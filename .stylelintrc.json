@@ -31,7 +31,7 @@
     "declaration-block-no-duplicate-properties": [ true, {
       "ignore": ["consecutive-duplicates-with-different-values"]
     }],
-    "declaration-block-trailing-semicolon": "never",
+    "declaration-block-trailing-semicolon": "always",
     "declaration-block-single-line-max-declarations": 20,
     "declaration-block-semicolon-space-before": "never",
     "declaration-block-semicolon-space-after": "never-single-line",
