@@ -31,10 +31,10 @@
     "declaration-block-no-duplicate-properties": [ true, {
       "ignore": ["consecutive-duplicates-with-different-values"]
     }],
-    "declaration-block-trailing-semicolon": "always",
-    "declaration-block-single-line-max-declarations": 1,
+    "declaration-block-trailing-semicolon": "never",
+    "declaration-block-single-line-max-declarations": 20,
     "declaration-block-semicolon-space-before": "never",
-    "declaration-block-semicolon-space-after": "always-single-line",
+    "declaration-block-semicolon-space-after": "never-single-line",
     "declaration-block-semicolon-newline-before": "never-multi-line",
     "declaration-block-semicolon-newline-after": "always-multi-line",
     "declaration-property-value-blacklist": [
@@ -43,7 +43,7 @@
     ],
 
     "block-closing-brace-newline-after": [
-      "always",
+      "never-single-line",
       {
         "ignoreAtRules": ["if", "else"]
       }
@@ -69,6 +69,6 @@
 
     "no-missing-end-of-source-newline": true,
 
-    "max-line-length": 120
+    "max-line-length": 1520
   }
 }
