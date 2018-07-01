@@ -102,7 +102,7 @@ import { NbAuthResult } from '../../../../../../node_modules/@nebular/auth/servi
 export class NgxLoginComponent {
 
   // Variables de la Clase
-  msgErrorApi:string[];
+  msgErrorApi: string[];
   jsonUser;
 
   redirectDelay: number = 0;

@@ -15,7 +15,7 @@ import { SystemPropertiesService } from '../../../../shared/system-properties.se
 export class LoginService {
   // Propiedades de la Clases *************************************************
   // URL Base de la Clase, Referencia a la API | Spring
-  public _url:string;
+  public _url: string;
   
   // Variables para el localStorage
   public _identity;
@@ -40,7 +40,7 @@ export class LoginService {
   * a la API (login).
   * Objetivo: Logearse a la Aplicacion
   ****************************************************************************/
-  signUp( user_to_login ){
+  signUp( user_to_login ) {
       let json = JSON.stringify( user_to_login );
       // let params = "json=" + json;
       let params = json;
@@ -52,7 +52,7 @@ export class LoginService {
               .map( res => res.json() );
   }// FIN | FND-00001
 
-  estados(){
+  estados() {
     let headers = new Headers({ 'Content-Type': 'application/json'});
     // let headers = new Headers({ 'Content-Type':'application/x-www-form-urlencoded' });
     // let headers = new Headers({ 'Access-Control-Allow-Origin': 'http://localhost:8090'});
@@ -75,7 +75,7 @@ export class LoginService {
   * a la API (usuario/new).
   * Objetivo: Agregar nuevo Usuario
   *****************************************************************************/
-  registerUser( user_to_register ){
+  registerUser( user_to_register ) {
       let json = JSON.stringify( user_to_register );
       let params = "json=" + json;
       // console.log(json);
@@ -92,7 +92,7 @@ export class LoginService {
   * a la API ( usuario/change-pass-user ).
   * Objetivo: Cambiar Password a Usuario
   ****************************************************************************/
-  changePassUser( user_to_change_pass ){
+  changePassUser( user_to_change_pass ) {
       let json = JSON.stringify( user_to_change_pass );
       let params = "json=" + json + "&authorization=" + this.getToken();
       // console.log(json);
@@ -109,7 +109,7 @@ export class LoginService {
   * variable identity del localStorage
   * Objetivo: Seteo de las variables en json
   ****************************************************************************/
-  getIdentity(){
+  getIdentity() {
     let identity = JSON.parse(localStorage.getItem('identity'));
     // Pregunta por el valor de la identity
       if(identity != "undefined"){
@@ -129,7 +129,7 @@ export class LoginService {
   * variable identity del localStorage
   * Objetivo: Seteo de las variables en json
   ****************************************************************************/
-  getToken(){
+  getToken() {
     // No hace el parse; porque no es Json
     let token = localStorage.getItem('token');
     // Pregunta por el valor del Token
