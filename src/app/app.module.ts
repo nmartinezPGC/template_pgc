@@ -15,8 +15,25 @@ import { AppRoutingModule } from './app-routing.module';
 import { ThemeModule } from './@theme/theme.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+// make sure the path is correct for your setup
+import { NgxAuthComponent } from './@theme/components/auth/auth.component';
+import { NgxAuthBlockComponent } from './@theme/components/auth/auth-block/auth-block.component';
+import { NgxLoginComponent } from './@theme/components/auth/login/login.component';
+/*import { NgxRegisterComponent } from './components/auth/register/register.component';
+import { NgxLogoutComponent } from './components/auth/logout/logout.component';
+import { NgxRequestPasswordComponent } from './components/auth/request-password/request-password.component';
+import { NgxResetPasswordComponent } from './components/auth/reset-password/reset-password.component';
+*/
+
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, // Auth Module
+    NgxAuthComponent,
+    NgxAuthBlockComponent,
+    NgxLoginComponent,
+    /*NgxRegisterComponent,
+    NgxRequestPasswordComponent,
+    NgxResetPasswordComponent,
+    NgxLogoutComponent,*/],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

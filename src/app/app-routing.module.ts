@@ -1,5 +1,6 @@
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
+
 import {
   NbAuthComponent,
   NbLoginComponent,
@@ -9,19 +10,30 @@ import {
   NbResetPasswordComponent,
 } from '@nebular/auth';
 
+// Auth Personalizado NAM
+
+import { NgxAuthComponent } from './@theme/components/auth/auth.component';
+import { NgxAuthBlockComponent } from './@theme/components/auth/auth-block/auth-block.component';
+import { NgxLoginComponent } from './@theme/components/auth/login/login.component';
+/*import { NgxRegisterComponent } from './components/auth/register/register.component';
+import { NgxLogoutComponent } from './components/auth/logout/logout.component';
+import { NgxRequestPasswordComponent } from './components/auth/request-password/request-password.component';
+import { NgxResetPasswordComponent } from './components/auth/reset-password/reset-password.component';
+*/
+
 const routes: Routes = [
   { path: 'pages', loadChildren: 'app/pages/pages.module#PagesModule' },
   {
     path: 'auth',
-    component: NbAuthComponent,
+    component: NgxAuthComponent,
     children: [
       {
         path: '',
-        component: NbLoginComponent,
+        component: NgxLoginComponent,
       },
       {
         path: 'login',
-        component: NbLoginComponent,
+        component: NgxLoginComponent,
       },
       {
         path: 'register',

@@ -10,7 +10,7 @@ import { AnalyticsService } from './utils/analytics.service';
 
 const socialLinks = [
   {
-    url: 'https://github.com/akveo/nebular',
+    url: 'https://github.com/akveo/nebularNAM',
     target: '_blank',
     icon: 'socicon-github',
   },

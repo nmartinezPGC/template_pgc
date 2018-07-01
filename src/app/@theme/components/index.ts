@@ -7,3 +7,12 @@ export * from './theme-switcher/theme-switcher.component';
 export * from './switcher/switcher.component';
 export * from './layout-direction-switcher/layout-direction-switcher.component'
 export * from './theme-switcher/themes-switcher-list/themes-switcher-list.component'
+
+// Modulo Auth de Seguridad Personalizado
+export * from '../components/auth/auth.component';
+export * from '../components/auth/auth-block/auth-block.component';
+export * from '../components/auth/login/login.component';
+/* export * from './auth/logout/logout.component';
+export * from './register/register.component';
+export * from './request-password/request-password.component';
+export * from './reset-password/reset-password.component'; */
