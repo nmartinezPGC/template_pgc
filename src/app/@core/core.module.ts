@@ -1,7 +1,6 @@
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NbAuthModule,
-        NbDummyAuthStrategy,
         NbPasswordAuthStrategy,
         NbAuthJWTToken } from '@nebular/auth';
 
@@ -47,8 +46,7 @@ export class NbSimpleRoleProvider extends NbRoleProvider {
 
 export const NB_CORE_PROVIDERS = [
   ...DataModule.forRoot().providers,
-  ...NbAuthModule.forRoot({
-    
+  ...NbAuthModule.forRoot({    
     strategies: [
       /*NbDummyAuthStrategy.setup({
         name: 'email',
