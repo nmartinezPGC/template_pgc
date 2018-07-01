@@ -46,7 +46,7 @@ export class NbSimpleRoleProvider extends NbRoleProvider {
 
 export const NB_CORE_PROVIDERS = [
   ...DataModule.forRoot().providers,
-  ...NbAuthModule.forRoot({    
+  ...NbAuthModule.forRoot({
     strategies: [
       /*NbDummyAuthStrategy.setup({
         name: 'email',
@@ -67,7 +67,7 @@ export const NB_CORE_PROVIDERS = [
            method: 'post',
            redirect: {
             success: '/pages/dashboard',
-            failure: null,              
+            failure: null,
            },
            // Mensajes personalizados
            defaultErrors: ['Email/Password, invalidos. Verifica que sean correctos'],

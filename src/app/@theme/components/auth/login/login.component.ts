@@ -34,7 +34,8 @@ import { NbAuthResult } from '../../../../../../node_modules/@nebular/auth/servi
                  class="form-control" placeholder="Ingresa el Email" #emailUsuario="ngModel"
                  [class.form-control-danger]="emailUsuario.invalid && emailUsuario.touched" autofocus
                  [required]="getConfigValue('forms.validation.email.required')">
-          <small class="form-text error" *ngIf="emailUsuario.invalid && emailUsuario.touched && emailUsuario.errors?.required">
+          <small class="form-text error" *ngIf="emailUsuario.invalid && emailUsuario.touched && 
+            emailUsuario.errors?.required">
             Email es requerido!
           </small>
           <small class="form-text error"
@@ -98,6 +99,10 @@ import { NbAuthResult } from '../../../../../../node_modules/@nebular/auth/servi
 })
 export class NgxLoginComponent {
 
+  // Variables de la Clase
+  msgErrorApi:string[];
+  jsonUser;
+
   redirectDelay: number = 0;
   showMessages: any = {};
   strategy: string = '';
@@ -131,37 +136,28 @@ export class NgxLoginComponent {
     this.submitted = true;
 
     // Convertimos la Informacion para enviarla a la API
-    let jsonUser = JSON.stringify( this.user );
+    this.jsonUser = JSON.stringify( this.user );
 
     // console.log( jsonUser );
 
-    this.service.authenticate( this.strategy, jsonUser ).subscribe(( result: NbAuthResult ) => {
+    this.service.authenticate( this.strategy, this.jsonUser ).subscribe(( result: NbAuthResult ) => {
       this.submitted = false;
 
       if (result.isSuccess()) {
         this.messages = result.getMessages();
-        // this.messages = result.getResponse().status;
-        // console.log( result.getToken() );
-        // console.log( result.getResponse().body.message );
       } else {
-        let msgErrorApi:string[] = [ result.getResponse().error.message ];
-        let statusCode:number = result.getResponse().status;
-
-        console.log( msgErrorApi + " ---- " + statusCode);
-        // this.errors = result.getErrors();
-        this.errors = msgErrorApi;
+        this.msgErrorApi = [ result.getResponse().error.message ];
+      
+        this.errors = this.msgErrorApi;
       }
 
       const redirect = result.getRedirect();
-      // console.log(redirect);
+      
       if (redirect) {
         setTimeout(() => {
           return this.router.navigateByUrl(redirect);
         }, this.redirectDelay);
       }
-    },
-    error => {
-      alert('Error NAM');
     }
   );
   } // FIN | FND-00001
