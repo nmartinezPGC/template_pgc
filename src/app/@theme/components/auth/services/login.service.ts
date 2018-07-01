@@ -16,7 +16,7 @@ export class LoginService {
   // Propiedades de la Clases *************************************************
   // URL Base de la Clase, Referencia a la API | Spring
   public _url: string;
-  
+
   // Variables para el localStorage
   public _identity;
   public _token;
@@ -28,7 +28,7 @@ export class LoginService {
   * Objetivo: Login in the API
   ****************************************************************************/
   constructor( private _http: Http,
-               private _systemPropertiesService: SystemPropertiesService ) { 
+                private _systemPropertiesService: SystemPropertiesService ) { 
     this._url = this._systemPropertiesService.getmethodUrlService();
   }// FIN | Contructor
 
@@ -41,19 +41,19 @@ export class LoginService {
   * Objetivo: Logearse a la Aplicacion
   ****************************************************************************/
   signUp( user_to_login ) {
-      let json = JSON.stringify( user_to_login );
+    const json = JSON.stringify( user_to_login );
       // let params = "json=" + json;
-      let params = json;
+    const params = json;
       // let headers = new Headers({ 'Content-Type':'application/x-www-form-urlencoded'});
       // let headers = new Headers({ 'Content-Type': 'application/json'});
 
     // return this._http.post(this._url + "/auth/login", params, { headers:headers }).map( res => res.json());
-    return this._http.post(this._url + "/auth/login", params)    
+    return this._http.post(this._url + '/auth/login', params)
               .map( res => res.json() );
   }// FIN | FND-00001
 
   estados() {
-    let headers = new Headers({ 'Content-Type': 'application/json'});
+    const headers = new Headers({ 'Content-Type': 'application/json'});
     // let headers = new Headers({ 'Content-Type':'application/x-www-form-urlencoded' });
     // let headers = new Headers({ 'Access-Control-Allow-Origin': 'http://localhost:8090'});
     /*let headers = new Headers();
@@ -63,7 +63,7 @@ export class LoginService {
     headers.append('Access-Control-Allow-Methods', 'GET');
     headers.append('Access-Control-Allow-Origin', 'http://localhost:8090');*/
 
-    return this._http.get(this._url + "/estados", { headers:headers })
+    return this._http.get(this._url + '/estados', { headers: headers })
               .map( res => res.json().data );
   }
 
@@ -76,12 +76,13 @@ export class LoginService {
   * Objetivo: Agregar nuevo Usuario
   *****************************************************************************/
   registerUser( user_to_register ) {
-      let json = JSON.stringify( user_to_register );
-      let params = "json=" + json;
+      const json = JSON.stringify( user_to_register );
+      const params = 'json=' + json;
       // console.log(json);
-      let headers = new Headers({ 'Content-Type':'application/x-www-form-urlencoded'});
+      const headers = new Headers({ 'Content-Type':'application/x-www-form-urlencoded'});
 
-    return this._http.post(this._url + "/auth/user/new", params, { headers:headers }).map( res => res.json());
+    return this._http.post(this._url + '/auth/user/new', params, { headers: headers })
+              .map( res => res.json());
   }// FIN | FND-00002
 
 
@@ -93,12 +94,13 @@ export class LoginService {
   * Objetivo: Cambiar Password a Usuario
   ****************************************************************************/
   changePassUser( user_to_change_pass ) {
-      let json = JSON.stringify( user_to_change_pass );
-      let params = "json=" + json + "&authorization=" + this.getToken();
+      const json = JSON.stringify( user_to_change_pass );
+      const params = 'json=' + json + '&authorization=' + this.getToken();
       // console.log(json);
-      let headers = new Headers({ 'Content-Type':'application/x-www-form-urlencoded'});
+      const headers = new Headers({ 'Content-Type':'application/x-www-form-urlencoded'});
 
-    return this._http.post(this._url + "/auth/user/change-pass-user", params, { headers:headers }).map( res => res.json());
+    return this._http.post(this._url + '/auth/user/change-pass-user', params, { headers: headers })
+              .map( res => res.json());
   } // FIN | FND-00002
 
 
@@ -110,11 +112,11 @@ export class LoginService {
   * Objetivo: Seteo de las variables en json
   ****************************************************************************/
   getIdentity() {
-    let identity = JSON.parse(localStorage.getItem('identity'));
+    const identity = JSON.parse(localStorage.getItem('identity'));
     // Pregunta por el valor de la identity
-      if(identity != "undefined"){
+      if (identity !== 'undefined') {
         this._identity = identity;
-      }else{
+      }else {
         this._identity = null;
       }
 
@@ -131,11 +133,11 @@ export class LoginService {
   ****************************************************************************/
   getToken() {
     // No hace el parse; porque no es Json
-    let token = localStorage.getItem('token');
+    const token = localStorage.getItem('token');
     // Pregunta por el valor del Token
-      if(token != "undefined"){
+      if (token !== 'undefined') {
         this._token = token;
-      }else{
+      }else {
         this._token = null;
       }
 
