@@ -30,32 +30,32 @@ import { NbAuthResult } from '../../../../../../node_modules/@nebular/auth/servi
         </div>
         <div class="form-group">
           <label for="input-email" class="sr-only">Email address</label>
-          <input name="email" [(ngModel)]="user.email" id="input-email" pattern=".+@.+\..+"
-                 class="form-control" placeholder="Ingresa el Email" #email="ngModel"
-                 [class.form-control-danger]="email.invalid && email.touched" autofocus
+          <input name="emailUsuario" [(ngModel)]="user.emailUsuario" id="input-email" pattern=".+@.+\..+"
+                 class="form-control" placeholder="Ingresa el Email" #emailUsuario="ngModel"
+                 [class.form-control-danger]="emailUsuario.invalid && emailUsuario.touched" autofocus
                  [required]="getConfigValue('forms.validation.email.required')">
-          <small class="form-text error" *ngIf="email.invalid && email.touched && email.errors?.required">
+          <small class="form-text error" *ngIf="emailUsuario.invalid && emailUsuario.touched && emailUsuario.errors?.required">
             Email es requerido!
           </small>
           <small class="form-text error"
-                 *ngIf="email.invalid && email.touched && email.errors?.pattern">
+                 *ngIf="emailUsuario.invalid && emailUsuario.touched && emailUsuario.errors?.pattern">
             Ingresa un Email real!
           </small>
         </div>
         <div class="form-group">
           <label for="input-password" class="sr-only">Password</label>
-          <input name="password" [(ngModel)]="user.password" type="password" id="input-password"
-                 class="form-control" placeholder="Ingresa el Password" #password="ngModel"
-                 [class.form-control-danger]="password.invalid && password.touched"
+          <input name="passwordUsuario" [(ngModel)]="user.passwordUsuario" type="password" id="input-password"
+                 class="form-control" placeholder="Ingresa el Password" #passwordUsuario="ngModel"
+                 [class.form-control-danger]="passwordUsuario.invalid && passwordUsuario.touched"
                  [required]="getConfigValue('forms.validation.password.required')"
                  [minlength]="getConfigValue('forms.validation.password.minLength')"
                  [maxlength]="getConfigValue('forms.validation.password.maxLength')">
-          <small class="form-text error" *ngIf="password.invalid && password.touched && password.errors?.required">
+          <small class="form-text error" *ngIf="passwordUsuario.invalid && passwordUsuario.touched && passwordUsuario.errors?.required">
             Password es requerido!
           </small>
           <small
             class="form-text error"
-            *ngIf="password.invalid && password.touched && (password.errors?.minlength || password.errors?.maxlength)">
+            *ngIf="passwordUsuario.invalid && passwordUsuario.touched && (passwordUsuario.errors?.minlength || passwordUsuario.errors?.maxlength)">
             Password debe contener
             almenos {{ getConfigValue('forms.validation.password.minLength') }}
             a {{ getConfigValue('forms.validation.password.maxLength') }}
@@ -63,7 +63,7 @@ import { NbAuthResult } from '../../../../../../node_modules/@nebular/auth/servi
           </small>
         </div>
         <div class="form-group accept-group col-sm-12">
-          <nb-checkbox name="rememberMe" [(ngModel)]="user.rememberMe">Recuerdame</nb-checkbox>
+          <nb-checkbox name="rememberMe" [(ngModel)]="user.rememberMe" >Recuerdame</nb-checkbox>
           <a class="forgot-password" routerLink="../request-password">Olvidaste el Password?</a>
         </div>
         <button [disabled]="submitted || !form.valid" class="btn btn-block btn-hero-success"
@@ -118,28 +118,54 @@ export class NgxLoginComponent {
     this.socialLinks = this.getConfigValue('forms.login.socialLinks');
   }
 
+
+  /****************************************************************************
+  * Funcion: FND-00001
+  * Fecha: 30-06-2018
+  * Descripcion: Metodo Ajax, para Invocar el servicio
+  * a la API (login).
+  * Objetivo: Logearse a la Aplicacion
+  ****************************************************************************/
   login(): void {
     this.errors = this.messages = [];
     this.submitted = true;
 
-    this.service.authenticate(this.strategy, this.user).subscribe((result: NbAuthResult) => {
+    // Convertimos la Informacion para enviarla a la API
+    let jsonUser = JSON.stringify( this.user );
+
+    // console.log( jsonUser );
+
+    this.service.authenticate( this.strategy, jsonUser ).subscribe(( result: NbAuthResult ) => {
       this.submitted = false;
 
       if (result.isSuccess()) {
         this.messages = result.getMessages();
+        // this.messages = result.getResponse().status;
+        // console.log( result.getToken() );
+        // console.log( result.getResponse().body.message );
       } else {
-        this.errors = result.getErrors();
+        let msgErrorApi:string[] = [ result.getResponse().error.message ];
+        let statusCode:number = result.getResponse().status;
+
+        console.log( msgErrorApi + " ---- " + statusCode);
+        // this.errors = result.getErrors();
+        this.errors = msgErrorApi;
       }
 
       const redirect = result.getRedirect();
-      // alert(redirect);
+      // console.log(redirect);
       if (redirect) {
         setTimeout(() => {
           return this.router.navigateByUrl(redirect);
         }, this.redirectDelay);
       }
-    });
-  }
+    },
+    error => {
+      alert('Error NAM');
+    }
+  );
+  } // FIN | FND-00001
+
 
   getConfigValue(key: string): any {
     return getDeepFromObject(this.options, key, null);

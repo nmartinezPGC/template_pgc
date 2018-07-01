@@ -1,6 +1,10 @@
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NbAuthModule, NbDummyAuthStrategy } from '@nebular/auth';
+import { NbAuthModule, 
+        NbDummyAuthStrategy, 
+        NbPasswordAuthStrategy, 
+        NbAuthJWTToken } from '@nebular/auth';
+
 import { NbSecurityModule, NbRoleProvider } from '@nebular/security';
 import { of as observableOf } from 'rxjs';
 
@@ -8,9 +12,17 @@ import { throwIfAlreadyLoaded } from './module-import-guard';
 import { DataModule } from './data/data.module';
 import { AnalyticsService } from './utils/analytics.service';
 
+// Imports de los Datos Generales
+import { environment } from '../../environments/environment';
+
+// Constnte de la Ruta que Utilizara para los Llamados a la API
+const urlAPI = environment.apiUrl;
+
+// console.log( urlAPI );
+
 const socialLinks = [
   {
-    url: 'https://github.com/akveo/nebularNAM',
+    url: 'https://github.com/akveo/nebular',
     target: '_blank',
     icon: 'socicon-github',
   },
@@ -36,11 +48,37 @@ export class NbSimpleRoleProvider extends NbRoleProvider {
 export const NB_CORE_PROVIDERS = [
   ...DataModule.forRoot().providers,
   ...NbAuthModule.forRoot({
-
+    
     strategies: [
-      NbDummyAuthStrategy.setup({
+      /*NbDummyAuthStrategy.setup({
         name: 'email',
-        delay: 3000,
+        delay: 2000,
+      }),*/
+      NbPasswordAuthStrategy.setup({
+        name: 'email',
+        token: {
+          class: NbAuthJWTToken,
+          key: 'token', // this parameter tells where to look for the token
+        },
+
+        // Se define la Direccion Base de la API
+        baseEndpoint: urlAPI,
+         login: {
+           // ...
+           endpoint: '/auth/login',
+           method: 'post',
+           redirect: {
+            success: '/pages/dashboard',
+            failure: null,              
+           },
+           // Mensajes personalizados
+           defaultErrors: ['Email/Password, invalidos. Verifica que sean correctos'],
+           defaultMessages: ['Tus datos son validos, en breve ingresaras a la Plataforma ...'],
+         },
+         register: {
+           // ...
+           endpoint: '/api/auth/register',
+         },
       }),
     ],
     forms: {
