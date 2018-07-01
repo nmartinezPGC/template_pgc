@@ -28,7 +28,7 @@ export class LoginService {
   * Objetivo: Login in the API
   ****************************************************************************/
   constructor( private _http: Http,
-                private _systemPropertiesService: SystemPropertiesService ) { 
+                private _systemPropertiesService: SystemPropertiesService ) {
     this._url = this._systemPropertiesService.getmethodUrlService();
   }// FIN | Contructor
 
@@ -79,7 +79,7 @@ export class LoginService {
       const json = JSON.stringify( user_to_register );
       const params = 'json=' + json;
       // console.log(json);
-      const headers = new Headers({ 'Content-Type':'application/x-www-form-urlencoded'});
+      const headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded'});
 
     return this._http.post(this._url + '/auth/user/new', params, { headers: headers })
               .map( res => res.json());
@@ -97,7 +97,7 @@ export class LoginService {
       const json = JSON.stringify( user_to_change_pass );
       const params = 'json=' + json + '&authorization=' + this.getToken();
       // console.log(json);
-      const headers = new Headers({ 'Content-Type':'application/x-www-form-urlencoded'});
+      const headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded'});
 
     return this._http.post(this._url + '/auth/user/change-pass-user', params, { headers: headers })
               .map( res => res.json());
