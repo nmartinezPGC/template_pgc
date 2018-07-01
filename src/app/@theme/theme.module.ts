@@ -45,10 +45,10 @@ import { COSMIC_THEME } from './styles/theme.cosmic';
 import { CORPORATE_THEME } from './styles/theme.corporate';
 
 // make sure the path is correct for your setup
-import { NgxAuthComponent } from './components/auth/auth.component';
+/*import { NgxAuthComponent } from './components/auth/auth.component';
 import { NgxAuthBlockComponent } from './components/auth/auth-block/auth-block.component';
 import { NgxLoginComponent } from './components/auth/login/login.component';
-/*import { NgxRegisterComponent } from './components/auth/register/register.component';
+import { NgxRegisterComponent } from './components/auth/register/register.component';
 import { NgxLogoutComponent } from './components/auth/logout/logout.component';
 import { NgxRequestPasswordComponent } from './components/auth/request-password/request-password.component';
 import { NgxResetPasswordComponent } from './components/auth/reset-password/reset-password.component';
