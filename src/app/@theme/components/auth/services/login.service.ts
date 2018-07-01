@@ -44,7 +44,7 @@ export class LoginService {
       let json = JSON.stringify( user_to_login );
       // let params = "json=" + json;
       let params = json;
-      //let headers = new Headers({ 'Content-Type':'application/x-www-form-urlencoded'});
+      // let headers = new Headers({ 'Content-Type':'application/x-www-form-urlencoded'});
       // let headers = new Headers({ 'Content-Type': 'application/json'});
 
     // return this._http.post(this._url + "/auth/login", params, { headers:headers }).map( res => res.json());
@@ -78,7 +78,7 @@ export class LoginService {
   registerUser( user_to_register ){
       let json = JSON.stringify( user_to_register );
       let params = "json=" + json;
-      //console.log(json);
+      // console.log(json);
       let headers = new Headers({ 'Content-Type':'application/x-www-form-urlencoded'});
 
     return this._http.post(this._url + "/auth/user/new", params, { headers:headers }).map( res => res.json());
@@ -95,7 +95,7 @@ export class LoginService {
   changePassUser( user_to_change_pass ){
       let json = JSON.stringify( user_to_change_pass );
       let params = "json=" + json + "&authorization=" + this.getToken();
-      //console.log(json);
+      // console.log(json);
       let headers = new Headers({ 'Content-Type':'application/x-www-form-urlencoded'});
 
     return this._http.post(this._url + "/auth/user/change-pass-user", params, { headers:headers }).map( res => res.json());
@@ -111,7 +111,7 @@ export class LoginService {
   ****************************************************************************/
   getIdentity(){
     let identity = JSON.parse(localStorage.getItem('identity'));
-    //Pregunta por el valor de la identity
+    // Pregunta por el valor de la identity
       if(identity != "undefined"){
         this._identity = identity;
       }else{
@@ -130,9 +130,9 @@ export class LoginService {
   * Objetivo: Seteo de las variables en json
   ****************************************************************************/
   getToken(){
-    //No hace el parse; porque no es Json
+    // No hace el parse; porque no es Json
     let token = localStorage.getItem('token');
-    //Pregunta por el valor del Token
+    // Pregunta por el valor del Token
       if(token != "undefined"){
         this._token = token;
       }else{

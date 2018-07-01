@@ -34,7 +34,7 @@ import { NbAuthResult } from '../../../../../../node_modules/@nebular/auth/servi
                  class="form-control" placeholder="Ingresa el Email" #emailUsuario="ngModel"
                  [class.form-control-danger]="emailUsuario.invalid && emailUsuario.touched" autofocus
                  [required]="getConfigValue('forms.validation.email.required')">
-          <small class="form-text error" *ngIf="emailUsuario.invalid && emailUsuario.touched && 
+          <small class="form-text error" *ngIf="emailUsuario.invalid && emailUsuario.touched &&
             emailUsuario.errors?.required">
             Email es requerido!
           </small>
@@ -51,13 +51,13 @@ import { NbAuthResult } from '../../../../../../node_modules/@nebular/auth/servi
                  [required]="getConfigValue('forms.validation.password.required')"
                  [minlength]="getConfigValue('forms.validation.password.minLength')"
                  [maxlength]="getConfigValue('forms.validation.password.maxLength')">
-          <small class="form-text error" *ngIf="passwordUsuario.invalid && passwordUsuario.touched && 
+          <small class="form-text error" *ngIf="passwordUsuario.invalid && passwordUsuario.touched &&
               passwordUsuario.errors?.required">
             Password es requerido!
           </small>
           <small
             class="form-text error"
-            *ngIf="passwordUsuario.invalid && passwordUsuario.touched && (passwordUsuario.errors?.minlength || 
+            *ngIf="passwordUsuario.invalid && passwordUsuario.touched && (passwordUsuario.errors?.minlength ||
                 passwordUsuario.errors?.maxlength)">
             Password debe contener
             almenos {{ getConfigValue('forms.validation.password.minLength') }}
@@ -154,7 +154,7 @@ export class NgxLoginComponent {
       }
 
       const redirect = result.getRedirect();
-      
+
       if (redirect) {
         setTimeout(() => {
           return this.router.navigateByUrl(redirect);
