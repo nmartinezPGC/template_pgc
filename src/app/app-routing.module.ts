@@ -13,7 +13,7 @@ import {
 // Auth Personalizado NAM
 
 import { NgxAuthComponent } from './@theme/components/auth/auth.component';
-import { NgxAuthBlockComponent } from './@theme/components/auth/auth-block/auth-block.component';
+//import { NgxAuthBlockComponent } from './@theme/components/auth/auth-block/auth-block.component';
 import { NgxLoginComponent } from './@theme/components/auth/login/login.component';
 /*import { NgxRegisterComponent } from './components/auth/register/register.component';
 import { NgxLogoutComponent } from './components/auth/logout/logout.component';
