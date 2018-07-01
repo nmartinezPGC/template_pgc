@@ -34,9 +34,9 @@ export class SystemPropertiesService {
 
     let urlEnviroment: string;
     // Evalua el Entorno y Proporciona la URL
-    if( indicadorIp == 1 ) {
+    if ( indicadorIp === 1 ) {
       urlEnviroment = this.urlServerConfig;
-    }else if ( indicadorIp == 2 ) {
+    }else if ( indicadorIp === 2 ) {
       urlEnviroment = this.urlLocalConfig;
     }
 
@@ -53,13 +53,13 @@ export class SystemPropertiesService {
   *****************************************************/
   getmethodUrlResourses() {
     // Instanciamos el Indicador del Entorno de Compilacion
-    const indicadorIp:number = this.indicatorIPCompiler;
+    const indicadorIp: number = this.indicatorIPCompiler;
 
-    let urlEnviromentResourse:string;
+    let urlEnviromentResourse: string;
     // Evalua el Entorno y Proporciona la URL
-    if( indicadorIp == 1 ) {
+    if ( indicadorIp === 1 ) {
       urlEnviromentResourse = this.urlServerResourse;
-    }else if ( indicadorIp == 2 ) {
+    }else if ( indicadorIp === 2 ) {
       urlEnviromentResourse = this.urlLocalResourse;
     }
 

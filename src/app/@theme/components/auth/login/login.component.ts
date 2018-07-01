@@ -51,12 +51,14 @@ import { NbAuthResult } from '../../../../../../node_modules/@nebular/auth/servi
                  [required]="getConfigValue('forms.validation.password.required')"
                  [minlength]="getConfigValue('forms.validation.password.minLength')"
                  [maxlength]="getConfigValue('forms.validation.password.maxLength')">
-          <small class="form-text error" *ngIf="passwordUsuario.invalid && passwordUsuario.touched && passwordUsuario.errors?.required">
+          <small class="form-text error" *ngIf="passwordUsuario.invalid && passwordUsuario.touched && 
+              passwordUsuario.errors?.required">
             Password es requerido!
           </small>
           <small
             class="form-text error"
-            *ngIf="passwordUsuario.invalid && passwordUsuario.touched && (passwordUsuario.errors?.minlength || passwordUsuario.errors?.maxlength)">
+            *ngIf="passwordUsuario.invalid && passwordUsuario.touched && (passwordUsuario.errors?.minlength || 
+                passwordUsuario.errors?.maxlength)">
             Password debe contener
             almenos {{ getConfigValue('forms.validation.password.minLength') }}
             a {{ getConfigValue('forms.validation.password.maxLength') }}
@@ -145,9 +147,9 @@ export class NgxLoginComponent {
 
       if (result.isSuccess()) {
         this.messages = result.getMessages();
-      } else {
+      }else {
         this.msgErrorApi = [ result.getResponse().error.message ];
-      
+
         this.errors = this.msgErrorApi;
       }
 
@@ -158,7 +160,7 @@ export class NgxLoginComponent {
           return this.router.navigateByUrl(redirect);
         }, this.redirectDelay);
       }
-    }
+    },
   );
   } // FIN | FND-00001
 
