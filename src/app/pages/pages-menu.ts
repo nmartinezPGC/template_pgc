@@ -8,8 +8,19 @@ export const MENU_ITEMS: NbMenuItem[] = [
     home: true,
   },
   {
-    title: 'FEATURES',
+    title: 'MENU PGC',
     group: true,
+  },
+  {
+    title: 'Actividades',
+    icon: 'ion-clipboard',
+    //link: '/pages/activities',
+    children: [
+      {
+        title:  'Ingreso de Actividad',
+        link: '/pages/activities/new-activity',
+      },
+    ],
   },
   {
     title: 'UI Features',

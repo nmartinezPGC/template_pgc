@@ -12,6 +12,9 @@ const routes: Routes = [{
     path: 'dashboard',
     component: DashboardComponent,
   }, {
+    path: 'activities',
+    loadChildren: './activities/activities.module#ActivitiesPGCModule',
+  },{
     path: 'ui-features',
     loadChildren: './ui-features/ui-features.module#UiFeaturesModule',
   }, {

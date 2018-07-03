@@ -6,6 +6,9 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { ThemeModule } from '../@theme/theme.module';
 import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
 
+// Imports del Modulo de Actividades | 2018-07-02
+//import { NewActivityComponent } from './activities/new-activity/new-activity.component';
+
 const PAGES_COMPONENTS = [
   PagesComponent,
 ];
@@ -16,9 +19,12 @@ const PAGES_COMPONENTS = [
     ThemeModule,
     DashboardModule,
     MiscellaneousModule,
+    // Modulo de Actividades
+    //NewActivityComponent,
   ],
   declarations: [
     ...PAGES_COMPONENTS,
+    //NewActivityComponent,
   ],
 })
 export class PagesModule {
