@@ -7,7 +7,7 @@ import { ThemeModule } from '../@theme/theme.module';
 import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
 
 // Imports del Modulo de Actividades | 2018-07-02
-//import { NewActivityComponent } from './activities/new-activity/new-activity.component';
+// import { NewActivityComponent } from './activities/new-activity/new-activity.component';
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -20,11 +20,11 @@ const PAGES_COMPONENTS = [
     DashboardModule,
     MiscellaneousModule,
     // Modulo de Actividades
-    //NewActivityComponent,
+    // NewActivityComponent,
   ],
   declarations: [
     ...PAGES_COMPONENTS,
-    //NewActivityComponent,
+    // NewActivityComponent,
   ],
 })
 export class PagesModule {

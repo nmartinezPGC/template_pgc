@@ -6,10 +6,10 @@ import { ActivitiesRoutingModule, routedComponents } from './activities-routing.
 @NgModule({
   imports: [
     ThemeModule,
-    ActivitiesRoutingModule
+    ActivitiesRoutingModule,
   ],
   declarations: [
-    ...routedComponents
+    ...routedComponents,
   ],
 })
 export class ActivitiesPGCModule {}

@@ -14,7 +14,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Actividades',
     icon: 'ion-clipboard',
-    //link: '/pages/activities',
+    // link: '/pages/activities',
     children: [
       {
         title:  'Ingreso de Actividad',

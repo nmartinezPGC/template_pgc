@@ -14,7 +14,7 @@ const routes: Routes = [{
   }, {
     path: 'activities',
     loadChildren: './activities/activities.module#ActivitiesPGCModule',
-  },{
+  }, {
     path: 'ui-features',
     loadChildren: './ui-features/ui-features.module#UiFeaturesModule',
   }, {
