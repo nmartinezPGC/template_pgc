@@ -52,7 +52,7 @@ export class UserService {
     // No hace el parse; porque no es Json
     const token = localStorage.getItem('auth_app_token');
     // Pregunta por el valor del Token
-    if (token != "undefined") {
+    if ( token !== 'undefined' ) {
       this._token = token;
     } else {
       this._token = null;
@@ -72,7 +72,7 @@ export class UserService {
   getIdentity() {
     const identity = JSON.parse(localStorage.getItem('identity'));
     // Pregunta por el valor de la identity
-    if (identity != "undefined") {
+    if ( identity !== "undefined" ) {
       this._identity = identity;
     } else {
       this._identity = null;

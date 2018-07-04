@@ -148,7 +148,7 @@ export class NgxLoginComponent {
       if (result.isSuccess()) {
         this.messages = result.getMessages();
 
-        let identity = result.getResponse().body;
+        const identity = result.getResponse().body;
 
         // Generamos la nueva variable LocalStorage
         localStorage.setItem('identity', JSON.stringify(identity));

@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit {
   user: any;
 
   // Token
-  private _token: any;
+  // private _token: any;
 
   userMenu = [{ title: 'Perfil' }, { title: 'Desconectar' }];
 
@@ -30,7 +30,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.userService.getUsers()
       .subscribe((users: any) => this.user = users.eva);
-    
+
     alert( this.userService.getIdentity().userName );
   }
 
