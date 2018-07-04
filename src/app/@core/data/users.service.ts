@@ -49,9 +49,9 @@ export class UserService {
   * Objetivo: Seteo de las variables en json
   ****************************************************************************/
   getToken() {
-    //No hace el parse; porque no es Json
+    // No hace el parse; porque no es Json
     let token = localStorage.getItem('auth_app_token');
-    //Pregunta por el valor del Token
+    // Pregunta por el valor del Token
     if (token != "undefined") {
       this._token = token;
     } else {
