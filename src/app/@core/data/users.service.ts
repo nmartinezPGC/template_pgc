@@ -50,7 +50,7 @@ export class UserService {
   ****************************************************************************/
   getToken() {
     // No hace el parse; porque no es Json
-    let token = localStorage.getItem('auth_app_token');
+    const token = localStorage.getItem('auth_app_token');
     // Pregunta por el valor del Token
     if (token != "undefined") {
       this._token = token;
@@ -70,8 +70,8 @@ export class UserService {
   * Objetivo: Seteo de las variables en json
   ****************************************************************************/
   getIdentity() {
-    let identity = JSON.parse(localStorage.getItem('identity'));
-    //Pregunta por el valor de la identity
+    const identity = JSON.parse(localStorage.getItem('identity'));
+    // Pregunta por el valor de la identity
     if (identity != "undefined") {
       this._identity = identity;
     } else {
