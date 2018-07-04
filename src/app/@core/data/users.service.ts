@@ -72,7 +72,7 @@ export class UserService {
   getIdentity() {
     const identity = JSON.parse(localStorage.getItem('identity'));
     // Pregunta por el valor de la identity
-    if ( identity !== "undefined" ) {
+    if ( identity !== 'undefined' ) {
       this._identity = identity;
     } else {
       this._identity = null;
