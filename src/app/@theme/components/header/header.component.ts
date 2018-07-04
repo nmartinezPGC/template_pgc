@@ -16,6 +16,9 @@ export class HeaderComponent implements OnInit {
 
   user: any;
 
+  // Token
+  private _token: any;
+
   userMenu = [{ title: 'Perfil' }, { title: 'Desconectar' }];
 
   constructor(private sidebarService: NbSidebarService,
@@ -26,7 +29,9 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.userService.getUsers()
-      .subscribe((users: any) => this.user = users.nick);
+      .subscribe((users: any) => this.user = users.eva);
+    
+    alert( this.userService.getIdentity().userName );
   }
 
   toggleSidebar(): boolean {
