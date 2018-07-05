@@ -8,7 +8,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
 // Importamos la Clase de las Propiedades del Sistema
-import { SystemPropertiesService } from '../../shared/system-properties.service';
+// import { SystemPropertiesService } from '../../shared/system-properties.service';
 
 let counter = 0;
 
@@ -27,19 +27,19 @@ export class UserService {
   private userArray: any[];
 
   // Variables de la Ruta de la API
-  public _url:string;
-  public _urlResourses:string;
+  public _url: string;
+  public _urlResourses: string;
 
   // Variables para el localStorage
   public _identity;
   public _token;
 
   constructor( private _http: HttpClient,
-              // private _systemPropertiesService: SystemPropertiesService 
+    // private _systemPropertiesService: SystemPropertiesService 
             ) {
     // this.userArray = Object.values(this.users);
-    //this._url = this._systemPropertiesService.getmethodUrlService();
-    //this._urlResourses = this._systemPropertiesService.getmethodUrlResourses();
+    // this._url = this._systemPropertiesService.getmethodUrlService();
+    // this._urlResourses = this._systemPropertiesService.getmethodUrlResourses();
   }
 
   getUsers(): Observable<any> {
@@ -111,7 +111,7 @@ export class UserService {
       // console.log(json);
       alert( 'Bearer ' + this.getIdentity().token );
     const headers = new HttpHeaders()
-      .set( 'Authorization', 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJmYjE0NTA4MDg5ZDE0ZDkxOWYxODljNTgyMGViNjNiMiIsInN1YiI6Im5tYXJ0aW5lei5zYWxnYWRvQHlhaG9vLmNvbSIsImlhdCI6MTUzMDc1NjYyNSwibmJmIjoxNTMwNzU2NjI1LCJleHAiOjE1MzA4NDMwMjV9.NhbD-k1YpDxdYMFd7Wfhsmc3d5NsV1t0sjkt6fFKnRc' )
+      .set( 'Authorization', 'Bearer ' + this.getIdentity().token )
       .set( 'Access-Control-Allow-Origin', '*' )
       .set('Content-Type', 'application/json');
 
