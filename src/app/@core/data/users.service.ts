@@ -41,9 +41,7 @@ export class UserService {
   * variable identity del localStorage
   * Objetivo: Seteo de las variables en json
   ****************************************************************************/
-  constructor( private _http: HttpClient,
-    // private _systemPropertiesService: SystemPropertiesService
-    ) {    
+  constructor( private _http: HttpClient ) {    
     // this.userArray = Object.values(this.users);
     // this._url = this._systemPropertiesService.getmethodUrlService();
     // this._urlResourses = this._systemPropertiesService.getmethodUrlResourses();
