@@ -36,7 +36,7 @@ export class HeaderComponent implements OnInit {
     this.userService.getUserDetails( this.userService.getIdentity().userName ).subscribe(
       result => {
 
-          if (result.code !== 200){
+          if (result.code !== 200) {
               // console.log( result.data );
           } else {
               // this.productos = result.data;

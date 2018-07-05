@@ -29,7 +29,7 @@ import { NgxResetPasswordComponent } from './components/auth/reset-password/rese
   declarations: [AppComponent, // Auth Module
     NgxAuthComponent,
     NgxAuthBlockComponent,
-    NgxLoginComponent,    
+    NgxLoginComponent,
     /*NgxRegisterComponent,
     NgxRequestPasswordComponent,
     NgxResetPasswordComponent,

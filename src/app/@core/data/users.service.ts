@@ -35,7 +35,7 @@ export class UserService {
   public _token;
 
   constructor( private _http: HttpClient,
-    // private _systemPropertiesService: SystemPropertiesService 
+    // private _systemPropertiesService: SystemPropertiesService
             ) {
     // this.userArray = Object.values(this.users);
     // this._url = this._systemPropertiesService.getmethodUrlService();
