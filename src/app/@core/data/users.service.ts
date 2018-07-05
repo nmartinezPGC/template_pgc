@@ -4,8 +4,8 @@ import { Injectable } from '@angular/core';
 
 // Clases nesesarias para el envio via Ajax
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/map';
+// import 'rxjs/add/operator/catch';
+// import 'rxjs/add/operator/map';
 
 // Importamos la Clase de las Propiedades del Sistema
 // import { SystemPropertiesService } from '../../shared/system-properties.service';
@@ -34,13 +34,21 @@ export class UserService {
   public _identity;
   public _token;
 
+  /****************************************************************************
+  * Funcion: FND-00001
+  * Fecha: 01-06-2018
+  * Descripcion: Metodo para obtener los Datos de la
+  * variable identity del localStorage
+  * Objetivo: Seteo de las variables en json
+  ****************************************************************************/
   constructor( private _http: HttpClient,
     // private _systemPropertiesService: SystemPropertiesService
-            ) {
+            ) {    
     // this.userArray = Object.values(this.users);
     // this._url = this._systemPropertiesService.getmethodUrlService();
     // this._urlResourses = this._systemPropertiesService.getmethodUrlResourses();
-  }
+  }// FIN | Constructor
+
 
   getUsers(): Observable<any> {
     return observableOf(this.users);
@@ -109,13 +117,21 @@ export class UserService {
     const params = user_to_name;
     // + "&authorization=" + this.getIdentity().token;
       // console.log(json);
-      alert( 'Bearer ' + this.getIdentity().token );
-    const headers = new HttpHeaders()
-      .set( 'Authorization', 'Bearer ' + this.getIdentity().token )
-      .set( 'Access-Control-Allow-Origin', '*' )
-      .set('Content-Type', 'application/json');
+     // alert( 'Bearer ' + this.getIdentity().token );
 
-    return this._http.get('http://localhost:8090/rest/usuarios/user/mail/' + params, { headers } );
+    const header = {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Headers': 'Content-Type',
+      'Access-Control-Allow-Methods': 'GET',
+      'Access-Control-Allow-Origin': '*',
+      'Authorization': this.getIdentity().token
+    };
+    
+    const httpOptions = new HttpHeaders().append('Authorization', this.getIdentity().token);
+
+    console.log( httpOptions );
+
+    return this._http.get('http://localhost:8090/rest/usuarios/user/mail/' + params, { headers: httpOptions } ) ;
   }// FIN | FND-00003
 
 }
