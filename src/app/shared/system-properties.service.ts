@@ -1,3 +1,4 @@
+import { of as observableOf,  Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 
 // Clase de Propieades Globales de la PGC

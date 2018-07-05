@@ -25,11 +25,13 @@ import { NgxRequestPasswordComponent } from './components/auth/request-password/
 import { NgxResetPasswordComponent } from './components/auth/reset-password/reset-password.component';
 */
 
+import { SystemPropertiesService } from './shared/system-properties.service';
+
 @NgModule({
   declarations: [AppComponent, // Auth Module
     NgxAuthComponent,
     NgxAuthBlockComponent,
-    NgxLoginComponent,
+    NgxLoginComponent,    
     /*NgxRegisterComponent,
     NgxRequestPasswordComponent,
     NgxResetPasswordComponent,
@@ -46,7 +48,7 @@ import { NgxResetPasswordComponent } from './components/auth/reset-password/rese
   ],
   bootstrap: [AppComponent],
   providers: [
-    { provide: APP_BASE_HREF, useValue: '/' },
+    { provide: APP_BASE_HREF, SystemPropertiesService, useValue: '/' },
   ],
 })
 export class AppModule {

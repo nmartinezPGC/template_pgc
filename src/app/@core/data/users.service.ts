@@ -2,6 +2,13 @@
 import { of as observableOf,  Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 
+// Clases nesesarias para el envio via Ajax
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
+
+// Importamos la Clase de las Propiedades del Sistema
+import { SystemPropertiesService } from '../../shared/system-properties.service';
 
 let counter = 0;
 
@@ -19,12 +26,20 @@ export class UserService {
 
   private userArray: any[];
 
+  // Variables de la Ruta de la API
+  public _url:string;
+  public _urlResourses:string;
+
   // Variables para el localStorage
   public _identity;
   public _token;
 
-  constructor() {
+  constructor( private _http: HttpClient,
+              // private _systemPropertiesService: SystemPropertiesService 
+            ) {
     // this.userArray = Object.values(this.users);
+    //this._url = this._systemPropertiesService.getmethodUrlService();
+    //this._urlResourses = this._systemPropertiesService.getmethodUrlResourses();
   }
 
   getUsers(): Observable<any> {
@@ -81,5 +96,26 @@ export class UserService {
     return this._identity;
   }// FIN | FND-00002
 
+
+  /****************************************************************************
+  * Funcion: FND-00003
+  * Fecha: 04-07-2018
+  * Descripcion: Metodo para obtener los Datos de la los datos del Usuario
+  * Objetivo: datos generales del Usuario
+  * Params: { userName }
+  ****************************************************************************/
+  getUserDetails( user_to_name ): Observable<any> {
+    // const json = JSON.stringify( user_to_name );
+    const params = user_to_name;
+    // + "&authorization=" + this.getIdentity().token;
+      // console.log(json);
+      alert( 'Bearer ' + this.getIdentity().token );
+    const headers = new HttpHeaders()
+      .set( 'Authorization', 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJmYjE0NTA4MDg5ZDE0ZDkxOWYxODljNTgyMGViNjNiMiIsInN1YiI6Im5tYXJ0aW5lei5zYWxnYWRvQHlhaG9vLmNvbSIsImlhdCI6MTUzMDc1NjYyNSwibmJmIjoxNTMwNzU2NjI1LCJleHAiOjE1MzA4NDMwMjV9.NhbD-k1YpDxdYMFd7Wfhsmc3d5NsV1t0sjkt6fFKnRc' )
+      .set( 'Access-Control-Allow-Origin', '*' )
+      .set('Content-Type', 'application/json');
+
+    return this._http.get('http://localhost:8090/rest/usuarios/user/mail/' + params, { headers } );
+  }// FIN | FND-00003
 
 }

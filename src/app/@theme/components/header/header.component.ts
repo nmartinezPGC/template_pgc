@@ -31,7 +31,23 @@ export class HeaderComponent implements OnInit {
     this.userService.getUsers()
       .subscribe((users: any) => this.user = users.eva);
 
-    alert( this.userService.getIdentity().userName );
+    // alert( this.userService.getIdentity().userName );
+    // alert( this.userService.getIdentity().token );
+    
+    this.userService.getUserDetails( this.userService.getIdentity().userName ).subscribe(
+      result => {
+           
+          if(result.code != 200){
+              console.log( result.data );
+          }else{
+              //this.productos = result.data;
+          }
+      },
+      error => {
+          console.log(<any>error);
+      }
+  );
+
   }
 
   toggleSidebar(): boolean {
