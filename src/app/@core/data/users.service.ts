@@ -43,7 +43,7 @@ export class UserService {
   ****************************************************************************/
   constructor( private _http: HttpClient,
     // private _systemPropertiesService: SystemPropertiesService
-                  ) {    
+    ) {    
     // this.userArray = Object.values(this.users);
     // this._url = this._systemPropertiesService.getmethodUrlService();
     // this._urlResourses = this._systemPropertiesService.getmethodUrlResourses();
@@ -119,14 +119,14 @@ export class UserService {
       // console.log(json);
      // alert( 'Bearer ' + this.getIdentity().token );
 
-    const header = {
+    /*const header = {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Headers': 'Content-Type',
       'Access-Control-Allow-Methods': 'GET',
       'Access-Control-Allow-Origin': '*',
       'Authorization': this.getIdentity().token,
-    };
-      
+    };*/
+
     const httpOptions = new HttpHeaders().append('Authorization', this.getIdentity().token);
 
     // console.log( httpOptions );
