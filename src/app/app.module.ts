@@ -25,6 +25,10 @@ import { NgxRequestPasswordComponent } from './components/auth/request-password/
 import { NgxResetPasswordComponent } from './components/auth/reset-password/reset-password.component';
 */
 
+// Nuevos Interceptores de las Entradas y Salidas Http
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptorService } from './@theme/components/auth/interceptors/token.interceptor';
+
 @NgModule({
   declarations: [AppComponent, // Auth Module
     NgxAuthComponent,
@@ -47,6 +51,7 @@ import { NgxResetPasswordComponent } from './components/auth/reset-password/rese
   bootstrap: [AppComponent],
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' },
+   // { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true },
   ],
 })
 export class AppModule {
