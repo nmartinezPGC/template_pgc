@@ -9,7 +9,7 @@ import {
  } from '@angular/common/http'
 
  import { AuthService } from '../auth.service';
- import { Observable } from 'rxjs/observable';
+ // import { Observable } from 'rxjs/observable';
 
 @Injectable()
 export class TokenInterceptorService implements HttpInterceptor {
@@ -24,13 +24,13 @@ export class TokenInterceptorService implements HttpInterceptor {
   * Objetivo: Seteo de las variables en el Headers
   ****************************************************************************/
   intercept(req: HttpRequest<any>, next: HttpHandler) {
-    
+
     const newRequest = req.clone({
       headers: req.headers.set (
-        'Authorization', `Bearer ${this.auth.getToken()}`)
+        'Authorization', `Bearer ${this.auth.getToken()}`),
     });
 
-    console.log(newRequest);
+    // console.log(newRequest);
     return next.handle(newRequest);
   }// FIN | FND-00001
 

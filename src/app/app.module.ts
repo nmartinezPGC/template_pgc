@@ -26,8 +26,8 @@ import { NgxResetPasswordComponent } from './components/auth/reset-password/rese
 */
 
 // Nuevos Interceptores de las Entradas y Salidas Http
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { TokenInterceptorService } from './@theme/components/auth/interceptors/token.interceptor';
+// import { HTTP_INTERCEPTORS } from '@angular/common/http';
+// import { TokenInterceptorService } from './@theme/components/auth/interceptors/token.interceptor';
 
 @NgModule({
   declarations: [AppComponent, // Auth Module
