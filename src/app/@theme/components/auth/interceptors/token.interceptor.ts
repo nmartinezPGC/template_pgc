@@ -11,7 +11,7 @@ import {
 
 import { AuthService } from '../auth.service';
 import { Observable } from 'rxjs/observable';
-import { Location } from '@angular/common';
+// import { Location } from '@angular/common';
 import 'rxjs/add/observable/fromPromise';
 
 
@@ -41,14 +41,13 @@ export class TokenInterceptorService implements HttpInterceptor {
 
   private async handleAccess(request: HttpRequest<any>, next: HttpHandler):
   Promise<HttpEvent<any>> {
-    console.log('Datos de la Funcion handleAccess');
+    // console.log('Datos de la Funcion handleAccess');
     const token = await this.auth.getToken();
 
     let changedRequest = request;
 
     // HttpHeader object immutable - copy values
-    const headersSettings: {[name: string]: string | string[];} = {};
-
+    const headersSettings: {[name: string]: string | string[]; } = {};
     for (const key of request.headers.keys()) {
       headersSettings[key] = request.headers.getAll(key);
     }
@@ -62,7 +61,7 @@ export class TokenInterceptorService implements HttpInterceptor {
     const newHeader = new HttpHeaders(headersSettings);
 
     changedRequest = request.clone({
-      headers: newHeader
+      headers: newHeader,
     });
 
     return next.handle(changedRequest).toPromise();

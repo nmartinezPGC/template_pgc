@@ -9,23 +9,22 @@ import { UserService } from '../../../@core/data/users.service';
 })
 export class NewActivityComponent implements OnInit {
 
-  constructor(private userService: UserService,) { }
+  constructor( private userService: UserService ) { }
 
   ngOnInit() {
-    console.log(this.userService.getIdentity().userName);
+    // console.log(this.userService.getIdentity().userName);
 
-    
-    this.userService.getUserDetails(this.userService.getIdentity().userName).subscribe(
+  this.userService.getUserDetails(this.userService.getIdentity().userName).subscribe(
       result => {
 
         if (result.code !== 200) {
-          console.log(result.data);
+          // console.log(result.data);
         } else {
           // this.productos = result.data;
         }
       },
       error => {
-        console.log(error);
+        // console.log(error);
         // console.log(<any>error);
       },
     );

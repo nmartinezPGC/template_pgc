@@ -125,12 +125,12 @@ export class UserService {
       'Authorization': this.getIdentity().token,
     };*/
     const tokenHeader = this.getIdentity().token; 
-     console.log(tokenHeader);
+     // console.log(tokenHeader);
     // const httpOptions = new HttpHeaders(header);
 
     const requestHeaders = new HttpHeaders().set('Authorization', tokenHeader);
 
-    console.log(requestHeaders );
+    // console.log(requestHeaders );
 
     return this._http.get('http://localhost:8090/rest/usuarios/user/mail/' + params, { headers: requestHeaders } ) ;
   }// FIN | FND-00003
