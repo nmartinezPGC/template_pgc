@@ -37,7 +37,7 @@ export class HeaderComponent implements OnInit {
       result => {
 
           if (result.code !== 200) {
-               console.log( result.data );
+              // console.log( result.data );
           } else {
               // this.productos = result.data;
           }

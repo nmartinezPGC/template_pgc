@@ -117,14 +117,14 @@ export class UserService {
       // console.log(json);
      // alert( 'Bearer ' + this.getIdentity().token );
 
-    const header = {
+    /*const header = {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Headers': 'Content-Type',
       'Access-Control-Allow-Methods': 'GET',
       'Access-Control-Allow-Origin': '*',
       'Authorization': this.getIdentity().token,
-    };
-    
+    };*/
+
     const httpOptions = new HttpHeaders().append('Authorization', this.getIdentity().token);
 
     // console.log( httpOptions );

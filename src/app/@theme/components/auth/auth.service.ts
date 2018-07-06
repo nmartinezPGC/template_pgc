@@ -18,7 +18,7 @@ export class AuthService {
   ****************************************************************************/
   constructor() {
     // Constantes de la Libreria
-    const helper = new JwtHelperService();
+    // const helper = new JwtHelperService();
    }
 
 
@@ -44,7 +44,7 @@ export class AuthService {
 
    public isAuthenticated(): boolean {
      // get the token
-     const token = this.getToken();
+     // const token = this.getToken();
 
      // return a boolean reflecting
      // whether or not the token is expired

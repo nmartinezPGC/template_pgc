@@ -4,8 +4,8 @@ import { Injectable } from '@angular/core';
 import {
   HttpRequest,
   HttpHandler,
-  HttpEvent,
-  HttpInterceptor
+  // HttpEvent,
+  HttpInterceptor,
  } from '@angular/common/http'
 
  import { AuthService } from '../auth.service';
@@ -27,9 +27,7 @@ export class TokenInterceptorService implements HttpInterceptor {
     
     const newRequest = req.clone({
       headers: req.headers.set (
-        'Authorization', `Bearer ${this.auth.getToken()}`
-        //'Access-Control-Allow-Origin': '*'
-      )
+        'Authorization', `Bearer ${this.auth.getToken()}`)
     });
 
     console.log(newRequest);
