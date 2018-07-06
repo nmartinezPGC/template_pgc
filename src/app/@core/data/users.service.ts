@@ -124,12 +124,15 @@ export class UserService {
       'Access-Control-Allow-Origin': '*',
       'Authorization': this.getIdentity().token,
     };*/
+    const tokenHeader = this.getIdentity().token; 
+     console.log(tokenHeader);
+    // const httpOptions = new HttpHeaders(header);
 
-    const httpOptions = new HttpHeaders().append('Authorization', this.getIdentity().token);
+    const requestHeaders = new HttpHeaders().set('Authorization', tokenHeader);
 
-    // console.log( httpOptions );
+    console.log(requestHeaders );
 
-    return this._http.get( 'http://localhost:8090/rest/usuarios/user/mail/' + params, { headers: httpOptions } ) ;
+    return this._http.get('http://localhost:8090/rest/usuarios/user/mail/' + params, { headers: requestHeaders } ) ;
   }// FIN | FND-00003
 
 }

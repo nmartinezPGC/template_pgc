@@ -8,6 +8,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
 import { CoreModule } from './@core/core.module';
 
 import { AppComponent } from './app.component';
@@ -26,8 +27,9 @@ import { NgxResetPasswordComponent } from './components/auth/reset-password/rese
 */
 
 // Nuevos Interceptores de las Entradas y Salidas Http
-// import { HTTP_INTERCEPTORS } from '@angular/common/http';
-// import { TokenInterceptorService } from './@theme/components/auth/interceptors/token.interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptorService } from './@theme/components/auth/interceptors/token.interceptor';
+import { AuthService } from './@theme/components/auth/auth.service';
 
 @NgModule({
   declarations: [AppComponent, // Auth Module
@@ -42,6 +44,7 @@ import { NgxResetPasswordComponent } from './components/auth/reset-password/rese
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    HttpModule,
     AppRoutingModule,
 
     NgbModule.forRoot(),
@@ -51,7 +54,8 @@ import { NgxResetPasswordComponent } from './components/auth/reset-password/rese
   bootstrap: [AppComponent],
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' },
-   // { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true },
+    // { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true },
+    // AuthService,
   ],
 })
 export class AppModule {
