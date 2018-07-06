@@ -124,8 +124,8 @@ export class UserService {
       'Access-Control-Allow-Origin': '*',
       'Authorization': this.getIdentity().token,
     };*/
-    const tokenHeader = this.getIdentity().token; 
-     // console.log(tokenHeader);
+    const tokenHeader = this.getIdentity().token;
+         // console.log(tokenHeader);
     // const httpOptions = new HttpHeaders(header);
 
     const requestHeaders = new HttpHeaders().set('Authorization', tokenHeader);
