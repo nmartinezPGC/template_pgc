@@ -3,7 +3,7 @@ import { of as observableOf,  Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 
 // Clases nesesarias para el envio via Ajax
-import {HttpClient, HttpHeaders, HttpRequest} from '@angular/common/http';
+import {HttpClient, HttpHeaders } from '@angular/common/http';
 // import 'rxjs/add/operator/catch';
 // import 'rxjs/add/operator/map';
 
@@ -12,13 +12,13 @@ import {HttpClient, HttpHeaders, HttpRequest} from '@angular/common/http';
 
 let counter = 0;
 
-const httpOptions = {
+/*const httpOptions = {
   headers: new HttpHeaders({
-    //'Content-Type':  'application/json',
+    // 'Content-Type':  'application/json',
     'Authorization': 'Bearer NAM',
     'Content-Type': 'application/x-www-form-urlencoded',
-  })
-};
+  }),
+};*/
 
 @Injectable()
 export class UserService {
@@ -129,9 +129,9 @@ export class UserService {
     // const json = JSON.stringify( user_to_name );
     const params = user_to_name;
 
-    const headers = new HttpHeaders({'Content-Type': 'application/json', 'Authorization': this.tokenHeader });  
-    
-    console.log(headers);
+    const headers = new HttpHeaders({'Content-Type': 'application/json', 'Authorization': this.tokenHeader });
+
+  //  console.log(headers);
 
     return this._http.get('http://localhost:8090/rest/usuarios/user/mail/' + params, { headers: headers } ) ;
   }// FIN | FND-00003

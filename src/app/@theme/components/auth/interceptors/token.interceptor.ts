@@ -6,7 +6,7 @@ import {
   HttpHandler,
   HttpInterceptor,
   HttpEvent,
-  HttpHeaders,
+  // HttpHeaders,
  } from '@angular/common/http'
 
 import { AuthService } from '../auth.service';
@@ -33,7 +33,7 @@ export class TokenInterceptorService implements HttpInterceptor {
         'Authorization', `Bearer ${this.auth.getToken()}`),
     });
 
-     console.log(newRequest);
+    // console.log(newRequest);
     return next.handle(newRequest);
     // return Observable.fromPromise(this.handleAccess(req, next));
   }// FIN | FND-00001
