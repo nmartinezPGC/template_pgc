@@ -128,33 +128,8 @@ export class UserService {
   getUserDetails( user_to_name ): Observable<any> {
     // const json = JSON.stringify( user_to_name );
     const params = user_to_name;
-    // + "&authorization=" + this.getIdentity().token;
-      // console.log(json);
-     // alert( 'Bearer ' + this.getIdentity().token );
-
-    /*const header = {
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Headers': 'Content-Type',
-      'Access-Control-Allow-Methods': 'GET',
-      'Access-Control-Allow-Origin': '*',
-      'Authorization': this.getIdentity().token,
-    };*/
     
-         // console.log(tokenHeader);
-     // const httpOptions = new HttpHeaders().set('Authorization', this.tokenHeader) ;
-
-      // const httpOptions1 = { headers: new HttpHeaders({'Content-Type':'application/json; charset=utf-8'})};
-
-     /*const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json',
-        'Authorization': 'Bearer ' + this.tokenHeader 
-      })
-     };*/
-
-    // const htpr = new HttpRequest.arguments.headers.set('Authorization','Nuevo Auth');
-
-     const headers = new HttpHeaders({'Content-Type': 'application/json', 'Authorization': this.tokenHeader });  
+     let headers = new HttpHeaders({'Content-Type': 'application/json', 'Authorization': this.tokenHeader });  
   
      // let options = new HttpRequestOptions({headers: headers});
      // console.log(htpr);
