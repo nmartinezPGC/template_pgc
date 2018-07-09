@@ -54,8 +54,8 @@ import { NgxResetPasswordComponent } from './components/auth/reset-password/rese
   bootstrap: [AppComponent],
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' },
-    // { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true },
-    // AuthService,
+     // { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true },
+     // AuthService,
   ],
 })
 export class AppModule {

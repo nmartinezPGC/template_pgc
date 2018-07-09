@@ -28,18 +28,18 @@ export class TokenInterceptorService implements HttpInterceptor {
   * Objetivo: Seteo de las variables en el Headers
   ****************************************************************************/
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-  /*  const newRequest = req.clone({
+    const newRequest = req.clone({
       headers: req.headers.set (
         'Authorization', `Bearer ${this.auth.getToken()}`),
     });
 
      console.log(newRequest);
-    return next.handle(newRequest);*/
-    return Observable.fromPromise(this.handleAccess(req, next));
+    return next.handle(newRequest);
+    // return Observable.fromPromise(this.handleAccess(req, next));
   }// FIN | FND-00001
 
 
-  private async handleAccess(request: HttpRequest<any>, next: HttpHandler):
+  /*private async handleAccess(request: HttpRequest<any>, next: HttpHandler):
   Promise<HttpEvent<any>> {
     // console.log('Datos de la Funcion handleAccess');
     const token = await this.auth.getToken();
@@ -65,6 +65,6 @@ export class TokenInterceptorService implements HttpInterceptor {
     });
 
     return next.handle(changedRequest).toPromise();
-  }
+  }*/
 
 }

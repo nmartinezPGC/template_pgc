@@ -3,7 +3,7 @@ import { of as observableOf,  Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 
 // Clases nesesarias para el envio via Ajax
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpRequest} from '@angular/common/http';
 // import 'rxjs/add/operator/catch';
 // import 'rxjs/add/operator/map';
 
@@ -11,6 +11,14 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 // import { SystemPropertiesService } from '../../shared/system-properties.service';
 
 let counter = 0;
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    //'Content-Type':  'application/json',
+    'Authorization': 'Bearer NAM',
+    'Content-Type': 'application/x-www-form-urlencoded'
+  })
+};
 
 @Injectable()
 export class UserService {
@@ -34,6 +42,9 @@ export class UserService {
   public _identity;
   public _token;
 
+  tokenHeader = this.getIdentity().token;
+  // httpOptions = new HttpHeaders();
+
   /****************************************************************************
   * Funcion: FND-00001
   * Fecha: 01-06-2018
@@ -42,7 +53,11 @@ export class UserService {
   * Objetivo: Seteo de las variables en json
   ****************************************************************************/
   constructor( private _http: HttpClient ) {
+     // this.httpOptions.set('Access-Control-Allow-Origin', '*');
+    // this.httpOptions.set('Content-Type', 'application/json');
+    // this.httpOptions.append('Authorization', 'Bearer ' + this.tokenHeader );
     // this.userArray = Object.values(this.users);
+    // this.httpOptions.keys();
     // this._url = this._systemPropertiesService.getmethodUrlService();
     // this._urlResourses = this._systemPropertiesService.getmethodUrlResourses();
   }// FIN | Constructor
@@ -124,15 +139,29 @@ export class UserService {
       'Access-Control-Allow-Origin': '*',
       'Authorization': this.getIdentity().token,
     };*/
-    const tokenHeader = this.getIdentity().token;
+    
          // console.log(tokenHeader);
-    // const httpOptions = new HttpHeaders(header);
+     // const httpOptions = new HttpHeaders().set('Authorization', this.tokenHeader) ;
 
-    const requestHeaders = new HttpHeaders().set('Authorization', tokenHeader);
+      // const httpOptions1 = { headers: new HttpHeaders({'Content-Type':'application/json; charset=utf-8'})};
 
-    // console.log(requestHeaders );
+     /*const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': 'Bearer ' + this.tokenHeader 
+      })
+     };*/
 
-    return this._http.get('http://localhost:8090/rest/usuarios/user/mail/' + params, { headers: requestHeaders } ) ;
+    // const htpr = new HttpRequest.arguments.headers.set('Authorization','Nuevo Auth');
+
+     const headers = new HttpHeaders({'Content-Type': 'application/json', 'Authorization': this.tokenHeader });  
+  
+     // let options = new HttpRequestOptions({headers: headers});
+     // console.log(htpr);
+     
+      console.log(headers);
+
+    return this._http.get('http://localhost:8090/rest/usuarios/user/mail/' + params, { headers: headers } ) ;
   }// FIN | FND-00003
 
 }
