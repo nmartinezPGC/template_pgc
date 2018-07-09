@@ -135,7 +135,7 @@ export class UserService {
    // console.log(headers);
    // console.log('Paso 1 por getUserDetails');
 
-    return this._http.get('http://localhost:8090/rest/usuarios/user/mail/' + params, { headers: new HttpHeaders().append('Nahum', '1212121') } );
+    return this._http.get('http://localhost:8090/rest/usuarios/user/mail/' + params, { headers: headers } );
     // return this._http.get('http://localhost:8090/rest/usuarios/user/mail/' + params ) ;
   }// FIN | FND-00003
 

@@ -28,9 +28,9 @@ export class TokenInterceptorService implements HttpInterceptor {
   * Objetivo: Seteo de las variables en el Headers
   ****************************************************************************/
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log("Hi este el Interceptor");
-    console.log(req);
-    console.log(this.auth.getToken());
+    // console.log("Hi este el Interceptor");
+    // console.log(req);
+    // console.log(this.auth.getToken());
 
     const newRequest = req.clone({
       headers: req.headers.set (
