@@ -16,7 +16,7 @@ const httpOptions = {
   headers: new HttpHeaders({
     //'Content-Type':  'application/json',
     'Authorization': 'Bearer NAM',
-    'Content-Type': 'application/x-www-form-urlencoded'
+    'Content-Type': 'application/x-www-form-urlencoded',
   })
 };
 
@@ -128,13 +128,10 @@ export class UserService {
   getUserDetails( user_to_name ): Observable<any> {
     // const json = JSON.stringify( user_to_name );
     const params = user_to_name;
+
+    const headers = new HttpHeaders({'Content-Type': 'application/json', 'Authorization': this.tokenHeader });  
     
-     let headers = new HttpHeaders({'Content-Type': 'application/json', 'Authorization': this.tokenHeader });  
-  
-     // let options = new HttpRequestOptions({headers: headers});
-     // console.log(htpr);
-     
-      console.log(headers);
+    console.log(headers);
 
     return this._http.get('http://localhost:8090/rest/usuarios/user/mail/' + params, { headers: headers } ) ;
   }// FIN | FND-00003
