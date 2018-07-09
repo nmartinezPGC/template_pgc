@@ -3,7 +3,8 @@ import { of as observableOf,  Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 
 // Clases nesesarias para el envio via Ajax
-import {HttpClient, HttpHeaders } from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams, HttpRequest } from '@angular/common/http';
+import { catchError } from 'rxjs/operators';
 // import 'rxjs/add/operator/catch';
 // import 'rxjs/add/operator/map';
 
@@ -129,11 +130,13 @@ export class UserService {
     // const json = JSON.stringify( user_to_name );
     const params = user_to_name;
 
-    const headers = new HttpHeaders({'Content-Type': 'application/json', 'Authorization': this.tokenHeader });
+    const headers = new HttpHeaders({'Content-Type': 'application/json', 'Authorization': this.tokenHeader, 'Nahum': '1212121' });
 
-  //  console.log(headers);
+    console.log(headers);
+    console.log('Paso 1 por getUserDetails');
 
-    return this._http.get('http://localhost:8090/rest/usuarios/user/mail/' + params, { headers: headers } ) ;
+    return this._http.get('http://localhost:8090/rest/usuarios/user/mail/' + params, { headers: new HttpHeaders().append('Nahum', '1212121') } );
+    // return this._http.get('http://localhost:8090/rest/usuarios/user/mail/' + params ) ;
   }// FIN | FND-00003
 
 }
