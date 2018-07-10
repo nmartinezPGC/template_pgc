@@ -13,14 +13,6 @@ import {HttpClient, HttpHeaders } from '@angular/common/http';
 
 let counter = 0;
 
-/*const httpOptions = {
-  headers: new HttpHeaders({
-    // 'Content-Type':  'application/json',
-    'Authorization': 'Bearer NAM',
-    'Content-Type': 'application/x-www-form-urlencoded',
-  }),
-};*/
-
 @Injectable()
 export class UserService {
 
@@ -46,6 +38,7 @@ export class UserService {
   tokenHeader = this.getIdentity().token;
   // httpOptions = new HttpHeaders();
 
+  public headers = new HttpHeaders();
   /****************************************************************************
   * Funcion: FND-00001
   * Fecha: 01-06-2018
@@ -54,13 +47,8 @@ export class UserService {
   * Objetivo: Seteo de las variables en json
   ****************************************************************************/
   constructor( private _http: HttpClient ) {
-     // this.httpOptions.set('Access-Control-Allow-Origin', '*');
-    // this.httpOptions.set('Content-Type', 'application/json');
-    // this.httpOptions.append('Authorization', 'Bearer ' + this.tokenHeader );
-    // this.userArray = Object.values(this.users);
-    // this.httpOptions.keys();
-    // this._url = this._systemPropertiesService.getmethodUrlService();
-    // this._urlResourses = this._systemPropertiesService.getmethodUrlResourses();
+    this.headers = new HttpHeaders({'Content-Type': 'application/json', 
+                                    'Authorization': this.tokenHeader, 'Access-Control-Allow-Origin': '*' });
   }// FIN | Constructor
 
 
@@ -129,14 +117,9 @@ export class UserService {
   getUserDetails( user_to_name ): Observable<any> {
     // const json = JSON.stringify( user_to_name );
     const params = user_to_name;
-
-    const headers = new HttpHeaders({'Content-Type': 'application/json', 'Authorization': this.tokenHeader, 'Nahum': '1212121' });
-
-   // console.log(headers);
-   // console.log('Paso 1 por getUserDetails');
-
-    return this._http.get('http://localhost:8090/rest/usuarios/user/mail/' + params, { headers: headers } );
-    // return this._http.get('http://localhost:8090/rest/usuarios/user/mail/' + params ) ;
+   // console.log(this.headers);
+    return this._http.get('http://localhost:8090/rest/usuarios/user/mail/' + params, { headers: this.headers, 
+                        params: {'tokenApi': this.tokenHeader } } );
   }// FIN | FND-00003
 
 }
