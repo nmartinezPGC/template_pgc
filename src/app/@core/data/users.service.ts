@@ -47,7 +47,7 @@ export class UserService {
   * Objetivo: Seteo de las variables en json
   ****************************************************************************/
   constructor( private _http: HttpClient ) {
-    this.headers = new HttpHeaders({'Content-Type': 'application/json', 
+    this.headers = new HttpHeaders({'Content-Type': 'application/json',
                                     'Authorization': this.tokenHeader, 'Access-Control-Allow-Origin': '*' });
   }// FIN | Constructor
 
@@ -118,7 +118,7 @@ export class UserService {
     // const json = JSON.stringify( user_to_name );
     const params = user_to_name;
    // console.log(this.headers);
-    return this._http.get('http://localhost:8090/rest/usuarios/user/mail/' + params, { headers: this.headers, 
+    return this._http.get('http://localhost:8090/rest/usuarios/user/mail/' + params, { headers: this.headers,
                         params: {'tokenApi': this.tokenHeader } } );
   }// FIN | FND-00003
 
