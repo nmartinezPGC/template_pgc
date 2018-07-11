@@ -19,6 +19,13 @@ export class HeaderComponent implements OnInit {
   // Token
   // private _token: any;
 
+  // User Details
+  public firstName: String;
+  public lastName: String;
+  public firtSurname: String;
+  public lastSurname: String;
+  public completeName: String;
+
   userMenu = [{ title: 'Perfil' }, { title: 'Desconectar' }];
 
   constructor(private sidebarService: NbSidebarService,
@@ -30,23 +37,24 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.userService.getUsers()
       .subscribe((users: any) => this.user = users.eva);
-
-    // alert( this.userService.getIdentity().userName );
-    // alert( this.userService.getIdentity().token );
-    /*this.userService.getUserDetails( this.userService.getIdentity().userName ).subscribe(
+    
+    // Llamado al Servicio de detalle de Usuarios
+    this.userService.getUserDetails( this.userService.getIdentity().userName ).subscribe(
       result => {
 
           if (result.code !== 200) {
-              // console.log( result.data );
+               console.log( result.data );
+                this.user = result.data;
+                this.completeName = result.data.nombre1Usuario + ' ' + result.data.apellido1Usuario;
           } else {
               // this.productos = result.data;
           }
       },
       error => {
          console.log( error );
-          // console.log(<any>error);
+           console.log(<any>error);
       },
-  );*/
+  );
 
   }
 

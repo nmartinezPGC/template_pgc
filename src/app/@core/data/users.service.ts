@@ -16,7 +16,7 @@ let counter = 0;
 @Injectable()
 export class UserService {
 
-  private users = {
+  public users = {
     nick: { name: 'Nick Jones', picture: 'assets/images/nick.png' },
     eva: { name: 'Eva Moor', picture: 'assets/images/eva.png' },
     jack: { name: 'Jack Williams', picture: 'assets/images/jack.png' },
