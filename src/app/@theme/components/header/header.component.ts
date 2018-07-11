@@ -37,13 +37,13 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.userService.getUsers()
       .subscribe((users: any) => this.user = users.eva);
-    
+
     // Llamado al Servicio de detalle de Usuarios
     this.userService.getUserDetails( this.userService.getIdentity().userName ).subscribe(
       result => {
 
           if (result.code !== 200) {
-               console.log( result.data );
+              // console.log( result.data );
                 this.user = result.data;
                 this.completeName = result.data.nombre1Usuario + ' ' + result.data.apellido1Usuario;
           } else {
@@ -51,8 +51,8 @@ export class HeaderComponent implements OnInit {
           }
       },
       error => {
-         console.log( error );
-           console.log(<any>error);
+        // console.log( error );
+          // console.log(<any>error);
       },
   );
 
