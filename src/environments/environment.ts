@@ -11,6 +11,6 @@ const envIN = 'env';
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:8090/rest',
+  apiUrl: 'http://localhost:8090/api/v1',
   env: envIN,
 };

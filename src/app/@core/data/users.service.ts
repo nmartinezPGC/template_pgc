@@ -39,6 +39,8 @@ export class UserService {
   // httpOptions = new HttpHeaders();
 
   public headers = new HttpHeaders();
+
+
   /****************************************************************************
   * Funcion: FND-00001
   * Fecha: 01-06-2018
@@ -47,6 +49,10 @@ export class UserService {
   * Objetivo: Seteo de las variables en json
   ****************************************************************************/
   constructor( private _http: HttpClient ) {
+    // Instanciamos la Url de la API
+    // this._url = this._systemProperties.getmethodUrlService();
+
+    // Seteo de los Headers
     this.headers = new HttpHeaders({'Content-Type': 'application/json',
                                     'Authorization': this.tokenHeader, 'Access-Control-Allow-Origin': '*' });
   }// FIN | Constructor
@@ -115,10 +121,10 @@ export class UserService {
   * Params: { userName }
   ****************************************************************************/
   getUserDetails( user_to_name ): Observable<any> {
-    // const json = JSON.stringify( user_to_name );
+    // Email del Usuario que se logea
     const params = user_to_name;
-   // console.log(this.headers);
-    return this._http.get('http://localhost:8090/rest/usuarios/user/mail/' + params, { headers: this.headers,
+    // Retorno de la Funcion
+    return this._http.get('http://localhost:8090/api/v1/usuarios/findByMail/' + params, { headers: this.headers,
                         params: {'tokenApi': this.tokenHeader } } );
   }// FIN | FND-00003
 

@@ -10,7 +10,7 @@ import {
  } from '@angular/common/http'
 
 import { AuthService } from '../auth.service';
-import { Observable } from 'rxjs/observable';
+import { Observable } from 'rxjs';
 // import { Location } from '@angular/common';
 import 'rxjs/add/observable/fromPromise';
 

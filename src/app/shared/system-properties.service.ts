@@ -10,9 +10,9 @@ export class SystemPropertiesService {
 
   // Varibles Gloables de Inicio del Systema
   // Entorno Localhost
-  public urlLocalConfig: string = 'http://localhost:8090/rest';
+  public urlLocalConfig: string = 'http://localhost:8090';
   // public urlLocalConfig:string = "/rest";
-  public urlLocalResourse: string = 'http://localhost:8090/rest';
+  public urlLocalResourse: string = 'http://localhost:8090';
   // public urlLocalResourse:string = "/rest";
 
   // Entorno de Servidor
