@@ -78,7 +78,7 @@ export class HeaderComponent implements OnInit {
     return false;
   }
 
-  toggleSettings(): boolean {    
+  toggleSettings(): boolean {
     this.sidebarService.toggle(false, 'settings-sidebar');
     return false;
   }
@@ -117,7 +117,7 @@ export class HeaderComponent implements OnInit {
             // Redireccionamos al Login
             this._router.navigate(['/auth/login']);
           }
-        }
+        },
       );
   }// FIN | onItemSelection
 }
