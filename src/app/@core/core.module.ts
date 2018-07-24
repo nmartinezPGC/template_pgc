@@ -73,6 +73,10 @@ export const NB_CORE_PROVIDERS = [
            defaultErrors: ['Email/Password, invalidos. Verifica que sean correctos'],
            defaultMessages: ['Tus datos son validos, en breve ingresaras a la Plataforma ...'],
          },
+         logout: {
+            endpoint: '/auth/logout',
+            method: 'post',
+         },
          register: {
            // ...
            endpoint: '/api/auth/register',
