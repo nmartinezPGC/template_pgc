@@ -125,10 +125,10 @@ export class NgxLoginComponent {
     this.strategy = this.getConfigValue('forms.login.strategy');
     this.socialLinks = this.getConfigValue('forms.login.socialLinks');
 
-    //Variables de paso para el logout
+    // Variables de paso para el logout
     this._route.params.subscribe( params => {
-      let logout = + params["id"];
-      if ( logout == 1 ) {
+      const logout = + params['id'];
+      if ( logout === 1 ) {
         alert( logout );
       }
     });

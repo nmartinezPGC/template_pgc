@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 
 import {
   /*NbAuthComponent,
-  NbLoginComponent,*/
-  NbLogoutComponent,
+  NbLoginComponent,
+  NbLogoutComponent,*/
   NbRegisterComponent,
   NbRequestPasswordComponent,
   NbResetPasswordComponent,

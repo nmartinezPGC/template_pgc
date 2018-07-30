@@ -104,7 +104,7 @@ export class HeaderComponent implements OnInit {
         filter(({ tag }) => tag === 'user-menu'),
         map((item) => item),
       )
-      .subscribe(({ item }) => {        
+      .subscribe(({ item }) => {
         // Condicionamos la opcion del Menú
         // this.window.alert(`${title} was clicked!`)
          alert( 'title ' + item.data.path );
@@ -114,7 +114,6 @@ export class HeaderComponent implements OnInit {
           }else if ( item.title === 'Desconectar' ) {
             localStorage.removeItem('auth_app_token');
             localStorage.removeItem('identity');
-            
             // Redireccionamos al Login
             this._router.navigateByUrl(item.data.path);
           }*/
