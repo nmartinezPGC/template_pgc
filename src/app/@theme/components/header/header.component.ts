@@ -29,8 +29,8 @@ export class HeaderComponent implements OnInit {
   public lastSurname: String;
   public completeName: String;
 
-  userMenu = [{ title: 'Perfil', icon: 'fa fa-user' },
-              { title: 'Desconectar', icon: 'fa fa-sign-out' }];
+  userMenu = [{ title: 'Perfil', icon: 'fa fa-user', data: {path: '/logout'} },
+              { title: 'Desconectar', icon: 'fa fa-sign-out', data: {path: 'auth/login/1'} }];
 
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
@@ -101,22 +101,24 @@ export class HeaderComponent implements OnInit {
   onItemSelection() {
     this.menuService.onItemClick()
       .pipe(
-        filter(({ tag }) => tag === 'my-context-menu'),
-        map(({ item: { title } }) => title),
+        filter(({ tag }) => tag === 'user-menu'),
+        map((item) => item),
       )
-      .subscribe(title => {
+      .subscribe(({ item }) => {        
         // Condicionamos la opcion del Menú
         // this.window.alert(`${title} was clicked!`)
-        alert( 'title ' + title );
-          if ( title === 'Perfil' ) {
+         alert( 'title ' + item.data.path );
+           /*if ( item.title === 'Perfil' ) {
             // removemos el Token del LocalStorage
             alert('Ventana de cambiar el Perfil');
-          }else if ( title === 'Desconectar' ) {
+          }else if ( item.title === 'Desconectar' ) {
             localStorage.removeItem('auth_app_token');
             localStorage.removeItem('identity');
+            
             // Redireccionamos al Login
-            this._router.navigate(['/auth/login']);
-          }
+            this._router.navigateByUrl(item.data.path);
+          }*/
+          this._router.navigateByUrl(item.data.path);
         },
       );
   }// FIN | onItemSelection

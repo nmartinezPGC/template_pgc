@@ -40,8 +40,8 @@ const routes: Routes = [
         component: NbRegisterComponent,
       },
       {
-        path: 'logout',
-        component: NbLogoutComponent,
+        path: 'login/{id}',
+        component: NgxLoginComponent,
       },
       {
         path: 'request-password',

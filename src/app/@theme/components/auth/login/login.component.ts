@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 import { Component, Inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { NB_AUTH_OPTIONS, NbAuthSocialLink } from '../../../../../../node_modules/@nebular/auth/auth.options';
 import { getDeepFromObject } from '../../../../../../node_modules/@nebular/auth/helpers';
 
@@ -117,13 +117,25 @@ export class NgxLoginComponent {
 
   constructor(protected service: NbAuthService,
               @Inject(NB_AUTH_OPTIONS) protected options = {},
-              protected router: Router) {
+              protected router: Router,
+              private _route: ActivatedRoute) {
 
     this.redirectDelay = this.getConfigValue('forms.login.redirectDelay');
     this.showMessages = this.getConfigValue('forms.login.showMessages');
     this.strategy = this.getConfigValue('forms.login.strategy');
     this.socialLinks = this.getConfigValue('forms.login.socialLinks');
+
+    //Variables de paso para el logout
+    this._route.params.subscribe( params => {
+      let logout = + params["id"];
+      if ( logout == 1 ) {
+        alert( logout );
+      }
+    });
+
   }
+
+
 
 
   /****************************************************************************
@@ -152,6 +164,7 @@ export class NgxLoginComponent {
 
         // Generamos la nueva variable LocalStorage
         localStorage.setItem('identity', JSON.stringify(identity));
+
       }else {
         this.msgErrorApi = [ result.getResponse().error.message ];
 
@@ -161,7 +174,7 @@ export class NgxLoginComponent {
       const redirect = result.getRedirect();
 
       if (redirect) {
-        setTimeout(() => {
+          setTimeout(() => {
           return this.router.navigateByUrl(redirect);
         }, this.redirectDelay);
       }

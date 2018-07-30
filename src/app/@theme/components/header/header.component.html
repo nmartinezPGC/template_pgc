@@ -17,7 +17,7 @@
     <nb-action icon="nb-gear" class="toggle-layout" (click)="toggleSettings()"></nb-action>
     <nb-action style="cursor: pointer;" *nbIsGranted="['view', 'user']" >
       <nb-user [nbContextMenu]="userMenu" [name]="completeName" [picture]="user?.picture"
-      nbContextMenuTag="my-context-menu" ></nb-user>
+      nbContextMenuTag="user-menu" ></nb-user>
     </nb-action>
     <nb-action class="control-item" icon="nb-notifications"></nb-action>
     <nb-action class="control-item" icon="nb-email"></nb-action>
