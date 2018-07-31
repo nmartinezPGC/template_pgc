@@ -30,5 +30,16 @@ export class NewActivityComponent implements OnInit {
     );
   }
 
+  tabs: any[] = [
+    {
+      title: 'Paso #1 | Datos Generales',
+      route: '/pages/ui-features/tabs/tab1',
+    },
+    {
+      title: 'Paso #2 | Datos de Sectores y Programas',
+      route: '/pages/ui-features/tabs/tab2',
+    },
+  ];
+
 
 }

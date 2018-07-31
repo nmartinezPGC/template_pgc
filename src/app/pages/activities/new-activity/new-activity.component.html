@@ -11,183 +11,106 @@
   </ol>
 </nav>
 
-    <!-- Tarjetas para Agrupar los Datos de Ingreso de la Actvidad/Proyecto -->
+<!-- Tarjetas para Agrupar los Datos de Ingreso de la Actvidad/Proyecto -->
+<div class="row">
+  <div class="col-12 col-sm-6 col-md-8 col-lg-12">
     <nb-card>
-      <!-- Tab de Datos de Indentificacion -->
-      <nb-tabset>
-        <!-- Tab de Seleccion de Espacio de Trabajo de la Actividad -->
-        <nb-tab tabTitle="Paso #1 | Datos de Identificación">
-          <nb-card class="inline-form-card">
-            <nb-card-header>Ingresa los datos de Identificación del Proyecto/Actividad</nb-card-header>
-            <nb-card-body>
-              <form class="form-inline">
-                <div class="col-md-12">
-                  <div class="form-group row">
-                      <label>Espacio de Trabajo: </label>
-                        <select class="form-control" required>
-                          <option value="0" >**************** Selecciona el Espacio de Trabajo ****************</option>
-                          <option>Agencia Española de Cooperación Internacional de Desarrollo | AECID</option>
-                          <option>COSUDE</option>
-                          <option>AUSTRIA</option>
-                          <option>BECAS</option>
-                        </select>
-                        <i class="fa fa-hands-helping" title="Ayuda"></i>
-                  </div>
+      <nb-tabset fullWidth>
+        <!-- Tab #1 de Datos Generales del Proyecto/Programa -->
+        <nb-tab tabTitle="Paso #1 | Datos Generales">          
+          <nb-card-header>Ingresa los datos generales del Proyecto/Programa</nb-card-header><br>
+          <nb-card-body>
+            <div class="row">
+              <div class="col-12 col-sm-6 col-md-8">
+                <div class="form-group">
+                  <label for="inputFirstName">Nombre del Proyecto/Programa</label>
+                  <input type="text" class="form-control" id="inputFirstName" placeholder="Nombre del Proyecto/Programa">
                 </div>
-
-                <div class="col-md-12">
-                  <!-- <label>Nombre del Proyecto/Actividad: </label> -->
-                  <div class="form-group row">
-                    <input type="text" class="form-control full-width" placeholder="Nombre de Proyecto/Actividad" required>
-                  </div>
+              </div>
+              <div class="col-6 col-md-4">
+                <div class="form-group">
+                  <label>Espacio de Trabajo</label>
+                  <select class="form-control">
+                    <option value="0">******** Selecciona el Espacio de Trabajo ********</option>
+                    <option value="1">Espacio #1</option>
+                    <option value="2">Espacio #2</option>
+                    <option value="3">Espacio #3</option>
+                    <option value="4">Espacio #4</option>
+                  </select>
                 </div>
-
-                <div class="col-6 col-md-4">
-                  <div class="form-group row">
-                    <label>Estado de Actividad: </label>
-                    <select class="form-control" required>
-                      <option value="0">**** Selecciona el Estado ****</option>
-                      <option>Ejecución</option>
-                      <option>Diseño</option>
-                      <option>Cierre</option>
-                      <option>Finalizado</option>
-                      <option>Condiciones Previas</option>
-                      <option>Suspendida</option>
-                      <option>En Busca de Financiamiento</option>
-                    </select>
-                    <i class="fa fa-hands-helping" title="Ayuda"></i>
-                  </div>
-                </div>
-
-                <div class="col-12 col-sm-6 col-md-8">
-                  <div class="form-group row">
-                    <input type="text" class="form-control full-width" placeholder="Explicación del Estado" required>
-                  </div>
-                </div>
-              </form>
-            </nb-card-body>
-          </nb-card>          
-        </nb-tab>
-
-        <!-- Tab de Datos de Indentificacion -->
-        <nb-tab tabTitle="Paso #2 | Datos de Sectores y Programas">
-            <nb-card class="inline-form-card">
-              <nb-card-header>Ingresa los datos de Sectores y Programas de Nación</nb-card-header>
-              <nb-card-body>
-                <form class="form-inline">
-                  <input type="text" class="form-control full-width" placeholder="Nombre de Proyecto/Actividad">
-                  <div class="input-group full-width">
-                    <div class="input-group-addon">@</div>
-                    <input type="text" class="form-control" placeholder="Email">
-                  </div>
-                  <nb-checkbox>Remember me</nb-checkbox>
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-              </nb-card-body>
-            </nb-card>        
-        </nb-tab>
-
-        <!-- Tab de Datos de Ubicación -->
-        <nb-tab tabTitle="Paso #3 | Datos de Ubicación">
-          <div class="row">
-            <div class="col-md-12">
-              <nb-card>
-                <nb-card-header>Ingresa los datos de Ubicación del Proyecto</nb-card-header>
-                <nb-card-body>
-                  <form>
-                    <div class="form-group row">
-                      <div class="col-md-6">
-                        <label for="inputEmail1" class="col-sm-3 col-form-label">Email</label>
-                        <div class="col-sm-9">
-                          <input type="email" class="form-control" id="inputEmail1" placeholder="Email">
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <label for="inputEmail1" class="col-sm-3 col-form-label">Email</label>
-                        <div class="col-sm-9">
-                          <input type="email" class="form-control" id="inputEmail1" placeholder="Email">
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="form-group row">
-                      <label for="inputPassword2" class="col-sm-3 col-form-label">Password</label>
-                      <div class="col-sm-9">
-                        <input type="password" class="form-control" id="inputPassword2" placeholder="Password">
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label class="col-sm-3">Radios</label>
-                      <div class="col-sm-9">
-                        <div class="form-check">
-                          <label class="custom-control custom-radio">
-                            <input type="radio" class="custom-control-input" name="gridRadios" checked>
-                            <span class="custom-control-indicator"></span>
-                            <span class="custom-control-description">Option one is this and that&mdash;be sure to include why it's great</span>
-                          </label>
-                        </div>
-                        <div class="form-check">
-                          <label class="custom-control custom-radio">
-                            <input type="radio" class="custom-control-input" name="gridRadios">
-                            <span class="custom-control-indicator"></span>
-                            <span class="custom-control-description">Option two can be something else and selecting it will deselect option one</span>
-                          </label>
-                        </div>
-                        <div class="form-check disabled">
-                          <label class="custom-control custom-radio">
-                            <input type="radio" class="custom-control-input" name="gridRadios" disabled>
-                            <span class="custom-control-indicator"></span>
-                            <span class="custom-control-description">Option three is disabled</span>
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <div class="offset-sm-3 col-sm-9">
-                        <button type="submit" class="btn btn-primary">Sign in NAM</button>
-                      </div>
-                    </div>
-                  </form>
-                </nb-card-body>
-              </nb-card>
+              </div>
             </div>
-          </div>
-        </nb-tab>
-
-        <!-- Tab de Datos Finacieros del Proyecto -->
-        <nb-tab tabTitle="Paso #4 | Datos de Financieros">
-            <nb-card class="inline-form-card">
-              <nb-card-header>Datos Finacieros del Proyecto</nb-card-header>
-              <nb-card-body>
-                <form class="form-inline">
-                  <input type="text" class="form-control full-width" placeholder="Jane Doe">
-                  <div class="input-group full-width">
-                    <div class="input-group-addon">@</div>
-                    <input type="text" class="form-control" placeholder="Email">
-                  </div>
-                  <nb-checkbox>Remember me</nb-checkbox>
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-              </nb-card-body>
-            </nb-card>          
-        </nb-tab>
-
-        <!-- Tab de Datos de Documentos de Soporte -->
-        <nb-tab tabTitle="Paso #5 | Documentos de Soporte">
-          <nb-card class="inline-form-card">
-            <nb-card-header>Documentos de Soporte del Proyecto</nb-card-header>
-            <nb-card-body>
-              <form class="form-inline">
-                <input type="text" class="form-control full-width" placeholder="Jane Doe">
-                <div class="input-group full-width">
-                  <div class="input-group-addon">@</div>
-                  <input type="text" class="form-control" placeholder="Email">
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="inputEmail">Email</label>
+                  <input type="email" class="form-control" id="inputEmail" placeholder="Email">
                 </div>
-                <nb-checkbox>Remember me</nb-checkbox>
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </form>
-            </nb-card-body>
-          </nb-card>          
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="inputWebsite">Website</label>
+                  <input type="text" class="form-control" id="inputWebsite" placeholder="Website">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="inputEmail">Email</label>
+                  <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="inputWebsite">Website</label>
+                  <input type="text" class="form-control" id="inputWebsite" placeholder="Website">
+                </div>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+
+            <nb-card accent="info">
+              <nb-card-header>Nebula</nb-card-header>
+              <nb-card-body>
+                A nebula is an interstellar cloud of dust, hydrogen, helium and other ionized gases. Originally, nebula was a name for any
+                diffuse astronomical object, including galaxies beyond the Milky Way.
+              </nb-card-body>
+            </nb-card>
+            
+            <nb-card accent="danger">
+              <nb-card-header>Nebula</nb-card-header>
+              <nb-card-body>
+                A nebula is an interstellar cloud of dust, hydrogen, helium and other ionized gases. Originally, nebula was a name for any
+                diffuse astronomical object, including galaxies beyond the Milky Way.
+              </nb-card-body>
+            </nb-card>
+            
+            <nb-card accent="primary" status="warning">
+              <nb-card-header>Nebula</nb-card-header>
+              <nb-card-body>
+                A nebula is an interstellar cloud of dust, hydrogen, helium and other ionized gases. Originally, nebula was a name for any
+                diffuse astronomical object, including galaxies beyond the Milky Way.
+              </nb-card-body>
+            </nb-card>
+
+          </nb-card-body>
         </nb-tab>
+
+
+        <nb-tab tabTitle="Paso #2 | Sectores y Programas">
+          <span>Content #2</span>
+        </nb-tab>
+        <nb-tab tabTitle="Paso #3 | Información Financiera">
+          <span>Content #3</span>
+        </nb-tab>
+      <nb-tab tabTitle="Paso #4 | Datos de Ubicación">
+        <span>Content #4</span>
+      </nb-tab>
+      <nb-tab tabTitle="Paso #5 | Documentos de Soporte">
+        <span>Content #5</span>
+      </nb-tab>
       </nb-tabset>
     </nb-card>
+  </div>
+</div>
