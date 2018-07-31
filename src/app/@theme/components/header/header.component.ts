@@ -29,8 +29,8 @@ export class HeaderComponent implements OnInit {
   public lastSurname: String;
   public completeName: String;
 
-  userMenu = [{ title: 'Perfil', icon: 'fa fa-user', data: {path: '/logout'} },
-              { title: 'Desconectar', icon: 'fa fa-sign-out', data: {path: 'auth/login/1'} }];
+  userMenu = [{ title: 'Perfil', icon: 'fa fa-user', data: { path: '/logout' } },
+              { title: 'Desconectar', icon: 'fa fa-sign-out', data: { link: '/auth/login' }} ];
 
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
@@ -107,7 +107,7 @@ export class HeaderComponent implements OnInit {
       .subscribe(({ item }) => {
         // Condicionamos la opcion del Menú
         // this.window.alert(`${title} was clicked!`)
-         alert( 'title ' + item.data.path );
+         // alert( 'title ' + item.data.path );
            /*if ( item.title === 'Perfil' ) {
             // removemos el Token del LocalStorage
             alert('Ventana de cambiar el Perfil');

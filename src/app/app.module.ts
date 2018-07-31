@@ -20,8 +20,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxAuthComponent } from './@theme/components/auth/auth.component';
 import { NgxAuthBlockComponent } from './@theme/components/auth/auth-block/auth-block.component';
 import { NgxLoginComponent } from './@theme/components/auth/login/login.component';
+import { NgxLogoutComponent } from './@theme/components/auth/logout/logout.component';
 /*import { NgxRegisterComponent } from './components/auth/register/register.component';
-import { NgxLogoutComponent } from './components/auth/logout/logout.component';
 import { NgxRequestPasswordComponent } from './components/auth/request-password/request-password.component';
 import { NgxResetPasswordComponent } from './components/auth/reset-password/reset-password.component';
 */
@@ -36,10 +36,11 @@ import { NgxResetPasswordComponent } from './components/auth/reset-password/rese
     NgxAuthComponent,
     NgxAuthBlockComponent,
     NgxLoginComponent,
+    NgxLogoutComponent,
     /*NgxRegisterComponent,
     NgxRequestPasswordComponent,
     NgxResetPasswordComponent,
-    NgxLogoutComponent,*/],
+    */],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

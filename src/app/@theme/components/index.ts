@@ -12,7 +12,7 @@ export * from './theme-switcher/themes-switcher-list/themes-switcher-list.compon
 export * from '../components/auth/auth.component';
 export * from '../components/auth/auth-block/auth-block.component';
 export * from '../components/auth/login/login.component';
-/* export * from './auth/logout/logout.component';
-export * from './register/register.component';
+export * from '../components/auth/logout/logout.component';
+/*export * from './register/register.component';
 export * from './request-password/request-password.component';
 export * from './reset-password/reset-password.component'; */

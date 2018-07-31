@@ -129,13 +129,11 @@ export class NgxLoginComponent {
     this._route.params.subscribe( params => {
       const logout = + params['id'];
       if ( logout === 1 ) {
-        alert( logout );
+        alert( 'En login ' + logout );
       }
     });
 
   }
-
-
 
 
   /****************************************************************************

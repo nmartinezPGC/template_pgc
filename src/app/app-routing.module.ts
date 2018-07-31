@@ -15,8 +15,8 @@ import {
 import { NgxAuthComponent } from './@theme/components/auth/auth.component';
 // import { NgxAuthBlockComponent } from './@theme/components/auth/auth-block/auth-block.component';
 import { NgxLoginComponent } from './@theme/components/auth/login/login.component';
+import { NgxLogoutComponent } from './@theme/components/auth/logout/logout.component';
 /*import { NgxRegisterComponent } from './components/auth/register/register.component';
-import { NgxLogoutComponent } from './components/auth/logout/logout.component';
 import { NgxRequestPasswordComponent } from './components/auth/request-password/request-password.component';
 import { NgxResetPasswordComponent } from './components/auth/reset-password/reset-password.component';
 */
@@ -40,8 +40,8 @@ const routes: Routes = [
         component: NbRegisterComponent,
       },
       {
-        path: 'login/{id}',
-        component: NgxLoginComponent,
+        path: 'logout',
+        component: NgxLogoutComponent,
       },
       {
         path: 'request-password',
