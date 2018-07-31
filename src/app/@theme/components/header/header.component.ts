@@ -30,7 +30,7 @@ export class HeaderComponent implements OnInit {
   public completeName: String;
 
   userMenu = [{ title: 'Perfil', icon: 'fa fa-user', data: { path: '/logout' } },
-              { title: 'Desconectar', icon: 'fa fa-sign-out', data: { link: '/auth/login' }} ];
+              { title: 'Desconectar', icon: 'fa fa-sign-out', data: { path: '/auth/logout' }} ];
 
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
@@ -105,18 +105,6 @@ export class HeaderComponent implements OnInit {
         map((item) => item),
       )
       .subscribe(({ item }) => {
-        // Condicionamos la opcion del Menú
-        // this.window.alert(`${title} was clicked!`)
-         // alert( 'title ' + item.data.path );
-           /*if ( item.title === 'Perfil' ) {
-            // removemos el Token del LocalStorage
-            alert('Ventana de cambiar el Perfil');
-          }else if ( item.title === 'Desconectar' ) {
-            localStorage.removeItem('auth_app_token');
-            localStorage.removeItem('identity');
-            // Redireccionamos al Login
-            this._router.navigateByUrl(item.data.path);
-          }*/
           this._router.navigateByUrl(item.data.path);
         },
       );

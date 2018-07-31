@@ -14,7 +14,7 @@ import { NbAuthResult } from '../../../../../../node_modules/@nebular/auth/servi
 @Component({
   selector: 'ngx-logout',
   template: `
-    <div>Logging out, please wait...</div>
+    <div>Redireccionando al Login, espera por favor... </div>
   `,
 })
 export class NgxLogoutComponent implements OnInit {
@@ -42,6 +42,8 @@ export class NgxLogoutComponent implements OnInit {
         localStorage.removeItem('auth_app_token');
         localStorage.removeItem('identity');
         setTimeout(() => {
+          // Iniciativa Temporal
+          location.reload();
           return this.router.navigateByUrl(redirect);
         }, this.redirectDelay);
       }

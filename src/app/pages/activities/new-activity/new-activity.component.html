@@ -11,36 +11,68 @@
   </ol>
 </nav>
 
-<div class="row">
-  <div class="col-md-12 col-lg-12">
+    <!-- Tarjetas para Agrupar los Datos de Ingreso de la Actvidad/Proyecto -->
     <nb-card>
+      <!-- Tab de Datos de Indentificacion -->
       <nb-tabset>
-        Tab de Seleccion de Espacio de Trabajo de la Actividad
+        <!-- Tab de Seleccion de Espacio de Trabajo de la Actividad -->
         <nb-tab tabTitle="Paso #1 | Datos de Identificación">
-          <!-- <span>Content #3</span> -->
-          <!-- <div class="col-md-12"> -->
           <nb-card class="inline-form-card">
-            <nb-card-header>Ingresa los datos de identificación del Proyecto/Actividad</nb-card-header>
+            <nb-card-header>Ingresa los datos de Identificación del Proyecto/Actividad</nb-card-header>
             <nb-card-body>
               <form class="form-inline">
-                <input type="text" class="form-control full-width" placeholder="Nombre de Proyecto/Actividad">
-                <div class="input-group full-width">
-                  <div class="input-group-addon">@</div>
-                  <input type="text" class="form-control" placeholder="Email">
+                <div class="col-md-12">
+                  <div class="form-group row">
+                      <label>Espacio de Trabajo: </label>
+                        <select class="form-control" required>
+                          <option value="0" >**************** Selecciona el Espacio de Trabajo ****************</option>
+                          <option>Agencia Española de Cooperación Internacional de Desarrollo | AECID</option>
+                          <option>COSUDE</option>
+                          <option>AUSTRIA</option>
+                          <option>BECAS</option>
+                        </select>
+                        <i class="fa fa-hands-helping" title="Ayuda"></i>
+                  </div>
                 </div>
-                <nb-checkbox>Remember me</nb-checkbox>
-                <button type="submit" class="btn btn-primary">Submit</button>
+
+                <div class="col-md-12">
+                  <!-- <label>Nombre del Proyecto/Actividad: </label> -->
+                  <div class="form-group row">
+                    <input type="text" class="form-control full-width" placeholder="Nombre de Proyecto/Actividad" required>
+                  </div>
+                </div>
+
+                <div class="col-6 col-md-4">
+                  <div class="form-group row">
+                    <label>Estado de Actividad: </label>
+                    <select class="form-control" required>
+                      <option value="0">**** Selecciona el Estado ****</option>
+                      <option>Ejecución</option>
+                      <option>Diseño</option>
+                      <option>Cierre</option>
+                      <option>Finalizado</option>
+                      <option>Condiciones Previas</option>
+                      <option>Suspendida</option>
+                      <option>En Busca de Financiamiento</option>
+                    </select>
+                    <i class="fa fa-hands-helping" title="Ayuda"></i>
+                  </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-8">
+                  <div class="form-group row">
+                    <input type="text" class="form-control full-width" placeholder="Explicación del Estado" required>
+                  </div>
+                </div>
               </form>
             </nb-card-body>
-          </nb-card>
-          <!-- </div> -->
+          </nb-card>          
         </nb-tab>
 
+        <!-- Tab de Datos de Indentificacion -->
         <nb-tab tabTitle="Paso #2 | Datos de Sectores y Programas">
-          <!-- <span>Content #3</span> -->
-          <!-- <div class="col-md-12"> -->
             <nb-card class="inline-form-card">
-              <nb-card-header>Ingresa los datos de identificación del Proyecto/Actividad</nb-card-header>
+              <nb-card-header>Ingresa los datos de Sectores y Programas de Nación</nb-card-header>
               <nb-card-body>
                 <form class="form-inline">
                   <input type="text" class="form-control full-width" placeholder="Nombre de Proyecto/Actividad">
@@ -52,71 +84,80 @@
                   <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
               </nb-card-body>
-            </nb-card>
-          <!-- </div> -->
+            </nb-card>        
         </nb-tab>
 
+        <!-- Tab de Datos de Ubicación -->
         <nb-tab tabTitle="Paso #3 | Datos de Ubicación">
-          <!-- <span>Content #2</span> -->
-          <div class="col-md-6">
-            <nb-card>
-              <nb-card-header>Using the Grid</nb-card-header>
-              <nb-card-body>
-                <form>
-                  <div class="form-group row">
-                    <label for="inputEmail1" class="col-sm-3 col-form-label">Email</label>
-                    <div class="col-sm-9">
-                      <input type="email" class="form-control" id="inputEmail1" placeholder="Email">
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="inputPassword2" class="col-sm-3 col-form-label">Password</label>
-                    <div class="col-sm-9">
-                      <input type="password" class="form-control" id="inputPassword2" placeholder="Password">
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label class="col-sm-3">Radios</label>
-                    <div class="col-sm-9">
-                      <div class="form-check">
-                        <label class="custom-control custom-radio">
-                          <input type="radio" class="custom-control-input" name="gridRadios" checked>
-                          <span class="custom-control-indicator"></span>
-                          <span class="custom-control-description">Option one is this and that&mdash;be sure to include why it's great</span>
-                        </label>
+          <div class="row">
+            <div class="col-md-12">
+              <nb-card>
+                <nb-card-header>Ingresa los datos de Ubicación del Proyecto</nb-card-header>
+                <nb-card-body>
+                  <form>
+                    <div class="form-group row">
+                      <div class="col-md-6">
+                        <label for="inputEmail1" class="col-sm-3 col-form-label">Email</label>
+                        <div class="col-sm-9">
+                          <input type="email" class="form-control" id="inputEmail1" placeholder="Email">
+                        </div>
                       </div>
-                      <div class="form-check">
-                        <label class="custom-control custom-radio">
-                          <input type="radio" class="custom-control-input" name="gridRadios">
-                          <span class="custom-control-indicator"></span>
-                          <span class="custom-control-description">Option two can be something else and selecting it will deselect option one</span>
-                        </label>
-                      </div>
-                      <div class="form-check disabled">
-                        <label class="custom-control custom-radio">
-                          <input type="radio" class="custom-control-input" name="gridRadios" disabled>
-                          <span class="custom-control-indicator"></span>
-                          <span class="custom-control-description">Option three is disabled</span>
-                        </label>
+                      <div class="col-md-6">
+                        <label for="inputEmail1" class="col-sm-3 col-form-label">Email</label>
+                        <div class="col-sm-9">
+                          <input type="email" class="form-control" id="inputEmail1" placeholder="Email">
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="form-group row">
-                    <div class="offset-sm-3 col-sm-9">
-                      <button type="submit" class="btn btn-primary">Sign in NAM</button>
+
+                    <div class="form-group row">
+                      <label for="inputPassword2" class="col-sm-3 col-form-label">Password</label>
+                      <div class="col-sm-9">
+                        <input type="password" class="form-control" id="inputPassword2" placeholder="Password">
+                      </div>
                     </div>
-                  </div>
-                </form>
-              </nb-card-body>
-            </nb-card>
+                    <div class="form-group row">
+                      <label class="col-sm-3">Radios</label>
+                      <div class="col-sm-9">
+                        <div class="form-check">
+                          <label class="custom-control custom-radio">
+                            <input type="radio" class="custom-control-input" name="gridRadios" checked>
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description">Option one is this and that&mdash;be sure to include why it's great</span>
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <label class="custom-control custom-radio">
+                            <input type="radio" class="custom-control-input" name="gridRadios">
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description">Option two can be something else and selecting it will deselect option one</span>
+                          </label>
+                        </div>
+                        <div class="form-check disabled">
+                          <label class="custom-control custom-radio">
+                            <input type="radio" class="custom-control-input" name="gridRadios" disabled>
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description">Option three is disabled</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <div class="offset-sm-3 col-sm-9">
+                        <button type="submit" class="btn btn-primary">Sign in NAM</button>
+                      </div>
+                    </div>
+                  </form>
+                </nb-card-body>
+              </nb-card>
             </div>
+          </div>
         </nb-tab>
 
+        <!-- Tab de Datos Finacieros del Proyecto -->
         <nb-tab tabTitle="Paso #4 | Datos de Financieros">
-          <!-- <span>Content #3</span> -->
-          <!-- <div class="col-md-12"> -->
             <nb-card class="inline-form-card">
-              <nb-card-header>Datos de Identificación</nb-card-header>
+              <nb-card-header>Datos Finacieros del Proyecto</nb-card-header>
               <nb-card-body>
                 <form class="form-inline">
                   <input type="text" class="form-control full-width" placeholder="Jane Doe">
@@ -128,9 +169,25 @@
                   <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
               </nb-card-body>
-            </nb-card>
-          <!-- </div> -->
+            </nb-card>          
+        </nb-tab>
+
+        <!-- Tab de Datos de Documentos de Soporte -->
+        <nb-tab tabTitle="Paso #5 | Documentos de Soporte">
+          <nb-card class="inline-form-card">
+            <nb-card-header>Documentos de Soporte del Proyecto</nb-card-header>
+            <nb-card-body>
+              <form class="form-inline">
+                <input type="text" class="form-control full-width" placeholder="Jane Doe">
+                <div class="input-group full-width">
+                  <div class="input-group-addon">@</div>
+                  <input type="text" class="form-control" placeholder="Email">
+                </div>
+                <nb-checkbox>Remember me</nb-checkbox>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+            </nb-card-body>
+          </nb-card>          
         </nb-tab>
       </nb-tabset>
     </nb-card>
-  </div>
