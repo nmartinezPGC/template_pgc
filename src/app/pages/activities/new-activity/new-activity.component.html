@@ -18,82 +18,103 @@
       <nb-tabset fullWidth>
         <!-- Tab #1 de Datos Generales del Proyecto/Programa -->
         <nb-tab tabTitle="Paso #1 | Datos Generales">          
-          <nb-card-header>Ingresa los datos generales del Proyecto/Programa</nb-card-header><br>
+          <!-- <nb-card-header>Ingresa los datos generales del Proyecto/Programa</nb-card-header><br> -->
           <nb-card-body>
-            <div class="row">
-              <div class="col-12 col-sm-6 col-md-8">
-                <div class="form-group">
-                  <label for="inputFirstName">Nombre del Proyecto/Programa</label>
-                  <input type="text" class="form-control" id="inputFirstName" placeholder="Nombre del Proyecto/Programa">
-                </div>
-              </div>
-              <div class="col-6 col-md-4">
-                <div class="form-group">
-                  <label>Espacio de Trabajo</label>
-                  <select class="form-control">
-                    <option value="0">******** Selecciona el Espacio de Trabajo ********</option>
-                    <option value="1">Espacio #1</option>
-                    <option value="2">Espacio #2</option>
-                    <option value="3">Espacio #3</option>
-                    <option value="4">Espacio #4</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="inputEmail">Email</label>
-                  <input type="email" class="form-control" id="inputEmail" placeholder="Email">
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="inputWebsite">Website</label>
-                  <input type="text" class="form-control" id="inputWebsite" placeholder="Website">
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="inputEmail">Email</label>
-                  <input type="email" class="form-control" id="inputEmail" placeholder="Email">
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="inputWebsite">Website</label>
-                  <input type="text" class="form-control" id="inputWebsite" placeholder="Website">
-                </div>
-              </div>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-
-            <nb-card accent="info">
-              <nb-card-header>Datos Generales NAM</nb-card-header>
+            <!-- Definición de los Datos Generales -->
+            <nb-card accent="primary">
+              <nb-card-header>Datos Generales</nb-card-header>
               <nb-card-body>
-                A nebula is an interstellar cloud of dust, hydrogen, helium and other ionized gases. Originally, nebula was a name for any
-                diffuse astronomical object, including galaxies beyond the Milky Way.
+                <div class="row">
+                  <div class="col-12 col-sm-6 col-md-8">
+                    <div class="form-group">
+                      <label for="inputFirstName">Nombre del Proyecto/Programa</label>
+                      <input type="text" class="form-control" id="inputFirstName" placeholder="Nombre del Proyecto/Programa">
+                    </div>
+                  </div>
+                  <div class="col-6 col-md-4">
+                    <div class="form-group">
+                      <label>Espacio de Trabajo</label>
+                      <select class="form-control">
+                        <option value="0">******** Selecciona el Espacio de Trabajo ********</option>
+                        <option value="1">Espacio #1</option>
+                        <option value="2">Espacio #2</option>
+                        <option value="3">Espacio #3</option>
+                        <option value="4">Espacio #4</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Estado de Proyecto/Programa</label>
+                      <select class="form-control">
+                        <option value="0">**** Selecciona el Estado ****</option>
+                        <option value="1">Estado #1</option>
+                        <option value="2">Estado #2</option>
+                        <option value="3">Estado #3</option>
+                        <option value="4">Estado #4</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label for="inputWebsite">Explicación de Estado</label>
+                      <input type="text" class="form-control" id="inputWebsite" placeholder="Explicación de Estado">
+                    </div>
+                  </div>
+                </div>
               </nb-card-body>
             </nb-card>
             
-            <nb-card accent="danger">
-              <nb-card-header>Nebula</nb-card-header>
+            <!-- Definición de los Estados de la Actividad -->
+            <nb-card accent="primary">
+              <nb-card-header>Estado de Proyecto</nb-card-header>
               <nb-card-body>
-                A nebula is an interstellar cloud of dust, hydrogen, helium and other ionized gases. Originally, nebula was a name for any
-                diffuse astronomical object, including galaxies beyond the Milky Way.
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Estado de Proyecto/Programa</label>
+                      <select class="form-control">
+                        <option value="0">**** Selecciona el Estado ****</option>
+                        <option value="1">Estado #1</option>
+                        <option value="2">Estado #2</option>
+                        <option value="3">Estado #3</option>
+                        <option value="4">Estado #4</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label for="inputWebsite">Explicación de Estado</label>
+                      <input type="text" class="form-control" id="inputWebsite" placeholder="Website">
+                    </div>
+                  </div>
+                </div>
               </nb-card-body>
             </nb-card>
             
-            <nb-card accent="primary" status="warning">
+            <!-- Definición de los Datos Relevantes del Proyecto -->
+            <nb-card accent="primary">
               <nb-card-header>Nebula</nb-card-header>
               <nb-card-body>
-                A nebula is an interstellar cloud of dust, hydrogen, helium and other ionized gases. Originally, nebula was a name for any
-                diffuse astronomical object, including galaxies beyond the Milky Way.
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label for="inputEmail">Email</label>
+                      <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label for="inputWebsite">Website</label>
+                      <input type="text" class="form-control" id="inputWebsite" placeholder="Website">
+                    </div>
+                  </div>
+                </div>
               </nb-card-body>
             </nb-card>
-
+            <!-- Fin de Datos Generales -->
           </nb-card-body>
         </nb-tab>
 
