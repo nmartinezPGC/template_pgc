@@ -29,6 +29,9 @@ export class HeaderComponent implements OnInit {
   public lastSurname: String;
   public completeName: String;
 
+  // Loading data Loader
+  public loadingData: boolean = true;
+
   userMenu = [{ title: 'Perfil', icon: 'fa fa-user', data: { path: '/logout' } },
               { title: 'Desconectar', icon: 'fa fa-sign-out', data: { path: '/auth/logout' }} ];
 
@@ -47,6 +50,9 @@ export class HeaderComponent implements OnInit {
   * Objetivo: ngOnInit in the method header API
   ****************************************************************************/
   ngOnInit() {
+    // Carga de Loading Data
+    this.loadingData = true;
+
     // Llamado a la Funcion de obtención del Usuario
     this.userService.getUsers()
       .subscribe((users: any) => this.user = users.eva);
@@ -62,6 +68,8 @@ export class HeaderComponent implements OnInit {
               // Ejecución de la Data Obtenida
                 this.user = result.data;
                 this.completeName = result.data.nombre1Usuario + ' ' + result.data.apellido1Usuario;
+
+              setTimeout(() => { this.loadingData = false; }, 2000);
           } else {
               // this.user = result.data;
           }
