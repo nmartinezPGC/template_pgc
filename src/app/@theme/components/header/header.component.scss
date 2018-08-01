@@ -231,20 +231,20 @@ $color-loader: #9aa0a5;
   }
 
   .loader {
-  width: 350px;
-  height: 50px;
-  line-height: 50px;
-  text-align: center;
-  position: absolute;
-  top: 100%;
-  left: 40%;
-  transform: translate(-50% -50%);
-  font-family: helvetica, arial, sans-serif;
-  text-transform: uppercase;
-  font-weight: 900;
-  color: $color-loader;
-  letter-spacing: 0.2em;
-  z-index: 9999;
+    width: 350px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    position: absolute;
+    top: 150%;
+    left: 40%;
+    transform: translate(-50% -50%);
+    font-family: helvetica, arial, sans-serif;
+    text-transform: uppercase;
+    font-weight: 900;
+    color: $color-loader;
+    letter-spacing: 0.2em;
+    z-index: 9999;
   
   &::before, &::after {
     content: '';
