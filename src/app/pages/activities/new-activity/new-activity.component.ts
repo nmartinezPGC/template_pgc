@@ -42,7 +42,7 @@ export class NewActivityComponent implements OnInit {
 
   /****************************************************************************
   * Funcion: constructor
-  * Object Number: 001 
+  * Object Number: 001
   * Fecha: 16-08-2018
   * Descripcion: Method constructor of the Class
   * Objetivo: constructor in the method header API
@@ -140,7 +140,7 @@ export class NewActivityComponent implements OnInit {
 
   public toasterconfig1: ToasterConfig =
     new ToasterConfig({
-      showCloseButton: { 'warning': true, 'error': false }
+      showCloseButton: { 'warning': true, 'error': false },
     });
 
 }
