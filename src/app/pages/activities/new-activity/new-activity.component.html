@@ -11,110 +11,240 @@
   </ol>
 </nav>
 
+<!-- <toaster-container [toasterconfig]="toasterconfig1"></toaster-container> -->
+
 <!-- Tarjetas para Agrupar los Datos de Ingreso de la Actvidad/Proyecto -->
 <div class="row">
   <div class="col-12 col-sm-12 col-md-12 col-lg-12">
     <nb-card>
-      <nb-tabset fullWidth>
+      <nb-tabset >
         <!-- Tab #1 de Datos Generales del Proyecto/Programa -->
         <nb-tab tabTitle="Paso #1 | Datos Generales">          
           <!-- <nb-card-header>Ingresa los datos generales del Proyecto/Programa</nb-card-header><br> -->
           <nb-card-body>
+            <!-- ==================================================================================== -->
             <!-- Definición de los Datos Generales -->
-            <nb-card accent="primary">
-              <nb-card-header>Datos Generales</nb-card-header>
-              <nb-card-body>
-                <div class="row">
-                  <div class="col-12 col-sm-6 col-md-8">
-                    <div class="form-group">
-                      <label for="inputFirstName">Nombre del Proyecto/Programa</label>
-                      <input type="text" class="form-control" id="inputFirstName" placeholder="Nombre del Proyecto/Programa">
+            <nb-flip-card>
+              <nb-card-front>
+              <nb-card accent="warning" status="primary">
+                <nb-card-header>Datos Generales | Definición del Programa/Proyecto</nb-card-header>
+                <nb-card-body>
+
+                  <!-- ==================================================================================== -->
+                  <!-- Espacios de Trabajo Asignados al Usuario -->
+                  <div class="row">
+                    <div class="col-12 col-sm-6 col-md-8">
+                      <div class="form-group">
+                        <label for="inputFirstName">Nombre del Proyecto/Programa</label>
+                        <input type="text" class="form-control" id="inputFirstName" placeholder="Nombre del Proyecto/Programa">
+                      </div>
+                    </div>
+                    <div class="col-6 col-md-4">
+                      <div class="form-group">
+                        <label>Espacio de Trabajo</label>
+                        <select class="form-control">
+                          <option value="0">******** Selecciona el Espacio de Trabajo ********</option>
+                          <option value="1">Espacio #1</option>
+                          <option value="2">Espacio #2</option>
+                          <option value="3">Espacio #3</option>
+                          <option value="4">Espacio #4</option>
+                        </select>
+                      </div>
                     </div>
                   </div>
-                  <div class="col-6 col-md-4">
-                    <div class="form-group">
-                      <label>Espacio de Trabajo</label>
-                      <select class="form-control">
-                        <option value="0">******** Selecciona el Espacio de Trabajo ********</option>
-                        <option value="1">Espacio #1</option>
-                        <option value="2">Espacio #2</option>
-                        <option value="3">Espacio #3</option>
-                        <option value="4">Espacio #4</option>
-                      </select>
+
+                  <!-- ==================================================================================== -->
+                  <!-- Definición de los Estados de la Actividad -->
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <div class="form-group">
+                        <label>Estado de Proyecto/Programa</label>
+                        <select class="form-control">
+                          <option value="0">**** Selecciona el Estado ****</option>
+                          <option value="1">Estado #1</option>
+                          <option value="2">Estado #2</option>
+                          <option value="3">Estado #3</option>
+                          <option value="4">Estado #4</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-sm-9">
+                      <div class="form-group">
+                        <label for="inputWebsite">Explicación de Estado</label>
+                        <input type="text" class="form-control" id="inputWebsite" placeholder="Explicación de Estado">
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="row">
-                  <div class="col-sm-3">
-                    <div class="form-group">
-                      <label>Estado de Proyecto/Programa</label>
-                      <select class="form-control">
-                        <option value="0">**** Selecciona el Estado ****</option>
-                        <option value="1">Estado #1</option>
-                        <option value="2">Estado #2</option>
-                        <option value="3">Estado #3</option>
-                        <option value="4">Estado #4</option>
-                      </select>
+
+                  <!-- ==================================================================================== -->
+                  <!-- Definicion de los Antecentes y Objetivos de la Actividad -->
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label>Descripción</label>
+                          <div class="form-group">
+                            <textarea class="form-control" placeholder="Descripción del Proyecto/Programa"></textarea>
+                          </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label>Objetivo</label>
+                        <div class="form-group">
+                          <textarea class="form-control" placeholder="Objetivo del Proyecto/Programa"></textarea>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <div class="col-sm-9">
-                    <div class="form-group">
-                      <label for="inputWebsite">Explicación de Estado</label>
-                      <input type="text" class="form-control" id="inputWebsite" placeholder="Explicación de Estado">
+
+                  <!-- ==================================================================================== -->
+                  <!-- Definicion de Descripcion y Condiciones Previas -->
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label>Antecedentes</label>
+                        <div class="form-group">
+                          <textarea class="form-control" placeholder="Antecedentes del Proyecto/Programa"></textarea>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label>Condiciones Previas</label>
+                        <div class="form-group">
+                          <textarea class="form-control" placeholder="Condiciones Previas del Proyecto/Programa"></textarea>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </nb-card-body>
-            </nb-card>
-            
+
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label>Justificación</label>
+                        <div class="form-group">
+                          <textarea class="form-control" placeholder="Justificación del Proyecto/Programa"></textarea>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </nb-card-body>
+              </nb-card>
+              </nb-card-front>
+              
+              <nb-card-back>
+                <nb-card>
+                  <nb-card-body>
+                    <div class="jumbotron jumbotron-fluid">
+                      <div class="container">
+                        <h1 class="display-4">Hola, nesesitas ayuda!</h1>
+                        <p class="lead">Este es un ejemplo de como ingresar la información en cada sección presentada.</p>
+                        <hr class="my-4">
+                        <p>Datos Generales | Definición del Programa/Proyecto. <br>
+                          Se requiere ingresar la información que define al proyecto como tal, su nombre, justificacion, objetivos, a que cooperante pertenece
+                          (Agencia de Cooperación/Espacio de Trabajo). <br><br>
+                          Ademas nesesita que le definamos el estado o etapa en el que se encuentra, asi como una breve Explicación del porque se encuentra en
+                          esa etapa que definamos. <br><br>
+                          Los Campos: Descripción, Objetivo, Antecedentes y Condiciones Previas, son tipo texto, lo que requiere que describamos textualmente lo
+                          que el documento del proyecto/programa menciona en el mismo, vale la pena mencionar que estas decripciones son abiertas sin limites de
+                          cantidad de palabras para ingresar y que se puede copiar y pargar de untexto a otro. <br><br>
+                          En la Seccion de resultados, se realizara una sentesis de lo que se espera alcanzar con la implementacion y desarrollo del proyecto en
+                          mención y ademas actaulizar con el transcurrir del tiempo los resultados que seran alcanzados. <br><br>
+                        </p>
+                        <a class="btn btn-primary btn-lg" href="#" role="button">Intructivo de uso ...</a>
+                      </div>
+                    </div>
+                  </nb-card-body>
+                </nb-card>
+              </nb-card-back>
+            </nb-flip-card>
+
+            <!-- ==================================================================================== -->            
             <!-- Definición de los Estados de la Actividad -->
-            <nb-card accent="primary">
-              <nb-card-header>Estado de Proyecto</nb-card-header>
+            <nb-card accent="warning" status="primary">
+              <nb-card-header>Datos Generales | Resultados</nb-card-header>
               <nb-card-body>
                 <div class="row">
-                  <div class="col-sm-4">
+                  <div class="col-sm-6">
                     <div class="form-group">
-                      <label>Estado de Proyecto/Programa</label>
-                      <select class="form-control">
-                        <option value="0">**** Selecciona el Estado ****</option>
-                        <option value="1">Estado #1</option>
-                        <option value="2">Estado #2</option>
-                        <option value="3">Estado #3</option>
-                        <option value="4">Estado #4</option>
-                      </select>
+                      <label>Resultados Esperados</label>
+                      <div class="form-group">
+                        <textarea class="form-control" placeholder="Resultados Esperados del Proyecto/Programa"></textarea>
+                      </div>
                     </div>
                   </div>
-                  <div class="col-sm-8">
+                  <div class="col-sm-6">
                     <div class="form-group">
-                      <label for="inputWebsite">Explicación de Estado</label>
-                      <input type="text" class="form-control" id="inputWebsite" placeholder="Website">
+                      <label>Resultados a la Fecha</label>
+                      <div class="form-group">
+                        <textarea class="form-control" placeholder="Resultados a la Fecha del Proyecto/Programa"></textarea>
+                      </div>
                     </div>
                   </div>
                 </div>
               </nb-card-body>
             </nb-card>
-            
+
+            <!-- ==================================================================================== -->            
             <!-- Definición de los Datos Relevantes del Proyecto -->
             <nb-card accent="primary">
-              <nb-card-header>Nebula</nb-card-header>
+              <nb-card-header>Datos Generales | Planificación</nb-card-header>
               <nb-card-body>
                 <div class="row">
                   <div class="col-sm-6">
                     <div class="form-group">
-                      <label for="inputEmail">Email</label>
-                      <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                      <label>Estrategia</label>
+                      <select class="form-control">
+                        <option value="0">**** Selecciona la Estrategia ****</option>
+                        <option value="1">Estrategia #1</option>
+                        <option value="2">Estrategia #2</option>
+                        <option value="3">Estrategia #3</option>
+                        <option value="4">Estrategia #4</option>
+                      </select>
                     </div>
                   </div>
                   <div class="col-sm-6">
                     <div class="form-group">
-                      <label for="inputWebsite">Website</label>
-                      <input type="text" class="form-control" id="inputWebsite" placeholder="Website">
+                      <label for="inputWebsite">Código BIP / SIAFI</label>
+                      <input type="text" class="form-control" id="inputWebsite" placeholder="Código BIP / SIAFI">
                     </div>
                   </div>
                 </div>
+                
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Presupuesto</label>
+                      <select class="form-control">
+                        <option value="0">**** Selecciona el Presupuesto ****</option>
+                        <option value="1">Presupuesto #1</option>
+                        <option value="2">Presupuesto #2</option>
+                        <option value="3">Presupuesto #3</option>
+                        <option value="4">Presupuesto #4</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Sector Ejecutor</label>
+                      <select class="form-control">
+                        <option value="0">**** Selecciona el Sector Ejecutor ****</option>
+                        <option value="1">Sector Ejecutor #1</option>
+                        <option value="2">Sector Ejecutor #2</option>
+                        <option value="3">Sector Ejecutor #3</option>
+                        <option value="4">Sector Ejecutor #4</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <button class="btn btn-primary" (click)="makeToast()">Guardar como borrador</button>
               </nb-card-body>
             </nb-card>
+
             <!-- Fin de Datos Generales -->
+            <!-- ==================================================================================== -->
           </nb-card-body>
         </nb-tab>
 

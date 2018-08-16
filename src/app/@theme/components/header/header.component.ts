@@ -64,18 +64,19 @@ export class HeaderComponent implements OnInit {
     this.userService.getUserDetails( this.userService.getIdentity().userName )
       .subscribe(
         result => {
-          if (result.code !== 200) {
-              // Ejecución de la Data Obtenida
-                this.user = result.data;
-                this.completeName = result.data.nombre1Usuario + ' ' + result.data.apellido1Usuario;
-
-              setTimeout(() => { this.loadingData = false; }, 2000);
+          if (result.status !== 200) {
+              // Error en la Obtencion de la Data
           } else {
-              // this.user = result.data;
+            // Ejecución de la Data Obtenida
+            this.user = result.data;
+            this.completeName = result.data.nombre1Usuario + ' ' + result.data.apellido1Usuario;
+
+            setTimeout(() => { this.loadingData = false; }, 2000);
           }
       },
       error => {
         alert( 'Error en la petición de la API ' + error );
+        this._router.navigateByUrl( '/auth/login' );
       },
     );
   }// FIN | ngOnInit
