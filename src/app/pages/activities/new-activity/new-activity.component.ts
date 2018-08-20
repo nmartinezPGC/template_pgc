@@ -159,7 +159,7 @@ export class NewActivityComponent implements OnInit {
       preventDuplicates: this.isDuplicatesPrevented,
       animation: this.animationType,
       limit: this.toastsLimit,
-    });    
+    });
     const toast: Toast = {
       type: type,
       title: title,
