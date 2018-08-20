@@ -63,7 +63,7 @@ export class NewActivityComponent implements OnInit {
       columnTitle: 'Acciones',
       add: true,
       delete: true,
-      edit: true
+      edit: true,
     },
     columns: {
       id: {
@@ -89,7 +89,7 @@ export class NewActivityComponent implements OnInit {
       },
     },
   };
-  
+
   source: LocalDataSource = new LocalDataSource();
 
   // private toasterService: ToasterService;
@@ -150,7 +150,7 @@ export class NewActivityComponent implements OnInit {
   * Descripcion: Method showToast of the Class
   * Objetivo: showToast in the method header API
   ****************************************************************************/
-  private showToast(type: string, title: string, body: string) {    
+  private showToast(type: string, title: string, body: string) {
     this.config = new ToasterConfig({
       positionClass: this.position,
       timeout: this.timeout,
@@ -214,14 +214,14 @@ export class NewActivityComponent implements OnInit {
       // event.newData['firstName'] += ' + added in code';
       event.confirm.resolve(event.newData);
       // console.log('Dato de la Fila Nueva ' + event.newData.id );
-      const parseEvent: any = JSON.stringify(event.newData);
+      // const parseEvent: any = JSON.stringify(event.newData);
       // console.log('onCreateConfirm +++ ' + parseEvent);
     } else {
       event.confirm.reject();
     }
   } // FIN | onDeleteConfirm
 
-  
+
   /* ********************************************************************************************************** */
   /* ***************************** Funciones Propias de la Clase ************************************************/
 
