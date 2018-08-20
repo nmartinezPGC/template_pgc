@@ -11,7 +11,7 @@
   </ol>
 </nav>
 
-<!-- <toaster-container [toasterconfig]="toasterconfig1"></toaster-container> -->
+<toaster-container [toasterconfig]="config"></toaster-container>
 
 <!-- Tarjetas para Agrupar los Datos de Ingreso de la Actvidad/Proyecto -->
 <div class="row">
@@ -238,7 +238,47 @@
                     </div>
                   </div>
                 </div>
+              </nb-card-body>
+            </nb-card>
 
+
+            <!-- ==================================================================================== -->
+            <!-- Definición de las ID's Internas del Proyecto -->
+            <nb-card status="primary" accent="warning">
+              <nb-card-header>Datos Generales | ID's Internas</nb-card-header>
+              <nb-card-body>
+                <div class="row">
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label>Filtrar Organización</label>
+                      <select class="form-control">
+                        <option value="0">**** Selecciona el tipo de Organizacion ****</option>
+                        <option value="1">Organizacion #1</option>
+                        <option value="2">Organizacion #2</option>
+                        <option value="3">Organizacion #3</option>
+                        <option value="4">Organizacion #4</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-sm-8">
+                    <div class="form-group">
+                      <label for="inputWebsite">Buscar Organización</label>
+                      <input type="text" class="form-control" id="inputWebsite" placeholder="Buscar Organización, por el filtro aplicado">
+                    </div>
+                  </div>
+                </div>
+            
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                      <label>ID's Internas seleccionadas</label>
+                      <!-- Tabla de las ID's Internas -->
+                        <ng2-smart-table [settings]="settings" [source]="source" 
+                            (deleteConfirm)="onDeleteConfirm($event)" (createConfirm)="onCreateConfirm($event)">
+                        </ng2-smart-table>
+                    </div>
+                  </div>
+                </div>            
                 <button class="btn btn-primary" (click)="makeToast()">Guardar como borrador</button>
               </nb-card-body>
             </nb-card>
