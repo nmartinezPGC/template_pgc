@@ -27,8 +27,8 @@ export class NewActivityComponent implements OnInit {
  // Configuracion del Toaster-Notifications
   config: ToasterConfig;
 
-  position = 'toast-top-right';
-  animationType = 'fade';
+  position = 'toast-bottom-right';
+  animationType = 'slideDown';
   title = 'HI there! soy Nahum Martinez, creador de la PGC';
   content = `I'm cool toaster!`;
   timeout = 10000;
