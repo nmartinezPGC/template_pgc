@@ -27,7 +27,7 @@ export class SystemEndPointsService extends ListEndPointsService {
   * Descripcion: Genera la Url para End Point solicitado
   * Objetivo: Genera Url de los End Points de la API
   *****************************************************/
-  getEndPointService( groupEndPoint:string, indicatorEndPointSend: number ) {
+  getEndPointService( groupEndPoint: string, indicatorEndPointSend: number ) {
     // Instanciamos el Indicador del Entorno de Compilacion
     const indicadorEndPoint: number = indicatorEndPointSend;
 

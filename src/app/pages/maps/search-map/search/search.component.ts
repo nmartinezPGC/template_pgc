@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, NgZone, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { MapsAPILoader } from '@agm/core';
 import { Location } from '../entity/Location';
 // import { google } from 'googlemaps';
@@ -15,8 +15,8 @@ export class SearchComponent implements OnInit {
   @ViewChild('search')
   public searchElementRef: ElementRef;
 
-  constructor(private mapsAPILoader: MapsAPILoader, ) {
-              //private ngZone: NgZone) {
+  constructor(private mapsAPILoader: MapsAPILoader ) {
+              // private ngZone: NgZone) {
   }
 
   ngOnInit() {
