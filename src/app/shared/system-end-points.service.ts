@@ -3,17 +3,17 @@ import { Injectable } from '@angular/core';
 // Importamos la Clase base de variables de Entorno
 import { SystemPropertiesService } from './system-properties.service'
 import { ListEndPointsService } from './list-end-points.service';
- 
+
 // Clase de Propieades Globales de la PGC
 @Injectable()
 export class SystemEndPointsService extends ListEndPointsService {
-  
+
   constructor( private _systemPropertiesService: SystemPropertiesService) {
     super();
   }
 
   // Varibles Gloables de Inicio del Systema
-  private userfindByMail: string = '/usuarios/findByMail/';
+  // private userfindByMail: string = '/usuarios/findByMail/';
 
   // Indicador del End Point que se Solicita | Modulo y Item
   public indicatorEndPoint: number;
@@ -27,7 +27,7 @@ export class SystemEndPointsService extends ListEndPointsService {
   * Descripcion: Genera la Url para End Point solicitado
   * Objetivo: Genera Url de los End Points de la API
   *****************************************************/
-  getEndPointService( groupEndPoint:string, indicatorEndPointSend:number ) {
+  getEndPointService( groupEndPoint:string, indicatorEndPointSend: number ) {
     // Instanciamos el Indicador del Entorno de Compilacion
     const indicadorEndPoint: number = indicatorEndPointSend;
 
@@ -37,7 +37,7 @@ export class SystemEndPointsService extends ListEndPointsService {
     switch ( groupEndPoint ) {
       case 'userGroup':
         switch ( indicadorEndPoint ) {
-            case 1: // Llamados a los End Point del Modulo de Usuarios                          
+            case 1: // Llamados a los End Point del Modulo de Usuarios
               endPointResult = this.urlBaseAPI + this.getEndPoint.endPointUsers.findByMail.urlEndPoint;
               break;
           }

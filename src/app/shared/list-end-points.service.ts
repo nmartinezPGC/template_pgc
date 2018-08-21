@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
- 
+
 // Clase de Propieades Globales de la PGC
 @Injectable()
 export class ListEndPointsService {
-  
+
   constructor() {}
 
   // Listado de los End Point que seran usados en la API ********************************
   // Modulo de Estados
-  private estadosEndPoint: string = '/usuarios/findByMail/';
-  
+  // private estadosEndPoint: string = '/usuarios/findByMail/';
+
   // Modulo de Usuarios sss
-  private suserfindByMail: string = '/usuarios/findByMail/';
+  // private suserfindByMail: string = '/usuarios/findByMail/';
 
   // Json de los End Points de la API disponibles
   getEndPoint = {

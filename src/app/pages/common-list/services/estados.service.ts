@@ -9,12 +9,10 @@ import {HttpClient, HttpHeaders } from '@angular/common/http';
 import { SystemPropertiesService } from '../../../shared/system-properties.service';
 import { SystemEndPointsService } from '../../../shared/system-end-points.service';
 
-let counter = 0;
-
 @Injectable()
 export class EstadosService {
 
-  private estadosArray: any[];
+  // private estadosArray: any[];
 
   public tokenHeader = this._systemPropertiesService.getIdentity().token;
   public usernameHeader = this._systemPropertiesService.getIdentity().userName;
@@ -41,7 +39,7 @@ export class EstadosService {
                                     'Authorization': this.tokenHeader, 'Access-Control-Allow-Origin': '*' });
   }// FIN | Constructor
 
-  
+
   /****************************************************************************
   * Funcion: FND-00001
   * Fecha: 04-07-2018

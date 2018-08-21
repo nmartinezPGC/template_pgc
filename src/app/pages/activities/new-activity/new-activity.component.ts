@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 // Servicios que la Clase nesesitara para su funcionanmiento
 import { UserService } from '../../../@core/data/users.service'; // Servicio de Usuarios
@@ -7,7 +7,7 @@ import { EstadosService } from '../../common-list/services/estados.service'; // 
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster'; // Servicio de Notificaciones
 // import 'style-loader!angular2-toaster/toaster.css';
 import { LocalDataSource } from 'ng2-smart-table'; // DataLocal de Ejemplo para el JSON de envio
-import { SmartTableService } from '../../../@core/data/smart-table.service'; // Servicio de la SmartTable de la API
+// import { SmartTableService } from '../../../@core/data/smart-table.service'; // Servicio de la SmartTable de la API
 
 import 'style-loader!angular2-toaster/toaster.css';
 
@@ -111,7 +111,7 @@ export class NewActivityComponent implements OnInit {
   ****************************************************************************/
   constructor( private _userService: UserService,
                private _estadosService: EstadosService,
-               //private service: SmartTableService,
+               // private service: SmartTableService,
                private _toasterService: ToasterService ) {
     // this.data = this.service.getData();
     // console.log( this.data );
@@ -279,9 +279,9 @@ export class NewActivityComponent implements OnInit {
         } else if (result.status === 200) {
           // this.productos = result.data;
           // console.log(result.status);
-          this.JsonReceptionEstados = result.data; 
-          console.log(this.JsonReceptionEstados);
-          //this.showToast(this.type, this.title, this.content);
+          this.JsonReceptionEstados = result.data;
+          // console.log(this.JsonReceptionEstados);
+          // this.showToast(this.type, this.title, this.content);
         }
       },
       error => {
