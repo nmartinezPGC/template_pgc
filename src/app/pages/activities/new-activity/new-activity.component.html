@@ -61,10 +61,9 @@
                         <label>Estado de Proyecto/Programa</label>
                         <select class="form-control">
                           <option value="0">**** Selecciona el Estado ****</option>
-                          <option value="1">Estado #1</option>
-                          <option value="2">Estado #2</option>
-                          <option value="3">Estado #3</option>
-                          <option value="4">Estado #4</option>
+                          <option *ngFor="let item of JsonReceptionEstados" [value]="item.idEstado">
+                            {{item.descEstado}}
+                          </option>
                         </select>
                       </div>
                     </div>

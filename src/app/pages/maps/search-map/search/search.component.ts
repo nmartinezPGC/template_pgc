@@ -1,7 +1,8 @@
 import { Component, ElementRef, EventEmitter, NgZone, OnInit, Output, ViewChild } from '@angular/core';
 import { MapsAPILoader } from '@agm/core';
 import { Location } from '../entity/Location';
-import {} from 'googlemaps';
+// import { google } from 'googlemaps';
+
 
 @Component({
   selector: 'ngx-search',
@@ -21,13 +22,13 @@ export class SearchComponent implements OnInit {
   ngOnInit() {
     // load Places Autocomplete
     this.mapsAPILoader.load().then(() => {
-      const autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
+      /* const autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
         types: ['address'],
       });
       autocomplete.addListener('place_changed', () => {
         this.ngZone.run(() => {
           // get the place result
-          const place: google.maps.places.PlaceResult = autocomplete.getPlace();
+          // const place: google.maps.places.PlaceResult = autocomplete.getPlace();
 
           // verify result
           if (place.geometry === undefined || place.geometry === null) {
@@ -38,7 +39,7 @@ export class SearchComponent implements OnInit {
             new Location(place.geometry.location.lat(),
               place.geometry.location.lng()));
         });
-      });
+      });*/
     });
   }
 }

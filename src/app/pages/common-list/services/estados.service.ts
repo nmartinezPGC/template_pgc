@@ -1,40 +1,20 @@
 
-import { of as observableOf,  Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 
 // Clases nesesarias para el envio via Ajax
 import {HttpClient, HttpHeaders } from '@angular/common/http';
-// import { catchError } from 'rxjs/operators';
-// import 'rxjs/add/operator/catch';
-// import 'rxjs/add/operator/map';
 
 // Importamos la Clase de las Propiedades del Sistema
-import { SystemPropertiesService } from '../../shared/system-properties.service';
-import { SystemEndPointsService } from '../../shared/system-end-points.service';
+import { SystemPropertiesService } from '../../../shared/system-properties.service';
+import { SystemEndPointsService } from '../../../shared/system-end-points.service';
 
 let counter = 0;
 
 @Injectable()
-export class UserService {
+export class EstadosService {
 
-  public users = {
-    nick: { name: 'Nick Jones', picture: 'assets/images/nick.png' },
-    eva: { name: 'Eva Moor', picture: 'assets/images/eva.png' },
-    jack: { name: 'Jack Williams', picture: 'assets/images/jack.png' },
-    lee: { name: 'Lee Wong', picture: 'assets/images/lee.png' },
-    alan: { name: 'Alan Thompson', picture: 'assets/images/alan.png' },
-    kate: { name: 'Kate Martinez', picture: 'assets/images/kate.png' },
-  };
-
-  private userArray: any[];
-
-  // Variables de la Ruta de la API
-  public _url: string;
-  public _urlResourses: string;
-
-  // Variables para el localStorage
-  public _identity;
-  public _token;
+  private estadosArray: any[];
 
   public tokenHeader = this._systemPropertiesService.getIdentity().token;
   public usernameHeader = this._systemPropertiesService.getIdentity().userName;
@@ -61,21 +41,7 @@ export class UserService {
                                     'Authorization': this.tokenHeader, 'Access-Control-Allow-Origin': '*' });
   }// FIN | Constructor
 
-
-  getUsers(): Observable<any> {
-    return observableOf(this.users);
-  }
-
-  getUserArray(): Observable<any[]> {
-    return observableOf(this.userArray);
-  }
-
-  getUser(): Observable<any> {
-    counter = (counter + 1) % this.userArray.length;
-    return observableOf(this.userArray[counter]);
-  }
-
-
+  
   /****************************************************************************
   * Funcion: FND-00001
   * Fecha: 04-07-2018
@@ -83,12 +49,10 @@ export class UserService {
   * Objetivo: datos generales del Usuario
   * Params: { userName }
   ****************************************************************************/
-  getUserDetails( user_to_name ): Observable<any> {
-    // Email del Usuario que se logea
-    const params = user_to_name;
+  getAllEstados(): Observable<any> {
     // Retorno de la Funcion
     // return this._http.get( 'http://localhost:8090/api/v1/usuarios/findByMail/' + params, { headers: this.headers,
-    return this._http.get(this._systemEndPointsService.getEndPointService( 'userGroup', 1) + params, { headers: this.headers,
+    return this._http.get( this._systemEndPointsService.getEndPointService( 'estadosGroup', 1), { headers: this.headers,
                         params: {'tokenApi': this.tokenHeader } } );
   }// FIN | FND-00001
 

@@ -13,6 +13,8 @@ import { AnalyticsService } from './utils/analytics.service';
 
 // Imports de los Datos Generales
 import { environment } from '../../environments/environment';
+import { SystemPropertiesService } from '../shared/system-properties.service';
+import { SystemEndPointsService } from '../shared/system-end-points.service';
 
 // Constnte de la Ruta que Utilizara para los Llamados a la API
 const urlAPI = environment.apiUrl;
@@ -111,6 +113,8 @@ export const NB_CORE_PROVIDERS = [
     provide: NbRoleProvider, useClass: NbSimpleRoleProvider,
   },
   AnalyticsService,
+  SystemPropertiesService,
+  SystemEndPointsService,
 ];
 
 @NgModule({

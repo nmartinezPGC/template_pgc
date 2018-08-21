@@ -61,7 +61,7 @@ export class HeaderComponent implements OnInit {
     this.onItemSelection();
 
     // Llamado al Servicio de detalle de Usuarios
-    this.userService.getUserDetails( this.userService.getIdentity().userName )
+    this.userService.getUserDetails( this.userService.usernameHeader )
       .subscribe(
         result => {
           if (result.status !== 200) {

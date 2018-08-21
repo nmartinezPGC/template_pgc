@@ -6,18 +6,22 @@ export class SystemPropertiesService {
   // Declaracion de las variables del Service
   public progressBar;
 
+  // Variables para el localStorage
+  public _identity;
+  public _token;
+
   constructor() {}
 
   // Varibles Gloables de Inicio del Systema
   // Entorno Localhost
-  public urlLocalConfig: string = 'http://localhost:8090';
+  public urlLocalConfig: string = 'http://localhost:8090/api/v1';
   // public urlLocalConfig:string = "/rest";
-  public urlLocalResourse: string = 'http://localhost:8090';
+  public urlLocalResourse: string = 'http://localhost:8090/api/v1';
   // public urlLocalResourse:string = "/rest";
 
   // Entorno de Servidor
-  public urlServerConfig: string = 'http://172.17.0.250:8090/rest';
-  public urlServerResourse: string = 'http://172.17.0.250:8090/rest';
+  public urlServerConfig: string = 'http://172.17.0.250:8090/api/v1';
+  public urlServerResourse: string = 'http://172.17.0.250:8090/api/v1';
 
   // Indicador del entorno a Copilar | 1 = Server | 2 = Localhost
   public indicatorIPCompiler: number = 2;
@@ -65,5 +69,46 @@ export class SystemPropertiesService {
 
     return urlEnviromentResourse;
   } // FIN : 00002
+
+
+  /****************************************************************************
+  * Funcion: FND-00003
+  * Fecha: 01-06-2018
+  * Descripcion: Metodo para obtener los Datos de la
+  * variable identity del localStorage
+  * Objetivo: Seteo de las variables en json
+  ****************************************************************************/
+  getToken() {
+    // No hace el parse; porque no es Json
+    const token = localStorage.getItem('auth_app_token');
+    // Pregunta por el valor del Token
+    if (token !== 'undefined') {
+      this._token = token;
+    } else {
+      this._token = null;
+    }
+
+    return this._token;
+  }// FIN | FND-00003
+
+
+  /****************************************************************************
+  * Funcion: FND-00004
+  * Fecha: 01-06-2018
+  * Descripcion: Metodo para obtener los Datos de la
+  * variable identity del localStorage
+  * Objetivo: Seteo de las variables en json
+  ****************************************************************************/
+  getIdentity() {
+    const identity = JSON.parse(localStorage.getItem('identity'));
+    // Pregunta por el valor de la identity
+    if (identity !== 'undefined') {
+      this._identity = identity;
+    } else {
+      this._identity = null;
+    }
+
+    return this._identity;
+  }// FIN | FND-00004
 
 }

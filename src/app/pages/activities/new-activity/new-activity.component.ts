@@ -2,6 +2,8 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 // Servicios que la Clase nesesitara para su funcionanmiento
 import { UserService } from '../../../@core/data/users.service'; // Servicio de Usuarios
+import { EstadosService } from '../../common-list/services/estados.service'; // Servicio de Lista de Estados
+
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster'; // Servicio de Notificaciones
 // import 'style-loader!angular2-toaster/toaster.css';
 import { LocalDataSource } from 'ng2-smart-table'; // DataLocal de Ejemplo para el JSON de envio
@@ -13,7 +15,7 @@ import 'style-loader!angular2-toaster/toaster.css';
   selector: 'ngx-new-activity',
   templateUrl: './new-activity.component.html',
   styleUrls: ['./new-activity.component.scss', '../../components/notifications/notifications.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush, // Se usa para Actualizar la Informacion con otro evento
   // providers: [ ToasterService, SmartTableService ],
 })
 export class NewActivityComponent implements OnInit {
@@ -29,8 +31,8 @@ export class NewActivityComponent implements OnInit {
 
   position = 'toast-bottom-right';
   animationType = 'slideDown';
-  title = 'HI there! soy Nahum Martinez, creador de la PGC';
-  content = `I'm cool toaster!`;
+  title = 'Se ha grabado la Información! ';
+  content = 'los cambios han sido grabados temporalmente, en la PGC!';
   timeout = 10000;
   toastsLimit = 5;
   type = 'default';
@@ -92,6 +94,9 @@ export class NewActivityComponent implements OnInit {
 
   source: LocalDataSource = new LocalDataSource();
 
+  // Variables Tipo JSON, para usarlas en los Servicios Invocados
+  public JsonReceptionEstados: any;
+
   // private toasterService: ToasterService;
 
   // FIN | Definicion de las Variables de la Clase
@@ -105,11 +110,12 @@ export class NewActivityComponent implements OnInit {
   * Objetivo: constructor in the method header API
   ****************************************************************************/
   constructor( private _userService: UserService,
-               private _toasterService: ToasterService,
-               private service: SmartTableService ) {
-    this.data = this.service.getData();
+               private _estadosService: EstadosService,
+               //private service: SmartTableService,
+               private _toasterService: ToasterService ) {
+    // this.data = this.service.getData();
     // console.log( this.data );
-    this.source.load( this.data );
+    // this.source.load( this.data );
       // Inicializa el ToasterService
     // this.toasterService = _toasterService;
 
@@ -124,9 +130,14 @@ export class NewActivityComponent implements OnInit {
   * Objetivo: ngOnInit in the method header API
   ****************************************************************************/
   ngOnInit() {
-  // console.log(this._userService.getIdentity().userName);
-    // Llamado a la Funcion: 005, la cual obtiene el detalle da la Info. del User
+    // Llamado a la Funcion: 007, la cual obtiene el detalle da la Info.
+    // del Usuario
     this.userDatailsService();
+
+    // Llamado a la Funcion: 008, la cual obtiene el listado de los Estados de
+    // que nesesita el Formulario de Actividades
+    this.estListService();
+
   } // FIN | ngOnInit
 
 
@@ -227,13 +238,13 @@ export class NewActivityComponent implements OnInit {
 
   /****************************************************************************
   * Funcion: userDatailsService
-  * Object Number: 00
+  * Object Number: 007
   * Fecha: 16-08-2018
   * Descripcion: Method userDatailsService of the Class
   * Objetivo: userDatailsService detalle del Usuario llamando a la API
   ****************************************************************************/
   private userDatailsService() {
-    this._userService.getUserDetails( this._userService.getIdentity().userName ).subscribe(
+    this._userService.getUserDetails( this._userService.usernameHeader ).subscribe(
       result => {
 
         if (result.status !== 200) {
@@ -250,5 +261,34 @@ export class NewActivityComponent implements OnInit {
       },
     );
   } // FIN | userDatailsService
+
+
+  /****************************************************************************
+  * Funcion: estListService
+  * Object Number: 008
+  * Fecha: 16-08-2018
+  * Descripcion: Method estListService of the Class
+  * Objetivo: estListService listados de los Estados del Formulario de
+  * Actividad llamando a la API
+  ****************************************************************************/
+  private estListService() {
+    this._estadosService.getAllEstados().subscribe(
+      result => {
+        if (result.status !== 200) {
+          // console.log(result.status);
+        } else if (result.status === 200) {
+          // this.productos = result.data;
+          // console.log(result.status);
+          this.JsonReceptionEstados = result.data; 
+          console.log(this.JsonReceptionEstados);
+          //this.showToast(this.type, this.title, this.content);
+        }
+      },
+      error => {
+        // console.log(error);
+        // console.log(<any>error);
+      },
+    );
+  } // FIN | estListService
 
 }

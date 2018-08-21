@@ -10,7 +10,7 @@ import { MapsRoutingModule, routedComponents } from './maps-routing.module';
   imports: [
     ThemeModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCpVhQiwAllg1RAFaxMWSpQruuGARy0Y1k',
+      apiKey: 'AIzaSyC90qAo9gcwt5E0kCdfWbdqpuMMD6s27i8',
       libraries: ['places'],
     }),
     LeafletModule.forRoot(),
