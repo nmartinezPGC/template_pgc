@@ -294,12 +294,11 @@ export class NewActivityComponent implements OnInit {
         if (result.status !== 200) {
           // console.log(result.status);
           this.showToast('danger', 'Error al Obtener la Información de Estados', result);
-        } else if (result.status === 200) {          
+        } else if (result.status === 200) {
           this.JsonReceptionEstados = result.data;
-          // console.log(this.JsonReceptionEstados);          
         }
       },
-      error => {        
+      error => {
         // console.log(<any>error);
         this.showToast('danger', 'Error al Obtener la Información de Estados', error);
       },
@@ -320,11 +319,11 @@ export class NewActivityComponent implements OnInit {
       result => {
         if (result.status !== 200) {
           // console.log(result.status);
-        } else if (result.status === 200) {      
+        } else if (result.status === 200) {
           this.JsonReceptionSectorEjecutor = result.data;
         }
       },
-      error => {        
+      error => {
         // console.log(<any>error);
         this.showToast('danger', 'Error al Obtener la Información de Sectores', error);
       },
@@ -346,7 +345,7 @@ export class NewActivityComponent implements OnInit {
         if (result.status !== 200) {
           // console.log(result.status);
         } else if (result.status === 200) {
-          this.JsonReceptionEstrategias = result.data;                 
+          this.JsonReceptionEstrategias = result.data;
         }
       },
       error => {

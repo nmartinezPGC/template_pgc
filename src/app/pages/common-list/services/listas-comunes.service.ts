@@ -50,7 +50,7 @@ export class ListasComunesService {
   getAllEstados(): Observable<any> {
     // Retorno de la Funcion
     // return this._http.get( 'http://localhost:8090/api/v1/usuarios/findByMail/' + params, { headers: this.headers,
-    return this._http.get( this._systemEndPointsService.getEndPointService( 'estadosGroup', 1), { 
+    return this._http.get( this._systemEndPointsService.getEndPointService( 'estadosGroup', 1), {
       headers: this.headers,
       params: {'tokenApi': this.tokenHeader } } );
   }// FIN | FND-00001
@@ -68,7 +68,7 @@ export class ListasComunesService {
     // Retorno de la Funcion
     return this._http.get(this._systemEndPointsService.getEndPointService('matActGroup', 1), {
       headers: this.headers,
-      params: { 'tokenApi': this.tokenHeader }
+      params: { 'tokenApi': this.tokenHeader },
     });
   }// FIN | FND-00002
 
@@ -85,7 +85,7 @@ export class ListasComunesService {
     // Retorno de la Funcion
     return this._http.get(this._systemEndPointsService.getEndPointService('matActGroup', 3), {
       headers: this.headers,
-      params: { 'tokenApi': this.tokenHeader }
+      params: { 'tokenApi': this.tokenHeader },
     });
   }// FIN | FND-00003
 
@@ -102,7 +102,7 @@ export class ListasComunesService {
     // Retorno de la Funcion
     return this._http.get(this._systemEndPointsService.getEndPointService('matActGroup', 5), {
       headers: this.headers,
-      params: { 'tokenApi': this.tokenHeader }
+      params: { 'tokenApi': this.tokenHeader },
     });
   }// FIN | FND-00004
 
