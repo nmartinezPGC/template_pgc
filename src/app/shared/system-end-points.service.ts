@@ -49,6 +49,28 @@ export class SystemEndPointsService extends ListEndPointsService {
               break;
           }
         break;
+      case 'matActGroup': // Llamados a los End Point del Modulo de Mantenimientos de Activdades
+        switch ( indicadorEndPoint) {
+          case 1: // Sectores Ejecutores
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointMantActividades.listAllSectorEjecutor.urlEndPoint;
+            break;
+          case 2:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointMantActividades.getSectorEjecutor.urlEndPoint;
+            break;
+          case 3: // Estrategias
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointMantActividades.listAllEstrategia.urlEndPoint;
+            break;
+          case 4:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointMantActividades.getEstrategia.urlEndPoint;
+            break;
+          case 5: // Presupuesto
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointMantActividades.listAllPresupuesto.urlEndPoint;
+            break;
+          case 6:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointMantActividades.getPresupuesto.urlEndPoint;
+            break;
+        }
+        break;
     }
 
     // Retorna el End Point solictado

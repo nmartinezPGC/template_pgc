@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 // Servicios que la Clase nesesitara para su funcionanmiento
 import { UserService } from '../../../@core/data/users.service'; // Servicio de Usuarios
-import { EstadosService } from '../../common-list/services/estados.service'; // Servicio de Lista de Estados
+import { ListasComunesService } from '../../common-list/services/listas-comunes.service'; // Servicio de Lista de Estados
 
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster'; // Servicio de Notificaciones
 // import 'style-loader!angular2-toaster/toaster.css';
@@ -96,6 +96,9 @@ export class NewActivityComponent implements OnInit {
 
   // Variables Tipo JSON, para usarlas en los Servicios Invocados
   public JsonReceptionEstados: any;
+  public JsonReceptionSectorEjecutor: any;
+  public JsonReceptionEstrategias: any;
+  public JsonReceptionPresupuesto: any;
 
   // private toasterService: ToasterService;
 
@@ -110,7 +113,7 @@ export class NewActivityComponent implements OnInit {
   * Objetivo: constructor in the method header API
   ****************************************************************************/
   constructor( private _userService: UserService,
-               private _estadosService: EstadosService,
+               private _listasComunesService: ListasComunesService,
                // private service: SmartTableService,
                private _toasterService: ToasterService ) {
     // this.data = this.service.getData();
@@ -136,7 +139,19 @@ export class NewActivityComponent implements OnInit {
 
     // Llamado a la Funcion: 008, la cual obtiene el listado de los Estados de
     // que nesesita el Formulario de Actividades
-    this.estListService();
+    this.estadosListService();
+
+    // Llamado a la Funcion: 009, la cual obtiene el listado de los Estados de
+    // que nesesita el Formulario de Actividades
+    this.sectorEjecutorListService();
+
+    // Llamado a la Funcion: 010, la cual obtiene el listado de las Estretegias
+    // de que nesesita el Formulario de Actividades
+    this.estrategiasListService();
+
+    // Llamado a la Funcion: 011, la cual obtiene el listado de los Presupuestos
+    // de que nesesita el Formulario de Actividades
+    this.presupuestoListService();
 
   } // FIN | ngOnInit
 
@@ -233,8 +248,8 @@ export class NewActivityComponent implements OnInit {
   } // FIN | onDeleteConfirm
 
 
-  /* ********************************************************************************************************** */
-  /* ***************************** Funciones Propias de la Clase ************************************************/
+  /* **************************************************************************/
+  /* ****************** Funciones Propias de la Clase *************************/
 
   /****************************************************************************
   * Funcion: userDatailsService
@@ -263,32 +278,107 @@ export class NewActivityComponent implements OnInit {
   } // FIN | userDatailsService
 
 
+  // ********** Invocacion de los Servicios Nesesarios para Funcionar *********
+
   /****************************************************************************
-  * Funcion: estListService
+  * Funcion: estadosListService
   * Object Number: 008
   * Fecha: 16-08-2018
   * Descripcion: Method estListService of the Class
   * Objetivo: estListService listados de los Estados del Formulario de
   * Actividad llamando a la API
   ****************************************************************************/
-  private estListService() {
-    this._estadosService.getAllEstados().subscribe(
+  private estadosListService() {
+    this._listasComunesService.getAllEstados().subscribe(
+      result => {
+        if (result.status !== 200) {
+          // console.log(result.status);
+          this.showToast('danger', 'Error al Obtener la Información de Estados', result);
+        } else if (result.status === 200) {          
+          this.JsonReceptionEstados = result.data;
+          // console.log(this.JsonReceptionEstados);          
+        }
+      },
+      error => {        
+        // console.log(<any>error);
+        this.showToast('danger', 'Error al Obtener la Información de Estados', error);
+      },
+    );
+  } // FIN | estadosListService
+
+
+  /****************************************************************************
+  * Funcion: sectorEjecutorListService
+  * Object Number: 009
+  * Fecha: 22-08-2018
+  * Descripcion: Method sectorEjecutorListService of the Class
+  * Objetivo: sectorEjecutorListService listados de los Sectores Ejecutores
+  * del Formulario de Actividad llamando a la API
+  ****************************************************************************/
+  private sectorEjecutorListService() {
+    this._listasComunesService.getAllSectoresEjecutores().subscribe(
+      result => {
+        if (result.status !== 200) {
+          // console.log(result.status);
+        } else if (result.status === 200) {      
+          this.JsonReceptionSectorEjecutor = result.data;
+        }
+      },
+      error => {        
+        // console.log(<any>error);
+        this.showToast('danger', 'Error al Obtener la Información de Sectores', error);
+      },
+    );
+  } // FIN | sectorEjecutorListService
+
+
+  /****************************************************************************
+  * Funcion: estrategiasListService
+  * Object Number: 010
+  * Fecha: 22-08-2018
+  * Descripcion: Method estrategiasListService of the Class
+  * Objetivo: estrategiasListService listados de las Estrategias
+  * del Formulario de Actividad llamando a la API
+  ****************************************************************************/
+  private estrategiasListService() {
+    this._listasComunesService.getAllEstrategias().subscribe(
       result => {
         if (result.status !== 200) {
           // console.log(result.status);
         } else if (result.status === 200) {
-          // this.productos = result.data;
-          // console.log(result.status);
-          this.JsonReceptionEstados = result.data;
-          // console.log(this.JsonReceptionEstados);
-          // this.showToast(this.type, this.title, this.content);
+          this.JsonReceptionEstrategias = result.data;                 
         }
       },
       error => {
-        // console.log(error);
         // console.log(<any>error);
+        this.showToast('danger', 'Error al Obtener la Información de las Estrategias', error);
       },
     );
-  } // FIN | estListService
+  } // FIN | estrategiasListService
+
+
+  /****************************************************************************
+  * Funcion: presupuestoListService
+  * Object Number: 011
+  * Fecha: 22-08-2018
+  * Descripcion: Method presupuestoListService of the Class
+  * Objetivo: presupuestoListService listados de los Presupuestos
+  * del Formulario de Actividad llamando a la API
+  ****************************************************************************/
+  private presupuestoListService() {
+    this._listasComunesService.getAllPresupuesto().subscribe(
+      result => {
+        if (result.status !== 200) {
+          // console.log(result.status);
+        } else if (result.status === 200) {
+          this.JsonReceptionPresupuesto = result.data;
+        }
+      },
+      error => {
+        // console.log(<any>error);
+        this.showToast('danger', 'Error al Obtener la Información de los Presupuestos', error);
+      },
+    );
+  } // FIN | presupuestoListService
 
 }

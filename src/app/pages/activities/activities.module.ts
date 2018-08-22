@@ -11,7 +11,7 @@ import { ThemeModule } from '../../@theme/theme.module';
 import { ActivitiesRoutingModule, routedComponents } from './activities-routing.module';
 
 // Imports de las Librerias de uso Comun de la Clase en el Formulario de Actividad
-import { EstadosService } from '../common-list/services/estados.service'; // Servicio de Lista de Estados
+import { ListasComunesService } from '../common-list/services/listas-comunes.service'; // Servicio de Lista de Estados
 
 @NgModule({
   imports: [
@@ -25,7 +25,7 @@ import { EstadosService } from '../common-list/services/estados.service'; // Ser
   ],
   providers: [
     SmartTableService, // Defincion del Servicio que provee los Datos de la Tabla: ID's Internas
-    EstadosService,
+    ListasComunesService,
   ],
 })
 export class ActivitiesPGCModule {}

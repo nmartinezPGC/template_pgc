@@ -11,6 +11,8 @@
   </ol>
 </nav>
 
+<!-- ==================================================================================== -->
+<!-- Componente para los Mensajes en pantalla -->
 <toaster-container [toasterconfig]="config"></toaster-container>
 
 <!-- Tarjetas para Agrupar los Datos de Ingreso de la Actvidad/Proyecto -->
@@ -31,7 +33,7 @@
                 <nb-card-body>
 
                   <!-- ==================================================================================== -->
-                  <!-- Espacios de Trabajo Asignados al Usuario -->
+                  <!-- Nombre del Proyecto/Actividad y Espacios de Trabajo Asignados al Usuario -->
                   <div class="row">
                     <div class="col-12 col-sm-6 col-md-8">
                       <div class="form-group">
@@ -76,7 +78,7 @@
                   </div>
 
                   <!-- ==================================================================================== -->
-                  <!-- Definicion de los Antecentes y Objetivos de la Actividad -->
+                  <!-- Definicion de los Descripcion y Objetivos de la Actividad -->
                   <div class="row">
                     <div class="col-sm-6">
                       <div class="form-group">
@@ -97,7 +99,7 @@
                   </div>
 
                   <!-- ==================================================================================== -->
-                  <!-- Definicion de Descripcion y Condiciones Previas -->
+                  <!-- Definicion de Antecentes y Condiciones Previas -->
                   <div class="row">
                     <div class="col-sm-6">
                       <div class="form-group">
@@ -117,6 +119,8 @@
                     </div>
                   </div>
 
+                  <!-- ==================================================================================== -->
+                  <!-- Definicion de Justificacion -->
                   <div class="row">
                     <div class="col-sm-6">
                       <div class="form-group">
@@ -160,7 +164,7 @@
             </nb-flip-card>
 
             <!-- ==================================================================================== -->            
-            <!-- Definición de los Estados de la Actividad -->
+            <!-- Definición de los Resultados de la Actividad -->
             <nb-card accent="warning" status="primary">
               <nb-card-header>Datos Generales | Resultados</nb-card-header>
               <nb-card-body>
@@ -186,7 +190,7 @@
             </nb-card>
 
             <!-- ==================================================================================== -->            
-            <!-- Definición de los Datos Relevantes del Proyecto -->
+            <!-- Definición de los Datos de Planificacion del Proyecto -->
             <nb-card status="primary" accent="warning">
               <nb-card-header>Datos Generales | Planificación</nb-card-header>
               <nb-card-body>
@@ -196,10 +200,9 @@
                       <label>Estrategia</label>
                       <select class="form-control">
                         <option value="0">**** Selecciona la Estrategia ****</option>
-                        <option value="1">Estrategia #1</option>
-                        <option value="2">Estrategia #2</option>
-                        <option value="3">Estrategia #3</option>
-                        <option value="4">Estrategia #4</option>
+                        <option *ngFor="let item of JsonReceptionEstrategias" [value]="item.idEstrategia">
+                            {{item.descripcionEstrategia}}
+                        </option>                        
                       </select>
                     </div>
                   </div>
@@ -217,10 +220,9 @@
                       <label>Presupuesto</label>
                       <select class="form-control">
                         <option value="0">**** Selecciona el Presupuesto ****</option>
-                        <option value="1">Presupuesto #1</option>
-                        <option value="2">Presupuesto #2</option>
-                        <option value="3">Presupuesto #3</option>
-                        <option value="4">Presupuesto #4</option>
+                        <option *ngFor="let item of JsonReceptionPresupuesto" [value]="item.idPresupuesto">
+                          {{item.descPresupuesto}}
+                        </option>
                       </select>
                     </div>
                   </div>
@@ -229,17 +231,15 @@
                       <label>Sector Ejecutor</label>
                       <select class="form-control">
                         <option value="0">**** Selecciona el Sector Ejecutor ****</option>
-                        <option value="1">Sector Ejecutor #1</option>
-                        <option value="2">Sector Ejecutor #2</option>
-                        <option value="3">Sector Ejecutor #3</option>
-                        <option value="4">Sector Ejecutor #4</option>
+                        <option *ngFor="let item of JsonReceptionSectorEjecutor" [value]="item.idSectorEjecutor">
+                          {{item.descSectorEjecutor}}
+                        </option>
                       </select>
                     </div>
                   </div>
                 </div>
               </nb-card-body>
             </nb-card>
-
 
             <!-- ==================================================================================== -->
             <!-- Definición de las ID's Internas del Proyecto -->
