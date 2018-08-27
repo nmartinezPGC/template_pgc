@@ -36,9 +36,9 @@ export class NewActivityComponent implements OnInit {
  protected dataService: CompleterData;
 
  datos = [
-  {organinizacion : "Organinizacion 1"},
-  {organinizacion : "Organinizacion 2"},
-  {organinizacion : "Organinizacion 3"},
+  {organinizacion : 'Organinizacion 1'},
+  {organinizacion : 'Organinizacion 2'},
+  {organinizacion : 'Organinizacion 3'},
 ]
 
 
@@ -100,14 +100,14 @@ export class NewActivityComponent implements OnInit {
               searchFields: 'organinizacion',
               titleField: 'organinizacion',
               descriptionField: 'organinizacion',
-              valuePrepareFunction: (value) => { return this.datos }
+              // valuePrepareFunction: (value) => { return this.datos }
             },
           },
         },
       },
     },
     attr: {
-      class: 'form-control'
+      class: 'form-control',
     },
   };
 
@@ -136,13 +136,13 @@ export class NewActivityComponent implements OnInit {
   constructor( private _userService: UserService,
                private _listasComunesService: ListasComunesService,
                // private service: SmartTableService,
-               private _toasterService: ToasterService,
-               private _completerService: CompleterService ) {
+               private _toasterService: ToasterService ) {
+              // private _completerService: CompleterService ) {
     // this.data = this.service.getData();
     // console.log( this.data );
     // this.source.load( this.data );
       // Inicializa el ToasterService
-      this.dataService = _completerService.local(this.datos, 'color', 'color');
+      // this.dataService = _completerService.local(this.datos, 'color', 'color');
     // this.toasterService = _toasterService;
 
   } // FIN | constructor
@@ -263,9 +263,9 @@ export class NewActivityComponent implements OnInit {
       event.newData['firstName'] += ' + ' + this.JsonOrganizationSelect;
       event.confirm.resolve(event.newData);
       // console.log('Dato de la Fila Nueva ' + event.newData.id );
-      const parseEvent: any = JSON.stringify(event.newData);
+      // const parseEvent: any = JSON.stringify(event.newData);
       // this.JsonOrganizationSelect = event.newData;
-      console.log('onCreateConfirm +++ ' + this.JsonOrganizationSelect);
+     // console.log('onCreateConfirm +++ ' + this.JsonOrganizationSelect);
     } else {
       event.confirm.reject();
     }
@@ -275,7 +275,7 @@ export class NewActivityComponent implements OnInit {
     // this.cell.newValue = event.title;
     this.JsonOrganizationSelect = event.title;
     const vari = JSON.stringify(event);
-      console.log('onCreateConfirm +++ ' + vari);
+      // console.log('onCreateConfirm +++ ' + vari);
     return false;
   }
 
