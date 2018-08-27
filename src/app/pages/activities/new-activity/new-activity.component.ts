@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { CompleterService, CompleterData } from 'ng2-completer';
+// import { CompleterService, CompleterData } from 'ng2-completer';
+import { CompleterData } from 'ng2-completer';
 
 // Servicios que la Clase nesesitara para su funcionanmiento
 import { UserService } from '../../../@core/data/users.service'; // Servicio de Usuarios
@@ -274,7 +275,7 @@ export class NewActivityComponent implements OnInit {
   onEditedCompleter(event: { title: '' }): boolean {
     // this.cell.newValue = event.title;
     this.JsonOrganizationSelect = event.title;
-    const vari = JSON.stringify(event);
+    // const vari = JSON.stringify(event);
       // console.log('onCreateConfirm +++ ' + vari);
     return false;
   }
