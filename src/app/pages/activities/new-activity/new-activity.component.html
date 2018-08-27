@@ -252,17 +252,22 @@
                       <label>Filtrar Organización</label>
                       <select class="form-control">
                         <option value="0">**** Selecciona el tipo de Organizacion ****</option>
-                        <option value="1">Organizacion #1</option>
-                        <option value="2">Organizacion #2</option>
-                        <option value="3">Organizacion #3</option>
-                        <option value="4">Organizacion #4</option>
+                        <option *ngFor="let item of datos" [value]="item.organinizacion">
+                          {{item.organinizacion}}
+                        </option>
                       </select>
                     </div>
                   </div>
                   <div class="col-sm-8">
                     <div class="form-group">
                       <label for="inputWebsite">Buscar Organización</label>
-                      <input type="text" class="form-control" id="inputWebsite" placeholder="Buscar Organización, por el filtro aplicado">
+                      <div class="input-group full-width">
+                        <div class="input-group-addon"><img src="../../../../assets/icons/common/magnifying-glass-search.png"></div>
+                        <!-- <input type="text" class="form-control" id="inputWebsite" placeholder="Buscar Organización, por el filtro aplicado"> -->
+                        <ng2-completer [inputClass]="'form-control'" [(ngModel)]="captain" [datasource]="datos" 
+                          placeholder="Buscar Organización, por el filtro aplicado" style=' width: 90%' 
+                          [minSearchLength]="0"  (selected)="onEditedCompleter($event)" ></ng2-completer> 
+                      </div>
                     </div>
                   </div>
                 </div>

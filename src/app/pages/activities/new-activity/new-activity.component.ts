@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { CompleterService, CompleterData } from 'ng2-completer';
+
 // Servicios que la Clase nesesitara para su funcionanmiento
 import { UserService } from '../../../@core/data/users.service'; // Servicio de Usuarios
 import { ListasComunesService } from '../../common-list/services/listas-comunes.service'; // Servicio de Lista de Estados
@@ -27,6 +29,19 @@ export class NewActivityComponent implements OnInit {
   * Objetivo: Tener el acceso a todas las variables de la Clase
   ****************************************************************************/
  // Configuracion del Toaster-Notifications
+ protected captain: string;
+
+ protected captains = ['James T. Kirk', 'Benjamin Sisko', 'Jean-Luc Picard', 'Spock', 'Jonathan Archer', 'Hikaru Sulu', 'Christopher Pike', 'Rachel Garrett' ];
+
+ protected dataService: CompleterData;
+
+ datos = [
+  {organinizacion : "Organinizacion 1"},
+  {organinizacion : "Organinizacion 2"},
+  {organinizacion : "Organinizacion 3"},
+]
+
+
   config: ToasterConfig;
 
   position = 'toast-bottom-right';
@@ -69,26 +84,30 @@ export class NewActivityComponent implements OnInit {
     },
     columns: {
       id: {
-        title: 'ID',
+        title: 'ID Interna',
         type: 'number',
         width: '20%',
       },
       firstName: {
         title: 'Organización',
         width: '80%',
-        edit: false,
-        /*editor: {
+        disable: false,
+        editor: {
           type: 'completer',
           config: {
             completer: {
-              data: this.data,
-              searchFields: 'firstName',
-              titleField: 'firstName',
-              descriptionField: 'firstName',
+              data: this.datos,
+              searchFields: 'organinizacion',
+              titleField: 'organinizacion',
+              descriptionField: 'organinizacion',
+              valuePrepareFunction: (value) => { return this.datos }
             },
           },
-        },*/
+        },
       },
+    },
+    attr: {
+      class: 'form-control'
     },
   };
 
@@ -99,6 +118,8 @@ export class NewActivityComponent implements OnInit {
   public JsonReceptionSectorEjecutor: any;
   public JsonReceptionEstrategias: any;
   public JsonReceptionPresupuesto: any;
+
+  public JsonOrganizationSelect: any;
 
   // private toasterService: ToasterService;
 
@@ -115,11 +136,13 @@ export class NewActivityComponent implements OnInit {
   constructor( private _userService: UserService,
                private _listasComunesService: ListasComunesService,
                // private service: SmartTableService,
-               private _toasterService: ToasterService ) {
+               private _toasterService: ToasterService,
+               private _completerService: CompleterService ) {
     // this.data = this.service.getData();
     // console.log( this.data );
     // this.source.load( this.data );
       // Inicializa el ToasterService
+      this.dataService = _completerService.local(this.datos, 'color', 'color');
     // this.toasterService = _toasterService;
 
   } // FIN | constructor
@@ -237,15 +260,24 @@ export class NewActivityComponent implements OnInit {
   ****************************************************************************/
   onCreateConfirm(event) {
     if (window.confirm('¿ Estas seguro de agregar una organización ?')) {
-      // event.newData['firstName'] += ' + added in code';
+      event.newData['firstName'] += ' + ' + this.JsonOrganizationSelect;
       event.confirm.resolve(event.newData);
       // console.log('Dato de la Fila Nueva ' + event.newData.id );
-      // const parseEvent: any = JSON.stringify(event.newData);
-      // console.log('onCreateConfirm +++ ' + parseEvent);
+      const parseEvent: any = JSON.stringify(event.newData);
+      // this.JsonOrganizationSelect = event.newData;
+      console.log('onCreateConfirm +++ ' + this.JsonOrganizationSelect);
     } else {
       event.confirm.reject();
     }
-  } // FIN | onDeleteConfirm
+  } // FIN | onCreateConfirm
+
+  onEditedCompleter(event: { title: '' }): boolean {
+    // this.cell.newValue = event.title;
+    this.JsonOrganizationSelect = event.title;
+    const vari = JSON.stringify(event);
+      console.log('onCreateConfirm +++ ' + vari);
+    return false;
+  }
 
 
   /* **************************************************************************/
@@ -371,6 +403,7 @@ export class NewActivityComponent implements OnInit {
           // console.log(result.status);
         } else if (result.status === 200) {
           this.JsonReceptionPresupuesto = result.data;
+         // console.log(this.JsonReceptionPresupuesto);
         }
       },
       error => {
