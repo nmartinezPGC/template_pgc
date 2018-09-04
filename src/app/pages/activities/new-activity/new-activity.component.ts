@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 // import { CompleterService, CompleterData } from 'ng2-completer';
 import { CompleterData } from 'ng2-completer';
 
-import {MatButtonModule} from '@angular/material/button';
+// import {MatButtonModule} from '@angular/material/button';
 
 // Servicios que la Clase nesesitara para su funcionanmiento
 import { UserService } from '../../../@core/data/users.service'; // Servicio de Usuarios
