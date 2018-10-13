@@ -31,18 +31,18 @@ export class NewActivityComponent implements OnInit {
   * privada
   * Objetivo: Tener el acceso a todas las variables de la Clase
   ****************************************************************************/
- // Configuracion del Toaster-Notifications
- protected captain: string;
+  // Configuracion del Toaster-Notifications
+  protected captain: string;
 
- protected captains = ['James T. Kirk', 'Benjamin Sisko', 'Jean-Luc Picard', 'Spock', 'Jonathan Archer', 'Hikaru Sulu', 'Christopher Pike', 'Rachel Garrett' ];
+  protected captains = ['James T. Kirk', 'Benjamin Sisko', 'Jean-Luc Picard', 'Spock', 'Jonathan Archer', 'Hikaru Sulu', 'Christopher Pike', 'Rachel Garrett'];
 
- protected dataService: CompleterData;
+  protected dataService: CompleterData;
 
- datos = [
-  {organinizacion : 'Organinizacion 1'},
-  {organinizacion : 'Organinizacion 2'},
-  {organinizacion : 'Organinizacion 3'},
-]
+  datos = [
+    { organinizacion: 'Organinizacion1Organinizacion1Organinizacion1' },
+    { organinizacion: 'Organinizacion2Organinizacion2Organinizacion2' },
+    { organinizacion: 'Organinizacion3Organinizacion3Organinizacion3' },
+  ]
 
 
   config: ToasterConfig;
@@ -105,6 +105,16 @@ export class NewActivityComponent implements OnInit {
               descriptionField: 'organinizacion',
               // valuePrepareFunction: (value) => { return this.datos }
             },
+            /*type: 'list',
+              config: {
+                list: [{
+                  value: 0,
+                  title: 'Prueba Uno'
+                },{
+                    value: 1,
+                    title: 'Prueba Dos'
+                }]
+              },*/
           },
         },
       },
@@ -121,6 +131,7 @@ export class NewActivityComponent implements OnInit {
   public JsonReceptionSectorEjecutor: any;
   public JsonReceptionEstrategias: any;
   public JsonReceptionPresupuesto: any;
+  public JsonReceptionEspaciosTrabajo: any;
 
   public JsonOrganizationSelect: any;
 
@@ -136,16 +147,16 @@ export class NewActivityComponent implements OnInit {
   * Descripcion: Method constructor of the Class
   * Objetivo: constructor in the method header API
   ****************************************************************************/
-  constructor( private _userService: UserService,
-               private _listasComunesService: ListasComunesService,
-               // private service: SmartTableService,
-               private _toasterService: ToasterService ) {
-              // private _completerService: CompleterService ) {
+  constructor(private _userService: UserService,
+    private _listasComunesService: ListasComunesService,
+    // private service: SmartTableService,
+    private _toasterService: ToasterService) {
+    // private _completerService: CompleterService ) {
     // this.data = this.service.getData();
     // console.log( this.data );
     // this.source.load( this.data );
-      // Inicializa el ToasterService
-      // this.dataService = _completerService.local(this.datos, 'color', 'color');
+    // Inicializa el ToasterService
+    // this.dataService = _completerService.local(this.datos, 'color', 'color');
     // this.toasterService = _toasterService;
 
   } // FIN | constructor
@@ -178,6 +189,10 @@ export class NewActivityComponent implements OnInit {
     // Llamado a la Funcion: 011, la cual obtiene el listado de los Presupuestos
     // de que nesesita el Formulario de Actividades
     this.presupuestoListService();
+
+    // Llamado a la Funcion: 012, la cual obtiene el listado de los Presupuestos
+    // de que nesesita el Formulario de Actividades
+    this.espaciosTrabajoListService();
 
   } // FIN | ngOnInit
 
@@ -268,7 +283,7 @@ export class NewActivityComponent implements OnInit {
       // console.log('Dato de la Fila Nueva ' + event.newData.id );
       // const parseEvent: any = JSON.stringify(event.newData);
       // this.JsonOrganizationSelect = event.newData;
-     // console.log('onCreateConfirm +++ ' + this.JsonOrganizationSelect);
+      // console.log('onCreateConfirm +++ ' + this.JsonOrganizationSelect);
     } else {
       event.confirm.reject();
     }
@@ -278,7 +293,7 @@ export class NewActivityComponent implements OnInit {
     // this.cell.newValue = event.title;
     this.JsonOrganizationSelect = event.title;
     // const vari = JSON.stringify(event);
-      // console.log('onCreateConfirm +++ ' + vari);
+    // console.log('onCreateConfirm +++ ' + vari);
     return false;
   }
 
@@ -294,7 +309,7 @@ export class NewActivityComponent implements OnInit {
   * Objetivo: userDatailsService detalle del Usuario llamando a la API
   ****************************************************************************/
   private userDatailsService() {
-    this._userService.getUserDetails( this._userService.usernameHeader ).subscribe(
+    this._userService.getUserDetails(this._userService.usernameHeader).subscribe(
       result => {
 
         if (result.status !== 200) {
@@ -406,7 +421,7 @@ export class NewActivityComponent implements OnInit {
           // console.log(result.status);
         } else if (result.status === 200) {
           this.JsonReceptionPresupuesto = result.data;
-         // console.log(this.JsonReceptionPresupuesto);
+          // console.log(this.JsonReceptionPresupuesto);
         }
       },
       error => {
@@ -415,5 +430,31 @@ export class NewActivityComponent implements OnInit {
       },
     );
   } // FIN | presupuestoListService
+
+
+  /****************************************************************************
+  * Funcion: espaciosTrabajoListService
+  * Object Number: 012
+  * Fecha: 12-10-2018
+  * Descripcion: Method espaciosTrabajoListService of the Class
+  * Objetivo: espaciosTrabajoListService listados de los Presupuestos
+  * del Formulario de Actividad llamando a la API
+  ****************************************************************************/
+  private espaciosTrabajoListService() {
+    this._listasComunesService.getAllEspaciosTrabajo().subscribe(
+      result => {
+        if (result.status !== 200) {
+          // console.log(result.status);
+        } else if (result.status === 200) {
+          this.JsonReceptionEspaciosTrabajo = result.data;
+          // console.log(this.JsonReceptionEspaciosTrabajo);
+        }
+      },
+      error => {
+        // console.log(<any>error);
+        this.showToast('danger', 'Error al Obtener la Información de los Espacios de Trabajo', error);
+      },
+    );
+  } // FIN | espaciosTrabajoListService
 
 }

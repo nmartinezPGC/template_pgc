@@ -8,7 +8,7 @@ import { ListEndPointsService } from './list-end-points.service';
 @Injectable()
 export class SystemEndPointsService extends ListEndPointsService {
 
-  constructor( private _systemPropertiesService: SystemPropertiesService) {
+  constructor(private _systemPropertiesService: SystemPropertiesService) {
     super();
   }
 
@@ -27,30 +27,30 @@ export class SystemEndPointsService extends ListEndPointsService {
   * Descripcion: Genera la Url para End Point solicitado
   * Objetivo: Genera Url de los End Points de la API
   *****************************************************/
-  getEndPointService( groupEndPoint: string, indicatorEndPointSend: number ) {
+  getEndPointService(groupEndPoint: string, indicatorEndPointSend: number) {
     // Instanciamos el Indicador del Entorno de Compilacion
     const indicadorEndPoint: number = indicatorEndPointSend;
 
     let endPointResult: string;
 
     // Evalua el caso de la selección del End Point solicitado
-    switch ( groupEndPoint ) {
+    switch (groupEndPoint) {
       case 'userGroup':
-        switch ( indicadorEndPoint ) {
-            case 1: // Llamados a los End Point del Modulo de Usuarios
-              endPointResult = this.urlBaseAPI + this.getEndPoint.endPointUsers.findByMail.urlEndPoint;
-              break;
-          }
+        switch (indicadorEndPoint) {
+          case 1: // Llamados a los End Point del Modulo de Usuarios
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointUsers.findByMail.urlEndPoint;
+            break;
+        }
         break;
       case 'estadosGroup': // Llamados a los End Point del Modulo de Estados
-        switch ( indicadorEndPoint ) {
-            case 1:
-              endPointResult = this.urlBaseAPI + this.getEndPoint.endPointEstados.listAllEstados.urlEndPoint;
-              break;
-          }
+        switch (indicadorEndPoint) {
+          case 1:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointEstados.listAllEstados.urlEndPoint;
+            break;
+        }
         break;
       case 'matActGroup': // Llamados a los End Point del Modulo de Mantenimientos de Activdades
-        switch ( indicadorEndPoint) {
+        switch (indicadorEndPoint) {
           case 1: // Sectores Ejecutores
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointMantActividades.listAllSectorEjecutor.urlEndPoint;
             break;
@@ -68,6 +68,32 @@ export class SystemEndPointsService extends ListEndPointsService {
             break;
           case 6:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointMantActividades.getPresupuesto.urlEndPoint;
+            break;
+        }
+        break;
+      case 'espacioTrabajoGroup': // Llamados a los End Point del Espacios de Trabajo
+        switch (indicadorEndPoint) {
+          case 1:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointEspaciosTrabajo.listAllEspaciosTrabajo.urlEndPoint;
+            break;
+          case 2:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointEspaciosTrabajo.findByIdEspacioTrabajo.urlEndPoint;
+            break;
+          case 3:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointEspaciosTrabajo.newEspacioTrabajo.urlEndPoint;
+            break;
+        }
+        break;
+      case 'espacioTrabajoUsuarioGroup': // Llamados a los EndPoint del Espacios de Trabajo Asignados a los Usuarios
+        switch (indicadorEndPoint) {
+          case 1:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointEspaciosTrabajoUsuarios.listAllEspaciosTrabajoUsuarios.urlEndPoint;
+            break;
+          case 2:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointEspaciosTrabajoUsuarios.findByIdEspacioTrabajoUsuarios.urlEndPoint;
+            break;
+          case 3:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointEspaciosTrabajoUsuarios.newEspacioTrabajoUsuarios.urlEndPoint;
             break;
         }
         break;

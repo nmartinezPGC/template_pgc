@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 
 // Clases nesesarias para el envio via Ajax
-import {HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 // Importamos la Clase de las Propiedades del Sistema
 import { SystemPropertiesService } from '../../../shared/system-properties.service';
@@ -28,15 +28,17 @@ export class ListasComunesService {
   * variable identity del localStorage
   * Objetivo: Seteo de las variables en json
   ****************************************************************************/
-  constructor( private _http: HttpClient,
+  constructor(private _http: HttpClient,
     private _systemEndPointsService: SystemEndPointsService,
-    private _systemPropertiesService: SystemPropertiesService ) {
+    private _systemPropertiesService: SystemPropertiesService) {
     // Instanciamos la Url de la API
     // this._url = this._systemProperties.getmethodUrlService();
 
     // Seteo de los Headers
-    this.headers = new HttpHeaders({'Content-Type': 'application/json',
-                                    'Authorization': this.tokenHeader, 'Access-Control-Allow-Origin': '*' });
+    this.headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': this.tokenHeader, 'Access-Control-Allow-Origin': '*'
+    });
   }// FIN | Constructor
 
 
@@ -50,9 +52,10 @@ export class ListasComunesService {
   getAllEstados(): Observable<any> {
     // Retorno de la Funcion
     // return this._http.get( 'http://localhost:8090/api/v1/usuarios/findByMail/' + params, { headers: this.headers,
-    return this._http.get( this._systemEndPointsService.getEndPointService( 'estadosGroup', 1), {
+    return this._http.get(this._systemEndPointsService.getEndPointService('estadosGroup', 1), {
       headers: this.headers,
-      params: {'tokenApi': this.tokenHeader } } );
+      params: { 'tokenApi': this.tokenHeader }
+    });
   }// FIN | FND-00001
 
 
@@ -105,5 +108,55 @@ export class ListasComunesService {
       params: { 'tokenApi': this.tokenHeader },
     });
   }// FIN | FND-00004
+
+
+  /****************************************************************************
+  * Funcion: FND-00005
+  * Fecha: 12-10-2018
+  * Descripcion: Metodo para obtener los Datos de los Espacios de Trabajo
+  * Objetivo: datos de los Espacios de Trabajo
+  * Params: {  }
+  ****************************************************************************/
+  getAllEspaciosTrabajo(): Observable<any> {
+    // Retorno de la Funcion
+    return this._http.get(this._systemEndPointsService.getEndPointService('espacioTrabajoGroup', 1), {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  }// FIN | FND-00005
+
+
+  /****************************************************************************
+  * Funcion: FND-00006
+  * Fecha: 12-10-2018
+  * Descripcion: Metodo para obtener los Datos de los Espacios de Trabajo
+  * con su respectivo Id
+  * Objetivo: datos de los Espacios de Trabajo consultado de forma individual
+  * Params: { idEsapcioTrabajo }
+  ****************************************************************************/
+  getEspaciosTrabajo(): Observable<any> {
+    // Retorno de la Funcion
+    return this._http.get(this._systemEndPointsService.getEndPointService('espacioTrabajoGroup', 2), {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  }// FIN | FND-00006
+
+
+  /****************************************************************************
+  * Funcion: FND-00007
+  * Fecha: 12-10-2018
+  * Descripcion: Metodo para obtener los Datos de los Espacios de Trabajo
+  * asignados al usuario, al momento de Crearlo
+  * Objetivo: datos de los Espacios de Trabajo asignados al Usuarios
+  * Params: { idUsuario }
+  ****************************************************************************/
+  getAllEspaciosTrabajoUsuario(): Observable<any> {
+    // Retorno de la Funcion
+    return this._http.get(this._systemEndPointsService.getEndPointService('espacioTrabajoGroup', 3), {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  }// FIN | FND-00007
 
 }
