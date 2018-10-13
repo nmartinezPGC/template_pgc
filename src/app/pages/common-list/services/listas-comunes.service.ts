@@ -37,7 +37,7 @@ export class ListasComunesService {
     // Seteo de los Headers
     this.headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': this.tokenHeader, 'Access-Control-Allow-Origin': '*'
+      'Authorization': this.tokenHeader, 'Access-Control-Allow-Origin': '*',
     });
   }// FIN | Constructor
 
@@ -54,7 +54,7 @@ export class ListasComunesService {
     // return this._http.get( 'http://localhost:8090/api/v1/usuarios/findByMail/' + params, { headers: this.headers,
     return this._http.get(this._systemEndPointsService.getEndPointService('estadosGroup', 1), {
       headers: this.headers,
-      params: { 'tokenApi': this.tokenHeader }
+      params: { 'tokenApi': this.tokenHeader },
     });
   }// FIN | FND-00001
 
