@@ -132,6 +132,8 @@ export class NewActivityComponent implements OnInit {
   public JsonReceptionEstrategias: any;
   public JsonReceptionPresupuesto: any;
   public JsonReceptionEspaciosTrabajo: any;
+  public JsonReceptionTiposOrganizacion: any;
+  public JsonReceptionPaises: any;
 
   public JsonOrganizationSelect: any;
 
@@ -193,6 +195,14 @@ export class NewActivityComponent implements OnInit {
     // Llamado a la Funcion: 012, la cual obtiene el listado de los Presupuestos
     // de que nesesita el Formulario de Actividades
     this.espaciosTrabajoListService();
+
+    // Llamado a la Funcion: 013, la cual obtiene el listado de los Tipos de
+    // Organizaciones de que nesesita el Formulario de Actividades
+    this.tiposOrganizacionListService();
+
+    // Llamado a la Funcion: 014, la cual obtiene el listado de los Paises
+    // que nesesita el Formulario de Actividades
+    this.paisesAllListService();
 
   } // FIN | ngOnInit
 
@@ -314,6 +324,7 @@ export class NewActivityComponent implements OnInit {
 
         if (result.status !== 200) {
           // console.log(result.status);
+          this.showToast('danger', 'Error al Obtener la Información del Usuario', result.message);
         } else {
           // this.productos = result.data;
           // console.log(result.status);
@@ -339,11 +350,11 @@ export class NewActivityComponent implements OnInit {
   * Actividad llamando a la API
   ****************************************************************************/
   private estadosListService() {
-    this._listasComunesService.getAllEstados().subscribe(
+    this._listasComunesService.getAllEstados(3).subscribe(
       result => {
         if (result.status !== 200) {
           // console.log(result.status);
-          this.showToast('danger', 'Error al Obtener la Información de Estados', result);
+          this.showToast('danger', 'Error al Obtener la Información de Estados', result.message);
         } else if (result.status === 200) {
           this.JsonReceptionEstados = result.data;
         }
@@ -369,6 +380,7 @@ export class NewActivityComponent implements OnInit {
       result => {
         if (result.status !== 200) {
           // console.log(result.status);
+          this.showToast('danger', 'Error al Obtener la Información de los Sectores Ejecutores', result.message);
         } else if (result.status === 200) {
           this.JsonReceptionSectorEjecutor = result.data;
         }
@@ -394,6 +406,7 @@ export class NewActivityComponent implements OnInit {
       result => {
         if (result.status !== 200) {
           // console.log(result.status);
+          this.showToast('danger', 'Error al Obtener la Información de los Estrategias', result.message);
         } else if (result.status === 200) {
           this.JsonReceptionEstrategias = result.data;
         }
@@ -419,6 +432,7 @@ export class NewActivityComponent implements OnInit {
       result => {
         if (result.status !== 200) {
           // console.log(result.status);
+          this.showToast('danger', 'Error al Obtener la Información de los Presupuesto', result.message);
         } else if (result.status === 200) {
           this.JsonReceptionPresupuesto = result.data;
           // console.log(this.JsonReceptionPresupuesto);
@@ -445,6 +459,7 @@ export class NewActivityComponent implements OnInit {
       result => {
         if (result.status !== 200) {
           // console.log(result.status);
+          this.showToast('danger', 'Error al Obtener la Información de los Espacios de Trabajo', result.message);
         } else if (result.status === 200) {
           this.JsonReceptionEspaciosTrabajo = result.data;
           // console.log(this.JsonReceptionEspaciosTrabajo);
@@ -456,5 +471,59 @@ export class NewActivityComponent implements OnInit {
       },
     );
   } // FIN | espaciosTrabajoListService
+
+
+  /****************************************************************************
+  * Funcion: tiposOrganizacionListService
+  * Object Number: 013
+  * Fecha: 13-10-2018
+  * Descripcion: Method tiposOrganizacionListService of the Class
+  * Objetivo: tiposOrganizacionListService listados de los Tipos de Organizacion
+  * del Formulario de Actividad llamando a la API
+  ****************************************************************************/
+  private tiposOrganizacionListService() {
+    this._listasComunesService.getAllTipoOrganizacion().subscribe(
+      result => {
+        if (result.status !== 200) {
+          // console.log(result.status);
+          this.showToast('danger', 'Error al Obtener la Información de los Tipos de Organizacion', result.message);
+        } else if (result.status === 200) {
+          this.JsonReceptionTiposOrganizacion = result.data;
+          // console.log(this.JsonReceptionTiposOrganizacion);
+        }
+      },
+      error => {
+        // console.log(<any>error);
+        this.showToast('danger', 'Error al Obtener la Información de los Tipos de Organizacion', error);
+      },
+    );
+  } // FIN | tiposOrganizacionListService
+
+
+  /****************************************************************************
+  * Funcion: paisesAllListService
+  * Object Number: 014
+  * Fecha: 13-10-2018
+  * Descripcion: Method paisesAllListService of the Class
+  * Objetivo: paisesAllListService listados de los Paises
+  * del Formulario de Actividad llamando a la API
+  ****************************************************************************/
+  private paisesAllListService() {
+    this._listasComunesService.getAllPaises().subscribe(
+      result => {
+        if (result.status !== 200) {
+          // console.log(result.status);
+          this.showToast('danger', 'Error al Obtener la Información de los Paises', result.message);
+        } else if (result.status === 200) {
+          this.JsonReceptionPaises = result.data;
+          // console.log(this.JsonReceptionPaises);
+        }
+      },
+      error => {
+        // console.log(<any>error);
+        this.showToast('danger', 'Error al Obtener la Información de los Paises', error);
+      },
+    );
+  } // FIN | paisesAllListService
 
 }

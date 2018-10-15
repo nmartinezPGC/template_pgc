@@ -49,10 +49,12 @@ export class ListasComunesService {
   * Objetivo: datos de los Estados de las Actividades
   * Params: {  }
   ****************************************************************************/
-  getAllEstados(): Observable<any> {
+  getAllEstados(idGrupo): Observable<any> {
+    // Parametros solicitados (Grupo Solicitao)
+    const paramSend = idGrupo;
     // Retorno de la Funcion
     // return this._http.get( 'http://localhost:8090/api/v1/usuarios/findByMail/' + params, { headers: this.headers,
-    return this._http.get(this._systemEndPointsService.getEndPointService('estadosGroup', 1), {
+    return this._http.get(this._systemEndPointsService.getEndPointService('estadosGroup', 2) + paramSend, {
       headers: this.headers,
       params: { 'tokenApi': this.tokenHeader },
     });
@@ -158,5 +160,36 @@ export class ListasComunesService {
       params: { 'tokenApi': this.tokenHeader },
     });
   }// FIN | FND-00007
+
+
+  /****************************************************************************
+  * Funcion: FND-00008
+  * Fecha: 13-10-2018
+  * Descripcion: Metodo para obtener los Datos de los Tipos de Organizaciones
+  * Objetivo: datos de los Tipos de Organizaciones
+  * Params: { idTipoOrganizacion }
+  ****************************************************************************/
+  getAllTipoOrganizacion(): Observable<any> {
+    // Retorno de la Funcion
+    return this._http.get(this._systemEndPointsService.getEndPointService('organizacionesGroup', 1), {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  }// FIN | FND-00008
+
+  /****************************************************************************
+  * Funcion: FND-00009
+  * Fecha: 13-10-2018
+  * Descripcion: Metodo para obtener los Datos de los Paises
+  * Objetivo: datos de los Tipos de Paises
+  * Params: { }
+  ****************************************************************************/
+  getAllPaises(): Observable<any> {
+    // Retorno de la Funcion
+    return this._http.get(this._systemEndPointsService.getEndPointService('mantGenericosGroup', 1), {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  }// FIN | FND-00009
 
 }

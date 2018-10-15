@@ -17,6 +17,13 @@ export class ListEndPointsService {
         groupEndPoint: 'estadosGroup',
         descEndPoint: 'Busca todos los Estados de la API',
       },
+      listAllEstadosActividades: {
+        id: 2,
+        nameEndpoint: 'ListAllEstadosActividades',
+        urlEndPoint: '/estados/findByIdGrupo/',
+        groupEndPoint: 'estadosGroup',
+        descEndPoint: 'Busca todos los Estados de la API, que sean de Actividades',
+      },
     },
     endPointUsers: {
       findByMail: {
@@ -114,6 +121,52 @@ export class ListEndPointsService {
         nameEndpoint: 'NewEspacioTrabajoUsuarios',
         urlEndPoint: '/espacios-trabajo-usuario/new',
         groupEndPoint: 'espacioTrabajoUsuarioGroup',
+        descEndPoint: 'Ingresa un nuevo Espacio de Trabajo en la BD asignandolo a un Usuario',
+      },
+    },
+    endPointOrganizaciones: {
+      listAllTipoOrganizaciones: {
+        id: 1,
+        nameEndpoint: 'ListAllTipoOrganizaciones',
+        urlEndPoint: '/tipos-organizaciones',
+        groupEndPoint: 'organizacionesGroup',
+        descEndPoint: 'Busca todos los Tipos de Organizaciones de la API',
+      },
+      findByIdTipoOrganizacion: {
+        id: 2,
+        nameEndpoint: 'FindByIdTipoOrganizacion',
+        urlEndPoint: '/tipos-organizaciones/findByIdTipoOrganizacion/',
+        groupEndPoint: 'organizacionesGroup',
+        descEndPoint: 'Busca el Tipo de Organizacion con el IdTipoOrganizacion, de parametro',
+      },
+      newTipoOrganizacion: {
+        id: 3,
+        nameEndpoint: 'NewTipoOrganizacion',
+        urlEndPoint: '/espacios-trabajo-usuario/new',
+        groupEndPoint: 'organizacionesGroup',
+        descEndPoint: 'Ingresa un nuevo Espacio de Trabajo en la BD asignandolo a un Usuario',
+      },
+    },
+    endPointMantGenericos: {
+      listAllPaises: {
+        id: 1,
+        nameEndpoint: 'ListAllPaises',
+        urlEndPoint: '/ubicacion-geografica/pais',
+        groupEndPoint: 'mantGenericosGroup',
+        descEndPoint: 'Busca todos los Paises de la API',
+      },
+      findByIdTipoOrganizacion: {
+        id: 2,
+        nameEndpoint: 'FindByIdTipoOrganizacion',
+        urlEndPoint: '/ubicacion-geografica/pais/',
+        groupEndPoint: 'mantGenericosGroup',
+        descEndPoint: 'Busca el Pais con el IdPais, de parametro',
+      },
+      newTipoOrganizacion: {
+        id: 3,
+        nameEndpoint: 'NewTipoOrganizacion',
+        urlEndPoint: '/espacios-trabajo-usuario/new',
+        groupEndPoint: 'mantGenericosGroup',
         descEndPoint: 'Ingresa un nuevo Espacio de Trabajo en la BD asignandolo a un Usuario',
       },
     },

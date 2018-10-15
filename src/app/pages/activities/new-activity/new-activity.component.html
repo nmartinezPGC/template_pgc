@@ -145,16 +145,26 @@
                         <h1 class="display-4">Hola, nesesitas ayuda!</h1>
                         <p class="lead">Este es un ejemplo de como ingresar la información en cada sección presentada.</p>
                         <hr class="my-4">
-                        <p>Datos Generales | Definición del Programa/Proyecto. <br> Se requiere ingresar la información que
-                          define al proyecto como tal, su nombre, justificacion, objetivos, a que cooperante pertenece (Agencia
-                          de Cooperación/Espacio de Trabajo). <br><br> Ademas nesesita que le definamos el estado o etapa
-                          en el que se encuentra, asi como una breve Explicación del porque se encuentra en esa etapa que
-                          definamos. <br><br> Los Campos: Descripción, Objetivo, Antecedentes y Condiciones Previas, son
-                          tipo texto, lo que requiere que describamos textualmente lo que el documento del proyecto/programa
-                          menciona en el mismo, vale la pena mencionar que estas decripciones son abiertas sin limites de
-                          cantidad de palabras para ingresar y que se puede copiar y pargar de untexto a otro. <br><br> En
-                          la Seccion de resultados, se realizara una sentesis de lo que se espera alcanzar con la implementacion
-                          y desarrollo del proyecto en mención y ademas actaulizar con el transcurrir del tiempo los resultados
+                        <p>Datos Generales | Definición del Programa/Proyecto. <br> Se requiere ingresar la información
+                          que
+                          define al proyecto como tal, su nombre, justificacion, objetivos, a que cooperante pertenece
+                          (Agencia
+                          de Cooperación/Espacio de Trabajo). <br><br> Ademas nesesita que le definamos el estado o
+                          etapa
+                          en el que se encuentra, asi como una breve Explicación del porque se encuentra en esa etapa
+                          que
+                          definamos. <br><br> Los Campos: Descripción, Objetivo, Antecedentes y Condiciones Previas,
+                          son
+                          tipo texto, lo que requiere que describamos textualmente lo que el documento del
+                          proyecto/programa
+                          menciona en el mismo, vale la pena mencionar que estas decripciones son abiertas sin limites
+                          de
+                          cantidad de palabras para ingresar y que se puede copiar y pargar de untexto a otro. <br><br>
+                          En
+                          la Seccion de resultados, se realizara una sentesis de lo que se espera alcanzar con la
+                          implementacion
+                          y desarrollo del proyecto en mención y ademas actaulizar con el transcurrir del tiempo los
+                          resultados
                           que seran alcanzados. <br><br>
                         </p>
                         <a class="btn btn-primary btn-lg" href="#" role="button">Intructivo de uso ...</a>
@@ -254,8 +264,8 @@
                       <label>Tipo de Organización</label>
                       <select class="form-control">
                         <option value="0">**** Selecciona el tipo de Organizacion ****</option>
-                        <option *ngFor="let item of datos" [value]="item.organinizacion">
-                          {{item.organinizacion}}
+                        <option *ngFor="let item of JsonReceptionTiposOrganizacion" [value]="item.idTipoOrganizacion">
+                          {{item.nombreTipoOrganizacion}}
                         </option>
                       </select>
                     </div>
@@ -266,8 +276,8 @@
                       <label>País de la Organización</label>
                       <select class="form-control">
                         <option value="0">**** Selecciona el País de la Organizacion ****</option>
-                        <option *ngFor="let item of datos" [value]="item.organinizacion">
-                          {{item.organinizacion}}
+                        <option *ngFor="let item of JsonReceptionPaises" [value]="item.idPais">
+                          {{item.descPais}}
                         </option>
                       </select>
                     </div>
@@ -279,8 +289,9 @@
                       <div class="input-group full-width">
                         <div class="input-group-addon"><img src="../../../../assets/icons/common/magnifying-glass-search.png"></div>
                         <!-- <input type="text" class="form-control" id="inputWebsite" placeholder="Buscar Organización, por el filtro aplicado"> -->
-                        <ng2-completer [inputClass]="'form-control'" [(ngModel)]="captain" [datasource]="datos" placeholder="Buscar Organización, por el filtro aplicado"
-                          style=" width: 90%; " [minSearchLength]="0" (selected)="onEditedCompleter($event)"></ng2-completer>
+                        <ng2-completer [inputClass]="'form-control'" [(ngModel)]="captain" [datasource]="datos"
+                          placeholder="Buscar Organización, por el filtro aplicado" style=" width: 90%; "
+                          [minSearchLength]="0" (selected)="onEditedCompleter($event)"></ng2-completer>
                       </div>
                     </div>
                   </div>
@@ -291,7 +302,8 @@
                     <div class="form-group">
                       <label>ID's Internas seleccionadas</label>
                       <!-- Tabla de las ID's Internas -->
-                      <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)" (createConfirm)="onCreateConfirm($event)">
+                      <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)"
+                        (createConfirm)="onCreateConfirm($event)">
                       </ng2-smart-table>
                     </div>
 

@@ -47,6 +47,9 @@ export class SystemEndPointsService extends ListEndPointsService {
           case 1:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointEstados.listAllEstados.urlEndPoint;
             break;
+          case 2:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointEstados.listAllEstadosActividades.urlEndPoint;
+            break;
         }
         break;
       case 'matActGroup': // Llamados a los End Point del Modulo de Mantenimientos de Activdades
@@ -94,6 +97,32 @@ export class SystemEndPointsService extends ListEndPointsService {
             break;
           case 3:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointEspaciosTrabajoUsuarios.newEspacioTrabajoUsuarios.urlEndPoint;
+            break;
+        }
+        break;
+      case 'organizacionesGroup': // Llamados a los EndPoint del Tipo de Organizacion
+        switch (indicadorEndPoint) {
+          case 1:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointOrganizaciones.listAllTipoOrganizaciones.urlEndPoint;
+            break;
+          case 2:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointOrganizaciones.findByIdTipoOrganizacion.urlEndPoint;
+            break;
+          case 3:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointOrganizaciones.newTipoOrganizacion.urlEndPoint;
+            break;
+        }
+        break;
+      case 'mantGenericosGroup': // Llamados a los EndPoint de Mantenimientos Genericos
+        switch (indicadorEndPoint) {
+          case 1:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointMantGenericos.listAllPaises.urlEndPoint;
+            break;
+          case 2:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointMantGenericos.findByIdTipoOrganizacion.urlEndPoint;
+            break;
+          case 3:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointMantGenericos.newTipoOrganizacion.urlEndPoint;
             break;
         }
         break;
