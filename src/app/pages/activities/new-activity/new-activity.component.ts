@@ -556,7 +556,7 @@ export class NewActivityComponent implements OnInit {
         } else if (result.status === 200) {
           this.JsonReceptionAllOrganizaciones = result.data;
           this.JsonReceptionAllOrganizacionesData = JSON.stringify(this.JsonReceptionAllOrganizaciones);
-          console.log(JSON.stringify(this.JsonReceptionAllOrganizaciones));
+          // console.log(JSON.stringify(this.JsonReceptionAllOrganizaciones));
 
           // Cargamos el compoenete de AutoCompletar
           this.dataService = this.completerService.local(this.JsonReceptionAllOrganizaciones, 'codOrganizacion,descOrganizacion',
