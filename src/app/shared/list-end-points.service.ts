@@ -146,6 +146,41 @@ export class ListEndPointsService {
         groupEndPoint: 'organizacionesGroup',
         descEndPoint: 'Ingresa un nuevo Espacio de Trabajo en la BD asignandolo a un Usuario',
       },
+      listAllOrganizaciones: {
+        id: 4,
+        nameEndpoint: 'ListAllOrganizaciones',
+        urlEndPoint: '/organizaciones',
+        groupEndPoint: 'organizacionesGroup',
+        descEndPoint: 'Busca todos las Organizaciones de la API',
+      },
+      findByIdOrganizacion: {
+        id: 5,
+        nameEndpoint: 'FindByIdOrganizacion',
+        urlEndPoint: '/organizaciones/findByIdOrganizacion/',
+        groupEndPoint: 'organizacionesGroup',
+        descEndPoint: 'Busca el Tipo de Organizacion con el IdTipoOrganizacion, de parametro',
+      },
+      findByIdTipoOrganizacionT: {
+        id: 5,
+        nameEndpoint: 'FindByIdOrganizacion',
+        urlEndPoint: '/organizaciones/findByIdTipoOrganizacion/',
+        groupEndPoint: 'organizacionesGroup',
+        descEndPoint: 'Busca el Tipo de Organizacion con el IdTipoOrganizacion, de parametro',
+      },
+      findByIdTipoPaisOrganizacion: {
+        id: 6,
+        nameEndpoint: 'FindByIdOrganizacion',
+        urlEndPoint: '/organizaciones/findByIdTipoPaisOrganizacion/',
+        groupEndPoint: 'organizacionesGroup',
+        descEndPoint: 'Busca el Tipo de Organizacion con el IdTipoOrganizacion, de parametro',
+      },
+      newOrganizacion: {
+        id: 7,
+        nameEndpoint: 'NewOrganizacion',
+        urlEndPoint: '/organizaciones/new',
+        groupEndPoint: 'organizacionesGroup',
+        descEndPoint: 'Ingresa un nueva Organizacion en la BD asignandolo',
+      },
     },
     endPointMantGenericos: {
       listAllPaises: {

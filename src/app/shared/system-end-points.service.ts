@@ -102,7 +102,7 @@ export class SystemEndPointsService extends ListEndPointsService {
         break;
       case 'organizacionesGroup': // Llamados a los EndPoint del Tipo de Organizacion
         switch (indicadorEndPoint) {
-          case 1:
+          case 1: // Tipos de Organizaciones
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointOrganizaciones.listAllTipoOrganizaciones.urlEndPoint;
             break;
           case 2:
@@ -110,6 +110,18 @@ export class SystemEndPointsService extends ListEndPointsService {
             break;
           case 3:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointOrganizaciones.newTipoOrganizacion.urlEndPoint;
+            break;
+          case 4: // Organizaciones
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointOrganizaciones.listAllOrganizaciones.urlEndPoint;
+            break;
+          case 5:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointOrganizaciones.findByIdOrganizacion.urlEndPoint;
+            break;
+          case 6:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointOrganizaciones.findByIdTipoPaisOrganizacion.urlEndPoint;
+            break;
+          case 7:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointOrganizaciones.newOrganizacion.urlEndPoint;
             break;
         }
         break;

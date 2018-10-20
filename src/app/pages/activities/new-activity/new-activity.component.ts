@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-// import { CompleterService, CompleterData } from 'ng2-completer';
-import { CompleterData } from 'ng2-completer';
+// AutoCompleter Services
+import { CompleterData, CompleterService, CompleterItem } from 'ng2-completer';
 
 // import {MatButtonModule} from '@angular/material/button';
 
@@ -135,6 +135,13 @@ export class NewActivityComponent implements OnInit {
   public JsonReceptionTiposOrganizacion: any;
   public JsonReceptionPaises: any;
 
+  // Organizaciones
+  protected searchStrFunc: string;
+  public JsonReceptionAllOrganizaciones: any[];
+  protected selectedOrganizicionesAll: string = "";
+  protected selectedOrganizacion: string = "";
+  public JsonReceptionAllOrganizacionesData: any;
+
   public JsonOrganizationSelect: any;
 
   // private toasterService: ToasterService;
@@ -150,6 +157,7 @@ export class NewActivityComponent implements OnInit {
   * Objetivo: constructor in the method header API
   ****************************************************************************/
   constructor(private _userService: UserService,
+    private completerService: CompleterService,
     private _listasComunesService: ListasComunesService,
     // private service: SmartTableService,
     private _toasterService: ToasterService) {
@@ -203,6 +211,10 @@ export class NewActivityComponent implements OnInit {
     // Llamado a la Funcion: 014, la cual obtiene el listado de los Paises
     // que nesesita el Formulario de Actividades
     this.paisesAllListService();
+
+    // Llamado a la Funcion: 015, la cual obtiene el listado de las Organizaciones
+    // que nesesita el Formulario de Actividades
+    this.organizacionesAllListService();
 
   } // FIN | ngOnInit
 
@@ -525,5 +537,65 @@ export class NewActivityComponent implements OnInit {
       },
     );
   } // FIN | paisesAllListService
+
+
+  /****************************************************************************
+  * Funcion: organizacionesAllListService
+  * Object Number: 015
+  * Fecha: 15-10-2018
+  * Descripcion: Method organizacionesAllListService of the Class
+  * Objetivo: organizacionesAllListService listados de los Paises
+  * del Formulario de Actividad llamando a la API
+  ****************************************************************************/
+  private organizacionesAllListService() {
+    this._listasComunesService.getAllOrganizaciones().subscribe(
+      result => {
+        if (result.status !== 200) {
+          // console.log(result.status);
+          this.showToast('danger', 'Error al Obtener la Información de las Organizaciones', result.message);
+        } else if (result.status === 200) {
+          this.JsonReceptionAllOrganizaciones = result.data;
+          this.JsonReceptionAllOrganizacionesData = JSON.stringify(this.JsonReceptionAllOrganizaciones);
+          console.log(JSON.stringify(this.JsonReceptionAllOrganizaciones));
+
+          // Cargamos el compoenete de AutoCompletar
+          this.dataService = this.completerService.local(this.JsonReceptionAllOrganizaciones, 'codOrganizacion,descOrganizacion',
+            'codOrganizacion,descOrganizacion');
+        }
+      },
+      error => {
+        // console.log(<any>error);
+        this.showToast('danger', 'Error al Obtener la Información de las Organizaciones', error);
+      },
+    );
+  } // FIN | organizacionesAllListService
+
+
+  /*****************************************************
+  * Funcion: FND-00003.1
+  * Fecha: 12-10-2017
+  * Descripcion: Funcion para AutoCompletar y sacar el
+  * Id de la Data de la Tabla TblFunionarios
+  * Params: $event
+  ******************************************************/
+  protected onSelectedFunc(item: CompleterItem) {
+    // Validar si hay datos Previos
+
+   /* if (this.comunicacion.setTomail == '') {
+      this.selectedOrganizicionesAll = '';
+    }*/
+
+    if (this.selectedOrganizicionesAll == '') {
+      //alert( this.selectedFuncionarioAll );
+      this.selectedOrganizacion = item ? item.originalObject.idOrganizacion : "";
+      this.selectedOrganizicionesAll = this.selectedOrganizacion;
+    } else {
+      // this.selectedOrganizacion = this.selectedOrganizacion + ',' + item ? item.originalObject.idOrganizacion : "";
+      this.selectedOrganizacion = item ? item.originalObject.idOrganizacion : "";
+      this.selectedOrganizicionesAll = this.selectedOrganizacion;
+    }
+    console.log(this.selectedOrganizicionesAll);
+    // this.comunicacion.setTomail = this.selectedOrganizicionesAll;
+  } // FIN | FND-00003.1
 
 }

@@ -192,4 +192,20 @@ export class ListasComunesService {
     });
   }// FIN | FND-00009
 
+
+  /****************************************************************************
+  * Funcion: FND-00010
+  * Fecha: 15-10-2018
+  * Descripcion: Metodo para obtener los Datos de las Organizaciones
+  * Objetivo: datos de las Organizaciones
+  * Params: { }
+  ****************************************************************************/
+  getAllOrganizaciones(): Observable<any> {
+    // Retorno de la Funcion
+    return this._http.get(this._systemEndPointsService.getEndPointService('organizacionesGroup', 4), {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  }// FIN | FND-00010
+
 }
