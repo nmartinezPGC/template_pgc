@@ -138,8 +138,8 @@ export class NewActivityComponent implements OnInit {
   // Organizaciones
   protected searchStrFunc: string;
   public JsonReceptionAllOrganizaciones: any[];
-  protected selectedOrganizicionesAll: string = "";
-  protected selectedOrganizacion: string = "";
+  protected selectedOrganizicionesAll: string = '';
+  protected selectedOrganizacion: string = '';
   public JsonReceptionAllOrganizacionesData: any;
 
   public JsonOrganizationSelect: any;
@@ -585,16 +585,16 @@ export class NewActivityComponent implements OnInit {
       this.selectedOrganizicionesAll = '';
     }*/
 
-    if (this.selectedOrganizicionesAll == '') {
-      //alert( this.selectedFuncionarioAll );
-      this.selectedOrganizacion = item ? item.originalObject.idOrganizacion : "";
+    if (this.selectedOrganizicionesAll === '') {
+      // alert( this.selectedFuncionarioAll );
+      this.selectedOrganizacion = item ? item.originalObject.idOrganizacion : '';
       this.selectedOrganizicionesAll = this.selectedOrganizacion;
     } else {
       // this.selectedOrganizacion = this.selectedOrganizacion + ',' + item ? item.originalObject.idOrganizacion : "";
-      this.selectedOrganizacion = item ? item.originalObject.idOrganizacion : "";
+      this.selectedOrganizacion = item ? item.originalObject.idOrganizacion : '';
       this.selectedOrganizicionesAll = this.selectedOrganizacion;
     }
-    console.log(this.selectedOrganizicionesAll);
+    // console.log(this.selectedOrganizicionesAll);
     // this.comunicacion.setTomail = this.selectedOrganizicionesAll;
   } // FIN | FND-00003.1
 
