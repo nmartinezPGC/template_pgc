@@ -217,8 +217,8 @@ export class ListasComunesService {
   ****************************************************************************/
   getIdTipoIdPaisOrganizaciones(idTipoOrganizacion: number, idPais: number): Observable<any> {
     // Parametros de la Funcion
-    const tipoOrgSend = idTipoOrganizacion;
-    const paisOrgSend = idPais;
+    // const tipoOrgSend = idTipoOrganizacion;
+    // const paisOrgSend = idPais;
     const paramsSend = idTipoOrganizacion + '/' + idPais;
     // Retorno de la Funcion
     return this._http.get(this._systemEndPointsService.getEndPointService('organizacionesGroup', 8) + paramsSend, {

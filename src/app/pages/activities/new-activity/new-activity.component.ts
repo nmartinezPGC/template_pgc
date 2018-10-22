@@ -187,11 +187,11 @@ export class NewActivityComponent implements OnInit {
     // Inicializacion del Modelo de la Clase
     this._activityModel = new ActivityModel(
       0,
-      "", 0, "", "", "", "", "", "",
+      '', 0, '', '', '', '', '', '',
       0, 0, 0,
-      "", "", "", 0, 0,
-      "", "", "",
-      0, 0, 0
+      '', '', '', 0, 0,
+      '', '', '',
+      0, 0, 0,
     );
 
     /* Llamado a la Funcion: 007, la cual obtiene el detalle da la Info.
@@ -596,7 +596,7 @@ export class NewActivityComponent implements OnInit {
     // Envia la Organizacion seleccionada
     this.selectedOrganizacion = item ? item.originalObject.idOrganizacion : '';
 
-    // Setea al Model el valor de la Organizacion 
+    // Setea al Model el valor de la Organizacion
     this._activityModel.idOrganizacion = Number(this.selectedOrganizacion);
     // console.log(this._activityModel.idOrganizacion);
   } // FIN | FND-00001
@@ -619,7 +619,7 @@ export class NewActivityComponent implements OnInit {
           this.showToast('danger', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', result.message);
         } else if (result.status === 200) {
           this.JsonReceptionTipoPaisOrganizacionesData = result.data;
-          console.log(this.JsonReceptionTipoPaisOrganizacionesData);
+          // console.log(this.JsonReceptionTipoPaisOrganizacionesData);
         }
       },
       error => {
