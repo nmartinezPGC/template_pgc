@@ -208,4 +208,23 @@ export class ListasComunesService {
     });
   }// FIN | FND-00010
 
+  /****************************************************************************
+  * Funcion: FND-00011
+  * Fecha: 20-10-2018
+  * Descripcion: Metodo para obtener los Datos de las Organizaciones
+  * Objetivo: datos de las Organizaciones
+  * Params: {idTipoOrganizacion}/{idPais}
+  ****************************************************************************/
+  getIdTipoIdPaisOrganizaciones(idTipoOrganizacion: number, idPais: number): Observable<any> {
+    // Parametros de la Funcion
+    const tipoOrgSend = idTipoOrganizacion;
+    const paisOrgSend = idPais;
+    const paramsSend = idTipoOrganizacion + '/' + idPais;
+    // Retorno de la Funcion
+    return this._http.get(this._systemEndPointsService.getEndPointService('organizacionesGroup', 8) + paramsSend, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  }// FIN | FND-00011
+
 }

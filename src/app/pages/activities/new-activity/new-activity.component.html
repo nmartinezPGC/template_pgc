@@ -40,7 +40,9 @@
                       <div class="col-12 col-sm-6 col-md-8">
                         <div class="form-group">
                           <label for="inputFirstName">Nombre del Proyecto/Programa</label>
-                          <input type="text" class="form-control" id="inputFirstName" placeholder="Nombre del Proyecto/Programa">
+                          <input #nombreActividad="ngModel" type="text" class="form-control" name="nombreActividad" id="nombreActividad"
+                            ngControl="nombreActividad" [(ngModel)]="_activityModel.nombreActividad" required autofocus
+                            placeholder="Nombre del Proyecto/Programa">
                         </div>
                       </div>
                       <div class="col-6 col-md-4">
@@ -62,7 +64,8 @@
                       <div class="col-sm-3">
                         <div class="form-group">
                           <label>Estado de Proyecto/Programa</label>
-                          <select class="form-control">
+                          <select class="form-control" #idEstado="ngModel" name="idEstado" id="idEstado" required
+                            ngControl="idEstado" [(ngModel)]="_activityModel.idEstado">
                             <option value="0">**** Selecciona el Estado ****</option>
                             <option *ngFor="let item of JsonReceptionEstados" [value]="item.idEstado">
                               {{item.descEstado}}
@@ -73,7 +76,8 @@
                       <div class="col-sm-9">
                         <div class="form-group">
                           <label for="inputWebsite">Explicación de Estado</label>
-                          <input type="text" class="form-control" id="inputWebsite" placeholder="Explicación de Estado">
+                          <input #explicacionEstado type="text" class="form-control" id="explicacionEstado" name="explicacionEstado"
+                            ngControl="explicacionEstado" [(ngModel)]="_activityModel.explicacionEstado" placeholder="Explicación de Estado">
                         </div>
                       </div>
                     </div>
@@ -85,7 +89,9 @@
                         <div class="form-group">
                           <label>Descripción</label>
                           <div class="form-group">
-                            <textarea class="form-control" placeholder="Descripción del Proyecto/Programa"></textarea>
+                            <textarea #descripcionActividad class="form-control" id="descripcionActividad" name="descripcionActividad"
+                              ngControl="descripcionActividad" [(ngModel)]="_activityModel.descripcionActividad"
+                              required placeholder="Descripción del Proyecto/Programa"></textarea>
                           </div>
                         </div>
                       </div>
@@ -93,7 +99,9 @@
                         <div class="form-group">
                           <label>Objetivo</label>
                           <div class="form-group">
-                            <textarea class="form-control" placeholder="Objetivo del Proyecto/Programa"></textarea>
+                            <textarea #objetivoActividad class="form-control" id="objetivoActividad" name="objetivoActividad"
+                              ngControl="objetivoActividad" [(ngModel)]="_activityModel.objetivoActividad" required
+                              placeholder="Objetivo del Proyecto/Programa"></textarea>
                           </div>
                         </div>
                       </div>
@@ -106,7 +114,9 @@
                         <div class="form-group">
                           <label>Antecedentes</label>
                           <div class="form-group">
-                            <textarea class="form-control" placeholder="Antecedentes del Proyecto/Programa"></textarea>
+                            <textarea #antecedentesAtividad class="form-control" id="antecedentesAtividad" name="antecedentesAtividad"
+                              ngControl="antecedentesAtividad" [(ngModel)]="_activityModel.antecedentesAtividad"
+                              placeholder="Antecedentes del Proyecto/Programa"></textarea>
                           </div>
                         </div>
                       </div>
@@ -114,7 +124,9 @@
                         <div class="form-group">
                           <label>Condiciones Previas</label>
                           <div class="form-group">
-                            <textarea class="form-control" placeholder="Condiciones Previas del Proyecto/Programa"></textarea>
+                            <textarea #condicionesActividad class="form-control" id="condicionesActividad" name="condicionesActividad"
+                              ngControl="condicionesActividad" [(ngModel)]="_activityModel.condicionesActividad"
+                              placeholder="Condiciones Previas del Proyecto/Programa"></textarea>
                           </div>
                         </div>
                       </div>
@@ -127,7 +139,9 @@
                         <div class="form-group">
                           <label>Justificación</label>
                           <div class="form-group">
-                            <textarea class="form-control" placeholder="Justificación del Proyecto/Programa"></textarea>
+                            <textarea #justificacionAtividad class="form-control" id="justificacionAtividad" name="justificacionAtividad"
+                              ngControl="justificacionAtividad" [(ngModel)]="_activityModel.justificacionAtividad"
+                              required placeholder="Justificación del Proyecto/Programa"></textarea>
                           </div>
                         </div>
                       </div>
@@ -145,16 +159,26 @@
                         <h1 class="display-4">Hola, nesesitas ayuda!</h1>
                         <p class="lead">Este es un ejemplo de como ingresar la información en cada sección presentada.</p>
                         <hr class="my-4">
-                        <p>Datos Generales | Definición del Programa/Proyecto. <br> Se requiere ingresar la información que
-                          define al proyecto como tal, su nombre, justificacion, objetivos, a que cooperante pertenece (Agencia
-                          de Cooperación/Espacio de Trabajo). <br><br> Ademas nesesita que le definamos el estado o etapa
-                          en el que se encuentra, asi como una breve Explicación del porque se encuentra en esa etapa que
-                          definamos. <br><br> Los Campos: Descripción, Objetivo, Antecedentes y Condiciones Previas, son
-                          tipo texto, lo que requiere que describamos textualmente lo que el documento del proyecto/programa
-                          menciona en el mismo, vale la pena mencionar que estas decripciones son abiertas sin limites de
-                          cantidad de palabras para ingresar y que se puede copiar y pargar de untexto a otro. <br><br> En
-                          la Seccion de resultados, se realizara una sentesis de lo que se espera alcanzar con la implementacion
-                          y desarrollo del proyecto en mención y ademas actaulizar con el transcurrir del tiempo los resultados
+                        <p>Datos Generales | Definición del Programa/Proyecto. <br> Se requiere ingresar la información
+                          que
+                          define al proyecto como tal, su nombre, justificacion, objetivos, a que cooperante pertenece
+                          (Agencia
+                          de Cooperación/Espacio de Trabajo). <br><br> Ademas nesesita que le definamos el estado o
+                          etapa
+                          en el que se encuentra, asi como una breve Explicación del porque se encuentra en esa etapa
+                          que
+                          definamos. <br><br> Los Campos: Descripción, Objetivo, Antecedentes y Condiciones Previas,
+                          son
+                          tipo texto, lo que requiere que describamos textualmente lo que el documento del
+                          proyecto/programa
+                          menciona en el mismo, vale la pena mencionar que estas decripciones son abiertas sin limites
+                          de
+                          cantidad de palabras para ingresar y que se puede copiar y pargar de untexto a otro. <br><br>
+                          En
+                          la Seccion de resultados, se realizara una sentesis de lo que se espera alcanzar con la
+                          implementacion
+                          y desarrollo del proyecto en mención y ademas actaulizar con el transcurrir del tiempo los
+                          resultados
                           que seran alcanzados. <br><br>
                         </p>
                         <a class="btn btn-primary btn-lg" href="#" role="button">Intructivo de uso ...</a>
@@ -175,7 +199,8 @@
                     <div class="form-group">
                       <label>Resultados Esperados</label>
                       <div class="form-group">
-                        <textarea class="form-control" placeholder="Resultados Esperados del Proyecto/Programa"></textarea>
+                        <textarea #resultadosEsperados class="form-control" id="resultadosEsperados" name="resultadosEsperados"
+                          ngControl="resultadosEsperados" [(ngModel)]="_activityModel.resultadosEsperados" placeholder="Resultados Esperados del Proyecto/Programa"></textarea>
                       </div>
                     </div>
                   </div>
@@ -183,7 +208,8 @@
                     <div class="form-group">
                       <label>Resultados a la Fecha</label>
                       <div class="form-group">
-                        <textarea class="form-control" placeholder="Resultados a la Fecha del Proyecto/Programa"></textarea>
+                        <textarea #resultadosAlaFecha class="form-control" id="resultadosAlaFecha" name="resultadosAlaFecha"
+                          ngControl="resultadosAlaFecha" [(ngModel)]="_activityModel.resultadosAlaFecha" placeholder="Resultados a la Fecha del Proyecto/Programa"></textarea>
                       </div>
                     </div>
                   </div>
@@ -200,7 +226,8 @@
                   <div class="col-sm-6">
                     <div class="form-group">
                       <label>Estrategia</label>
-                      <select class="form-control">
+                      <select #idEstrategia class="form-control" id="idEstrategia" name="idEstrategia" ngControl="idEstrategia"
+                        [(ngModel)]="_activityModel.idEstrategia">
                         <option value="0">**** Selecciona la Estrategia ****</option>
                         <option *ngFor="let item of JsonReceptionEstrategias" [value]="item.idEstrategia">
                           {{item.descripcionEstrategia}}
@@ -211,7 +238,8 @@
                   <div class="col-sm-6">
                     <div class="form-group">
                       <label for="inputWebsite">Código BIP / SIAFI</label>
-                      <input type="text" class="form-control" id="inputWebsite" placeholder="Código BIP / SIAFI">
+                      <input #codigoSiafiBip type="text" class="form-control" id="codigoSiafiBip" name="codigoSiafiBip"
+                        ngControl="codigoSiafiBip" [(ngModel)]="_activityModel.codigoSiafiBip" placeholder="Código BIP / SIAFI">
                     </div>
                   </div>
                 </div>
@@ -220,7 +248,8 @@
                   <div class="col-sm-6">
                     <div class="form-group">
                       <label>Presupuesto</label>
-                      <select class="form-control">
+                      <select #idPresupuesto class="form-control" id="idPresupuesto" name="idPresupuesto" ngControl="idPresupuesto"
+                        [(ngModel)]="_activityModel.idPresupuesto">
                         <option value="0">**** Selecciona el Presupuesto ****</option>
                         <option *ngFor="let item of JsonReceptionPresupuesto" [value]="item.idPresupuesto">
                           {{item.descPresupuesto}}
@@ -231,7 +260,8 @@
                   <div class="col-sm-6">
                     <div class="form-group">
                       <label>Sector Ejecutor</label>
-                      <select class="form-control">
+                      <select #idSectorEjecutor class="form-control" id="idSectorEjecutor" name="idSectorEjecutor"
+                        ngControl="idSectorEjecutor" [(ngModel)]="_activityModel.idSectorEjecutor">
                         <option value="0">**** Selecciona el Sector Ejecutor ****</option>
                         <option *ngFor="let item of JsonReceptionSectorEjecutor" [value]="item.idSectorEjecutor">
                           {{item.descSectorEjecutor}}
@@ -252,7 +282,8 @@
                   <div class="col-sm-3">
                     <div class="form-group">
                       <label>Tipo de Organización</label>
-                      <select class="form-control">
+                      <select #idTipoOrganizacion class="form-control" id="idTipoOrganizacion" name="idTipoOrganizacion"
+                        ngControl="idTipoOrganizacion" [(ngModel)]="_activityModel.idTipoOrganizacion">
                         <option value="0">**** Selecciona el tipo de Organizacion ****</option>
                         <option *ngFor="let item of JsonReceptionTiposOrganizacion" [value]="item.idTipoOrganizacion">
                           {{item.nombreTipoOrganizacion}}
@@ -264,7 +295,8 @@
                   <div class="col-sm-3">
                     <div class="form-group">
                       <label>País de la Organización</label>
-                      <select class="form-control">
+                      <select #idPais class="form-control" id="idPais" name="idPais" ngControl="idPais" [(ngModel)]="_activityModel.idPais"
+                        (change)="organizacionesIdTipoIdPaisListService(_activityModel.idTipoOrganizacion, _activityModel.idPais )">
                         <option value="0">**** Selecciona el País de la Organizacion ****</option>
                         <option *ngFor="let item of JsonReceptionPaises" [value]="item.idPais">
                           {{item.descPais}}
@@ -279,9 +311,10 @@
                       <div class="input-group full-width">
                         <div class="input-group-addon"><img src="../../../../assets/icons/common/magnifying-glass-search.png"></div>
                         <!-- <input type="text" class="form-control" id="inputWebsite" placeholder="Buscar Organización, por el filtro aplicado"> -->
-                        <ng2-completer [inputClass]="'form-control'" [(ngModel)]="searchStrFunc" [datasource]="dataService" placeholder="Buscar Organización, por el filtro aplicado"
-                          style=" width: 90%; " [minSearchLength]="0" (selected)="onSelectedFunc($event)" textSearching="Buscando Contacto ..."
-                          textNoResults="No se han encontrado nada ..." clearUnselected="true" ></ng2-completer>
+                        <ng2-completer [inputClass]="'form-control'" [(ngModel)]="searchStrFunc" [datasource]="dataService"
+                          placeholder="Buscar Organización, por el filtro aplicado" style=" width: 90%; "
+                          [minSearchLength]="0" (selected)="onSelectedFunc($event)" textSearching="Buscando Contacto ..."
+                          textNoResults="No se han encontrado nada ..." clearSelected="true"></ng2-completer>
                       </div>
                     </div>
                   </div>
@@ -291,7 +324,7 @@
                   <div class="col-sm-12">
                     <!-- <div class="form-group">
                       <label>ID's Internas seleccionadas</label> -->
-                      <!-- Tabla de las ID's Internas -->
+                    <!-- Tabla de las ID's Internas -->
                     <!--   <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)" (createConfirm)="onCreateConfirm($event)">
                       </ng2-smart-table>
                     </div> -->

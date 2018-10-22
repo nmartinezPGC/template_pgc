@@ -16,7 +16,7 @@ import { ThemeModule } from '../../@theme/theme.module';
 import { ActivitiesRoutingModule, routedComponents } from './activities-routing.module';
 
 // Imports de las Librerias de uso Comun de la Clase en el Formulario de Actividad
-import { ListasComunesService } from '../common-list/services/listas-comunes.service'; // Servicio de Lista de Estados
+import { ListasComunesService } from '../common-list/services/listas-comunes.service';
 
 @NgModule({
   imports: [

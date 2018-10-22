@@ -172,7 +172,7 @@ export class ListEndPointsService {
         nameEndpoint: 'FindByIdOrganizacion',
         urlEndPoint: '/organizaciones/findByIdTipoPaisOrganizacion/',
         groupEndPoint: 'organizacionesGroup',
-        descEndPoint: 'Busca el Tipo de Organizacion con el IdTipoOrganizacion, de parametro',
+        descEndPoint: 'Busca la Organizacion con el IdTipoOrganizacion, de parametro',
       },
       newOrganizacion: {
         id: 7,
@@ -180,6 +180,13 @@ export class ListEndPointsService {
         urlEndPoint: '/organizaciones/new',
         groupEndPoint: 'organizacionesGroup',
         descEndPoint: 'Ingresa un nueva Organizacion en la BD asignandolo',
+      },
+      findByIdPaisOrganizacion: { // 2018-10-20 | NAM
+        id: 8,
+        nameEndpoint: 'findByIdPaisOrganizacion',
+        urlEndPoint: '/organizaciones/findByIdPaisOrganizacion/',
+        groupEndPoint: 'organizacionesGroup',
+        descEndPoint: 'Busca la Organizacion con el IdPaisOrganizacion, de parametro',
       },
     },
     endPointMantGenericos: {

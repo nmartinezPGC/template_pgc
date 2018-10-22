@@ -16,6 +16,10 @@ import { LocalDataSource } from 'ng2-smart-table'; // DataLocal de Ejemplo para 
 
 import 'style-loader!angular2-toaster/toaster.css';
 
+// Modelo de la Clase Activiades
+import { ActivityModel } from '../models/model-activity';
+
+
 @Component({
   selector: 'ngx-new-activity',
   templateUrl: './new-activity.component.html',
@@ -142,9 +146,15 @@ export class NewActivityComponent implements OnInit {
   protected selectedOrganizacion: string = '';
   public JsonReceptionAllOrganizacionesData: any;
 
+  protected JsonReceptionTipoPaisOrganizacionesData: any;
+
   public JsonOrganizationSelect: any;
 
   // private toasterService: ToasterService;
+
+  // Instacia de la variable del Modelo | Json de Parametros
+  public _activityModel: ActivityModel;
+
 
   // FIN | Definicion de las Variables de la Clase
 
@@ -160,14 +170,8 @@ export class NewActivityComponent implements OnInit {
     private completerService: CompleterService,
     private _listasComunesService: ListasComunesService,
     // private service: SmartTableService,
-    private _toasterService: ToasterService) {
-    // private _completerService: CompleterService ) {
-    // this.data = this.service.getData();
-    // console.log( this.data );
-    // this.source.load( this.data );
     // Inicializa el ToasterService
-    // this.dataService = _completerService.local(this.datos, 'color', 'color');
-    // this.toasterService = _toasterService;
+    private _toasterService: ToasterService) {
 
   } // FIN | constructor
 
@@ -180,40 +184,50 @@ export class NewActivityComponent implements OnInit {
   * Objetivo: ngOnInit in the method header API
   ****************************************************************************/
   ngOnInit() {
-    // Llamado a la Funcion: 007, la cual obtiene el detalle da la Info.
-    // del Usuario
+    // Inicializacion del Modelo de la Clase
+    this._activityModel = new ActivityModel(
+      0,
+      "", 0, "", "", "", "", "", "",
+      0, 0, 0,
+      "", "", "", 0, 0,
+      "", "", "",
+      0, 0, 0
+    );
+
+    /* Llamado a la Funcion: 007, la cual obtiene el detalle da la Info.
+     del Usuario */
     this.userDatailsService();
 
-    // Llamado a la Funcion: 008, la cual obtiene el listado de los Estados de
-    // que nesesita el Formulario de Actividades
+    /* Llamado a la Funcion: 008, la cual obtiene el listado de los Estados de
+     que nesesita el Formulario de Actividades */
     this.estadosListService();
 
-    // Llamado a la Funcion: 009, la cual obtiene el listado de los Estados de
-    // que nesesita el Formulario de Actividades
+    /* Llamado a la Funcion: 009, la cual obtiene el listado de los Estados de
+     que nesesita el Formulario de Actividades */
     this.sectorEjecutorListService();
 
-    // Llamado a la Funcion: 010, la cual obtiene el listado de las Estretegias
-    // de que nesesita el Formulario de Actividades
+    /* Llamado a la Funcion: 010, la cual obtiene el listado de las Estretegias
+     de que nesesita el Formulario de Actividades */
     this.estrategiasListService();
 
-    // Llamado a la Funcion: 011, la cual obtiene el listado de los Presupuestos
-    // de que nesesita el Formulario de Actividades
+    /* Llamado a la Funcion: 011, la cual obtiene el listado de los Presupuestos
+     de que nesesita el Formulario de Actividades */
     this.presupuestoListService();
 
-    // Llamado a la Funcion: 012, la cual obtiene el listado de los Presupuestos
-    // de que nesesita el Formulario de Actividades
+    /* Llamado a la Funcion: 012, la cual obtiene el listado de los Presupuestos
+     de que nesesita el Formulario de Actividades */
     this.espaciosTrabajoListService();
 
-    // Llamado a la Funcion: 013, la cual obtiene el listado de los Tipos de
-    // Organizaciones de que nesesita el Formulario de Actividades
+    /* Llamado a la Funcion: 013, la cual obtiene el listado de los Tipos de
+     Organizaciones de que nesesita el Formulario de Actividades */
     this.tiposOrganizacionListService();
 
-    // Llamado a la Funcion: 014, la cual obtiene el listado de los Paises
-    // que nesesita el Formulario de Actividades
+    /* Llamado a la Funcion: 014, la cual obtiene el listado de los Paises
+     que nesesita el Formulario de Actividades */
     this.paisesAllListService();
 
-    // Llamado a la Funcion: 015, la cual obtiene el listado de las Organizaciones
-    // que nesesita el Formulario de Actividades
+    /* Llamado a la Funcion: 015, la cual obtiene el listado de las Organizaciones
+     que nesesita el Formulario de Actividades */
     this.organizacionesAllListService();
 
   } // FIN | ngOnInit
@@ -497,7 +511,7 @@ export class NewActivityComponent implements OnInit {
     this._listasComunesService.getAllTipoOrganizacion().subscribe(
       result => {
         if (result.status !== 200) {
-          // console.log(result.status);
+          // Respuesta del Error
           this.showToast('danger', 'Error al Obtener la Información de los Tipos de Organizacion', result.message);
         } else if (result.status === 200) {
           this.JsonReceptionTiposOrganizacion = result.data;
@@ -559,7 +573,7 @@ export class NewActivityComponent implements OnInit {
           // console.log(JSON.stringify(this.JsonReceptionAllOrganizaciones));
 
           // Cargamos el compoenete de AutoCompletar
-          this.dataService = this.completerService.local(this.JsonReceptionAllOrganizaciones, 'codOrganizacion,descOrganizacion',
+          this.dataService = this.completerService.local(this.JsonReceptionAllOrganizaciones, 'descOrganizacion',
             'codOrganizacion,descOrganizacion');
         }
       },
@@ -572,30 +586,46 @@ export class NewActivityComponent implements OnInit {
 
 
   /*****************************************************
-  * Funcion: FND-00003.1
-  * Fecha: 12-10-2017
+  * Funcion: FND-00001
+  * Fecha: 18-10-2018
   * Descripcion: Funcion para AutoCompletar y sacar el
-  * Id de la Data de la Tabla TblFunionarios
+  * Id de la Data de la Tabla TblOrganizaciones
   * Params: $event
   ******************************************************/
   protected onSelectedFunc(item: CompleterItem) {
-    // Validar si hay datos Previos
+    // Envia la Organizacion seleccionada
+    this.selectedOrganizacion = item ? item.originalObject.idOrganizacion : '';
 
-   /* if (this.comunicacion.setTomail == '') {
-      this.selectedOrganizicionesAll = '';
-    }*/
+    // Setea al Model el valor de la Organizacion 
+    this._activityModel.idOrganizacion = Number(this.selectedOrganizacion);
+    // console.log(this._activityModel.idOrganizacion);
+  } // FIN | FND-00001
 
-    if (this.selectedOrganizicionesAll === '') {
-      // alert( this.selectedFuncionarioAll );
-      this.selectedOrganizacion = item ? item.originalObject.idOrganizacion : '';
-      this.selectedOrganizicionesAll = this.selectedOrganizacion;
-    } else {
-      // this.selectedOrganizacion = this.selectedOrganizacion + ',' + item ? item.originalObject.idOrganizacion : "";
-      this.selectedOrganizacion = item ? item.originalObject.idOrganizacion : '';
-      this.selectedOrganizicionesAll = this.selectedOrganizacion;
-    }
-    // console.log(this.selectedOrganizicionesAll);
-    // this.comunicacion.setTomail = this.selectedOrganizicionesAll;
-  } // FIN | FND-00003.1
 
+  /****************************************************************************
+  * Funcion: organizacionesIdTipoIdPaisListService
+  * Object Number: 016
+  * Fecha: 15-10-2018
+  * Descripcion: Method organizacionesIdTipoIdPaisListService of the Class
+  * Objetivo: organizacionesIdTipoIdPaisListService listados de los Paises
+  * del Formulario de Actividad llamando a la API
+  ****************************************************************************/
+  private organizacionesIdTipoIdPaisListService(idTipoOrganizacionSend: number, idPais: number) {
+    // Condicion para evaluar que opcion se pulsa
+    this._listasComunesService.getIdTipoIdPaisOrganizaciones(idTipoOrganizacionSend, idPais).subscribe(
+      result => {
+        if (result.status !== 200) {
+          // Resultadps del Error
+          this.showToast('danger', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', result.message);
+        } else if (result.status === 200) {
+          this.JsonReceptionTipoPaisOrganizacionesData = result.data;
+          console.log(this.JsonReceptionTipoPaisOrganizacionesData);
+        }
+      },
+      error => {
+        // console.log(<any>error);
+        this.showToast('danger', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', error);
+      },
+    );
+  } // FIN | organizacionesIdTipoIdPaisListService
 }
