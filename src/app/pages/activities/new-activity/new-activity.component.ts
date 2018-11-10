@@ -666,7 +666,7 @@ export class NewActivityComponent implements OnInit {
   * Objetivo: Delete de nuevo File input, en Tabla listados de las ID Internas
   * del Formulario de Actividad llamando a la API
   ****************************************************************************/
-  //deleteRowHomeForm(homeFormIndex: number, codDocumentoIn: string, extDocumentoIn: string) {
+  // deleteRowHomeForm(homeFormIndex: number, codDocumentoIn: string, extDocumentoIn: string) {
   deleteRowHomeForm(homeFormIndex: number) {
     // Borra el Elemento al Json
     this.JsonIdInternaOrganizacion.splice(homeFormIndex, 1);
