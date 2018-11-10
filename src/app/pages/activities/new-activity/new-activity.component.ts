@@ -648,13 +648,13 @@ export class NewActivityComponent implements OnInit {
   ****************************************************************************/
   private pushJsonIdInterna() {
     this.JsonIdInternaOrganizacion.push({
-      "descTipoOrganizacion": "Ong's",
-      "descPaisOrganizacion": "Honduras",
-      "descOrganizacion": "Beneficiencia del Niño contra el Cancer",
-      "idInterna": ""
+      "descTipoOrganizacion": 'Ong',
+      "descPaisOrganizacion": 'Honduras',
+      "descOrganizacion": 'Beneficiencia del Niño contra el Cancer',
+      "idInterna": "",
     });
 
-    console.log('Datos del JsonIdInternas ++++++++ ' + JSON.stringify(this.JsonIdInternaOrganizacion));
+    // console.log('Datos del JsonIdInternas ++++++++ ' + JSON.stringify(this.JsonIdInternaOrganizacion));
   }
 
 
@@ -675,7 +675,7 @@ export class NewActivityComponent implements OnInit {
 
     // Ejecutamos la Fucnion que Borra el Archivo desde le Servidor
     // this.borrarDocumentoServer(codDocumentoIn, extDocumentoIn);
-    console.log(this.JsonIdInternaOrganizacion);
+    // console.log(this.JsonIdInternaOrganizacion);
   }
 
   verJson() {
@@ -690,11 +690,11 @@ export class NewActivityComponent implements OnInit {
 
     // Recorre todo el Array de la Tabla
     $('#tableIdInterna > tbody > tr').each(function (index, element) {
-      console.log(element);
-      const _referencia = $(element).find("td").eq(0).html(),
-        _tipoOrganizacion = $(element).find("td").eq(1).html(),
-        _paisOrganizacion = $(element).find("td").eq(3).html(),
-        _idInterna = $(element).find("td").eq(4).html();
+      // console.log(element);
+      const _referencia = $(element).find('td').eq(0).html(),
+        _tipoOrganizacion = $(element).find('td').eq(1).html(),
+        _paisOrganizacion = $(element).find('td').eq(3).html(),
+        _idInterna = $(element).find('td').eq(4).html();
       alert('Referencia ' + _referencia + ' tipoOrganizacion ' + _tipoOrganizacion + '  paisOrganizacion ' + _paisOrganizacion + ' _idInterna  ' + _idInterna);
     });
   }
