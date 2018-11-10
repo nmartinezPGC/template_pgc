@@ -648,10 +648,10 @@ export class NewActivityComponent implements OnInit {
   ****************************************************************************/
   private pushJsonIdInterna() {
     this.JsonIdInternaOrganizacion.push({
-      "descTipoOrganizacion": 'Ong',
-      "descPaisOrganizacion": 'Honduras',
-      "descOrganizacion": 'Beneficiencia del Niño contra el Cancer',
-      "idInterna": "",
+      'descTipoOrganizacion': 'Ong',
+      'descPaisOrganizacion': 'Honduras',
+      'descOrganizacion': 'Beneficiencia del Niño contra el Cancer',
+      'idInterna': '',
     });
 
     // console.log('Datos del JsonIdInternas ++++++++ ' + JSON.stringify(this.JsonIdInternaOrganizacion));
@@ -689,13 +689,13 @@ export class NewActivityComponent implements OnInit {
     // alert('Filas de la Tabla ==== ' + rowCount + '  ======  Columnas de la Tabla ======= ' + columnCount);
 
     // Recorre todo el Array de la Tabla
-    $('#tableIdInterna > tbody > tr').each(function (index, element) {
+    /*$('#tableIdInterna > tbody > tr').each(function (index, element) {
       // console.log(element);
       const _referencia = $(element).find('td').eq(0).html(),
         _tipoOrganizacion = $(element).find('td').eq(1).html(),
         _paisOrganizacion = $(element).find('td').eq(3).html(),
         _idInterna = $(element).find('td').eq(4).html();
       alert('Referencia ' + _referencia + ' tipoOrganizacion ' + _tipoOrganizacion + '  paisOrganizacion ' + _paisOrganizacion + ' _idInterna  ' + _idInterna);
-    });
+    });*/
   }
 }
