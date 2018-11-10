@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 
 // AutoCompleter Services
 import { CompleterData, CompleterService, CompleterItem } from 'ng2-completer';
@@ -19,6 +19,9 @@ import 'style-loader!angular2-toaster/toaster.css';
 // Modelo de la Clase Activiades
 import { ActivityModel } from '../models/model-activity';
 
+// Variables de Jquery
+declare var jquery: any;
+declare var $: any;
 
 @Component({
   selector: 'ngx-new-activity',
@@ -103,10 +106,10 @@ export class NewActivityComponent implements OnInit {
           type: 'completer',
           config: {
             completer: {
-              data: this.datos,
-              searchFields: 'organinizacion',
-              titleField: 'organinizacion',
-              descriptionField: 'organinizacion',
+              data: this.dataService,
+              searchFields: 'descOrganizacion',
+              titleField: 'descOrganizacion',
+              descriptionField: 'descOrganizacion',
               // valuePrepareFunction: (value) => { return this.datos }
             },
             /*type: 'list',
@@ -146,6 +149,9 @@ export class NewActivityComponent implements OnInit {
   protected selectedOrganizacion: string = '';
   public JsonReceptionAllOrganizacionesData: any;
 
+  // Id Internas
+  public JsonIdInternaOrganizacion = [];
+
   protected JsonReceptionTipoPaisOrganizacionesData: any;
 
   public JsonOrganizationSelect: any;
@@ -170,6 +176,7 @@ export class NewActivityComponent implements OnInit {
     private completerService: CompleterService,
     private _listasComunesService: ListasComunesService,
     // private service: SmartTableService,
+    private changeDetectorRef: ChangeDetectorRef,
     // Inicializa el ToasterService
     private _toasterService: ToasterService) {
 
@@ -187,7 +194,7 @@ export class NewActivityComponent implements OnInit {
     // Inicializacion del Modelo de la Clase
     this._activityModel = new ActivityModel(
       0,
-      '', 0, '', '', '', '', '', '',
+      '', 0, 0, '', '', '', '', '', '',
       0, 0, 0,
       '', '', '', 0, 0,
       '', '', '',
@@ -628,4 +635,67 @@ export class NewActivityComponent implements OnInit {
       },
     );
   } // FIN | organizacionesIdTipoIdPaisListService
+
+
+
+  /****************************************************************************
+  * Funcion: organizacionesIdTipoIdPaisListService
+  * Object Number: 017
+  * Fecha: 09-11-2018
+  * Descripcion: Method Creacion de nuevo File input
+  * Objetivo: Creacion de nuevo File input listados de las ID Internas
+  * del Formulario de Actividad llamando a la API
+  ****************************************************************************/
+  private pushJsonIdInterna() {
+    this.JsonIdInternaOrganizacion.push({
+      "descTipoOrganizacion": "Ong's",
+      "descPaisOrganizacion": "Honduras",
+      "descOrganizacion": "Beneficiencia del Niño contra el Cancer",
+      "idInterna": ""
+    });
+
+    console.log('Datos del JsonIdInternas ++++++++ ' + JSON.stringify(this.JsonIdInternaOrganizacion));
+  }
+
+
+  /****************************************************************************
+  * Funcion: organizacionesIdTipoIdPaisListService
+  * Object Number: 018
+  * Fecha: 09-11-2018
+  * Descripcion: Method Delete de nuevo File input, en Tabla
+  * Objetivo: Delete de nuevo File input, en Tabla listados de las ID Internas
+  * del Formulario de Actividad llamando a la API
+  ****************************************************************************/
+  //deleteRowHomeForm(homeFormIndex: number, codDocumentoIn: string, extDocumentoIn: string) {
+  deleteRowHomeForm(homeFormIndex: number) {
+    // Borra el Elemento al Json
+    this.JsonIdInternaOrganizacion.splice(homeFormIndex, 1);
+    this.changeDetectorRef.detectChanges();
+    // this.JsonIdInternaOrganizacion.pdfDocumento = "";
+
+    // Ejecutamos la Fucnion que Borra el Archivo desde le Servidor
+    // this.borrarDocumentoServer(codDocumentoIn, extDocumentoIn);
+    console.log(this.JsonIdInternaOrganizacion);
+  }
+
+  verJson() {
+    // console.log(this.JsonIdInternaOrganizacion);
+    // Numero de Filas de la tabla, flag para tener el limite del array
+    /* let rowCount = $("#tableIdInterna > tbody >tr").length;
+
+    // Numero de clomunas, para obtener el indice del campo a serializar
+    let columnCount = $("#tableIdInterna tr:last td").length;
+    */
+    // alert('Filas de la Tabla ==== ' + rowCount + '  ======  Columnas de la Tabla ======= ' + columnCount);
+
+    // Recorre todo el Array de la Tabla
+    $('#tableIdInterna > tbody > tr').each(function (index, element) {
+      console.log(element);
+      const _referencia = $(element).find("td").eq(0).html(),
+        _tipoOrganizacion = $(element).find("td").eq(1).html(),
+        _paisOrganizacion = $(element).find("td").eq(3).html(),
+        _idInterna = $(element).find("td").eq(4).html();
+      alert('Referencia ' + _referencia + ' tipoOrganizacion ' + _tipoOrganizacion + '  paisOrganizacion ' + _paisOrganizacion + ' _idInterna  ' + _idInterna);
+    });
+  }
 }

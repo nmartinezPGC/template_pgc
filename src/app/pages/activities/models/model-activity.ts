@@ -7,6 +7,7 @@ export class ActivityModel {
         // Datos Generales de la Actividad
         public codActividad: string,
         public idEstado: number,
+        public idEspacioTrabajo: number,
         public explicacionEstado: string,
         public descripcionActividad: string,
         public antecedentesAtividad: string,

@@ -48,7 +48,8 @@
                       <div class="col-6 col-md-4">
                         <div class="form-group">
                           <label>Espacio de Trabajo</label>
-                          <select class="form-control">
+                          <select class="form-control" #idEspacioTrabajo="ngModel" name="idEspacioTrabajo" id="idEspacioTrabajo"
+                            ngControl="idEspacioTrabajo" [(ngModel)]="_activityModel.idEspacioTrabajo" required>
                             <option value="0">**** Selecciona el Espacio de Trabajo ****</option>
                             <option *ngFor="let item of JsonReceptionEspaciosTrabajo" [value]="item.idEspacioTrabajo">
                               {{item.descripcionEspacioTrabajo}}
@@ -322,58 +323,112 @@
 
                 <div class="row">
                   <div class="col-sm-12">
-                    <!-- <div class="form-group">
-                      <label>ID's Internas seleccionadas</label> -->
                     <!-- Tabla de las ID's Internas -->
-                    <!--   <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)" (createConfirm)="onCreateConfirm($event)">
+                    <!-- <div class="form-group">
+                      <label>ID's Internas seleccionadas</label>
+                      <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)"
+                        (createConfirm)="onCreateConfirm($event)">
                       </ng2-smart-table>
                     </div> -->
-
-                    <table class="table table-hover">
+                    <hr>
+                    <table class="table table-hover" id="tableIdInterna" >
                       <thead>
                         <tr>
-                          <th scope="col">#</th>
-                          <th scope="col">First</th>
-                          <th scope="col">Last</th>
-                          <th scope="col">Handle</th>
+                          <th scope="col" style="width: 5%;">#</th>
+                          <th scope="col" style="width: 20%;">Tipo de Organización</th>
+                          <th scope="col" style="width: 20%;">País de Organización</th>
+                          <th scope="col" style="width: 30%;">Organización</th>
+                          <th scope="col" style="width: 20%;">ID Interna</th>
+                          <th scope="col" style="width: 5%;">Acción</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
+                        <tr *ngFor="let itemIdInterna of JsonIdInternaOrganizacion; let homeTableIndex = index">
+                          <td>{{ homeTableIndex + 1 }}</td>
+                          <td>{{ itemIdInterna.descTipoOrganizacion }}</td>
+                          <td>{{ itemIdInterna.descPaisOrganizacion }}</td>
+                          <td>{{ itemIdInterna.descOrganizacion }}</td>
+                          <td>
+                            <div class="input-group input-group-sm" id="tdIdInterna">
+                              <input type="text" placeholder="ID Interna" class="form-control" />{{
+                              itemIdInterna.idInterna }}
+                            </div>
+                          </td>
+                          <td>
+                            <img src="../../../../assets/icons/forms/rubbish-bin_24x.png" alt="" (click)="deleteRowHomeForm(homeTableIndex, itemIdInterna.descTipoOrganizacion, itemIdInterna.descPaisOrganizacion )">
+                          </td>
+                        </tr>
+                        <!-- <tr>
                           <th scope="row">1</th>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>@mdo</td>
+                          <td>Cooperacion Sur Sur y Triangular</td>
+                          <td>Republica Democratica del Congo</td>
+                          <td>Organizacion de Republica Democratica del Congo</td>
+                          <td>
+                            <div class="input-group input-group-sm">
+                              <input type="text" placeholder="ID Interna" class="form-control" required />
+                            </div>
+                          </td>
+                          <td>
+                            <img src="../../../../assets/icons/forms/rubbish-bin_24x.png" alt="">
+                          </td>
                         </tr>
                         <tr>
                           <th scope="row">2</th>
                           <td>Jacob</td>
                           <td>Thornton</td>
-                          <td>@fat</td>
+                          <td>Organizacion de Honduras</td>
+                          <td>
+                            <div class="input-group input-group-sm">
+                              <input type="text" placeholder="ID Interna" class="form-control" />
+                            </div>
+                          </td>
+                          <td>
+                            <img src="../../../../assets/icons/forms/rubbish-bin_24x.png" alt="">
+                          </td>
                         </tr>
                         <tr>
                           <th scope="row">3</th>
-                          <td colspan="2">Larry the Bird</td>
-                          <td>@twitter</td>
-                        </tr>
+                          <td>Larry the Bird</td>
+                          <td>Nam</td>
+                          <td>Organizacion de Brasil</td>
+                          <td>
+                            <div class="input-group input-group-sm">
+                              <input type="text" placeholder="ID Interna" class="form-control" />
+                            </div>
+                          </td>
+                          <td>
+                            <img src="../../../../assets/icons/forms/rubbish-bin_24x.png" alt="">
+                          </td>
+                        </tr> -->
                       </tbody>
                     </table>
 
                   </div>
                 </div>
-                <button class="btn btn-primary" (click)="makeToast()">Guardar como borrador</button>
+                <!-- <button class="btn btn-primary" (click)="makeToast()">Guardar como borrador</button> -->
+                <div class="btn-group">
+                  <button type="button" class="btn btn-primary btn-group-icon btn-group-divider">
+                    <i class="ion-folder"></i>
+                  </button>
+                  <button type="button" class="btn btn-primary" (click)="makeToast(); pushJsonIdInterna()">Guardar
+                    como borrador</button>
+                  <button type="button" class="btn btn-success" (click)="verJson()">Ver Json</button>
+                </div>
               </nb-card-body>
             </nb-card>
 
-            <!-- Fin de Datos Generales -->
-            <!-- ==================================================================================== -->
           </nb-card-body>
         </nb-tab>
+        <!-- Fin de Datos Generales -->
+        <!-- ==================================================================================== -->
 
-
+        <!-- Tab #2 de Sectores y Programas del Proyecto/Programa -->
         <nb-tab tabTitle="Paso #2 | Sectores y Programas">
-          <span>Content #2</span>
+          <span id="sectorPrograms">Content #2</span>
         </nb-tab>
+        <!-- Fin de Datos Generales -->
+        <!-- ==================================================================================== -->
+
         <nb-tab tabTitle="Paso #3 | Información Financiera">
           <span>Content #3</span>
         </nb-tab>
