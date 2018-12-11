@@ -180,8 +180,12 @@
                           implementacion
                           y desarrollo del proyecto en mención y ademas actaulizar con el transcurrir del tiempo los
                           resultados
+                          que seran alcanzados.
+                          y desarrollo del proyecto en mención y ademas actaulizar con el transcurrir del tiempo los
+                          resultados
                           que seran alcanzados. <br><br>
                         </p>
+                        <br><br>
                         <a class="btn btn-primary btn-lg" href="#" role="button">Intructivo de uso ...</a>
                       </div>
                     </div>
@@ -277,7 +281,12 @@
             <!-- ==================================================================================== -->
             <!-- Definición de las ID's Internas del Proyecto -->
             <nb-card status="primary" accent="warning">
-              <nb-card-header>Datos Generales | ID's Internas</nb-card-header>
+              <nb-card-header>Datos Generales | ID's Internas
+                <button type="button" class="btn btn-primary btn-group-icon btn-group-divider" [nbPopover]="card"
+                  nbPopoverMode="hint">
+                  <i class="ion-help"></i>
+                </button>
+              </nb-card-header>
               <nb-card-body>
                 <div class="row">
                   <div class="col-sm-3">
@@ -314,11 +323,43 @@
                         <!-- <input type="text" class="form-control" id="inputWebsite" placeholder="Buscar Organización, por el filtro aplicado"> -->
                         <ng2-completer [inputClass]="'form-control'" [(ngModel)]="searchStrFunc" [datasource]="dataService"
                           placeholder="Buscar Organización, por el filtro aplicado" style=" width: 90%; "
-                          [minSearchLength]="0" (selected)="onSelectedFunc($event)" textSearching="Buscando Contacto ..."
-                          textNoResults="No se han encontrado nada ..." clearSelected="true"></ng2-completer>
+                          [minSearchLength]="0" (selected)="onSelectedFunc($event)" openOnClick="true" selectOnClick="true"
+                          textSearching="Buscando Organización ..." textNoResults="No se han encontrado nada ..."></ng2-completer>
                       </div>
                     </div>
                   </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label for="inputWebsite">Id Interna</label>
+                      <div class="input-group full-width">
+                        <input #idInterna="ngModel" type="text" class="form-control" style="text-transform: uppercase;"
+                          name="idInterna" id="idInterna" ngControl="idInterna" [(ngModel)]="_activityModel.idInterna"
+                          placeholder="ID Interna">
+
+                        <!-- Botonera de Organizaciones -->
+                        <button type="button" class="btn btn-primary btn-group-icon btn-group-divider" nbPopover="Agrega la ID Interna a la lista"
+                          nbPopoverMode="hint" (click)="pushJsonIdInterna()">
+                          <i class="ion-checkmark-round"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Tarjeta de ayuda de la Seccion -->
+                  <ng-template #card>
+                    <nb-card class="popover-card">
+                      <nb-card-header status="warning">
+                        Hola!
+                      </nb-card-header>
+                      <nb-card-body>
+                        Esta sección de la PGC, sirve para registrar el Código que usted tiene en su Sistema de
+                        Registro de Proyectos. Y de esta forma hacer una equivalencia entre su Sistema y la PGC.
+                      </nb-card-body>
+                    </nb-card>
+                  </ng-template>
                 </div>
 
                 <div class="row">
@@ -331,7 +372,7 @@
                       </ng2-smart-table>
                     </div> -->
                     <hr>
-                    <table class="table table-hover" id="tableIdInterna" >
+                    <table class="table table-hover" id="tableIdInterna">
                       <thead>
                         <tr>
                           <th scope="col" style="width: 5%;">#</th>
@@ -349,57 +390,15 @@
                           <td>{{ itemIdInterna.descPaisOrganizacion }}</td>
                           <td>{{ itemIdInterna.descOrganizacion }}</td>
                           <td>
-                            <div class="input-group input-group-sm" id="tdIdInterna">
-                              <input type="text" placeholder="ID Interna" class="form-control" />{{
-                              itemIdInterna.idInterna }}
-                            </div>
+                            <!-- <div class="input-group input-group-sm" id="tdIdInterna">
+                              <input type="text" placeholder="ID Interna" class="form-control" value="" />
+                            </div> -->
+                            {{ itemIdInterna.idInterna | uppercase }}
                           </td>
                           <td>
                             <img src="../../../../assets/icons/forms/rubbish-bin_24x.png" alt="" (click)="deleteRowHomeForm(homeTableIndex, itemIdInterna.descTipoOrganizacion, itemIdInterna.descPaisOrganizacion )">
                           </td>
                         </tr>
-                        <!-- <tr>
-                          <th scope="row">1</th>
-                          <td>Cooperacion Sur Sur y Triangular</td>
-                          <td>Republica Democratica del Congo</td>
-                          <td>Organizacion de Republica Democratica del Congo</td>
-                          <td>
-                            <div class="input-group input-group-sm">
-                              <input type="text" placeholder="ID Interna" class="form-control" required />
-                            </div>
-                          </td>
-                          <td>
-                            <img src="../../../../assets/icons/forms/rubbish-bin_24x.png" alt="">
-                          </td>
-                        </tr>
-                        <tr>
-                          <th scope="row">2</th>
-                          <td>Jacob</td>
-                          <td>Thornton</td>
-                          <td>Organizacion de Honduras</td>
-                          <td>
-                            <div class="input-group input-group-sm">
-                              <input type="text" placeholder="ID Interna" class="form-control" />
-                            </div>
-                          </td>
-                          <td>
-                            <img src="../../../../assets/icons/forms/rubbish-bin_24x.png" alt="">
-                          </td>
-                        </tr>
-                        <tr>
-                          <th scope="row">3</th>
-                          <td>Larry the Bird</td>
-                          <td>Nam</td>
-                          <td>Organizacion de Brasil</td>
-                          <td>
-                            <div class="input-group input-group-sm">
-                              <input type="text" placeholder="ID Interna" class="form-control" />
-                            </div>
-                          </td>
-                          <td>
-                            <img src="../../../../assets/icons/forms/rubbish-bin_24x.png" alt="">
-                          </td>
-                        </tr> -->
                       </tbody>
                     </table>
 

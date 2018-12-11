@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Renderer2, ElementRef, ViewChild } from '@angular/core';
 
 // AutoCompleter Services
 import { CompleterData, CompleterService, CompleterItem } from 'ng2-completer';
@@ -18,6 +18,7 @@ import 'style-loader!angular2-toaster/toaster.css';
 
 // Modelo de la Clase Activiades
 import { ActivityModel } from '../models/model-activity';
+import { Router } from '@angular/router';
 
 // Variables de Jquery
 declare var jquery: any;
@@ -38,8 +39,13 @@ export class NewActivityComponent implements OnInit {
   * privada
   * Objetivo: Tener el acceso a todas las variables de la Clase
   ****************************************************************************/
+  // Manipulacion del DOM
+  @ViewChild("idPais") mySelectPais: ElementRef;
+
   // Configuracion del Toaster-Notifications
   protected captain: string;
+
+  redirectDelay: number = 0;
 
   protected captains = ['James T. Kirk', 'Benjamin Sisko', 'Jean-Luc Picard', 'Spock', 'Jonathan Archer', 'Hikaru Sulu', 'Christopher Pike', 'Rachel Garrett'];
 
@@ -54,7 +60,7 @@ export class NewActivityComponent implements OnInit {
 
   config: ToasterConfig;
 
-  position = 'toast-bottom-right';
+  position = 'toast-bottom-full-width';
   animationType = 'slideDown';
   title = 'Se ha grabado la Información! ';
   content = 'los cambios han sido grabados temporalmente, en la PGC!';
@@ -146,15 +152,19 @@ export class NewActivityComponent implements OnInit {
   protected searchStrFunc: string;
   public JsonReceptionAllOrganizaciones: any[];
   protected selectedOrganizicionesAll: string = '';
-  protected selectedOrganizacion: string = '';
+  protected selectedIdOrganizacion: string = '';
+  protected selectedDescTipoOrganizacion: string = '';
+  protected selectedPaisOrganizacion: string = '';
+  protected selectedDescOrganizacion: string = '';
   public JsonReceptionAllOrganizacionesData: any;
 
   // Id Internas
   public JsonIdInternaOrganizacion = [];
-
   protected JsonReceptionTipoPaisOrganizacionesData: any;
-
   public JsonOrganizationSelect: any;
+  public descPais: string;
+  public descTipoOrganizacion: string;
+  public descOrganizacion: string;
 
   // private toasterService: ToasterService;
 
@@ -178,7 +188,17 @@ export class NewActivityComponent implements OnInit {
     // private service: SmartTableService,
     private changeDetectorRef: ChangeDetectorRef,
     // Inicializa el ToasterService
-    private _toasterService: ToasterService) {
+    private _toasterService: ToasterService,
+    // Render del DOM
+    //private _renderer: Renderer2,
+    protected _router: Router) {
+    /**
+    * Metodo de que valida la Cabezera de la Aplicacion, evalua si el Token
+    * sigue Activo, de no ser asi, redirecciona al Login
+    */
+    /* Llamado a la Funcion: 007, la cual obtiene el detalle da la Info.
+     del Usuario */
+    this.userDatailsService();
 
   } // FIN | constructor
 
@@ -198,12 +218,9 @@ export class NewActivityComponent implements OnInit {
       0, 0, 0,
       '', '', '', 0, 0,
       '', '', '',
-      0, 0, 0,
+      0, 0, 0, '',
+      '', '', '',
     );
-
-    /* Llamado a la Funcion: 007, la cual obtiene el detalle da la Info.
-     del Usuario */
-    this.userDatailsService();
 
     /* Llamado a la Funcion: 008, la cual obtiene el listado de los Estados de
      que nesesita el Formulario de Actividades */
@@ -292,7 +309,7 @@ export class NewActivityComponent implements OnInit {
   ****************************************************************************/
   public toasterconfig: ToasterConfig =
     new ToasterConfig({
-      showCloseButton: { 'warning': true, 'error': false },
+      showCloseButton: { 'warning': true, 'error': true },
     }); // FIN | toasterconfig
 
 
@@ -357,7 +374,7 @@ export class NewActivityComponent implements OnInit {
 
         if (result.status !== 200) {
           // console.log(result.status);
-          this.showToast('danger', 'Error al Obtener la Información del Usuario', result.message);
+          this.showToast('error', 'Error al Obtener la Información del Usuario', result.message);
         } else {
           // this.productos = result.data;
           // console.log(result.status);
@@ -365,8 +382,19 @@ export class NewActivityComponent implements OnInit {
         }
       },
       error => {
-        // console.log(error);
-        // console.log(<any>error);
+        // Redirecciona al Login
+        alert('Error en la petición de la API ' + <any>error);
+
+        // Borramos los datos del LocalStorage
+        localStorage.removeItem('auth_app_token');
+        localStorage.removeItem('identity');
+
+        const redirect = '/auth/login';
+        setTimeout(() => {
+          // Iniciativa Temporal
+          location.reload();
+          return this._router.navigateByUrl(redirect);
+        }, this.redirectDelay);
       },
     );
   } // FIN | userDatailsService
@@ -387,14 +415,15 @@ export class NewActivityComponent implements OnInit {
       result => {
         if (result.status !== 200) {
           // console.log(result.status);
-          this.showToast('danger', 'Error al Obtener la Información de Estados', result.message);
+          this.showToast('error', 'Error al Obtener la Información de Estados', result.message);
         } else if (result.status === 200) {
           this.JsonReceptionEstados = result.data;
         }
       },
       error => {
         // console.log(<any>error);
-        this.showToast('danger', 'Error al Obtener la Información de Estados', error);
+        // this.showToast('error', 'Error al Obtener la Información de Estados', error);
+        this.userDatailsService();
       },
     );
   } // FIN | estadosListService
@@ -413,14 +442,14 @@ export class NewActivityComponent implements OnInit {
       result => {
         if (result.status !== 200) {
           // console.log(result.status);
-          this.showToast('danger', 'Error al Obtener la Información de los Sectores Ejecutores', result.message);
+          this.showToast('error', 'Error al Obtener la Información de los Sectores Ejecutores', result.message);
         } else if (result.status === 200) {
           this.JsonReceptionSectorEjecutor = result.data;
         }
       },
       error => {
         // console.log(<any>error);
-        this.showToast('danger', 'Error al Obtener la Información de Sectores', error);
+        this.showToast('error', 'Error al Obtener la Información de Sectores', error);
       },
     );
   } // FIN | sectorEjecutorListService
@@ -439,14 +468,14 @@ export class NewActivityComponent implements OnInit {
       result => {
         if (result.status !== 200) {
           // console.log(result.status);
-          this.showToast('danger', 'Error al Obtener la Información de los Estrategias', result.message);
+          this.showToast('error', 'Error al Obtener la Información de los Estrategias', result.message);
         } else if (result.status === 200) {
           this.JsonReceptionEstrategias = result.data;
         }
       },
       error => {
         // console.log(<any>error);
-        this.showToast('danger', 'Error al Obtener la Información de las Estrategias', error);
+        this.showToast('error', 'Error al Obtener la Información de las Estrategias', error);
       },
     );
   } // FIN | estrategiasListService
@@ -465,7 +494,7 @@ export class NewActivityComponent implements OnInit {
       result => {
         if (result.status !== 200) {
           // console.log(result.status);
-          this.showToast('danger', 'Error al Obtener la Información de los Presupuesto', result.message);
+          this.showToast('error', 'Error al Obtener la Información de los Presupuesto', result.message);
         } else if (result.status === 200) {
           this.JsonReceptionPresupuesto = result.data;
           // console.log(this.JsonReceptionPresupuesto);
@@ -473,7 +502,7 @@ export class NewActivityComponent implements OnInit {
       },
       error => {
         // console.log(<any>error);
-        this.showToast('danger', 'Error al Obtener la Información de los Presupuestos', error);
+        this.showToast('error', 'Error al Obtener la Información de los Presupuestos', error);
       },
     );
   } // FIN | presupuestoListService
@@ -492,7 +521,7 @@ export class NewActivityComponent implements OnInit {
       result => {
         if (result.status !== 200) {
           // console.log(result.status);
-          this.showToast('danger', 'Error al Obtener la Información de los Espacios de Trabajo', result.message);
+          this.showToast('error', 'Error al Obtener la Información de los Espacios de Trabajo', result.message);
         } else if (result.status === 200) {
           this.JsonReceptionEspaciosTrabajo = result.data;
           // console.log(this.JsonReceptionEspaciosTrabajo);
@@ -500,7 +529,7 @@ export class NewActivityComponent implements OnInit {
       },
       error => {
         // console.log(<any>error);
-        this.showToast('danger', 'Error al Obtener la Información de los Espacios de Trabajo', error);
+        this.showToast('error', 'Error al Obtener la Información de los Espacios de Trabajo', error);
       },
     );
   } // FIN | espaciosTrabajoListService
@@ -519,7 +548,7 @@ export class NewActivityComponent implements OnInit {
       result => {
         if (result.status !== 200) {
           // Respuesta del Error
-          this.showToast('danger', 'Error al Obtener la Información de los Tipos de Organizacion', result.message);
+          this.showToast('error', 'Error al Obtener la Información de los Tipos de Organizacion', result.message);
         } else if (result.status === 200) {
           this.JsonReceptionTiposOrganizacion = result.data;
           // console.log(this.JsonReceptionTiposOrganizacion);
@@ -527,7 +556,7 @@ export class NewActivityComponent implements OnInit {
       },
       error => {
         // console.log(<any>error);
-        this.showToast('danger', 'Error al Obtener la Información de los Tipos de Organizacion', error);
+        this.showToast('error', 'Error al Obtener la Información de los Tipos de Organizacion', error);
       },
     );
   } // FIN | tiposOrganizacionListService
@@ -546,7 +575,7 @@ export class NewActivityComponent implements OnInit {
       result => {
         if (result.status !== 200) {
           // console.log(result.status);
-          this.showToast('danger', 'Error al Obtener la Información de los Paises', result.message);
+          this.showToast('error', 'Error al Obtener la Información de los Paises', result.message);
         } else if (result.status === 200) {
           this.JsonReceptionPaises = result.data;
           // console.log(this.JsonReceptionPaises);
@@ -554,7 +583,7 @@ export class NewActivityComponent implements OnInit {
       },
       error => {
         // console.log(<any>error);
-        this.showToast('danger', 'Error al Obtener la Información de los Paises', error);
+        this.showToast('error', 'Error al Obtener la Información de los Paises', error);
       },
     );
   } // FIN | paisesAllListService
@@ -573,7 +602,7 @@ export class NewActivityComponent implements OnInit {
       result => {
         if (result.status !== 200) {
           // console.log(result.status);
-          this.showToast('danger', 'Error al Obtener la Información de las Organizaciones', result.message);
+          this.showToast('error', 'Error al Obtener la Información de las Organizaciones', result.message);
         } else if (result.status === 200) {
           this.JsonReceptionAllOrganizaciones = result.data;
           this.JsonReceptionAllOrganizacionesData = JSON.stringify(this.JsonReceptionAllOrganizaciones);
@@ -581,12 +610,12 @@ export class NewActivityComponent implements OnInit {
 
           // Cargamos el compoenete de AutoCompletar
           this.dataService = this.completerService.local(this.JsonReceptionAllOrganizaciones, 'descOrganizacion',
-            'codOrganizacion,descOrganizacion');
+            'descOrganizacion');
         }
       },
       error => {
         // console.log(<any>error);
-        this.showToast('danger', 'Error al Obtener la Información de las Organizaciones', error);
+        this.showToast('error', 'Error al Obtener la Información de las Organizaciones', error);
       },
     );
   } // FIN | organizacionesAllListService
@@ -601,11 +630,18 @@ export class NewActivityComponent implements OnInit {
   ******************************************************/
   protected onSelectedFunc(item: CompleterItem) {
     // Envia la Organizacion seleccionada
-    this.selectedOrganizacion = item ? item.originalObject.idOrganizacion : '';
+    this.selectedIdOrganizacion = item ? item.originalObject.idOrganizacion : '';
+    this.selectedDescOrganizacion = item ? item.originalObject.descOrganizacion : '';
+    this.selectedDescTipoOrganizacion = item ? item.originalObject.idTipoOrganizacionT.nombreTipoOrganizacion : '';
+    this.selectedPaisOrganizacion = item ? item.originalObject.idPaisOrganizacion.descPais : '';
 
     // Setea al Model el valor de la Organizacion
-    this._activityModel.idOrganizacion = Number(this.selectedOrganizacion);
+    this._activityModel.idOrganizacion = Number(this.selectedIdOrganizacion);
     // console.log(this._activityModel.idOrganizacion);
+    // console.log(item.originalObject);
+    this._activityModel.descOrganizacion = this.selectedDescOrganizacion;
+    this._activityModel.descTipoOrganizacion = this.selectedDescTipoOrganizacion;
+    this._activityModel.descPaisOrganizacion = this.selectedPaisOrganizacion;
   } // FIN | FND-00001
 
 
@@ -623,15 +659,15 @@ export class NewActivityComponent implements OnInit {
       result => {
         if (result.status !== 200) {
           // Resultadps del Error
-          this.showToast('danger', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', result.message);
+          this.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', result.message);
         } else if (result.status === 200) {
           this.JsonReceptionTipoPaisOrganizacionesData = result.data;
-          // console.log(this.JsonReceptionTipoPaisOrganizacionesData);
+          // console.log(this.JsonReceptionTipoPaisOrganizacionesData)
         }
       },
       error => {
         // console.log(<any>error);
-        this.showToast('danger', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', error);
+        this.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', error);
       },
     );
   } // FIN | organizacionesIdTipoIdPaisListService
@@ -639,7 +675,7 @@ export class NewActivityComponent implements OnInit {
 
 
   /****************************************************************************
-  * Funcion: organizacionesIdTipoIdPaisListService
+  * Funcion: pushJsonIdInterna
   * Object Number: 017
   * Fecha: 09-11-2018
   * Descripcion: Method Creacion de nuevo File input
@@ -647,15 +683,67 @@ export class NewActivityComponent implements OnInit {
   * del Formulario de Actividad llamando a la API
   ****************************************************************************/
   private pushJsonIdInterna() {
-    this.JsonIdInternaOrganizacion.push({
-      'descTipoOrganizacion': 'Ong',
-      'descPaisOrganizacion': 'Honduras',
-      'descOrganizacion': 'Beneficiencia del Niño contra el Cancer',
-      'idInterna': '',
-    });
+    // this._activityModel.descTipoOrganizacion = $('#idTipoOrganizacion').find('option:selected').text(); // Capturamos el texto del option seleccionado | idTipoOrganizacion
+    // this._activityModel.descPais = $('#idPais').find('option:selected').text(); // Capturamos el texto del option seleccionado | idPais
 
-    // console.log('Datos del JsonIdInternas ++++++++ ' + JSON.stringify(this.JsonIdInternaOrganizacion));
-  }
+    // Validacion de la Informacion a Ingresar
+    if (this._activityModel.idInterna === '' || this._activityModel.idInterna === null) {
+      this.showToast('error', 'Error al Ingresar la Información de las Organizaciones', 'Debes de Ingresar el Código del ID Interna, para continuar');
+    } else {
+      // Validacion de exitencia de esa ID Interna en la Lista
+      const arrayOrganizacionesIdInternas = JSON.stringify(this.JsonIdInternaOrganizacion);
+
+      let h = this._activityModel.idInterna;
+      let countJson = this.JsonIdInternaOrganizacion.length;
+
+      if (countJson === 0) {
+        // Ingresa el primer Item del json
+        this.JsonIdInternaOrganizacion.push({
+          'descTipoOrganizacion': this._activityModel.descTipoOrganizacion,
+          'descPaisOrganizacion': this._activityModel.descPaisOrganizacion,
+          'descOrganizacion': this._activityModel.descOrganizacion,
+          'idInterna': this._activityModel.idInterna,
+        });
+        this._activityModel.idInterna = '';
+        this.showToast('success', 'ID Interna Ingresada', 'Se ha Ingresado la ID Interna, a la Organización seleccionada');
+      } else {
+        // Entra a Cilco de conteo de Items
+        for (let index = 0; index < countJson; index++) {
+          const element = this.JsonIdInternaOrganizacion[index].idInterna;
+          alert('Elemento de la Matriz ***** ' + element);
+          alert('Elemento de Model ***** ' + h);
+          if (element === h) {
+            console.log('Elemento de la Matriz repetido ***** ' + element);
+            this.showToast('error', 'Error al Ingresar la Información de las Organizaciones', 'Debes de Ingresar un Código del ID Interna distinto, para continuar');
+          } else {
+            this.JsonIdInternaOrganizacion.push({
+              'descTipoOrganizacion': this._activityModel.descTipoOrganizacion,
+              'descPaisOrganizacion': this._activityModel.descPaisOrganizacion,
+              'descOrganizacion': this._activityModel.descOrganizacion,
+              'idInterna': this._activityModel.idInterna,
+            });
+            this._activityModel.idInterna = '';
+            this.showToast('success', 'ID Interna Ingresada', 'Se ha Ingresado la ID Interna, a la Organización seleccionada');
+          }
+        }
+      }
+
+
+      /*if (this.JsonIdInternaOrganizacion[2] == 'HOLA') {
+        this.showToast('error', 'Error al Ingresar la Información de las Organizaciones', 'Debes de Ingresar un Código del ID Interna distinto, para continuar');
+        console.log('Datos del JsonIdInternas ++++++++ ' + arrayOrganizacionesIdInternas);
+      } else {
+        this.JsonIdInternaOrganizacion.push({
+          'descTipoOrganizacion': this._activityModel.descTipoOrganizacion,
+          'descPaisOrganizacion': this._activityModel.descPaisOrganizacion,
+          'descOrganizacion': this._activityModel.descOrganizacion,
+          'idInterna': this._activityModel.idInterna,
+        });
+        this._activityModel.idInterna = '';
+        this.showToast('success', 'ID Interna Ingresada', 'Se ha Ingresado la ID Interna, a la Organización seleccionada');
+      }*/
+    }
+  } // FN | pushJsonIdInterna
 
 
   /****************************************************************************
@@ -668,14 +756,18 @@ export class NewActivityComponent implements OnInit {
   ****************************************************************************/
   // deleteRowHomeForm(homeFormIndex: number, codDocumentoIn: string, extDocumentoIn: string) {
   deleteRowHomeForm(homeFormIndex: number) {
-    // Borra el Elemento al Json
-    this.JsonIdInternaOrganizacion.splice(homeFormIndex, 1);
-    this.changeDetectorRef.detectChanges();
-    // this.JsonIdInternaOrganizacion.pdfDocumento = "";
+    // Confirmar que se desea borrar ?
+    const deletedItem = confirm('Esta seguro de borrar el Item de ID Interna Seleccionado ? ');
 
-    // Ejecutamos la Fucnion que Borra el Archivo desde le Servidor
-    // this.borrarDocumentoServer(codDocumentoIn, extDocumentoIn);
-    // console.log(this.JsonIdInternaOrganizacion);
+    if (deletedItem == true) {
+      // Borra el Elemento al Json
+      this.JsonIdInternaOrganizacion.splice(homeFormIndex, 1);
+      this.changeDetectorRef.detectChanges();
+      // this.JsonIdInternaOrganizacion.pdfDocumento = "";
+      // Ejecutamos la Fucnion que Borra el Archivo desde le Servidor
+      // this.borrarDocumentoServer(codDocumentoIn, extDocumentoIn);
+      console.log(this.JsonIdInternaOrganizacion);
+    }
   }
 
   verJson() {
@@ -689,13 +781,14 @@ export class NewActivityComponent implements OnInit {
     // alert('Filas de la Tabla ==== ' + rowCount + '  ======  Columnas de la Tabla ======= ' + columnCount);
 
     // Recorre todo el Array de la Tabla
-    /*$('#tableIdInterna > tbody > tr').each(function (index, element) {
+    $('#tableIdInterna > tbody > tr').each(function (index, element) {
       // console.log(element);
       const _referencia = $(element).find('td').eq(0).html(),
         _tipoOrganizacion = $(element).find('td').eq(1).html(),
         _paisOrganizacion = $(element).find('td').eq(3).html(),
-        _idInterna = $(element).find('td').eq(4).html();
+        _idInterna = $(element).find('#tdIdInterna').eq(4).html();
       alert('Referencia ' + _referencia + ' tipoOrganizacion ' + _tipoOrganizacion + '  paisOrganizacion ' + _paisOrganizacion + ' _idInterna  ' + _idInterna);
-    });*/
+      // console.log('Referencia ' + _referencia + ' tipoOrganizacion ' + _tipoOrganizacion + '  paisOrganizacion ' + _paisOrganizacion + ' _idInterna  ' + _idInterna);
+    });
   }
 }

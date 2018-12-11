@@ -32,6 +32,8 @@ export class HeaderComponent implements OnInit {
   // Loading data Loader
   public loadingData: boolean = true;
 
+  redirectDelay: number = 0;
+
   userMenu = [{ title: 'Perfil', icon: 'fa fa-user', data: { path: '/logout' } },
               { title: 'Desconectar', icon: 'fa fa-sign-out', data: { path: '/auth/logout' }} ];
 
@@ -66,6 +68,16 @@ export class HeaderComponent implements OnInit {
         result => {
           if (result.status !== 200) {
               // Error en la Obtencion de la Data
+            // Borramos los datos del LocalStorage
+            localStorage.removeItem('auth_app_token');
+            localStorage.removeItem('identity');
+
+            const redirect = '/auth/login';
+            setTimeout(() => {
+              // Iniciativa Temporal
+              // location.reload();
+              return this._router.navigateByUrl(redirect);
+            }, this.redirectDelay);
           } else {
             // Ejecución de la Data Obtenida
             this.user = result.data;
@@ -75,8 +87,19 @@ export class HeaderComponent implements OnInit {
           }
       },
       error => {
+        // Redirecciona al Login
         alert( 'Error en la petición de la API ' + error );
-        this._router.navigateByUrl( '/auth/login' );
+
+        // Borramos los datos del LocalStorage
+        localStorage.removeItem('auth_app_token');
+        localStorage.removeItem('identity');
+
+        const redirect = '/auth/login';
+        setTimeout(() => {
+          // Iniciativa Temporal
+           location.reload();
+          return this._router.navigateByUrl(redirect);
+        }, this.redirectDelay);
       },
     );
   }// FIN | ngOnInit

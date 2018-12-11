@@ -221,7 +221,7 @@ export class ListasComunesService {
     // const paisOrgSend = idPais;
     const paramsSend = idTipoOrganizacion + '/' + idPais;
     // Retorno de la Funcion
-    return this._http.get(this._systemEndPointsService.getEndPointService('organizacionesGroup', 8) + paramsSend, {
+    return this._http.get(this._systemEndPointsService.getEndPointService('organizacionesGroup', 6) + paramsSend, {
       headers: this.headers,
       params: { 'tokenApi': this.tokenHeader },
     });

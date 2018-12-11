@@ -31,10 +31,16 @@ export class ActivityModel {
         public nombreActividad: string,
         public productosEsperados: string,
 
-        // Organizaciones
+        // Organizaciones Relaciones
         public idTipoOrganizacion: number,
         public idPais: number,
         public idOrganizacion: number,
+        public idInterna: string,
 
+        // Parte descriptiva de los llamados a las Relaciones
+        // Organizaciones Descripciones
+        public descPaisOrganizacion: string,
+        public descTipoOrganizacion: string,
+        public descOrganizacion: string,
     ) { }
 }
