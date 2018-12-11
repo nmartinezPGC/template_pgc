@@ -40,7 +40,7 @@ export class NewActivityComponent implements OnInit {
   * Objetivo: Tener el acceso a todas las variables de la Clase
   ****************************************************************************/
   // Manipulacion del DOM
-  @ViewChild("idPais") mySelectPais: ElementRef;
+  @ViewChild('idPais') mySelectPais: ElementRef;
 
   // Configuracion del Toaster-Notifications
   protected captain: string;
@@ -190,7 +190,7 @@ export class NewActivityComponent implements OnInit {
     // Inicializa el ToasterService
     private _toasterService: ToasterService,
     // Render del DOM
-    //private _renderer: Renderer2,
+    // private _renderer: Renderer2,
     protected _router: Router) {
     /**
     * Metodo de que valida la Cabezera de la Aplicacion, evalua si el Token
@@ -693,8 +693,8 @@ export class NewActivityComponent implements OnInit {
       // Validacion de exitencia de esa ID Interna en la Lista
       const arrayOrganizacionesIdInternas = JSON.stringify(this.JsonIdInternaOrganizacion);
 
-      let h = this._activityModel.idInterna;
-      let countJson = this.JsonIdInternaOrganizacion.length;
+      const h = this._activityModel.idInterna;
+      const countJson = this.JsonIdInternaOrganizacion.length;
 
       if (countJson === 0) {
         // Ingresa el primer Item del json
@@ -713,7 +713,7 @@ export class NewActivityComponent implements OnInit {
           alert('Elemento de la Matriz ***** ' + element);
           alert('Elemento de Model ***** ' + h);
           if (element === h) {
-            console.log('Elemento de la Matriz repetido ***** ' + element);
+            // console.log('Elemento de la Matriz repetido ***** ' + element);
             this.showToast('error', 'Error al Ingresar la Información de las Organizaciones', 'Debes de Ingresar un Código del ID Interna distinto, para continuar');
           } else {
             this.JsonIdInternaOrganizacion.push({
@@ -759,14 +759,14 @@ export class NewActivityComponent implements OnInit {
     // Confirmar que se desea borrar ?
     const deletedItem = confirm('Esta seguro de borrar el Item de ID Interna Seleccionado ? ');
 
-    if (deletedItem == true) {
+    if (deletedItem === true) {
       // Borra el Elemento al Json
       this.JsonIdInternaOrganizacion.splice(homeFormIndex, 1);
       this.changeDetectorRef.detectChanges();
       // this.JsonIdInternaOrganizacion.pdfDocumento = "";
       // Ejecutamos la Fucnion que Borra el Archivo desde le Servidor
       // this.borrarDocumentoServer(codDocumentoIn, extDocumentoIn);
-      console.log(this.JsonIdInternaOrganizacion);
+      // console.log(this.JsonIdInternaOrganizacion);
     }
   }
 
@@ -781,7 +781,7 @@ export class NewActivityComponent implements OnInit {
     // alert('Filas de la Tabla ==== ' + rowCount + '  ======  Columnas de la Tabla ======= ' + columnCount);
 
     // Recorre todo el Array de la Tabla
-    $('#tableIdInterna > tbody > tr').each(function (index, element) {
+    /*$('#tableIdInterna > tbody > tr').each(function (index, element) {
       // console.log(element);
       const _referencia = $(element).find('td').eq(0).html(),
         _tipoOrganizacion = $(element).find('td').eq(1).html(),
@@ -790,5 +790,6 @@ export class NewActivityComponent implements OnInit {
       alert('Referencia ' + _referencia + ' tipoOrganizacion ' + _tipoOrganizacion + '  paisOrganizacion ' + _paisOrganizacion + ' _idInterna  ' + _idInterna);
       // console.log('Referencia ' + _referencia + ' tipoOrganizacion ' + _tipoOrganizacion + '  paisOrganizacion ' + _paisOrganizacion + ' _idInterna  ' + _idInterna);
     });
+    */
   }
 }
