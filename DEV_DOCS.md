@@ -7,3 +7,6 @@ Anotacion de Nahum Martinez - 2018-12-11
 Comentario de DAP - David Pavon hola de nuevo
 
 Comentario de EDR -Edgar Ramirez
+
+
+Comentario de GEC -Gabriel Callejas 
