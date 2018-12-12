@@ -85,10 +85,9 @@ export class UserService {
   ****************************************************************************/
   getUserDetails( user_to_name ): Observable<any> {
     // Email del Usuario que se logea
-    const params = user_to_name;
+    const paramsU = user_to_name;
     // Retorno de la Funcion
-    // return this._http.get( 'http://localhost:8090/api/v1/usuarios/findByMail/' + params, { headers: this.headers,
-    return this._http.get(this._systemEndPointsService.getEndPointService( 'userGroup', 1) + params, { headers: this.headers,
+    return this._http.get(this._systemEndPointsService.getEndPointService( 'userGroup', 1) + paramsU, { headers: this.headers,
                         params: {'tokenApi': this.tokenHeader } } );
   }// FIN | FND-00001
 

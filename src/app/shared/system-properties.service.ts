@@ -9,8 +9,9 @@ export class SystemPropertiesService {
   // Variables para el localStorage
   public _identity;
   public _token;
+  public _timeExpired;
 
-  constructor() {}
+  constructor() { }
 
   // Varibles Gloables de Inicio del Systema
   // Entorno Localhost
@@ -38,9 +39,9 @@ export class SystemPropertiesService {
 
     let urlEnviroment: string;
     // Evalua el Entorno y Proporciona la URL
-    if ( indicadorIp === 1 ) {
+    if (indicadorIp === 1) {
       urlEnviroment = this.urlServerConfig;
-    }else if ( indicadorIp === 2 ) {
+    } else if (indicadorIp === 2) {
       urlEnviroment = this.urlLocalConfig;
     }
 
@@ -61,9 +62,9 @@ export class SystemPropertiesService {
 
     let urlEnviromentResourse: string;
     // Evalua el Entorno y Proporciona la URL
-    if ( indicadorIp === 1 ) {
+    if (indicadorIp === 1) {
       urlEnviromentResourse = this.urlServerResourse;
-    }else if ( indicadorIp === 2 ) {
+    } else if (indicadorIp === 2) {
       urlEnviromentResourse = this.urlLocalResourse;
     }
 
@@ -110,5 +111,22 @@ export class SystemPropertiesService {
 
     return this._identity;
   }// FIN | FND-00004
+
+  /****************************************************************************
+  * Funcion: FND-00005
+  * Fecha: 14-11-2018
+  * Descripcion: Metodo para obtener el tiempo que el token expira
+  * Objetivo: Obtener el tiempo de expiracion del Token
+  ****************************************************************************/
+  getTimeExperired() {
+    const timeExpired = JSON.parse(localStorage.getItem('timeExpired'));
+    // Pregunta por el valor de la timeExpired
+    if (timeExpired !== 'undefined') {
+      this._timeExpired = timeExpired;
+    } else {
+      this._timeExpired = null;
+    }
+    return this._timeExpired;
+  }// FIN | FND-00005
 
 }
