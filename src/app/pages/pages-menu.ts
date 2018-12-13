@@ -22,6 +22,18 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
     ],
   },
+  { // Menu de Mantenimientos NAM | 2018-12-12 | Se creo el menu de raiz del Modulo de Mantenimientos
+    title: 'Mantenimientos',
+    icon: 'nb-gear',
+    // link: '/pages/activities',
+    children: [
+      {
+        title: 'Espacios de Trabajo',
+        icon: 'fa fa-address-book',
+        link: '/pages/ui-features/buttons',
+      },
+    ],
+  },
   {
     title: 'UI Features',
     icon: 'nb-keypad',

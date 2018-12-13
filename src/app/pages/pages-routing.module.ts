@@ -14,6 +14,9 @@ const routes: Routes = [{
   }, {
     path: 'activities',
     loadChildren: './activities/activities.module#ActivitiesPGCModule',
+  }, { // Menu de Mantenimientos
+    path: 'mantenimientos',
+      loadChildren: './mantenimientos/mantenimientos.module#MantenimientosPGCModule',
   }, {
     path: 'ui-features',
     loadChildren: './ui-features/ui-features.module#UiFeaturesModule',
