@@ -4,7 +4,7 @@
  * @name PerfilesComponent
  * @alias _perfilesComponent
  * @version 1.0.0
- * 
+ *
  */
 import { Component, OnInit } from '@angular/core';
 
