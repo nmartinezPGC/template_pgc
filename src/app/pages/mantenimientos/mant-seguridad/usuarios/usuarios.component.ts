@@ -1,3 +1,10 @@
+/**
+ * @author David Pavon
+ * @returns mantenimientos de usuario
+ * @name UsuariosComponent
+ * @alias _usuariosComponent
+ * @version 1.0.0
+ */
 import { Component, OnInit } from '@angular/core';
 
 @Component({
