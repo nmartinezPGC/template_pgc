@@ -1,3 +1,11 @@
+/**
+ * @author Edgar Ramirez
+ * @returns mantenimiento de perfiles
+ * @name PerfilesComponent
+ * @alias _perfilesComponent
+ * @version 1.0.0
+ * 
+ */
 import { Component, OnInit } from '@angular/core';
 
 @Component({
