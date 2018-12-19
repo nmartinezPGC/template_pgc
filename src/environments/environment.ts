@@ -11,6 +11,7 @@ const envIN = 'env';
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:8090/api/v1',
+  // apiUrl: 'http://localhost:8090/api/v1',
+  apiUrl: 'http://172.17.0.128:8080/API-Rest-PGC/api/v1', // DAP - 2018-12-19 - Se Actulizo la Url del servidor de Pruebas
   env: envIN,
 };
