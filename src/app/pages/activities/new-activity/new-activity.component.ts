@@ -686,6 +686,18 @@ export class NewActivityComponent implements OnInit {
     // this._activityModel.descTipoOrganizacion = $('#idTipoOrganizacion').find('option:selected').text(); // Capturamos el texto del option seleccionado | idTipoOrganizacion
     // this._activityModel.descPais = $('#idPais').find('option:selected').text(); // Capturamos el texto del option seleccionado | idPais
 
+    // Validamos que se ha Seleccionado los Filtros Previos a la ID Interna
+    if (this._activityModel.idTipoOrganizacion === 0) {
+      this.showToast('error', 'Error al Ingresar la Información de las ID Internas', 'Debes Seleccionar el Tipo de Organización, para continuar');
+      return -1;
+    } else if (this._activityModel.idPais === 0) {
+      this.showToast('error', 'Error al Ingresar la Información de las ID Internas', 'Debes Seleccionar el País, para continuar');
+      return -1;
+    } else if (this._activityModel.idOrganizacion === 0) {
+      this.showToast('error', 'Error al Ingresar la Información de las ID Internas', 'Debes Seleccionar la Organización, para continuar');
+      return -1;
+    }
+
     // Validacion de la Informacion a Ingresar
     if (this._activityModel.idInterna === '' || this._activityModel.idInterna === null) {
       this.showToast('error', 'Error al Ingresar la Información de las Organizaciones', 'Debes de Ingresar el Código del ID Interna, para continuar');
@@ -710,11 +722,12 @@ export class NewActivityComponent implements OnInit {
         // Entra a Cilco de conteo de Items
         for (let index = 0; index < countJson; index++) {
           const element = this.JsonIdInternaOrganizacion[index].idInterna;
-          alert('Elemento de la Matriz ***** ' + element);
-          alert('Elemento de Model ***** ' + h);
+          // alert('Item recorrido No. ' + index + '  Elemento de la Matriz ***** ' + element + '  Elemento de Model ***** ' + h );
           if (element === h) {
             // console.log('Elemento de la Matriz repetido ***** ' + element);
-            this.showToast('error', 'Error al Ingresar la Información de las Organizaciones', 'Debes de Ingresar un Código del ID Interna distinto, para continuar');
+            this.showToast('error', 'Error al Ingresar la Información de las Organizaciones',
+              'Debes de Ingresar un Código del ID Interna distinto, para continuar');
+              return -1
           } else {
             this.JsonIdInternaOrganizacion.push({
               'descTipoOrganizacion': this._activityModel.descTipoOrganizacion,
@@ -727,21 +740,6 @@ export class NewActivityComponent implements OnInit {
           }
         }
       }
-
-
-      /*if (this.JsonIdInternaOrganizacion[2] == 'HOLA') {
-        this.showToast('error', 'Error al Ingresar la Información de las Organizaciones', 'Debes de Ingresar un Código del ID Interna distinto, para continuar');
-        console.log('Datos del JsonIdInternas ++++++++ ' + arrayOrganizacionesIdInternas);
-      } else {
-        this.JsonIdInternaOrganizacion.push({
-          'descTipoOrganizacion': this._activityModel.descTipoOrganizacion,
-          'descPaisOrganizacion': this._activityModel.descPaisOrganizacion,
-          'descOrganizacion': this._activityModel.descOrganizacion,
-          'idInterna': this._activityModel.idInterna,
-        });
-        this._activityModel.idInterna = '';
-        this.showToast('success', 'ID Interna Ingresada', 'Se ha Ingresado la ID Interna, a la Organización seleccionada');
-      }*/
     }
   } // FN | pushJsonIdInterna
 
@@ -770,26 +768,98 @@ export class NewActivityComponent implements OnInit {
     }
   }
 
+  filterByString(data, s) {
+    return data.filter(e => e.idInterna.includes(s) || e.descOrganizacion.includes(s))
+      .sort((a, b) => a.idInterna.includes(s) && !b.idInterna.includes(s) ? -1 : b.idInterna.includes(s) && !a.idInterna.includes(s) ? 1 : 0);
+  }
+
   verJson() {
-    // console.log(this.JsonIdInternaOrganizacion);
+    //console.log( 'Json de IdInterna +++ ' + JSON.stringify( this.JsonIdInternaOrganizacion));
+    //console.log('Ejecucion de la Funcion +++ ' + this.filterByString( this.JsonIdInternaOrganizacion, "E"));
+/*
+    let jsonSend = this.JsonIdInternaOrganizacion;
+    console.log('Json de ID Internas +++ ' + JSON.stringify ( jsonSend ));
+
+    var names1 = jsonSend.map(function (interna) { return interna.idInterna; });
+    var sorted1 = names1.sort();
+
+    var unique1 = sorted1.filter(function (value, index) {
+      return value !== sorted1[index + 1];
+    });
+    console.log( 'Datos que no son repetidos ID Interna ' + unique1);
+
+*/
+    // var elementos = [1, 1, 3, 5, 6, 4, 9, 5, 3, 5, 7, 9, 0, 1];
+   /* var elementos = this.JsonIdInternaOrganizacion;
+    var repetidos = [];
+    var temporal = [];*/
+
+    // elementos.forEach((value, index) => {
+      // temporal = Object.assign([], elementos); //Copiado de elemento
+      // temporal.splice(index, 1); //Se elimina el elemnto q se compara
+      /**
+       * Se busca en temporal el elemento, y en repetido para
+       * ver si esta ingresado al array. indexOf returna
+       * -1 si el elemento no se encuetra
+       **/
+      // if (temporal.indexOf(value) != -1 && repetidos.indexOf(value) == -1) repetidos.push(value);
+    // });
+
+    // console.log('repetidos ' + repetidos);
+
+    /*var personas = [
+      { name: "paco", edad: 23 },
+      { name: "paco", edad: 23 },
+      { name: "pepe", edad: 25 },
+      { name: "paco", edad: 23 },
+      { name: "lucas", edad: 30 },
+      { name: "paco", edad: 23 },
+      { name: "pepe", edad: 25 }
+    ];
+
+    var persona = {};
+    var unicos = personas.filter(function (e) {
+      return persona[e.name] ? false : (persona[e.name] = true);
+    });
+
+    console.log('Datos que no son repetidos Personas ' + JSON.stringify( unicos));*/
+
+
+    /*var elementos1 = [1, 1, 3, 5, 6, 4, 9, 5, 3, 5, 7, 9, 0, 1];
+    var repetidos1 = [];
+    var temporal1 = [];
+*/
+    // elementos1.forEach((value, index) => {
+      // temporal1 = Object.assign([], elementos1); //Copiado de elemento
+      // temporal1.splice(index, 1); //Se elimina el elemnto q se compara
+      /**
+       * Se busca en temporal el elemento, y en repetido para
+       * ver si esta ingresado al array. indexOf returna
+       * -1 si el elemento no se encuetra
+       **/
+      // if (temporal1.indexOf(value) != -1 && repetidos1.indexOf(value) == -1) repetidos1.push(value);
+    // });
+
+    // console.log('repetidos1 ' + repetidos1);
+
+     console.log(this.JsonIdInternaOrganizacion);
     // Numero de Filas de la tabla, flag para tener el limite del array
-    /* let rowCount = $("#tableIdInterna > tbody >tr").length;
+     let rowCount = $("#tableIdInterna > tbody >tr").length;
 
     // Numero de clomunas, para obtener el indice del campo a serializar
     let columnCount = $("#tableIdInterna tr:last td").length;
-    */
+
     // alert('Filas de la Tabla ==== ' + rowCount + '  ======  Columnas de la Tabla ======= ' + columnCount);
 
     // Recorre todo el Array de la Tabla
-    /*$('#tableIdInterna > tbody > tr').each(function (index, element) {
+    $('#tableIdInterna > tbody > tr').each(function (index, element) {
       // console.log(element);
       const _referencia = $(element).find('td').eq(0).html(),
         _tipoOrganizacion = $(element).find('td').eq(1).html(),
         _paisOrganizacion = $(element).find('td').eq(3).html(),
-        _idInterna = $(element).find('#tdIdInterna').eq(4).html();
+        _idInterna = $(element).find('td').eq(4).html();
       alert('Referencia ' + _referencia + ' tipoOrganizacion ' + _tipoOrganizacion + '  paisOrganizacion ' + _paisOrganizacion + ' _idInterna  ' + _idInterna);
       // console.log('Referencia ' + _referencia + ' tipoOrganizacion ' + _tipoOrganizacion + '  paisOrganizacion ' + _paisOrganizacion + ' _idInterna  ' + _idInterna);
     });
-    */
   }
 }

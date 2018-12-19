@@ -335,9 +335,9 @@
                     <div class="form-group">
                       <label for="inputWebsite">Id Interna</label>
                       <div class="input-group full-width">
-                        <input #idInterna="ngModel" type="text" class="form-control" style="text-transform: uppercase;"
-                          name="idInterna" id="idInterna" ngControl="idInterna" [(ngModel)]="_activityModel.idInterna"
-                          placeholder="ID Interna">
+                        <input #idInterna="ngModel" type="text" class="form-control" name="idInterna" id="idInterna"
+                          ngControl="idInterna" [(ngModel)]="_activityModel.idInterna" placeholder="ID Interna">
+                        <!-- style="text-transform: uppercase;" -->
 
                         <!-- Botonera de Organizaciones -->
                         <button type="button" class="btn btn-primary btn-group-icon btn-group-divider" nbPopover="Agrega la ID Interna a la lista"
@@ -393,7 +393,8 @@
                             <!-- <div class="input-group input-group-sm" id="tdIdInterna">
                               <input type="text" placeholder="ID Interna" class="form-control" value="" />
                             </div> -->
-                            {{ itemIdInterna.idInterna | uppercase }}
+                            <!-- {{ itemIdInterna.idInterna | uppercase }} -->
+                            {{ itemIdInterna.idInterna }}
                           </td>
                           <td>
                             <img src="../../../../assets/icons/forms/rubbish-bin_24x.png" alt="" (click)="deleteRowHomeForm(homeTableIndex, itemIdInterna.descTipoOrganizacion, itemIdInterna.descPaisOrganizacion )">

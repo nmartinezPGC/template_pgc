@@ -6,11 +6,11 @@ import { Component, OnInit } from '@angular/core';
     <router-outlet></router-outlet>
   `,
 })
-export class MantenimientosComponent implements OnInit {
+export class MantenimientosComponent {
 
-  constructor() { }
+  /*constructor() { }
 
   ngOnInit() {
-  }
+  } */
 
 }

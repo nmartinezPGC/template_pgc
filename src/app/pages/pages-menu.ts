@@ -29,8 +29,13 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: 'Espacios de Trabajo',
-        icon: 'fa fa-address-book',
+        // icon: 'fa fa-address-book',
         link: '/pages/ui-features/buttons',
+      },
+      { // Menu de Mantenimientos NAM | 2018-12-19 | Se creo el menu de raiz del Modulo de Mantenimientos / Mant. Seguridad / Usuarios
+        title: 'Seguridad',
+        // icon: 'fa fa-users',
+        link: '/pages/mantenimientos/mant-seguridad',
       },
     ],
   },

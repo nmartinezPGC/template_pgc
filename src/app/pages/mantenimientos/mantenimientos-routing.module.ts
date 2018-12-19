@@ -3,14 +3,16 @@ import { Routes, RouterModule } from '@angular/router';
 
 // Importamos los Components de cada Seccion
 import { MantenimientosComponent } from './mantenimientos.component';
+import { UsuariosComponent } from './mant-seguridad/usuarios/usuarios.component';
+import { MantSeguridadComponent } from './mant-seguridad/mant-seguridad.component';
 
 // Mapeo de las Rutas del Modulo
 const routes: Routes = [{
   path: '',
   component: MantenimientosComponent,
   children: [{
-    // path: 'new-activity',
-    // component: NewActivityComponent,
+    path: 'mant-seguridad',
+    component: MantSeguridadComponent,
   }],
 }];
 
@@ -23,4 +25,6 @@ export class MantenimientosRoutingModule { }
 
 // Exportamos las Rutas del Modulo de Mantenimientos
 export const routedComponentsMant = [
+  MantenimientosComponent,
+  MantSeguridadComponent,
 ];
