@@ -774,8 +774,8 @@ export class NewActivityComponent implements OnInit {
   }
 
   verJson() {
-    //console.log( 'Json de IdInterna +++ ' + JSON.stringify( this.JsonIdInternaOrganizacion));
-    //console.log('Ejecucion de la Funcion +++ ' + this.filterByString( this.JsonIdInternaOrganizacion, "E"));
+    // console.log( 'Json de IdInterna +++ ' + JSON.stringify( this.JsonIdInternaOrganizacion));
+    // console.log('Ejecucion de la Funcion +++ ' + this.filterByString( this.JsonIdInternaOrganizacion, "E"));
 /*
     let jsonSend = this.JsonIdInternaOrganizacion;
     console.log('Json de ID Internas +++ ' + JSON.stringify ( jsonSend ));
@@ -842,17 +842,17 @@ export class NewActivityComponent implements OnInit {
 
     // console.log('repetidos1 ' + repetidos1);
 
-     console.log(this.JsonIdInternaOrganizacion);
+    //  console.log(this.JsonIdInternaOrganizacion);
     // Numero de Filas de la tabla, flag para tener el limite del array
-     let rowCount = $("#tableIdInterna > tbody >tr").length;
+    // let rowCount = $("#tableIdInterna > tbody >tr").length;
 
     // Numero de clomunas, para obtener el indice del campo a serializar
-    let columnCount = $("#tableIdInterna tr:last td").length;
+    // let columnCount = $("#tableIdInterna tr:last td").length;
 
     // alert('Filas de la Tabla ==== ' + rowCount + '  ======  Columnas de la Tabla ======= ' + columnCount);
 
     // Recorre todo el Array de la Tabla
-    $('#tableIdInterna > tbody > tr').each(function (index, element) {
+    /*$('#tableIdInterna > tbody > tr').each(function (index, element) {
       // console.log(element);
       const _referencia = $(element).find('td').eq(0).html(),
         _tipoOrganizacion = $(element).find('td').eq(1).html(),
@@ -860,6 +860,6 @@ export class NewActivityComponent implements OnInit {
         _idInterna = $(element).find('td').eq(4).html();
       alert('Referencia ' + _referencia + ' tipoOrganizacion ' + _tipoOrganizacion + '  paisOrganizacion ' + _paisOrganizacion + ' _idInterna  ' + _idInterna);
       // console.log('Referencia ' + _referencia + ' tipoOrganizacion ' + _tipoOrganizacion + '  paisOrganizacion ' + _paisOrganizacion + ' _idInterna  ' + _idInterna);
-    });
+    });*/
   }
 }
