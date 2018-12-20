@@ -10,10 +10,20 @@ import { MantSeguridadComponent } from './mant-seguridad/mant-seguridad.componen
 const routes: Routes = [{
   path: '',
   component: MantenimientosComponent,
-  children: [{
-    path: 'mant-seguridad',
-    component: MantSeguridadComponent,
-  }],
+  children: [
+    {
+      path: 'mant-seguridad',
+      component: MantSeguridadComponent,
+      /*children: [{
+        path: 'usuarios',
+        component: UsuariosComponent,
+      }],*/
+    },
+    {
+      path: 'mant-seguridad/usuarios',
+      component: UsuariosComponent,
+    },
+  ],
 }];
 
 // Definicion del Modulo de la Clase
@@ -27,4 +37,5 @@ export class MantenimientosRoutingModule { }
 export const routedComponentsMant = [
   MantenimientosComponent,
   MantSeguridadComponent,
+  UsuariosComponent,
 ];
