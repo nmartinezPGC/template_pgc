@@ -7,6 +7,7 @@ import { UsuariosComponent } from './mant-seguridad/usuarios/usuarios.component'
 import { MantSeguridadComponent } from './mant-seguridad/mant-seguridad.component';
 import { PerfilesComponent } from './mant-seguridad/perfiles/perfiles.component';
 
+
 // Mapeo de las Rutas del Modulo
 const routes: Routes = [{
   path: '',

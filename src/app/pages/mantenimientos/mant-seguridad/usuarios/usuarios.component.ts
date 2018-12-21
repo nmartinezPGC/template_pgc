@@ -7,6 +7,10 @@
  */
 import { Component, OnInit } from '@angular/core';
 
+// Varieble Jquey
+declare var jquery: any;
+declare var $: any;
+
 @Component({
   selector: 'ngx-usuarios',
   templateUrl: './usuarios.component.html',
