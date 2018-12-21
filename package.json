@@ -61,6 +61,7 @@
     "ckeditor": "4.7.3",
     "classlist.js": "1.1.20150312",
     "core-js": "2.5.1",
+    "datatables": "^1.10.18",
     "echarts": "^4.0.2",
     "font-awesome": "4.7.0",
     "google-maps": "^3.3.0",

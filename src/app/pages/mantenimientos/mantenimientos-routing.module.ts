@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { MantenimientosComponent } from './mantenimientos.component';
 import { UsuariosComponent } from './mant-seguridad/usuarios/usuarios.component';
 import { MantSeguridadComponent } from './mant-seguridad/mant-seguridad.component';
+import { PerfilesComponent } from './mant-seguridad/perfiles/perfiles.component';
 
 // Mapeo de las Rutas del Modulo
 const routes: Routes = [{
@@ -23,6 +24,10 @@ const routes: Routes = [{
       path: 'mant-seguridad/usuarios',
       component: UsuariosComponent,
     },
+    {
+      path: 'mant-seguridad/perfiles',
+      component: PerfilesComponent,
+    },
   ],
 }];
 
@@ -38,4 +43,5 @@ export const routedComponentsMant = [
   MantenimientosComponent,
   MantSeguridadComponent,
   UsuariosComponent,
+  PerfilesComponent,
 ];
