@@ -1,3 +1,32 @@
-<p>
-  usuarios works!
-</p>
+<!-- Area de Donde esta Ubicado el Usuario -->
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a routerLink="/pages/dashboard">Dashboard</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a routerLink="./">Mantenimientos</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a routerLink="/pages/mantenimientos/mant-seguridad">Seguridad</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a routerLink="./">Mantenimiento de usuarios</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Creacion de Usuarios</li>
+  </ol>
+</nav>
+<div class="row">
+  <div class="col-md-12 col-lg-12">
+    <nb-card>
+      <nb-tabset>
+        <nb-tab tabTitle="Creacion de Usuario">
+          <span>Content #1</span>
+        </nb-tab>
+        <nb-tab tabTitle="Consultar">
+          <span>Content #2</span>
+        </nb-tab>        
+      </nb-tabset>
+    </nb-card>
+  </div>
+</div>
