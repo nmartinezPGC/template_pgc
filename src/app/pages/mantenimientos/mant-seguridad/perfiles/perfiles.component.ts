@@ -36,15 +36,6 @@ export class PerfilesComponent implements OnInit {
   //       $('#table').DataTable({
   //         dom: 'Bfrtip',
   //         fixedHeader: true,
-  //         "autoWidth": false,
-  //         // Tamaño de la Pagina
-  //         "pageLength": 10,
-  //         // Refresca la Data y Borra de Memoria los Datos anteriores
-  //         destroy: true,
-  //         retrieve: true,
-  //         // Selecciona las Filas
-  //         select: true,
-  //       });
   //     });
   //   }, 500);
   // }

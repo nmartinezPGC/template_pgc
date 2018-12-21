@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { ThemeModule } from '../../@theme/theme.module';
 import { ToasterModule } from 'angular2-toaster';
 
+
 // Imports de la clase de Definicion de las Rutas
 import { MantenimientosRoutingModule, routedComponentsMant } from './mantenimientos-routing.module';
 
@@ -14,7 +15,7 @@ import { ListasComunesService } from '../common-list/services/listas-comunes.ser
   imports: [
     ThemeModule,
     MantenimientosRoutingModule,
-    ToasterModule.forRoot(), // Modulo de Toaster-Notification
+    ToasterModule.forRoot(), // Modulo de Toaster-Notificatiion
   ],
   declarations: [
     ...routedComponentsMant,
