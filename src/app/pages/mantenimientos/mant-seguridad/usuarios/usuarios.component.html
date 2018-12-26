@@ -21,11 +21,72 @@
     <nb-card>
       <nb-tabset>
         <nb-tab tabTitle="Creacion de Usuario">
-          <span>Content #1</span>
+          <div class="row">
+            <div class="col-lg-6">
+              <nb-card>
+                <nb-card-body>
+                  <div class="row full-name-inputs">
+                    <div class="col-sm-6 input-group">
+                      <input type="text" placeholder="Nombre" class="form-control" />
+                    </div>
+                    <div class="col-sm-6 input-group">
+                      <input type="text" placeholder="Apellido" class="form-control" />
+                    </div>
+                  </div>
+                  <div class="input-group">
+                    <input type="text" placeholder="Email" class="form-control" />
+                  </div>
+                  <div class="input-group">
+                    <input type="password" placeholder="Password" class="form-control" />
+                  </div>
+                  <!-- Seleccion del tipo de usuario -->
+                  <div class="form-group input-group-rounded">
+                    <select class="form-control">
+                      <option>Administrador de la PGC</option>
+                      <option>Usuario de la PGC</option>
+                      <option>Consulta de la PGC</option>
+                    </select>
+                  </div>
+                  <div class="input-group input-group-rounded">
+                    <input type="text" placeholder="Pais" class="form-control" />
+                  </div>
+                </nb-card-body>
+              </nb-card>
+            </div>
+            <div class="col-lg-6">
+              <nb-card>
+                <!-- <nb-card-header>Perfiles</nb-card-header> -->
+                <nb-card-body>
+                  <div class="form-group input-group-rounded">
+                    <select class="form-control">
+                      <option>Nuevo</option>
+                      <option>Activo</option>
+                      <option>Inactivo</option>
+                      <option>Inhabilitado</option>
+                    </select>
+                  </div>
+                  <div class="form-group input-group-rounded">
+                    <select class="form-control">
+                      <option>Administrador</option>
+                      <option>Usuario</option>
+                      <option>Consulta</option>
+                    </select>
+                  </div>
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-primary btn-group-icon btn-group-divider">
+                      <i class="nb-plus-circled"></i>
+                    </button>
+                    <button type="button" class="btn btn-primary">Guardar</button>
+                    <button type="button" class="btn btn-warning">Cancelar</button>
+                  </div>
+                </nb-card-body>
+              </nb-card>
+            </div>
+          </div>
         </nb-tab>
         <nb-tab tabTitle="Consultar">
           <span>Content #2</span>
-        </nb-tab>        
+        </nb-tab>
       </nb-tabset>
     </nb-card>
   </div>
