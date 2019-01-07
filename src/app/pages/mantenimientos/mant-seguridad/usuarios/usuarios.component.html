@@ -41,6 +41,8 @@
                   </div>
                   <!-- Seleccion del tipo de usuario -->
                   <div class="form-group input-group-rounded">
+                    <small class="form-text">Tipo de usuario.
+                    </small>
                     <select class="form-control">
                       <option>Administrador de la PGC</option>
                       <option>Usuario de la PGC</option>
@@ -58,6 +60,8 @@
                 <!-- <nb-card-header>Perfiles</nb-card-header> -->
                 <nb-card-body>
                   <div class="form-group input-group-rounded">
+                    <small class="form-text">Estado de el usuario.
+                    </small>
                     <select class="form-control">
                       <option>Nuevo</option>
                       <option>Activo</option>
@@ -66,6 +70,8 @@
                     </select>
                   </div>
                   <div class="form-group input-group-rounded">
+                    <small class="form-text">Rol del usuario.
+                    </small>
                     <select class="form-control">
                       <option>Administrador</option>
                       <option>Usuario</option>
@@ -84,8 +90,38 @@
             </div>
           </div>
         </nb-tab>
-        <nb-tab tabTitle="Consultar">
-          <span>Content #2</span>
+        <!-- Comienzo de estructura del tab dos -->
+        <nb-tab tabTitle="Consultar">        
+          <table #dataTable class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>Javier</td>
+                <td>Macherano</td>
+                <td>@mache</td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>Steven</td>
+                <td>Gerard</td>
+                <td>@gerard</td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td>Samuel</td> 
+                <td>Eto'o</td>
+                <td>@eto'o</td>
+              </tr>
+            </tbody>
+          </table>
         </nb-tab>
       </nb-tabset>
     </nb-card>
