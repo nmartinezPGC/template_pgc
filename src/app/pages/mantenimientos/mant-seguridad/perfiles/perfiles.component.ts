@@ -6,7 +6,7 @@
  * @version 1.0.0
  *
  */
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 
 // Varieble Jquey
 declare var jquery: any;
@@ -29,17 +29,17 @@ export class PerfilesComponent {
     {
       id: 1,
       perfil: 'Administrador',
-      desc_perfil: 'Administrador de la Plataforma'
+      desc_perfil: 'Administrador de la Plataforma',
     },
     {
       id: 2,
       perfil: 'Usuario',
-      desc_perfil: 'Administrador de la Plataforma'
+      desc_perfil: 'Administrador de la Plataforma',
     },
     {
       id: 3,
       perfil: 'Super Usuario',
-      desc_perfil: 'SU da la permisos para los demas Usuarios'
+      desc_perfil: 'SU da la permisos para los demas Usuarios',
     },
   ];
   settings = {
@@ -72,15 +72,8 @@ export class PerfilesComponent {
       },
     },
   };
-  // source: LocalDataSource = new LocalDataSource();
-  // constructor(private service: SmartTableService) {
-  //   const data = this.service.getData();
-  //   this.source.load(data);
-  // }
-
   constructor() {
-    console.log(this.data)            
-  }            
+  }
   onDeleteConfirm(event): void {
     if (window.confirm('Are you sure you want to delete?')) {
       event.confirm.resolve();

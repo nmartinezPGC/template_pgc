@@ -48,7 +48,7 @@ export class PerfilService {
         // Seteo de los Headers
         this.headers = new HttpHeaders({
             'Content-Type': 'application/json',
-            'Authorization': this.tokenHeader, 'Access-Control-Allow-Origin': '*'
+            'Authorization': this.tokenHeader, 'Access-Control-Allow-Origin': '*',
         });
     }// FIN | Constructor
 
@@ -64,7 +64,7 @@ export class PerfilService {
         // Retorno de la Funcion
         return this._http.get(this._systemEndPointsService.getEndPointService('userGroup', 1) , {
             headers: this.headers,
-            params: { 'tokenApi': this.tokenHeader }
+            params: { 'tokenApi': this.tokenHeader },
         });
     }// FIN | FND-00002
 
