@@ -81,26 +81,4 @@ export class PerfilesComponent {
       event.confirm.reject();
     }
   }
-  // onSearch(query: string = '') {
-  //   this.source.setFilter([
-  //     // fields we want to include in the search
-  //     {
-  //       field: 'id',
-  //       search: query
-  //     },
-  //     {
-  //       field: 'name',
-  //       search: query
-  //     },
-  //     {
-  //       field: 'username',
-  //       search: query
-  //     },
-  //     {
-  //       field: 'email',
-  //       search: query
-  //     }
-  //   ], false); 
-  // }
 }
-
