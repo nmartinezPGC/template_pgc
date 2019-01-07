@@ -79,7 +79,7 @@ export class UserService {
   /****************************************************************************
   * Funcion: FND-00001
   * Fecha: 04-07-2018
-  * Descripcion: Metodo para obtener los Datos de la los datos del Usuario
+  * Descripcion: Metodo para obtener los Datos del Usuario
   * Objetivo: datos generales del Usuario
   * Params: { userName }
   ****************************************************************************/

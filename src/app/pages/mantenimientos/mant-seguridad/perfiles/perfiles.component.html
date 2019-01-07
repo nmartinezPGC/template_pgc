@@ -33,9 +33,9 @@
                   <div class="form-group">
                     <label>Elija un Perfil</label>
                     <select class="form-control">
-                        <option>Administrador</option>
-                        <option>Usuario</option>
-                        <option>Superadmin</option>
+                      <option>Administrador</option>
+                      <option>Usuario</option>
+                      <option>Superadmin</option>
                     </select>
                   </div>
                 </nb-card-body>
@@ -47,16 +47,16 @@
               <nb-card>
                 <!-- <nb-card-header>Perfiles</nb-card-header> -->
                 <nb-card-body>
-                    <div class="input-group">
-                        <textarea rows="5" placeholder="Descripcion del Perfil" class="form-control"></textarea>
-                      </div>
-                      <div class="btn-group">
-                          <button type="button" class="btn btn-primary btn-group-icon btn-group-divider">
-                            <i class="nb-plus-circled"></i>
-                          </button>
-                          <button type="button" class="btn btn-primary">Guardar</button>
-                          <button type="button" class="btn btn-warning">Cancelar</button>
-                        </div>
+                  <div class="input-group">
+                    <textarea rows="5" placeholder="Descripcion del Perfil" class="form-control"></textarea>
+                  </div>
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-primary btn-group-icon btn-group-divider">
+                      <i class="nb-plus-circled"></i>
+                    </button>
+                    <button type="button" class="btn btn-primary">Guardar</button>
+                    <button type="button" class="btn btn-warning">Cancelar</button>
+                  </div>
                 </nb-card-body>
               </nb-card>
             </div>
@@ -66,68 +66,34 @@
 
         <!-- Tab de Mantenimiento y Consulta de Perfiles -->
         <nb-tab tabTitle="Matenimiento/Consulta">
-          <span>Content #2</span>
-          <table #dataTable class="table">
-              <thead class="thead-dark">
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">First</th>
-                  <th scope="col">Last</th>
-                  <th scope="col">Handle</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr>
-              </tbody>
-            </table>
-            
-            <table class="table" id="table">
-              <thead class="thead-light">
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">First</th>
-                  <th scope="col">Last</th>
-                  <th scope="col">Handle</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="col-lg-10">
+              <nb-card>
+                  <nb-card-body>
+                    <ng2-smart-table [settings]="settings" [source]="data" (deleteConfirm)="onDeleteConfirm($event)">
+                    </ng2-smart-table>
+                  </nb-card-body>
+                </nb-card>
+            <!-- <nb-card>
+              <nb-card-body>
+                <div>
+                  <div>
+                    <input #table type='text' style='padding:8px;margin:15px auto;width:30%;' placeholder='Buscar'
+                      (keyup)='updateFilter($event)' />
+                    <h3>
+                      Horizontal and Vertical Scrolling
+                      <small>
+
+                      </small>
+                    </h3>
+                    <ngx-datatable style="height:200px" class="material" [rows]="rows" [columns]="columns" columnMode="force" [headerHeight]="50"
+                      [footerHeight]="0" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true">
+                      >
+                    </ngx-datatable>
+                  </div>
+                </div>
+              </nb-card-body>
+            </nb-card> -->
+          </div>
         </nb-tab>
       </nb-tabset>
     </nb-card>
