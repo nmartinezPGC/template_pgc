@@ -2,6 +2,11 @@
 @import '~bootstrap/scss/mixins/breakpoints';
 @import '~@nebular/theme/styles/global/bootstrap/breakpoints';
 
+// Temas de ngx-datatable
+@import '~@swimlane/ngx-datatable/release/index.css';
+@import '~@swimlane/ngx-datatable/release/themes/material.css';
+@import '~@swimlane/ngx-datatable/release/assets/icons.css';
+
 @include nb-install-component() {
   nb-tabset {
     height: 100%;
@@ -13,7 +18,8 @@
     padding: nb-theme(padding);
   }
 
-  /deep/ ngx-tab1, /deep/ ngx-tab2 {
+  /deep/ ngx-tab1,
+  /deep/ ngx-tab2 {
     display: block;
     padding: nb-theme(padding);
   }
@@ -133,4 +139,19 @@ Seccion de formularios
   ngb-rating {
     outline: none;
   }
+
+  /* Validaciones de los Campos */
+  .ng-valid[required] {
+    border-left: 5px solid #42a948;
+    /* green */
+  }
+
+  .ng-invalid.ng-touched:not(form) {
+    border-left: 5px solid #a94442 !important;
+    /* red */
+    border-color: #a94442 !important;
+    /* red */
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(169, 68, 66, 0.6) !important;
+  }
+
 }

@@ -2,8 +2,9 @@
 import { NgModule } from '@angular/core';
 import { ThemeModule } from '../../@theme/theme.module';
 import { ToasterModule } from 'angular2-toaster';
-
-
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { SmartTableService  } from '../../@core/data/smart-table.service';
 
 // Imports de la clase de Definicion de las Rutas
 import { MantenimientosRoutingModule, routedComponentsMant } from './mantenimientos-routing.module';
@@ -17,12 +18,16 @@ import { ListasComunesService } from '../common-list/services/listas-comunes.ser
     ThemeModule,
     MantenimientosRoutingModule,
     ToasterModule.forRoot(), // Modulo de Toaster-Notificatiion
+    NgxDatatableModule,
+    Ng2SmartTableModule,
   ],
   declarations: [
     ...routedComponentsMant,
   ],
   providers: [
-    ListasComunesService, // Esta libreria contiene los llamados a servicios genericos de tablas de la BD
+    ListasComunesService,
+    SmartTableService,
+     // Esta libreria contiene los llamados a servicios genericos de tablas de la BD
   ],
 })
 export class MantenimientosPGCModule { }

@@ -211,6 +211,20 @@ export class ListEndPointsService {
         groupEndPoint: 'mantGenericosGroup',
         descEndPoint: 'Ingresa un nuevo Espacio de Trabajo en la BD asignandolo a un Usuario',
       },
+      listAllPerfiles: {
+        id: 4,
+        nameEndpoint: 'List All Perfiles',
+        urlEndPoint: '/profiles',
+        groupEndPoint: 'mantGenericosGroup',
+        descEndPoint: 'Listar todos los Perfiles',
+      },
+      newPerfil: {
+        id: 5,
+        nameEndpoint: 'nuevo perfil',
+        urlEndPoint: '/profiles/new',
+        groupEndPoint: 'mantGenericosGroup',
+        descEndPoint: 'crear nuevo Perfiles',
+      },
     },
   };
 
