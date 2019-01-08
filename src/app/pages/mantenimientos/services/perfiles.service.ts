@@ -78,7 +78,7 @@ export class PerfilService {
     newPerfil(jsonPerfil): Observable<any> {
         // Parametros del EndPoint
         const paramsSend = jsonPerfil;
-        console.log(paramsSend);
+        // console.log(paramsSend);
         // Retorno de la Funcion
         return this._http.post(this._systemEndPointsService.getEndPointService('mantGenericosGroup', 5), paramsSend, {
             headers: this.headers,

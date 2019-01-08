@@ -95,7 +95,7 @@ export class PerfilesComponent implements OnInit {
    * @param _perfilesService
    */
   constructor(protected _router: Router,
-    public _perfilesService: PerfilService,// Inicializa el ToasterService
+    public _perfilesService: PerfilService, // Inicializa el ToasterService
     private _toasterService: ToasterService) {
     /* Llamado a la Funcion: 007, la cual obtiene el detalle da la Info.
      del Usuario */
@@ -155,7 +155,7 @@ export class PerfilesComponent implements OnInit {
     // Inicializacion del Modelo de la Clase
     this._perfilModel = new PerfilModel(
       0, null, null, null,
-      null, null, null
+      null, null, null,
     );
   }
 
@@ -177,7 +177,7 @@ export class PerfilesComponent implements OnInit {
           // console.log(response.status);
           // console.log(response.message);
           this.showToast('error', 'Error al Obtener la Información del Perfil', response.message);
-        } else if (response.status == 200) {
+        } else if (response.status === 200) {
           // this.productos = result.data;
           // console.log(result.status);
           this.JsonReceptionPrefiles = response.data;
@@ -235,7 +235,7 @@ export class PerfilesComponent implements OnInit {
           // console.log(response.status);
           // console.log(response.message);
           this.showToast('error', 'Error al Ingresar la Información del Perfil', response.message);
-        } else if (response.status == 200) {
+        } else if (response.status === 200) {
           // console.log(result.status);
           this.showToast('default', 'La Información del Perfil, se ha ingresado con exito', response.message);
           // console.log(response.data);
