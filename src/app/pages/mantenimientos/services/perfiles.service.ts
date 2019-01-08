@@ -62,10 +62,27 @@ export class PerfilService {
       ****************************************************************************/
     getAllPerfiles(): Observable<any> {
         // Retorno de la Funcion
-        return this._http.get(this._systemEndPointsService.getEndPointService('userGroup', 1) , {
+        return this._http.get(this._systemEndPointsService.getEndPointService('mantGenericosGroup', 4), {
             headers: this.headers,
             params: { 'tokenApi': this.tokenHeader },
         });
     }// FIN | FND-00002
 
+
+    /****************************************************************************
+    * Funcion: FND-00003
+    * Fecha: 07-01-2019
+    * Descripcion: Metodo que sirve para poder ingresar un nuevo perfil
+    * Params: { jsonPerfil }
+    ****************************************************************************/
+    newPerfil(jsonPerfil): Observable<any> {
+        // Parametros del EndPoint
+        const paramsSend = jsonPerfil;
+        console.log(paramsSend);
+        // Retorno de la Funcion
+        return this._http.post(this._systemEndPointsService.getEndPointService('mantGenericosGroup', 5), paramsSend, {
+            headers: this.headers,
+            params: { 'tokenApi': this.tokenHeader },
+        });
+    }// FIN | FND-00002
 }
