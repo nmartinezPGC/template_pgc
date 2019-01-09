@@ -276,14 +276,14 @@ export class PerfilesComponent implements OnInit {
   this._perfilesService.getAllTipoPerfiles().subscribe(
     response => {
       if (response.status !== 200) {
-         console.log(response.status);
+        // console.log(response.status);
         // console.log(response.message);
-        //this.showToast('error', 'Error al Obtener la Información del Perfil', response.message);
+        // this.showToast('error', 'Error al Obtener la Información del Perfil', response.message);
       } else if (response.status === 200) {
         // this.productos = result.data;
         // console.log(result.status);
         this.JsonReceptionTipoPerfiles = response.data;
-        console.log(response.data);
+        // console.log(response.data);
       }
     },
     error => {
