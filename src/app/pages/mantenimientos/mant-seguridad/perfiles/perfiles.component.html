@@ -39,9 +39,10 @@
                   <div class="form-group">
                     <label>Elija un Perfil</label>
                     <select class="form-control" name="idTipo" id="idTipo" ngControl="idTipo" [(ngModel)]="_perfilModel.idTipo">
-                      <option value="1">Administrador</option>
-                      <option value="2">Usuario</option>
-                      <option value="3">Superadmin</option>
+                      <option value="0"  >Seleccione una Opcion</option>
+                      <option *ngFor="let item of JsonReceptionTipoPerfiles" [value]="item.idTipo">
+                        {{item.descTipo}}
+                      </option>
                     </select>
                   </div>
                 </nb-card-body>

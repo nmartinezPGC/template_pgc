@@ -33,6 +33,7 @@ import { PerfilModel } from '../../models/perfiles.model';
 export class PerfilesComponent implements OnInit {
   // Variables Tipo JSON, para usarlas en los Servicios Invocados
   public JsonReceptionPrefiles: any;
+  public JsonReceptionTipoPerfiles: any;
 
   // Instacia de la variable del Modelo | Json de Parametros
   public _perfilModel: PerfilModel;
@@ -155,8 +156,10 @@ export class PerfilesComponent implements OnInit {
     // Inicializacion del Modelo de la Clase
     this._perfilModel = new PerfilModel(
       0, null, null, null,
-      null, null, null,
+      null, 0, null,
     );
+    // inicializar la lista de tipo de perfiles
+    this.perfilesTipoService();
   }
 
 
@@ -201,7 +204,7 @@ export class PerfilesComponent implements OnInit {
         }, 2000);
       },
     );
-  } // FIN | userDatailsService
+  } // FIN | perfilesDatailsService
 
 
   /**
@@ -261,4 +264,43 @@ export class PerfilesComponent implements OnInit {
     );
   } // FIN | newPerfilService
 
+
+   /****************************************************************************
+  * Funcion: perfilesTipoService
+  * Object Number: 003
+  * Fecha: 08-01-2019
+  * Descripcion: Method perfilesTipoService of the Class
+  * Objetivo: perfilesTipoService detalle de los Tipos de Perfil llamando a la API
+  ****************************************************************************/
+ private perfilesTipoService() {
+  this._perfilesService.getAllTipoPerfiles().subscribe(
+    response => {
+      if (response.status !== 200) {
+        // console.log(response.status);
+        // console.log(response.message);
+        // this.showToast('error', 'Error al Obtener la Información del Perfil', response.message);
+      } else if (response.status === 200) {
+        // this.productos = result.data;
+        // console.log(result.status);
+        this.JsonReceptionTipoPerfiles = response.data;
+        // console.log(response.data);
+      }
+    },
+    error => {
+      // Redirecciona al Login
+      alert('Error en la petición de la API ' + <any>error);
+
+      // Borramos los datos del LocalStorage
+      localStorage.removeItem('auth_app_token');
+      localStorage.removeItem('identity');
+
+      const redirect = '/auth/login';
+      setTimeout(() => {
+        // Iniciativa Temporal
+        location.reload();
+        return this._router.navigateByUrl(redirect);
+      }, 2000);
+    },
+  );
+} // FIN | perfilesTipoService
 }
