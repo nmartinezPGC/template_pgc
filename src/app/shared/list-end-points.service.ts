@@ -225,6 +225,13 @@ export class ListEndPointsService {
         groupEndPoint: 'mantGenericosGroup',
         descEndPoint: 'crear nuevo Perfiles',
       },
+      getAllTipoPerfil: {
+        id: 6,
+        nameEndpoint: 'listar tipo perfil',
+        urlEndPoint: '/profiles/kind',
+        groupEndPoint: 'mantGenericosGroup',
+        descEndPoint: 'listar los tipo de perfiles',
+      },
     },
   };
 

@@ -145,6 +145,9 @@ export class SystemEndPointsService extends ListEndPointsService {
           case 5:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointMantGenericos.newPerfil.urlEndPoint;
             break;
+            case 6:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointMantGenericos.getAllTipoPerfil.urlEndPoint;
+            break;
         }
         break;
     }
