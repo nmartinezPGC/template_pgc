@@ -597,19 +597,6 @@ export class NewActivityComponent implements OnInit {
           this.showToast('error', 'Error al Obtener la Información de los Tipos de Organizacion', result.message);
         } else if (result.status === 200) {
           this.JsonReceptionTiposOrganizacion = result.data;
-          // console.log(this.JsonReceptionTiposOrganizacion);
-          // this.data = this.JsonReceptionEstados;
-          this.data1 = this.JsonReceptionTiposOrganizacion;
-
-          // Carga los Items para el List de la Smart table
-          this.listArrayTipoOrg = new Array();
-
-          this.data1.forEach(element => {
-            this.listArrayTipoOrg.push({ title: element['nombreTipoOrganizacion'], value: element['idTipoOrganizacion'] });
-          });
-
-          this.settings.columns.idTipoOrganizacion.editor.config.list = this.listArrayTipoOrg;
-          this.settings = Object.assign({}, this.settings);
         }
       },
       error => {
@@ -636,17 +623,6 @@ export class NewActivityComponent implements OnInit {
           this.showToast('error', 'Error al Obtener la Información de los Paises', result.message);
         } else if (result.status === 200) {
           this.JsonReceptionPaises = result.data;
-          this.data1 = this.JsonReceptionPaises;
-
-          // Carga los Items para el List de la Smart table
-          this.listArrayPaisOrg = new Array();
-
-          this.data1.forEach(element => {
-            this.listArrayPaisOrg.push({ title: element['descPais'], value: element['idPais'] });
-          });
-
-          this.settings.columns.idPaisOrganizacion.editor.config.list = this.listArrayPaisOrg;
-          this.settings = Object.assign({}, this.settings);
         }
       },
       error => {

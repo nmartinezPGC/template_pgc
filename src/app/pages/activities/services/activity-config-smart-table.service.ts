@@ -70,7 +70,7 @@ export class ActivityConfigSmartTableService {
           type: 'text',
           width: '70%',
         },*/
-        idTipoOrganizacion: {
+        /*idTipoOrganizacion: {
           title: 'Tipo Organización',
           width: '35%',
           editor: {
@@ -90,16 +90,21 @@ export class ActivityConfigSmartTableService {
               list: listArrayData2,
             },
           },
-        },
+        },*/
         idOrganizacion: {
-          title: 'País Organización',
-          width: '35%',
+          title: 'Nombre Organizacion',
+          width: '65%',
           editor: {
             type: 'list',
             config: {
               list: listArrayData3,
             },
           },
+        },
+        descOrganizacion: {
+          title: 'Id Interna',
+          type: 'text',
+          width: '20%',
         },
       },
       attr: {

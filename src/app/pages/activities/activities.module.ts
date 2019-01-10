@@ -17,6 +17,7 @@ import { ActivitiesRoutingModule, routedComponents } from './activities-routing.
 
 // Imports de las Librerias de uso Comun de la Clase en el Formulario de Actividad
 import { ListasComunesService } from '../common-list/services/listas-comunes.service';
+import { FilterdataPipe } from './pipes/filterdata.pipe';
 
 @NgModule({
   imports: [
@@ -30,6 +31,7 @@ import { ListasComunesService } from '../common-list/services/listas-comunes.ser
   ],
   declarations: [
     ...routedComponents,
+    FilterdataPipe,
   ],
   providers: [
     SmartTableService, // Defincion del Servicio que provee los Datos de la Tabla: ID's Internas
