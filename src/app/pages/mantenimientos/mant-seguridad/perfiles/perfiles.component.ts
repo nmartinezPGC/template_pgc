@@ -16,6 +16,7 @@ import { Router } from '@angular/router';
 // Model of Class
 import { PerfilModel } from '../../models/perfiles.model';
 
+
 /**
  * Generated Component
  */
@@ -43,7 +44,10 @@ export class PerfilesComponent implements OnInit {
    */
   data: any;
 
+
   settings = {
+    hideSubHeader: false,
+
     add: {
       addButtonContent: '<i class="nb-plus"></i>',
       createButtonContent: '<i class="nb-checkmark"></i>',
@@ -53,26 +57,46 @@ export class PerfilesComponent implements OnInit {
       editButtonContent: '<i class="nb-edit"></i>',
       saveButtonContent: '<i class="nb-checkmark"></i>',
       cancelButtonContent: '<i class="nb-close"></i>',
+      confirmSave: true,
     },
     delete: {
       deleteButtonContent: '<i class="nb-trash"></i>',
       confirmDelete: true,
     },
     columns: {
-      idPerfil: {
-        title: 'Codigo de Perfil',
-        type: 'number',
-      },
+      // idPerfil: {
+      // title: 'Id de Perfil',
+      // notShownField: true,
+
+      // valuePrepareFunction: (edit) => {
+      // console.log(edit);
+      // this.onSaveConfirm(edit);
+      // },
+      // },
       codPerfil: {
-        title: 'Perfil',
+        title: 'Codigo de Perfil',
         type: 'string',
       },
       descPerfil: {
         title: 'Descripcion de Perfil',
         type: 'string',
       },
+      // Json anidado para lograr capturar el valor de una entidad
+      // bibliografia : https://github.com/akveo/ng2-smart-table/issues/375
+      descripcionTipoPerfil: {
+        valuePrepareFunction: (cell: any, row: any) =>   row.idTipoPerfil.descTipo ,
+        title: 'Tipo',
+        type: 'string',
+      },
     },
   };
+
+
+
+  public onSaveConfirm(id) {
+    alert('id selecionado ' + id)
+  }
+
 
   config: ToasterConfig;
 
@@ -156,7 +180,7 @@ export class PerfilesComponent implements OnInit {
     // Inicializacion del Modelo de la Clase
     this._perfilModel = new PerfilModel(
       0, null, null, null,
-      null, 0, null,
+      null, 0, '',
     );
     // inicializar la lista de tipo de perfiles
     this.perfilesTipoService();
@@ -219,6 +243,16 @@ export class PerfilesComponent implements OnInit {
     }
   }
 
+  onSaveConfirm1(event) {
+    // console.log(event.data.idPerfil);
+    if (window.confirm('Are you sure you want to save?')) {
+      event.newData['name'] += ' + added in code';
+      event.confirm.resolve(event.newData);
+    } else {
+      event.confirm.reject();
+    }
+  }
+
 
   /****************************************************************************
    * Funcion: newPerfilService
@@ -265,42 +299,42 @@ export class PerfilesComponent implements OnInit {
   } // FIN | newPerfilService
 
 
-   /****************************************************************************
-  * Funcion: perfilesTipoService
-  * Object Number: 003
-  * Fecha: 08-01-2019
-  * Descripcion: Method perfilesTipoService of the Class
-  * Objetivo: perfilesTipoService detalle de los Tipos de Perfil llamando a la API
-  ****************************************************************************/
- private perfilesTipoService() {
-  this._perfilesService.getAllTipoPerfiles().subscribe(
-    response => {
-      if (response.status !== 200) {
-        // console.log(response.status);
-        // console.log(response.message);
-        // this.showToast('error', 'Error al Obtener la Información del Perfil', response.message);
-      } else if (response.status === 200) {
-        // this.productos = result.data;
-        // console.log(result.status);
-        this.JsonReceptionTipoPerfiles = response.data;
-        // console.log(response.data);
-      }
-    },
-    error => {
-      // Redirecciona al Login
-      alert('Error en la petición de la API ' + <any>error);
+  /****************************************************************************
+ * Funcion: perfilesTipoService
+ * Object Number: 003
+ * Fecha: 08-01-2019
+ * Descripcion: Method perfilesTipoService of the Class
+ * Objetivo: perfilesTipoService detalle de los Tipos de Perfil llamando a la API
+ ****************************************************************************/
+  private perfilesTipoService() {
+    this._perfilesService.getAllTipoPerfiles().subscribe(
+      response => {
+        if (response.status !== 200) {
+          // console.log(response.status);
+          // console.log(response.message);
+          // this.showToast('error', 'Error al Obtener la Información del Perfil', response.message);
+        } else if (response.status === 200) {
+          // this.productos = result.data;
+          // console.log(result.status);
+          this.JsonReceptionTipoPerfiles = response.data;
+          // console.log(response.data);
+        }
+      },
+      error => {
+        // Redirecciona al Login
+        alert('Error en la petición de la API ' + <any>error);
 
-      // Borramos los datos del LocalStorage
-      localStorage.removeItem('auth_app_token');
-      localStorage.removeItem('identity');
+        // Borramos los datos del LocalStorage
+        localStorage.removeItem('auth_app_token');
+        localStorage.removeItem('identity');
 
-      const redirect = '/auth/login';
-      setTimeout(() => {
-        // Iniciativa Temporal
-        location.reload();
-        return this._router.navigateByUrl(redirect);
-      }, 2000);
-    },
-  );
-} // FIN | perfilesTipoService
+        const redirect = '/auth/login';
+        setTimeout(() => {
+          // Iniciativa Temporal
+          location.reload();
+          return this._router.navigateByUrl(redirect);
+        }, 2000);
+      },
+    );
+  } // FIN | perfilesTipoService
 }

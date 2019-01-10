@@ -77,7 +77,7 @@
           <div class="col-lg-12">
             <nb-card>
               <nb-card-body>
-                <ng2-smart-table [settings]="settings" [source]="data" (deleteConfirm)="onDeleteConfirm($event)">
+                <ng2-smart-table [settings]="settings" [source]="data" (editConfirm)="onSaveConfirm1($event)" (deleteConfirm)="onDeleteConfirm($event)"  >
                 </ng2-smart-table>
               </nb-card-body>
             </nb-card>
