@@ -84,7 +84,7 @@ export class PerfilesComponent implements OnInit {
       // Json anidado para lograr capturar el valor de una entidad
       // bibliografia : https://github.com/akveo/ng2-smart-table/issues/375
       descripcionTipoPerfil: {
-        valuePrepareFunction: (cell: any, row: any)=>{ return row.idTipoPerfil.descTipo },
+        valuePrepareFunction: (cell: any, row: any) => { return row.idTipoPerfil.descTipo },
         title: 'Tipo',
         type: 'string',
       },
