@@ -144,7 +144,7 @@ export class NewActivityComponent implements OnInit {
       username: 'Nicholas.Stanton',
       email: 'Rey.Padberg@rosamond.biz',
       notShownField: true,
-    }
+    },
   ];
 
   data1: any;

@@ -180,7 +180,7 @@ export class ListEndPointsService {
         urlEndPoint: '/organizaciones/new',
         groupEndPoint: 'organizacionesGroup',
         descEndPoint: 'Ingresa un nueva Organizacion en la BD asignandolo',
-      },// 2018-10-20 | NAM
+      }, // 2018-10-20 | NAM
       findByIdPaisOrganizacion: {
         id: 9,
         nameEndpoint: 'findByIdPaisOrganizacion',
