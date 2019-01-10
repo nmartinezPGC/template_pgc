@@ -12,6 +12,8 @@ import { ListasComunesService } from '../../common-list/services/listas-comunes.
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster'; // Servicio de Notificaciones
 // import 'style-loader!angular2-toaster/toaster.css';
 import { LocalDataSource } from 'ng2-smart-table'; // DataLocal de Ejemplo para el JSON de envio
+import { ActivityConfigSmartTableService } from '../services/activity-config-smart-table.service';
+
 // import { SmartTableService } from '../../../@core/data/smart-table.service'; // Servicio de la SmartTable de la API
 
 import 'style-loader!angular2-toaster/toaster.css';
@@ -29,7 +31,7 @@ declare var $: any;
   templateUrl: './new-activity.component.html',
   styleUrls: ['./new-activity.component.scss', '../../components/notifications/notifications.component.scss'],
   // changeDetection: ChangeDetectionStrategy.OnPush, // Se usa para Actualizar la Informacion con otro evento
-  // providers: [ ToasterService, SmartTableService ],
+  providers: [ToasterService, ActivityConfigSmartTableService],
 })
 export class NewActivityComponent implements OnInit {
   /****************************************************************************
@@ -65,9 +67,11 @@ export class NewActivityComponent implements OnInit {
   isDuplicatesPrevented = false;
   isCloseButton = true;
 
+  p: number = 1;
+
   // Configuracion de la SmartTable
 
-  data = [
+  /*data = [
     {
       id: 1,
       name: 'Leanne Graham',
@@ -145,69 +149,19 @@ export class NewActivityComponent implements OnInit {
       email: 'Rey.Padberg@rosamond.biz',
       notShownField: true,
     },
-  ];
-
-  data1: any;
-
-  public listArrayEstados: any;
-
-  settings = {
-    add: {
-      confirmCreate: true,
-      addButtonContent: '<i class="nb-plus"></i>',
-      createButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
-    },
-    edit: {
-      editButtonContent: '<i class="nb-edit"></i>',
-      saveButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
-      confirmSave: true, // Confirma que se Actualizara la Informacion
-    },
-    delete: {
-      deleteButtonContent: '<i class="nb-trash"></i>',
-      confirmDelete: true,
-    },
-    actions: { // Definicion de la Accion de los Botones de la Smart Table
-      columnTitle: 'Acciones',
-      add: true,
-      delete: true,
-      edit: true,
-    },
-    pager: { // Paginador de la Tabla
-      perPage: 5,
-    },
-    columns: { // Definicion de las Columnas de Tabla
-      id: {
-        title: 'ID',
-        type: 'number',
-        width: '5%',
-        editable: false,
-      },
-      name: {
-        title: 'Nombre',
-        type: 'text',
-        width: '20%',
-      },
-      username: {
-        title: 'Organización',
-        width: '75%',
-        disable: false,
-        editor: {
-          type: 'list',
-          config: {
-            list: this.listArrayEstados,
-          },
-        },
-      },
-    },
-    attr: {
-      class: 'form-control',
-    },
-  };
+  ];*/
+  data: any;
 
   // DataSource de la Smart Table
+  data1: any;
+  data2: any;
+
+  public settings;
   source: LocalDataSource;
+  public listArrayEstados: any;
+  public listArrayTipoOrg: any;
+  public listArrayPaisOrg: any;
+  public listArrayOrg: any;
 
   // Variables Tipo JSON, para usarlas en los Servicios Invocados
   public JsonReceptionEstados: any;
@@ -258,12 +212,17 @@ export class NewActivityComponent implements OnInit {
     private changeDetectorRef: ChangeDetectorRef,
     // Inicializa el ToasterService
     private _toasterService: ToasterService,
-    protected _router: Router) {
+    protected _router: Router,
+    public _activityConfigSmartTableService: ActivityConfigSmartTableService) {
+    // Llamamos a la Funcion de Configuracion de las Smart Table
+    this._activityConfigSmartTableService.configSmartTableIdInternas(null, null, null);
+    this.settings = this._activityConfigSmartTableService.settings;
+
     /* Llamado a la Funcion: 007, la cual obtiene el detalle da la Info.
      del Usuario */
     this.userDatailsService();
 
-    this.source = new LocalDataSource(this.data); // create the source
+    // this.source = new LocalDataSource(this.data); // create the source
 
   } // FIN | constructor
 
@@ -423,7 +382,7 @@ export class NewActivityComponent implements OnInit {
       // event.newData['name'] += ' + added in code';
       alert(event.newData['username']);
       event.confirm.resolve(event.newData);
-      // console.log(event.newData);
+      console.log(event.newData);
     } else {
       event.confirm.reject();
     }
@@ -503,20 +462,7 @@ export class NewActivityComponent implements OnInit {
           // console.log(result.status);
           this.showToast('error', 'Error al Obtener la Información de Estados', result.message);
         } else if (result.status === 200) {
-          this.JsonReceptionEstados = result.data;
-          this.data1 = this.JsonReceptionEstados;
-          // console.log(this.data1);
-
-          // Carga los Items para el List de la Smart table
-          this.listArrayEstados = new Array();
-
-          this.data1.forEach(element => {
-            this.listArrayEstados.push({ title: element['descEstado'], value: element['idEstado'] });
-          });
-
-          this.settings.columns.username.editor.config.list = this.listArrayEstados;
-          this.settings = Object.assign({}, this.settings);
-          // console.log(this.listArrayEstados);
+          // NADA
         }
       },
       error => {
@@ -652,6 +598,18 @@ export class NewActivityComponent implements OnInit {
         } else if (result.status === 200) {
           this.JsonReceptionTiposOrganizacion = result.data;
           // console.log(this.JsonReceptionTiposOrganizacion);
+          // this.data = this.JsonReceptionEstados;
+          this.data1 = this.JsonReceptionTiposOrganizacion;
+
+          // Carga los Items para el List de la Smart table
+          this.listArrayTipoOrg = new Array();
+
+          this.data1.forEach(element => {
+            this.listArrayTipoOrg.push({ title: element['nombreTipoOrganizacion'], value: element['idTipoOrganizacion'] });
+          });
+
+          this.settings.columns.idTipoOrganizacion.editor.config.list = this.listArrayTipoOrg;
+          this.settings = Object.assign({}, this.settings);
         }
       },
       error => {
@@ -678,7 +636,17 @@ export class NewActivityComponent implements OnInit {
           this.showToast('error', 'Error al Obtener la Información de los Paises', result.message);
         } else if (result.status === 200) {
           this.JsonReceptionPaises = result.data;
-          // console.log(this.JsonReceptionPaises);
+          this.data1 = this.JsonReceptionPaises;
+
+          // Carga los Items para el List de la Smart table
+          this.listArrayPaisOrg = new Array();
+
+          this.data1.forEach(element => {
+            this.listArrayPaisOrg.push({ title: element['descPais'], value: element['idPais'] });
+          });
+
+          this.settings.columns.idPaisOrganizacion.editor.config.list = this.listArrayPaisOrg;
+          this.settings = Object.assign({}, this.settings);
         }
       },
       error => {
@@ -762,11 +730,20 @@ export class NewActivityComponent implements OnInit {
           this.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', result.message);
         } else if (result.status === 200) {
           this.JsonReceptionTipoPaisOrganizacionesData = result.data;
-          // console.log(this.JsonReceptionTipoPaisOrganizacionesData)
+          this.data1 = this.JsonReceptionTipoPaisOrganizacionesData;
+
+          // Carga los Items para el List de la Smart table
+          this.listArrayOrg = new Array();
+
+          this.data1.forEach(element => {
+            this.listArrayOrg.push({ title: element['descOrganizacion'], value: element['idOrganizacion'] });
+          });
+
+          this.settings.columns.idOrganizacion.editor.config.list = this.listArrayOrg;
+          this.settings = Object.assign({}, this.settings);
         }
       },
       error => {
-        // console.log(<any>error);
         this.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', error);
       },
     );
@@ -859,110 +836,15 @@ export class NewActivityComponent implements OnInit {
               'idInterna': this._activityModel.idInterna,
             });
             this._activityModel.idInterna = '';
+            // this.data = this.JsonIdInternaOrganizacion;
             this.showToast('success', 'ID Interna Ingresada', 'Se ha Ingresado la ID Interna, a la Organización seleccionada');
           }
         }
       },
       error => {
-        // console.log(<any>error);
         this.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', <any>error);
       },
     );
   } // FIN | findOrganizacionByCode
 
-
-  filterByString(data, s) {
-    return data.filter(e => e.idInterna.includes(s) || e.descOrganizacion.includes(s))
-      .sort((a, b) => a.idInterna.includes(s) && !b.idInterna.includes(s) ? -1 : b.idInterna.includes(s) && !a.idInterna.includes(s) ? 1 : 0);
-  }
-
-  verJson() {
-    // console.log( 'Json de IdInterna +++ ' + JSON.stringify( this.JsonIdInternaOrganizacion));
-    // console.log('Ejecucion de la Funcion +++ ' + this.filterByString( this.JsonIdInternaOrganizacion, "E"));
-    /*
-        let jsonSend = this.JsonIdInternaOrganizacion;
-        console.log('Json de ID Internas +++ ' + JSON.stringify ( jsonSend ));
-
-        var names1 = jsonSend.map(function (interna) { return interna.idInterna; });
-        var sorted1 = names1.sort();
-
-        var unique1 = sorted1.filter(function (value, index) {
-          return value !== sorted1[index + 1];
-        });
-        console.log( 'Datos que no son repetidos ID Interna ' + unique1);
-
-    */
-    // var elementos = [1, 1, 3, 5, 6, 4, 9, 5, 3, 5, 7, 9, 0, 1];
-    /* var elementos = this.JsonIdInternaOrganizacion;
-     var repetidos = [];
-     var temporal = [];*/
-
-    // elementos.forEach((value, index) => {
-    // temporal = Object.assign([], elementos); //Copiado de elemento
-    // temporal.splice(index, 1); //Se elimina el elemnto q se compara
-    /**
-     * Se busca en temporal el elemento, y en repetido para
-     * ver si esta ingresado al array. indexOf returna
-     * -1 si el elemento no se encuetra
-     **/
-    // if (temporal.indexOf(value) != -1 && repetidos.indexOf(value) == -1) repetidos.push(value);
-    // });
-
-    // console.log('repetidos ' + repetidos);
-
-    /*var personas = [
-      { name: "paco", edad: 23 },
-      { name: "paco", edad: 23 },
-      { name: "pepe", edad: 25 },
-      { name: "paco", edad: 23 },
-      { name: "lucas", edad: 30 },
-      { name: "paco", edad: 23 },
-      { name: "pepe", edad: 25 }
-    ];
-
-    var persona = {};
-    var unicos = personas.filter(function (e) {
-      return persona[e.name] ? false : (persona[e.name] = true);
-    });
-
-    console.log('Datos que no son repetidos Personas ' + JSON.stringify( unicos));*/
-
-
-    /*var elementos1 = [1, 1, 3, 5, 6, 4, 9, 5, 3, 5, 7, 9, 0, 1];
-    var repetidos1 = [];
-    var temporal1 = [];
-*/
-    // elementos1.forEach((value, index) => {
-    // temporal1 = Object.assign([], elementos1); //Copiado de elemento
-    // temporal1.splice(index, 1); //Se elimina el elemnto q se compara
-    /**
-     * Se busca en temporal el elemento, y en repetido para
-     * ver si esta ingresado al array. indexOf returna
-     * -1 si el elemento no se encuetra
-     **/
-    // if (temporal1.indexOf(value) != -1 && repetidos1.indexOf(value) == -1) repetidos1.push(value);
-    // });
-
-    // console.log('repetidos1 ' + repetidos1);
-
-    //  console.log(this.JsonIdInternaOrganizacion);
-    // Numero de Filas de la tabla, flag para tener el limite del array
-    // let rowCount = $("#tableIdInterna > tbody >tr").length;
-
-    // Numero de clomunas, para obtener el indice del campo a serializar
-    // let columnCount = $("#tableIdInterna tr:last td").length;
-
-    // alert('Filas de la Tabla ==== ' + rowCount + '  ======  Columnas de la Tabla ======= ' + columnCount);
-
-    // Recorre todo el Array de la Tabla
-    /*$('#tableIdInterna > tbody > tr').each(function (index, element) {
-      // console.log(element);
-      const _referencia = $(element).find('td').eq(0).html(),
-        _tipoOrganizacion = $(element).find('td').eq(1).html(),
-        _paisOrganizacion = $(element).find('td').eq(3).html(),
-        _idInterna = $(element).find('td').eq(4).html();
-      alert('Referencia ' + _referencia + ' tipoOrganizacion ' + _tipoOrganizacion + '  paisOrganizacion ' + _paisOrganizacion + ' _idInterna  ' + _idInterna);
-      // console.log('Referencia ' + _referencia + ' tipoOrganizacion ' + _tipoOrganizacion + '  paisOrganizacion ' + _paisOrganizacion + ' _idInterna  ' + _idInterna);
-    });*/
-  }
 }

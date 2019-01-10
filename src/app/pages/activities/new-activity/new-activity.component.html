@@ -367,7 +367,7 @@
                     <!-- Tabla de las ID's Internas -->
                     <div class="form-group">
                       <label>ID's Internas seleccionadas</label>
-                      <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)"
+                      <ng2-smart-table [settings]="settings" [source]="data" (deleteConfirm)="onDeleteConfirm($event)"
                         (editConfirm)="onSaveConfirm($event)" (createConfirm)="onCreateConfirm($event)"></ng2-smart-table>
                     </div>
                     <hr>
@@ -401,6 +401,8 @@
                         </tr>
                       </tbody>
                     </table>
+
+                    <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls> -->
 
                   </div>
                 </div>

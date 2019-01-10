@@ -5,10 +5,8 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { PagesRoutingModule } from './pages-routing.module';
 import { ThemeModule } from '../@theme/theme.module';
 import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
-// import { MantenimientosComponent } from './mantenimientos/mantenimientos.component';
 
-// Imports del Modulo de Actividades | 2018-07-02
-// import { NewActivityComponent } from './activities/new-activity/new-activity.component';
+import { NgxPaginationModule } from 'ngx-pagination'; // <-- import the module
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -20,13 +18,10 @@ const PAGES_COMPONENTS = [
     ThemeModule,
     DashboardModule,
     MiscellaneousModule,
-    // Modulo de Actividades
-    // NewActivityComponent,
+    NgxPaginationModule,
   ],
   declarations: [
     ...PAGES_COMPONENTS,
-    // MantenimientosComponent,
-    // NewActivityComponent,
   ],
 })
 export class PagesModule {
