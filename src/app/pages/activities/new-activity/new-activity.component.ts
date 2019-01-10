@@ -404,7 +404,7 @@ export class NewActivityComponent implements OnInit {
     if (window.confirm('Are you sure you want to create?')) {
       event.newData['name'] += ' + added in code';
       event.confirm.resolve(event.newData);
-      console.log(event.newData);
+      // console.log(event.newData);
     } else {
       event.confirm.reject();
     }
@@ -423,7 +423,7 @@ export class NewActivityComponent implements OnInit {
       // event.newData['name'] += ' + added in code';
       alert(event.newData['username']);
       event.confirm.resolve(event.newData);
-      console.log(event.newData);
+      // console.log(event.newData);
     } else {
       event.confirm.reject();
     }
@@ -505,7 +505,7 @@ export class NewActivityComponent implements OnInit {
         } else if (result.status === 200) {
           this.JsonReceptionEstados = result.data;
           this.data1 = this.JsonReceptionEstados;
-          console.log(this.data1);
+          // console.log(this.data1);
 
           // Carga los Items para el List de la Smart table
           this.listArrayEstados = new Array();
@@ -516,7 +516,7 @@ export class NewActivityComponent implements OnInit {
 
           this.settings.columns.username.editor.config.list = this.listArrayEstados;
           this.settings = Object.assign({}, this.settings);
-          console.log(this.listArrayEstados);
+          // console.log(this.listArrayEstados);
         }
       },
       error => {
