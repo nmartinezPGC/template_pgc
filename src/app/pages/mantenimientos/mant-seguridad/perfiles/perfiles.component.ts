@@ -16,6 +16,7 @@ import { Router } from '@angular/router';
 // Model of Class
 import { PerfilModel } from '../../models/perfiles.model';
 
+
 /**
  * Generated Component
  */
@@ -42,8 +43,12 @@ export class PerfilesComponent implements OnInit {
    * Smart table Generated
    */
   data: any;
+  
+  
 
   settings = {
+    hideSubHeader: false,
+    
     add: {
       addButtonContent: '<i class="nb-plus"></i>',
       createButtonContent: '<i class="nb-checkmark"></i>',
@@ -53,26 +58,47 @@ export class PerfilesComponent implements OnInit {
       editButtonContent: '<i class="nb-edit"></i>',
       saveButtonContent: '<i class="nb-checkmark"></i>',
       cancelButtonContent: '<i class="nb-close"></i>',
+      confirmSave: true,
     },
     delete: {
       deleteButtonContent: '<i class="nb-trash"></i>',
       confirmDelete: true,
     },
     columns: {
-      idPerfil: {
-        title: 'Codigo de Perfil',
-        type: 'number',
-      },
+      // idPerfil: {
+      //   title: 'Id de Perfil',
+      //   notShownField: true,
+      
+      //   valuePrepareFunction: (edit) => {
+      //     console.log(edit);
+      //     this.onSaveConfirm(edit);
+      //   },
+      // },
       codPerfil: {
-        title: 'Perfil',
+        title: 'Codigo de Perfil',
         type: 'string',
       },
       descPerfil: {
         title: 'Descripcion de Perfil',
         type: 'string',
       },
-    },
+      //Json anidado para lograr capturar el valor de una entidad
+      // bibliografia : https://github.com/akveo/ng2-smart-table/issues/375
+      descripcionTipoPerfil: { 
+        valuePrepareFunction: (cell: any,row:any) => {return row.idTipoPerfil.descTipo}, 
+        title: 'Tipo',
+        type: 'string',
+      },
+    },  
   };
+
+
+
+  public  onSaveConfirm(id){
+
+    alert('id selecionado '+id )
+  }
+
 
   config: ToasterConfig;
 
@@ -156,7 +182,7 @@ export class PerfilesComponent implements OnInit {
     // Inicializacion del Modelo de la Clase
     this._perfilModel = new PerfilModel(
       0, null, null, null,
-      null, 0, null,
+      null, 0, "",
     );
     // inicializar la lista de tipo de perfiles
     this.perfilesTipoService();
@@ -185,7 +211,7 @@ export class PerfilesComponent implements OnInit {
           // console.log(result.status);
           this.JsonReceptionPrefiles = response.data;
           this.data = this.JsonReceptionPrefiles;
-          // console.log(response.data);
+          //console.log(response.data);
         }
       },
       error => {
@@ -214,6 +240,16 @@ export class PerfilesComponent implements OnInit {
   onDeleteConfirm(event): void {
     if (window.confirm('Are you sure you want to delete?')) {
       event.confirm.resolve();
+    } else {
+      event.confirm.reject();
+    }
+  }
+
+  onSaveConfirm1(event) {
+    //console.log(event.data.idPerfil);
+    if (window.confirm('Are you sure you want to save?')) {
+      event.newData['name'] += ' + added in code';
+      event.confirm.resolve(event.newData);
     } else {
       event.confirm.reject();
     }
