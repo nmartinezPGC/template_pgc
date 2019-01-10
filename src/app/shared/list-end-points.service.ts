@@ -123,7 +123,7 @@ export class ListEndPointsService {
         groupEndPoint: 'espacioTrabajoUsuarioGroup',
         descEndPoint: 'Ingresa un nuevo Espacio de Trabajo en la BD asignandolo a un Usuario',
       },
-    },
+    }, // Modulo de Organizaciones
     endPointOrganizaciones: {
       listAllTipoOrganizaciones: {
         id: 1,
@@ -161,34 +161,48 @@ export class ListEndPointsService {
         descEndPoint: 'Busca el Tipo de Organizacion con el IdTipoOrganizacion, de parametro',
       },
       findByIdTipoOrganizacionT: {
-        id: 5,
+        id: 6,
         nameEndpoint: 'FindByIdOrganizacion',
         urlEndPoint: '/organizaciones/findByIdTipoOrganizacion/',
         groupEndPoint: 'organizacionesGroup',
         descEndPoint: 'Busca el Tipo de Organizacion con el IdTipoOrganizacion, de parametro',
       },
       findByIdTipoPaisOrganizacion: {
-        id: 6,
+        id: 7,
         nameEndpoint: 'FindByIdOrganizacion',
         urlEndPoint: '/organizaciones/findByIdTipoPaisOrganizacion/',
         groupEndPoint: 'organizacionesGroup',
         descEndPoint: 'Busca la Organizacion con el IdTipoOrganizacion, de parametro',
       },
       newOrganizacion: {
-        id: 7,
+        id: 8,
         nameEndpoint: 'NewOrganizacion',
         urlEndPoint: '/organizaciones/new',
         groupEndPoint: 'organizacionesGroup',
         descEndPoint: 'Ingresa un nueva Organizacion en la BD asignandolo',
-      },
-      findByIdPaisOrganizacion: { // 2018-10-20 | NAM
-        id: 8,
+      },// 2018-10-20 | NAM
+      findByIdPaisOrganizacion: {
+        id: 9,
         nameEndpoint: 'findByIdPaisOrganizacion',
         urlEndPoint: '/organizaciones/findByIdPaisOrganizacion/',
         groupEndPoint: 'organizacionesGroup',
         descEndPoint: 'Busca la Organizacion con el IdPaisOrganizacion, de parametro',
+      }, // NAM | 2019-01-09 | Creacion del EndPoint de Buscar Org. por Codido
+      findByCodOrganizacion: {
+        id: 10,
+        nameEndpoint: 'Find By CodOrganizacion',
+        urlEndPoint: '/organizaciones/findByCodOrganizacion/',
+        groupEndPoint: 'organizacionesGroup',
+        descEndPoint: 'Busca la Organizacion con el CodOrganizacion, de parametro',
       },
-    },
+      countByCodOrganizacion: {
+        id: 11,
+        nameEndpoint: 'Find By CodOrganizacion Count',
+        urlEndPoint: '/organizaciones/countByCodOrganizacion/',
+        groupEndPoint: 'organizacionesGroup',
+        descEndPoint: 'Busca la Organizacion con el CodOrganizacion, de parametro',
+      },
+    }, // Modulo de Mantenimientos Genericos
     endPointMantGenericos: {
       listAllPaises: {
         id: 1,
@@ -231,6 +245,29 @@ export class ListEndPointsService {
         urlEndPoint: '/profiles/kind',
         groupEndPoint: 'mantGenericosGroup',
         descEndPoint: 'listar los tipo de perfiles',
+      },
+    }, // Modulo de Mantenimientos Genericos
+    endPointIdInternasActividades: {
+      listAllidInternas: {
+        id: 1,
+        nameEndpoint: 'List All Id Internas',
+        urlEndPoint: '/mant-actividades/id-interna',
+        groupEndPoint: 'idInternaGroup',
+        descEndPoint: 'Busca todos los Paises de la API',
+      },
+      findByCodInterna: {
+        id: 2,
+        nameEndpoint: 'Find By CodInterna',
+        urlEndPoint: '/mant-actividades/id-interna/findByCodInterna/',
+        groupEndPoint: 'idInternaGroup',
+        descEndPoint: 'Busca la Id Interna con el Codigo enviado',
+      },
+      countByCodInterna: {
+        id: 3,
+        nameEndpoint: 'Count By CodInterna',
+        urlEndPoint: '/mant-actividades/id-interna/countByCodInterna/',
+        groupEndPoint: 'idInternaGroup',
+        descEndPoint: 'Busca la Cantidad de Id Internas con el Codigo enviado',
       },
     },
   };

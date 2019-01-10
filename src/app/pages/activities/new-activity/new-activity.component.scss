@@ -77,4 +77,34 @@
     /* red */
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(169, 68, 66, 0.6) !important;
   }
+
+  .input-group.has-person-icon {
+    position: relative;
+
+    .form-control {
+
+      padding-left: 3rem;
+    }
+
+    &::before {
+      content: '\F47D';
+      font-family: 'Ionicons';
+      font-size: 2rem;
+      position: absolute;
+      z-index: 100;
+      left: 1rem;
+      top: 0.25rem;
+    }
+  }
+
+  // Smart table style
+  .ng2-smart-filter select {
+    height: calc(2rem + 4px) !important;
+    padding: 0 10px !important;
+  }
+
+  table-cell-default-editor select-editor select {
+    height: calc(2rem + 8px) !important;
+    padding: 0 10px !important;
+  }
 }

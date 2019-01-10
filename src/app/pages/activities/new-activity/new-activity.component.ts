@@ -47,19 +47,11 @@ export class NewActivityComponent implements OnInit {
 
   redirectDelay: number = 0;
 
-  protected captains = ['James T. Kirk', 'Benjamin Sisko', 'Jean-Luc Picard', 'Spock', 'Jonathan Archer', 'Hikaru Sulu', 'Christopher Pike', 'Rachel Garrett'];
-
   protected dataService: CompleterData;
-
-  datos = [
-    { organinizacion: 'Organinizacion1Organinizacion1Organinizacion1' },
-    { organinizacion: 'Organinizacion2Organinizacion2Organinizacion2' },
-    { organinizacion: 'Organinizacion3Organinizacion3Organinizacion3' },
-  ]
-
 
   config: ToasterConfig;
 
+  // Consfiguracion del Notificador
   position = 'toast-bottom-full-width';
   animationType = 'slideDown';
   title = 'Se ha grabado la Información! ';
@@ -74,7 +66,90 @@ export class NewActivityComponent implements OnInit {
   isCloseButton = true;
 
   // Configuracion de la SmartTable
-  data: any;
+
+  data = [
+    {
+      id: 1,
+      name: 'Leanne Graham',
+      username: 'Bret',
+      email: 'Sincere@april.biz',
+      notShownField: true,
+    },
+    {
+      id: 2,
+      name: 'Ervin Howell',
+      username: 'Antonette',
+      email: 'Shanna@melissa.tv',
+      notShownField: true,
+    },
+    {
+      id: 3,
+      name: 'Clementine Bauch',
+      username: 'Samantha',
+      email: 'Nathan@yesenia.net',
+      notShownField: false,
+    },
+    {
+      id: 4,
+      name: 'Patricia Lebsack',
+      username: 'Karianne',
+      email: 'Julianne.OConner@kory.org',
+      notShownField: false,
+    },
+    {
+      id: 5,
+      name: 'Chelsey Dietrich',
+      username: 'Kamren',
+      email: 'Lucio_Hettinger@annie.ca',
+      notShownField: false,
+    },
+    {
+      id: 6,
+      name: 'Mrs. Dennis Schulist',
+      username: 'Leopoldo_Corkery',
+      email: 'Karley_Dach@jasper.info',
+      notShownField: false,
+    },
+    {
+      id: 7,
+      name: 'Kurtis Weissnat',
+      username: 'Elwyn.Skiles',
+      email: 'Telly.Hoeger@billy.biz',
+      notShownField: false,
+    },
+    {
+      id: 8,
+      name: 'Nicholas Runolfsdottir V',
+      username: 'Maxime_Nienow',
+      email: 'Sherwood@rosamond.me',
+      notShownField: true,
+    },
+    {
+      id: 9,
+      name: 'Glenna Reichert',
+      username: 'Delphine',
+      email: 'Chaim_McDermott@dana.io',
+      notShownField: false,
+    },
+    {
+      id: 10,
+      name: 'Clementina DuBuque',
+      username: 'Moriah.Stanton',
+      email: 'Rey.Padberg@karina.biz',
+      notShownField: false,
+    },
+    {
+      id: 11,
+      name: 'Nicholas DuBuque',
+      username: 'Nicholas.Stanton',
+      email: 'Rey.Padberg@rosamond.biz',
+      notShownField: true,
+    }
+  ];
+
+  data1: any;
+
+  public listArrayEstados: any;
 
   settings = {
     add: {
@@ -87,47 +162,41 @@ export class NewActivityComponent implements OnInit {
       editButtonContent: '<i class="nb-edit"></i>',
       saveButtonContent: '<i class="nb-checkmark"></i>',
       cancelButtonContent: '<i class="nb-close"></i>',
+      confirmSave: true, // Confirma que se Actualizara la Informacion
     },
     delete: {
       deleteButtonContent: '<i class="nb-trash"></i>',
       confirmDelete: true,
     },
-    actions: {
+    actions: { // Definicion de la Accion de los Botones de la Smart Table
       columnTitle: 'Acciones',
       add: true,
       delete: true,
       edit: true,
     },
-    columns: {
+    pager: { // Paginador de la Tabla
+      perPage: 5,
+    },
+    columns: { // Definicion de las Columnas de Tabla
       id: {
-        title: 'ID Interna',
+        title: 'ID',
         type: 'number',
+        width: '5%',
+        editable: false,
+      },
+      name: {
+        title: 'Nombre',
+        type: 'text',
         width: '20%',
       },
-      firstName: {
+      username: {
         title: 'Organización',
-        width: '80%',
+        width: '75%',
         disable: false,
         editor: {
-          type: 'completer',
+          type: 'list',
           config: {
-            completer: {
-              data: this.dataService,
-              searchFields: 'descOrganizacion',
-              titleField: 'descOrganizacion',
-              descriptionField: 'descOrganizacion',
-              // valuePrepareFunction: (value) => { return this.datos }
-            },
-            /*type: 'list',
-              config: {
-                list: [{
-                  value: 0,
-                  title: 'Prueba Uno'
-                },{
-                    value: 1,
-                    title: 'Prueba Dos'
-                }]
-              },*/
+            list: this.listArrayEstados,
           },
         },
       },
@@ -137,7 +206,8 @@ export class NewActivityComponent implements OnInit {
     },
   };
 
-  source: LocalDataSource = new LocalDataSource();
+  // DataSource de la Smart Table
+  source: LocalDataSource;
 
   // Variables Tipo JSON, para usarlas en los Servicios Invocados
   public JsonReceptionEstados: any;
@@ -151,12 +221,14 @@ export class NewActivityComponent implements OnInit {
   // Organizaciones
   protected searchStrFunc: string;
   public JsonReceptionAllOrganizaciones: any[];
+  public JsonReceptionOrganizacionCode: any[];
   protected selectedOrganizicionesAll: string = '';
   protected selectedIdOrganizacion: string = '';
   protected selectedDescTipoOrganizacion: string = '';
   protected selectedPaisOrganizacion: string = '';
   protected selectedDescOrganizacion: string = '';
   public JsonReceptionAllOrganizacionesData: any;
+  public countIdInternaFind: number;
 
   // Id Internas
   public JsonIdInternaOrganizacion = [];
@@ -166,11 +238,8 @@ export class NewActivityComponent implements OnInit {
   public descTipoOrganizacion: string;
   public descOrganizacion: string;
 
-  // private toasterService: ToasterService;
-
   // Instacia de la variable del Modelo | Json de Parametros
   public _activityModel: ActivityModel;
-
 
   // FIN | Definicion de las Variables de la Clase
 
@@ -189,16 +258,12 @@ export class NewActivityComponent implements OnInit {
     private changeDetectorRef: ChangeDetectorRef,
     // Inicializa el ToasterService
     private _toasterService: ToasterService,
-    // Render del DOM
-    // private _renderer: Renderer2,
     protected _router: Router) {
-    /**
-    * Metodo de que valida la Cabezera de la Aplicacion, evalua si el Token
-    * sigue Activo, de no ser asi, redirecciona al Login
-    */
     /* Llamado a la Funcion: 007, la cual obtiene el detalle da la Info.
      del Usuario */
     this.userDatailsService();
+
+    this.source = new LocalDataSource(this.data); // create the source
 
   } // FIN | constructor
 
@@ -266,7 +331,6 @@ export class NewActivityComponent implements OnInit {
   ****************************************************************************/
   makeToast() {
     this.showToast(this.type, this.title, this.content);
-    // console.log('Opcion de Toaster 1.3 ' + JSON.stringify(this.content));
   } // FIN | makeToast
 
 
@@ -316,46 +380,70 @@ export class NewActivityComponent implements OnInit {
   /****************************************************************************
   * Funcion: onDeleteConfirm
   * Object Number: 005
-  * Fecha: 20-08-2018
+  * Fecha: 09-01-2019
   * Descripcion: Method para Borrar Items de la SmartTable
   * Objetivo: enviar al Json de ID'Intermas la información que ocupa la API
   ****************************************************************************/
-  onDeleteConfirm(event): void {
-    if (window.confirm('¿ Estas seguro de borrar la Organización ?')) {
+  onDeleteConfirm(event) {
+    if (window.confirm('Are you sure you want to delete?')) {
       event.confirm.resolve();
     } else {
       event.confirm.reject();
     }
-  } // FIN | onDeleteConfirm
+  }// FIN | onDeleteConfirm
 
 
   /****************************************************************************
   * Funcion: onCreateConfirm
   * Object Number: 006
-  * Fecha: 20-08-2018
-  * Descripcion: Method para Borrar Items de la SmartTable
+  * Fecha: 09-01-2019
+  * Descripcion: Method para Cerar Items de la SmartTable
   * Objetivo: enviar al Json de ID'Intermas la información que ocupa la API
   ****************************************************************************/
   onCreateConfirm(event) {
-    if (window.confirm('¿ Estas seguro de agregar una organización ?')) {
-      event.newData['firstName'] += ' + ' + this.JsonOrganizationSelect;
+    if (window.confirm('Are you sure you want to create?')) {
+      event.newData['name'] += ' + added in code';
       event.confirm.resolve(event.newData);
-      // console.log('Dato de la Fila Nueva ' + event.newData.id );
-      // const parseEvent: any = JSON.stringify(event.newData);
-      // this.JsonOrganizationSelect = event.newData;
-      // console.log('onCreateConfirm +++ ' + this.JsonOrganizationSelect);
+      console.log(event.newData);
     } else {
       event.confirm.reject();
     }
   } // FIN | onCreateConfirm
 
+
+  /****************************************************************************
+  * Funcion: onSaveConfirm
+  * Object Number: 006
+  * Fecha: 09-01-2019
+  * Descripcion: Method para Guardar Items de la SmartTable
+  * Objetivo: enviar al Json de ID'Intermas la información que ocupa la API
+  ****************************************************************************/
+  onSaveConfirm(event) {
+    if (window.confirm('Estas seguro de grabar la información modificada?')) {
+      // event.newData['name'] += ' + added in code';
+      alert(event.newData['username']);
+      event.confirm.resolve(event.newData);
+      console.log(event.newData);
+    } else {
+      event.confirm.reject();
+    }
+  }// FIN | onSaveConfirm
+
+
+  /****************************************************************************
+  * Funcion: onEditedCompleter
+  * Object Number: 006.1
+  * Fecha: 09-01-2019
+  * Descripcion: Method para Editar listas Items de la SmartTable
+  * Objetivo: enviar al Json de ID'Intermas la información que ocupa la API
+  ****************************************************************************/
   onEditedCompleter(event: { title: '' }): boolean {
     // this.cell.newValue = event.title;
     this.JsonOrganizationSelect = event.title;
     // const vari = JSON.stringify(event);
-    // console.log('onCreateConfirm +++ ' + vari);
+    // console.log('onEditedCompleter +++ ' + vari);
     return false;
-  }
+  } // FIN | onEditedCompleter
 
 
   /* **************************************************************************/
@@ -376,8 +464,6 @@ export class NewActivityComponent implements OnInit {
           // console.log(result.status);
           this.showToast('error', 'Error al Obtener la Información del Usuario', result.message);
         } else {
-          // this.productos = result.data;
-          // console.log(result.status);
           // console.log(result.data);
         }
       },
@@ -418,15 +504,29 @@ export class NewActivityComponent implements OnInit {
           this.showToast('error', 'Error al Obtener la Información de Estados', result.message);
         } else if (result.status === 200) {
           this.JsonReceptionEstados = result.data;
+          this.data1 = this.JsonReceptionEstados;
+          console.log(this.data1);
+
+          // Carga los Items para el List de la Smart table
+          this.listArrayEstados = new Array();
+
+          this.data1.forEach(element => {
+            this.listArrayEstados.push({ title: element['descEstado'], value: element['idEstado'] });
+          });
+
+          this.settings.columns.username.editor.config.list = this.listArrayEstados;
+          this.settings = Object.assign({}, this.settings);
+          console.log(this.listArrayEstados);
         }
       },
       error => {
         // console.log(<any>error);
-        // this.showToast('error', 'Error al Obtener la Información de Estados', error);
-        this.userDatailsService();
+        this.showToast('error', 'Error al Obtener la Información de Estados', error);
+        // this.userDatailsService();
       },
     );
   } // FIN | estadosListService
+
 
 
   /****************************************************************************
@@ -673,7 +773,6 @@ export class NewActivityComponent implements OnInit {
   } // FIN | organizacionesIdTipoIdPaisListService
 
 
-
   /****************************************************************************
   * Funcion: pushJsonIdInterna
   * Object Number: 017
@@ -683,9 +782,6 @@ export class NewActivityComponent implements OnInit {
   * del Formulario de Actividad llamando a la API
   ****************************************************************************/
   private pushJsonIdInterna() {
-    // this._activityModel.descTipoOrganizacion = $('#idTipoOrganizacion').find('option:selected').text(); // Capturamos el texto del option seleccionado | idTipoOrganizacion
-    // this._activityModel.descPais = $('#idPais').find('option:selected').text(); // Capturamos el texto del option seleccionado | idPais
-
     // Validamos que se ha Seleccionado los Filtros Previos a la ID Interna
     if (this._activityModel.idTipoOrganizacion === 0) {
       this.showToast('error', 'Error al Ingresar la Información de las ID Internas', 'Debes Seleccionar el Tipo de Organización, para continuar');
@@ -702,46 +798,10 @@ export class NewActivityComponent implements OnInit {
     if (this._activityModel.idInterna === '' || this._activityModel.idInterna === null) {
       this.showToast('error', 'Error al Ingresar la Información de las Organizaciones', 'Debes de Ingresar el Código del ID Interna, para continuar');
     } else {
-      // Validacion de exitencia de esa ID Interna en la Lista
-      const arrayOrganizacionesIdInternas = JSON.stringify(this.JsonIdInternaOrganizacion);
-
-      const h = this._activityModel.idInterna;
-      const countJson = this.JsonIdInternaOrganizacion.length;
-
-      if (countJson === 0) {
-        // Ingresa el primer Item del json
-        this.JsonIdInternaOrganizacion.push({
-          'descTipoOrganizacion': this._activityModel.descTipoOrganizacion,
-          'descPaisOrganizacion': this._activityModel.descPaisOrganizacion,
-          'descOrganizacion': this._activityModel.descOrganizacion,
-          'idInterna': this._activityModel.idInterna,
-        });
-        this._activityModel.idInterna = '';
-        this.showToast('success', 'ID Interna Ingresada', 'Se ha Ingresado la ID Interna, a la Organización seleccionada');
-      } else {
-        // Entra a Cilco de conteo de Items
-        for (let index = 0; index < countJson; index++) {
-          const element = this.JsonIdInternaOrganizacion[index].idInterna;
-          // alert('Item recorrido No. ' + index + '  Elemento de la Matriz ***** ' + element + '  Elemento de Model ***** ' + h );
-          if (element === h) {
-            // console.log('Elemento de la Matriz repetido ***** ' + element);
-            this.showToast('error', 'Error al Ingresar la Información de las Organizaciones',
-              'Debes de Ingresar un Código del ID Interna distinto, para continuar');
-              return -1
-          } else {
-            this.JsonIdInternaOrganizacion.push({
-              'descTipoOrganizacion': this._activityModel.descTipoOrganizacion,
-              'descPaisOrganizacion': this._activityModel.descPaisOrganizacion,
-              'descOrganizacion': this._activityModel.descOrganizacion,
-              'idInterna': this._activityModel.idInterna,
-            });
-            this._activityModel.idInterna = '';
-            this.showToast('success', 'ID Interna Ingresada', 'Se ha Ingresado la ID Interna, a la Organización seleccionada');
-          }
-        }
-      }
+      // Busqueda del Codigo del Perfil si Existe
+      this.findOrganizacionByCode(this._activityModel.idInterna);
     }
-  } // FN | pushJsonIdInterna
+  } // FIN | pushJsonIdInterna
 
 
   /****************************************************************************
@@ -768,6 +828,49 @@ export class NewActivityComponent implements OnInit {
     }
   }
 
+
+  /****************************************************************************
+  * Funcion: findOrganizacionByCode
+  * Object Number: 019
+  * Fecha: 09-01-2019
+  * Descripcion: Method que valida si un Codigo de Organizacion para Id Interna
+  * Existe, y no permitir su ingreso nuevamente
+  * Objetivo: Validacion de Id Interna por Codigo
+  ****************************************************************************/
+  private findOrganizacionByCode(codeOrganizacionSend: string) {
+    // Condicion para evaluar que opcion se pulsa
+    this._listasComunesService.getOrganizacionByCodigoCount(codeOrganizacionSend).subscribe(
+      result => {
+        if (result.status !== 200) {
+          // Resultadps del Error
+          this.showToast('error', 'Error al Obtener la Información de la Organizacion, con los parametros enviados', result.message);
+        } else if (result.status === 200) {
+          this.countIdInternaFind = result.data;
+
+          if (this.countIdInternaFind !== 0) {
+            this.showToast('error', 'Error al Ingresar la Información de Id Interna en las Organizaciones', 'Ya existe un Código de Id Interna registrado en la BD');
+            return -1;
+          } else {
+            // Ingresa el primer Item del json
+            this.JsonIdInternaOrganizacion.push({
+              'descTipoOrganizacion': this._activityModel.descTipoOrganizacion,
+              'descPaisOrganizacion': this._activityModel.descPaisOrganizacion,
+              'descOrganizacion': this._activityModel.descOrganizacion,
+              'idInterna': this._activityModel.idInterna,
+            });
+            this._activityModel.idInterna = '';
+            this.showToast('success', 'ID Interna Ingresada', 'Se ha Ingresado la ID Interna, a la Organización seleccionada');
+          }
+        }
+      },
+      error => {
+        // console.log(<any>error);
+        this.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', <any>error);
+      },
+    );
+  } // FIN | findOrganizacionByCode
+
+
   filterByString(data, s) {
     return data.filter(e => e.idInterna.includes(s) || e.descOrganizacion.includes(s))
       .sort((a, b) => a.idInterna.includes(s) && !b.idInterna.includes(s) ? -1 : b.idInterna.includes(s) && !a.idInterna.includes(s) ? 1 : 0);
@@ -776,33 +879,33 @@ export class NewActivityComponent implements OnInit {
   verJson() {
     // console.log( 'Json de IdInterna +++ ' + JSON.stringify( this.JsonIdInternaOrganizacion));
     // console.log('Ejecucion de la Funcion +++ ' + this.filterByString( this.JsonIdInternaOrganizacion, "E"));
-/*
-    let jsonSend = this.JsonIdInternaOrganizacion;
-    console.log('Json de ID Internas +++ ' + JSON.stringify ( jsonSend ));
+    /*
+        let jsonSend = this.JsonIdInternaOrganizacion;
+        console.log('Json de ID Internas +++ ' + JSON.stringify ( jsonSend ));
 
-    var names1 = jsonSend.map(function (interna) { return interna.idInterna; });
-    var sorted1 = names1.sort();
+        var names1 = jsonSend.map(function (interna) { return interna.idInterna; });
+        var sorted1 = names1.sort();
 
-    var unique1 = sorted1.filter(function (value, index) {
-      return value !== sorted1[index + 1];
-    });
-    console.log( 'Datos que no son repetidos ID Interna ' + unique1);
+        var unique1 = sorted1.filter(function (value, index) {
+          return value !== sorted1[index + 1];
+        });
+        console.log( 'Datos que no son repetidos ID Interna ' + unique1);
 
-*/
+    */
     // var elementos = [1, 1, 3, 5, 6, 4, 9, 5, 3, 5, 7, 9, 0, 1];
-   /* var elementos = this.JsonIdInternaOrganizacion;
-    var repetidos = [];
-    var temporal = [];*/
+    /* var elementos = this.JsonIdInternaOrganizacion;
+     var repetidos = [];
+     var temporal = [];*/
 
     // elementos.forEach((value, index) => {
-      // temporal = Object.assign([], elementos); //Copiado de elemento
-      // temporal.splice(index, 1); //Se elimina el elemnto q se compara
-      /**
-       * Se busca en temporal el elemento, y en repetido para
-       * ver si esta ingresado al array. indexOf returna
-       * -1 si el elemento no se encuetra
-       **/
-      // if (temporal.indexOf(value) != -1 && repetidos.indexOf(value) == -1) repetidos.push(value);
+    // temporal = Object.assign([], elementos); //Copiado de elemento
+    // temporal.splice(index, 1); //Se elimina el elemnto q se compara
+    /**
+     * Se busca en temporal el elemento, y en repetido para
+     * ver si esta ingresado al array. indexOf returna
+     * -1 si el elemento no se encuetra
+     **/
+    // if (temporal.indexOf(value) != -1 && repetidos.indexOf(value) == -1) repetidos.push(value);
     // });
 
     // console.log('repetidos ' + repetidos);
@@ -830,14 +933,14 @@ export class NewActivityComponent implements OnInit {
     var temporal1 = [];
 */
     // elementos1.forEach((value, index) => {
-      // temporal1 = Object.assign([], elementos1); //Copiado de elemento
-      // temporal1.splice(index, 1); //Se elimina el elemnto q se compara
-      /**
-       * Se busca en temporal el elemento, y en repetido para
-       * ver si esta ingresado al array. indexOf returna
-       * -1 si el elemento no se encuetra
-       **/
-      // if (temporal1.indexOf(value) != -1 && repetidos1.indexOf(value) == -1) repetidos1.push(value);
+    // temporal1 = Object.assign([], elementos1); //Copiado de elemento
+    // temporal1.splice(index, 1); //Se elimina el elemnto q se compara
+    /**
+     * Se busca en temporal el elemento, y en repetido para
+     * ver si esta ingresado al array. indexOf returna
+     * -1 si el elemento no se encuetra
+     **/
+    // if (temporal1.indexOf(value) != -1 && repetidos1.indexOf(value) == -1) repetidos1.push(value);
     // });
 
     // console.log('repetidos1 ' + repetidos1);

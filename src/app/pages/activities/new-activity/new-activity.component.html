@@ -319,7 +319,7 @@
                     <div class="form-group">
                       <label for="inputWebsite">Buscar Organización</label>
                       <div class="input-group full-width">
-                        <div class="input-group-addon"><img src="../../../../assets/icons/common/magnifying-glass-search.png"></div>
+                        <!-- <div class="input-group-addon"><img src="../../../../assets/icons/common/magnifying-glass-search.png"></div> -->
                         <!-- <input type="text" class="form-control" id="inputWebsite" placeholder="Buscar Organización, por el filtro aplicado"> -->
                         <ng2-completer [inputClass]="'form-control'" [(ngModel)]="searchStrFunc" [datasource]="dataService"
                           placeholder="Buscar Organización, por el filtro aplicado" style=" width: 90%; "
@@ -365,12 +365,11 @@
                 <div class="row">
                   <div class="col-sm-12">
                     <!-- Tabla de las ID's Internas -->
-                    <!-- <div class="form-group">
+                    <div class="form-group">
                       <label>ID's Internas seleccionadas</label>
                       <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)"
-                        (createConfirm)="onCreateConfirm($event)">
-                      </ng2-smart-table>
-                    </div> -->
+                        (editConfirm)="onSaveConfirm($event)" (createConfirm)="onCreateConfirm($event)"></ng2-smart-table>
+                    </div>
                     <hr>
                     <table class="table table-hover" id="tableIdInterna">
                       <thead>

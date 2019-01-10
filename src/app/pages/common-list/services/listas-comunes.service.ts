@@ -53,7 +53,6 @@ export class ListasComunesService {
     // Parametros solicitados (Grupo Solicitao)
     const paramSend = idGrupo;
     // Retorno de la Funcion
-    // return this._http.get( 'http://localhost:8090/api/v1/usuarios/findByMail/' + params, { headers: this.headers,
     return this._http.get(this._systemEndPointsService.getEndPointService('estadosGroup', 2) + paramSend, {
       headers: this.headers,
       params: { 'tokenApi': this.tokenHeader },
@@ -177,6 +176,7 @@ export class ListasComunesService {
     });
   }// FIN | FND-00008
 
+
   /****************************************************************************
   * Funcion: FND-00009
   * Fecha: 13-10-2018
@@ -208,6 +208,7 @@ export class ListasComunesService {
     });
   }// FIN | FND-00010
 
+
   /****************************************************************************
   * Funcion: FND-00011
   * Fecha: 20-10-2018
@@ -217,14 +218,30 @@ export class ListasComunesService {
   ****************************************************************************/
   getIdTipoIdPaisOrganizaciones(idTipoOrganizacion: number, idPais: number): Observable<any> {
     // Parametros de la Funcion
-    // const tipoOrgSend = idTipoOrganizacion;
-    // const paisOrgSend = idPais;
     const paramsSend = idTipoOrganizacion + '/' + idPais;
     // Retorno de la Funcion
-    return this._http.get(this._systemEndPointsService.getEndPointService('organizacionesGroup', 6) + paramsSend, {
+    return this._http.get(this._systemEndPointsService.getEndPointService('organizacionesGroup', 7) + paramsSend, {
       headers: this.headers,
       params: { 'tokenApi': this.tokenHeader },
     });
   }// FIN | FND-00011
+
+
+  /****************************************************************************
+  * Funcion: FND-00012
+  * Fecha: 09-01-2019
+  * Descripcion: Metodo para obtener los Datos de la Organizacion por Codigo
+  * Objetivo: Validar si una Organizacion existe por Codigo
+  * Params: { codTipoOrganizacion }
+  ****************************************************************************/
+  getOrganizacionByCodigoCount(codTipoOrganizacion: string): Observable<any> {
+    // Parametros de la Funcion
+    const paramsSend = codTipoOrganizacion;
+    // Retorno de la Funcion
+    return this._http.get(this._systemEndPointsService.getEndPointService('idInternaGroup', 3) + paramsSend, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  }// FIN | FND-00012
 
 }

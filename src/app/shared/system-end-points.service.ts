@@ -100,9 +100,9 @@ export class SystemEndPointsService extends ListEndPointsService {
             break;
         }
         break;
-      case 'organizacionesGroup': // Llamados a los EndPoint del Tipo de Organizacion
+      case 'organizacionesGroup': // Llamados a los EndPoint de Organizaciones
         switch (indicadorEndPoint) {
-          case 1: // Tipos de Organizaciones
+          case 1: // Organizaciones
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointOrganizaciones.listAllTipoOrganizaciones.urlEndPoint;
             break;
           case 2:
@@ -111,20 +111,29 @@ export class SystemEndPointsService extends ListEndPointsService {
           case 3:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointOrganizaciones.newTipoOrganizacion.urlEndPoint;
             break;
-          case 4: // Organizaciones
+          case 4:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointOrganizaciones.listAllOrganizaciones.urlEndPoint;
             break;
           case 5:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointOrganizaciones.findByIdOrganizacion.urlEndPoint;
             break;
           case 6:
-            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointOrganizaciones.findByIdTipoPaisOrganizacion.urlEndPoint;
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointOrganizaciones.findByIdTipoOrganizacionT.urlEndPoint;
             break;
           case 7:
-            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointOrganizaciones.newOrganizacion.urlEndPoint;
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointOrganizaciones.findByIdTipoPaisOrganizacion.urlEndPoint;
             break;
           case 8:
-            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointOrganizaciones.findByIdTipoPaisOrganizacion.urlEndPoint;
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointOrganizaciones.newOrganizacion.urlEndPoint;
+            break;
+          case 9:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointOrganizaciones.findByIdPaisOrganizacion.urlEndPoint;
+            break;
+          case 10:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointOrganizaciones.findByCodOrganizacion.urlEndPoint;
+            break;
+          case 11:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointOrganizaciones.countByCodOrganizacion.urlEndPoint;
             break;
         }
         break;
@@ -145,8 +154,21 @@ export class SystemEndPointsService extends ListEndPointsService {
           case 5:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointMantGenericos.newPerfil.urlEndPoint;
             break;
-            case 6:
+          case 6:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointMantGenericos.getAllTipoPerfil.urlEndPoint;
+            break;
+        }
+        break;
+      case 'idInternaGroup': // Llamados a los EndPoint de Id Internas de los Proyectos
+        switch (indicadorEndPoint) {
+          case 1:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointIdInternasActividades.listAllidInternas.urlEndPoint;
+            break;
+          case 2:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointIdInternasActividades.countByCodInterna.urlEndPoint;
+            break;
+          case 3:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointIdInternasActividades.countByCodInterna.urlEndPoint;
             break;
         }
         break;
