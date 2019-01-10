@@ -12,7 +12,7 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root',
 })
-export class configSmartTableService {
+export class ConfigSmartTableService {
   // Definicion de las variables Globales
   public settings: any;
   constructor() { }
