@@ -382,7 +382,7 @@ export class NewActivityComponent implements OnInit {
       // event.newData['name'] += ' + added in code';
       alert(event.newData['username']);
       event.confirm.resolve(event.newData);
-      console.log(event.newData);
+      // console.log(event.newData);
     } else {
       event.confirm.reject();
     }

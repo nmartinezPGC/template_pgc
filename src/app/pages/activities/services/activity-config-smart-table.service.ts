@@ -10,7 +10,7 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ActivityConfigSmartTableService {
   // Definicion de las Variables Globales
