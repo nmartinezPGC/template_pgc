@@ -246,6 +246,13 @@ export class ListEndPointsService {
         groupEndPoint: 'mantGenericosGroup',
         descEndPoint: 'listar los tipo de perfiles',
       },
+      perfilUpdate: {
+        id: 7,
+        nameEndpoint: 'Actualizar los perfiles',
+        urlEndPoint: '/profiles/edit/',
+        groupEndPoint: 'mantGenericosGroup',
+        descEndPoint: 'Actualizar los perfiles',
+      },
     }, // Modulo de Mantenimientos Genericos
     endPointIdInternasActividades: {
       listAllidInternas: {
