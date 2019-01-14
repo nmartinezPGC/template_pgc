@@ -79,7 +79,7 @@ export class PerfilesComponent implements OnInit {
     public _perfilesService: PerfilService, // Inicializa el ToasterService
     private _toasterService: ToasterService,
     public _configSmartTableService: ConfigSmartTableService) {
-       // Llamamos a la Funcion de Configuracion de las Smart Table
+    // Llamamos a la Funcion de Configuracion de las Smart Table
     this._configSmartTableService.configSmartTable('userSmart', 1, null);
     this.settings = this._configSmartTableService.settings;
     /* Llamado a la Funcion: 007, la cual obtiene el detalle da la Info.
@@ -205,17 +205,20 @@ export class PerfilesComponent implements OnInit {
   }
 
   onSaveConfirm1(event) {
-     const id = event.data.idPerfil;
+    // Confirmacion del Update
     if (window.confirm('seguro que quiere actualizar los cambios?')) {
       // Seteo de las variables del Model al json de Java
-      this._perfilModel.idPerfil = event.data.idPerfil;
-      this._perfilModel.idTipoPerfil =  event.data.idTipoPerfil;
-      this._perfilModel.idTipo = event.data.idTipoPerfil.idTipo;
-      this._perfilModel.codPerfil = event.data.codPerfil;
-      this._perfilModel.descPerfil = event.data.descPerfil;
-     // console.log(this._perfilModel);
+      this._perfilModel.idPerfil = event.newData.idPerfil;
+      this._perfilModel.idTipoPerfil = event.newData.idTipoPerfil;
+      this._perfilModel.idTipo = event.newData.idTipoPerfil.idTipo;
+      this._perfilModel.codPerfil = event.newData.codPerfil;
+      this._perfilModel.descPerfil = event.newData.descPerfil;
+      // this._perfilModel.descripcionTipoPerfil = event.newData.descripcionTipoPerfil;
+      this._perfilModel.idTipo = event.newData.descripcionTipoPerfil;
+      this._perfilModel.idTipoPerfil = { idTipo: this._perfilModel.idTipo };
+      // console.log('Tipo de Perfil ' + JSON.stringify(this._perfilModel));
+      // Ejecutamos las Funcion
       this.updatePerfilService();
-      event.newData['name'] += ' + added in code';
       event.confirm.resolve(event.newData);
     } else {
       event.confirm.reject();
@@ -232,10 +235,9 @@ export class PerfilesComponent implements OnInit {
    ****************************************************************************/
   private updatePerfilService(): void {
     // Seteo de las variables del Model al json de Java
-    this._perfilModel.idTipoPerfil = { idTipo: this._perfilModel.idTipo };
 
     // Ejecutamos el Recurso del EndPoint
-    this._perfilesService.perfilUpdate(this._perfilModel, this._perfilModel.idTipo).subscribe(
+    this._perfilesService.perfilUpdate(this._perfilModel, this._perfilModel.idPerfil).subscribe(
       response => {
         if (response.status !== 200) {
           // console.log(response.status);
@@ -254,7 +256,7 @@ export class PerfilesComponent implements OnInit {
         alert('Error en la petición de la API ' + <any>error);
 
         // Borramos los datos del LocalStorage
-        localStorage.removeItem('auth_app_token');
+        /*localStorage.removeItem('auth_app_token');
         localStorage.removeItem('identity');
 
         const redirect = '/auth/login';
@@ -262,18 +264,18 @@ export class PerfilesComponent implements OnInit {
           // Iniciativa Temporal
           location.reload();
           return this._router.navigateByUrl(redirect);
-        }, 2000);
+        }, 2000);*/
       },
     );
   } // FIN | newPerfilService
 
-    /****************************************************************************
-   * Funcion: newPerfilService
-   * Object Number: 003
-   * Fecha: 07-01-2019
-   * Descripcion: Method newPerfilService
-   * Objetivo: crear nuevos perfiles.
-   ****************************************************************************/
+  /****************************************************************************
+ * Funcion: newPerfilService
+ * Object Number: 003
+ * Fecha: 07-01-2019
+ * Descripcion: Method newPerfilService
+ * Objetivo: crear nuevos perfiles.
+ ****************************************************************************/
   private newPerfilService(): void {
     // Seteo de las variables del Model al json de Java
     this._perfilModel.idTipoPerfil = { idTipo: this._perfilModel.idTipo };
@@ -329,9 +331,9 @@ export class PerfilesComponent implements OnInit {
           // this.productos = result.data;
           // console.log(result.status);
           this.JsonReceptionTipoPerfiles = response.data;
-            // instancia data con los perfiles;
+          // instancia data con los perfiles;
           this.data1 = this.JsonReceptionTipoPerfiles;
-           // console.log(this.data1);
+          // console.log(this.data1);
           // Carga los Items para el List de la Smart table
           this.arrayTipoPerfiles = new Array();
 

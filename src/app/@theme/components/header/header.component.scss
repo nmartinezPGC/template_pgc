@@ -245,7 +245,7 @@ $color-loader: #9aa0a5;
     color: $color-loader;
     letter-spacing: 0.2em;
     z-index: 9999;
-  
+
   &::before, &::after {
     content: '';
     display: block;
@@ -255,11 +255,11 @@ $color-loader: #9aa0a5;
     position: absolute;
     animation: load 0.7s infinite alternate ease-in-out;
   }
-  
+
   &::before {
     top: 0;
   }
-  
+
   &::after {
     bottom: 0;
   }

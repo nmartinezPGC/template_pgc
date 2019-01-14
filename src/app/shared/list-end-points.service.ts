@@ -277,6 +277,5 @@ export class ListEndPointsService {
         descEndPoint: 'Busca la Cantidad de Id Internas con el Codigo enviado',
       },
     },
-  };
-
-}
+  }
+} // FIN de Clase
