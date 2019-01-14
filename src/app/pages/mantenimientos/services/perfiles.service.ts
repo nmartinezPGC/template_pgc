@@ -111,7 +111,7 @@ export class PerfilService {
         // Parametros del EndPoint
         const paramsSend = jsonPerfil;
         const idPerfil: number = idPerfilIn;
-        console.log('Parametros de Servicio ' + ' Modelo ' + JSON.stringify(paramsSend) + ' Where ' + idPerfil );
+        // console.log('Parametros de Servicio ' + ' Modelo ' + JSON.stringify(paramsSend) + ' Where ' + idPerfil );
         // Retorno de la Funcion
         return this._http.put(this._systemEndPointsService.getEndPointService('mantGenericosGroup', 7) + idPerfil, paramsSend, {
             headers: this.headers,
