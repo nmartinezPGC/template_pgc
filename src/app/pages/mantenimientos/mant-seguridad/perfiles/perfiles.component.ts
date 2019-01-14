@@ -26,7 +26,7 @@ import { ConfigSmartTableService } from '../../services/perfiles.settings.smart-
   templateUrl: './perfiles.component.html',
   styleUrls: ['./perfiles.component.scss'],
 
-  providers: [PerfilService,ConfigSmartTableService],
+  providers: [PerfilService, ConfigSmartTableService],
 })
 export class PerfilesComponent implements OnInit {
   // Variables Tipo JSON, para usarlas en los Servicios Invocados

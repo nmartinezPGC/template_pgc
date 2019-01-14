@@ -76,7 +76,7 @@ export class ConfigSmartTableService {
                     config: {
                       list: array,
                     },
-                  }
+                  },
                 },
               },
             };
