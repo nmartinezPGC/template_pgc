@@ -47,6 +47,7 @@ export class PerfilesComponent implements OnInit {
 
 
 
+
   public onSaveConfirm(id) {
     alert('id selecionado ' + id)
   }
