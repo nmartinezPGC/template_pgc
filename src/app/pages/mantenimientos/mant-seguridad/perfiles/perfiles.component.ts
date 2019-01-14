@@ -44,7 +44,6 @@ export class PerfilesComponent implements OnInit {
   data1: any;
   arrayTipoPerfiles: any
 
-  
 
 
 
@@ -77,12 +76,11 @@ export class PerfilesComponent implements OnInit {
    */
   constructor(protected _router: Router,
     public _perfilesService: PerfilService, // Inicializa el ToasterService
-    private _toasterService: ToasterService, 
+    private _toasterService: ToasterService,
     public _configSmartTableService: ConfigSmartTableService) {
        // Llamamos a la Funcion de Configuracion de las Smart Table
     this._configSmartTableService.configSmartTable('userSmart', 1, null);
     this.settings = this._configSmartTableService.settings;
-      
     /* Llamado a la Funcion: 007, la cual obtiene el detalle da la Info.
      del Usuario */
     this.perfilesDatailsService();
@@ -212,11 +210,9 @@ export class PerfilesComponent implements OnInit {
       this._perfilModel.idPerfil = event.data.idPerfil;
       this._perfilModel.idTipoPerfil =  event.data.idTipoPerfil;
       this._perfilModel.idTipo = event.data.idTipoPerfil.idTipo;
-    
       this._perfilModel.codPerfil = event.data.codPerfil;
       this._perfilModel.descPerfil = event.data.descPerfil;
-      
-      console.log(this._perfilModel);
+     // console.log(this._perfilModel);
       this.updatePerfilService();
       event.newData['name'] += ' + added in code';
       event.confirm.resolve(event.newData);

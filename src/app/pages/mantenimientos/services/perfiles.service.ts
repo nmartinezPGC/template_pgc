@@ -101,21 +101,21 @@ export class PerfilService {
         });
     }// FIN | FND-00002
 
-       /****************************************************************************
-    * Funcion: FND-00005
-    * Fecha: 11-01-2019
-    * Descripcion: Metodo que sirve para actualizar los perfiles que utilizara el usuario
-    * Params: { jsonPerfil }
-    ****************************************************************************/
-   perfilUpdate(jsonPerfil: any, idPerfilIn: number): Observable<any> {
-    // Parametros del EndPoint
-    const paramsSend = jsonPerfil;
-    const idPerfil: number = idPerfilIn;
-    // console.log(paramsSend);
-    // Retorno de la Funcion
-    return this._http.put(this._systemEndPointsService.getEndPointService('mantGenericosGroup', 7)+'/'+idPerfil,paramsSend, {
-        headers: this.headers,
-        params: { 'tokenApi': this.tokenHeader },
-    });
-}// FIN | FND-00005
+    /****************************************************************************
+ * Funcion: FND-00005
+ * Fecha: 11-01-2019
+ * Descripcion: Metodo que sirve para actualizar los perfiles que utilizara el usuario
+ * Params: { jsonPerfil }
+ ****************************************************************************/
+    perfilUpdate(jsonPerfil: any, idPerfilIn: number): Observable<any> {
+        // Parametros del EndPoint
+        const paramsSend = jsonPerfil;
+        const idPerfil: number = idPerfilIn;
+        // console.log(paramsSend);
+        // Retorno de la Funcion
+        return this._http.put(this._systemEndPointsService.getEndPointService('mantGenericosGroup', 7) + '/' + idPerfil, paramsSend, {
+            headers: this.headers,
+            params: { 'tokenApi': this.tokenHeader },
+        });
+    }// FIN | FND-00005
 }

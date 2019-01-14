@@ -74,8 +74,8 @@ export class ConfigSmartTableService {
                   editor: {
                     type: 'list',
                     config: {
-                      list: array
-                    }
+                      list: array,
+                    },
                   }
                 },
               },
