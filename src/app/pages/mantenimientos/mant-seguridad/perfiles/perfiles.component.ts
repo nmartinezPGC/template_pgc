@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
 
 // Model of Class
 import { PerfilModel } from '../../models/perfiles.model';
+import { ConfigSmartTableService } from '../../services/perfiles.settings.smart-table.service';
 
 
 /**
@@ -24,12 +25,8 @@ import { PerfilModel } from '../../models/perfiles.model';
   selector: 'ngx-perfiles',
   templateUrl: './perfiles.component.html',
   styleUrls: ['./perfiles.component.scss'],
-  styles: [`
-  nb-card {
-    transform: translate3d(0, 0, 0);
-  }
-`],
-  providers: [PerfilService],
+
+  providers: [PerfilService, ConfigSmartTableService],
 })
 export class PerfilesComponent implements OnInit {
   // Variables Tipo JSON, para usarlas en los Servicios Invocados
@@ -43,53 +40,10 @@ export class PerfilesComponent implements OnInit {
    * Smart table Generated
    */
   data: any;
+  listArrayData3: any
+  data1: any;
+  arrayTipoPerfiles: any
 
-
-  settings = {
-    hideSubHeader: false,
-
-    add: {
-      addButtonContent: '<i class="nb-plus"></i>',
-      createButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
-    },
-    edit: {
-      editButtonContent: '<i class="nb-edit"></i>',
-      saveButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
-      confirmSave: true,
-    },
-    delete: {
-      deleteButtonContent: '<i class="nb-trash"></i>',
-      confirmDelete: true,
-    },
-    columns: {
-      // idPerfil: {
-      // title: 'Id de Perfil',
-      // notShownField: true,
-
-      // valuePrepareFunction: (edit) => {
-      // console.log(edit);
-      // this.onSaveConfirm(edit);
-      // },
-      // },
-      codPerfil: {
-        title: 'Codigo de Perfil',
-        type: 'string',
-      },
-      descPerfil: {
-        title: 'Descripcion de Perfil',
-        type: 'string',
-      },
-      // Json anidado para lograr capturar el valor de una entidad
-      // bibliografia : https://github.com/akveo/ng2-smart-table/issues/375
-      descripcionTipoPerfil: {
-        valuePrepareFunction: (cell: any, row: any) =>   row.idTipoPerfil.descTipo ,
-        title: 'Tipo',
-        type: 'string',
-      },
-    },
-  };
 
 
 
@@ -112,6 +66,7 @@ export class PerfilesComponent implements OnInit {
   isHideOnClick = true;
   isDuplicatesPrevented = false;
   isCloseButton = true;
+  settings: any;
 
 
   /**
@@ -121,10 +76,15 @@ export class PerfilesComponent implements OnInit {
    */
   constructor(protected _router: Router,
     public _perfilesService: PerfilService, // Inicializa el ToasterService
-    private _toasterService: ToasterService) {
+    private _toasterService: ToasterService,
+    public _configSmartTableService: ConfigSmartTableService) {
+       // Llamamos a la Funcion de Configuracion de las Smart Table
+    this._configSmartTableService.configSmartTable('userSmart', 1, null);
+    this.settings = this._configSmartTableService.settings;
     /* Llamado a la Funcion: 007, la cual obtiene el detalle da la Info.
      del Usuario */
     this.perfilesDatailsService();
+
   }
 
 
@@ -244,8 +204,16 @@ export class PerfilesComponent implements OnInit {
   }
 
   onSaveConfirm1(event) {
-    // console.log(event.data.idPerfil);
-    if (window.confirm('Are you sure you want to save?')) {
+     const id = event.data.idPerfil;
+    if (window.confirm('seguro que quiere actualizar los cambios?')) {
+      // Seteo de las variables del Model al json de Java
+      this._perfilModel.idPerfil = event.data.idPerfil;
+      this._perfilModel.idTipoPerfil =  event.data.idTipoPerfil;
+      this._perfilModel.idTipo = event.data.idTipoPerfil.idTipo;
+      this._perfilModel.codPerfil = event.data.codPerfil;
+      this._perfilModel.descPerfil = event.data.descPerfil;
+     // console.log(this._perfilModel);
+      this.updatePerfilService();
       event.newData['name'] += ' + added in code';
       event.confirm.resolve(event.newData);
     } else {
@@ -255,8 +223,52 @@ export class PerfilesComponent implements OnInit {
 
 
   /****************************************************************************
-   * Funcion: newPerfilService
+   * Funcion: updatePerfilService
    * Object Number: 002
+   * Fecha: 07-01-2019
+   * Descripcion: Method newPerfilService
+   * Objetivo: actualizar los perfiles existentes perfiles.
+   ****************************************************************************/
+  private updatePerfilService(): void {
+    // Seteo de las variables del Model al json de Java
+    this._perfilModel.idTipoPerfil = { idTipo: this._perfilModel.idTipo };
+
+    // Ejecutamos el Recurso del EndPoint
+    this._perfilesService.perfilUpdate(this._perfilModel, this._perfilModel.idTipo).subscribe(
+      response => {
+        if (response.status !== 200) {
+          // console.log(response.status);
+          // console.log(response.message);
+          this.showToast('error', 'Error al actualizar los cambios', response.message);
+        } else if (response.status === 200) {
+          // console.log(result.status);
+          this.showToast('default', 'se actualizaron con exito los datos', response.message);
+          // console.log(response.data);
+          // Carga la tabla Nuevamente
+          this.perfilesDatailsService();
+        }
+      },
+      error => {
+        // Redirecciona al Login
+        alert('Error en la petición de la API ' + <any>error);
+
+        // Borramos los datos del LocalStorage
+        localStorage.removeItem('auth_app_token');
+        localStorage.removeItem('identity');
+
+        const redirect = '/auth/login';
+        setTimeout(() => {
+          // Iniciativa Temporal
+          location.reload();
+          return this._router.navigateByUrl(redirect);
+        }, 2000);
+      },
+    );
+  } // FIN | newPerfilService
+
+    /****************************************************************************
+   * Funcion: newPerfilService
+   * Object Number: 003
    * Fecha: 07-01-2019
    * Descripcion: Method newPerfilService
    * Objetivo: crear nuevos perfiles.
@@ -298,10 +310,9 @@ export class PerfilesComponent implements OnInit {
     );
   } // FIN | newPerfilService
 
-
   /****************************************************************************
  * Funcion: perfilesTipoService
- * Object Number: 003
+ * Object Number: 004
  * Fecha: 08-01-2019
  * Descripcion: Method perfilesTipoService of the Class
  * Objetivo: perfilesTipoService detalle de los Tipos de Perfil llamando a la API
@@ -317,6 +328,18 @@ export class PerfilesComponent implements OnInit {
           // this.productos = result.data;
           // console.log(result.status);
           this.JsonReceptionTipoPerfiles = response.data;
+            // instancia data con los perfiles;
+          this.data1 = this.JsonReceptionTipoPerfiles;
+           // console.log(this.data1);
+          // Carga los Items para el List de la Smart table
+          this.arrayTipoPerfiles = new Array();
+
+          this.data1.forEach(element => {
+            this.arrayTipoPerfiles.push({ title: element['descTipo'], value: element['idTipo'] });
+          });
+
+          this.settings.columns.descripcionTipoPerfil.editor.config.list = this.arrayTipoPerfiles;
+          this.settings = Object.assign({}, this.settings);
           // console.log(response.data);
         }
       },

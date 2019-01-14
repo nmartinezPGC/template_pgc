@@ -25,12 +25,12 @@ export class ConfigSmartTableService {
 * Objetivo: Establecer las configuraciones para la Smart Table
 ****************************************************************************/
 
-  configSmartTable(smartTable: string, smartNormal: number) {
+  configSmartTable(smartTable: string, smartNormal: number , array: any) {
     switch (smartTable) {
       case 'userSmart':
         switch (smartNormal) {
           case 1:
-            this.settings = {
+            const settings = {
               hideSubHeader: false,
 
               add: {
@@ -71,10 +71,17 @@ export class ConfigSmartTableService {
                 descripcionTipoPerfil: {
                   valuePrepareFunction: (cell: any, row: any) => row.idTipoPerfil.descTipo,
                   title: 'Tipo',
-                  type: 'string',
+                  editor: {
+                    type: 'list',
+                    config: {
+                      list: array,
+                    },
+                  },
                 },
               },
             };
+              // variable que retorne
+              this.settings = settings;
             break;
 
           case 2:
