@@ -246,9 +246,6 @@ export class ListEndPointsService {
         groupEndPoint: 'mantGenericosGroup',
         descEndPoint: 'listar los tipo de perfiles',
       },
-<<<<<<< HEAD
-    }, // Modulo de Mantenimientos Actividad
-=======
       perfilUpdate: {
         id: 7,
         nameEndpoint: 'Actualizar los perfiles',
@@ -257,7 +254,6 @@ export class ListEndPointsService {
         descEndPoint: 'Actualizar los perfiles',
       },
     }, // Modulo de Mantenimientos Genericos
->>>>>>> a230cb3aae6d85a1894698eb9407995e5cb1c4d7
     endPointIdInternasActividades: {
       listAllidInternas: {
         id: 1,
@@ -281,6 +277,5 @@ export class ListEndPointsService {
         descEndPoint: 'Busca la Cantidad de Id Internas con el Codigo enviado',
       },
     },
-  };
-
-}
+  }
+} // FIN de Clase

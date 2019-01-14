@@ -88,11 +88,11 @@ export class PerfilService {
 
 
     /****************************************************************************
-        * Funcion: FND-00004
-        * Fecha: 07-01-2019
-        * Descripcion: Metodo que sirve para poder ingresar un nuevo perfil
-        * Params: {  }
-        ****************************************************************************/
+    * Funcion: FND-00004
+    * Fecha: 07-01-2019
+    * Descripcion: Metodo que sirve para poder ingresar un nuevo perfil
+    * Params: {  }
+    ****************************************************************************/
     getAllTipoPerfiles(): Observable<any> {
         // Retorno de la Funcion
         return this._http.get(this._systemEndPointsService.getEndPointService('mantGenericosGroup', 6), {
@@ -102,18 +102,18 @@ export class PerfilService {
     }// FIN | FND-00002
 
     /****************************************************************************
- * Funcion: FND-00005
- * Fecha: 11-01-2019
- * Descripcion: Metodo que sirve para actualizar los perfiles que utilizara el usuario
- * Params: { jsonPerfil }
- ****************************************************************************/
-    perfilUpdate(jsonPerfil: any, idPerfilIn: number): Observable<any> {
+    * Funcion: FND-00005
+    * Fecha: 11-01-2019
+    * Descripcion: Metodo que sirve para actualizar los perfiles que utilizara el usuario
+    * Params: { jsonPerfil, idPerfilIn }
+    ****************************************************************************/
+    perfilUpdate(jsonPerfil, idPerfilIn: number): Observable<any> {
         // Parametros del EndPoint
         const paramsSend = jsonPerfil;
         const idPerfil: number = idPerfilIn;
-        // console.log(paramsSend);
+        console.log('Parametros de Servicio ' + ' Modelo ' + JSON.stringify(paramsSend) + ' Where ' + idPerfil );
         // Retorno de la Funcion
-        return this._http.put(this._systemEndPointsService.getEndPointService('mantGenericosGroup', 7) + '/' + idPerfil, paramsSend, {
+        return this._http.put(this._systemEndPointsService.getEndPointService('mantGenericosGroup', 7) + idPerfil, paramsSend, {
             headers: this.headers,
             params: { 'tokenApi': this.tokenHeader },
         });
