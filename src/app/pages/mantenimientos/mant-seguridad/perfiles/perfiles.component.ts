@@ -47,6 +47,7 @@ export class PerfilesComponent implements OnInit {
 
 
 
+
   public onSaveConfirm(id) {
     alert('id selecionado ' + id)
   }
@@ -213,7 +214,7 @@ export class PerfilesComponent implements OnInit {
       this._perfilModel.codPerfil = event.data.codPerfil;
       this._perfilModel.descPerfil = event.data.descPerfil;
      // console.log(this._perfilModel);
-    // this.updatePerfilService();
+      this.updatePerfilService();
       event.newData['name'] += ' + added in code';
       event.confirm.resolve(event.newData);
     } else {
