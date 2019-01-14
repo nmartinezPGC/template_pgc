@@ -20,6 +20,7 @@
   <div class="col-md-12 col-lg-12">
     <nb-card>
       <nb-tabset>
+        <!-- Area de la estructura del primer tab donde se crean los usuarios-->
         <nb-tab tabTitle="Creacion de Usuario">
           <div class="row">
             <div class="col-lg-6">
@@ -27,10 +28,22 @@
                 <nb-card-body>
                   <div class="row full-name-inputs">
                     <div class="col-sm-6 input-group">
-                      <input type="text" placeholder="Nombre" class="form-control" />
+                      <input type="text" placeholder="Primer Nombre" class="form-control" />
                     </div>
                     <div class="col-sm-6 input-group">
-                      <input type="text" placeholder="Apellido" class="form-control" />
+                      <input type="text" placeholder="Segundo Nombre" class="form-control" />
+                    </div>
+                    <div class="col-sm-6 input-group">
+                      <input type="text" placeholder="Primer Apellido" class="form-control" />
+                    </div>
+                    <div class="col-sm-6 input-group">
+                      <input type="text" placeholder="Segundo Apellido" class="form-control" />
+                    </div>
+                    <div class="col-sm-6 input-group">
+                      <input type="text" placeholder="Iniciales del Usuario" class="form-control" />
+                    </div>
+                    <div class="col-sm-6 input-group">
+                      <input type="text" placeholder="Codigo del Usuario" class="form-control" />
                     </div>
                   </div>
                   <div class="input-group">
@@ -49,9 +62,6 @@
                       <option>Consulta de la PGC</option>
                     </select>
                   </div>
-                  <div class="input-group input-group-rounded">
-                    <input type="text" placeholder="Pais" class="form-control" />
-                  </div>
                 </nb-card-body>
               </nb-card>
             </div>
@@ -59,6 +69,9 @@
               <nb-card>
                 <!-- <nb-card-header>Perfiles</nb-card-header> -->
                 <nb-card-body>
+                  <div class="input-group input-group-rounded">
+                    <input type="text" placeholder="Pais" class="form-control" />
+                  </div>
                   <div class="form-group input-group-rounded">
                     <small class="form-text">Estado de el usuario.
                     </small>
@@ -90,38 +103,17 @@
             </div>
           </div>
         </nb-tab>
-        <!-- Comienzo de estructura del tab dos -->
-        <nb-tab tabTitle="Consultar">        
-          <table #dataTable class="table">
-            <thead class="thead-dark">
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Javier</td>
-                <td>Macherano</td>
-                <td>@mache</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Steven</td>
-                <td>Gerard</td>
-                <td>@gerard</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Samuel</td> 
-                <td>Eto'o</td>
-                <td>@eto'o</td>
-              </tr>
-            </tbody>
-          </table>
+        <!-- Comienzo de estructura del tab dos donde se consultan los usuarios -->
+        <nb-tab tabTitle="Mantenimiento/Consultar">
+          <div class="col-lg-12">
+            <nb-card>
+              <nb-card-body>
+                <ng2-smart-table [settings]="settings" [source]="data" (editConfirm)="onSaveConfirm1($event)"
+                  (deleteConfirm)="onDeleteConfirm($event)">
+                </ng2-smart-table>
+              </nb-card-body>
+            </nb-card>
+          </div>
         </nb-tab>
       </nb-tabset>
     </nb-card>
