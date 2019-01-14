@@ -1,3 +1,11 @@
+/**
+ * @author Nahum Martinez
+ * @returns Modelo de Actividades
+ * @name ActivityModel
+ * @alias _activityModel
+ * @version 1.0.0
+ * @fecha 11/01/2019
+ */
 export class ActivityModel {
     // Creacion del Constructor de la Clase
     constructor(
@@ -5,13 +13,13 @@ export class ActivityModel {
         public idActividad: number,
 
         // Datos Generales de la Actividad
-        public codActividad: string,
+        public codigoActividad: string,
         public idEstado: number,
         public idEspacioTrabajo: number,
         public explicacionEstado: string,
-        public descripcionActividad: string,
-        public antecedentesAtividad: string,
+        public antecedentesActividad: string,
         public objetivoActividad: string,
+        public descripcionActividad: string,
         public condicionesActividad: string,
         public codigoSiafiBip: string,
 
@@ -23,11 +31,11 @@ export class ActivityModel {
         // Resultados
         public resultadosEsperados: string,
         public resultadosAlaFecha: string,
-        public justificacionAtividad: string,
+        public justificacionActividad: string,
         public costoActividad: number,
         public idMonedaActividad: number,
 
-        public fechaFinanciamiento: string,
+        public fechaFinanciamiento: Date,
         public nombreActividad: string,
         public productosEsperados: string,
 

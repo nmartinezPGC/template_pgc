@@ -18,6 +18,7 @@ import { ActivitiesRoutingModule, routedComponents } from './activities-routing.
 // Imports de las Librerias de uso Comun de la Clase en el Formulario de Actividad
 import { ListasComunesService } from '../common-list/services/listas-comunes.service';
 import { FilterdataPipe } from './pipes/filterdata.pipe';
+import { NgxPaginationModule } from 'ngx-pagination'; // <-- import the module
 
 @NgModule({
   imports: [
@@ -28,6 +29,7 @@ import { FilterdataPipe } from './pipes/filterdata.pipe';
     Ng2CompleterModule,
     MatButtonModule,
     MatExpansionModule,
+    NgxPaginationModule,
   ],
   declarations: [
     ...routedComponents,

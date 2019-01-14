@@ -322,7 +322,7 @@
                         <!-- <div class="input-group-addon"><img src="../../../../assets/icons/common/magnifying-glass-search.png"></div> -->
                         <!-- <input type="text" class="form-control" id="inputWebsite" placeholder="Buscar Organización, por el filtro aplicado"> -->
                         <ng2-completer [inputClass]="'form-control'" [(ngModel)]="searchStrFunc" [datasource]="dataService"
-                          placeholder="Buscar Organización, por el filtro aplicado" style=" width: 90%; "
+                          placeholder="Buscar Organización, por el filtro aplicado" style=" width: 100%; "
                           [minSearchLength]="0" (selected)="onSelectedFunc($event)" openOnClick="true" selectOnClick="true"
                           textSearching="Buscando Organización ..." textNoResults="No se han encontrado nada ..."></ng2-completer>
                       </div>
@@ -340,8 +340,8 @@
                         <!-- style="text-transform: uppercase;" -->
 
                         <!-- Botonera de Organizaciones -->
-                        <button type="button" class="btn btn-primary btn-group-icon btn-group-divider" nbPopover="Agrega la ID Interna a la lista"
-                          nbPopoverMode="hint" (click)="pushJsonIdInterna()">
+                        <button type="button" class="btn btn-primary btn-group-icon btn-group-divider botonSpecial"
+                          nbPopover="Agrega la ID Interna a la lista" nbPopoverMode="hint" (click)="pushJsonIdInterna()">
                           <i class="ion-checkmark-round"></i>
                         </button>
                       </div>
@@ -352,11 +352,12 @@
                   <ng-template #card>
                     <nb-card class="popover-card">
                       <nb-card-header status="warning">
-                        Hola!
+                        Hola! Ingresa la Id Interna de tu Proyecto
                       </nb-card-header>
                       <nb-card-body>
-                        Esta sección de la PGC, sirve para registrar el Código que usted tiene en su Sistema de
-                        Registro de Proyectos. Y de esta forma hacer una equivalencia entre su Sistema y la PGC.
+                        Esta sección de la PGC, sirve para registrar el Código que tienes en tu Sistema de
+                        Registro de Proyectos, y relacionarlo con Identificador de la PGC, logrando una equivalencia
+                        entre su Sistema y la PGC.
                       </nb-card-body>
                     </nb-card>
                   </ng-template>
@@ -371,24 +372,24 @@
                         (editConfirm)="onSaveConfirm($event)" (createConfirm)="onCreateConfirm($event)"></ng2-smart-table>
                     </div> -->
                     <!-- <hr> -->
-                    <table class="table table-hover" id="tableIdInterna">
+                    <table class="table table-hover table-striped table-bordered" id="tableIdInterna">
                       <thead>
                         <tr>
-                          <th colspan="2">Buscar Id Interna :
+                          <th scope="col" colspan="2">Buscar Id Interna :
                             <input type="text" class="form-control" [(ngModel)]="queryString">
                           </th>
                         </tr>
                         <tr>
-                          <th scope="col" style="width: 5%;">#</th>
+                          <th scope="col" style="width: 5%;">No</th>
                           <th scope="col" style="width: 20%;">Tipo de Organización</th>
                           <th scope="col" style="width: 20%;">País de Organización</th>
-                          <th scope="col" style="width: 30%;">Organización</th>
-                          <th scope="col" style="width: 20%;">ID Interna</th>
+                          <th scope="col" style="width: 35%;">Organización</th>
+                          <th scope="col" style="width: 15%;">ID Interna</th>
                           <th scope="col" style="width: 5%;">Acción</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr *ngFor="let itemIdInterna of JsonIdInternaOrganizacion | filterdata: queryString : 'idInterna';let homeTableIndex = index">
+                        <tr *ngFor="let itemIdInterna of JsonIdInternaOrganizacion | filterdata: queryString : 'idInterna' | paginate: { itemsPerPage: 3, currentPage: p };let homeTableIndex = index">
                           <td>{{ homeTableIndex + 1 }}</td>
                           <td>{{ itemIdInterna.descTipoOrganizacion }}</td>
                           <td>{{ itemIdInterna.descPaisOrganizacion }}</td>
@@ -401,24 +402,27 @@
                             {{ itemIdInterna.idInterna }}
                           </td>
                           <td>
-                            <img src="../../../../assets/icons/forms/rubbish-bin_24x.png" alt="" (click)="deleteRowHomeForm(homeTableIndex, itemIdInterna.descTipoOrganizacion, itemIdInterna.descPaisOrganizacion )">
+                            <img class="pointerMouse" src="../../../../assets/icons/forms/rubbish-bin_24x.png" alt=""
+                              (click)="deleteRowHomeForm(homeTableIndex, itemIdInterna.descTipoOrganizacion, itemIdInterna.descPaisOrganizacion )">
                           </td>
                         </tr>
                       </tbody>
                     </table>
 
-                    <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls> -->
+                    <!-- paginador de la tabla -->
+                    <pagination-controls autoHide="true" responsive="true" previousLabel="Anterior" nextLabel="Siguiente"
+                      (pageChange)="p = $event"></pagination-controls>
 
                   </div>
                 </div>
                 <!-- <button class="btn btn-primary" (click)="makeToast()">Guardar como borrador</button> -->
                 <div class="btn-group">
-                  <button type="button" class="btn btn-primary btn-group-icon btn-group-divider">
+                  <button type="button" class="btn btn-primary btn-group-icon btn-group-divider botonSave">
                     <i class="ion-folder"></i>
                   </button>
-                  <button type="button" class="btn btn-primary" (click)="makeToast(); pushJsonIdInterna()">Guardar
+                  <button type="button" class="btn btn-primary botonSave" (click)="makeToast(); pushJsonIdInterna()">Guardar
                     como borrador</button>
-                  <button type="button" class="btn btn-success" (click)="verJson()">Ver Json</button>
+                  <button type="button" class="btn btn-warning" (click)="verJson()">Limpiar</button>
                 </div>
               </nb-card-body>
             </nb-card>

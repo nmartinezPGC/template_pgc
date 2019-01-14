@@ -107,4 +107,19 @@
     height: calc(2rem + 8px) !important;
     padding: 0 10px !important;
   }
+
+  // Estilos de Botones
+  .botonSpecial {
+    background-color: #204f85;
+    margin-left: 5px;
+  }
+
+  .botonSave {
+    background-color: #204f85;
+  }
+
+  .pointerMouse {
+    cursor: pointer;
+  }
+
 }

@@ -246,7 +246,7 @@ export class ListEndPointsService {
         groupEndPoint: 'mantGenericosGroup',
         descEndPoint: 'listar los tipo de perfiles',
       },
-    }, // Modulo de Mantenimientos Genericos
+    }, // Modulo de Mantenimientos Actividad
     endPointIdInternasActividades: {
       listAllidInternas: {
         id: 1,
