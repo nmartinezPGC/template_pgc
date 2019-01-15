@@ -277,5 +277,32 @@ export class ListEndPointsService {
         descEndPoint: 'Busca la Cantidad de Id Internas con el Codigo enviado',
       },
     },
+    // Modulo de CRUD Activiades | Datos Generales
+    endPointCRUDActividades: {
+      newActivityDatosGenerales: {
+        id: 1,
+        nameEndpoint: 'Nueva Actividad',
+        urlEndPoint: '/activities/new-activity',
+        params: 'jsonActivity',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Ingresa a la API una nueva Actividad con sus Datos Generales',
+      },
+      editActivityDatosGenerales: {
+        id: 2,
+        nameEndpoint: 'Editar Actividad',
+        urlEndPoint: '/activities/edit-activity/',
+        params: '{idActivity}',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Edita en la API, una Actividad con sus Datos Generales',
+      },
+      deleteActivityDatosGenerales: {
+        id: 3,
+        nameEndpoint: 'Eliminar Actividad',
+        urlEndPoint: '/activities/delete-activity/',
+        params: '{idActivity}',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Inhabilita en la API, una Actividad con sus Datos Generales',
+      },
+    },
   }
 } // FIN de Clase

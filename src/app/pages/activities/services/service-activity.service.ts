@@ -69,4 +69,23 @@ export class ActivityService {
     });
   } // FIN | FND-00002
 
+
+  /****************************************************************************
+    * Funcion: FND-00003
+    * Fecha: 14-01-2019
+    * Descripcion: Metodo para obtener Ingresar los Datos Generales de la Actividad
+    * Objetivo: Ingresar los Datos generales de la Activiad
+    * Params: { jsonActivity }
+    ****************************************************************************/
+  newActivityGeneral(jsonActivity: any): Observable<any> {
+    // Parametros del EndPoint
+    const paramsSend = jsonActivity;
+
+    // Retorno de la Funcion
+    return this._http.post(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 1), paramsSend, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  } // FIN | FND-00003
+
 }

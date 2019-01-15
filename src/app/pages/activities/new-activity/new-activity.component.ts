@@ -15,7 +15,7 @@ import { CompleterData, CompleterService, CompleterItem } from 'ng2-completer';
 
 // Servicios que la Clase nesesitara para su funcionanmiento
 import { UserService } from '../../../@core/data/users.service'; // Servicio de Usuarios
-import { ListasComunesService } from '../../common-list/services/listas-comunes.service'; // Servicio de Lista de Estados
+import { ListasComunesService } from '../../common-list/services/listas-comunes.service'; // Servicio de Lista de Comunes
 
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster'; // Servicio de Notificaciones
 // import 'style-loader!angular2-toaster/toaster.css';
@@ -29,6 +29,7 @@ import 'style-loader!angular2-toaster/toaster.css';
 // Modelo de la Clase Activiades
 import { ActivityModel } from '../models/model-activity';
 import { Router } from '@angular/router';
+import { ActivityService } from '../services/service-activity.service';
 
 // Variables de Jquery
 declare var jquery: any;
@@ -39,7 +40,7 @@ declare var $: any;
   templateUrl: './new-activity.component.html',
   styleUrls: ['./new-activity.component.scss', '../../components/notifications/notifications.component.scss'],
   // changeDetection: ChangeDetectionStrategy.OnPush, // Se usa para Actualizar la Informacion con otro evento
-  providers: [ToasterService, ActivityConfigSmartTableService],
+  providers: [ToasterService, ActivityConfigSmartTableService, ActivityService],
 })
 export class NewActivityComponent implements OnInit {
   /****************************************************************************
@@ -142,7 +143,8 @@ export class NewActivityComponent implements OnInit {
     // Inicializa el ToasterService
     private _toasterService: ToasterService,
     protected _router: Router,
-    public _activityConfigSmartTableService: ActivityConfigSmartTableService) {
+    public _activityConfigSmartTableService: ActivityConfigSmartTableService,
+    public _activityService: ActivityService) {
     // Llamamos a la Funcion de Configuracion de las Smart Table
     this._activityConfigSmartTableService.configSmartTableIdInternas(null, null, null);
     this.settings = this._activityConfigSmartTableService.settings;
@@ -167,10 +169,10 @@ export class NewActivityComponent implements OnInit {
     // Inicializacion del Modelo de la Clase
     this._activityModel = new ActivityModel(
       0, // Id Actividad
-      '', 0, 0, '', '', '', '', '', '', // Datos Generales de la Actividad
-      0, 0, 0, // Planificacion
-      '', '', '', 0, 0, null, '', '', // Resultados
-      0, 0, 0, '', // Organizaciones Relaciones
+      '', null, 0, null, 0,'', '', '', '', '', '', // Datos Generales de la Actividad
+      null, 0, null, 0, null, 0, // Planificacion
+      '', '', '', 0, null, 0, null, '', '', // Resultados
+      null, 0, null, 0, null, 0, '', // Organizaciones Relaciones
       '', '', '', // Organizaciones Descripciones
     );
 
@@ -391,6 +393,7 @@ export class NewActivityComponent implements OnInit {
           this.showToast('error', 'Error al Obtener la Información de Estados', result.message);
         } else if (result.status === 200) {
           // NADA
+          this.JsonReceptionEstados = result.data;
         }
       },
       error => {
@@ -608,7 +611,7 @@ export class NewActivityComponent implements OnInit {
     this.selectedPaisOrganizacion = item ? item.originalObject.idPaisOrganizacion.descPais : '';
 
     // Setea al Model el valor de la Organizacion
-    this._activityModel.idOrganizacion = Number(this.selectedIdOrganizacion);
+    this._activityModel.idOrganizacionActivity = Number(this.selectedIdOrganizacion);
     // console.log(this._activityModel.idOrganizacion);
     // console.log(item.originalObject);
     this._activityModel.descOrganizacion = this.selectedDescOrganizacion;
@@ -664,13 +667,13 @@ export class NewActivityComponent implements OnInit {
   ****************************************************************************/
   private pushJsonIdInterna() {
     // Validamos que se ha Seleccionado los Filtros Previos a la ID Interna
-    if (this._activityModel.idTipoOrganizacion === 0) {
+    if (this._activityModel.idTipoOrganizacion === null) {
       this.showToast('error', 'Error al Ingresar la Información de las ID Internas', 'Debes Seleccionar el Tipo de Organización, para continuar');
       return -1;
-    } else if (this._activityModel.idPais === 0) {
+    } else if (this._activityModel.idPais === null) {
       this.showToast('error', 'Error al Ingresar la Información de las ID Internas', 'Debes Seleccionar el País, para continuar');
       return -1;
-    } else if (this._activityModel.idOrganizacion === 0) {
+    } else if (this._activityModel.idOrganizacion === null) {
       this.showToast('error', 'Error al Ingresar la Información de las ID Internas', 'Debes Seleccionar la Organización, para continuar');
       return -1;
     }
@@ -750,5 +753,40 @@ export class NewActivityComponent implements OnInit {
       },
     );
   } // FIN | findOrganizacionByCode
+
+
+  /****************************************************************************
+  * Funcion: findOrganizacionByCode
+  * Object Number: 019
+  * Fecha: 09-01-2019
+  * Descripcion: Method que valida si un Codigo de Organizacion para Id Interna
+  * Existe, y no permitir su ingreso nuevamente
+  * Objetivo: Validacion de Id Interna por Codigo
+  ****************************************************************************/
+  newActivity() {
+    console.log('Datos del Modelo al Guardar ' + JSON.stringify(this._activityModel));
+    // Seteo de las variables del Model al json de Java
+    // this._activityModel.idTipoPerfil = { idTipo: this._activityModel.idTipo };
+
+    // Ejecutamos el Recurso del EndPoint
+    this._activityService.newActivityGeneral(this._activityModel).subscribe(
+      response => {
+        if (response.status !== 200) {
+          this.showToast('error', 'Error al Ingresar la Información del Perfil', response.message);
+        } else if (response.status === 200) {
+          this.showToast('default', 'La Información del Perfil, se ha ingresado con exito', response.message);
+
+          // Carga la tabla Nuevamente
+          this.ngOnInit();
+        }
+      },
+      error => {
+        // Redirecciona al Login
+        // alert('Error en la petición de la API ' + <any>error);
+        this.showToast('error', 'Ha ocurrido un Error al Registrar la información del Proyecto, por favor verifica que todo este bien!!', <any>error);
+      },
+    );
+    // Return
+  }
 
 }

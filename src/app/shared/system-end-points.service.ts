@@ -52,7 +52,7 @@ export class SystemEndPointsService extends ListEndPointsService {
             break;
         }
         break;
-      case 'matActGroup': // Llamados a los End Point del Modulo de Mantenimientos de Activdades
+      case 'mantActGroup': // Llamados a los End Point del Modulo de Mantenimientos de Activdades
         switch (indicadorEndPoint) {
           case 1: // Sectores Ejecutores
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointMantActividades.listAllSectorEjecutor.urlEndPoint;
@@ -172,6 +172,19 @@ export class SystemEndPointsService extends ListEndPointsService {
             break;
           case 3:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointIdInternasActividades.countByCodInterna.urlEndPoint;
+            break;
+        }
+        break;
+      case 'actividadesCRUDGroup': // Llamados a los EndPoint de Activiades
+        switch (indicadorEndPoint) {
+          case 1:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.newActivityDatosGenerales.urlEndPoint;
+            break;
+          case 2:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.editActivityDatosGenerales.urlEndPoint;
+            break;
+          case 3:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActivityDatosGenerales.urlEndPoint;
             break;
         }
         break;

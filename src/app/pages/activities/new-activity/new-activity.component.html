@@ -48,8 +48,9 @@
                       <div class="col-6 col-md-4">
                         <div class="form-group">
                           <label>Espacio de Trabajo</label>
-                          <select class="form-control" #idEspacioTrabajo="ngModel" name="idEspacioTrabajo" id="idEspacioTrabajo"
-                            ngControl="idEspacioTrabajo" [(ngModel)]="_activityModel.idEspacioTrabajo" required>
+                          <select class="form-control" #idEspacioTrabajoActivity="ngModel" name="idEspacioTrabajoActivity"
+                            id="idEspacioTrabajoActivity" ngControl="idEspacioTrabajoActivity" [(ngModel)]="_activityModel.idEspacioTrabajoActivity"
+                            required>
                             <option value="0">**** Selecciona el Espacio de Trabajo ****</option>
                             <option *ngFor="let item of JsonReceptionEspaciosTrabajo" [value]="item.idEspacioTrabajo">
                               {{item.descripcionEspacioTrabajo}}
@@ -65,8 +66,8 @@
                       <div class="col-sm-3">
                         <div class="form-group">
                           <label>Estado de Proyecto/Programa</label>
-                          <select class="form-control" #idEstado="ngModel" name="idEstado" id="idEstado" required
-                            ngControl="idEstado" [(ngModel)]="_activityModel.idEstado">
+                          <select class="form-control" #idEstadoActivity="ngModel" name="idEstadoActivity" id="idEstadoActivity"
+                            required ngControl="idEstadoActivity" [(ngModel)]="_activityModel.idEstadoActivity">
                             <option value="0">**** Selecciona el Estado ****</option>
                             <option *ngFor="let item of JsonReceptionEstados" [value]="item.idEstado">
                               {{item.descEstado}}
@@ -231,8 +232,8 @@
                   <div class="col-sm-6">
                     <div class="form-group">
                       <label>Estrategia</label>
-                      <select #idEstrategia class="form-control" id="idEstrategia" name="idEstrategia" ngControl="idEstrategia"
-                        [(ngModel)]="_activityModel.idEstrategia">
+                      <select #idEstrategiaActivity class="form-control" id="idEstrategiaActivity" name="idEstrategiaActivity"
+                        ngControl="idEstrategiaActivity" [(ngModel)]="_activityModel.idEstrategiaActivity">
                         <option value="0">**** Selecciona la Estrategia ****</option>
                         <option *ngFor="let item of JsonReceptionEstrategias" [value]="item.idEstrategia">
                           {{item.descripcionEstrategia}}
@@ -253,8 +254,8 @@
                   <div class="col-sm-6">
                     <div class="form-group">
                       <label>Presupuesto</label>
-                      <select #idPresupuesto class="form-control" id="idPresupuesto" name="idPresupuesto" ngControl="idPresupuesto"
-                        [(ngModel)]="_activityModel.idPresupuesto">
+                      <select #idPresupuestoActivity class="form-control" id="idPresupuestoActivity" name="idPresupuestoActivity"
+                        ngControl="idPresupuestoActivity" [(ngModel)]="_activityModel.idPresupuestoActivity">
                         <option value="0">**** Selecciona el Presupuesto ****</option>
                         <option *ngFor="let item of JsonReceptionPresupuesto" [value]="item.idPresupuesto">
                           {{item.descPresupuesto}}
@@ -265,8 +266,8 @@
                   <div class="col-sm-6">
                     <div class="form-group">
                       <label>Sector Ejecutor</label>
-                      <select #idSectorEjecutor class="form-control" id="idSectorEjecutor" name="idSectorEjecutor"
-                        ngControl="idSectorEjecutor" [(ngModel)]="_activityModel.idSectorEjecutor">
+                      <select #idSectorEjecutorActivity class="form-control" id="idSectorEjecutorActivity" name="idSectorEjecutorActivity"
+                        ngControl="idSectorEjecutor" [(ngModel)]="_activityModel.idSectorEjecutorActivity">
                         <option value="0">**** Selecciona el Sector Ejecutor ****</option>
                         <option *ngFor="let item of JsonReceptionSectorEjecutor" [value]="item.idSectorEjecutor">
                           {{item.descSectorEjecutor}}
@@ -289,11 +290,11 @@
               </nb-card-header>
               <nb-card-body>
                 <div class="row">
-                  <div class="col-sm-3">
+                  <div class="col-sm-2">
                     <div class="form-group">
-                      <label>Tipo de Organización</label>
-                      <select #idTipoOrganizacion class="form-control" id="idTipoOrganizacion" name="idTipoOrganizacion"
-                        ngControl="idTipoOrganizacion" [(ngModel)]="_activityModel.idTipoOrganizacion">
+                      <label>Tipo Organización</label>
+                      <select #idTipoOrganizacionActivity class="form-control" id="idTipoOrganizacionActivity" name="idTipoOrganizacionActivity"
+                        ngControl="idTipoOrganizacionActivity" [(ngModel)]="_activityModel.idTipoOrganizacionActivity">
                         <option value="0">**** Selecciona el tipo de Organizacion ****</option>
                         <option *ngFor="let item of JsonReceptionTiposOrganizacion" [value]="item.idTipoOrganizacion">
                           {{item.nombreTipoOrganizacion}}
@@ -302,11 +303,12 @@
                     </div>
                   </div>
 
-                  <div class="col-sm-3">
+                  <div class="col-sm-2">
                     <div class="form-group">
-                      <label>País de la Organización</label>
-                      <select #idPais class="form-control" id="idPais" name="idPais" ngControl="idPais" [(ngModel)]="_activityModel.idPais"
-                        (change)="organizacionesIdTipoIdPaisListService(_activityModel.idTipoOrganizacion, _activityModel.idPais )">
+                      <label>País Organización</label>
+                      <select #idPaisActivity class="form-control" id="idPaisActivity" name="idPaisActivity" ngControl="idPaisActivity"
+                        [(ngModel)]="_activityModel.idPaisActivity" (change)="organizacionesIdTipoIdPaisListService(_activityModel.idTipoOrganizacionActivity,
+_activityModel.idPaisActivity )">
                         <option value="0">**** Selecciona el País de la Organizacion ****</option>
                         <option *ngFor="let item of JsonReceptionPaises" [value]="item.idPais">
                           {{item.descPais}}
@@ -315,7 +317,7 @@
                     </div>
                   </div>
 
-                  <div class="col-sm-6">
+                  <div class="col-sm-5">
                     <div class="form-group">
                       <label for="inputWebsite">Buscar Organización</label>
                       <div class="input-group full-width">
@@ -328,10 +330,8 @@
                       </div>
                     </div>
                   </div>
-                </div>
 
-                <div class="row">
-                  <div class="col-sm-6">
+                  <div class="col-sm-3">
                     <div class="form-group">
                       <label for="inputWebsite">Id Interna</label>
                       <div class="input-group full-width">
@@ -346,21 +346,21 @@
                         </button>
                       </div>
                     </div>
-                  </div>
 
-                  <!-- Tarjeta de ayuda de la Seccion -->
-                  <ng-template #card>
-                    <nb-card class="popover-card">
-                      <nb-card-header status="warning">
-                        Hola! Ingresa la Id Interna de tu Proyecto
-                      </nb-card-header>
-                      <nb-card-body>
-                        Esta sección de la PGC, sirve para registrar el Código que tienes en tu Sistema de
-                        Registro de Proyectos, y relacionarlo con Identificador de la PGC, logrando una equivalencia
-                        entre su Sistema y la PGC.
-                      </nb-card-body>
-                    </nb-card>
-                  </ng-template>
+                    <!-- Tarjeta de ayuda de la Seccion -->
+                    <ng-template #card>
+                      <nb-card class="popover-card">
+                        <nb-card-header status="warning">
+                          Hola! Ingresa la Id Interna de tu Proyecto
+                        </nb-card-header>
+                        <nb-card-body>
+                          Esta sección de la PGC, sirve para registrar el Código que tienes en tu Sistema de
+                          Registro de Proyectos, y relacionarlo con Identificador de la PGC, logrando una equivalencia
+                          entre su Sistema y la PGC.
+                        </nb-card-body>
+                      </nb-card>
+                    </ng-template>
+                  </div>
                 </div>
 
                 <div class="row">
@@ -420,7 +420,7 @@
                   <button type="button" class="btn btn-primary btn-group-icon btn-group-divider botonSave">
                     <i class="ion-folder"></i>
                   </button>
-                  <button type="button" class="btn btn-primary botonSave" (click)="makeToast(); pushJsonIdInterna()">Guardar
+                  <button type="button" class="btn btn-primary botonSave" (click)="makeToast(); newActivity()">Guardar
                     como borrador</button>
                   <button type="button" class="btn btn-warning" (click)="verJson()">Limpiar</button>
                 </div>

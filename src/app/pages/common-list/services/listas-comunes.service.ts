@@ -70,7 +70,7 @@ export class ListasComunesService {
   ****************************************************************************/
   getAllSectoresEjecutores(): Observable<any> {
     // Retorno de la Funcion
-    return this._http.get(this._systemEndPointsService.getEndPointService('matActGroup', 1), {
+    return this._http.get(this._systemEndPointsService.getEndPointService('mantActGroup', 1), {
       headers: this.headers,
       params: { 'tokenApi': this.tokenHeader },
     });
@@ -87,7 +87,7 @@ export class ListasComunesService {
   ****************************************************************************/
   getAllEstrategias(): Observable<any> {
     // Retorno de la Funcion
-    return this._http.get(this._systemEndPointsService.getEndPointService('matActGroup', 3), {
+    return this._http.get(this._systemEndPointsService.getEndPointService('mantActGroup', 3), {
       headers: this.headers,
       params: { 'tokenApi': this.tokenHeader },
     });
@@ -104,7 +104,7 @@ export class ListasComunesService {
   ****************************************************************************/
   getAllPresupuesto(): Observable<any> {
     // Retorno de la Funcion
-    return this._http.get(this._systemEndPointsService.getEndPointService('matActGroup', 5), {
+    return this._http.get(this._systemEndPointsService.getEndPointService('mantActGroup', 5), {
       headers: this.headers,
       params: { 'tokenApi': this.tokenHeader },
     });
