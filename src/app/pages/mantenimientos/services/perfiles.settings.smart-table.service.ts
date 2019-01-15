@@ -32,7 +32,8 @@ export class ConfigSmartTableService {
           case 1:
             const settings = {
               hideSubHeader: false,
-
+              actions: { delete: true,
+              },
               add: {
                 addButtonContent: '<i class="nb-plus"></i>',
                 createButtonContent: '<i class="nb-checkmark"></i>',
@@ -77,6 +78,11 @@ export class ConfigSmartTableService {
                       list: array,
                     },
                   },
+                },
+                habilitado: {
+                  title: 'Habilitado',
+                  type: 'string',
+                  valuePrepareFunction: (cell: any, row: any) => row.activado,
                 },
               },
             };

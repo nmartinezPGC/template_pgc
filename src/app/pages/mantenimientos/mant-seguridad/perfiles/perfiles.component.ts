@@ -196,9 +196,14 @@ export class PerfilesComponent implements OnInit {
    * onDeleteConfirm
    * @param event
    */
-  onDeleteConfirm(event): void {
-    if (window.confirm('Are you sure you want to delete?')) {
-      event.confirm.resolve();
+  onDeleteConfirm(event) {
+    if (window.confirm('Esta seguro en Inhabilitar este perfil?')) {
+     // console.log(event);
+     // console.log(event.data.activado);
+     // console.log(event.data.idPerfil);
+      this._perfilModel.idPerfil = event.data.idPerfil;
+      this._perfilModel.estadoPerfil = false;
+      event.confirm.resolve(event.newData);
     } else {
       event.confirm.reject();
     }
