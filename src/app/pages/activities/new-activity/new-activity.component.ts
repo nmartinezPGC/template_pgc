@@ -169,7 +169,7 @@ export class NewActivityComponent implements OnInit {
     // Inicializacion del Modelo de la Clase
     this._activityModel = new ActivityModel(
       0, // Id Actividad
-      '', null, 0, null, 0,'', '', '', '', '', '', // Datos Generales de la Actividad
+      '', null, 0, null, 0, '', '', '', '', '', '', // Datos Generales de la Actividad
       null, 0, null, 0, null, 0, // Planificacion
       '', '', '', 0, null, 0, null, '', '', // Resultados
       null, 0, null, 0, null, 0, '', // Organizaciones Relaciones
@@ -764,7 +764,7 @@ export class NewActivityComponent implements OnInit {
   * Objetivo: Validacion de Id Interna por Codigo
   ****************************************************************************/
   newActivity() {
-    console.log('Datos del Modelo al Guardar ' + JSON.stringify(this._activityModel));
+   // console.log('Datos del Modelo al Guardar ' + JSON.stringify(this._activityModel));
     // Seteo de las variables del Model al json de Java
     // this._activityModel.idTipoPerfil = { idTipo: this._activityModel.idTipo };
 
