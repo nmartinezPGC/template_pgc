@@ -86,7 +86,7 @@ export class PerfilesComponent implements OnInit {
     /* Llamado a la Funcion: 007, la cual obtiene el detalle da la Info.
      del Usuario */
     this.perfilesDatailsService();
-    this.responsedata = { "error": false, "msg": "error campos solicitado" };
+    this.responsedata = { 'error': false, 'msg': 'error campos solicitado' };
   }
 
 
@@ -428,10 +428,10 @@ export class PerfilesComponent implements OnInit {
     if (perfilModelIn.codPerfil === null || perfilModelIn.codPerfil === '') {
       this.responsedata.msg = 'Debes ingresar el codigo de perfil para continuar';
       this.responsedata.error = true;
-    } else if(perfilModelIn.descTipo == null || perfilModelIn.descPerfil === '' ){
+    }else if(perfilModelIn.descTipo == null || perfilModelIn.descPerfil === '' ) {
       this.responsedata.msg = 'Desbes ingresar un tipo de perfil';
       this.responsedata = true;
-    }else if(perfilModelIn.descPerfil === null || perfilModelIn.descPerfil === ''){
+    }else if(perfilModelIn.descPerfil === null || perfilModelIn.descPerfil === '') {
       this.responsedata.msg = 'Debes de ingresar una descripcion de este perfil';
       this.responsedata = true;
     }
