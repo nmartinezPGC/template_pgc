@@ -118,4 +118,21 @@ export class PerfilService {
             params: { 'tokenApi': this.tokenHeader },
         });
     }// FIN | FND-00005
+
+     /****************************************************************************
+    * Funcion: FND-00006
+    * Fecha: 15-01-2019
+    * Descripcion: Metodo que sirve para inhabilitar los perfiles
+    * Params: { idPerfilIn }
+    ****************************************************************************/
+   perfildelete( idPerfilIn: number): Observable<any> {
+    // Parametros del EndPoint
+    const idPerfil: number = idPerfilIn;
+    // console.log('Parametros de Servicio ' + ' Modelo ' + JSON.stringify(paramsSend) + ' Where ' + idPerfil );
+    // Retorno de la Funcion
+    return this._http.delete(this._systemEndPointsService.getEndPointService('mantGenericosGroup', 8) + idPerfil, {
+        headers: this.headers,
+        params: { 'tokenApi': this.tokenHeader },
+    });
+}// FIN | FND-00006
 }
