@@ -17,6 +17,7 @@ declare var $: any;
   styleUrls: ['./usuarios.component.scss'],
 })
 export class UsuariosComponent implements OnInit {
+
   // estructura de la smart table donde mostramos los datos de los usuarios
   settings = {
     hideSubHeader: false,
