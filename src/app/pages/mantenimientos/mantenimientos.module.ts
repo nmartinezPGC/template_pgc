@@ -6,6 +6,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { SmartTableService  } from '../../@core/data/smart-table.service';
 
+
 // Imports de la clase de Definicion de las Rutas
 import { MantenimientosRoutingModule, routedComponentsMant } from './mantenimientos-routing.module';
 

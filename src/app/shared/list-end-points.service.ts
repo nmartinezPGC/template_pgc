@@ -253,6 +253,13 @@ export class ListEndPointsService {
         groupEndPoint: 'mantGenericosGroup',
         descEndPoint: 'Actualizar los perfiles',
       },
+      deletePerfil: {
+        id: 8,
+        nameEndpoint: 'inhabilitar los perfiles',
+        urlEndPoint: '/profiles/delete/',
+        groupEndPoint: 'mantGenericosGroup',
+        descEndPoint: 'inhabilita los perfiles',
+      },
     }, // Modulo de Mantenimientos Genericos
     endPointIdInternasActividades: {
       listAllidInternas: {

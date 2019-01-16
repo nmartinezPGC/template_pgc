@@ -68,6 +68,7 @@ export class PerfilesComponent implements OnInit {
   isDuplicatesPrevented = false;
   isCloseButton = true;
   settings: any;
+  public responsedata: any;
 
 
   /**
@@ -85,7 +86,7 @@ export class PerfilesComponent implements OnInit {
     /* Llamado a la Funcion: 007, la cual obtiene el detalle da la Info.
      del Usuario */
     this.perfilesDatailsService();
-
+    this.responsedata = { "error": false, "msg": "error campos solicitado" };
   }
 
 
@@ -198,11 +199,9 @@ export class PerfilesComponent implements OnInit {
    */
   onDeleteConfirm(event) {
     if (window.confirm('Esta seguro en Inhabilitar este perfil?')) {
-     // console.log(event);
-     // console.log(event.data.activado);
-     // console.log(event.data.idPerfil);
       this._perfilModel.idPerfil = event.data.idPerfil;
-      this._perfilModel.estadoPerfil = false;
+      this._perfilModel.idTipo = event.data.idTipoPerfil.idTipo;
+      this.deleteperfil();
       event.confirm.resolve(event.newData);
     } else {
       event.confirm.reject();
@@ -218,9 +217,11 @@ export class PerfilesComponent implements OnInit {
       this._perfilModel.idTipo = event.newData.idTipoPerfil.idTipo;
       this._perfilModel.codPerfil = event.newData.codPerfil;
       this._perfilModel.descPerfil = event.newData.descPerfil;
+      this._perfilModel.estadoPerfil = event.newData.activado;
       // this._perfilModel.descripcionTipoPerfil = event.newData.descripcionTipoPerfil;
       this._perfilModel.idTipo = event.newData.descripcionTipoPerfil;
       this._perfilModel.idTipoPerfil = { idTipo: this._perfilModel.idTipo };
+      // console.log(event.data);
       // console.log('Tipo de Perfil ' + JSON.stringify(this._perfilModel));
       // Ejecutamos las Funcion
       this.updatePerfilService();
@@ -275,6 +276,49 @@ export class PerfilesComponent implements OnInit {
   } // FIN | newPerfilService
 
   /****************************************************************************
+ * Funcion: deleteperfil
+ * Object Number: 002
+ * Fecha: 07-01-2019
+ * Descripcion: Method newPerfilService
+ * Objetivo: actualizar los perfiles existentes perfiles.
+ ****************************************************************************/
+  private deleteperfil(): void {
+    // Seteo de las variables del Model al json de Java
+
+    // Ejecutamos el Recurso del EndPoint
+    this._perfilesService.perfildelete(this._perfilModel.idPerfil).subscribe(
+      response => {
+        if (response.status !== 200) {
+          // console.log(response.status);
+          // console.log(response.message);
+          this.showToast('error', 'Error al actualizar los cambios', response.message);
+        } else if (response.status === 200) {
+          // console.log(result.status);
+          this.showToast('default', 'se actualizaron con exito los datos', response.message);
+          // console.log(response.data);
+          // Carga la tabla Nuevamente
+          this.perfilesDatailsService();
+        }
+      },
+      error => {
+        // Redirecciona al Login
+        alert('Error en la petición de la API ' + <any>error);
+
+        // Borramos los datos del LocalStorage
+        /*localStorage.removeItem('auth_app_token');
+        localStorage.removeItem('identity');
+
+        const redirect = '/auth/login';
+        setTimeout(() => {
+          // Iniciativa Temporal
+          location.reload();
+          return this._router.navigateByUrl(redirect);
+        }, 2000);*/
+      },
+    );
+  } // FIN | newPerfilService
+
+  /****************************************************************************
  * Funcion: newPerfilService
  * Object Number: 003
  * Fecha: 07-01-2019
@@ -284,6 +328,7 @@ export class PerfilesComponent implements OnInit {
   private newPerfilService(): void {
     // Seteo de las variables del Model al json de Java
     this._perfilModel.idTipoPerfil = { idTipo: this._perfilModel.idTipo };
+    this.validatePerfiles(this._perfilModel);
 
     // Ejecutamos el Recurso del EndPoint
     this._perfilesService.newPerfil(this._perfilModel).subscribe(
@@ -367,5 +412,29 @@ export class PerfilesComponent implements OnInit {
         }, 2000);
       },
     );
+  } // FIN | perfilesTipoService
+
+
+  /****************************************************************************
+   * Funcion: validatePerfiles
+   * Object Number: 006
+   * Fecha: 16-01-2019
+   * Descripcion: Method para validar que los campos esten llenos
+   * Objetivo: validatePerfiles  procurrar que llegue a la base de datos toda la informacion de perfiles
+   ****************************************************************************/
+  private validatePerfiles(perfilModelIn: any) {
+    // seteo el modelo para que los campos sean verificados
+    this.responsedata.error = false;
+    if (perfilModelIn.codPerfil === null || perfilModelIn.codPerfil === '') {
+      this.responsedata.msg = 'Debes ingresar el codigo de perfil para continuar';
+      this.responsedata.error = true;
+    } else if(perfilModelIn.descTipo == null || perfilModelIn.descPerfil === '' ){
+      this.responsedata.msg = 'Desbes ingresar un tipo de perfil';
+      this.responsedata = true;
+    }else if(perfilModelIn.descPerfil === null || perfilModelIn.descPerfil === ''){
+      this.responsedata.msg = 'Debes de ingresar una descripcion de este perfil';
+      this.responsedata = true;
+    }
+    return this.responsedata;
   } // FIN | perfilesTipoService
 }

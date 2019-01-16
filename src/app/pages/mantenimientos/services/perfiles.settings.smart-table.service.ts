@@ -9,6 +9,7 @@
 
 import { Injectable } from '@angular/core';
 
+
 @Injectable({
   providedIn: 'root',
 })
@@ -16,6 +17,8 @@ export class ConfigSmartTableService {
   // Definicion de las variables Globales
   public settings: any;
   constructor() { }
+
+  daysOfTheWeekList: [{ value: 0, title: 'Monday' }, { value: 1, title: 'Tuesday' }]
 
   /****************************************************************************
 * Funcion: configSmartTable
@@ -25,15 +28,13 @@ export class ConfigSmartTableService {
 * Objetivo: Establecer las configuraciones para la Smart Table
 ****************************************************************************/
 
-  configSmartTable(smartTable: string, smartNormal: number , array: any) {
+  configSmartTable(smartTable: string, smartNormal: number, array: any) {
     switch (smartTable) {
       case 'userSmart':
         switch (smartNormal) {
           case 1:
             const settings = {
-              hideSubHeader: false,
-              actions: { delete: true,
-              },
+              hideSubHeader : true,
               add: {
                 addButtonContent: '<i class="nb-plus"></i>',
                 createButtonContent: '<i class="nb-checkmark"></i>',
@@ -62,12 +63,13 @@ export class ConfigSmartTableService {
                 codPerfil: {
                   title: 'Codigo de Perfil',
                   type: 'string',
+                  editable: false,
                 },
                 descPerfil: {
                   title: 'Descripcion de Perfil',
                   type: 'string',
                 },
-                // Json anidado para lograr capturar el valor de una entidad
+                // Json anidado para lograr capturar el valor de una entidad     ///https://github.com/akveo/ngx-admin/issues/1827
                 // bibliografia : https://github.com/akveo/ng2-smart-table/issues/375
                 descripcionTipoPerfil: {
                   valuePrepareFunction: (cell: any, row: any) => row.idTipoPerfil.descTipo,
@@ -81,13 +83,19 @@ export class ConfigSmartTableService {
                 },
                 habilitado: {
                   title: 'Habilitado',
-                  type: 'string',
-                  valuePrepareFunction: (cell: any, row: any) => row.activado,
+                  type: 'html',
+                 valuePrepareFunction: (cell: any, row: any) => row.activado,
+                  editor: {
+                    type: 'list',
+                    config: {
+                      list: [{value: 'true', title: 'Activo'}, {value: 'false', title: 'Inactivo'}],
+                    },
+                  },
                 },
               },
             };
-              // variable que retorne
-              this.settings = settings;
+            // variable que retorne
+            this.settings = settings;
             break;
 
           case 2:
