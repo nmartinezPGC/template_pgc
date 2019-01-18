@@ -20,7 +20,7 @@ export class ActivityValidateFormService {
   public _activityModel: ActivityModel;
 
   constructor() {
-    this.responseData = {"error": false, "msg": "Error; Campo Solicitado" };
+    this.responseData = {'error': false, 'msg': 'Error; Campo Solicitado' };
    }
 
   /****************************************************************************

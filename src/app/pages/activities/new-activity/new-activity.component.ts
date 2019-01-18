@@ -194,7 +194,7 @@ export class NewActivityComponent implements OnInit {
       null, 0, null, 0, null, 0, '', // Organizaciones Relaciones
       '', '', '', // Organizaciones Descripciones
       null, 0, // Datos de Auditoria
-      null, null, null, null, null // Fechas de Planifiacion
+      null, null, null, null, null, // Fechas de Planifiacion
     );
 
     /* Llamado a la Funcion: 008, la cual obtiene el listado de los Estados de
