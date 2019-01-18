@@ -14,44 +14,44 @@ export class ActivityModel {
 
         // Datos Generales de la Actividad
         public codigoActividad: string,
-        public idEstado: { idEstadoActivity: number },
-        public idEstadoActivity: number,
-        public idEspacioTrabajo: { idEspacioTrabajoActivity: number },
-        public idEspacioTrabajoActivity: number,
+        public idEstadoActivity: { idEstado: number },
+        public idEstado: number,
+        public idEspacioTrabajoActivity: { idEspacioTrabajo: number },
+        public idEspacioTrabajo: number,
         public explicacionEstado: string,
         public antecedentesActividad: string,
         public objetivoActividad: string,
         public descripcionActividad: string,
         public condicionesActividad: string,
-        public codigoSiafiBip: string,
+        public codigoSIAFIBIP: string,
 
         // Planificacion
-        public idEstrategia: { idEstrategiaActivity: number },
-        public idEstrategiaActivity: number,
-        public idPresupuesto: { idPresupuestoActivity: number },
-        public idPresupuestoActivity: number,
-        public idSectorEjecutor: { idSectorEjecutorActivity: number },
-        public idSectorEjecutorActivity: number,
+        public idEstrategiaActivity: { idEstrategia: number },
+        public idEstrategia: number,
+        public idPresupuestoActivity: { idPresupuesto: number },
+        public idPresupuesto: number,
+        public idSectorEjecutorActivity: { idSectorEjecutor: number },
+        public idSectorEjecutor: number,
 
         // Resultados
         public resultadosEsperados: string,
         public resultadosAlaFecha: string,
         public justificacionActividad: string,
         public costoActividad: number,
-        public idMonedaActividad: { idMonedaActividadActivity: number },
-        public idMonedaActividadActivity: number = 1,
+        public idMonedaActividadActivity: { idMonedaActividad: number },
+        public idMonedaActividad: number,
 
         public fechaFinanciamiento: Date,
         public nombreActividad: string,
         public productosEsperados: string,
 
         // Organizaciones Relaciones
-        public idTipoOrganizacion: { idTipoOrganizacionActivity: number },
-        public idTipoOrganizacionActivity: number,
-        public idPais: { idPaisActivity: number },
-        public idPaisActivity: number,
-        public idOrganizacion: { idOrganizacionActivity: number },
-        public idOrganizacionActivity: number,
+        public idTipoOrganizacionActivity: { idTipoOrganizacion: number },
+        public idTipoOrganizacion: number,
+        public idPaisActivity: { idPais: number },
+        public idPais: number,
+        public idOrganizacionActivity: { idOrganizacion: number },
+        public idOrganizacion: number,
         public idInterna: string,
 
         // Parte descriptiva de los llamados a las Relaciones
@@ -59,5 +59,16 @@ export class ActivityModel {
         public descPaisOrganizacion: string,
         public descTipoOrganizacion: string,
         public descOrganizacion: string,
+
+        // Campos de Auditoria
+        public idUsuarioCreador: { idUsuario: number },
+        public idUsuario: number,
+
+        // Fechas de Planificacion
+        public fechaFirma: Date,
+        public fechaEfectividad: Date,
+        public fechaCierre: Date,
+        public fechaPropuestaFinalizacion: Date,
+        public fechaFinalizacion: Date,
     ) { }
 }

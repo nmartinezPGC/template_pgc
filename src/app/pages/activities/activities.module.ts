@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 
 // Imports de Tabla Smart de Angular
 import { Ng2SmartTableModule } from 'ng2-smart-table';
-import { SmartTableService } from '../../@core/data/smart-table.service';
+// import { SmartTableService } from '../../@core/data/smart-table.service';
 
 // Imports de Toaster-Notification Service
 import { ToasterModule } from 'angular2-toaster';
@@ -19,6 +19,9 @@ import { ActivitiesRoutingModule, routedComponents } from './activities-routing.
 import { ListasComunesService } from '../common-list/services/listas-comunes.service';
 import { FilterdataPipe } from './pipes/filterdata.pipe';
 import { NgxPaginationModule } from 'ngx-pagination'; // <-- import the module
+import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
+import { FormsModule } from '@angular/forms';
+import { MyDatePickerModule } from 'mydatepicker';
 
 @NgModule({
   imports: [
@@ -30,13 +33,16 @@ import { NgxPaginationModule } from 'ngx-pagination'; // <-- import the module
     MatButtonModule,
     MatExpansionModule,
     NgxPaginationModule,
+    AngularMultiSelectModule,
+    FormsModule,
+    MyDatePickerModule,
   ],
   declarations: [
     ...routedComponents,
     FilterdataPipe,
   ],
   providers: [
-    SmartTableService, // Defincion del Servicio que provee los Datos de la Tabla: ID's Internas
+    // SmartTableService, // Defincion del Servicio que provee los Datos de la Tabla: ID's Internas
     ListasComunesService,
   ],
 })
