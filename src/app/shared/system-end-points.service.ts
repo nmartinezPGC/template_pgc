@@ -160,8 +160,11 @@ export class SystemEndPointsService extends ListEndPointsService {
           case 7:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointMantGenericos.perfilUpdate.urlEndPoint;
             break;
-            case 8:
+          case 8:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointMantGenericos.deletePerfil.urlEndPoint;
+            break;
+          case 9:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointMantGenericos.listAllUsuarios.urlEndPoint;
             break;
         }
         break;
