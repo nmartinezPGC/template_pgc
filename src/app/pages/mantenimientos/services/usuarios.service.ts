@@ -62,7 +62,7 @@ export class UsuarioService {
       ****************************************************************************/
     getAllUsuarios(): Observable<any> {
         // Retorno de la Funcion
-        return this._http.get(this._systemEndPointsService.getEndPointService('mantGenericosGroup', 9), {
+        return this._http.get(this._systemEndPointsService.getEndPointService('mantGenericosUsuarioGroup', 1), {
             headers: this.headers,
             params: { 'tokenApi': this.tokenHeader },
         });
