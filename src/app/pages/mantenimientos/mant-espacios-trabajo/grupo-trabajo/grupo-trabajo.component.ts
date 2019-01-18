@@ -121,7 +121,6 @@ export class GrupoTrabajoComponent implements OnInit {
         if (response.status !== 200) {
           // console.log(response.status);
           // console.log(response.message);
-          console.log("falloo");
           this.showToast('error', 'Error al Obtener la Información del Perfil', response.message);
         } else if (response.status === 200) {
           // this.productos = result.data;
