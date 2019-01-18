@@ -164,7 +164,7 @@ export class UsuariosComponent implements OnInit {
           // console.log(result.status);
           this.JsonReceptionUsuarios = response.data;
           this.data = this.JsonReceptionUsuarios;
-          console.log(response.data);
+          // console.log(response.data);
         }
       },
       error => {
