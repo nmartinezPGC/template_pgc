@@ -187,6 +187,7 @@ export class NewActivityComponent implements OnInit {
   * Objetivo: ngOnInit in the method header API
   ****************************************************************************/
   ngOnInit() {
+    this.getSecuenciaListService('NEW-ACT');
     // Inicializacion del Modelo de la Clase
     this._activityModel = new ActivityModel(
       0, // Id Actividad

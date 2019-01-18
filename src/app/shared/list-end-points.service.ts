@@ -33,6 +33,13 @@ export class ListEndPointsService {
         groupEndPoint: 'userGroup',
         descEndPoint: 'Busca el Usuario con el Email, de parametro',
       },
+      getSecuencia: {
+        id: 2,
+        nameEndpoint: 'Get Secuencia',
+        urlEndPoint: '/secuencias/findByIdSecuencia/',
+        groupEndPoint: 'userGroup',
+        descEndPoint: 'Busca la Secuencia con el Codigo Enviado',
+      },
     },
     endPointMantActividades: {
       listAllSectorEjecutor: {

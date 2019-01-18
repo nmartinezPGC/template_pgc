@@ -37,8 +37,11 @@ export class SystemEndPointsService extends ListEndPointsService {
     switch (groupEndPoint) {
       case 'userGroup':
         switch (indicadorEndPoint) {
-          case 1: // Llamados a los End Point del Modulo de Usuarios
+          case 1: // Llamamos a los End Point del Modulo de Usuarios
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointUsers.findByMail.urlEndPoint;
+            break;
+          case 2:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointUsers.getSecuencia.urlEndPoint;
             break;
         }
         break;
