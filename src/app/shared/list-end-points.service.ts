@@ -260,13 +260,6 @@ export class ListEndPointsService {
         groupEndPoint: 'mantGenericosGroup',
         descEndPoint: 'inhabilita los perfiles',
       },
-      listAllUsuarios: {
-        id: 9,
-        nameEndpoint: 'List All Usuarios',
-        urlEndPoint: '/usuarios',
-        groupEndPoint: 'mantGenericosGroup',
-        descEndPoint: 'Listar todos los Usuarios',
-      },
     }, // Modulo de Mantenimientos Genericos
     endPointIdInternasActividades: {
       listAllidInternas: {
@@ -316,6 +309,15 @@ export class ListEndPointsService {
         params: '{idActivity}',
         groupEndPoint: 'actividadesCRUDGroup',
         descEndPoint: 'Inhabilita en la API, una Actividad con sus Datos Generales',
+      },
+    }, // modulo de mantenimientos generico de usuarios
+    endPointMantGenericosUsuario: {
+      listAllUsuarios: {
+        id: 1,
+        nameEndpoint: 'List All Usuarios',
+        urlEndPoint: '/usuarios',
+        groupEndPoint: 'mantGenericosUsuarioGroup',
+        descEndPoint: 'Listar todos los Usuarios',
       },
     },
   }
