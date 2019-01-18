@@ -873,7 +873,7 @@ export class NewActivityComponent implements OnInit {
     this._activityModel.idOrganizacionActivity = { idOrganizacion: this._activityModel.idOrganizacion };
     this._activityModel.idUsuarioCreador = { idUsuario: this.JsonReceptionUserDetail.idUsuario };
 
-    console.log(this._activityModel);
+    // console.log(this._activityModel);
     // Validamos los Campos enviados
     this._activityValidateFormService.validateFormActivity(this._activityModel);
     const responseData: any = this._activityValidateFormService.responseData;
