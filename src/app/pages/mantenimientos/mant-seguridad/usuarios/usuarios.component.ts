@@ -120,7 +120,7 @@ export class UsuariosComponent implements OnInit {
     this.settings = this._configSmartTableService.settings;
     /* Llamado a la Funcion: 007, la cual obtiene el detalle da la Info.
      del Usuario */
-    this.usuariosDatailsService();
+    this.usuariosListAllService();
     this.responsedata = { 'error': false, 'msg': 'error campos solicitado' };
   }
 
@@ -152,7 +152,7 @@ export class UsuariosComponent implements OnInit {
   * Descripcion: Method usuariosDatailsService of the Class
   * Objetivo: usuariosDatailsService detalle del Perfil llamando a la API
   ****************************************************************************/
-  private usuariosDatailsService() {
+  private usuariosListAllService() {
     this._usuariosService.getAllUsuarios().subscribe(
       response => {
         if (response.status !== 200) {
