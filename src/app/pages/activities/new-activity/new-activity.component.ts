@@ -947,6 +947,6 @@ export class NewActivityComponent implements OnInit {
   generateCodeActivity() {
     const iniHND: string = 'HND';
     const paisSelect = JSON.stringify(this.selectedItemsPais);
-    console.log('Codigo de la Actividad ' + iniHND + ' --- ' + this.inicialesPais);
+    // console.log('Codigo de la Actividad ' + iniHND + ' --- ' + this.inicialesPais);
   } // FIN | generateCodeActivity
 }
