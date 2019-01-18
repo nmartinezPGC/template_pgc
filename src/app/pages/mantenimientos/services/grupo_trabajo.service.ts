@@ -50,6 +50,20 @@ export class GrupoTrabajoService {
             'Content-Type': 'application/json',
             'Authorization': this.tokenHeader, 'Access-Control-Allow-Origin': '*',
         });
-    }
+    }     // FIN | constructor
+
+     /****************************************************************************
+      * Funcion: FND-00002
+      * Fecha: 18-01-2018
+      * Descripcion: Metodo para obtener los tipo de organizacion
+      * Objetivo: datos para obtener los tipo de organizacion
+      * Params: { }
+      ****************************************************************************/
+     listAllTipoOrganizaciones(): Observable<any> {
+        // Retorno de la Funcion
+        return this._http.get(this._systemEndPointsService.getEndPointService('organizacionesGroup', 1), {
+            headers: this.headers,
+            params: { 'tokenApi': this.tokenHeader },
+        });
+    }// FIN | FND-00002
 }
-    // FIN | constructor

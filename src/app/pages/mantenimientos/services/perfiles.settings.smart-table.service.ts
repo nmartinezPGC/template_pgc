@@ -51,15 +51,6 @@ export class ConfigSmartTableService {
                 confirmDelete: true,
               },
               columns: {
-                // idPerfil: {
-                // title: 'Id de Perfil',
-                // notShownField: true,
-
-                // valuePrepareFunction: (edit) => {
-                // console.log(edit);
-                // this.onSaveConfirm(edit);
-                // },
-                // },
                 codPerfil: {
                   title: 'Codigo de Perfil',
                   type: 'string',

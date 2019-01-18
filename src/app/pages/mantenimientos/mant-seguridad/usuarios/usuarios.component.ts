@@ -138,7 +138,7 @@ export class UsuariosComponent implements OnInit {
       null, null, null, null, null, null, null, 0, '', null, 0, '', null, 0, '', null, 0, '',
     );
     // inicializar la lista de tipo de perfiles
-    // this.usuariosTipoService();
+    //  this.usuariosTipoService();
   }
 
 

@@ -12,19 +12,24 @@ import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-t
 import { Router } from '@angular/router';
 // model class
 // Model of Class
-import { GrupoTrabajoModel} from '../../models/grupo_trabajo.model';
+import { GrupoTrabajoModel } from '../../models/grupo_trabajo.model';
 import { ConfigSmartTableService } from '../../services/grupo-trabajo.settings.smart-table.service';
+import { GrupoTrabajoService } from '../../services/grupo_trabajo.service';
 
 @Component({
   selector: 'ngx-grupo-trabajo',
   templateUrl: './grupo-trabajo.component.html',
   styleUrls: ['./grupo-trabajo.component.scss'],
-  providers: [ConfigSmartTableService],
+
+  providers: [ConfigSmartTableService, GrupoTrabajoService],
 })
 
 export class GrupoTrabajoComponent implements OnInit {
   // Instacia de la variable del Modelo | Json de Parametros
   public _Grupo: GrupoTrabajoModel;
+  public JsonReceptionPrefiles: any;
+  public JsonReceptionTipoPerfiles: any;
+  data: any;
   config: ToasterConfig;
 
   position = 'toast-bottom-full-width';
@@ -43,10 +48,12 @@ export class GrupoTrabajoComponent implements OnInit {
   public responsedata: any;
 
   constructor(protected _router: Router, private _toasterService: ToasterService,
-    public _configSmartTableService: ConfigSmartTableService) {
+    public _configSmartTableService: ConfigSmartTableService,
+    public _tipo: GrupoTrabajoService ) {
     // Llamamos a la Funcion de Configuracion de las Smart Table
     this._configSmartTableService.configSmartTable('userSmart', 1, null);
     this.settings = this._configSmartTableService.settings;
+    //  this.listarTipoOrganizacion();
   }
   /****************************************************************************
 * Funcion: makeToast
@@ -96,5 +103,49 @@ export class GrupoTrabajoComponent implements OnInit {
       null,
     );
     // inicializar la lista de tipo de perfiles
+    this.listarTipoOrganizacion();
   }
+  /* **************************************************************************/
+  /* ****************** Funciones Propias de la Clase *************************/
+
+  /****************************************************************************
+  * Funcion: perfilesDatailsService
+  * Object Number: 001
+  * Fecha: 07-01-2019
+  * Descripcion: Method perfilesDatailsService of the Class
+  * Objetivo: perfilesDatailsService detalle del Perfil llamando a la API
+  ****************************************************************************/
+  private listarTipoOrganizacion() {
+    this._tipo.listAllTipoOrganizaciones().subscribe(
+      response => {
+        if (response.status !== 200) {
+          // console.log(response.status);
+          // console.log(response.message);
+          this.showToast('error', 'Error al Obtener la Información del Perfil', response.message);
+        } else if (response.status === 200) {
+          // this.productos = result.data;
+          //  console.log(response.status);
+          this.JsonReceptionPrefiles = response.data;
+          this.data = this.JsonReceptionPrefiles;
+          // console.log(this.data);
+        }
+      },
+      error => {
+        // Redirecciona al Login
+        alert('Error en la petición de la API ' + <any>error);
+
+        // Borramos los datos del LocalStorage
+        localStorage.removeItem('auth_app_token');
+        localStorage.removeItem('identity');
+
+        const redirect = '/auth/login';
+        setTimeout(() => {
+          // Iniciativa Temporal
+          location.reload();
+          return this._router.navigateByUrl(redirect);
+        }, 2000);
+      },
+    );
+  } // FIN | perfilesDatailsService
+
 }

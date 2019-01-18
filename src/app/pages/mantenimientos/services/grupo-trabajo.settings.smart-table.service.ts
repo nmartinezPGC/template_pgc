@@ -18,7 +18,7 @@ export class ConfigSmartTableService {
   public settings: any;
   constructor() { }
 
-  daysOfTheWeekList: [{ value: 0, title: 'Monday' }, { value: 1, title: 'Tuesday' }]
+
 
   /****************************************************************************
 * Funcion: configSmartTable
@@ -51,27 +51,22 @@ export class ConfigSmartTableService {
                 confirmDelete: true,
               },
               columns: {
-                // idPerfil: {
-                // title: 'Id de Perfil',
-                // notShownField: true,
-
-                // valuePrepareFunction: (edit) => {
-                // console.log(edit);
-                // this.onSaveConfirm(edit);
-                // },
-                // },
-                codigo_tipo: {
+                codTipoOrganizacion: {
                   title: 'Codigo de Tipo',
                   type: 'string',
                   editable: false,
                 },
-                nombre_tipo_organizacion: {
-                  title: 'nombre de tipo de organizacion',
+                acronimoTipoOrganizacion: {
+                  title: 'acronimo',
+                  type: 'string',
+                },
+                descTipoOrganizacion: {
+                  title: 'Descripcion',
                   type: 'string',
                 },
                 // Json anidado para lograr capturar el valor de una entidad     ///https://github.com/akveo/ngx-admin/issues/1827
                 // bibliografia : https://github.com/akveo/ng2-smart-table/issues/375
-                habilitado: {
+                activo: {
                   title: 'Habilitado',
                   type: 'html',
                 // valuePrepareFunction: (cell: any, row: any) => row.activado,

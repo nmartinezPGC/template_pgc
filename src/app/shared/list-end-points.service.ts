@@ -142,7 +142,7 @@ export class ListEndPointsService {
       newTipoOrganizacion: {
         id: 3,
         nameEndpoint: 'NewTipoOrganizacion',
-        urlEndPoint: '/espacios-trabajo-usuario/new',
+        urlEndPoint: '/tipos-organizaciones/new',
         groupEndPoint: 'organizacionesGroup',
         descEndPoint: 'Ingresa un nuevo Espacio de Trabajo en la BD asignandolo a un Usuario',
       },
@@ -201,6 +201,20 @@ export class ListEndPointsService {
         urlEndPoint: '/organizaciones/countByCodOrganizacion/',
         groupEndPoint: 'organizacionesGroup',
         descEndPoint: 'Busca la Organizacion con el CodOrganizacion, de parametro',
+      },
+      updateTipoOrganizacion: {
+        id: 12,
+        nameEndpoint: 'updateTipoOrganizacion',
+        urlEndPoint: '/tipo-organizaciones/update',
+        groupEndPoint: 'organizacionesGroup',
+        descEndPoint: 'Actualizar eñ tipo de organizaciones ',
+      },
+      deleteTipoOrganizacion: {
+        id: 13,
+        nameEndpoint: 'deleteTipoOrganizacion',
+        urlEndPoint: '/tipo-organizaciones/delete',
+        groupEndPoint: 'organizacionesGroup',
+        descEndPoint: 'inhabilitar el tipo de organizaciones ',
       },
     }, // Modulo de Mantenimientos Genericos
     endPointMantGenericos: {
