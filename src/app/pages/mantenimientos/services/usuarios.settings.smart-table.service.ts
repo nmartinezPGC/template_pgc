@@ -53,54 +53,64 @@ export class ConfigSmartTableService {
                                 confirmDelete: true,
                             },
                             columns: {
-                                codigo: {
+                                codUsuario: {
                                     title: 'Codigo',
                                     type: 'string',
                                 },
-                                nombre1: {
+                                nombre1Usuario: {
                                     title: 'Primer Nombre',
                                     type: 'string',
                                 },
-                                nombre2: {
+                                nombre2Usuario: {
                                     title: 'Segundo Nombre',
                                     type: 'string',
                                 },
-                                apellido1: {
+                                apellido1Usuario: {
                                     title: 'Primer Apellido',
                                     type: 'string',
                                 },
-                                apellido2: {
+                                apellido2Usuario: {
                                     title: 'Segundo Apellido',
                                     type: 'string',
                                 },
-                                iniciales: {
+                                inicialesUsuario: {
                                     title: 'Iniciales',
                                     type: 'string',
                                 },
-                                email: {
+                                emailUsuario: {
                                     title: 'Email',
                                     type: 'string',
                                 },
-                                password: {
-                                    title: 'Password',
-                                    type: 'string',
+                                idTipoUsuario: {
+                                    valuePrepareFunction: (cell: any, row: any) => row.idTipoUsuario.descTipo,
+                                    title: 'Rol de Usuario',
+                                    editor: {
+                                        type: 'list',
+                                        config: {
+                                            list: array,
+                                        },
+                                    },
                                 },
-                                tipUsuario: {
-                                    title: 'Tipo de Usuario',
-                                    type: 'string',
-                                },
-                                pais: {
+                                idPais: {
+                                    valuePrepareFunction: (cell: any, row: any) => row.idPais.descPais,
                                     title: 'Pais',
-                                    type: 'string',
+                                    editor: {
+                                        type: 'list',
+                                        config: {
+                                            list: array,
+                                        },
+                                    },
                                 },
-                                // estadoUsuario: {
-                                //   title: 'Estado',
-                                //   type: 'string',
-                                // },
-                                // perfilUsuario: {
-                                //   title: 'Perfil Usuario',
-                                //   type: 'string',
-                                // },
+                                idEstadoUsuario: {
+                                    valuePrepareFunction: (cell: any, row: any) => row.idEstadoUsuario.descEstado,
+                                    title: 'Estado Usuario',
+                                    editor: {
+                                        type: 'list',
+                                        config: {
+                                            list: array,
+                                        },
+                                    },
+                                },
                             },
                         };
                         // variable que retorne
