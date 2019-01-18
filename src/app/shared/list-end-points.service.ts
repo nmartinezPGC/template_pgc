@@ -310,6 +310,15 @@ export class ListEndPointsService {
         groupEndPoint: 'actividadesCRUDGroup',
         descEndPoint: 'Inhabilita en la API, una Actividad con sus Datos Generales',
       },
+    }, // modulo de mantenimientos generico de usuarios
+    endPointMantGenericosUsuario: {
+      listAllUsuarios: {
+        id: 1,
+        nameEndpoint: 'List All Usuarios',
+        urlEndPoint: '/usuarios',
+        groupEndPoint: 'mantGenericosUsuarioGroup',
+        descEndPoint: 'Listar todos los Usuarios',
+      },
     },
   }
 } // FIN de Clase
