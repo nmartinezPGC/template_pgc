@@ -357,7 +357,7 @@
 
                   <div class="col-sm-4">
                     <div class="form-group">
-                       <strong> <label>Categoría Organización</label> </strong>
+                      <strong> <label>Categoría Organización</label> </strong>
                       <select #idTipoOrganizacion class="form-control" id="idTipoOrganizacion" name="idTipoOrganizacion"
                         ngControl="idTipoOrganizacion" [(ngModel)]="_activityModel.idTipoOrganizacion">
                         <option value="0">**** Selecciona el tipo de Organizacion ****</option>
@@ -370,7 +370,7 @@
 
                   <div class="col-sm-4">
                     <div class="form-group">
-                       <strong> <label>País Organización</label> </strong>
+                      <strong> <label>País Organización</label> </strong>
                       <!-- <select #idPais class="form-control" id="idPais" name="idPais" ngControl="idPais" [(ngModel)]="_activityModel.idPais"
                         (change)="organizacionesIdTipoIdPaisListService(_activityModel.idTipoOrganizacion, _activityModel.idPais )">
                         <option value="0">**** Selecciona el País de la Organizacion ****</option>
@@ -486,6 +486,7 @@
                   <button type="button" class="btn btn-primary botonSave" (click)="newActivity()">Guardar
                     como borrador</button>
                   <button type="button" class="btn btn-warning" (click)="resetActivity()">Limpiar</button>
+                  <button type="button" class="btn btn-warning" (click)="generateCodeActivity()">Probar</button>
                 </div>
               </nb-card-body>
             </nb-card>

@@ -260,4 +260,22 @@ export class ListasComunesService {
     });
   }// FIN | FND-00012
 
+
+  /****************************************************************************
+  * Funcion: FND-00013
+  * Fecha: 18-01-2019
+  * Descripcion: Metodo para obtener los Datos de la Secuencia
+  * Objetivo: Obtener la Secuencia de la Actividad
+  * Params: { codSecuencia }
+  ****************************************************************************/
+  getSecuenciaActividad(codSecuencia: string): Observable<any> {
+    // Parametros de la Funcion
+    const paramsSend = codSecuencia;
+    // Retorno de la Funcion
+    return this._http.get(this._systemEndPointsService.getEndPointService('idInternaGroup', 3) + paramsSend, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  }// FIN | FND-00013
+
 }

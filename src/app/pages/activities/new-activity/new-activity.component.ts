@@ -94,6 +94,7 @@ export class NewActivityComponent implements OnInit {
   public JsonReceptionEspaciosTrabajo: any;
   public JsonReceptionTiposOrganizacion: any;
   public JsonReceptionPaises: any;
+  public inicialesPais: string;
 
   // Organizaciones
   protected searchStrFunc: string;
@@ -117,6 +118,7 @@ export class NewActivityComponent implements OnInit {
 
   // Audotoria
   public JsonReceptionUserDetail: any;
+  public secuenciaDeActividad: string;
 
   // Instacia de la variable del Modelo | Json de Parametros
   public _activityModel: ActivityModel;
@@ -340,6 +342,8 @@ export class NewActivityComponent implements OnInit {
   onItemSelectPais(item: any) {
     // Asignamos el Pais seleccionado
     this._activityModel.idPais = item.id;
+    this.inicialesPais = item.iniciales;
+
     this.organizacionesIdTipoIdPaisListService(this._activityModel.idTipoOrganizacion, this._activityModel.idPais)
   } // FIN | OnItemDeSelect
 
@@ -356,7 +360,6 @@ export class NewActivityComponent implements OnInit {
       // event.newData['name'] += ' + added in code';
       alert(event.newData['username']);
       event.confirm.resolve(event.newData);
-      // console.log(event.newData);
     } else {
       event.confirm.reject();
     }
@@ -631,6 +634,7 @@ export class NewActivityComponent implements OnInit {
             return {
               id: item.idPais,
               itemName: item.descPais,
+              iniciales: item.inicialesPais,
             }
           })
         }
@@ -678,24 +682,27 @@ export class NewActivityComponent implements OnInit {
   /*****************************************************
   * Funcion: FND-00001
   * Fecha: 18-10-2018
-  * Descripcion: Funcion para AutoCompletar y sacar el
-  * Id de la Data de la Tabla TblOrganizaciones
-  * Params: $event
+  * Descripcion: Funcion que Obtiene la Secuencia del
+  * Proyecto o Actividad
+  * Params: codSecuencia
   ******************************************************/
-  protected onSelectedFunc(item: CompleterItem) {
-    // Envia la Organizacion seleccionada
-    this.selectedIdOrganizacion = item ? item.originalObject.idOrganizacion : '';
-    this.selectedDescOrganizacion = item ? item.originalObject.descOrganizacion : '';
-    this.selectedDescTipoOrganizacion = item ? item.originalObject.idTipoOrganizacionT.nombreTipoOrganizacion : '';
-    this.selectedPaisOrganizacion = item ? item.originalObject.idPaisOrganizacion.descPais : '';
+  protected getSecuenciaListService(codSecuencia: string) {
+    // Envia la Secuencia a Buscar
+    const secuenciaIn: string = 'NEW-ACT';
 
-    // Setea al Model el valor de la Organizacion
-    this._activityModel.idOrganizacion = Number(this.selectedIdOrganizacion);
-    // console.log(this._activityModel.idOrganizacion);
-    // console.log(item.originalObject);
-    this._activityModel.descOrganizacion = this.selectedDescOrganizacion;
-    this._activityModel.descTipoOrganizacion = this.selectedDescTipoOrganizacion;
-    this._activityModel.descPaisOrganizacion = this.selectedPaisOrganizacion;
+    this._listasComunesService.getSecuenciaActividad(secuenciaIn).subscribe(
+      result => {
+        if (result.status !== 200) {
+          this.showToast('error', 'Error al Obtener la Información de la Secuencia', result.message);
+        } else if (result.status === 200) {
+          this.secuenciaDeActividad = result.data;
+          // console.log(JSON.stringify(this.secuenciaDeActividad));
+        }
+      },
+      error => {
+        this.showToast('error', 'Error al Obtener la Información de la Secuencia', error);
+      },
+    );
   } // FIN | FND-00001
 
 
@@ -928,4 +935,18 @@ export class NewActivityComponent implements OnInit {
     this.dataService = null;
     this.dropdownList = [];
   } // FIN resetActivity
+
+
+  /****************************************************************************
+  * Funcion: generateCodeActivity
+  * Object Number: 021
+  * Fecha: 18-01-2019
+  * Descripcion: Method que Genera el Codigo de la Activiades
+  * Objetivo: Generar Codigo de la Actividad
+  ****************************************************************************/
+  generateCodeActivity() {
+    const iniHND: string = 'HND';
+    const paisSelect = JSON.stringify(this.selectedItemsPais);
+    console.log('Codigo de la Actividad ' + iniHND + ' --- ' + this.inicialesPais);
+  } // FIN | generateCodeActivity
 }
