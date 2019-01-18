@@ -6,41 +6,34 @@
  * @version 1.0.0
  * @fecha 10/01/2019
  */
-import { Component, OnInit, ChangeDetectorRef, Renderer2, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ElementRef, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 
 // AutoCompleter Services
 import { CompleterData, CompleterService, CompleterItem } from 'ng2-completer';
-
-// import {MatButtonModule} from '@angular/material/button';
 
 // Servicios que la Clase nesesitara para su funcionanmiento
 import { UserService } from '../../../@core/data/users.service'; // Servicio de Usuarios
 import { ListasComunesService } from '../../common-list/services/listas-comunes.service'; // Servicio de Lista de Comunes
 
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster'; // Servicio de Notificaciones
-// import 'style-loader!angular2-toaster/toaster.css';
 import { LocalDataSource } from 'ng2-smart-table'; // DataLocal de Ejemplo para el JSON de envio
 import { ActivityConfigSmartTableService } from '../services/activity-config-smart-table.service';
-
+import { IMyDpOptions, IMyDateModel } from 'mydatepicker';
+import 'style-loader!angular2-toaster/toaster.css';
 // import { SmartTableService } from '../../../@core/data/smart-table.service'; // Servicio de la SmartTable de la API
 
-import 'style-loader!angular2-toaster/toaster.css';
-
-// Modelo de la Clase Activiades
+// Modelo y Servicios de la Clase Activiades
 import { ActivityModel } from '../models/model-activity';
-import { Router } from '@angular/router';
 import { ActivityService } from '../services/service-activity.service';
-
-// Variables de Jquery
-declare var jquery: any;
-declare var $: any;
+import { ActivityValidateFormService } from '../services/activity-validate-form.service';
 
 @Component({
   selector: 'ngx-new-activity',
   templateUrl: './new-activity.component.html',
   styleUrls: ['./new-activity.component.scss', '../../components/notifications/notifications.component.scss'],
   // changeDetection: ChangeDetectionStrategy.OnPush, // Se usa para Actualizar la Informacion con otro evento
-  providers: [ToasterService, ActivityConfigSmartTableService, ActivityService],
+  providers: [ToasterService, ActivityConfigSmartTableService, ActivityService, ActivityValidateFormService],
 })
 export class NewActivityComponent implements OnInit {
   /****************************************************************************
@@ -122,8 +115,33 @@ export class NewActivityComponent implements OnInit {
   public descTipoOrganizacion: string;
   public descOrganizacion: string;
 
+  // Audotoria
+  public JsonReceptionUserDetail: any;
+
   // Instacia de la variable del Modelo | Json de Parametros
   public _activityModel: ActivityModel;
+
+  /**
+   * Configuracion del Dropdow List
+   */
+  dropdownList = [];
+  dropdownListPais = [];
+  selectedItems = [];
+  selectedItemsPais = [];
+  dropdownSettings = {};
+
+  /**
+   * Configuracion del DatePicker
+   */
+  public myDatePickerOptions: IMyDpOptions = {
+    // other options...
+    dateFormat: 'dd/mm/yyyy',
+    editableDateField: true,
+  };
+
+  // Initialized to specific date (09.10.2018).
+  // public model: any = { date: { year: 2018, month: 10, day: 9 } };
+  public model: any;
 
   // FIN | Definicion de las Variables de la Clase
 
@@ -144,7 +162,8 @@ export class NewActivityComponent implements OnInit {
     private _toasterService: ToasterService,
     protected _router: Router,
     public _activityConfigSmartTableService: ActivityConfigSmartTableService,
-    public _activityService: ActivityService) {
+    public _activityService: ActivityService,
+    public _activityValidateFormService: ActivityValidateFormService) {
     // Llamamos a la Funcion de Configuracion de las Smart Table
     this._activityConfigSmartTableService.configSmartTableIdInternas(null, null, null);
     this.settings = this._activityConfigSmartTableService.settings;
@@ -171,9 +190,11 @@ export class NewActivityComponent implements OnInit {
       0, // Id Actividad
       '', null, 0, null, 0, '', '', '', '', '', '', // Datos Generales de la Actividad
       null, 0, null, 0, null, 0, // Planificacion
-      '', '', '', 0, null, 0, null, '', '', // Resultados
+      '', '', '', 0, null, 1, null, '', '', // Resultados
       null, 0, null, 0, null, 0, '', // Organizaciones Relaciones
       '', '', '', // Organizaciones Descripciones
+      null, 0, // Datos de Auditoria
+      null, null, null, null, null, // Fechas de Planifiacion
     );
 
     /* Llamado a la Funcion: 008, la cual obtiene el listado de los Estados de
@@ -207,6 +228,25 @@ export class NewActivityComponent implements OnInit {
     /* Llamado a la Funcion: 015, la cual obtiene el listado de las Organizaciones
      que nesesita el Formulario de Actividades */
     this.organizacionesAllListService();
+
+    /**
+     * Configuracion Inicial del Dropdown List
+     */
+    this.selectedItems = [
+    ];
+
+    this.selectedItemsPais = [
+    ];
+
+    this.dropdownSettings = {
+      singleSelection: true,
+      text: 'Seleccione una Opción',
+      enableSearchFilter: true,
+      searchPlaceholderText: 'Buscar Elemento',
+      classes: 'comboSea',
+      showCheckbox: false,
+      lazyLoading: false,
+    };
 
   } // FIN | ngOnInit
 
@@ -267,37 +307,41 @@ export class NewActivityComponent implements OnInit {
 
 
   /****************************************************************************
-  * Funcion: onDeleteConfirm
+  * Funcion: onItemSelect
   * Object Number: 005
   * Fecha: 09-01-2019
-  * Descripcion: Method para Borrar Items de la SmartTable
+  * Descripcion: Method para Seleccionar Items de Organizacion para usarlo en Id
+  * Internas
   * Objetivo: enviar al Json de ID'Intermas la información que ocupa la API
   ****************************************************************************/
-  onDeleteConfirm(event) {
-    if (window.confirm('Are you sure you want to delete?')) {
-      event.confirm.resolve();
-    } else {
-      event.confirm.reject();
-    }
-  }// FIN | onDeleteConfirm
+  onItemSelect(item: any) {
+    // Envia la Organizacion seleccionada
+    this.selectedIdOrganizacion = item ? item.id : '';
+    this.selectedDescOrganizacion = item ? item.itemName : '';
+    this.selectedDescTipoOrganizacion = item ? item.nombreTipoOrganizacion : '';
+    this.selectedPaisOrganizacion = item ? item.descPais : '';
+
+    // Setea al Model el valor de la Organizacion
+    this._activityModel.idOrganizacion = Number(this.selectedIdOrganizacion);
+    this._activityModel.descOrganizacion = this.selectedDescOrganizacion;
+    this._activityModel.descTipoOrganizacion = this.selectedDescTipoOrganizacion;
+    this._activityModel.descPaisOrganizacion = this.selectedPaisOrganizacion;
+  } // FIN | onItemSelect
 
 
   /****************************************************************************
-  * Funcion: onCreateConfirm
+  * Funcion: OnItemDeSelect
   * Object Number: 006
   * Fecha: 09-01-2019
-  * Descripcion: Method para Cerar Items de la SmartTable
+  * Descripcion: Method para Seleccionar Items de Pais para usarlo en Id
+  * Internas
   * Objetivo: enviar al Json de ID'Intermas la información que ocupa la API
   ****************************************************************************/
-  onCreateConfirm(event) {
-    if (window.confirm('Are you sure you want to create?')) {
-      event.newData['name'] += ' + added in code';
-      event.confirm.resolve(event.newData);
-      // console.log(event.newData);
-    } else {
-      event.confirm.reject();
-    }
-  } // FIN | onCreateConfirm
+  onItemSelectPais(item: any) {
+    // Asignamos el Pais seleccionado
+    this._activityModel.idPais = item.id;
+    this.organizacionesIdTipoIdPaisListService(this._activityModel.idTipoOrganizacion, this._activityModel.idPais)
+  } // FIN | OnItemDeSelect
 
 
   /****************************************************************************
@@ -353,7 +397,8 @@ export class NewActivityComponent implements OnInit {
           // console.log(result.status);
           this.showToast('error', 'Error al Obtener la Información del Usuario', result.message);
         } else {
-          // console.log(result.data);
+          this.JsonReceptionUserDetail = result.data
+          // console.log(this.JsonReceptionUserDetail.idUsuario);
         }
       },
       error => {
@@ -539,6 +584,32 @@ export class NewActivityComponent implements OnInit {
 
 
   /****************************************************************************
+  * Funcion: categoriasOrganizacionListService
+  * Object Number: 013.1
+  * Fecha: 17-01-2019
+  * Descripcion: Method categoriasOrganizacionListService of the Class
+  * Objetivo: categoriasOrganizacionListService listados de las Categorias de la
+  * Organizacion del Formulario de Actividad llamando a la API
+  ****************************************************************************/
+  private categoriasOrganizacionListService() {
+    this._listasComunesService.getAllTipoOrganizacion().subscribe(
+      result => {
+        if (result.status !== 200) {
+          // Respuesta del Error
+          this.showToast('error', 'Error al Obtener la Información de los Tipos de Organizacion', result.message);
+        } else if (result.status === 200) {
+          this.JsonReceptionTiposOrganizacion = result.data;
+        }
+      },
+      error => {
+        // console.log(<any>error);
+        this.showToast('error', 'Error al Obtener la Información de los Tipos de Organizacion', error);
+      },
+    );
+  } // FIN | tiposOrganizacionListService
+
+
+  /****************************************************************************
   * Funcion: paisesAllListService
   * Object Number: 014
   * Fecha: 13-10-2018
@@ -554,6 +625,14 @@ export class NewActivityComponent implements OnInit {
           this.showToast('error', 'Error al Obtener la Información de los Paises', result.message);
         } else if (result.status === 200) {
           this.JsonReceptionPaises = result.data;
+
+          // Setea la Lista del Dropdown List
+          this.dropdownListPais = this.JsonReceptionPaises.map((item) => {
+            return {
+              id: item.idPais,
+              itemName: item.descPais,
+            }
+          })
         }
       },
       error => {
@@ -611,7 +690,7 @@ export class NewActivityComponent implements OnInit {
     this.selectedPaisOrganizacion = item ? item.originalObject.idPaisOrganizacion.descPais : '';
 
     // Setea al Model el valor de la Organizacion
-    this._activityModel.idOrganizacionActivity = Number(this.selectedIdOrganizacion);
+    this._activityModel.idOrganizacion = Number(this.selectedIdOrganizacion);
     // console.log(this._activityModel.idOrganizacion);
     // console.log(item.originalObject);
     this._activityModel.descOrganizacion = this.selectedDescOrganizacion;
@@ -633,11 +712,15 @@ export class NewActivityComponent implements OnInit {
     this._listasComunesService.getIdTipoIdPaisOrganizaciones(idTipoOrganizacionSend, idPais).subscribe(
       result => {
         if (result.status !== 200) {
-          // Resultadps del Error
+          // Resultados del Error
+          // Cargamos el compoenete de AutoCompletar
+          this.dropdownList = [];
+          this.selectedItems = [];
+
           this.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', result.message);
         } else if (result.status === 200) {
           this.JsonReceptionTipoPaisOrganizacionesData = result.data;
-          this.data1 = this.JsonReceptionTipoPaisOrganizacionesData;
+          /*this.data1 = this.JsonReceptionTipoPaisOrganizacionesData;
 
           // Carga los Items para el List de la Smart table
           this.listArrayOrg = new Array();
@@ -647,8 +730,21 @@ export class NewActivityComponent implements OnInit {
           });
 
           this.settings.columns.idOrganizacion.editor.config.list = this.listArrayOrg;
-          this.settings = Object.assign({}, this.settings);
+          this.settings = Object.assign({}, this.settings);*/
+
+          // Asignacion de los Valores del Json al Select
+          this.dropdownList = this.JsonReceptionTipoPaisOrganizacionesData.map((item) => {
+            return {
+              id: item.idOrganizacion,
+              itemName: item.descOrganizacion,
+              nombreTipoOrganizacion: item.idTipoOrganizacionT.nombreTipoOrganizacion,
+              descPais: item.idPaisOrganizacion.descPais,
+            }
+          })
         }
+        // Cargamos el compoenete de AutoCompletar
+        // this.dataService = this.completerService.local(this.JsonReceptionTipoPaisOrganizacionesData, 'descOrganizacion',
+        //   'descOrganizacion');
       },
       error => {
         this.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', error);
@@ -667,13 +763,13 @@ export class NewActivityComponent implements OnInit {
   ****************************************************************************/
   private pushJsonIdInterna() {
     // Validamos que se ha Seleccionado los Filtros Previos a la ID Interna
-    if (this._activityModel.idTipoOrganizacion === null) {
+    if (this._activityModel.idTipoOrganizacion === 0) {
       this.showToast('error', 'Error al Ingresar la Información de las ID Internas', 'Debes Seleccionar el Tipo de Organización, para continuar');
       return -1;
-    } else if (this._activityModel.idPais === null) {
+    } else if (this._activityModel.idPais === 0) {
       this.showToast('error', 'Error al Ingresar la Información de las ID Internas', 'Debes Seleccionar el País, para continuar');
       return -1;
-    } else if (this._activityModel.idOrganizacion === null) {
+    } else if (this._activityModel.idOrganizacion === 0) {
       this.showToast('error', 'Error al Ingresar la Información de las ID Internas', 'Debes Seleccionar la Organización, para continuar');
       return -1;
     }
@@ -689,7 +785,7 @@ export class NewActivityComponent implements OnInit {
 
 
   /****************************************************************************
-  * Funcion: organizacionesIdTipoIdPaisListService
+  * Funcion: deleteRowHomeForm
   * Object Number: 018
   * Fecha: 09-11-2018
   * Descripcion: Method Delete de nuevo File input, en Tabla
@@ -710,7 +806,7 @@ export class NewActivityComponent implements OnInit {
       // this.borrarDocumentoServer(codDocumentoIn, extDocumentoIn);
       // console.log(this.JsonIdInternaOrganizacion);
     }
-  }
+  } // FIN deleteRowHomeForm
 
 
   /****************************************************************************
@@ -736,6 +832,7 @@ export class NewActivityComponent implements OnInit {
             return -1;
           } else {
             // Ingresa el primer Item del json
+            // console.log(this._activityModel.descTipoOrganizacion);
             this.JsonIdInternaOrganizacion.push({
               'descTipoOrganizacion': this._activityModel.descTipoOrganizacion,
               'descPaisOrganizacion': this._activityModel.descPaisOrganizacion,
@@ -756,7 +853,7 @@ export class NewActivityComponent implements OnInit {
 
 
   /****************************************************************************
-  * Funcion: findOrganizacionByCode
+  * Funcion: newActivity
   * Object Number: 019
   * Fecha: 09-01-2019
   * Descripcion: Method que valida si un Codigo de Organizacion para Id Interna
@@ -764,20 +861,43 @@ export class NewActivityComponent implements OnInit {
   * Objetivo: Validacion de Id Interna por Codigo
   ****************************************************************************/
   newActivity() {
-   // console.log('Datos del Modelo al Guardar ' + JSON.stringify(this._activityModel));
     // Seteo de las variables del Model al json de Java
-    // this._activityModel.idTipoPerfil = { idTipo: this._activityModel.idTipo };
+    this._activityModel.idEstadoActivity = { idEstado: this._activityModel.idEstado };
+    this._activityModel.idEspacioTrabajoActivity = { idEspacioTrabajo: this._activityModel.idEspacioTrabajo };
+    this._activityModel.idEstrategiaActivity = { idEstrategia: this._activityModel.idEstrategia };
+    this._activityModel.idPresupuestoActivity = { idPresupuesto: this._activityModel.idPresupuesto };
+    this._activityModel.idSectorEjecutorActivity = { idSectorEjecutor: this._activityModel.idSectorEjecutor };
+    this._activityModel.idMonedaActividadActivity = { idMonedaActividad: this._activityModel.idMonedaActividad };
+    this._activityModel.idTipoOrganizacionActivity = { idTipoOrganizacion: this._activityModel.idTipoOrganizacion };
+    this._activityModel.idPaisActivity = { idPais: this._activityModel.idPais };
+    this._activityModel.idOrganizacionActivity = { idOrganizacion: this._activityModel.idOrganizacion };
+    this._activityModel.idUsuarioCreador = { idUsuario: this.JsonReceptionUserDetail.idUsuario };
+
+    // console.log(this._activityModel);
+    // Validamos los Campos enviados
+    this._activityValidateFormService.validateFormActivity(this._activityModel);
+    const responseData: any = this._activityValidateFormService.responseData;
+
+    if (responseData.error === true) {
+      this.showToast('error', 'Error al Ingresar la Información de la Actividad', responseData.msg);
+      return -1;
+    }
 
     // Ejecutamos el Recurso del EndPoint
     this._activityService.newActivityGeneral(this._activityModel).subscribe(
       response => {
         if (response.status !== 200) {
-          this.showToast('error', 'Error al Ingresar la Información del Perfil', response.message);
+          this.showToast('error', 'Error al Ingresar la Información de la Actividad', response.message);
         } else if (response.status === 200) {
-          this.showToast('default', 'La Información del Perfil, se ha ingresado con exito', response.message);
+          // Verificamos que la Actividad no Exista en la BD
+          if (response.find === true) {
+            this.showToast('error', 'Error al Ingresar la Información de la Actividad', response.message);
+          } else {
+            this.showToast('default', 'La Información de la Actividad, se ha ingresado con exito', response.message);
 
-          // Carga la tabla Nuevamente
-          this.ngOnInit();
+            // Carga la tabla Nuevamente
+            this.resetActivity();
+          }
         }
       },
       error => {
@@ -787,6 +907,25 @@ export class NewActivityComponent implements OnInit {
       },
     );
     // Return
-  }
+  } // FIN newActivity
 
+
+  /****************************************************************************
+  * Funcion: resetActivity
+  * Object Number: 020
+  * Fecha: 15-01-2019
+  * Descripcion: Method que Limpia el Formulario de Activiades
+  * Objetivo: Limpiar Formulario
+  ****************************************************************************/
+  resetActivity() {
+    // Limpiar Formulario de la Actividad
+    this.ngOnInit();
+
+    // Reiniciamos la tabla
+    this.JsonIdInternaOrganizacion = [];
+
+    // Reinciamos el Text de Autocomplete de Organizaciones
+    this.dataService = null;
+    this.dropdownList = [];
+  } // FIN resetActivity
 }

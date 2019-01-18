@@ -1,5 +1,6 @@
 {
     "typescript.tsdk": "./node_modules/typescript/lib",
     "tslint.enable": false,
-    "files.autoSave": "onWindowChange"
+    "files.autoSave": "onWindowChange",
+    "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
 }

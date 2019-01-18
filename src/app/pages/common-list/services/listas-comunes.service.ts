@@ -166,7 +166,7 @@ export class ListasComunesService {
   * Fecha: 13-10-2018
   * Descripcion: Metodo para obtener los Datos de los Tipos de Organizaciones
   * Objetivo: datos de los Tipos de Organizaciones
-  * Params: { idTipoOrganizacion }
+  * Params: {  }
   ****************************************************************************/
   getAllTipoOrganizacion(): Observable<any> {
     // Retorno de la Funcion
@@ -175,6 +175,22 @@ export class ListasComunesService {
       params: { 'tokenApi': this.tokenHeader },
     });
   }// FIN | FND-00008
+
+
+  /****************************************************************************
+  * Funcion: FND-00008.1
+  * Fecha: 17-01-2019
+  * Descripcion: Metodo para obtener los Datos de las Categorias de Organizaciones
+  * Objetivo: datos de las Categorias de Organizaciones
+  * Params: {  }
+  ****************************************************************************/
+  getAllCategoriaOrganizacion(): Observable<any> {
+    // Retorno de la Funcion
+    return this._http.get(this._systemEndPointsService.getEndPointService('organizacionesGroup', 1), {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  }// FIN | FND-00008.1
 
 
   /****************************************************************************

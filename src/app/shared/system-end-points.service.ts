@@ -160,7 +160,7 @@ export class SystemEndPointsService extends ListEndPointsService {
           case 7:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointMantGenericos.perfilUpdate.urlEndPoint;
             break;
-            case 8:
+          case 8:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointMantGenericos.deletePerfil.urlEndPoint;
             break;
         }
@@ -188,6 +188,13 @@ export class SystemEndPointsService extends ListEndPointsService {
             break;
           case 3:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActivityDatosGenerales.urlEndPoint;
+            break;
+        }
+        break;
+        case 'mantGenericosUsuarioGroup': // Llamados a los EndPoint de usuarios
+        switch (indicadorEndPoint) {
+            case 1:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointMantGenericosUsuario.listAllUsuarios.urlEndPoint;
             break;
         }
         break;
