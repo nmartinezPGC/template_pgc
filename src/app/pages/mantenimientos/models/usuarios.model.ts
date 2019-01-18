@@ -5,7 +5,7 @@
  * @alias _perfilModel
  * @version 1.0.0
  * @fecha 16/01/2019
- *
+ * @cambio
  */
 export class UsuarioModel {
     constructor(
