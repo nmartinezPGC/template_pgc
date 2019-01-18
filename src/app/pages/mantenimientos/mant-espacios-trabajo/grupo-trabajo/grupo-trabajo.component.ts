@@ -49,7 +49,7 @@ export class GrupoTrabajoComponent implements OnInit {
 
   constructor(protected _router: Router, private _toasterService: ToasterService,
     public _configSmartTableService: ConfigSmartTableService,
-    public _tipo: GrupoTrabajoService, ) {
+    public _tipo: GrupoTrabajoService ) {
     // Llamamos a la Funcion de Configuracion de las Smart Table
     this._configSmartTableService.configSmartTable('userSmart', 1, null);
     this.settings = this._configSmartTableService.settings;
