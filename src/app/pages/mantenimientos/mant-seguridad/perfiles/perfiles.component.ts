@@ -44,15 +44,6 @@ export class PerfilesComponent implements OnInit {
   data1: any;
   arrayTipoPerfiles: any
 
-
-
-
-
-  public onSaveConfirm(id) {
-    alert('id selecionado ' + id)
-  }
-
-
   config: ToasterConfig;
 
   position = 'toast-bottom-full-width';
@@ -221,7 +212,11 @@ export class PerfilesComponent implements OnInit {
       // this._perfilModel.descripcionTipoPerfil = event.newData.descripcionTipoPerfil;
       this._perfilModel.idTipo = event.newData.descripcionTipoPerfil;
       this._perfilModel.idTipoPerfil = { idTipo: this._perfilModel.idTipo };
-      // console.log(event.data);
+      // validamos campos
+
+      if (this.responsedata.error === true) {
+
+      }
       // console.log('Tipo de Perfil ' + JSON.stringify(this._perfilModel));
       // Ejecutamos las Funcion
       this.updatePerfilService();
@@ -239,9 +234,15 @@ export class PerfilesComponent implements OnInit {
    * Descripcion: Method newPerfilService
    * Objetivo: actualizar los perfiles existentes perfiles.
    ****************************************************************************/
-  private updatePerfilService(): void {
+  private updatePerfilService() {
     // Seteo de las variables del Model al json de Java
+    this.validatePerfiles(this._perfilModel);
+    const responsedataExt: any = this.responsedata;
 
+    if (responsedataExt.error === true) {
+      this.showToast('error', 'Error al actualizar los cambios', responsedataExt);
+      return -1;
+    }
     // Ejecutamos el Recurso del EndPoint
     this._perfilesService.perfilUpdate(this._perfilModel, this._perfilModel.idPerfil).subscribe(
       response => {
@@ -325,11 +326,16 @@ export class PerfilesComponent implements OnInit {
  * Descripcion: Method newPerfilService
  * Objetivo: crear nuevos perfiles.
  ****************************************************************************/
-  private newPerfilService(): void {
+  private newPerfilService() {
     // Seteo de las variables del Model al json de Java
     this._perfilModel.idTipoPerfil = { idTipo: this._perfilModel.idTipo };
     this.validatePerfiles(this._perfilModel);
+    const responsedataExt: any = this.responsedata;
 
+    if (responsedataExt.error === true) {
+      this.showToast('error', 'Error al ingresar los datos', responsedataExt.msg);
+      return -1;
+    }
     // Ejecutamos el Recurso del EndPoint
     this._perfilesService.newPerfil(this._perfilModel).subscribe(
       response => {
@@ -428,10 +434,10 @@ export class PerfilesComponent implements OnInit {
     if (perfilModelIn.codPerfil === null || perfilModelIn.codPerfil === '') {
       this.responsedata.msg = 'Debes ingresar el codigo de perfil para continuar';
       this.responsedata.error = true;
-    }else if (perfilModelIn.descTipo == null || perfilModelIn.descPerfil === '' ) {
+    } else if (perfilModelIn.descPerfil === null || perfilModelIn.descPerfil === '') {
       this.responsedata.msg = 'Desbes ingresar un tipo de perfil';
       this.responsedata = true;
-    }else if (perfilModelIn.descPerfil === null || perfilModelIn.descPerfil === '') {
+    } else if (perfilModelIn.descPerfil === null || perfilModelIn.descPerfil === '') {
       this.responsedata.msg = 'Debes de ingresar una descripcion de este perfil';
       this.responsedata = true;
     }

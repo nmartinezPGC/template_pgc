@@ -12,6 +12,8 @@ import { MantenimientosRoutingModule, routedComponentsMant } from './mantenimien
 
 // Imports de librerias prefabricadas y reutilizables
 import { ListasComunesService } from '../common-list/services/listas-comunes.service';
+import { MantEspaciosTrabajoComponent } from './mant-espacios-trabajo/mant-espacios-trabajo.component';
+import { GrupoTrabajoComponent } from './mant-espacios-trabajo/grupo-trabajo/grupo-trabajo.component';
 
 // Composicion del Modulo
 @NgModule({
@@ -24,6 +26,8 @@ import { ListasComunesService } from '../common-list/services/listas-comunes.ser
   ],
   declarations: [
     ...routedComponentsMant,
+    MantEspaciosTrabajoComponent,
+    GrupoTrabajoComponent,
   ],
   providers: [
     ListasComunesService,
