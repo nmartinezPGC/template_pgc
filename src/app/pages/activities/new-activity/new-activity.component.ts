@@ -702,7 +702,7 @@ export class NewActivityComponent implements OnInit {
           this.showToast('error', 'Error al Obtener la Información de la Secuencia', result.message);
         } else if (result.status === 200) {
           this.secuenciaDeActividad = result.data;
-          console.log(JSON.stringify(this.secuenciaDeActividad.valor1));
+          // console.log(JSON.stringify(this.secuenciaDeActividad.valor1));
         }
       },
       error => {
@@ -953,6 +953,6 @@ export class NewActivityComponent implements OnInit {
   generateCodeActivity() {
     const iniHND: string = 'HND';
     const paisSelect = JSON.stringify(this.selectedItemsPais);
-    console.log('Codigo de la Actividad ' + iniHND + ' --- ' + this.inicialesPais + ' Secuencia de Actividad' + JSON.stringify(this.secuenciaDeActividad.valor1));
+    // console.log('Codigo de la Actividad ' + iniHND + ' --- ' + this.inicialesPais + ' Secuencia de Actividad' + JSON.stringify(this.secuenciaDeActividad.valor1));
   } // FIN | generateCodeActivity
 }
