@@ -118,7 +118,7 @@ export class NewActivityComponent implements OnInit {
 
   // Audotoria
   public JsonReceptionUserDetail: any;
-  public secuenciaDeActividad: string;
+  public secuenciaDeActividad: any;
 
   // Instacia de la variable del Modelo | Json de Parametros
   public _activityModel: ActivityModel;
@@ -694,7 +694,7 @@ export class NewActivityComponent implements OnInit {
   ******************************************************/
   protected getSecuenciaListService(codSecuencia: string) {
     // Envia la Secuencia a Buscar
-    const secuenciaIn: string = 'NEW-ACT';
+    const secuenciaIn: string = '1';
 
     this._listasComunesService.getSecuenciaActividad(secuenciaIn).subscribe(
       result => {
@@ -702,7 +702,7 @@ export class NewActivityComponent implements OnInit {
           this.showToast('error', 'Error al Obtener la Información de la Secuencia', result.message);
         } else if (result.status === 200) {
           this.secuenciaDeActividad = result.data;
-          // console.log(JSON.stringify(this.secuenciaDeActividad));
+          console.log(JSON.stringify(this.secuenciaDeActividad.valor1));
         }
       },
       error => {
@@ -953,6 +953,6 @@ export class NewActivityComponent implements OnInit {
   generateCodeActivity() {
     const iniHND: string = 'HND';
     const paisSelect = JSON.stringify(this.selectedItemsPais);
-    // console.log('Codigo de la Actividad ' + iniHND + ' --- ' + this.inicialesPais);
+    console.log('Codigo de la Actividad ' + iniHND + ' --- ' + this.inicialesPais + ' Secuencia de Actividad' + JSON.stringify(this.secuenciaDeActividad.valor1));
   } // FIN | generateCodeActivity
 }
