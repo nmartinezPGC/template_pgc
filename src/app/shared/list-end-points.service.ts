@@ -357,7 +357,7 @@ export class ListEndPointsService {
       getAllTipoUsuario: {
         id: 3,
         nameEndpoint: 'listar tipo usuario',
-        urlEndPoint: '/usuarios/kind',
+        urlEndPoint: '/tipos/findByIdGrupo/',
         groupEndPoint: 'mantGenericosUsuarioGroup',
         descEndPoint: 'listar los tipo de usuarios',
       },
