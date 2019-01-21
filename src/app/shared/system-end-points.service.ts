@@ -138,6 +138,9 @@ export class SystemEndPointsService extends ListEndPointsService {
           case 11:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointOrganizaciones.countByCodOrganizacion.urlEndPoint;
             break;
+          case 12:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointOrganizaciones.newTipoOrganizacion.urlEndPoint;
+            break;
         }
         break;
       case 'mantGenericosGroup': // Llamados a los EndPoint de Mantenimientos Genericos
@@ -194,9 +197,9 @@ export class SystemEndPointsService extends ListEndPointsService {
             break;
         }
         break;
-        case 'mantGenericosUsuarioGroup': // Llamados a los EndPoint de usuarios
+      case 'mantGenericosUsuarioGroup': // Llamados a los EndPoint de usuarios
         switch (indicadorEndPoint) {
-            case 1:
+          case 1:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointMantGenericosUsuario.listAllUsuarios.urlEndPoint;
             break;
         }
