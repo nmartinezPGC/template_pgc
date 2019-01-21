@@ -82,13 +82,13 @@
                       <option>Inhabilitado</option>
                     </select>
                   </div>
-                  <div class="form-group input-group-rounded">
-                    <small class="form-text">Perfil del usuario.
-                    </small>
-                    <select class="form-control">
-                      <option>Administrador</option>
-                      <option>Usuario</option>
-                      <option>Consulta</option>
+                  <div class="form-group">
+                    <label>Elija un Perfil</label>
+                    <select class="form-control" name="idTipo" id="idTipo" ngControl="idTipo" [(ngModel)]="_usuarioModel.idTipo" required>
+                      <option value="0"  >Seleccione una Opcion</option>
+                      <option *ngFor="let item of JsonReceptionTipoUsuarios" [value]="item.idTipo">
+                        {{item.descTipo}}
+                      </option>
                     </select>
                   </div>
                   <div class="btn-group">

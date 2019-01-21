@@ -67,4 +67,37 @@ export class UsuarioService {
             params: { 'tokenApi': this.tokenHeader },
         });
     }// FIN | FND-00002
+
+        /****************************************************************************
+    * Funcion: FND-00003
+    * Fecha: 21-01-2019
+    * Descripcion: Metodo que sirve para poder ingresar un nuevo Usuario
+    * Params: { jsonPerfil }
+    * autor: Edgar Ramirez
+    ****************************************************************************/
+   newUsuario(jsonUsuario): Observable<any> {
+    // Parametros del EndPoint
+    const paramsSend = jsonUsuario;
+    // console.log(paramsSend);
+    // Retorno de la Funcion
+    return this._http.post(this._systemEndPointsService.getEndPointService('mantGenericosGroup', 2), paramsSend, {
+        headers: this.headers,
+        params: { 'tokenApi': this.tokenHeader },
+    });
+}// FIN | FND-00003
+
+    /****************************************************************************
+    * Funcion: FND-00004
+    * Fecha: 21-01-2019
+    * Descripcion: Metodo que sirve para poder ingresar un nuevo usuario
+    * Params: {  }
+    * Autor: Edgar Ramirez
+    ****************************************************************************/
+   getAllTipoUsuario(): Observable<any> {
+    // Retorno de la Funcion
+    return this._http.get(this._systemEndPointsService.getEndPointService('mantGenericosUsuarioGroup', 3), {
+        headers: this.headers,
+        params: { 'tokenApi': this.tokenHeader },
+    });
+}// FIN | FND-00002
 }
