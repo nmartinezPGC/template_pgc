@@ -185,6 +185,107 @@ export class UsuariosComponent implements OnInit {
     );
   } // FIN | usuariosDatailsService
 
+  /****************************************************************************
+ * Funcion: newUsuarioService
+ * Object Number: 003
+ * Fecha: 21-01-2019
+ * Descripcion: Method newUsuarioService
+ * Objetivo: crear nuevos usuarios.
+ * Autor: Edgar Ramirez
+ ****************************************************************************/
+private newUsuarioService() {
+  // Seteo de las variables del Model al json de Java
+  this._usuarioModel.idTipoUsuario = { idTipo: this._usuarioModel.idTipo };
+  // this.validateUsuarios(this._usuarioModel);
+  const responsedataExt: any = this.responsedata;
 
+  if (responsedataExt.error === true) {
+    this.showToast('error', 'Error al ingresar los datos', responsedataExt.msg);
+    return -1;
+  }
+  // Ejecutamos el Recurso del EndPoint
+  this._usuariosService.newUsuario(this._usuarioModel).subscribe(
+    response => {
+      if (response.status !== 200) {
+        // console.log(response.status);
+        // console.log(response.message);
+        this.showToast('error', 'Error al Ingresar la Información del Usuario', response.message);
+      } else if (response.status === 200) {
+        // console.log(result.status);
+        this.showToast('default', 'La Información del Usuario, se ha ingresado con exito', response.message);
+        // console.log(response.data);
+        // Carga la tabla Nuevamente
+        // this.usuariosDatailsService();
+      }
+    },
+    error => {
+      // Redirecciona al Login
+      alert('Error en la petición de la API ' + <any>error);
+
+      // Borramos los datos del LocalStorage
+      localStorage.removeItem('auth_app_token');
+      localStorage.removeItem('identity');
+
+      const redirect = '/auth/login';
+      setTimeout(() => {
+        // Iniciativa Temporal
+        location.reload();
+        return this._router.navigateByUrl(redirect);
+      }, 2000);
+    },
+  );
+} // FIN | newUsuarioService
+
+  /****************************************************************************
+ * Funcion: usuariosTipoService
+ * Object Number: 004
+ * Fecha: 21-01-2019
+ * Descripcion: Method usuariosTipoService of the Class
+ * Objetivo: usuariosTipoService detalle de los Tipos de usuarios llamando a la API
+ * Autor: Edgar Ramirez
+ ****************************************************************************/
+private usuariosTipoService() {
+  this._usuariosService.getAllTipoUsuario().subscribe(
+    response => {
+      if (response.status !== 200) {
+        // console.log(response.status);
+        // console.log(response.message);
+        // this.showToast('error', 'Error al Obtener la Información del Perfil', response.message);
+      } else if (response.status === 200) {
+        // this.productos = result.data;
+        // console.log(result.status);
+        this.JsonReceptionTipoUsuarios = response.data;
+        // instancia data con los perfiles;
+        this.data1 = this.JsonReceptionTipoUsuarios;
+        // console.log(this.data1);
+        // Carga los Items para el List de la Smart table
+        this.arrayTipoUsuarios = new Array();
+
+        this.data1.forEach(element => {
+          this.arrayTipoUsuarios.push({ title: element['descTipo'], value: element['idTipo'] });
+        });
+
+        this.settings.columns.descripcionTipoUsuario.editor.config.list = this.arrayTipoUsuarios;
+        this.settings = Object.assign({}, this.settings);
+        // console.log(response.data);
+      }
+    },
+    error => {
+      // Redirecciona al Login
+      alert('Error en la petición de la API ' + <any>error);
+
+      // Borramos los datos del LocalStorage
+      localStorage.removeItem('auth_app_token');
+      localStorage.removeItem('identity');
+
+      const redirect = '/auth/login';
+      setTimeout(() => {
+        // Iniciativa Temporal
+        location.reload();
+        return this._router.navigateByUrl(redirect);
+      }, 2000);
+    },
+  );
+} // FIN | usuariosTipoService
 
 }
