@@ -131,7 +131,7 @@ export class ListEndPointsService {
         descEndPoint: 'Ingresa un nuevo Espacio de Trabajo en la BD asignandolo a un Usuario',
       },
     }, // Modulo de Organizaciones
-    endPointOrganizaciones: {
+    endPointOrganizaciones: { // DRP NUEVO TIPO DE ORGANIZACION
       listAllTipoOrganizaciones: {
         id: 1,
         nameEndpoint: 'ListAllTipoOrganizaciones',
