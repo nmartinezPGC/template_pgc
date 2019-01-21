@@ -187,8 +187,13 @@ export class NewActivityComponent implements OnInit {
   * Objetivo: ngOnInit in the method header API
   ****************************************************************************/
   ngOnInit() {
+    /* Llamado a la Funcion: 001, la cual obtiene el listado de la Secuencia
+     que nesesita el Formulario de Actividades */
     this.getSecuenciaListService('NEW-ACT');
-    // Inicializacion del Modelo de la Clase
+
+    /**
+     * Inicializacion del Modelo de la Clase
+     */
     this._activityModel = new ActivityModel(
       0, // Id Actividad
       '', null, 0, null, 0, '', '', '', '', '', '', // Datos Generales de la Actividad
@@ -682,7 +687,7 @@ export class NewActivityComponent implements OnInit {
 
   /*****************************************************
   * Funcion: FND-00001
-  * Fecha: 18-10-2018
+  * Fecha: 21-01-2019
   * Descripcion: Funcion que Obtiene la Secuencia del
   * Proyecto o Actividad
   * Params: codSecuencia
