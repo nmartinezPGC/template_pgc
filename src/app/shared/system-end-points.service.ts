@@ -145,7 +145,10 @@ export class SystemEndPointsService extends ListEndPointsService {
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointOrganizaciones.countByCodOrganizacion.urlEndPoint;
             break;
           case 12:
-            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointOrganizaciones.newTipoOrganizacion.urlEndPoint;
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointOrganizaciones.updateTipoOrganizacion.urlEndPoint;
+            break;
+          case 13:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointOrganizaciones.deleteTipoOrganizacion.urlEndPoint;
             break;
         }
         break;

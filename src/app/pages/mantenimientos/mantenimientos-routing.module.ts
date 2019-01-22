@@ -6,8 +6,8 @@ import { MantenimientosComponent } from './mantenimientos.component';
 import { UsuariosComponent } from './mant-seguridad/usuarios/usuarios.component';
 import { MantSeguridadComponent } from './mant-seguridad/mant-seguridad.component';
 import { PerfilesComponent } from './mant-seguridad/perfiles/perfiles.component';
-import { MantEspaciosTrabajoComponent } from './mant-espacios-trabajo/mant-espacios-trabajo.component';
-import { GrupoTrabajoComponent } from './mant-espacios-trabajo/grupo-trabajo/grupo-trabajo.component';
+import { MantEspaciosTrabajoComponent } from './mant-espacios-trabajo/mant.espacios.trabajo.component';
+import { GrupoTrabajoComponent } from './mant-espacios-trabajo/grupo-trabajo/grupo.trabajo.component';
 
 
 // Mapeo de las Rutas del Modulo
