@@ -208,6 +208,12 @@ export class SystemEndPointsService extends ListEndPointsService {
           case 1:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointMantGenericosUsuario.listAllUsuarios.urlEndPoint;
             break;
+          case 2:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointMantGenericosUsuario.newUsuario.urlEndPoint;
+            break;
+          case 3:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointMantGenericosUsuario.getAllTipoUsuario.urlEndPoint;
+            break;
         }
         break;
     }

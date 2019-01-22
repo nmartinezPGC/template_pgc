@@ -354,6 +354,20 @@ export class ListEndPointsService {
         groupEndPoint: 'mantGenericosUsuarioGroup',
         descEndPoint: 'Listar todos los Usuarios',
       },
+      newUsuario: {
+        id: 2,
+        nameEndpoint: 'nuevo usuario',
+        urlEndPoint: '/usuarios/new',
+        groupEndPoint: 'mantGenericosUsuarioGroup',
+        descEndPoint: 'crear nuevo Usuarios',
+      },
+      getAllTipoUsuario: {
+        id: 3,
+        nameEndpoint: 'listar tipo usuario',
+        urlEndPoint: '/tipos/findByIdGrupo/',
+        groupEndPoint: 'mantGenericosUsuarioGroup',
+        descEndPoint: 'listar los tipo de usuarios',
+      },
     },
   }
 } // FIN de Clase
