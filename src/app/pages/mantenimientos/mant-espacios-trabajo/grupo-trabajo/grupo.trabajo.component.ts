@@ -102,7 +102,7 @@ export class GrupoTrabajoComponent implements OnInit {
     // Inicializacion del Modelo de la Clase
     this._grupoModel = new GrupoTrabajoModel(
       0, null, null, null,
-      true, null, null
+      true, null, null,
     );
     // inicializar la lista de tipo de perfiles
     this.listarTipoOrganizacion();
@@ -157,7 +157,6 @@ export class GrupoTrabajoComponent implements OnInit {
 
     this.validateTipoOganizacion(this._grupoModel);
     const responsedataExt: any = this.responsedata;
-    console.log(responsedataExt);
 
     if (responsedataExt.error === true) {
       this.showToast('error', 'Error al ingresar los datos', responsedataExt.msg);
@@ -208,7 +207,6 @@ export class GrupoTrabajoComponent implements OnInit {
       return -1;
     }
     // Ejecutamos el Recurso del EndPoint
-    console.log(this._grupoModel.idTipoOrganizacion);
     this._tipo.tipoOganizacionUpdate(this._grupoModel, this._grupoModel.idTipoOrganizacion).subscribe(
       response => {
         if (response.status !== 200) {
@@ -216,7 +214,6 @@ export class GrupoTrabajoComponent implements OnInit {
         } else if (response.status === 200) {
           // console.log(result.status);
           this.showToast('default', 'se actualizaron con exito los datos', response.message);
-          console.log(response.data);
           // Carga la tabla Nuevamente
           // this.perfilesDatailsService();
         }
@@ -303,7 +300,6 @@ export class GrupoTrabajoComponent implements OnInit {
   onDeleteConfirm1(event) {
     if (window.confirm('Esta seguro en Inhabilitar este tipo de organizacion?')) {
       this._grupoModel.idTipoOrganizacion = event.data.idTipoOrganizacion;
-      console.log(this._grupoModel.idTipoOrganizacion);
      // this._perfilModel.idTipo = event.data.idTipoPerfil.idTipo;
       this.deleteTipoOrganizacion();
       event.confirm.resolve(event.newData);
@@ -325,7 +321,7 @@ export class GrupoTrabajoComponent implements OnInit {
     if (_grupoModel.codTipoOrganizacion === null || _grupoModel.codTipoOrganizacion === '') {
       this.responsedata.msg = 'Debes ingresar el codigo de Tipo de prganozacion para continuar';
       this.responsedata.error = true;
-    } else if (_grupoModel.descTipoOrganizacion === null ||_grupoModel.descTipoOrganizacion === '') {
+    } else if (_grupoModel.descTipoOrganizacion === null || _grupoModel.descTipoOrganizacion === '') {
       this.responsedata.msg = 'Desbes ingresar un nombre de organizacion para continuar';
       this.responsedata = true;
     } else if (_grupoModel.acronimoTipoOrganizacion === null || _grupoModel.acronimoTipoOrganizacion  === '') {
