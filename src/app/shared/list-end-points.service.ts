@@ -219,14 +219,14 @@ export class ListEndPointsService {
       updateTipoOrganizacion: {
         id: 12,
         nameEndpoint: 'updateTipoOrganizacion',
-        urlEndPoint: '/tipo-organizaciones/update',
+        urlEndPoint: '/tipos-organizaciones/update/',
         groupEndPoint: 'organizacionesGroup',
         descEndPoint: 'Actualizar eñ tipo de organizaciones ',
       },
       deleteTipoOrganizacion: {
         id: 13,
         nameEndpoint: 'deleteTipoOrganizacion',
-        urlEndPoint: '/tipo-organizaciones/delete',
+        urlEndPoint: '/tipos-organizaciones/delete/',
         groupEndPoint: 'organizacionesGroup',
         descEndPoint: 'inhabilitar el tipo de organizaciones ',
       },

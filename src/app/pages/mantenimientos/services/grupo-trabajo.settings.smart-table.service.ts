@@ -68,7 +68,7 @@ export class ConfigSmartTableService {
                 // bibliografia : https://github.com/akveo/ng2-smart-table/issues/375
                 activo: {
                   title: 'Habilitado',
-                  type: 'html',
+                  type: 'list',
                 // valuePrepareFunction: (cell: any, row: any) => row.activado,
                   editor: {
                     type: 'list',
