@@ -95,6 +95,7 @@ export class NewActivityComponent implements OnInit {
   public JsonReceptionTiposOrganizacion: any;
   public JsonReceptionPaises: any;
   public inicialesPais: string;
+  public inicialesOrganizacion: any;
 
   // Organizaciones
   protected searchStrFunc: string;
@@ -187,10 +188,6 @@ export class NewActivityComponent implements OnInit {
   * Objetivo: ngOnInit in the method header API
   ****************************************************************************/
   ngOnInit() {
-    /* Llamado a la Funcion: 001, la cual obtiene el listado de la Secuencia
-     que nesesita el Formulario de Actividades */
-    this.getSecuenciaListService('NEW-ACT');
-
     /**
      * Inicializacion del Modelo de la Clase
      */
@@ -328,6 +325,7 @@ export class NewActivityComponent implements OnInit {
     this.selectedDescOrganizacion = item ? item.itemName : '';
     this.selectedDescTipoOrganizacion = item ? item.nombreTipoOrganizacion : '';
     this.selectedPaisOrganizacion = item ? item.descPais : '';
+    this.inicialesOrganizacion = item ? item.inicialesOrganizacion : '';
 
     // Setea al Model el valor de la Organizacion
     this._activityModel.idOrganizacion = Number(this.selectedIdOrganizacion);
@@ -694,22 +692,53 @@ export class NewActivityComponent implements OnInit {
   ******************************************************/
   protected getSecuenciaListService(codSecuencia: string) {
     // Envia la Secuencia a Buscar
-    const secuenciaIn: string = '1';
-
-    this._listasComunesService.getSecuenciaActividad(secuenciaIn).subscribe(
+    this._listasComunesService.getSecuenciaActividad(codSecuencia).subscribe(
       result => {
         if (result.status !== 200) {
-          this.showToast('error', 'Error al Obtener la Información de la Secuencia', result.message);
+          this.showToast('error', 'Error al Obtener la Información de la Secuencia', JSON.stringify(result.message));
         } else if (result.status === 200) {
           this.secuenciaDeActividad = result.data;
-          // console.log(JSON.stringify(this.secuenciaDeActividad.valor1));
+
+          // Componemos la Secuencia a Generar
+          const iniHND: string = 'HND-';
+          this._activityModel.codigoActividad = iniHND + (Number(this.secuenciaDeActividad.valor2));
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información de la Secuencia', error);
+        this.showToast('error', 'Error al Obtener la Información de la Secuencia', JSON.stringify(error.message));
       },
     );
   } // FIN | FND-00001
+
+
+  /*****************************************************
+  * Funcion: FND-00001.1
+  * Fecha: 21-01-2019
+  * Descripcion: Funcion que Actuaiza la Secuencia del
+  * Proyecto o Actividad
+  * Params: { jsonSecuencia, idSecuencia }
+  ******************************************************/
+  protected updateSecuenciaService(idUsuarioMod: number, idSecuencia: number) {
+    // Envia la Secuencia a Buscar
+    const jsonSecuencia = {
+      'idUsuarioMod': {
+        'idUsuario': idUsuarioMod
+      }
+    };
+
+    this._activityService.updateSecuence(jsonSecuencia, idSecuencia).subscribe(
+      result => {
+        if (result.status !== 200) {
+          this.showToast('error', 'Error al Actualizar la Información de la Secuencia', JSON.stringify(result.message));
+        } else if (result.status === 200) {
+          // Nada
+        }
+      },
+      error => {
+        this.showToast('error', 'Error al Actualizar la Información de la Secuencia', JSON.stringify(error.message));
+      },
+    );
+  } // FIN | FND-00001.1
 
 
   /****************************************************************************
@@ -717,8 +746,8 @@ export class NewActivityComponent implements OnInit {
   * Object Number: 016
   * Fecha: 15-10-2018
   * Descripcion: Method organizacionesIdTipoIdPaisListService of the Class
-  * Objetivo: organizacionesIdTipoIdPaisListService listados de los Paises
-  * del Formulario de Actividad llamando a la API
+  * Objetivo: Buscar las Organizaciones segun el Filtro Aplicado, Tipo, Categoria
+  * y Pais de Organizacion, en Formulario de Actividad llamando a la API
   ****************************************************************************/
   private organizacionesIdTipoIdPaisListService(idTipoOrganizacionSend: number, idPais: number) {
     // Condicion para evaluar que opcion se pulsa
@@ -750,8 +779,9 @@ export class NewActivityComponent implements OnInit {
             return {
               id: item.idOrganizacion,
               itemName: item.descOrganizacion,
-              nombreTipoOrganizacion: item.idTipoOrganizacionT.nombreTipoOrganizacion,
+              nombreTipoOrganizacion: item.idTipoOrganizacionT.descTipoOrganizacion,
               descPais: item.idPaisOrganizacion.descPais,
+              inicialesOrganizacion: item.inicalesOrganizacion,
             }
           })
         }
@@ -886,7 +916,9 @@ export class NewActivityComponent implements OnInit {
     this._activityModel.idOrganizacionActivity = { idOrganizacion: this._activityModel.idOrganizacion };
     this._activityModel.idUsuarioCreador = { idUsuario: this.JsonReceptionUserDetail.idUsuario };
 
-    // console.log(this._activityModel);
+    // Creacion del Codigo de la Actividad
+    this.generateCodeActivity();
+
     // Validamos los Campos enviados
     this._activityValidateFormService.validateFormActivity(this._activityModel);
     const responseData: any = this._activityValidateFormService.responseData;
@@ -908,8 +940,12 @@ export class NewActivityComponent implements OnInit {
           } else {
             this.showToast('default', 'La Información de la Actividad, se ha ingresado con exito', response.message);
 
+            // Actualizamos la Siguiente Secuencia
+            this.updateSecuenciaService(this.JsonReceptionUserDetail.idUsuario, 1);
+
             // Carga la tabla Nuevamente
             this.resetActivity();
+
           }
         }
       },
@@ -951,8 +987,8 @@ export class NewActivityComponent implements OnInit {
   * Objetivo: Generar Codigo de la Actividad
   ****************************************************************************/
   generateCodeActivity() {
-    const iniHND: string = 'HND';
-    const paisSelect = JSON.stringify(this.selectedItemsPais);
-    // console.log('Codigo de la Actividad ' + iniHND + ' --- ' + this.inicialesPais + ' Secuencia de Actividad' + JSON.stringify(this.secuenciaDeActividad.valor1));
+    /* Llamado a la Funcion: 001, la cual obtiene el listado de la Secuencia
+     que nesesita el Formulario de Actividades */
+    this.getSecuenciaListService('NEW-ACT');
   } // FIN | generateCodeActivity
 }

@@ -38,14 +38,21 @@ export class ListEndPointsService {
         nameEndpoint: 'Get Secuencia',
         urlEndPoint: '/secuencias/findByIdSecuencia/',
         groupEndPoint: 'userGroup',
-        descEndPoint: 'Busca la Secuencia con el Codigo Enviado',
+        descEndPoint: 'Busca la Secuencia con el ID Enviado',
       },
-      getSecuenciabyCod: {
+      getSecuenciabyCod: { // NAM | 2019-01-21 | Secuencias de Actividad
         id: 3,
         nameEndpoint: 'Get Secuencia by Cod',
         urlEndPoint: '/secuencias/findByCodSecuencia/',
         groupEndPoint: 'userGroup',
         descEndPoint: 'Busca la Secuencia con el Codigo Enviado',
+      },
+      updateSecuence: {
+        id: 4,
+        nameEndpoint: 'Actualizacion de la Secuencia',
+        urlEndPoint: '/secuencias/update/',
+        groupEndPoint: 'userGroup',
+        descEndPoint: 'Actualiza la Secuencia de la Actividad',
       },
     },
     endPointMantActividades: {

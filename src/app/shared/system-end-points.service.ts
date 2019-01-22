@@ -43,6 +43,12 @@ export class SystemEndPointsService extends ListEndPointsService {
           case 2:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointUsers.getSecuencia.urlEndPoint;
             break;
+          case 3:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointUsers.getSecuenciabyCod.urlEndPoint;
+            break;
+          case 4:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointUsers.updateSecuence.urlEndPoint;
+            break;
         }
         break;
       case 'estadosGroup': // Llamados a los End Point del Modulo de Estados

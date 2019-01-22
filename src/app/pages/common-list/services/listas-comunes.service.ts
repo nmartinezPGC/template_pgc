@@ -272,7 +272,7 @@ export class ListasComunesService {
     // Parametros de la Funcion
     const paramsSend = codSecuencia;
     // Retorno de la Funcion
-    return this._http.get(this._systemEndPointsService.getEndPointService('userGroup', 2) + paramsSend, {
+    return this._http.get(this._systemEndPointsService.getEndPointService('userGroup', 3) + paramsSend, {
       headers: this.headers,
       params: { 'tokenApi': this.tokenHeader },
     });
