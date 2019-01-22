@@ -722,8 +722,8 @@ export class NewActivityComponent implements OnInit {
     // Envia la Secuencia a Buscar
     const jsonSecuencia = {
       'idUsuarioMod': {
-        'idUsuario': idUsuarioMod
-      }
+        'idUsuario': idUsuarioMod,
+      },
     };
 
     this._activityService.updateSecuence(jsonSecuencia, idSecuencia).subscribe(
