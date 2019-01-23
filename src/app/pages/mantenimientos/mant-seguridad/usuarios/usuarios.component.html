@@ -28,54 +28,78 @@
                 <nb-card-body>
                   <div class="row full-name-inputs">
                     <div class="col-sm-6 input-group">
-                      <input type="text" placeholder="Primer Nombre" class="form-control" />
+                      <input type="text" #nombre1Usuario="ngModel" placeholder="Primer Nombre" class="form-control"
+                        name="nombre1Usuario" id="nombre1Usuario" ngControl="nombre1Usuario" [(ngModel)]="_usuarioModel.nombre1Usuario"
+                        required />
                     </div>
                     <div class="col-sm-6 input-group">
-                      <input type="text" placeholder="Segundo Nombre" class="form-control" />
+                      <input type="text" #nombre2Usuario="ngModel" placeholder="Segundo Nombre" class="form-control"
+                        name="nombre2Usuario" id="nombre2Usuario" ngControl="nombre2Usuario" [(ngModel)]="_usuarioModel.nombre2Usuario"
+                        required />
                     </div>
                     <div class="col-sm-6 input-group">
-                      <input type="text" placeholder="Primer Apellido" class="form-control" />
+                      <input type="text" #apellido1Usuario="ngModel" placeholder="Primer Apellido" class="form-control"
+                        name="apellido1Usuario" id="apellido1Usuario" ngControl="apellido1Usuario" [(ngModel)]="_usuarioModel.apellido1Usuario"
+                        required />
                     </div>
                     <div class="col-sm-6 input-group">
-                      <input type="text" placeholder="Segundo Apellido" class="form-control" />
+                      <input type="text" #apellido2Usuario="ngModel" placeholder="Segundo Apellido" class="form-control"
+                        name="apellido2Usuario" id="apellido2Usuario" ngControl="apellido2Usuario" [(ngModel)]="_usuarioModel.apellido2Usuario"
+                        required />
                     </div>
                     <div class="col-sm-6 input-group">
-                      <input type="text" placeholder="Iniciales del Usuario" class="form-control" />
+                      <input type="text" #inicialesUsuario="ngModel" placeholder="Iniciales del Usuario" class="form-control"
+                        name="inicialesUsuario" id="inicialesUsuario" ngControl="inicialesUsuario" [(ngModel)]="_usuarioModel.inicialesUsuario"
+                        required />
                     </div>
                     <div class="col-sm-6 input-group">
-                      <input type="text" placeholder="Codigo del Usuario" class="form-control" />
+                      <input type="text" #codUsuario="ngModel" placeholder="Codigo del Usuario" class="form-control"
+                        name="codUsuario" id="codUsuario" ngControl="codUsuario" [(ngModel)]="_usuarioModel.codUsuario"
+                        required />
                     </div>
                   </div>
                   <div class="input-group">
-                    <input type="text" placeholder="Email" class="form-control" />
+                    <input type="text" #emailUsuario="ngModel" placeholder="Email" class="form-control" name="emailUsuario"
+                      id="emailUsuario" ngControl="emailUsuario" [(ngModel)]="_usuarioModel.emailUsuario" required />
                   </div>
                   <div class="input-group">
-                    <input type="password" placeholder="Password" class="form-control" />
+                    <input type="password" #passwordUsuario="ngModel" placeholder="Password" class="form-control" name="passwordUsuario"
+                      id="passwordUsuario" ngControl="passwordUsuario" [(ngModel)]="_usuarioModel.passwordUsuario"
+                      required />
                   </div>
                 </nb-card-body>
               </nb-card>
             </div>
             <div class="col-lg-6">
               <nb-card>
-                <!-- <nb-card-header>Perfiles</nb-card-header> -->
                 <nb-card-body>
-                  <div class="input-group input-group-rounded">
-                    <input type="text" placeholder="Pais" class="form-control" />
+                  <div class="form-group">
+                    <strong> <label>País Organización</label> </strong>
+                    <!-- <select #idPais class="form-control" id="idPais" name="idPais" ngControl="idPais" [(ngModel)]="_activityModel.idPais"
+                        (change)="organizacionesIdTipoIdPaisListService(_activityModel.idTipoOrganizacion, _activityModel.idPais )">
+                        <option value="0">**** Selecciona el País de la Organizacion ****</option>
+                        <option *ngFor="let item of JsonReceptionPaises" [value]="item.idPais">
+                          {{item.descPais}}
+                        </option>
+                      </select> -->
+                    <angular2-multiselect [data]="dropdownListPais" [(ngModel)]="selectedItemsPais" [settings]="dropdownSettings"
+                      required></angular2-multiselect>
                   </div>
-                  <div class="form-group input-group-rounded">
-                    <small class="form-text">Estado de el usuario.
-                    </small>
-                    <select class="form-control">
-                      <option>Nuevo</option>
-                      <option>Activo</option>
-                      <option>Inactivo</option>
-                      <option>Inhabilitado</option>
+                  <div class="form-group">
+                    <strong> <label>Elija un Estado</label> </strong>
+                    <select class="form-control" name="idEstado" id="idEstado" ngControl="idEstado" [(ngModel)]="_usuarioModel.idEstado"
+                      required>
+                      <option value="0">Seleccione una Opcion</option>
+                      <option *ngFor="let item of JsonReceptionEstados" [value]="item.idEstado">
+                        {{item.descEstado}}
+                      </option>
                     </select>
                   </div>
                   <div class="form-group">
-                    <label>Elija un Perfil</label>
-                    <select class="form-control" name="idTipo" id="idTipo" ngControl="idTipo" [(ngModel)]="_usuarioModel.idTipo" required>
-                      <option value="0"  >Seleccione una Opcion</option>
+                    <strong> <label>Elija un Perfil</label> </strong>
+                    <select class="form-control" name="idTipo" id="idTipo" ngControl="idTipo" [(ngModel)]="_usuarioModel.idTipo"
+                      required>
+                      <option value="0">Seleccione una Opcion</option>
                       <option *ngFor="let item of JsonReceptionTipoUsuarios" [value]="item.idTipo">
                         {{item.descTipo}}
                       </option>
@@ -85,7 +109,7 @@
                     <button type="button" class="btn btn-primary btn-group-icon btn-group-divider">
                       <i class="nb-plus-circled"></i>
                     </button>
-                    <button type="button" class="btn btn-primary">Guardar</button>
+                    <button type="button" (click)="newUsuarioService()" class="btn btn-primary">Guardar</button>
                     <button type="button" class="btn btn-warning">Cancelar</button>
                   </div>
                 </nb-card-body>

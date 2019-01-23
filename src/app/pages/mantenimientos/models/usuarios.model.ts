@@ -19,7 +19,11 @@ export class UsuarioModel {
         public emailUsuario: string,
         public passwordUsuario: string,
         public imagenUsuario: string,
-        public activada: boolean,
+        public activo: boolean,
+        public fechaCreacion: Date,
+        public fechaModificacion: Date,
+        public horaCreacion: Date,
+        public horaModificacion: Date,
         // public estadoUsuario: boolean = true,
         // mapeo de relacion tipo de usuario
         public idTipoUsuario: { idTipo: number },
