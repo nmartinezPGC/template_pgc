@@ -48,6 +48,8 @@ export class ActivityModel {
         // Organizaciones Relaciones
         public idTipoOrganizacionActivity: { idTipoOrganizacion: number },
         public idTipoOrganizacion: number,
+        public idCatOrganizacionActivity: { idCatOrganizacion: number },
+        public idCatOrganizacion: number,
         public idPaisActivity: { idPais: number },
         public idPais: number,
         public idOrganizacionActivity: { idOrganizacion: number },

@@ -44,7 +44,7 @@ export class ActivityValidateFormService {
     } else if (modeloActividad.idEstado === null || modeloActividad.idEstado === 0) {
       this.responseData.msg = 'Debes Seleccionar el Estado de la Actividad, para Continuar';
       this.responseData.error = true;
-    } else if (modeloActividad.descripcionActividad === null || modeloActividad.descripcionActividad === '' ) {
+    } /*else if (modeloActividad.descripcionActividad === null || modeloActividad.descripcionActividad === '' ) {
       this.responseData.msg = 'Debes Ingresar la Descripción de la Actividad, para Continuar';
       this.responseData.error = true;
     } else if (modeloActividad.objetivoActividad === null || modeloActividad.objetivoActividad === '' ) {
@@ -53,7 +53,7 @@ export class ActivityValidateFormService {
     } else if (modeloActividad.justificacionActividad === null || modeloActividad.justificacionActividad === '') {
       this.responseData.msg = 'Debes Ingresar la Justificación de la Actividad, para Continuar';
       this.responseData.error = true;
-    }
+    }*/
 
     // Retorno de la Funcion
     return this.responseData;

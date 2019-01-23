@@ -51,8 +51,8 @@
                           <select class="form-control" #idEspacioTrabajo="ngModel" name="idEspacioTrabajo" id="idEspacioTrabajo"
                             ngControl="idEspacioTrabajo" [(ngModel)]="_activityModel.idEspacioTrabajo" required>
                             <option value="0">**** Selecciona el Espacio de Trabajo ****</option>
-                            <option *ngFor="let item of JsonReceptionEspaciosTrabajo" [value]="item.idEspacioTrabajo">
-                              {{item.descripcionEspacioTrabajo}}
+                            <option *ngFor="let item of JsonReceptionEspaciosTrabajoUsuario" [value]="item.idEspacioTrabajo.idEspacioTrabajo">
+                              {{item.idEspacioTrabajo.descripcionEspacioTrabajo}}
                             </option>
                           </select>
                         </div>
@@ -346,7 +346,7 @@
                     <div class="form-group">
                       <strong> <label>Tipo Organización</label> </strong>
                       <select #idTipoOrganizacion class="form-control" id="idTipoOrganizacion" name="idTipoOrganizacion"
-                        ngControl="idTipoOrganizacion" [(ngModel)]="_activityModel.idTipoOrganizacion">
+                        ngControl="idTipoOrganizacion" [(ngModel)]="_activityModel.idTipoOrganizacion" (change)="categoriasOrganizacionListService(_activityModel.idTipoOrganizacion)">
                         <option value="0">**** Selecciona el tipo de Organizacion ****</option>
                         <option *ngFor="let item of JsonReceptionTiposOrganizacion" [value]="item.idTipoOrganizacion">
                           {{item.descTipoOrganizacion}}
@@ -355,20 +355,20 @@
                     </div>
                   </div>
 
-                  <div class="col-sm-4">
+                  <div class="col-sm-5">
                     <div class="form-group">
                       <strong> <label>Categoría Organización</label> </strong>
-                      <select #idTipoOrganizacion class="form-control" id="idTipoOrganizacion" name="idTipoOrganizacion"
-                        ngControl="idTipoOrganizacion" [(ngModel)]="_activityModel.idTipoOrganizacion">
-                        <option value="0">**** Selecciona el tipo de Organizacion ****</option>
-                        <option *ngFor="let item of JsonReceptionTiposOrganizacion" [value]="item.idTipoOrganizacion">
-                          {{item.descTipoOrganizacion}}
+                      <select #idCatOrganizacion class="form-control" id="idCatOrganizacion" name="idCatOrganizacion"
+                        ngControl="idCatOrganizacion" [(ngModel)]="_activityModel.idCatOrganizacion">
+                        <option value="0">**** Selecciona la Categoría ****</option>
+                        <option *ngFor="let item of JsonReceptionCategoriasOrganizacion" [value]="item.idCatOrganizacion">
+                          {{item.descCatOrganizacion}}
                         </option>
                       </select>
                     </div>
                   </div>
 
-                  <div class="col-sm-4">
+                  <div class="col-sm-3">
                     <div class="form-group">
                       <strong> <label>País Organización</label> </strong>
                       <!-- <select #idPais class="form-control" id="idPais" name="idPais" ngControl="idPais" [(ngModel)]="_activityModel.idPais"

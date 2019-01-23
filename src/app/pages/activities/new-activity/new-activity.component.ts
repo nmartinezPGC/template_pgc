@@ -92,7 +92,9 @@ export class NewActivityComponent implements OnInit {
   public JsonReceptionEstrategias: any;
   public JsonReceptionPresupuesto: any;
   public JsonReceptionEspaciosTrabajo: any;
+  public JsonReceptionEspaciosTrabajoUsuario: any;
   public JsonReceptionTiposOrganizacion: any;
+  public JsonReceptionCategoriasOrganizacion: any;
   public JsonReceptionPaises: any;
   public inicialesPais: string;
   public inicialesOrganizacion: any;
@@ -112,6 +114,7 @@ export class NewActivityComponent implements OnInit {
   // Id Internas
   public JsonIdInternaOrganizacion = [];
   protected JsonReceptionTipoPaisOrganizacionesData: any;
+  protected JsonReceptionPaisOrganizacionesData: any;
   public JsonOrganizationSelect: any;
   public descPais: string;
   public descTipoOrganizacion: string;
@@ -196,7 +199,7 @@ export class NewActivityComponent implements OnInit {
       '', null, 0, null, 0, '', '', '', '', '', '', // Datos Generales de la Actividad
       null, 0, null, 0, null, 0, // Planificacion
       '', '', '', 0, null, 1, null, '', '', // Resultados
-      null, 0, null, 0, null, 0, '', // Organizaciones Relaciones
+      null, 0, null, 0, null, 0, null, 0, '', // Organizaciones Relaciones
       '', '', '', // Organizaciones Descripciones
       null, 0, // Datos de Auditoria
       null, null, null, null, null, // Fechas de Planifiacion
@@ -218,9 +221,9 @@ export class NewActivityComponent implements OnInit {
      de que nesesita el Formulario de Actividades */
     this.presupuestoListService();
 
-    /* Llamado a la Funcion: 012, la cual obtiene el listado de los Presupuestos
-     de que nesesita el Formulario de Actividades */
-    this.espaciosTrabajoListService();
+    /* Llamado a la Funcion: 012, la cual obtiene el listado de los Espacios de
+     Trabajo de la BD */
+    // this.espaciosTrabajoListService();
 
     /* Llamado a la Funcion: 013, la cual obtiene el listado de los Tipos de
      Organizaciones de que nesesita el Formulario de Actividades */
@@ -233,6 +236,10 @@ export class NewActivityComponent implements OnInit {
     /* Llamado a la Funcion: 015, la cual obtiene el listado de las Organizaciones
      que nesesita el Formulario de Actividades */
     this.organizacionesAllListService();
+
+    /* Llamado a la Funcion: 012.1, la cual obtiene el listado de los Espacios de
+     Trabajo que nesesita el Formulario de Actividades */
+    this.espaciosTrabajoUsuarioListService();
 
     /**
      * Configuracion Inicial del Dropdown List
@@ -348,7 +355,7 @@ export class NewActivityComponent implements OnInit {
     this._activityModel.idPais = item.id;
     this.inicialesPais = item.iniciales;
 
-    this.organizacionesIdTipoIdPaisListService(this._activityModel.idTipoOrganizacion, this._activityModel.idPais)
+    this.organizacionesIdTipoIdPaisListService(this._activityModel.idCatOrganizacion, 0, this._activityModel.idPais)
   } // FIN | OnItemDeSelect
 
 
@@ -542,8 +549,8 @@ export class NewActivityComponent implements OnInit {
   * Object Number: 012
   * Fecha: 12-10-2018
   * Descripcion: Method espaciosTrabajoListService of the Class
-  * Objetivo: espaciosTrabajoListService listados de los Presupuestos
-  * del Formulario de Actividad llamando a la API
+  * Objetivo: espaciosTrabajoListService listados de los Espacios de Trabajo
+  * llamando a la API
   ****************************************************************************/
   private espaciosTrabajoListService() {
     this._listasComunesService.getAllEspaciosTrabajo().subscribe(
@@ -558,10 +565,35 @@ export class NewActivityComponent implements OnInit {
       },
       error => {
         // console.log(<any>error);
-        this.showToast('error', 'Error al Obtener la Información de los Espacios de Trabajo', error);
+        this.showToast('error', 'Error al Obtener la Información de los Espacios de Trabajo', JSON.stringify(error));
       },
     );
   } // FIN | espaciosTrabajoListService
+
+
+  /****************************************************************************
+  * Funcion: espaciosTrabajoUsuarioListService
+  * Object Number: 012.1
+  * Fecha: 12-10-2018
+  * Descripcion: Method espaciosTrabajoUsuarioListService of the Class
+  * Objetivo: espaciosTrabajoUsuarioListService listados de los Espacios de Tra-
+  * bajo que tiene asignado el Usuario, llamando a la API
+  ****************************************************************************/
+  private espaciosTrabajoUsuarioListService() {
+    this._listasComunesService.getAllEspaciosTrabajoUsuario(9).subscribe(
+      result => {
+        if (result.status !== 200) {
+          this.showToast('error', 'Error al Obtener la Información de los Espacios de Trabajo', result.message);
+        } else if (result.status === 200) {
+          this.JsonReceptionEspaciosTrabajoUsuario = result.data;
+        }
+      },
+      error => {
+        // console.log(<any>error);
+        this.showToast('error', 'Error al Obtener la Información de los Espacios de Trabajo', JSON.stringify(error.message));
+      },
+    );
+  } // FIN | espaciosTrabajoUsuarioListService
 
 
   /****************************************************************************
@@ -598,19 +630,22 @@ export class NewActivityComponent implements OnInit {
   * Objetivo: categoriasOrganizacionListService listados de las Categorias de la
   * Organizacion del Formulario de Actividad llamando a la API
   ****************************************************************************/
-  private categoriasOrganizacionListService() {
-    this._listasComunesService.getAllTipoOrganizacion().subscribe(
+  private categoriasOrganizacionListService(idTipoOrganizacionSend: number) {
+    this._listasComunesService.getCategoriaOrganizacionByTipo(idTipoOrganizacionSend).subscribe(
       result => {
         if (result.status !== 200) {
           // Respuesta del Error
-          this.showToast('error', 'Error al Obtener la Información de los Tipos de Organizacion', result.message);
+          this.JsonReceptionCategoriasOrganizacion = null;
+          this.showToast('error', 'Error al Obtener la Información de las Categorias de Organizacion', result.message);
         } else if (result.status === 200) {
-          this.JsonReceptionTiposOrganizacion = result.data;
+          this.JsonReceptionCategoriasOrganizacion = result.data;
+
+          // Ejecutamos la COnsulta de las Organizaciones, segun el Tipo Seleccionado
+          this.organizacionesIdTipoListService(this._activityModel.idTipoOrganizacion);
         }
       },
       error => {
-        // console.log(<any>error);
-        this.showToast('error', 'Error al Obtener la Información de los Tipos de Organizacion', error);
+        this.showToast('error', 'Error al Obtener la Información de las Categorias de Organizacion', JSON.stringify(error));
       },
     );
   } // FIN | tiposOrganizacionListService
@@ -749,7 +784,7 @@ export class NewActivityComponent implements OnInit {
   * Objetivo: Buscar las Organizaciones segun el Filtro Aplicado, Tipo, Categoria
   * y Pais de Organizacion, en Formulario de Actividad llamando a la API
   ****************************************************************************/
-  private organizacionesIdTipoIdPaisListService(idTipoOrganizacionSend: number, idPais: number) {
+  private organizacionesIdTipoIdPaisListService(idTipoOrganizacionSend: number, idCatOrganizacion: number, idPais: number) {
     // Condicion para evaluar que opcion se pulsa
     this._listasComunesService.getIdTipoIdPaisOrganizaciones(idTipoOrganizacionSend, idPais).subscribe(
       result => {
@@ -779,21 +814,105 @@ export class NewActivityComponent implements OnInit {
             return {
               id: item.idOrganizacion,
               itemName: item.descOrganizacion,
-              nombreTipoOrganizacion: item.idTipoOrganizacionT.descTipoOrganizacion,
+              nombreTipoOrganizacion: item.idTipoOrganizacion.descTipoOrganizacion,
               descPais: item.idPaisOrganizacion.descPais,
               inicialesOrganizacion: item.inicalesOrganizacion,
             }
           })
         }
-        // Cargamos el compoenete de AutoCompletar
-        // this.dataService = this.completerService.local(this.JsonReceptionTipoPaisOrganizacionesData, 'descOrganizacion',
-        //   'descOrganizacion');
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', error);
+        this.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', JSON.stringify(error));
       },
     );
   } // FIN | organizacionesIdTipoIdPaisListService
+
+
+  /****************************************************************************
+  * Funcion: organizacionesIdPaisListService
+  * Object Number: 016.1
+  * Fecha: 22-01-2019
+  * Descripcion: Method organizacionesIdPaisListService of the Class
+  * Objetivo: Buscar las Organizaciones segun el Filtro Aplicado, Pais de
+  * Organizacion, en Formulario de Actividad llamando a la API
+  ****************************************************************************/
+  private organizacionesIdPaisListService(idPais: number) {
+    // Condicion para evaluar que opcion se pulsa
+    this._listasComunesService.getIdPaisOrganizaciones(idPais).subscribe(
+      result => {
+        if (result.status !== 200) {
+          // Resultados del Error
+          // Cargamos el compoenete de AutoCompletar
+          this.dropdownList = [];
+          this.selectedItems = [];
+
+          this.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', result.message);
+        } else if (result.status === 200) {
+          this.JsonReceptionPaisOrganizacionesData = result.data;
+
+          // Asignacion de los Valores del Json al Select
+          console.log('Data ' + JSON.stringify(this.JsonReceptionPaisOrganizacionesData));
+          this.dropdownList = this.JsonReceptionPaisOrganizacionesData.map((item) => {
+            return {
+              id: item.idOrganizacion,
+              itemName: item.descOrganizacion,
+              nombreTipoOrganizacion: item.idTipoOrganizacion.descTipoOrganizacion,
+              descPais: item.idPaisOrganizacion.descPais,
+              inicialesOrganizacion: item.inicalesOrganizacion,
+            }
+          })
+        }
+      },
+      error => {
+        this.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', JSON.stringify(error));
+      },
+    );
+  } // FIN | organizacionesIdPaisListService
+
+
+  /****************************************************************************
+  * Funcion: organizacionesIdTipoListService
+  * Object Number: 016.2
+  * Fecha: 22-01-2019
+  * Descripcion: Method organizacionesIdTipoListService of the Class
+  * Objetivo: Buscar las Organizaciones segun el Filtro Aplicado, Tipo de
+  * Organizacion, en Formulario de Actividad llamando a la API
+  ****************************************************************************/
+  private organizacionesIdTipoListService(idTipoOrganizacion: number) {
+    // Cargamos el compoenete de AutoCompletar
+    this.dropdownList = [];
+    this.selectedItems = [];
+
+    // Condicion para evaluar que opcion se pulsa
+    this._listasComunesService.getIdTipoOrganizaciones(idTipoOrganizacion).subscribe(
+      result => {
+        if (result.status !== 200) {
+          // Resultados del Error
+          // Cargamos el compoenete de AutoCompletar
+          this.dropdownList = [];
+          this.selectedItems = [];
+
+          this.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', result.message);
+        } else if (result.status === 200) {
+          this.JsonReceptionPaisOrganizacionesData = result.data;
+
+          // Asignacion de los Valores del Json al Select
+          this.dropdownList = this.JsonReceptionPaisOrganizacionesData.map((item) => {
+            return {
+              id: item.idOrganizacion,
+              itemName: item.descOrganizacion,
+              nombreTipoOrganizacion: item.idTipoOrganizacion.descTipoOrganizacion,
+              descPais: item.idPaisOrganizacion.descPais,
+              inicialesOrganizacion: item.inicalesOrganizacion,
+            }
+          })
+        }
+      },
+      error => {
+        this.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', JSON.stringify(error));
+      },
+    );
+  } // FIN | organizacionesIdTipoListService
 
 
   /****************************************************************************

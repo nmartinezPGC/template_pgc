@@ -237,6 +237,34 @@ export class ListEndPointsService {
         groupEndPoint: 'organizacionesGroup',
         descEndPoint: 'inhabilitar el tipo de organizaciones ',
       },
+      listAllCategoriaOrganizaciones: {
+        id: 14,
+        nameEndpoint: 'listAllCategoriaOrganizaciones',
+        urlEndPoint: '/categorias-organizaciones',
+        groupEndPoint: 'organizacionesGroup',
+        descEndPoint: 'Listar todas las Categorias de Organizacion',
+      },
+      findByIdCatOrganizacion: {
+        id: 15,
+        nameEndpoint: 'findByIdCatOrganizacion',
+        urlEndPoint: '/categorias-organizaciones/findByIdCatOrganizacion/',
+        groupEndPoint: 'organizacionesGroup',
+        descEndPoint: 'Buscar Categoria de Organzicion con el Id como Parametro',
+      },
+      findByIdTipoOrganizacionCat: {
+        id: 16,
+        nameEndpoint: 'findByIdTipoOrganizacionCat',
+        urlEndPoint: '/categorias-organizaciones/findByIdTipoOrganizacion/',
+        groupEndPoint: 'organizacionesGroup',
+        descEndPoint: 'Buscar todas las Categorias de Organizacion, con el Tipo como parametro',
+      },
+      newCatOrganizacionCat: {
+        id: 17,
+        nameEndpoint: 'newCatOrganizacionCat',
+        urlEndPoint: '/categorias-organizaciones/new',
+        groupEndPoint: 'organizacionesGroup',
+        descEndPoint: 'Ingresar la Categoria de Organizacion',
+      },
     }, // Modulo de Mantenimientos Genericos
     endPointMantGenericos: {
       listAllPaises: {

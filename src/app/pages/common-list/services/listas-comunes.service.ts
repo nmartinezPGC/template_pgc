@@ -150,11 +150,14 @@ export class ListasComunesService {
   * Descripcion: Metodo para obtener los Datos de los Espacios de Trabajo
   * asignados al usuario, al momento de Crearlo
   * Objetivo: datos de los Espacios de Trabajo asignados al Usuarios
-  * Params: { idUsuario }
+  * Params: { idUsuarioEspacioTrabajo }
   ****************************************************************************/
-  getAllEspaciosTrabajoUsuario(): Observable<any> {
+  getAllEspaciosTrabajoUsuario(idUsuarioEspacioTrabajoIn: number): Observable<any> {
+    // Parametros a Enviar
+    const paramSend: number = idUsuarioEspacioTrabajoIn;
+
     // Retorno de la Funcion
-    return this._http.get(this._systemEndPointsService.getEndPointService('espacioTrabajoGroup', 3), {
+    return this._http.get(this._systemEndPointsService.getEndPointService('espacioTrabajoUsuarioGroup', 2) + paramSend, {
       headers: this.headers,
       params: { 'tokenApi': this.tokenHeader },
     });
@@ -175,6 +178,26 @@ export class ListasComunesService {
       params: { 'tokenApi': this.tokenHeader },
     });
   }// FIN | FND-00008
+
+
+  /****************************************************************************
+  * Funcion: FND-00008.1
+  * Fecha: 22-01-2019
+  * Descripcion: Metodo para obtener los Datos de las Categorias de
+  * Organizaciones, segun el Tipo que envia
+  * Objetivo: datos de los Categiras de Organizaciones
+  * Params: { idTipoOrganizacion }
+  ****************************************************************************/
+  getCategoriaOrganizacionByTipo(idTipoOrganizacionIn: number): Observable<any> {
+    // Parametro de Tipo de Organizacion
+    const idTipoOrganizacionSend: number = idTipoOrganizacionIn;
+
+    // Retorno de la Funcion
+    return this._http.get(this._systemEndPointsService.getEndPointService('organizacionesGroup', 16) + idTipoOrganizacionSend, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  }// FIN | FND-00008.1
 
 
   /****************************************************************************
@@ -241,6 +264,42 @@ export class ListasComunesService {
       params: { 'tokenApi': this.tokenHeader },
     });
   }// FIN | FND-00011
+
+
+  /****************************************************************************
+  * Funcion: FND-00011.1
+  * Fecha: 22-01-2019
+  * Descripcion: Metodo para obtener los Datos de las Organizaciones
+  * Objetivo: datos de las Organizaciones
+  * Params: { idPais }
+  ****************************************************************************/
+  getIdPaisOrganizaciones(idPais: number): Observable<any> {
+    // Parametros de la Funcion
+    const paramsSend = idPais;
+    // Retorno de la Funcion
+    return this._http.get(this._systemEndPointsService.getEndPointService('organizacionesGroup', 9) + paramsSend, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  }// FIN | FND-00011.1
+
+
+  /****************************************************************************
+  * Funcion: FND-00011.2
+  * Fecha: 22-01-2019
+  * Descripcion: Metodo para obtener los Datos de las Organizaciones
+  * Objetivo: datos de las Organizaciones
+  * Params: { idTipoOrganizacion }
+  ****************************************************************************/
+  getIdTipoOrganizaciones(idTipoOrganizacion: number): Observable<any> {
+    // Parametros de la Funcion
+    const paramsSend = idTipoOrganizacion;
+    // Retorno de la Funcion
+    return this._http.get(this._systemEndPointsService.getEndPointService('organizacionesGroup', 6) + paramsSend, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  }// FIN | FND-00011.2
 
 
   /****************************************************************************
