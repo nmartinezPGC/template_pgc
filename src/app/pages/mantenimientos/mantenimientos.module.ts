@@ -14,6 +14,7 @@ import { MantenimientosRoutingModule, routedComponentsMant } from './mantenimien
 import { ListasComunesService } from '../common-list/services/listas-comunes.service';
 import { MantEspaciosTrabajoComponent } from './mant-espacios-trabajo/mant.espacios.trabajo.component';
 import { GrupoTrabajoComponent } from './mant-espacios-trabajo/grupo-trabajo/grupo.trabajo.component';
+import { AgregarCategoriaComponent } from './mant-espacios-trabajo/agregar-categoria/agregar-categoria.component';
 
 // Composicion del Modulo
 @NgModule({
@@ -28,6 +29,7 @@ import { GrupoTrabajoComponent } from './mant-espacios-trabajo/grupo-trabajo/gru
     ...routedComponentsMant,
     MantEspaciosTrabajoComponent,
     GrupoTrabajoComponent,
+    AgregarCategoriaComponent,
   ],
   providers: [
     ListasComunesService,
