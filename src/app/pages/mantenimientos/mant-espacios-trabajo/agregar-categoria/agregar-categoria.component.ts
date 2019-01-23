@@ -46,7 +46,7 @@ export class AgregarCategoriaComponent implements OnInit {
 
   constructor(protected _router: Router, private _toasterService: ToasterService,
     public _configSmartTableService: ConfigSmartTableService,
-    public _categoriaService: CategoriaService, ) {
+    public _categoriaService: CategoriaService) {
     this._configSmartTableService.configSmartTable('userSmart', 1, null);
     this.settings = this._configSmartTableService.settings;
     this.responsedata = { 'error': false, 'msg': 'error campos solicitado' };
@@ -112,7 +112,6 @@ export class AgregarCategoriaComponent implements OnInit {
     this._categoriaService.listAllCategoria().subscribe(
       response => {
         if (response.status !== 200) {
-          console.log(response);
           this.showToast('error', 'Error al Obtener la Información del Perfil', response.message);
         } else if (response.status === 200) {
           this.JsonReceptionPrefiles = response.data;
