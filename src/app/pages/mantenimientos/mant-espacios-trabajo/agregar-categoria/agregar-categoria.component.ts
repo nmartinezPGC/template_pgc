@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 // model class
 // Model of Class
 import { AgregarCategoriaModel } from '../../models/agregar.categoria.model';
-import { ConfigSmartTableService } from '../../services/grupo-trabajo.settings.smart-table.service';
+import { ConfigSmartTableService } from '../../services/agregar-categoria.settings.smart-table.service';
 import { CategoriaService } from '../../services/agregar.categoria.service';
 
 @Component({
