@@ -851,7 +851,7 @@ export class NewActivityComponent implements OnInit {
           this.JsonReceptionPaisOrganizacionesData = result.data;
 
           // Asignacion de los Valores del Json al Select
-          console.log('Data ' + JSON.stringify(this.JsonReceptionPaisOrganizacionesData));
+          // console.log('Data ' + JSON.stringify(this.JsonReceptionPaisOrganizacionesData));
           this.dropdownList = this.JsonReceptionPaisOrganizacionesData.map((item) => {
             return {
               id: item.idOrganizacion,
