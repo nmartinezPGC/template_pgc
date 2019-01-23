@@ -89,7 +89,7 @@ export class UsuarioService {
     /****************************************************************************
     * Funcion: FND-00004
     * Fecha: 21-01-2019
-    * Descripcion: Metodo que sirve para poder ingresar un nuevo usuario
+    * Descripcion: Metodo que sirve para poder ingresar un nuevo tipo de usuario
     * Params: {  }
     * Autor: Edgar Ramirez
     ****************************************************************************/
@@ -101,5 +101,6 @@ export class UsuarioService {
             headers: this.headers,
             params: { 'tokenApi': this.tokenHeader },
         });
-    }// FIN | FND-00002
+    }// FIN | FND-00004
+
 }
