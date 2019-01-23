@@ -191,6 +191,7 @@ export class GrupoTrabajoComponent implements OnInit {
     );
   } // FIN | newPerfilService
 
+
   /****************************************************************************
    * Funcion: upTipoOrganzacion()
    * Object Number: 0003
@@ -256,6 +257,8 @@ export class GrupoTrabajoComponent implements OnInit {
       event.confirm.reject();
     }
   }
+
+
   /****************************************************************************
 * Funcion: deleteTipoOrganizacion();
 * Object Number: 0004

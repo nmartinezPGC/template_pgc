@@ -8,6 +8,7 @@ import { MantSeguridadComponent } from './mant-seguridad/mant-seguridad.componen
 import { PerfilesComponent } from './mant-seguridad/perfiles/perfiles.component';
 import { MantEspaciosTrabajoComponent } from './mant-espacios-trabajo/mant.espacios.trabajo.component';
 import { GrupoTrabajoComponent } from './mant-espacios-trabajo/grupo-trabajo/grupo.trabajo.component';
+import { AgregarCategoriaComponent } from './mant-espacios-trabajo/agregar-categoria/agregar-categoria.component';
 
 
 // Mapeo de las Rutas del Modulo
@@ -38,6 +39,10 @@ const routes: Routes = [{
     {
       path: 'mant-espacios-trabajo/grupo-trabajo',
       component: GrupoTrabajoComponent,
+    },
+    {
+      path: 'mant-espacios-trabajo/agregar-categoria',
+      component: AgregarCategoriaComponent,
     },
   ],
 }];
