@@ -1167,7 +1167,7 @@ export class NewActivityComponent implements OnInit {
     // Seteamos los valores del Modelo de Planificacion a Enviar
     this._activityPlanificacionModel.codigoActividad = this._activityModel.codigoActividad;
 
-    console.log('Datos de ' + JSON.stringify(this._activityPlanificacionModel));
+    // console.log('Datos de ' + JSON.stringify(this._activityPlanificacionModel));
 
     // Ejecutamos el Recurso del EndPoint
     this._activityService.newActivityPlanificacion(this._activityModel).subscribe(
@@ -1202,7 +1202,7 @@ export class NewActivityComponent implements OnInit {
   ****************************************************************************/
   onDateChanged(event: IMyDateModel, paraEvalDate: number) {
     // event properties are: event.date, event.jsdate, event.formatted and event.epoc
-    console.log('onDateChanged(): ', event.date, ' - jsdate: ', new Date(event.jsdate).toLocaleDateString(), ' - formatted: ', event.formatted, ' - epoc timestamp: ', event.epoc);
+    // console.log('onDateChanged(): ', event.date, ' - jsdate: ', new Date(event.jsdate).toLocaleDateString(), ' - formatted: ', event.formatted, ' - epoc timestamp: ', event.epoc);
     switch (paraEvalDate) {
       case 1:
         this._activityPlanificacionModel.fechaFirma = event.jsdate;

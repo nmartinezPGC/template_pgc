@@ -118,7 +118,7 @@ export class ActivityService {
   newActivityPlanificacion(jsonActivityPlanificacion: any): Observable<any> {
     // Parametros del EndPoint
     const paramsSend = jsonActivityPlanificacion;
-    console.log( 'Datos del Modelo en el Servicio ' + JSON.stringify( paramsSend));
+    // console.log( 'Datos del Modelo en el Servicio ' + JSON.stringify( paramsSend));
     // Retorno de la Funcion
     return this._http.post(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 4), paramsSend, {
       headers: this.headers,
