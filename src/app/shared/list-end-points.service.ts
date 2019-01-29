@@ -265,6 +265,20 @@ export class ListEndPointsService {
         groupEndPoint: 'organizacionesGroup',
         descEndPoint: 'Ingresar la Categoria de Organizacion',
       },
+      updateCatOrganizacionCat: {
+        id: 18,
+        nameEndpoint: 'updateCatOrganizacionCat',
+        urlEndPoint: '/categorias-organizaciones/update/',
+        groupEndPoint: 'organizacionesGroup',
+        descEndPoint: 'actualizar las categorias',
+      },
+      deleteCatOrganizacionCat: {
+        id: 19,
+        nameEndpoint: 'updateCatOrganizacionCat',
+        urlEndPoint: '/categorias-organizaciones/delete/',
+        groupEndPoint: 'organizacionesGroup',
+        descEndPoint: 'inhabilitar las categorias',
+      },
     }, // Modulo de Mantenimientos Genericos
     endPointMantGenericos: {
       listAllPaises: {
