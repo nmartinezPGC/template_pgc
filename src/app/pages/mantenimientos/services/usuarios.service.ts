@@ -72,7 +72,7 @@ export class UsuarioService {
 * Funcion: FND-00003
 * Fecha: 21-01-2019
 * Descripcion: Metodo que sirve para poder ingresar un nuevo Usuario
-* Params: { jsonPerfil }
+* Params: { jsonUsuario }
 * autor: Edgar Ramirez
 ****************************************************************************/
     newUsuario(jsonUsuario): Observable<any> {

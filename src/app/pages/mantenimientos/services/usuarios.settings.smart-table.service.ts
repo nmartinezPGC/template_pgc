@@ -92,7 +92,7 @@ export class ConfigSmartTableService {
                                     },
                                 },
                                 idPais: {
-                                    valuePrepareFunction: (cell: any, row: any) => row.idPais.descPais,
+                                    valuePrepareFunction: (cell: any, row: any) => row.idPaisUsuario.descPais,
                                     title: 'Pais',
                                     editor: {
                                         type: 'list',
