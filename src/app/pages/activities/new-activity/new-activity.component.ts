@@ -215,7 +215,7 @@ export class NewActivityComponent implements OnInit {
     this._activityPlanificacionModel = new ActivityPlanificacionModel(
       0, '', // Definificion
       null, null, null, null, null, // Fechas de Planificacion
-      null, null // Auditoria
+      null, null, // Auditoria
     );
 
     /* Llamado a la Funcion: 008, la cual obtiene el listado de los Estados de
@@ -638,7 +638,7 @@ export class NewActivityComponent implements OnInit {
           this.JsonReceptionCategoriasOrganizacion = result.data;
 
           // Ejecutamos la Consulta de las Organizaciones, segun el Tipo Seleccionado
-          if (this._activityModel.idPais == 0 || this._activityModel.idPais == null) {
+          if (this._activityModel.idPais === 0 || this._activityModel.idPais == null) {
             this.organizacionesIdTipoListService(this._activityModel.idTipoOrganizacion);
           } else {
             this.organizacionesIdTipoIdPaisListService(this._activityModel.idTipoOrganizacion, this._activityModel.idPais)
@@ -1206,23 +1206,23 @@ export class NewActivityComponent implements OnInit {
     switch (paraEvalDate) {
       case 1:
         this._activityPlanificacionModel.fechaFirma = event.jsdate;
-        console.log('Fecha de Firma ' + JSON.stringify(this._activityPlanificacionModel.fechaFirma))
+        // console.log('Fecha de Firma ' + JSON.stringify(this._activityPlanificacionModel.fechaFirma))
         break;
       case 2:
         this._activityPlanificacionModel.fechaEfectividad = event.jsdate;
-        console.log('Fecha de Efectividad ' + JSON.stringify(this._activityPlanificacionModel.fechaEfectividad))
+        // console.log('Fecha de Efectividad ' + JSON.stringify(this._activityPlanificacionModel.fechaEfectividad))
         break;
       case 3:
         this._activityPlanificacionModel.fechaCierre = event.jsdate;
-        console.log('Fecha de Cierre ' + JSON.stringify(this._activityPlanificacionModel.fechaCierre))
+        // console.log('Fecha de Cierre ' + JSON.stringify(this._activityPlanificacionModel.fechaCierre))
         break;
       case 4:
         this._activityPlanificacionModel.fechaPropuestaFinalizacion = event.jsdate;
-        console.log('Fecha de fechaPropuestaFinalizacion ' + JSON.stringify(this._activityPlanificacionModel.fechaPropuestaFinalizacion))
+        // console.log('Fecha de fechaPropuestaFinalizacion ' + JSON.stringify(this._activityPlanificacionModel.fechaPropuestaFinalizacion))
         break;
       case 5:
         this._activityPlanificacionModel.fechaFinalizacion = event.jsdate;
-        console.log('Fecha de fechaFinalizacion ' + JSON.stringify(this._activityPlanificacionModel.fechaFinalizacion))
+        // console.log('Fecha de fechaFinalizacion ' + JSON.stringify(this._activityPlanificacionModel.fechaFinalizacion))
         break;
     }
     // FIN | onDateChanged
