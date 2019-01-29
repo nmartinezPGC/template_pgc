@@ -150,9 +150,8 @@ export class UsuariosComponent implements OnInit {
   ngOnInit() {
     // Inicializacion del Modelo de la Clase
     this._usuarioModel = new UsuarioModel(
-      0, null, null, null, null,
-      null, null, null, null, null, null, null, null, null, null, null, 0, '', null, 0, '', null, 0, '', null, 0, '',
-    );
+      true, null, null, null, null,
+      null, null, null, null, /* comienza los campos relacion */ null, 0, '', null, 0, '', null, 0, '', /* datos del usuario */ 0, null, null, null, null, null, 1);
     // inicializar la lista de tipo de perfiles
     this.usuariosTipoService();
     // inicializa la lista de estados del usuario
@@ -242,6 +241,7 @@ export class UsuariosComponent implements OnInit {
     this._usuarioModel.idEstadoUsuario = { idEstado: this._usuarioModel.idEstado };
     // this.validateUsuarios(this._usuarioModel);
     const responsedataExt: any = this.responsedata;
+    // console.log(this._usuarioModel);
 
     if (responsedataExt.error === true) {
       this.showToast('error', 'Error al ingresar los datos', responsedataExt.msg);
@@ -264,18 +264,19 @@ export class UsuariosComponent implements OnInit {
       },
       error => {
         // Redirecciona al Login
-        alert('Error en la petición de la API ' + <any>error);
+        // alert('Error en la petición de la API ' + <any>error);
+        // this.showToast('error', 'Error al Ingresar la Información del Usuario', JSON.stringify(error.message));
 
         // Borramos los datos del LocalStorage
-        localStorage.removeItem('auth_app_token');
-        localStorage.removeItem('identity');
+        // localStorage.removeItem('auth_app_token');
+        // localStorage.removeItem('identity');
 
-        const redirect = '/auth/login';
-        setTimeout(() => {
-          // Iniciativa Temporal
-          location.reload();
-          return this._router.navigateByUrl(redirect);
-        }, 2000);
+        // const redirect = '/auth/login';
+        // setTimeout(() => {
+        //   // Iniciativa Temporal
+        //   location.reload();
+        //   return this._router.navigateByUrl(redirect);
+        // }, 2000);
       },
     );
   } // FIN | newUsuarioService
@@ -423,5 +424,22 @@ export class UsuariosComponent implements OnInit {
     );
   } // FIN | paisesAllListService
 
+
+  /****************************************************************************
+  * Funcion: OnItemDeSelect
+  * Object Number: 00
+  * Fecha: 24-01-2019
+  * Descripcion: Method para Seleccionar Items de Pais para usarlo usuarios
+  * Objetivo: enviar al Json de ID'Intermas la información que ocupa la API
+  * Autor: Edgar Ramirez
+  ****************************************************************************/
+  onItemSelectPais(item: any) {
+    // Asignamos el Pais seleccionado
+    this._usuarioModel.idPais = item.id;
+    // console.log(this._usuarioModel.idPais);
+    // this.inicialesPais = item.iniciales;
+
+    // this.organizacionesIdTipoIdPaisListService(this._activityModel.idCatOrganizacion, 0, this._activityModel.idPais)
+  } // FIN | OnItemDeSelect
 
 }

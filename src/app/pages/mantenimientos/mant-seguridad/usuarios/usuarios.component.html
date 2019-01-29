@@ -16,6 +16,11 @@
     <li class="breadcrumb-item active" aria-current="page">Creacion de Usuarios</li>
   </ol>
 </nav>
+
+<!-- ==================================================================================== -->
+<!-- Componente para los Mensajes en pantalla -->
+<toaster-container [toasterconfig]="config"></toaster-container>
+
 <div class="row">
   <div class="col-md-12 col-lg-12">
     <nb-card>
@@ -83,7 +88,7 @@
                         </option>
                       </select> -->
                     <angular2-multiselect [data]="dropdownListPais" [(ngModel)]="selectedItemsPais" [settings]="dropdownSettings"
-                      required></angular2-multiselect>
+                      (onSelect)="onItemSelectPais($event)" required></angular2-multiselect>
                   </div>
                   <div class="form-group">
                     <strong> <label>Elija un Estado</label> </strong>
