@@ -90,7 +90,7 @@ export class ActivityService {
 
 
   /****************************************************************************
-    * Funcion: FND-00003
+    * Funcion: FND-00004
     * Fecha: 21-01-2019
     * Descripcion: Metodo para Actualizar el Valor de la Secuencia
     * Objetivo: Actualizar el valor de la Secuencia
@@ -104,6 +104,26 @@ export class ActivityService {
       headers: this.headers,
       params: { 'tokenApi': this.tokenHeader },
     });
-  } // FIN | FND-00002
+  } // FIN | FND-00004
+
+
+  /****************************************************************************
+    * Funcion: FND-00005
+    * Fecha: 28-01-2019
+    * Descripcion: Metodo para obtener Ingresar los Datos de Planificacion de
+    * la Actividad, segun el codigo de la Actividad recien Ingresado
+    * Objetivo: Ingresar los Datos de Planificacion de la Activiad
+    * Params: { jsonActivityPlanificacion }
+    ****************************************************************************/
+  newActivityPlanificacion(jsonActivityPlanificacion: any): Observable<any> {
+    // Parametros del EndPoint
+    const paramsSend = jsonActivityPlanificacion;
+    console.log( 'Datos del Modelo en el Servicio ' + JSON.stringify( paramsSend));
+    // Retorno de la Funcion
+    return this._http.post(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 4), paramsSend, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  } // FIN | FND-00005
 
 }

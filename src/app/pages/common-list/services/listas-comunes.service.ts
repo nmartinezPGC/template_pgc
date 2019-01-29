@@ -268,6 +268,24 @@ export class ListasComunesService {
 
   /****************************************************************************
   * Funcion: FND-00011.1
+  * Fecha: 23-01-2019
+  * Descripcion: Metodo para obtener los Datos de las Organizaciones
+  * Objetivo: datos de las Organizaciones
+  * Params: {idTipoOrganizacion}/{idPais}/{idCategoria}
+  ****************************************************************************/
+  getIdTipoIdPaisIdCategoriaOrganizaciones(idTipoOrganizacion: number, idPais: number,  idCategoria: number): Observable<any> {
+    // Parametros de la Funcion
+    const paramsSend = idTipoOrganizacion + '/' + idPais + '/' + idCategoria;
+    // Retorno de la Funcion
+    return this._http.get(this._systemEndPointsService.getEndPointService('organizacionesGroup', 20) + paramsSend, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  }// FIN | FND-00011.1
+
+
+  /****************************************************************************
+  * Funcion: FND-00011.1
   * Fecha: 22-01-2019
   * Descripcion: Metodo para obtener los Datos de las Organizaciones
   * Objetivo: datos de las Organizaciones
@@ -336,5 +354,23 @@ export class ListasComunesService {
       params: { 'tokenApi': this.tokenHeader },
     });
   }// FIN | FND-00013
+
+
+  /****************************************************************************
+  * Funcion: FND-00013.1
+  * Fecha: 23-01-2019
+  * Descripcion: Metodo para obtener los Datos de la Secuencia
+  * Objetivo: Obtener la Secuencia de la Actividad
+  * Params: { idSecuencia }
+  ****************************************************************************/
+  getSecuenciaIdActividad(idSecuencia: number): Observable<any> {
+    // Parametros de la Funcion
+    const paramsSend = idSecuencia;
+    // Retorno de la Funcion
+    return this._http.get(this._systemEndPointsService.getEndPointService('userGroup', 2) + paramsSend, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  }// FIN | FND-00013.1
 
 }

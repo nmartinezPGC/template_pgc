@@ -24,9 +24,11 @@ import 'style-loader!angular2-toaster/toaster.css';
 // import { SmartTableService } from '../../../@core/data/smart-table.service'; // Servicio de la SmartTable de la API
 
 // Modelo y Servicios de la Clase Activiades
-import { ActivityModel } from '../models/model-activity';
+import { ActivityPlanificacionModel } from '../models/model-planificacion-activity';
+import { ActivityModel } from '../models/model-activity'; // Modelo de Planificacion
 import { ActivityService } from '../services/service-activity.service';
 import { ActivityValidateFormService } from '../services/activity-validate-form.service';
+import { delay } from 'q';
 
 @Component({
   selector: 'ngx-new-activity',
@@ -101,7 +103,7 @@ export class NewActivityComponent implements OnInit {
 
   // Organizaciones
   protected searchStrFunc: string;
-  public JsonReceptionAllOrganizaciones: any[];
+  public JsonReceptionAllOrganizaciones: any;
   public JsonReceptionOrganizacionCode: any[];
   protected selectedOrganizicionesAll: string = '';
   protected selectedIdOrganizacion: string = '';
@@ -114,6 +116,7 @@ export class NewActivityComponent implements OnInit {
   // Id Internas
   public JsonIdInternaOrganizacion = [];
   protected JsonReceptionTipoPaisOrganizacionesData: any;
+  protected JsonReceptionTipoPaisCategoriaOrganizacionesData: any;
   protected JsonReceptionPaisOrganizacionesData: any;
   public JsonOrganizationSelect: any;
   public descPais: string;
@@ -126,6 +129,7 @@ export class NewActivityComponent implements OnInit {
 
   // Instacia de la variable del Modelo | Json de Parametros
   public _activityModel: ActivityModel;
+  public _activityPlanificacionModel: ActivityPlanificacionModel;
 
   /**
    * Configuracion del Dropdow List
@@ -201,8 +205,17 @@ export class NewActivityComponent implements OnInit {
       '', '', '', 0, null, 1, null, '', '', // Resultados
       null, 0, null, 0, null, 0, null, 0, '', // Organizaciones Relaciones
       '', '', '', // Organizaciones Descripciones
-      null, 0, // Datos de Auditoria
+      null, 0, true, // Datos de Auditoria
       null, null, null, null, null, // Fechas de Planifiacion
+    );
+
+    /**
+     * Inicializacion del Modelo de la Clase Planificacion
+     */
+    this._activityPlanificacionModel = new ActivityPlanificacionModel(
+      0, '', // Definificion
+      null, null, null, null, null, // Fechas de Planificacion
+      null, null // Auditoria
     );
 
     /* Llamado a la Funcion: 008, la cual obtiene el listado de los Estados de
@@ -235,7 +248,7 @@ export class NewActivityComponent implements OnInit {
 
     /* Llamado a la Funcion: 015, la cual obtiene el listado de las Organizaciones
      que nesesita el Formulario de Actividades */
-    this.organizacionesAllListService();
+    // this.organizacionesAllListService();
 
     /* Llamado a la Funcion: 012.1, la cual obtiene el listado de los Espacios de
      Trabajo que nesesita el Formulario de Actividades */
@@ -355,7 +368,9 @@ export class NewActivityComponent implements OnInit {
     this._activityModel.idPais = item.id;
     this.inicialesPais = item.iniciales;
 
-    this.organizacionesIdTipoIdPaisListService(this._activityModel.idCatOrganizacion, 0, this._activityModel.idPais)
+    // Condicona los Datos a Consultar
+    this.organizacionesIdPaisListService(this._activityModel.idPais);
+    // this.organizacionesIdTipoIdPaisListService(this._activityModel.idCatOrganizacion, 0, this._activityModel.idPais)
   } // FIN | OnItemDeSelect
 
 
@@ -387,8 +402,6 @@ export class NewActivityComponent implements OnInit {
   onEditedCompleter(event: { title: '' }): boolean {
     // this.cell.newValue = event.title;
     this.JsonOrganizationSelect = event.title;
-    // const vari = JSON.stringify(event);
-    // console.log('onEditedCompleter +++ ' + vari);
     return false;
   } // FIN | onEditedCompleter
 
@@ -408,11 +421,9 @@ export class NewActivityComponent implements OnInit {
       result => {
 
         if (result.status !== 200) {
-          // console.log(result.status);
           this.showToast('error', 'Error al Obtener la Información del Usuario', result.message);
         } else {
           this.JsonReceptionUserDetail = result.data
-          // console.log(this.JsonReceptionUserDetail.idUsuario);
         }
       },
       error => {
@@ -448,7 +459,6 @@ export class NewActivityComponent implements OnInit {
     this._listasComunesService.getAllEstados(3).subscribe(
       result => {
         if (result.status !== 200) {
-          // console.log(result.status);
           this.showToast('error', 'Error al Obtener la Información de Estados', result.message);
         } else if (result.status === 200) {
           // NADA
@@ -456,8 +466,7 @@ export class NewActivityComponent implements OnInit {
         }
       },
       error => {
-        // console.log(<any>error);
-        this.showToast('error', 'Error al Obtener la Información de Estados', error);
+        this.showToast('error', 'Error al Obtener la Información de Estados', JSON.stringify(error.message));
         // this.userDatailsService();
       },
     );
@@ -477,15 +486,13 @@ export class NewActivityComponent implements OnInit {
     this._listasComunesService.getAllSectoresEjecutores().subscribe(
       result => {
         if (result.status !== 200) {
-          // console.log(result.status);
           this.showToast('error', 'Error al Obtener la Información de los Sectores Ejecutores', result.message);
         } else if (result.status === 200) {
           this.JsonReceptionSectorEjecutor = result.data;
         }
       },
       error => {
-        // console.log(<any>error);
-        this.showToast('error', 'Error al Obtener la Información de Sectores', error);
+        this.showToast('error', 'Error al Obtener la Información de Sectores', JSON.stringify(error.message));
       },
     );
   } // FIN | sectorEjecutorListService
@@ -503,15 +510,13 @@ export class NewActivityComponent implements OnInit {
     this._listasComunesService.getAllEstrategias().subscribe(
       result => {
         if (result.status !== 200) {
-          // console.log(result.status);
           this.showToast('error', 'Error al Obtener la Información de los Estrategias', result.message);
         } else if (result.status === 200) {
           this.JsonReceptionEstrategias = result.data;
         }
       },
       error => {
-        // console.log(<any>error);
-        this.showToast('error', 'Error al Obtener la Información de las Estrategias', error);
+        this.showToast('error', 'Error al Obtener la Información de las Estrategias', JSON.stringify(error.message));
       },
     );
   } // FIN | estrategiasListService
@@ -529,16 +534,13 @@ export class NewActivityComponent implements OnInit {
     this._listasComunesService.getAllPresupuesto().subscribe(
       result => {
         if (result.status !== 200) {
-          // console.log(result.status);
           this.showToast('error', 'Error al Obtener la Información de los Presupuesto', result.message);
         } else if (result.status === 200) {
           this.JsonReceptionPresupuesto = result.data;
-          // console.log(this.JsonReceptionPresupuesto);
         }
       },
       error => {
-        // console.log(<any>error);
-        this.showToast('error', 'Error al Obtener la Información de los Presupuestos', error);
+        this.showToast('error', 'Error al Obtener la Información de los Presupuestos', JSON.stringify(error));
       },
     );
   } // FIN | presupuestoListService
@@ -556,16 +558,13 @@ export class NewActivityComponent implements OnInit {
     this._listasComunesService.getAllEspaciosTrabajo().subscribe(
       result => {
         if (result.status !== 200) {
-          // console.log(result.status);
           this.showToast('error', 'Error al Obtener la Información de los Espacios de Trabajo', result.message);
         } else if (result.status === 200) {
           this.JsonReceptionEspaciosTrabajo = result.data;
-          // console.log(this.JsonReceptionEspaciosTrabajo);
         }
       },
       error => {
-        // console.log(<any>error);
-        this.showToast('error', 'Error al Obtener la Información de los Espacios de Trabajo', JSON.stringify(error));
+        this.showToast('error', 'Error al Obtener la Información de los Espacios de Trabajo', JSON.stringify(error.message));
       },
     );
   } // FIN | espaciosTrabajoListService
@@ -589,7 +588,6 @@ export class NewActivityComponent implements OnInit {
         }
       },
       error => {
-        // console.log(<any>error);
         this.showToast('error', 'Error al Obtener la Información de los Espacios de Trabajo', JSON.stringify(error.message));
       },
     );
@@ -615,8 +613,7 @@ export class NewActivityComponent implements OnInit {
         }
       },
       error => {
-        // console.log(<any>error);
-        this.showToast('error', 'Error al Obtener la Información de los Tipos de Organizacion', error);
+        this.showToast('error', 'Error al Obtener la Información de los Tipos de Organizacion', JSON.stringify(error.message));
       },
     );
   } // FIN | tiposOrganizacionListService
@@ -640,12 +637,16 @@ export class NewActivityComponent implements OnInit {
         } else if (result.status === 200) {
           this.JsonReceptionCategoriasOrganizacion = result.data;
 
-          // Ejecutamos la COnsulta de las Organizaciones, segun el Tipo Seleccionado
-          this.organizacionesIdTipoListService(this._activityModel.idTipoOrganizacion);
+          // Ejecutamos la Consulta de las Organizaciones, segun el Tipo Seleccionado
+          if (this._activityModel.idPais == 0 || this._activityModel.idPais == null) {
+            this.organizacionesIdTipoListService(this._activityModel.idTipoOrganizacion);
+          } else {
+            this.organizacionesIdTipoIdPaisListService(this._activityModel.idTipoOrganizacion, this._activityModel.idPais)
+          }
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información de las Categorias de Organizacion', JSON.stringify(error));
+        this.showToast('error', 'Error al Obtener la Información de las Categorias de Organizacion', JSON.stringify(error.message));
       },
     );
   } // FIN | tiposOrganizacionListService
@@ -663,7 +664,6 @@ export class NewActivityComponent implements OnInit {
     this._listasComunesService.getAllPaises().subscribe(
       result => {
         if (result.status !== 200) {
-          // console.log(result.status);
           this.showToast('error', 'Error al Obtener la Información de los Paises', result.message);
         } else if (result.status === 200) {
           this.JsonReceptionPaises = result.data;
@@ -679,8 +679,7 @@ export class NewActivityComponent implements OnInit {
         }
       },
       error => {
-        // console.log(<any>error);
-        this.showToast('error', 'Error al Obtener la Información de los Paises', error);
+        this.showToast('error', 'Error al Obtener la Información de los Paises', JSON.stringify(error.message));
       },
     );
   } // FIN | paisesAllListService
@@ -695,24 +694,39 @@ export class NewActivityComponent implements OnInit {
   * del Formulario de Actividad llamando a la API
   ****************************************************************************/
   private organizacionesAllListService() {
+    // Resetea los valores Previos
+    this._activityModel.idTipoOrganizacion = 0;
+    this._activityModel.idCatOrganizacion = 0;
+    this.JsonReceptionCategoriasOrganizacion = null;
+    this.dropdownList = [];
+    this.selectedItems = [];
+    this.selectedItemsPais = [];
+
+    // Invoca el Servicio de la Clase
     this._listasComunesService.getAllOrganizaciones().subscribe(
       result => {
         if (result.status !== 200) {
-          // console.log(result.status);
+          this.dropdownList = [];
+          this.selectedItems = [];
+
           this.showToast('error', 'Error al Obtener la Información de las Organizaciones', result.message);
         } else if (result.status === 200) {
           this.JsonReceptionAllOrganizaciones = result.data;
-          this.JsonReceptionAllOrganizacionesData = JSON.stringify(this.JsonReceptionAllOrganizaciones);
-          // console.log(JSON.stringify(this.JsonReceptionAllOrganizaciones));
 
-          // Cargamos el compoenete de AutoCompletar
-          this.dataService = this.completerService.local(this.JsonReceptionAllOrganizaciones, 'descOrganizacion',
-            'descOrganizacion');
+          // Asignacion de los Valores del Json al Select
+          this.dropdownList = this.JsonReceptionAllOrganizaciones.map((item) => {
+            return {
+              id: item.idOrganizacion,
+              itemName: item.descOrganizacion,
+              nombreTipoOrganizacion: item.idTipoOrganizacion.descTipoOrganizacion,
+              descPais: item.idPaisOrganizacion.descPais,
+              inicialesOrganizacion: item.inicalesOrganizacion,
+            }
+          })
         }
       },
       error => {
-        // console.log(<any>error);
-        this.showToast('error', 'Error al Obtener la Información de las Organizaciones', error);
+        this.showToast('error', 'Error al Obtener la Información de las Organizaciones', JSON.stringify(error.message));
       },
     );
   } // FIN | organizacionesAllListService
@@ -725,9 +739,9 @@ export class NewActivityComponent implements OnInit {
   * Proyecto o Actividad
   * Params: codSecuencia
   ******************************************************/
-  protected getSecuenciaListService(codSecuencia: string) {
+  protected getSecuenciaListService(idSecuencia: number) {
     // Envia la Secuencia a Buscar
-    this._listasComunesService.getSecuenciaActividad(codSecuencia).subscribe(
+    this._listasComunesService.getSecuenciaIdActividad(idSecuencia).subscribe(
       result => {
         if (result.status !== 200) {
           this.showToast('error', 'Error al Obtener la Información de la Secuencia', JSON.stringify(result.message));
@@ -735,8 +749,8 @@ export class NewActivityComponent implements OnInit {
           this.secuenciaDeActividad = result.data;
 
           // Componemos la Secuencia a Generar
-          const iniHND: string = 'HND-';
-          this._activityModel.codigoActividad = iniHND + (Number(this.secuenciaDeActividad.valor2));
+          const prefixHND: string = 'HND-';
+          this._activityModel.codigoActividad = prefixHND + (Number(this.secuenciaDeActividad.valor2));
         }
       },
       error => {
@@ -766,7 +780,8 @@ export class NewActivityComponent implements OnInit {
         if (result.status !== 200) {
           this.showToast('error', 'Error al Actualizar la Información de la Secuencia', JSON.stringify(result.message));
         } else if (result.status === 200) {
-          // Nada
+          // Ejecuta el Llenado de la Planificacion
+          // this.newActividadPlanificacion();
         }
       },
       error => {
@@ -784,7 +799,7 @@ export class NewActivityComponent implements OnInit {
   * Objetivo: Buscar las Organizaciones segun el Filtro Aplicado, Tipo, Categoria
   * y Pais de Organizacion, en Formulario de Actividad llamando a la API
   ****************************************************************************/
-  private organizacionesIdTipoIdPaisListService(idTipoOrganizacionSend: number, idCatOrganizacion: number, idPais: number) {
+  private organizacionesIdTipoIdPaisListService(idTipoOrganizacionSend: number, idPais: number) {
     // Condicion para evaluar que opcion se pulsa
     this._listasComunesService.getIdTipoIdPaisOrganizaciones(idTipoOrganizacionSend, idPais).subscribe(
       result => {
@@ -822,10 +837,51 @@ export class NewActivityComponent implements OnInit {
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', JSON.stringify(error));
+        this.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', JSON.stringify(error.message));
       },
     );
   } // FIN | organizacionesIdTipoIdPaisListService
+
+
+  /****************************************************************************
+  * Funcion: organizacionesIdTipoIdPaisIdCategoriaListService
+  * Object Number: 016
+  * Fecha: 15-10-2018
+  * Descripcion: Method organizacionesIdTipoIdPaisIdCategoriaListService of the Class
+  * Objetivo: Buscar las Organizaciones segun el Filtro Aplicado, Tipo, Categoria
+  * y Pais de Organizacion, en Formulario de Actividad llamando a la API
+  ****************************************************************************/
+  private organizacionesIdTipoIdPaisIdCategoriaListService(idTipoOrganizacionSend: number, idPais: number, idCatOrganizacion: number) {
+    // Condicion para evaluar que opcion se pulsa
+    this._listasComunesService.getIdTipoIdPaisIdCategoriaOrganizaciones(idTipoOrganizacionSend, idPais, idCatOrganizacion).subscribe(
+      result => {
+        if (result.status !== 200) {
+          // Resultados del Error
+          // Cargamos el compoenete de AutoCompletar
+          this.dropdownList = [];
+          this.selectedItems = [];
+          this.JsonReceptionTipoPaisCategoriaOrganizacionesData = null;
+
+          this.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', result.message);
+        } else if (result.status === 200) {
+          this.JsonReceptionTipoPaisCategoriaOrganizacionesData = result.data;
+          // Asignacion de los Valores del Json al Select
+          this.dropdownList = this.JsonReceptionTipoPaisCategoriaOrganizacionesData.map((item) => {
+            return {
+              id: item.idOrganizacion,
+              itemName: item.descOrganizacion,
+              nombreTipoOrganizacion: item.idTipoOrganizacion.descTipoOrganizacion,
+              descPais: item.idPaisOrganizacion.descPais,
+              inicialesOrganizacion: item.inicalesOrganizacion,
+            }
+          })
+        }
+      },
+      error => {
+        this.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', JSON.stringify(error));
+      },
+    );
+  } // FIN | organizacionesIdTipoIdPaisIdCategoriaListService
 
 
   /****************************************************************************
@@ -851,7 +907,6 @@ export class NewActivityComponent implements OnInit {
           this.JsonReceptionPaisOrganizacionesData = result.data;
 
           // Asignacion de los Valores del Json al Select
-          // console.log('Data ' + JSON.stringify(this.JsonReceptionPaisOrganizacionesData));
           this.dropdownList = this.JsonReceptionPaisOrganizacionesData.map((item) => {
             return {
               id: item.idOrganizacion,
@@ -966,7 +1021,6 @@ export class NewActivityComponent implements OnInit {
       // this.JsonIdInternaOrganizacion.pdfDocumento = "";
       // Ejecutamos la Fucnion que Borra el Archivo desde le Servidor
       // this.borrarDocumentoServer(codDocumentoIn, extDocumentoIn);
-      // console.log(this.JsonIdInternaOrganizacion);
     }
   } // FIN deleteRowHomeForm
 
@@ -994,7 +1048,6 @@ export class NewActivityComponent implements OnInit {
             return -1;
           } else {
             // Ingresa el primer Item del json
-            // console.log(this._activityModel.descTipoOrganizacion);
             this.JsonIdInternaOrganizacion.push({
               'descTipoOrganizacion': this._activityModel.descTipoOrganizacion,
               'descPaisOrganizacion': this._activityModel.descPaisOrganizacion,
@@ -1022,7 +1075,12 @@ export class NewActivityComponent implements OnInit {
   * Existe, y no permitir su ingreso nuevamente
   * Objetivo: Validacion de Id Interna por Codigo
   ****************************************************************************/
-  newActivity() {
+  async newActivity() {
+    // Creacion del Codigo de la Actividad
+    this.getSecuenciaListService(1);
+
+    await delay(100);
+
     // Seteo de las variables del Model al json de Java
     this._activityModel.idEstadoActivity = { idEstado: this._activityModel.idEstado };
     this._activityModel.idEspacioTrabajoActivity = { idEspacioTrabajo: this._activityModel.idEspacioTrabajo };
@@ -1035,15 +1093,12 @@ export class NewActivityComponent implements OnInit {
     this._activityModel.idOrganizacionActivity = { idOrganizacion: this._activityModel.idOrganizacion };
     this._activityModel.idUsuarioCreador = { idUsuario: this.JsonReceptionUserDetail.idUsuario };
 
-    // Creacion del Codigo de la Actividad
-    this.generateCodeActivity();
-
     // Validamos los Campos enviados
     this._activityValidateFormService.validateFormActivity(this._activityModel);
     const responseData: any = this._activityValidateFormService.responseData;
 
     if (responseData.error === true) {
-      this.showToast('error', 'Error al Ingresar la Información de la Actividad', responseData.msg);
+      this.showToast('error', 'Error al Ingresar la Información del Proyecto', responseData.msg);
       return -1;
     }
 
@@ -1051,27 +1106,29 @@ export class NewActivityComponent implements OnInit {
     this._activityService.newActivityGeneral(this._activityModel).subscribe(
       response => {
         if (response.status !== 200) {
-          this.showToast('error', 'Error al Ingresar la Información de la Actividad', response.message);
+          this.showToast('error', 'Error al Ingresar la Información del Proyecto', response.message);
         } else if (response.status === 200) {
           // Verificamos que la Actividad no Exista en la BD
           if (response.find === true) {
-            this.showToast('error', 'Error al Ingresar la Información de la Actividad', response.message);
+            this.showToast('error', 'Error al Ingresar la Información del Proyecto', response.message);
           } else {
-            this.showToast('default', 'La Información de la Actividad, se ha ingresado con exito', response.message);
+            this.showToast('default', 'La Información del Proyecto, se ha ingresado con exito', response.message);
 
             // Actualizamos la Siguiente Secuencia
+            // Ejecuta el Llenado de la Planificacion
+            this.newActividadPlanificacion();
+
             this.updateSecuenciaService(this.JsonReceptionUserDetail.idUsuario, 1);
 
             // Carga la tabla Nuevamente
             this.resetActivity();
-
           }
         }
       },
       error => {
         // Redirecciona al Login
         // alert('Error en la petición de la API ' + <any>error);
-        this.showToast('error', 'Ha ocurrido un Error al Registrar la información del Proyecto, por favor verifica que todo este bien!!', <any>error);
+        this.showToast('error', 'Ha ocurrido un Error al Registrar la información del Proyecto, por favor verifica que todo este bien!!', JSON.stringify(error.message));
       },
     );
     // Return
@@ -1095,19 +1152,79 @@ export class NewActivityComponent implements OnInit {
     // Reinciamos el Text de Autocomplete de Organizaciones
     this.dataService = null;
     this.dropdownList = [];
+    this.JsonReceptionCategoriasOrganizacion = null;
   } // FIN resetActivity
 
 
   /****************************************************************************
-  * Funcion: generateCodeActivity
+  * Funcion: newActividadPlanificacion
   * Object Number: 021
-  * Fecha: 18-01-2019
-  * Descripcion: Method que Genera el Codigo de la Activiades
-  * Objetivo: Generar Codigo de la Actividad
+  * Fecha: 24-01-2019
+  * Descripcion: Method que Genera la Planificacion de la Actividad
+  * Objetivo: Generar Planificacion de la Actividad
   ****************************************************************************/
-  generateCodeActivity() {
-    /* Llamado a la Funcion: 001, la cual obtiene el listado de la Secuencia
-     que nesesita el Formulario de Actividades */
-    this.getSecuenciaListService('NEW-ACT');
-  } // FIN | generateCodeActivity
+  newActividadPlanificacion() {
+    // Seteamos los valores del Modelo de Planificacion a Enviar
+    this._activityPlanificacionModel.codigoActividad = this._activityModel.codigoActividad;
+
+    console.log('Datos de ' + JSON.stringify(this._activityPlanificacionModel));
+
+    // Ejecutamos el Recurso del EndPoint
+    this._activityService.newActivityPlanificacion(this._activityModel).subscribe(
+      response => {
+        if (response.status !== 200) {
+          this.showToast('error', 'Error al Ingresar la Información de la Planificacion del Proyecto', response.message);
+        } else if (response.status === 200) {
+          // Verificamos que la Actividad no Exista en la BD
+          this.showToast('default', 'La Información de la Planificacion del Proyecto, se ha ingresado con exito', response.message);
+          // Carga la tabla Nuevamente
+          // this.resetActivity();
+        }
+      },
+      error => {
+        // Informacion del Error que se capturo de la Secuencia
+        this.showToast('error', 'Ha ocurrido un Error al Registrar la información de Planificcio del Proyecto, por favor verifica que todo este bien!!', JSON.stringify(error.message));
+      },
+    );
+    // Return
+  } // FIN | newActividadPlanificacion
+
+
+
+  /****************************************************************************
+  * Funcion: onDateChanged
+  * Object Number: 022
+  * Fecha: 28-01-2019
+  * Descripcion: Method que Genera las fechas de Planificacion y las asigan al
+  * Modelo de la Clase
+  * Objetivo: Generar las Fechas de Planificacion al Modelo
+  * @param event
+  ****************************************************************************/
+  onDateChanged(event: IMyDateModel, paraEvalDate: number) {
+    // event properties are: event.date, event.jsdate, event.formatted and event.epoc
+    console.log('onDateChanged(): ', event.date, ' - jsdate: ', new Date(event.jsdate).toLocaleDateString(), ' - formatted: ', event.formatted, ' - epoc timestamp: ', event.epoc);
+    switch (paraEvalDate) {
+      case 1:
+        this._activityPlanificacionModel.fechaFirma = event.jsdate;
+        console.log('Fecha de Firma ' + JSON.stringify(this._activityPlanificacionModel.fechaFirma))
+        break;
+      case 2:
+        this._activityPlanificacionModel.fechaEfectividad = event.jsdate;
+        console.log('Fecha de Efectividad ' + JSON.stringify(this._activityPlanificacionModel.fechaEfectividad))
+        break;
+      case 3:
+        this._activityPlanificacionModel.fechaCierre = event.jsdate;
+        console.log('Fecha de Cierre ' + JSON.stringify(this._activityPlanificacionModel.fechaCierre))
+        break;
+      case 4:
+        this._activityPlanificacionModel.fechaPropuestaFinalizacion = event.jsdate;
+        console.log('Fecha de fechaPropuestaFinalizacion ' + JSON.stringify(this._activityPlanificacionModel.fechaPropuestaFinalizacion))
+        break;
+      case 5:
+        this._activityPlanificacionModel.fechaFinalizacion = event.jsdate;
+        console.log('Fecha de fechaFinalizacion ' + JSON.stringify(this._activityPlanificacionModel.fechaFinalizacion))
+        break;
+    }
+    // FIN | onDateChanged
+  }
 }

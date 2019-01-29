@@ -265,6 +265,13 @@ export class ListEndPointsService {
         groupEndPoint: 'organizacionesGroup',
         descEndPoint: 'Ingresar la Categoria de Organizacion',
       },
+      findByIdTipoPaisCategoriaOrganizacion: {
+        id: 20,
+        nameEndpoint: 'FindByIdTipoPaisCategoriaOrganizacion',
+        urlEndPoint: '/organizaciones/findByIdTipoPaisCategoriaOrganizacion/',
+        groupEndPoint: 'organizacionesGroup',
+        descEndPoint: 'Busca la Organizacion con el IdTipo, IdPais y IdCategoria de Organizacion , de parametro',
+      },
     }, // Modulo de Mantenimientos Genericos
     endPointMantGenericos: {
       listAllPaises: {
@@ -372,6 +379,14 @@ export class ListEndPointsService {
         params: '{idActivity}',
         groupEndPoint: 'actividadesCRUDGroup',
         descEndPoint: 'Inhabilita en la API, una Actividad con sus Datos Generales',
+      },
+      newActivityPlanificacion: {
+        id: 4,
+        nameEndpoint: 'Agregar Planificacion a Proyecto',
+        urlEndPoint: '/mant-actividades/planificacion/new',
+        params: '{jsonActivityPlanificacion}',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Agregar la Planificacion al proyecto recien Ingresado',
       },
     }, // modulo de mantenimientos generico de usuarios
     endPointMantGenericosUsuario: {

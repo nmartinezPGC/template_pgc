@@ -65,9 +65,10 @@ export class ActivityModel {
         // Campos de Auditoria
         public idUsuarioCreador: { idUsuario: number },
         public idUsuario: number,
+        public activo: boolean,
 
         // Fechas de Planificacion
-        public fechaFirma: Date,
+        public fechaFirma: { date: null },
         public fechaEfectividad: Date,
         public fechaCierre: Date,
         public fechaPropuestaFinalizacion: Date,
