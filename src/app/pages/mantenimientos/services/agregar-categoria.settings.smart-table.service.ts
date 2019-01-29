@@ -34,7 +34,7 @@ export class ConfigSmartTableService {
         switch (smartNormal) {
           case 1:
             const settings = {
-              hideSubHeader : false,
+              hideSubHeader: false,
               add: {
                 addButtonContent: '<i class="nb-plus"></i>',
                 createButtonContent: '<i class="nb-checkmark"></i>',
@@ -51,17 +51,17 @@ export class ConfigSmartTableService {
                 confirmDelete: true,
               },
               columns: {
-                codTipoOrganizacion: {
-                  title: 'Codigo de Tipo',
+                codCatOrganizacion: {
+                  title: 'Codigo de categoria de organizacion',
                   type: 'string',
                   editable: false,
                 },
-                acronimoTipoOrganizacion: {
-                  title: 'acronimo',
+                acronimoCatOrganizacion: {
+                  title: 'acronimo categoria orgnzacion',
                   type: 'string',
                 },
-                descTipoOrganizacion: {
-                  title: 'Descripcion',
+                descCatOrganizacion: {
+                  title: 'Descripcion catg',
                   type: 'string',
                 },
                 // Json anidado para lograr capturar el valor de una entidad     ///https://github.com/akveo/ngx-admin/issues/1827
@@ -69,11 +69,11 @@ export class ConfigSmartTableService {
                 activo: {
                   title: 'Habilitado',
                   type: 'list',
-                // valuePrepareFunction: (cell: any, row: any) => row.activado,
+                  // valuePrepareFunction: (cell: any, row: any) => row.activado,
                   editor: {
                     type: 'list',
                     config: {
-                      list: [{value: 'true', title: 'Activo'}, {value: 'false', title: 'Inactivo'}],
+                      list: [{ value: 'true', title: 'Activo' }, { value: 'false', title: 'Inactivo' }],
                     },
                   },
                 },
