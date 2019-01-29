@@ -18,9 +18,9 @@ export class AgregarCategoriaModel {
         public horaCreacion: Date,
         public idCatOrganizacion: number,
 
-        // mapeo de la variables que estan relacionadas con la gtabla
+        // mapeo de la variables que estan relacionadas con la gtabla hola
         public idTipoOrganizacionCat: { idTipoOrganizacion: number },
-        public descTipoOrganizacion : string,
+        public descTipoOrganizacion: string,
         public idTipoOrganizacion: number,
         public codTipoOrganizacion: string,
     ) { }
