@@ -28,7 +28,7 @@ export class ConfigSmartTableService {
   * Objetivo: Establecer las configuraciones para la Smart Table de usuarios
   ****************************************************************************/
 
-    configSmartTable(smartTable: string, smartNormal: number, array: any) {
+    configSmartTable(smartTable: string, smartNormal: number, arrayPais: any, arrayEstado: any, arrayTipo: any) {
         switch (smartTable) {
             case 'userSmart':
                 switch (smartNormal) {
@@ -81,13 +81,13 @@ export class ConfigSmartTableService {
                                     title: 'Email',
                                     type: 'string',
                                 },
-                                idTipoUsuario: {
+                                idTipo: {
                                     valuePrepareFunction: (cell: any, row: any) => row.idTipoUsuario.descTipo,
                                     title: 'Rol de Usuario',
                                     editor: {
                                         type: 'list',
                                         config: {
-                                            list: array,
+                                            list: arrayTipo,
                                         },
                                     },
                                 },
@@ -97,19 +97,23 @@ export class ConfigSmartTableService {
                                     editor: {
                                         type: 'list',
                                         config: {
-                                            list: array,
+                                            list: arrayPais,
                                         },
                                     },
                                 },
-                                idEstadoUsuario: {
+                                idEstado: {
                                     valuePrepareFunction: (cell: any, row: any) => row.idEstadoUsuario.descEstado,
                                     title: 'Estado Usuario',
                                     editor: {
                                         type: 'list',
                                         config: {
-                                            list: array,
+                                            list: arrayEstado,
                                         },
                                     },
+                                },
+                                activo: {
+                                    title: 'Activo',
+                                    type: 'string',
                                 },
                             },
                         };
