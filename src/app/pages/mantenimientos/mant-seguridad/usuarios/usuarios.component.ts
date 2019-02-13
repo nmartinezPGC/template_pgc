@@ -17,6 +17,7 @@ import { Router } from '@angular/router';
 import { UsuarioModel } from '../../models/usuarios.model';
 import { ConfigSmartTableService } from '../../services/usuarios.settings.smart-table.service';
 import { ListasComunesService } from '../../../common-list/services/listas-comunes.service';
+import { delay } from 'q';
 
 // Varieble Jquey
 declare var jquery: any;
@@ -57,8 +58,12 @@ export class UsuariosComponent implements OnInit {
   data: any;
   listArrayData3: any
   data1: any;
+  data2: any;
+  data3: any;
   arrayTipoUsuarios: any
   arrayEstados: any
+  arrayPaises: any
+  responseStatus: number
 
   public onSaveConfirm(id) {
     alert('id selecionado ' + id)
@@ -132,7 +137,7 @@ export class UsuariosComponent implements OnInit {
     private _toasterService: ToasterService,
     public _configSmartTableService: ConfigSmartTableService, public _listasComunesService: ListasComunesService) {
     // Llamamos a la Funcion de Configuracion de las Smart Table
-    this._configSmartTableService.configSmartTable('userSmart', 1, null);
+    this._configSmartTableService.configSmartTable('userSmart', 1, null, null, null);
     this.settings = this._configSmartTableService.settings;
     /* Llamado a la Funcion: 007, la cual obtiene el detalle da la Info.
      del Usuario */
@@ -158,6 +163,7 @@ export class UsuariosComponent implements OnInit {
     this.estadoService();
     // inicializa la lista de paises de la base de datos
     this.paisesAllListService();
+
 
     /**
     * Configuracion Inicial del Dropdown List
@@ -234,12 +240,13 @@ export class UsuariosComponent implements OnInit {
  * Objetivo: crear nuevos usuarios.
  * Autor: Edgar Ramirez
  ****************************************************************************/
-  private newUsuarioService() {
+  async newUsuarioService() {
     // Seteo de las variables del Model al json de Java
     this._usuarioModel.idTipoUsuario = { idTipo: this._usuarioModel.idTipo };
     this._usuarioModel.idPaisUsuario = { idPais: this._usuarioModel.idPais };
     this._usuarioModel.idEstadoUsuario = { idEstado: this._usuarioModel.idEstado };
-    // this.validateUsuarios(this._usuarioModel);
+    this.validateUsuarios(this._usuarioModel);
+
     const responsedataExt: any = this.responsedata;
     // console.log(this._usuarioModel);
 
@@ -247,6 +254,25 @@ export class UsuariosComponent implements OnInit {
       this.showToast('error', 'Error al ingresar los datos', responsedataExt.msg);
       return -1;
     }
+
+    this.usuariosCodValidate();
+
+    await delay(100);
+
+    if (this.responseStatus === 200) {
+      this.showToast('error', 'Error ya existe el codigo del usuario', 'Intente con Otro');
+      return -1;
+    }
+
+    this.mailValidate();
+
+    await delay(100);
+
+    if (this.responseStatus === 200) {
+      this.showToast('error', 'Error ya existe el email del usuario', 'Intente con Otro');
+      return -1;
+    }
+
     // Ejecutamos el Recurso del EndPoint
     this._usuariosService.newUsuario(this._usuarioModel).subscribe(
       response => {
@@ -265,18 +291,6 @@ export class UsuariosComponent implements OnInit {
       error => {
         // Redirecciona al Login
         // alert('Error en la petición de la API ' + <any>error);
-        // this.showToast('error', 'Error al Ingresar la Información del Usuario', JSON.stringify(error.message));
-
-        // Borramos los datos del LocalStorage
-        // localStorage.removeItem('auth_app_token');
-        // localStorage.removeItem('identity');
-
-        // const redirect = '/auth/login';
-        // setTimeout(() => {
-        //   // Iniciativa Temporal
-        //   location.reload();
-        //   return this._router.navigateByUrl(redirect);
-        // }, 2000);
       },
     );
   } // FIN | newUsuarioService
@@ -306,12 +320,12 @@ export class UsuariosComponent implements OnInit {
           // Carga los Items para el List de la Smart table
           this.arrayTipoUsuarios = new Array();
 
-          // this.data1.forEach(element => {
-          //   this.arrayTipoUsuarios.push({ title: element['descTipo'], value: element['idTipo'] });
-          // });
-          // console.log("hola");
-          // this.settings.columns.descTipoUsuario.editor.config.list = this.arrayTipoUsuarios;
-          // this.settings = Object.assign({}, this.settings);
+          this.data1.forEach(element => {
+            this.arrayTipoUsuarios.push({ title: element['descTipo'], value: element['idTipo'] });
+          });
+          // console.log(this.arrayTipoUsuarios);
+          this.settings.columns.idTipo.editor.config.list = this.arrayTipoUsuarios;
+          this.settings = Object.assign({}, this.settings);
           // console.log(response.data);
         }
       },
@@ -356,17 +370,17 @@ export class UsuariosComponent implements OnInit {
           this.JsonReceptionEstados = response.data;
           // console.log(this.JsonReceptionEstados);
           // instancia data con los tipos de usuarios;
-          // this.data2 = this.JsonReceptionEstados;
+          this.data2 = this.JsonReceptionEstados;
           // console.log(this.data1);
           // Carga los Items para el List de la Smart table
-          // this.arrayEstados = new Array();
+          this.arrayEstados = new Array();
           // console.log(this.data2);
-          // this.data2.forEach(element => {
-          //   this.arrayEstados.push({ title: element['descEstado'], value: element['idEstado'] });
-          // });
+          this.data2.forEach(element => {
+            this.arrayEstados.push({ title: element['descEstado'], value: element['idEstado'] });
+          });
           // console.log("hola");
-          // this.settings.columns.descTipoUsuario.editor.config.list = this.arrayTipoUsuarios;
-          // this.settings = Object.assign({}, this.settings);
+          this.settings.columns.idEstado.editor.config.list = this.arrayEstados;
+          this.settings = Object.assign({}, this.settings);
           // console.log(response.data);
         }
       },
@@ -407,6 +421,16 @@ export class UsuariosComponent implements OnInit {
         } else if (result.status === 200) {
           this.JsonReceptionPaises = result.data;
 
+          this.data3 = this.JsonReceptionPaises;
+          this.arrayPaises = new Array();
+
+          this.data3.forEach(element => {
+            this.arrayPaises.push({ title: element['descPais'], value: element['idPais'] });
+          });
+
+          this.settings.columns.idPais.editor.config.list = this.arrayPaises;
+          this.settings = Object.assign({}, this.settings);
+
           // Setea la Lista del Dropdown List
           this.dropdownListPais = this.JsonReceptionPaises.map((item) => {
             return {
@@ -427,7 +451,7 @@ export class UsuariosComponent implements OnInit {
 
   /****************************************************************************
   * Funcion: OnItemDeSelect
-  * Object Number: 00
+  * Object Number: 009
   * Fecha: 24-01-2019
   * Descripcion: Method para Seleccionar Items de Pais para usarlo usuarios
   * Objetivo: enviar al Json de ID'Intermas la información que ocupa la API
@@ -441,5 +465,300 @@ export class UsuariosComponent implements OnInit {
 
     // this.organizacionesIdTipoIdPaisListService(this._activityModel.idCatOrganizacion, 0, this._activityModel.idPais)
   } // FIN | OnItemDeSelect
+
+
+  /* **************************************************************************/
+  /* ****************** Funciones Propias de la Clase *************************/
+
+  /****************************************************************************
+  * Funcion: usuariosDatailsService
+  * Object Number: 010
+  * Fecha: 29-01-2019
+  * Descripcion: Method usuariosDatailsService of the Class
+  * Objetivo: usuariosDatailsService detalle del Usuario llamando a la API
+  * Autor: Edgar Ramirez
+  ****************************************************************************/
+  private usuariosDatailsService() {
+    this._usuariosService.getAllUsuarios().subscribe(
+      response => {
+        if (response.status !== 200) {
+          // console.log(response.status);
+          // console.log(response.message);
+          this.showToast('error', 'Error al Obtener la Información del Usuario', response.message);
+        } else if (response.status === 200) {
+          // this.productos = result.data;
+          // console.log(result.status);
+          this.JsonReceptionUsuarios = response.data;
+          this.data = this.JsonReceptionUsuarios;
+          // console.log(response.data);
+        }
+      },
+      error => {
+        // Redirecciona al Login
+        alert('Error en la petición de la API ' + <any>error);
+
+        // Borramos los datos del LocalStorage
+        localStorage.removeItem('auth_app_token');
+        localStorage.removeItem('identity');
+
+        const redirect = '/auth/login';
+        setTimeout(() => {
+          // Iniciativa Temporal
+          location.reload();
+          return this._router.navigateByUrl(redirect);
+        }, 2000);
+      },
+    );
+  } // FIN | usuariosDatailsService
+
+
+  /****************************************************************************
+ * Funcion: updateUsuarioService
+ * Object Number: 011
+ * Fecha: 29-01-2019
+ * Descripcion: Method updateUsuarioService
+ * Objetivo: actualizar los usuarios existentes.
+ * Autor: Edgar Ramirez
+ ****************************************************************************/
+  private updateUsuarioService() {
+    // Seteo de las variables del Model al json de Java
+    this.validateUsuarios(this._usuarioModel);
+    const responsedataExt: any = this.responsedata;
+
+    if (responsedataExt.error === true) {
+      this.showToast('error', 'Error al actualizar los cambios', responsedataExt);
+      return -1;
+    }
+    // Ejecutamos el Recurso del EndPoint
+    this._usuariosService.usuarioUpdate(this._usuarioModel, this._usuarioModel.idUsuario).subscribe(
+      response => {
+        if (response.status !== 200) {
+          // console.log(response.status);
+          // console.log(response.message);
+          this.showToast('error', 'Error al actualizar los cambios', response.message);
+        } else if (response.status === 200) {
+          // console.log(result.status);
+          this.showToast('default', 'se actualizaron con exito los datos', response.message);
+          // console.log(response.data);
+          // Carga la tabla Nuevamente
+          this.usuariosDatailsService();
+        }
+      },
+      error => {
+        // Redirecciona al Login
+        // alert('Error en la petición de la API ' + <any>error);
+
+        // Borramos los datos del LocalStorage
+        /*localStorage.removeItem('auth_app_token');
+        localStorage.removeItem('identity');
+
+        const redirect = '/auth/login';
+        setTimeout(() => {
+          // Iniciativa Temporal
+          location.reload();
+          return this._router.navigateByUrl(redirect);
+        }, 2000);*/
+      },
+    );
+  } // FIN | updateUsuarioService
+
+
+  onSaveConfirm1(event) {
+    // Confirmacion del Update
+    if (window.confirm('seguro que quiere actualizar los cambios?')) {
+      // console.log(event.newData);
+      // Seteo de las variables del Model al json de Java
+      this._usuarioModel.idUsuario = event.newData.idUsuario;
+
+      this._usuarioModel.activo = event.newData.activo;
+      this._usuarioModel.apellido1Usuario = event.newData.apellido1Usuario;
+      this._usuarioModel.apellido2Usuario = event.newData.apellido2Usuario;
+      this._usuarioModel.codUsuario = event.newData.codUsuario;
+
+      this._usuarioModel.idEstado = event.newData.idEstado;
+      this._usuarioModel.idEstadoUsuario = { idEstado: this._usuarioModel.idEstado };
+
+      this._usuarioModel.idPais = event.newData.idPais;
+      this._usuarioModel.idPaisUsuario = { idPais: this._usuarioModel.idPais };
+
+      this._usuarioModel.idTipo = event.newData.idTipo;
+      this._usuarioModel.idTipoUsuario = { idTipo: this._usuarioModel.idTipo };
+
+      this._usuarioModel.inicialesUsuario = event.newData.inicialesUsuario;
+      this._usuarioModel.nombre1Usuario = event.newData.nombre1Usuario;
+      this._usuarioModel.nombre2Usuario = event.newData.nombre2Usuario;
+
+      // validamos campos
+
+      if (this.responsedata.error === true) {
+
+      }
+      // console.log('Tipo de Perfil ' + JSON.stringify(this._perfilModel));
+      // Ejecutamos las Funcion
+      this.updateUsuarioService();
+      event.confirm.resolve(event.newData);
+    } else {
+      event.confirm.reject();
+    }
+  } // fin de onSaveConfirm1
+
+
+    /**
+   * onDeleteConfirm
+   * @param event
+   */
+  onDeleteConfirm(event) {
+    if (window.confirm('Esta seguro en Inhabilitar este usuario?')) {
+      this._usuarioModel.idUsuario = event.data.idUsuario;
+
+      this.deleteUsuario();
+      event.confirm.resolve(event.newData);
+    } else {
+      event.confirm.reject();
+    }
+  }
+
+
+  /****************************************************************************
+ * Funcion: usuariosCodValidate
+ * Object Number: 012
+ * Fecha: 31-01-2019
+ * Descripcion: Method usuariosCodValidate of the Class
+ * Objetivo: usuariosCodValidate detalle de los codigos de usuario llamando a la API
+ * Autor: Edgar Ramirez
+ ****************************************************************************/
+  private usuariosCodValidate() {
+    // console.log('Entro a la Funcion');
+    this._usuariosService.usuarioValidate(this._usuarioModel.codUsuario).subscribe(
+      response => {
+
+        if (response.status !== 200) {
+          // console.log(response.status);
+          // console.log("ingreso con exito");
+          this.responseStatus = 0;
+          // this.showToast('error', 'Error al Obtener la Información del usuario', response.message);
+        } else if (response.status === 200) {
+          // console.log("el codigo ya existe " + JSON.stringify( response));
+          this.responseStatus = response.status;
+          // console.log(this.responseStatus);
+        }
+      },
+      error => {
+        // Redirecciona al Login
+        alert('Error en la petición de la API ' + <any>error);
+      },
+    );
+    return this.responseStatus;
+  } // FIN | usuariosCodValidate
+
+
+  /****************************************************************************
+* Funcion: mailValidate
+* Object Number: 013
+* Fecha: 31-01-2019
+* Descripcion: Method mailValidate of the Class
+* Objetivo: mailValidate detalle de los codigos de usuario llamando a la API
+* Autor: Edgar Ramirez
+****************************************************************************/
+  private mailValidate() {
+    // console.log('Entro a la Funcion');
+    this._usuariosService.mailValidate(this._usuarioModel.emailUsuario).subscribe(
+      response => {
+
+        if (response.status !== 200) {
+          this.responseStatus = 0;
+
+        } else if (response.status === 200) {
+          this.responseStatus = response.status;
+        }
+      },
+      error => {
+        // Redirecciona al Login
+        alert('Error en la petición de la API ' + <any>error);
+      },
+    );
+    return this.responseStatus;
+  } // FIN | mailValidate
+
+
+  /****************************************************************************
+ * Funcion: validateUsuarios
+ * Object Number: 014
+ * Fecha: 31-01-2019
+ * Descripcion: Method para validar que los campos esten llenos
+ * Objetivo: validateUsuarios  procurar que llegue a la base de datos toda la informacion de usuarios
+ ****************************************************************************/
+  private validateUsuarios(usuarioModelIn: any) {
+    // seteo el modelo para que los campos sean verificados
+    this.responsedata.error = false;
+    if (usuarioModelIn.nombre1Usuario === null || usuarioModelIn.nombre1Usuario === '') {
+      this.responsedata.msg = 'Debes ingresar el primer nombre del usuario';
+      this.responsedata.error = true;
+    } else if (usuarioModelIn.nombre2Usuario === null || usuarioModelIn.nombre2Usuario === '') {
+      this.responsedata.msg = 'Desbes ingresar el segundo nombre del usuario';
+      this.responsedata = true;
+    } else if (usuarioModelIn.apellido1Usuario === null || usuarioModelIn.apellido1Usuario === '') {
+      this.responsedata.msg = 'Debes ingresar el primer apellido del usuario';
+      this.responsedata = true;
+    } else if (usuarioModelIn.apellido2Usuario === null || usuarioModelIn.apellido2Usuario === '') {
+      this.responsedata.msg = 'Debes ingresar el segundo apellido del usuario';
+      this.responsedata = true;
+    } else if (usuarioModelIn.inicialesUsuario === null || usuarioModelIn.inicialesUsuario === '') {
+      this.responsedata.msg = 'Debes ingresar las iniciales del usuario';
+      this.responsedata = true;
+    } else if (usuarioModelIn.codUsuario === null || usuarioModelIn.codUsuario === '') {
+      this.responsedata.msg = 'Debes ingresar el codigo del usuario';
+      this.responsedata = true;
+    } else if (usuarioModelIn.emailUsuario === null || usuarioModelIn.emailUsuario === '') {
+      this.responsedata.msg = 'Debes ingresar el email del usuario';
+      this.responsedata = true;
+    } else if (usuarioModelIn.passwordUsuario === null || usuarioModelIn.passwordUsuario === '') {
+      this.responsedata.msg = 'Debes ingresar el segundo apellido del usuario';
+      this.responsedata = true;
+    } else if (usuarioModelIn.descPais === null || usuarioModelIn.descPais === '') {
+      this.responsedata.msg = 'Debes ingresar el pais del usuario';
+      this.responsedata = true;
+    } else if (usuarioModelIn.descEstado === null || usuarioModelIn.descEstado === '') {
+      this.responsedata.msg = 'Debes ingresar el estado del usuario';
+      this.responsedata = true;
+    } else if (usuarioModelIn.descTipo === null || usuarioModelIn.descTipo === '') {
+      this.responsedata.msg = 'Debes ingresar el tipo de perfil del usuario';
+      this.responsedata = true;
+    }
+    return this.responsedata;
+  } // FIN | validateUsuarios
+
+
+    /****************************************************************************
+ * Funcion: deleteUsuario
+ * Object Number: 015
+ * Fecha: 01-02-2019
+ * Descripcion: Method deleteUsuario
+ * Objetivo: actualizar los usuarios existentes.
+ ****************************************************************************/
+private deleteUsuario(): void {
+  // Seteo de las variables del Model al json de Java
+
+  // Ejecutamos el Recurso del EndPoint
+  this._usuariosService.usuariodelete(this._usuarioModel.idUsuario).subscribe(
+    response => {
+      if (response.status !== 200) {
+        // console.log(response.status);
+        // console.log(response.message);
+        this.showToast('error', 'Error al actualizar los cambios', response.message);
+      } else if (response.status === 200) {
+        // console.log(result.status);
+        this.showToast('default', 'se actualizaron con exito los datos', response.message);
+        // console.log(response.data);
+        // Carga la tabla Nuevamente
+        this.usuariosDatailsService();
+      }
+    },
+    error => {
+      // Redirecciona al Login
+      alert('Error en la petición de la API ' + <any>error);
+    },
+  );
+} // FIN | deleteUsuario
 
 }

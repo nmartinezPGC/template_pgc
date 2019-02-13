@@ -1,6 +1,6 @@
 /**
- * @author David Pavon
- * @returns servicios de perfil
+ * @author Edgar Ramirez
+ * @returns servicios de usuarios
  * @name UsuarioService
  * @alias _usuarioService
  * @version 1.0.0
@@ -102,5 +102,79 @@ export class UsuarioService {
             params: { 'tokenApi': this.tokenHeader },
         });
     }// FIN | FND-00004
+
+
+    /****************************************************************************
+* Funcion: FND-00005
+* Fecha: 29-01-2019
+* Descripcion: Metodo que sirve para actualizar los usuarios
+* Params: { jsonUsuario, idUsuarioIn }
+****************************************************************************/
+    usuarioUpdate(jsonUsuario, idUsuarioIn: number): Observable<any> {
+        // Parametros del EndPoint
+        const paramsSend = jsonUsuario;
+        const idUsuario: number = idUsuarioIn;
+        // console.log('Parametros de Servicio ' + ' Modelo ' + JSON.stringify(paramsSend) + ' Where ' + idPerfil );
+        // Retorno de la Funcion
+        return this._http.put(this._systemEndPointsService.getEndPointService('mantGenericosUsuarioGroup', 4) + idUsuario, paramsSend, {
+            headers: this.headers,
+            params: { 'tokenApi': this.tokenHeader },
+        });
+    }// FIN | FND-00005
+
+
+    /****************************************************************************
+  * Funcion: FND-00006
+  * Fecha: 31-01-2019
+  * Descripcion: Metodo que sirve para verificar si existe un codigo en los usuarios
+  * Params: { jsonUsuario, idUsuarioIn }
+  ****************************************************************************/
+    usuarioValidate(codUsuarioIn: string): Observable<any> {
+        // Parametros del EndPoint
+        const codUsuario: string = codUsuarioIn;
+        // console.log('Parametros de Servicio ' + ' Modelo ' + JSON.stringify(codUsuario) + ' Where ' );
+        // Retorno de la Funcion
+        return this._http.get(this._systemEndPointsService.getEndPointService('mantGenericosUsuarioGroup', 5) + codUsuario, {
+            headers: this.headers,
+            params: { 'tokenApi': this.tokenHeader },
+        });
+    }// FIN | FND-00006
+
+
+    /****************************************************************************
+      * Funcion: FND-00007
+      * Fecha: 31-01-2019
+      * Descripcion: Metodo que sirve para verificar si existe un codigo en los usuarios
+      * Params: { jsonUsuario, idUsuarioIn }
+      ****************************************************************************/
+    mailValidate(mailUsuarioIn: string): Observable<any> {
+        // Parametros del EndPoint
+        const mailUsuario: string = mailUsuarioIn;
+        // console.log('Parametros de Servicio ' + ' Modelo ' + JSON.stringify(codUsuario) + ' Where ' );
+        // Retorno de la Funcion
+        return this._http.get(this._systemEndPointsService.getEndPointService('userGroup', 1) + mailUsuario, {
+            headers: this.headers,
+            params: { 'tokenApi': this.tokenHeader },
+        });
+    }// FIN | FND-00007
+
+
+    /****************************************************************************
+  * Funcion: FND-00008
+  * Fecha: 01-02-2019
+  * Descripcion: Metodo que sirve para inhabilitar los usuarios
+  * Params: { idUsuarioIn }
+  * Autor: Edgar Ramirez
+  ****************************************************************************/
+    usuariodelete(idUsuarioIn: number): Observable<any> {
+        // Parametros del EndPoint
+        const idUsuario: number = idUsuarioIn;
+        // console.log('Parametros de Servicio ' + ' Modelo ' + JSON.stringify(paramsSend) + ' Where ' + idPerfil );
+        // Retorno de la Funcion
+        return this._http.delete(this._systemEndPointsService.getEndPointService('mantGenericosUsuarioGroup', 6) + idUsuario, {
+            headers: this.headers,
+            params: { 'tokenApi': this.tokenHeader },
+        });
+    }// FIN | FND-00008
 
 }

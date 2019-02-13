@@ -472,6 +472,27 @@ export class ListEndPointsService {
         groupEndPoint: 'mantGenericosUsuarioGroup',
         descEndPoint: 'listar los tipo de usuarios',
       },
+      usuarioUpdate: {
+        id: 4,
+        nameEndpoint: 'Actualizar los usuarios',
+        urlEndPoint: '/usuarios/update/',
+        groupEndPoint: 'mantGenericosUsuarioGroup',
+        descEndPoint: 'Actualizar los usuarios',
+      },
+      usuarioValidate: {
+        id: 5,
+        nameEndpoint: 'Codigos usuarios',
+        urlEndPoint: '/usuarios/findByCod/',
+        groupEndPoint: 'mantGenericosUsuarioGroup',
+        descEndPoint: 'comparar codigos de los usuarios',
+      },
+      deleteUsuario: {
+        id: 6,
+        nameEndpoint: 'inhabilitar los usuarios',
+        urlEndPoint: '/usuarios/delete/',
+        groupEndPoint: 'mantGenericosUsuarioGroup',
+        descEndPoint: 'inhabilita los usuarios',
+      },
     },
   }
 } // FIN de Clase
