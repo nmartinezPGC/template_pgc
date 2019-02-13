@@ -36,13 +36,16 @@ export class ActivityValidateFormService {
     // Validamos que se ha Seleccionado los Filtros Previos a la ID Interna
     this.responseData.error = false;
     if (modeloActividad.nombreActividad === null || modeloActividad.nombreActividad === '' ) {
-      this.responseData.msg = 'Debes Ingresar el Nombre de la Actividad, para Continuar';
+      this.responseData.msg = 'Debes Ingresar el Nombre del Proyecto, para Continuar';
       this.responseData.error = true;
     } else if (modeloActividad.idEspacioTrabajo === null || modeloActividad.idEspacioTrabajo === 0) {
-      this.responseData.msg = 'Debes Seleccionar el Espacio de Trabajo en el que Ingresaras la Actividad, para Continuar';
+      this.responseData.msg = 'Debes Seleccionar el Espacio de Trabajo en el que Ingresaras el Proyecto, para Continuar';
       this.responseData.error = true;
     } else if (modeloActividad.idEstado === null || modeloActividad.idEstado === 0) {
-      this.responseData.msg = 'Debes Seleccionar el Estado de la Actividad, para Continuar';
+      this.responseData.msg = 'Debes Seleccionar el Estado del Proyecto, para Continuar';
+      this.responseData.error = true;
+    } else if (modeloActividad.fechaFirma === null || modeloActividad.fechaFirma === '') {
+      this.responseData.msg = 'Debes Seleccionar Fecha de Firma del Proyecto, para Continuar';
       this.responseData.error = true;
     } /*else if (modeloActividad.descripcionActividad === null || modeloActividad.descripcionActividad === '' ) {
       this.responseData.msg = 'Debes Ingresar la Descripción de la Actividad, para Continuar';

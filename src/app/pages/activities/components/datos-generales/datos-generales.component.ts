@@ -1,11 +1,12 @@
 /**
- * @author Nahum Martinez
- * @returns servicios de Actividades
- * @name NewActivityComponent
- * @alias _newActivityComponent
- * @version 1.0.0
- * @fecha 10/01/2019
- */
+* @author Nahum Martinez
+* @returns Componente de la Clase de Datos Generales
+* @name DatosGeneralesComponent
+* @alias _datosGeneralesComponent
+* @version 1.0.0
+* @fecha 08/02/2019
+*/
+
 import { Component, OnInit, ChangeDetectorRef, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -13,58 +14,40 @@ import { Router } from '@angular/router';
 import { CompleterData, CompleterService, CompleterItem } from 'ng2-completer';
 
 // Servicios que la Clase nesesitara para su funcionanmiento
-import { UserService } from '../../../@core/data/users.service'; // Servicio de Usuarios
-import { ListasComunesService } from '../../common-list/services/listas-comunes.service'; // Servicio de Lista de Comunes
+import { UserService } from '../../../../@core/data/users.service'; // Servicio de Usuarios
+import { ListasComunesService } from '../../../common-list/services/listas-comunes.service'; // Servicio de Lista de Comunes
 
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster'; // Servicio de Notificaciones
 import { LocalDataSource } from 'ng2-smart-table'; // DataLocal de Ejemplo para el JSON de envio
-import { ActivityConfigSmartTableService } from '../services/activity-config-smart-table.service';
+import { ActivityConfigSmartTableService } from '../../services/activity-config-smart-table.service';
 import { IMyDpOptions, IMyDateModel } from 'mydatepicker';
 import 'style-loader!angular2-toaster/toaster.css';
 // import { SmartTableService } from '../../../@core/data/smart-table.service'; // Servicio de la SmartTable de la API
 
 // Modelo y Servicios de la Clase Activiades
-import { ActivityPlanificacionModel } from '../models/model-planificacion-activity';
-import { ActivityModel } from '../models/model-activity'; // Modelo de Planificacion
-import { ActivityService } from '../services/service-activity.service';
-import { ActivityValidateFormService } from '../services/activity-validate-form.service';
+import { ActivityPlanificacionModel } from '../../models/model-planificacion-activity';
+import { ActivityModel } from '../../models/model-activity'; // Modelo de Planificacion
+import { ActivityService } from '../../services/service-activity.service';
+import { ActivityValidateFormService } from '../../services/activity-validate-form.service';
 import { delay } from 'q';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { ActivityIdInternaModel } from '../models/model-idinterna-activity';
 
 @Component({
-  selector: 'ngx-new-activity',
-  /*template: `
-    <nb-card>
-      <nb-card-body>
-        <nb-route-tabset [tabs]="tabs" fullWidth></nb-route-tabset>
-      </nb-card-body>
-    </nb-card>
-  `,*/
-  templateUrl: './new-activity.component.html',
-  styleUrls: ['./new-activity.component.scss', '../../components/notifications/notifications.component.scss'],
-  // changeDetection: ChangeDetectionStrategy.OnPush, // Se usa para Actualizar la Informacion con otro evento
+  selector: 'ngx-datos-generales',
+  templateUrl: './datos-generales.component.html',
+  styleUrls: ['./datos-generales.component.scss'],
   providers: [ToasterService, ActivityConfigSmartTableService, ActivityService, ActivityValidateFormService],
 })
-export class NewActivityComponent implements OnInit {
+export class DatosGeneralesComponent implements OnInit {
   /****************************************************************************
-  * Variables: Definicion de las Variables de la Clase
-  * Fecha: 16-08-2018
-  * Descripcion: variables que se usan en toda la Clase de forma publica y
-  * privada
-  * Objetivo: Tener el acceso a todas las variables de la Clase
-  ****************************************************************************/
+    * Variables: Definicion de las Variables de la Clase
+    * Fecha: 16-08-2018
+    * Descripcion: variables que se usan en toda la Clase de forma publica y
+    * privada
+    * Objetivo: Tener el acceso a todas las variables de la Clase
+    ****************************************************************************/
   // Manipulacion del DOM
-  @ViewChild('nombreActividad') mySelectnombreActividad: ElementRef;
-  @ViewChild('idInterna') mySelectIdInterna: ElementRef;
-
-  tabs: any[] = [
-    {
-      title: 'Users',
-      icon: 'nb-person',
-      route: './pages/activities/datos-generales',
-    }
-  ];
+  @ViewChild('idPais') mySelectPais: ElementRef;
 
   // Variables de Configuracion del Usuario
   public idTipoOrganizacionUsario: number;
@@ -83,7 +66,7 @@ export class NewActivityComponent implements OnInit {
   animationType = 'slideDown';
   title = 'Se ha grabado la Información! ';
   content = 'los cambios han sido grabados temporalmente, en la PGC!';
-  timeout = 20000;
+  timeout = 10000;
   toastsLimit = 5;
   type = 'default';
 
@@ -151,7 +134,6 @@ export class NewActivityComponent implements OnInit {
   // Instacia de la variable del Modelo | Json de Parametros
   public _activityModel: ActivityModel;
   public _activityPlanificacionModel: ActivityPlanificacionModel;
-  public _activityIdInternaModel: ActivityIdInternaModel;
 
   /**
    * Configuracion del Dropdow List
@@ -253,16 +235,6 @@ export class NewActivityComponent implements OnInit {
       null, null, // Auditoria
     );
 
-    /**
-     * Inicializacion del Modelo de la Clase Id Interna
-     */
-    this._activityIdInternaModel = new ActivityIdInternaModel(
-      0, // Identificacion
-      null, 0, null, 0, // Definificion
-      null, // Codigo de Actividad
-      null, null, // Auditoria
-    );
-
     /* Llamado a la Funcion: 008, la cual obtiene el listado de los Estados de
      que nesesita el Formulario de Actividades */
     this.estadosListService();
@@ -293,7 +265,7 @@ export class NewActivityComponent implements OnInit {
 
     /* Llamado a la Funcion: 015, la cual obtiene el listado de las Organizaciones
      que nesesita el Formulario de Actividades */
-    this.organizacionesAllListService();
+    // this.organizacionesAllListService();
 
     /* Llamado a la Funcion: 012.1, la cual obtiene el listado de los Espacios de
      Trabajo que nesesita el Formulario de Actividades */
@@ -1065,29 +1037,24 @@ export class NewActivityComponent implements OnInit {
   * del Formulario de Actividad llamando a la API
   ****************************************************************************/
   private pushJsonIdInterna() {
-    // Validacion de la Informacion a Ingresar
-    if (this._activityModel.idInterna === '' || this._activityModel.idInterna === null) {
-      this.showToast('error', 'Error al Ingresar la Información de las Organizaciones', 'Debes de Ingresar el Código del ID Interna, para continuar');
-      this.mySelectIdInterna.nativeElement.focus();
-      return -1;
-    } else {
-      // Busqueda del Codigo del Perfil si Existe
-      this.findOrganizacionByCode(this._activityModel.idInterna);
-    }
-
     // Validamos que se ha Seleccionado los Filtros Previos a la ID Interna
-    if (this._activityModel.idPais === 0 && this._activityModel.idOrganizacion === 0) {
-      this.showToast('error', 'Error al Ingresar la Información de las ID Internas', 'Debes Seleccionar el País, para continuar');
-      return -1;
-    } else if (this._activityModel.idTipoOrganizacion === 0 && this._activityModel.idOrganizacion === 0) {
+    if (this._activityModel.idTipoOrganizacion === 0) {
       this.showToast('error', 'Error al Ingresar la Información de las ID Internas', 'Debes Seleccionar el Tipo de Organización, para continuar');
       return -1;
-    } else if (this._activityModel.idCatOrganizacion === 0 && this._activityModel.idOrganizacion === 0) {
-      this.showToast('error', 'Error al Ingresar la Información de las ID Internas', 'Debes Seleccionar la Categoría de Organización, para continuar');
+    } else if (this._activityModel.idPais === 0) {
+      this.showToast('error', 'Error al Ingresar la Información de las ID Internas', 'Debes Seleccionar el País, para continuar');
       return -1;
     } else if (this._activityModel.idOrganizacion === 0) {
       this.showToast('error', 'Error al Ingresar la Información de las ID Internas', 'Debes Seleccionar la Organización, para continuar');
       return -1;
+    }
+
+    // Validacion de la Informacion a Ingresar
+    if (this._activityModel.idInterna === '' || this._activityModel.idInterna === null) {
+      this.showToast('error', 'Error al Ingresar la Información de las Organizaciones', 'Debes de Ingresar el Código del ID Interna, para continuar');
+    } else {
+      // Busqueda del Codigo del Perfil si Existe
+      this.findOrganizacionByCode(this._activityModel.idInterna);
     }
   } // FIN | pushJsonIdInterna
 
@@ -1101,7 +1068,7 @@ export class NewActivityComponent implements OnInit {
   * del Formulario de Actividad llamando a la API
   ****************************************************************************/
   // deleteRowHomeForm(homeFormIndex: number, codDocumentoIn: string, extDocumentoIn: string) {
-  deleteRowHomeForm(homeFormIndex: number, codIdInternaIn: string) {
+  deleteRowHomeForm(homeFormIndex: number) {
     // Confirmar que se desea borrar ?
     const deletedItem = confirm('Esta seguro de borrar el Item de ID Interna Seleccionado ? ');
 
@@ -1109,9 +1076,9 @@ export class NewActivityComponent implements OnInit {
       // Borra el Elemento al Json
       this.JsonIdInternaOrganizacion.splice(homeFormIndex, 1);
       this.changeDetectorRef.detectChanges();
-
-      // Borramos la Id Interna de la BD
-      this.deletedActividadIdInterna(codIdInternaIn);
+      // this.JsonIdInternaOrganizacion.pdfDocumento = "";
+      // Ejecutamos la Fucnion que Borra el Archivo desde le Servidor
+      // this.borrarDocumentoServer(codDocumentoIn, extDocumentoIn);
     }
   } // FIN deleteRowHomeForm
 
@@ -1143,7 +1110,6 @@ export class NewActivityComponent implements OnInit {
               'descTipoOrganizacion': this._activityModel.descTipoOrganizacion,
               'descPaisOrganizacion': this._activityModel.descPaisOrganizacion,
               'descOrganizacion': this._activityModel.descOrganizacion,
-              'idOrganizacion': this._activityModel.idOrganizacion,
               'idInterna': this._activityModel.idInterna,
             });
             this._activityModel.idInterna = '';
@@ -1258,9 +1224,6 @@ export class NewActivityComponent implements OnInit {
 
             // Ejecuta el Llenado de la Planificacion
             this.newActividadPlanificacion();
-
-            // Ejecuta el Llenado de las Id Internas
-            this.newActividadIdInterna();
 
             // Actualizamos la Siguiente Secuencia
             this.updateSecuenciaService(this.JsonReceptionUserDetail.idUsuario, 1);
@@ -1427,21 +1390,27 @@ export class NewActivityComponent implements OnInit {
   ****************************************************************************/
   onDateChanged(event: IMyDateModel, paraEvalDate: number) {
     // event properties are: event.date, event.jsdate, event.formatted and event.epoc
+    // console.log('onDateChanged(): ', event.date, ' - jsdate: ', new Date(event.jsdate).toLocaleDateString(), ' - formatted: ', event.formatted, ' - epoc timestamp: ', event.epoc);
     switch (paraEvalDate) {
       case 1:
         this._activityPlanificacionModel.fechaFirma = event.jsdate;
+        // console.log('Fecha de Firma ' + JSON.stringify(this._activityPlanificacionModel.fechaFirma))
         break;
       case 2:
         this._activityPlanificacionModel.fechaEfectividad = event.jsdate;
+        // console.log('Fecha de Efectividad ' + JSON.stringify(this._activityPlanificacionModel.fechaEfectividad))
         break;
       case 3:
         this._activityPlanificacionModel.fechaCierre = event.jsdate;
+        // console.log('Fecha de Cierre ' + JSON.stringify(this._activityPlanificacionModel.fechaCierre))
         break;
       case 4:
         this._activityPlanificacionModel.fechaPropuestaFinalizacion = event.jsdate;
+        // console.log('Fecha de fechaPropuestaFinalizacion ' + JSON.stringify(this._activityPlanificacionModel.fechaPropuestaFinalizacion))
         break;
       case 5:
         this._activityPlanificacionModel.fechaFinalizacion = event.jsdate;
+        // console.log('Fecha de fechaFinalizacion ' + JSON.stringify(this._activityPlanificacionModel.fechaFinalizacion))
         break;
     }
     // FIN | onDateChanged
@@ -1471,70 +1440,4 @@ export class NewActivityComponent implements OnInit {
     );
   } // FIN | getTipoIniciativasCssService
 
-
-  /****************************************************************************
-  * Funcion: newActividadIdInterna
-  * Object Number: 024
-  * Fecha: 12-02-2019
-  * Descripcion: Method que Genera las Id Internas de la Actividad
-  * Objetivo: Generar Id internas del Proyecto
-  * @param { _activityPlanificacionModel }
-  ****************************************************************************/
-  newActividadIdInterna() {
-    // Seteamos los valores del Modelo de Planificacion a Enviar
-    this.JsonIdInternaOrganizacion.forEach(element => {
-      this._activityIdInternaModel.idOrganizacionIdInterna = { idOrganizacion: this._activityModel.idOrganizacion };
-      this._activityIdInternaModel.idActividadIdInterna = { idActividad: this._activityModel.idActividad };
-      this._activityIdInternaModel.codIdInterna = element.idInterna;
-
-      // Ejecutamos el Recurso del EndPoint
-      this._activityService.newActivityIdInterna(this._activityIdInternaModel).subscribe(
-        response => {
-          if (response.status !== 200) {
-            this.showToast('error', 'Error al Ingresar la Información de la Id Interna del Proyecto', response.message);
-          } else if (response.status === 200) {
-            // Verificamos que la Actividad no Exista en la BD
-            this.showToast('default', 'La Información de la Id Interna del Proyecto, se ha ingresado con exito', response.message);
-          }
-        },
-        error => {
-          // Informacion del Error que se capturo de la Secuencia
-          this.showToast('error', 'Ha ocurrido un Error al Registrar la información de la Id Interna del Proyecto, por favor verifica que todo este bien!!', JSON.stringify(error.message));
-        },
-      );
-    });
-    // Return
-  } // FIN | newActividadIdInterna
-
-
-  /****************************************************************************
-  * Funcion: deleteActividadIdInterna
-  * Object Number: 024.1
-  * Fecha: 11-02-2019
-  * Descripcion: Method que Elimina la Id Interna de la Actividad
-  * Objetivo: Eliminar la Id Interna del Proyecto
-  * @param { codIdInterna }
-  ****************************************************************************/
-  deletedActividadIdInterna(codIdInterna: string) {
-    // Ejecutamos el Recurso del EndPoint
-    this._activityService.deletedActivityIdInterna(codIdInterna).subscribe(
-      response => {
-        if (response.status !== 200) {
-          this.showToast('error', 'Error al Eliminar la Id Interna de la Planificacion del Proyecto', response.message);
-        } else if (response.status === 200) {
-          // Verificamos que la Actividad no Exista en la BD
-          this.showToast('default', 'La Información de la Id Interna del Proyecto, se ha eliminado con exito', response.message);
-        }
-      },
-      error => {
-        // Informacion del Error que se capturo de la Secuencia
-        this.showToast('error', 'Ha ocurrido un Error al Actualizar la información de Id Interna del Proyecto, por favor verifica que todo este bien!!', JSON.stringify(error.error.message));
-        // Ocultamos el Loader la Funcion
-        setTimeout(() => {
-          this._spinner.hide();
-        }, 2000);
-      },
-    );
-    // Return
-  } // FIN | deleteActividadIdInterna
 }

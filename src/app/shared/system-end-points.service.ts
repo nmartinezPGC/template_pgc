@@ -81,6 +81,9 @@ export class SystemEndPointsService extends ListEndPointsService {
           case 6:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointMantActividades.getPresupuesto.urlEndPoint;
             break;
+          case 7: // Llamado de los EndPoints de Listado de Tipo de Inciativas CSS
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointMantActividades.getTiposIniciativasCSS.urlEndPoint;
+            break;
         }
         break;
       case 'espacioTrabajoGroup': // Llamados a los End Point del Espacios de Trabajo
@@ -225,8 +228,23 @@ export class SystemEndPointsService extends ListEndPointsService {
           case 3:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActivityDatosGenerales.urlEndPoint;
             break;
-          case 4:
+          case 4: // NAM | 2019-02-08 | Mapeo de los EndPoins de Planificacion
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.newActivityPlanificacion.urlEndPoint;
+            break;
+          case 5:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.editActivityPlanificacion.urlEndPoint;
+            break;
+          case 6:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActivityPlanificacion.urlEndPoint;
+            break;
+          case 7: // NAM | 2019-02-11 | Mapeo de los EndPoins de Id Interna
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.newActivityIdInterna.urlEndPoint;
+            break;
+          case 8:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.editActivityIdInterna.urlEndPoint;
+            break;
+          case 9:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActivityIdInterna.urlEndPoint;
             break;
         }
         break;

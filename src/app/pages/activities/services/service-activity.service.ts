@@ -73,7 +73,7 @@ export class ActivityService {
   /****************************************************************************
     * Funcion: FND-00003
     * Fecha: 14-01-2019
-    * Descripcion: Metodo para obtener Ingresar los Datos Generales de la Actividad
+    * Descripcion: Metodo para Ingresar los Datos Generales de la Actividad
     * Objetivo: Ingresar los Datos generales de la Activiad
     * Params: { jsonActivity }
     ****************************************************************************/
@@ -87,6 +87,26 @@ export class ActivityService {
       params: { 'tokenApi': this.tokenHeader },
     });
   } // FIN | FND-00003
+
+
+  /****************************************************************************
+    * Funcion: FND-00003.1
+    * Fecha: 08-02-2019
+    * Descripcion: Metodo para Actualizar los Datos Generales de la Actividad
+    * Objetivo: Actualizar los Datos generales de la Activiad
+    * Params: { jsonActivity }
+    ****************************************************************************/
+  editActivityGeneral(jsonActivity: any, idProyectoIn: number): Observable<any> {
+    // Parametros del EndPoint
+    const idProyectoSend: number = idProyectoIn;
+    const paramsSend = jsonActivity;
+
+    // Retorno de la Funcion
+    return this._http.put(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 2) + idProyectoSend, paramsSend, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  } // FIN | FND-00003.1
 
 
   /****************************************************************************
@@ -118,12 +138,94 @@ export class ActivityService {
   newActivityPlanificacion(jsonActivityPlanificacion: any): Observable<any> {
     // Parametros del EndPoint
     const paramsSend = jsonActivityPlanificacion;
-    // console.log( 'Datos del Modelo en el Servicio ' + JSON.stringify( paramsSend));
+
     // Retorno de la Funcion
     return this._http.post(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 4), paramsSend, {
       headers: this.headers,
       params: { 'tokenApi': this.tokenHeader },
     });
   } // FIN | FND-00005
+
+
+  /****************************************************************************
+    * Funcion: FND-00005.1
+    * Fecha: 08-02-2019
+    * Descripcion: Metodo para Actualizar los Datos de Planificacion de
+    * la Actividad, segun el codigo del Proyecto
+    * Objetivo: Actualizar los Datos de Planificacion del Proyecto
+    * * Params: { jsonActivityPlanificacion, idActividadPlan }
+    ****************************************************************************/
+  editActivityPlanificacion(jsonActivityPlanificacion: any, idActividadPlanIn: number): Observable<any> {
+    // Parametros del EndPoint
+    const idActividadPlanSend: number = idActividadPlanIn;
+    const paramsSend = jsonActivityPlanificacion;
+
+    // Retorno de la Funcion
+    return this._http.put(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 5) + idActividadPlanSend, paramsSend, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  } // FIN | FND-00005.1
+
+
+  /****************************************************************************
+    * Funcion: FND-00006
+    * Fecha: 11-02-2019
+    * Descripcion: Metodo para Ingresar los Datos de Id Interna de
+    * la Actividad, segun el Id de la Actividad recien Ingresado
+    * Objetivo: Ingresar los Datos de Planificacion de la Activiad
+    * Params: { jsonActivityIdInterna }
+    ****************************************************************************/
+  newActivityIdInterna(jsonActivityIdInterna: any): Observable<any> {
+    // Parametros del EndPoint
+    const paramsSend = jsonActivityIdInterna;
+
+    // Retorno de la Funcion
+    return this._http.post(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 7), paramsSend, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  } // FIN | FND-00006
+
+
+  /****************************************************************************
+    * Funcion: FND-00006.1
+    * Fecha: 11-02-2019
+    * Descripcion: Metodo para Actualizar los Datos de Id Interna de
+    * la Actividad, segun el Id de la Actividad recien Ingresado
+    * Objetivo: Editar los Datos de Id Interna de la Activiad
+    * Params: { jsonActivityIdInterna, idInterna }
+    ****************************************************************************/
+  editActivityIdInterna(jsonActivityIdInterna: any, idInternaIn: number): Observable<any> {
+    // Parametros del EndPoint
+    const idInternaSend: number = idInternaIn;
+    const paramsSend = jsonActivityIdInterna;
+
+    // Retorno de la Funcion
+    return this._http.put(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 7) + idInternaSend, paramsSend, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  } // FIN | FND-00006.1
+
+
+  /****************************************************************************
+    * Funcion: FND-00006.2
+    * Fecha: 11-02-2019
+    * Descripcion: Metodo para Eliminar los Datos de Id Interna de
+    * la Actividad, segun el Id de la Actividad recien Ingresado
+    * Objetivo: Eliminar los Datos de Id Interna de la Activiad
+    * Params: { codIdInterna }
+    ****************************************************************************/
+  deletedActivityIdInterna(codIdInterna: string): Observable<any> {
+    // Parametros del EndPoint
+    const codIdInternaSend: string = codIdInterna;
+
+    // Retorno de la Funcion
+    return this._http.delete(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 9) + codIdInternaSend, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  } // FIN | FND-00006.2
 
 }

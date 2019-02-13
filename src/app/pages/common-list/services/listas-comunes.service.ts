@@ -373,4 +373,20 @@ export class ListasComunesService {
     });
   }// FIN | FND-00013.1
 
+
+  /****************************************************************************
+  * Funcion: FND-00014
+  * Fecha: 07-02-2019
+  * Descripcion: Metodo para obtener los Tipos de Inciativa de CSS
+  * Objetivo: Listadod de los Tipos de Iniciativas CSS
+  * Params: { }
+  ****************************************************************************/
+  getAllTipoIniciativasCSS(): Observable<any> {
+    // Retorno de la Funcion
+    return this._http.get(this._systemEndPointsService.getEndPointService('mantActGroup', 7), {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  }// FIN | FND-00014
+
 }

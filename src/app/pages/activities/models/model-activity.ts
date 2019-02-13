@@ -16,6 +16,8 @@ export class ActivityModel {
         public codigoActividad: string,
         public idEstadoActivity: { idEstado: number },
         public idEstado: number,
+        public idEstadoValid: { idEstado: number },
+        public idEstadoV: number,
         public idEspacioTrabajoActivity: { idEspacioTrabajo: number },
         public idEspacioTrabajo: number,
         public explicacionEstado: string,
@@ -65,6 +67,8 @@ export class ActivityModel {
         // Campos de Auditoria
         public idUsuarioCreador: { idUsuario: number },
         public idUsuario: number,
+        public idUsuarioMod: { idUsuario: number },
+        public idUsuarioModif: number,
         public activo: boolean,
 
         // Fechas de Planificacion
@@ -73,5 +77,10 @@ export class ActivityModel {
         public fechaCierre: Date,
         public fechaPropuestaFinalizacion: Date,
         public fechaFinalizacion: Date,
+
+        // CSS
+        public idTipoIniciativaCssAct: { idTipoIniciativa: number },
+        public idTipoIniciativa: number,
+        public actividadesCss: string,
     ) { }
 }
