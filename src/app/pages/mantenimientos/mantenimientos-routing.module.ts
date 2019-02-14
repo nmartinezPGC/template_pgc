@@ -10,7 +10,7 @@ import { MantEspaciosTrabajoComponent } from './mant-espacios-trabajo/mant.espac
 import { GrupoTrabajoComponent } from './mant-espacios-trabajo/grupo-trabajo/grupo.trabajo.component';
 import { AgregarCategoriaComponent } from './mant-espacios-trabajo/agregar-categoria/agregar-categoria.component';
 import { EspaciosTrabajoComponent } from './mant-espacios-trabajo/espacios-trabajo/espacios-trabajo.component';
-import { OrganizacionComponent } from './mant-espacios-trabajo/organizacion/organizacion.component';
+
 
 // Mapeo de las Rutas del Modulo
 const routes: Routes = [{
