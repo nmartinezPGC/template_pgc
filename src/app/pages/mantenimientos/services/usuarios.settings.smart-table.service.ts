@@ -28,7 +28,7 @@ export class ConfigSmartTableService {
   * Objetivo: Establecer las configuraciones para la Smart Table de usuarios
   ****************************************************************************/
 
-    configSmartTable(smartTable: string, smartNormal: number, arrayPais: any, arrayEstado: any, arrayTipo: any) {
+    configSmartTable(smartTable: string, smartNormal: number, arrayPais: any, arrayEstado: any, arrayTipo: any, arrayCatOrg: any, arrayOrganizacion: any, arrayTipoOrganizacion: any) {
         switch (smartTable) {
             case 'userSmart':
                 switch (smartNormal) {
@@ -81,6 +81,10 @@ export class ConfigSmartTableService {
                                     title: 'Email',
                                     type: 'string',
                                 },
+                                direccion: {
+                                    title: 'Direccion',
+                                    type: 'string',
+                                },
                                 idTipo: {
                                     valuePrepareFunction: (cell: any, row: any) => row.idTipoUsuario.descTipo,
                                     title: 'Rol de Usuario',
@@ -108,6 +112,36 @@ export class ConfigSmartTableService {
                                         type: 'list',
                                         config: {
                                             list: arrayEstado,
+                                        },
+                                    },
+                                },
+                                idCatOrganizacion: {
+                                    valuePrepareFunction: (cell: any, row: any) => row.idCatOrganizacionUsuario.descCatOrganizacion,
+                                    title: 'Categoria',
+                                    editor: {
+                                        type: 'list',
+                                        config: {
+                                            list: arrayCatOrg,
+                                        },
+                                    },
+                                },
+                                idOrganizacion: {
+                                    valuePrepareFunction: (cell: any, row: any) => row.idOrganizacionUsuario.descOrganizacion,
+                                    title: 'Organizaciones',
+                                    editor: {
+                                        type: 'list',
+                                        config: {
+                                            list: arrayOrganizacion,
+                                        },
+                                    },
+                                },
+                                idTipoOrganizacion: {
+                                    valuePrepareFunction: (cell: any, row: any) => row.idTipoOrganizacionUsuario.descTipoOrganizacion,
+                                    title: 'Tipo Organizaciones',
+                                    editor: {
+                                        type: 'list',
+                                        config: {
+                                            list: arrayTipoOrganizacion,
                                         },
                                     },
                                 },
