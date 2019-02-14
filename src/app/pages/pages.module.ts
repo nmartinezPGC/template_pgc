@@ -7,6 +7,7 @@ import { ThemeModule } from '../@theme/theme.module';
 import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
 
 import { NgxPaginationModule } from 'ngx-pagination';
+import { NbRouteTabsetModule } from '@nebular/theme/components/route-tabset/route-tabset.module';
  // <-- import the module
 
 const PAGES_COMPONENTS = [
@@ -20,6 +21,7 @@ const PAGES_COMPONENTS = [
     DashboardModule,
     MiscellaneousModule,
     NgxPaginationModule,
+    NbRouteTabsetModule, // Modulo de Rutas para los tabs
   ],
   declarations: [
     ...PAGES_COMPONENTS,

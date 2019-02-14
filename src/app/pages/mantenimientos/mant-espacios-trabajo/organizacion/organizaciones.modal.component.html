@@ -1,0 +1,111 @@
+<div class="modal-header">
+  <span>Actualizar Organizacion</span>
+  <button class="close" aria-label="Close" (click)="closeModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="row">
+    <div class="col-lg-4">
+      <nb-card>
+        <nb-card-body>
+          <strong><label>Codigo de la Organizacion</label></strong>
+          <div class="form-group">
+            <input class="form-control" type="text" placeholder="Codigo de la Organizacion" required />
+          </div>
+          <strong><label>Iniciales de la Organizacion</label></strong>
+          <div class="form-group">
+            <input class="form-control" type="text" placeholder="Iniciales de la Organizacion" required />
+          </div>
+          <strong><label>Nombre de la Organizacion</label></strong>
+          <div class="form-group">
+            <input class="form-control" type="text" placeholder="Nombre de la Organizacion" required />
+          </div>
+          <strong><label>Descripcion de la Organizacion</label></strong>
+          <div class="form-group">
+            <input class="form-control" type="text" placeholder="Descripcion de la Organizacion" required />
+          </div>
+          <strong><label>Direccion de la Organizacion</label></strong>
+          <div class="form-group">
+            <input class="form-control" type="text" placeholder="Direccion de la Organizacion" required />
+          </div>
+          <strong><label>Telefono</label></strong>
+          <div class="form-group">
+            <input class="form-control" type="text" placeholder="Telefono" required />
+          </div>
+        </nb-card-body>
+      </nb-card>
+    </div>
+    <div class="col-lg-4">
+      <nb-card>
+        <nb-card-body>
+          <strong><label>Email</label></strong>
+          <div class="form-group">
+            <input class="form-control" type="text" placeholder="Email" required />
+          </div>
+          <strong><label>Departamento de la Organizacion</label></strong>
+          <div class="form-group">
+            <input class="form-control" type="text" placeholder="Departamento de la Organizacion" required />
+          </div>
+          <strong><label>Contacto de Referencia</label></strong>
+          <div class="form-group">
+            <input class="form-control" type="text" placeholder="Departamento de la Organizacion" required />
+          </div>
+          <fieldset class="fieldCheck">
+            <div class="demo-checkboxes">
+              <strong>
+                <nb-checkbox>Socio en Desarrollo</nb-checkbox>
+              </strong>
+              <strong>
+                <nb-checkbox [value]="true">Agencia Beneficiaria</nb-checkbox>
+              </strong>
+              <strong>
+                <nb-checkbox [value]="true">Unidad Ejecutora</nb-checkbox>
+              </strong>
+              <strong>
+                <nb-checkbox>Administrador Financiero</nb-checkbox>
+              </strong>
+            </div>
+          </fieldset>
+        </nb-card-body>
+      </nb-card>
+    </div>
+    <div class="col-lg-4">
+      <nb-card>
+        <nb-card-body>
+          <strong><label>Web de la Organizacion</label></strong>
+          <div class="form-group">
+            <input class="form-control" type="text" placeholder="Web de la Organizacion" required />
+          </div>
+          <div class="form-group">
+            <strong><label>Elija un Tipo De Organizacion</label></strong>
+            <select class="form-control" required>
+              <option value="0">Seleccione una Opcion</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <strong><label>Grupo de Organizacion</label></strong>
+            <select class="form-control" required>
+              <option value="0">Seleccione una Opcion</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <strong><label>Tipo de Organizacion</label></strong>
+            <select class="form-control" required>
+              <option value="0">Seleccione una Opcion</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <strong><label>Categoria de la Organizacion</label></strong>
+            <select class="form-control" required>
+              <option value="0">Seleccione una Opcion</option>
+            </select>
+          </div>
+        </nb-card-body>
+      </nb-card>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-md btn-primary" (click)="closeModal()">Guardar los Cambios</button>
+</div>

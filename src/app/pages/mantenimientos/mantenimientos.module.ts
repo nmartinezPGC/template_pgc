@@ -16,6 +16,9 @@ import { MantEspaciosTrabajoComponent } from './mant-espacios-trabajo/mant.espac
 import { GrupoTrabajoComponent } from './mant-espacios-trabajo/grupo-trabajo/grupo.trabajo.component';
 import { AgregarCategoriaComponent } from './mant-espacios-trabajo/agregar-categoria/agregar-categoria.component';
 import { EspaciosTrabajoComponent } from './mant-espacios-trabajo/espacios-trabajo/espacios-trabajo.component';
+import { OrganizacionComponent } from './mant-espacios-trabajo/organizacion/organizacion.component';
+import { OrganizacionModalComponent } from './mant-espacios-trabajo/organizacion/organizaciones.modal.component';
+
 // Composicion del Modulo
 @NgModule({
   imports: [
@@ -32,6 +35,11 @@ import { EspaciosTrabajoComponent } from './mant-espacios-trabajo/espacios-traba
     GrupoTrabajoComponent,
     AgregarCategoriaComponent,
     EspaciosTrabajoComponent,
+    OrganizacionComponent,
+    OrganizacionModalComponent,
+  ],
+  entryComponents: [
+    OrganizacionModalComponent,
   ],
   providers: [
     ListasComunesService,

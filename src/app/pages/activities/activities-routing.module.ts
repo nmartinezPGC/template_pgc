@@ -3,14 +3,21 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { ActivitiesComponent } from './activities.component';
 import { NewActivityComponent } from './new-activity/new-activity.component';
+import { DatosGeneralesComponent } from './components/datos-generales/datos-generales.component';
 
 const routes: Routes = [{
   path: '',
   component: ActivitiesComponent,
-  children: [{
-    path: 'new-activity',
-    component: NewActivityComponent,
-  }],
+  children: [
+    {
+      path: 'new-activity',
+      component: NewActivityComponent,
+    },
+    {
+      path: 'datos-generales',
+      component: DatosGeneralesComponent,
+    },
+  ],
 }];
 
 @NgModule({
@@ -22,4 +29,5 @@ export class ActivitiesRoutingModule { }
 export const routedComponents = [
   ActivitiesComponent,
   NewActivityComponent,
+  DatosGeneralesComponent,
 ];

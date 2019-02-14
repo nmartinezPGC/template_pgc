@@ -62,7 +62,6 @@ export class AgregarCategoriaComponent implements OnInit {
 ****************************************************************************/
   makeToast() {
     this.showToast(this.type, this.title, this.content);
-    // console.log('Opcion de Toaster 1.3 ' + JSON.stringify(this.content));
   } // FIN | makeToast
 
   /****************************************************************************
@@ -90,7 +89,6 @@ export class AgregarCategoriaComponent implements OnInit {
       showCloseButton: this.isCloseButton,
       bodyOutputType: BodyOutputType.TrustedHtml,
     };
-    // this._toasterService.popAsync(toast);
     this._toasterService.pop(toast);
   } // FIN | showToast
 
@@ -150,20 +148,12 @@ export class AgregarCategoriaComponent implements OnInit {
     this._categoriaService.listAllTipoOrganizaciones().subscribe(
       response => {
         if (response.status !== 200) {
-          // console.log(response.status);
-          // console.log(response.message);
-          // this.showToast('error', 'Error al Obtener la Información del Perfil', response.message);
         } else if (response.status === 200) {
-          // this.productos = result.data;
-          // console.log(result.status);
           this.JsonReceptionTipoPerfiles = response.data;
           // instancia data con los perfiles;
           this.data1 = this.JsonReceptionTipoPerfiles;
           // Carga los Items para el List de la Smart table
           this.arrayTipoPerfiles = new Array();
-
-          // this.settings.columns.descripcionTipoPerfil.editor.config.list = this.arrayTipoPerfiles;
-          //  this.settings = Object.assign({}, this.settings);
         }
       },
       error => {
@@ -192,6 +182,7 @@ export class AgregarCategoriaComponent implements OnInit {
   * Objetivo: crear nuevos perfiles.
   ****************************************************************************/
   private newCategoria() {
+    this.validateCtegoria(this._CategoriaModel);
     // Seteo de las variables del Model al json de Java
     this._CategoriaModel.idTipoOrganizacionCat = { idTipoOrganizacion: this._CategoriaModel.idTipoOrganizacion };
     // this.validatePerfiles(this._perfilModel);
@@ -205,8 +196,6 @@ export class AgregarCategoriaComponent implements OnInit {
     this._categoriaService.newCategegoria(this._CategoriaModel).subscribe(
       response => {
         if (response.status !== 200) {
-          // console.log(response.status);
-          // console.log(response.message);
           this.showToast('error', 'Error al Ingresar la Información del Perfil', response.message);
         } else if (response.status === 200) {
           // console.log(result.status);
@@ -353,4 +342,27 @@ export class AgregarCategoriaComponent implements OnInit {
       event.confirm.reject();
     }
   }
+
+  /****************************************************************************
+   * Funcion: validateTipoOganizacion(_grupoModel: any)
+   * Object Number: 0005
+   * Fecha: 22-01-2019
+   * Descripcion: Method para validar que los campos esten llenos
+   * Objetivo: validatePerfiles  procurar que llegue a la base de datos toda la informacion de tipo de organizacion.
+   ****************************************************************************/
+  private validateCtegoria(_CategoriaModel: any) {
+    // seteo el modelo para que los campos sean verificados
+    this.responsedata.error = false;
+    if (_CategoriaModel.descCatOrganizacion === null || _CategoriaModel.descCatOrganizacion === '') {
+      this.responsedata.msg = 'Debes ingresar el nombre de la Categoria';
+      this.responsedata.error = true;
+    } else if (_CategoriaModel.codCatOrganizacion === null || _CategoriaModel.codCatOrganizacion === '') {
+      this.responsedata.msg = 'Desbes ingresar un codigo de la Categpria';
+      this.responsedata = true;
+    } else if (_CategoriaModel.acronimoCatOrganizacion === null || _CategoriaModel.acronimoCatOrganizacion === '') {
+      this.responsedata.msg = 'Debes de ingresar un acronimo para la categoria';
+      this.responsedata = true;
+    }
+    return this.responsedata;
+  } // FIN | validateTipoOganizacion(_grupoModel: any)
 }

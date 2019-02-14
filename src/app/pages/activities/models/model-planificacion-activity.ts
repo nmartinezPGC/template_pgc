@@ -10,6 +10,7 @@ export class ActivityPlanificacionModel {
     // Creacion del Constructor de la Clase
     constructor(
         // Definicion de las variables Mapeadas a la Clase del Model
+        public idActividadPlan: { idActividad: number},
         public idActividad: number,
         public codigoActividad: string,
 

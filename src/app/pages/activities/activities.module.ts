@@ -23,6 +23,9 @@ import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
 import { FormsModule } from '@angular/forms';
 import { MyDatePickerModule } from 'mydatepicker';
 
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { NbRouteTabsetModule } from '@nebular/theme/components/route-tabset/route-tabset.module';
+
 @NgModule({
   imports: [
     ThemeModule,
@@ -35,7 +38,9 @@ import { MyDatePickerModule } from 'mydatepicker';
     NgxPaginationModule,
     AngularMultiSelectModule,
     FormsModule,
-    MyDatePickerModule,
+    MyDatePickerModule, // Modulo de Fechas
+    NgxSpinnerModule, // Modulo de Spinner
+    NbRouteTabsetModule, // Modulo de Rutas para los tabs
   ],
   declarations: [
     ...routedComponents,

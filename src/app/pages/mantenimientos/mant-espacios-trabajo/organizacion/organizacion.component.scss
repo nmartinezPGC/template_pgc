@@ -150,14 +150,43 @@ Seccion de formularios
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(169, 68, 66, 0.6) !important;
   }
 }
-
-
 .ng2-smart-filter select {
   height: calc(2rem + 4px) !important;
   padding: 0 10px !important;
 }
 
-table-cell-default-editor select-editor select {
-  height: calc(2rem + 8px) !important;
-  padding: 0 10px !important;
+
+// Estilo de Checkbox
+.fieldCheck {
+    border: #dadfe6 solid 2px;
+    padding: 5px 0 0 10px;
 }
+
+// estilo de la tabla
+.tHeadTable {
+  height: 50px;
+}
+.tHeadSearch {
+  border: none;
+}
+.pointerMouse {
+  cursor: pointer;
+}
+// Clase de Select Local
+.comboSea {
+  height: calc(2rem + 20px);
+  width: 100%;
+  display: block;
+  // padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 2px solid #dadfe6;
+  border-radius: 0.25rem;
+  border-color: #dadfe6;
+  transition: border-color 0.15s ease-in-out,
+  box-shadow 0.15s ease-in-out;
+}
+

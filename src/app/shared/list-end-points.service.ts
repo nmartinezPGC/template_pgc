@@ -98,6 +98,13 @@ export class ListEndPointsService {
         groupEndPoint: 'matActGroup',
         descEndPoint: 'Busca el Presupuesto de la Actividad',
       },
+      getTiposIniciativasCSS: { // NAM | 2019-02-07 | Tipos de Iniciativa
+        id: 7,
+        nameEndpoint: 'getTiposIniciativasCSS',
+        urlEndPoint: '/mant-actividades/tipo-iniciativa',
+        groupEndPoint: 'matActGroup',
+        descEndPoint: 'Busca los Tipos de Iniciativa de CSS',
+      },
     },
     endPointEspaciosTrabajo: {
       listAllEspaciosTrabajo: {
@@ -393,7 +400,7 @@ export class ListEndPointsService {
         params: '{idActivity}',
         groupEndPoint: 'actividadesCRUDGroup',
         descEndPoint: 'Inhabilita en la API, una Actividad con sus Datos Generales',
-      },
+      }, // NAM | 2019-02-08 | Mapping Planificacion de Actividades
       newActivityPlanificacion: {
         id: 4,
         nameEndpoint: 'Agregar Planificacion a Proyecto',
@@ -401,6 +408,46 @@ export class ListEndPointsService {
         params: '{jsonActivityPlanificacion}',
         groupEndPoint: 'actividadesCRUDGroup',
         descEndPoint: 'Agregar la Planificacion al proyecto recien Ingresado',
+      },
+      editActivityPlanificacion: {
+        id: 5,
+        nameEndpoint: 'Actualizar Planificacion a Proyecto Editado',
+        urlEndPoint: '/mant-actividades/planificacion/edit/',
+        params: '{jsonActivityPlanificacion, idActividadPlan}',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Actualizar la Planificacion al proyecto a Editar',
+      },
+      deleteActivityPlanificacion: {
+        id: 6,
+        nameEndpoint: 'Eliminar Planificacion a Proyecto',
+        urlEndPoint: '/mant-actividades/planificacion/edit/',
+        params: '{jsonActivityPlanificacion, idActividadPlan}',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Eliminar la Planificacion al proyecto a Editar',
+      }, // NAM | 2019-02-08 | Mapping Planificacion de Actividades
+      newActivityIdInterna: {
+        id: 7,
+        nameEndpoint: 'Agregar Id Interna a Proyecto',
+        urlEndPoint: '/mant-actividades/id-interna/new',
+        params: '{jsonActivityIdInterna}',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Agregar la Id Interna al proyecto recien Ingresado',
+      },
+      editActivityIdInterna: {
+        id: 8,
+        nameEndpoint: 'Actualizar Id Interna a Proyecto Editado',
+        urlEndPoint: '/mant-actividades/id-interna/edit/',
+        params: '{jsonActivityIdInterna, idInterna}',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Actualizar la Id Interna al proyecto a Editar',
+      },
+      deleteActivityIdInterna: {
+        id: 9,
+        nameEndpoint: 'Eliminar Id Interna a Proyecto',
+        urlEndPoint: '/mant-actividades/id-interna/delete/',
+        params: '{idInterna}',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Eliminar la Id Interna al proyecto',
       },
     }, // modulo de mantenimientos generico de usuarios
     endPointMantGenericosUsuario: {
