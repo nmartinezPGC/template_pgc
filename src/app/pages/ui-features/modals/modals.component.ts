@@ -13,7 +13,7 @@ export class ModalsComponent {
   constructor(private modalService: NgbModal) { }
 
   showLargeModal() {
-    const activeModal = this.modalService.open(ModalComponent, { size: 'lg', container: 'nb-layout' });
+    const activeModal = this.modalService.open(ModalComponent, { size: 'lg', container: 'nb-layout',  });
 
     activeModal.componentInstance.modalHeader = 'Large Modal';
   }

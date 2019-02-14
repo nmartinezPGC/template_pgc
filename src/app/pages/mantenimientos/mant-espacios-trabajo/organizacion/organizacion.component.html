@@ -1,0 +1,218 @@
+<!-- Area de Donde esta Ubicado el Usuario -->
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a routerLink="/pages/dashboard">Dashboard</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a routerLink="./">Mantenimientos</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a routerLink="/pages/mantenimientos/mant-espacios-trabajo">Espacios de trabajo</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Organizacion</li>
+  </ol>
+</nav>
+<!-- ==================================================================================== -->
+<toaster-container [toasterconfig]="config"></toaster-container>
+<div class="row">
+  <div class="col-md-12 col-lg-12">
+    <nb-card>
+      <nb-tabset>
+        <nb-tab tabTitle="Creacion de Organizacion">
+          <div class="row">
+            <div class="col-lg-4">
+              <nb-card>
+                <!-- <nb-card-header>Perfiles</nb-card-header> -->
+                <nb-card-body>
+                  <strong><label>Codigo de la Organizacion</label></strong>
+                  <div class="form-group">
+                    <input #codOrganizacion="ngModel" class="form-control" type="text"
+                      placeholder="Codigo de la Organizacion" name="codOrganizacion" id="codOrganizacion"
+                      ngControl="codOrganizacion" [(ngModel)]="_OrganizacionModel.codOrganizacion" required />
+                  </div>
+                  <strong><label>Iniciales de la Organizacion</label></strong>
+                  <div class="form-group">
+                    <input #inicalesOrganizacion="ngModel" class="form-control" type="text"
+                      placeholder="Iniciales de la Organizacion" name="inicalesOrganizacion" id="inicalesOrganizacion"
+                      ngControl="inicalesOrganizacion" [(ngModel)]="_OrganizacionModel.inicalesOrganizacion" required />
+                  </div>
+                  <strong><label>Nombre de la Organizacion</label></strong>
+                  <div class="form-group">
+                    <input #nombreOrganizacion="ngModel" class="form-control" type="text"
+                      placeholder="Nombre de la Organizacion" placeholder="Iniciales de la Organizacion"
+                      name="nombreOrganizacion" id="nombreOrganizacion" ngControl="nombreOrganizacion"
+                      [(ngModel)]="_OrganizacionModel.nombreOrganizacion" required />
+                  </div>
+                  <strong><label>Descripcion de la Organizacion</label></strong>
+                  <div class="form-group">
+                    <input #descOrganizacion="ngModel" class="form-control" type="text"
+                      placeholder="Descripcion de la Organizacion" name="descOrganizacion" id="descOrganizacion"
+                      ngControl="descOrganizacion" [(ngModel)]="_OrganizacionModel.descOrganizacion" required />
+                  </div>
+                  <strong><label>Direccion de la Organizacion</label></strong>
+                  <div class="form-group">
+                    <input #direccionFisicaOrganizacion="ngModel" class="form-control" type="text"
+                      placeholder="Direccion de la Organizacion" name="direccionFisicaOrganizacion"
+                      id="direccionFisicaOrganizacion" ngControl="direccionFisicaOrganizacion"
+                      [(ngModel)]="_OrganizacionModel.direccionFisicaOrganizacion" required />
+                  </div>
+                  <strong><label>Telefono</label></strong>
+                  <div class="form-group">
+                    <input #telefonoOrganizacion="ngModel" class="form-control" type="text" placeholder="Telefono"
+                      name="telefonoOrganizacion" id="telefonoOrganizacion" ngControl="telefonoOrganizacion"
+                      [(ngModel)]="_OrganizacionModel.telefonoOrganizacion" required />
+                  </div>
+                  <div class="form-group">
+                  </div>
+                </nb-card-body>
+              </nb-card>
+            </div>
+
+            <!-- seccion de text areas -->
+            <div class="col-lg-4">
+              <nb-card>
+                <!-- <nb-card-header>Perfiles</nb-card-header> -->
+                <nb-card-body>
+                  <div class="form-group">
+                    <strong><label>Email</label></strong>
+                    <div class="form-group">
+                      <input #emailOrganizacion="ngModel" class="form-control" type="text" placeholder="Email"
+                        name="emailOrganizacion" id="emailOrganizacion" ngControl="emailOrganizacion"
+                        [(ngModel)]="_OrganizacionModel.emailOrganizacion" required />
+                    </div>
+                    <strong><label>Departamento de la Organizacion</label></strong>
+                    <div class="form-group">
+                      <input #deptoReferencia="ngModel" class="form-control" type="text"
+                        placeholder="Departamento de la Organizacion" name="deptoReferencia" id="deptoReferencia"
+                        ngControl="deptoReferencia" [(ngModel)]="_OrganizacionModel.deptoReferencia" required />
+                    </div>
+                    <strong><label>Contacto de Referencia</label></strong>
+                    <div class="form-group">
+                      <input #contactoReferencia="ngModel" class="form-control" type="text"
+                        placeholder="Departamento de la Organizacion" name="contactoReferencia" id="contactoReferencia"
+                        ngControl="contactoReferencia" [(ngModel)]="_OrganizacionModel.contactoReferencia" required />
+                    </div>
+                    <fieldset class="fieldCheck">
+                      <div class="demo-checkboxes">
+                        <strong>
+                          <nb-checkbox (change)="toggleVisibility($event)" #socioDesarrollo="ngModel" type="checkbox"
+                            [(ngModel)]="_OrganizacionModel.socioDesarrollo" name="socioDesarrollo"
+                            id="socioDesarrollo">Socio en Desarrollo</nb-checkbox>
+                        </strong>
+                        <strong>
+                          <nb-checkbox (change)="toggleVisibility1($event)" #agenciaBeneficiaria="ngModel"
+                            type="checkbox" [(ngModel)]="_OrganizacionModel.agenciaBeneficiaria"
+                            name="agenciaBeneficiaria" id="agenciaBeneficiaria">Agencia Beneficiaria</nb-checkbox>
+                        </strong>
+                        <strong>
+                          <nb-checkbox (change)="toggleVisibilit2($event)" #unidadEjecutora="ngModel" type="checkbox"
+                            [(ngModel)]="_OrganizacionModel.unidadEjecutora" name="unidadEjecutora"
+                            id="unidadEjecutora">Unidad Ejecutora</nb-checkbox>
+                        </strong>
+                        <strong>
+                          <nb-checkbox (change)="toggleVisibilit3($event)" #administradorFinanciero="ngModel"
+                            type="checkbox" [(ngModel)]="_OrganizacionModel.administradorFinanciero"
+                            name="administradorFinanciero" id="administradorFinanciero">Administrador Financiero
+                          </nb-checkbox>
+                        </strong>
+                      </div>
+                    </fieldset>
+                  </div>
+                </nb-card-body>
+              </nb-card>
+            </div>
+
+            <div class="col-lg-4">
+              <nb-card>
+                <!-- <nb-card-header>Perfiles</nb-card-header> -->
+                <nb-card-body>
+                  <strong><label>Web de la Organizacion</label></strong>
+                  <div class="form-group">
+                    <input #webOrganizacion="ngModel" class="form-control" type="text"
+                      placeholder="Web de la Organizacion" name="webOrganizacion" id="webOrganizacion"
+                      ngControl="webOrganizacion" [(ngModel)]="_OrganizacionModel.webOrganizacion" required />
+                  </div>
+                  <div class="form-group">
+                    <strong><label>Elija un Tipo De Organizacion</label></strong>
+                    <select name="idTipoOrganizacion1" id="idTipoOrganizacion1" ngControl="idTipoOrganizacion1"
+                      class="form-control" [(ngModel)]="_OrganizacionModel.idTipoOrganizacion1" required>
+                      <option value="0">Seleccione una Opcion</option>
+                      <option *ngFor="let item of JsonReceptionTipoPerfiles" [value]="item.idTipoOrganizacion">
+                        {{item.descTipoOrganizacion}}
+                    </select>
+                  </div>
+                  <strong> <label>País Organización</label> </strong>
+                  <angular2-multiselect [data]="dropdownListPais" [(ngModel)]="selectedItemsPais"
+                    [settings]="dropdownSettings" (onSelect)="onItemSlectPais($event)" required></angular2-multiselect>
+                  <div class="form-group">
+                    <strong><label>Categoria de la Organizacion</label></strong>
+                    <select name="idCatOrganizacion1" id="idCatOrganizacion1" ngControl="idCatOrganizacion1"
+                      class="form-control" [(ngModel)]="_OrganizacionModel.idCatOrganizacion1" required>
+                      <option>Seleccione una Opcion</option>
+                      <option *ngFor="let item of JsonCategoria" [value]="item.idCatOrganizacion">
+                        {{item.descCatOrganizacion}}
+                    </select>
+                  </div>
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-primary btn-group-icon btn-group-divider">
+                      <i class="nb-plus-circled"></i>
+                    </button>
+                    <button type="button" (click)="newOrganizacion()" class="btn btn-primary">Guardar</button>
+                    <button type="button" class="btn btn-warning">Cancelar</button>
+                  </div>
+                  <div class="form-group">
+                  </div>
+                </nb-card-body>
+              </nb-card>
+            </div>
+            <!-- Fin de fila de primer tab -->
+          </div>
+        </nb-tab>
+        <nb-tab tabTitle="Mantenimiento de Organizacion">
+          <div class="col-lg-12">
+            <nb-card>
+              <nb-card-body>
+                <table class="table table-hover table-striped table-bordered" id="tableIdInterna">
+                  <thead>
+                    <tr class="tHeadSearch">
+                      <th scope="col" colspan="2">
+                        <input type="text" class="form-control">
+                      </th>
+                    </tr>
+                    <tr class="tHeadTable">
+                      <th scope="col" style="width: 30%;">Nombre</th>
+                      <th scope="col" style="width: 10%;">Pais</th>
+                      <th scope="col" style="width: 5%;">Iniciales</th>
+                      <th scope="col" style="width: 15%;">Unidad Ejecutora</th>
+                      <th scope="col" style="width: 15%;">Administrador Financiero</th>
+                      <th scope="col" style="width: 15%;">Agencia Beneficiaria</th>
+                      <th scope="col" style="width: 15%;">Socio en Desarrollo</th>
+                      <th scope="col" style="width: 40%;">Acciónes</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of JsonReceptionOrganizaciones">
+                      <td> {{item.nombreOrganizacion}}</td>
+                      <td>{{item.idPaisOrganizacion.descPais}}</td>
+                      <td>{{item.idPaisOrganizacion.inicialesPais}}</td>
+                      <td>{{item.unidadEjecutora}}</td>
+                      <td>{{item.administradorFinanciero}}</td>
+                      <td>{{item.agenciaBeneficiaria}}</td>
+                      <td>{{item.socioDesarrollo}}</td>
+                      <td>
+                        <img class="pointerMouse" src="../../../../assets/icons/forms/rubbish-bin_24x.png" alt=""><img
+                          (click)="showLargeModal()" class="pointerMouse"
+                          src="../../../../assets/icons/forms/pencil-striped-symbol_24.png" alt="">
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </nb-card-body>
+            </nb-card>
+          </div>
+        </nb-tab>
+      </nb-tabset>
+    </nb-card>
+  </div>
+</div>

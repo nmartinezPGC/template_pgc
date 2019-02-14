@@ -18,7 +18,7 @@ export class ConfigSmartTableService {
   public settings: any;
   constructor() { }
 
-  daysOfTheWeekList: [{ value: 0, title: 'Monday' }, { value: 1, title: 'Tuesday' }]
+
 
   /****************************************************************************
 * Funcion: configSmartTable

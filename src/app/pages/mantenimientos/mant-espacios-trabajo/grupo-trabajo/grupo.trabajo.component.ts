@@ -57,6 +57,7 @@ export class GrupoTrabajoComponent implements OnInit {
     this.responsedata = { 'error': false, 'msg': 'error campos solicitado' };
     //  this.listarTipoOrganizacion();
   }
+
   /****************************************************************************
 * Funcion: makeToast
 * Object Number: 003
