@@ -1,0 +1,161 @@
+<!-- Area de Donde esta Ubicado el Usuario -->
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a routerLink="/pages/dashboard">Dashboard</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a routerLink="./">Mantenimientos</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a routerLink="/pages/mantenimientos/mant-seguridad">Espacios</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a routerLink="./">Mantenimiento de espacios de trabajo</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Creacion de Espacios de Trabajo</li>
+  </ol>
+</nav>
+
+<!-- ==================================================================================== -->
+<!-- Componente para los Mensajes en pantalla -->
+<!-- <toaster-container [toasterconfig]="config"></toaster-container> -->
+
+<div class="row">
+  <div class="col-md-12 col-lg-12">
+    <nb-card>
+      <nb-tabset>
+        <!-- Area de la estructura del primer tab donde se crean los espacios de trabajo-->
+        <nb-tab tabTitle="Creacion de Espacios de Trabajo">
+          <div class="row">
+            <div class="col-lg-6">
+              <nb-card>
+                <nb-card-body>
+                  <div class="row full-name-inputs">
+                    <div class="col-sm-6 input-group">
+                      <input type="text" placeholder="Codigo Espacio Trabajo" class="form-control" name="nombre1Usuario" id="nombre1Usuario"
+                        required />
+                    </div>
+                    <div class="col-sm-6 input-group">
+                      <input type="text" placeholder="Nombre Espacio Trabajo" class="form-control" name="codUsuario" id="codUsuario"
+                        required />
+                    </div>
+                  </div>
+                  <div class="input-group">
+                    <input type="text" placeholder="Descripcion Espacio Trabajo" class="form-control" name="codUsuario"
+                      id="codUsuario" required />
+                  </div>
+                  <div class="form-group">
+                    <strong> <label>Seleccione un Estado</label> </strong>
+                    <select class="form-control" name="idEstado" id="idEstado" ngControl="idEstado" required>
+                      <option value="0">Seleccione una Opcion</option>
+                      <option *ngFor="let item of JsonReceptionEstados" [value]="item.idEstado">
+                        {{item.descEstado}}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <strong> <label>Seleccione un Tipo</label> </strong>
+                    <select class="form-control" name="idTipo" id="idTipo" ngControl="idTipo" required>
+                      <option value="0">Seleccione una Opcion</option>
+                      <option *ngFor="let item of JsonReceptionTipoUsuarios" [value]="item.idTipo">
+                        {{item.descTipo}}
+                      </option>
+                    </select>
+                  </div>
+                </nb-card-body>
+              </nb-card>
+            </div>
+            <div class="col-lg-6">
+              <nb-card>
+                <nb-card-body>
+                  <div class="form-control">
+                    <div class="row demo-checkboxes-radio">
+                      <div class="demo-checkboxes col-sm-6">
+                        <nb-checkbox [value]="true">Vista Publica</nb-checkbox>
+                      </div>
+                      <div class="demo-checkboxes col-sm-6">
+                        <nb-checkbox>Espacio Padre</nb-checkbox>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-control">
+                    <div class="form-group">
+                      <strong> <label>Seleccione un País</label> </strong>
+                      <!-- <select #idPais class="form-control" id="idPais" name="idPais" ngControl="idPais" [(ngModel)]="_activityModel.idPais"
+                        (change)="organizacionesIdTipoIdPaisListService(_activityModel.idTipoOrganizacion, _activityModel.idPais )">
+                        <option value="0">**** Selecciona el País de la Organizacion ****</option>
+                        <option *ngFor="let item of JsonReceptionPaises" [value]="item.idPais">
+                          {{item.descPais}}
+                        </option>
+                      </select> -->
+                      <angular2-multiselect [data]="dropdownListPais" [(ngModel)]="selectedItemsPais" [settings]="dropdownSettings"
+                        (onSelect)="onItemSelectPais($event)" required></angular2-multiselect>
+                    </div>
+                  </div>
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-primary btn-group-icon btn-group-divider">
+                      <i class="nb-plus-circled"></i>
+                    </button>
+                    <button type="button" (click)="newUsuarioService()" class="btn btn-primary">Guardar</button>
+                    <button type="button" class="btn btn-warning">Cancelar</button>
+                  </div>
+                </nb-card-body>
+              </nb-card>
+            </div>
+          </div>
+        </nb-tab>
+        <!-- Comienzo de estructura del tab dos donde se consultan los espacios de trabajo -->
+        <nb-tab tabTitle="Mantenimiento/Consultar">
+          <div class="col-lg-12">
+            <nb-card>
+              <nb-card-body>
+                <table class="table table-hover table-striped table-bordered" id="tableIdInterna">
+                  <thead>
+                    <tr class="tHeadSearch">
+                      <th scope="col" colspan="2">
+                        <input type="text" class="form-control" placeholder="Buscar Id Interna :">
+                      </th>
+                    </tr>
+                    <tr class="tHeadTable">
+                      <th scope="col" style="width: 5%;">No</th>
+                      <th scope="col" style="width: 10%;">Codigo</th>
+                      <th scope="col" style="width: 20%;">Espacio de Trabajo</th>
+                      <th scope="col" style="width: 20%;">Descripcion del Espacio</th>
+                      <th scope="col" style="width: 20%;">Tipo de Organización</th>
+                      <th scope="col" style="width: 20%;">País de Organización</th>
+                      <th scope="col" style="width: 35%;">Organización</th>
+                      <th scope="col" style="width: 15%;">Estado</th>
+                      <th scope="col" style="width: 5%;">Acción</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td>
+                        <!-- <div class="input-group input-group-sm" id="tdIdInterna">
+                          <input type="text" placeholder="ID Interna" class="form-control" value="" />
+                        </div> -->
+                        <!-- {{ itemIdInterna.idInterna | uppercase }} -->
+
+                      </td>
+                      <td>
+                        <img class="pointerMouse" src="../../../../assets/icons/forms/rubbish-bin_24x.png">
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </nb-card-body>
+            </nb-card>
+          </div>
+        </nb-tab>
+      </nb-tabset>
+    </nb-card>
+  </div>
+</div>

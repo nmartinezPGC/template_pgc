@@ -14,6 +14,7 @@ export class UsuarioModel {
         public apellido2Usuario: string,
         public codUsuario: string,
         public emailUsuario: string,
+        public direccion: string,
         public fechaCreacion: Date,
         public fechaModificacion: Date,
         public horaCreacion: Date,
@@ -30,6 +31,18 @@ export class UsuarioModel {
         public idTipoUsuario: { idTipo: number },
         public idTipo: number,
         public descTipoUsuario: string,
+        // mapeo de relacion tipo de organizacion de el usuario
+        public idTipoOrganizacionUsuario: { idTipoOrganizacion: number },
+        public idTipoOrganizacion: number,
+        public descTipoOrganizacion: string,
+        // mapeo de relacion categoria de organizacion de usuario
+        public idCatOrganizacionUsuario: { idCatOrganizacion: number },
+        public idCatOrganizacion: number,
+        public descCatOrganizacion: string,
+        // mapeo de relacion tipo de usuario
+        public idOrganizacionUsuario: { idOrganizacion: number },
+        public idOrganizacion: number,
+        public descOrganizacion: string,
         //  datos generales del usuario
         public idUsuario: number,
         public imagenUsuario: string,
@@ -37,14 +50,6 @@ export class UsuarioModel {
         public nombre1Usuario: string,
         public nombre2Usuario: string,
         public passwordUsuario: string,
-        public idRol: number,
-        // public estadoUsuario: boolean = true,
-
-
-
-        // mapeo de la relacion del rol del usuario
-        // public idRolUsuario: { idRol: number },
-        // public idRol: number,
-        // public descripcionRolUsuario: string,
+        public rol: number,
     ) { }
 }
