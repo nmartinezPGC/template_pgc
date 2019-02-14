@@ -63,7 +63,7 @@ export class NewActivityComponent implements OnInit {
       title: 'Users',
       icon: 'nb-person',
       route: './pages/activities/datos-generales',
-    }
+    },
   ];
 
   // Variables de Configuracion del Usuario
@@ -226,7 +226,7 @@ export class NewActivityComponent implements OnInit {
   ****************************************************************************/
   ngOnInit() {
     /** spinner starts on init */
-    this.msgLoader = "Cargando";
+    this.msgLoader = 'Cargand';
     this._spinner.show();
 
     /**
@@ -241,7 +241,7 @@ export class NewActivityComponent implements OnInit {
       '', '', '', // Organizaciones Descripciones
       null, 0, null, 0, true, // Datos de Auditoria
       null, null, null, null, null, // Fechas de Planifiacion
-      null, 0, null,// CSS
+      null, 0, null, // CSS
     );
 
     /**
@@ -1191,7 +1191,7 @@ export class NewActivityComponent implements OnInit {
     }
 
     /** spinner starts on Start Function */
-    this.msgLoader = "Ingresando la Información del Proyecto";
+    this.msgLoader = 'Ingresando la Información del Proyecto';
     this._spinner.show();
 
     /**

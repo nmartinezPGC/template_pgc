@@ -16,7 +16,7 @@ const routes: Routes = [{
     {
       path: 'datos-generales',
       component: DatosGeneralesComponent,
-    }
+    },
   ],
 }];
 
