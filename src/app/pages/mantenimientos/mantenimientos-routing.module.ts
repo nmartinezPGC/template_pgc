@@ -49,8 +49,9 @@ const routes: Routes = [{
       path: 'mant-espacios-trabajo/espacios-trabajo',
       component: EspaciosTrabajoComponent,
     },
+    {
       path: 'mant-espacios-trabajo/organizacion',
-      component: OrganizacionComponent,
+      component: OrganizacionComponent,//solucion de problema #54
     },
   ],
 }];
