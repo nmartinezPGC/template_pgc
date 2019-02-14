@@ -171,7 +171,7 @@ export class GrupoTrabajoComponent implements OnInit {
         } else if (response.status === 200) {
           this.showToast('default', 'La Información del Tipo de Organozacion, se ha ingresado con exito', response.message);
           // Carga la tabla Nuevamente
-           this.listarTipoOrganizacion();
+          this.listarTipoOrganizacion();
         }
       },
       error => {
@@ -304,7 +304,7 @@ export class GrupoTrabajoComponent implements OnInit {
   onDeleteConfirm1(event) {
     if (window.confirm('Esta seguro en Inhabilitar este tipo de organizacion?')) {
       this._grupoModel.idTipoOrganizacion = event.data.idTipoOrganizacion;
-     // this._perfilModel.idTipo = event.data.idTipoPerfil.idTipo;
+      // this._perfilModel.idTipo = event.data.idTipoPerfil.idTipo;
       this.deleteTipoOrganizacion();
       event.confirm.resolve(event.newData);
     } else {
@@ -328,8 +328,8 @@ export class GrupoTrabajoComponent implements OnInit {
     } else if (_grupoModel.descTipoOrganizacion === null || _grupoModel.descTipoOrganizacion === '') {
       this.responsedata.msg = 'Desbes ingresar un nombre de organizacion para continuar';
       this.responsedata = true;
-    } else if (_grupoModel.acronimoTipoOrganizacion === null || _grupoModel.acronimoTipoOrganizacion  === '') {
-this.responsedata.msg = 'Debes de ingresar un acronimo a la organiacion para continuar';
+    } else if (_grupoModel.acronimoTipoOrganizacion === null || _grupoModel.acronimoTipoOrganizacion === '') {
+      this.responsedata.msg = 'Debes de ingresar un acronimo a la organiacion para continuar';
       this.responsedata = true;
     }
     return this.responsedata;

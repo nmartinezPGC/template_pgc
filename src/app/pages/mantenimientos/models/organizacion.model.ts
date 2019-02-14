@@ -35,7 +35,7 @@ export class OrganizacionModel {
 
         // mapeo de la variables que estan relacionadas con la tabla
         public idCatOrganizacion: { idCatOrganizacion: number },
-        public idCatOrganizacion1 : number
+        public idCatOrganizacion1: number,
 
         // mapeo de la variables que estan relacionadas con la tabla
     ) {

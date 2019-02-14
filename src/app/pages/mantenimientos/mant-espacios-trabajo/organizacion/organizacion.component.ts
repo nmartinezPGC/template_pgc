@@ -16,7 +16,7 @@ import { OrganizacionModel } from '../../models/organizacion.model';
 import { OrganizacionService } from '../../services/organizaciones.service';
 
 @Component({
-  selector: 'organizacion',
+  selector: 'ngx-organizacion',
   templateUrl: './organizacion.component.html',
   styleUrls: ['./organizacion.component.scss'],
   providers: [OrganizacionService],
@@ -68,7 +68,7 @@ export class OrganizacionComponent implements OnInit {
   public responsedata: any;
 
   showLargeModal() {
-    const activeModal = this.modalService.open(OrganizacionModalComponent, { size: "lg", container: 'nb-layout', });
+    const activeModal = this.modalService.open(OrganizacionModalComponent, { size: 'lg', container: 'nb-layout' });
     activeModal.componentInstance.modalHeader = 'Large Modal';
   }
 
@@ -145,7 +145,7 @@ export class OrganizacionComponent implements OnInit {
       true, 0, null, null, null, null, null, null, null, null, false, false, false, false, null, null,
       null, null,
       null, null,
-      null, null
+      null, null,
     );
     this.TipoOrganizacion();
     this.ListAllCategoria();
