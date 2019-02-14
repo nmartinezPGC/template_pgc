@@ -2,6 +2,10 @@
 @import '~bootstrap/scss/mixins/breakpoints';
 @import '~@nebular/theme/styles/global/bootstrap/breakpoints';
 
+@import '../../../../@theme/styles/themes';
+@import '~bootstrap/scss/mixins/breakpoints';
+@import '~@nebular/theme/styles/global/bootstrap/breakpoints';
+
 
 @include nb-install-component() {
   nb-tabset {
@@ -150,14 +154,38 @@ Seccion de formularios
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(169, 68, 66, 0.6) !important;
   }
 }
-
-
 .ng2-smart-filter select {
   height: calc(2rem + 4px) !important;
   padding: 0 10px !important;
 }
 
-table-cell-default-editor select-editor select {
-  height: calc(2rem + 8px) !important;
-  padding: 0 10px !important;
+
+// Estilo de Checkbox
+.fieldCheck {
+    border: #dadfe6 solid 2px;
+    padding: 5px 0 0 10px;
+}
+
+// estilo de la tabla
+.tHeadTable {
+  height: 50px;
+}
+.tHeadSearch {
+  border: none;
+}
+.pointerMouse {
+  cursor: pointer;
+}
+.modalxl {
+  max-width: 1000px;
+}
+.modal-header {
+    background-color: #0480be;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+     border-top-left-radius: 5px;
+     border-top-right-radius: 5px;
+
 }
