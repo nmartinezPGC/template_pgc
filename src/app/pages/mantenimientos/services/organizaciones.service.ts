@@ -131,4 +131,20 @@ newOrganizacion(jsonOrganizacion): Observable<any> {
     params: { 'tokenApi': this.tokenHeader },
   });
 }// FIN | FND-00009
+
+   /****************************************************************************
+  * Funcion: FND-00009
+  * Fecha: 13-10-2018
+  * Descripcion: Metodo para obtener los Datos de los Paises
+  * Objetivo: datos de los Tipos de Paises
+  * Params: { }
+  ****************************************************************************/
+ FindByIdOrganizacion(idOrganizacionIn:number): Observable<any> {
+  // Retorno de la Funcion
+  const idOrganizacion: number = idOrganizacionIn;
+  return this._http.get(this._systemEndPointsService.getEndPointService('organizacionesGroup', 5) + idOrganizacion , {
+    headers: this.headers,
+    params: { 'tokenApi': this.tokenHeader },
+  });
+}// FIN | FND-00009
 }

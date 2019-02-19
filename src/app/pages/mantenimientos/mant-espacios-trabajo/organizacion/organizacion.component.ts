@@ -8,13 +8,14 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { OrganizacionModalComponent } from './organizaciones.modal.component';
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster'; // Servicio de Notificaciones
 import { Router } from '@angular/router';
 import { OrganizacionModel } from '../../models/organizacion.model';
+import { OrganizacionModal } from '../../models/organizacion.modal';
 import { OrganizacionService } from '../../services/organizaciones.service';
-
+import { delay } from 'q';
 @Component({
   selector: 'ngx-organizacion',
   templateUrl: './organizacion.component.html',
@@ -30,6 +31,7 @@ export class OrganizacionComponent implements OnInit {
   public JsonCategoria: any;
   public JsonReceptionPaises: any;
   public JsonReceptionOrganizaciones: any;
+  public JsonReceptionFyByOrganizaciones: any;
   data2: any;
   data: any;
   config: ToasterConfig;
@@ -40,6 +42,7 @@ export class OrganizacionComponent implements OnInit {
   theCheckbox = false;
   data3: any;
   arrayOrganizacion: any;
+  data4: any;
 
   /**
    * Configuracion del Dropdow List
@@ -67,9 +70,18 @@ export class OrganizacionComponent implements OnInit {
   settings: any;
   public responsedata: any;
 
-  showLargeModal() {
+
+
+  showLargeModal(idOrganizacion: number, codOrganizacion: string) {
     const activeModal = this.modalService.open(OrganizacionModalComponent, { size: 'lg', container: 'nb-layout' });
-    activeModal.componentInstance.modalHeader = 'Large Modal';
+    activeModal.componentInstance.modalHeader = 'Large Modal Parametro ';
+    activeModal.componentInstance.idOrganizacion = idOrganizacion;
+    activeModal.componentInstance.codOrganizacion = codOrganizacion;
+
+    activeModal.componentInstance.JsonReceptionFyByOrganizaciones = this.JsonReceptionFyByOrganizaciones;
+
+    this.data3 = this.JsonReceptionOrganizaciones;
+    this.arrayOrganizacion = new Array();
   }
 
 
@@ -374,4 +386,7 @@ export class OrganizacionComponent implements OnInit {
       },
     );
   } // FIN | perfilesTipoService
+
+
+
 }
