@@ -25,6 +25,8 @@ import { MyDatePickerModule } from 'mydatepicker';
 
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NbRouteTabsetModule } from '@nebular/theme/components/route-tabset/route-tabset.module';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import { UbicacionComponent } from './components/ubicacion/ubicacion.component';
 
 @NgModule({
   imports: [
@@ -40,11 +42,13 @@ import { NbRouteTabsetModule } from '@nebular/theme/components/route-tabset/rout
     FormsModule,
     MyDatePickerModule, // Modulo de Fechas
     NgxSpinnerModule, // Modulo de Spinner
-    NbRouteTabsetModule, // Modulo de Rutas para los tabs
+    NbRouteTabsetModule, // Modulo de Rutas para los tabs,
+    LeafletModule.forRoot(),
   ],
   declarations: [
     ...routedComponents,
     FilterdataPipe,
+    UbicacionComponent,
   ],
   providers: [
     // SmartTableService, // Defincion del Servicio que provee los Datos de la Tabla: ID's Internas

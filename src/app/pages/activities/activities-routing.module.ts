@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ActivitiesComponent } from './activities.component';
 import { NewActivityComponent } from './new-activity/new-activity.component';
 import { DatosGeneralesComponent } from './components/datos-generales/datos-generales.component';
+import { GeolocalizacionComponent } from './components/geolocalizacion/geolocalizacion.component';
 
 const routes: Routes = [{
   path: '',
@@ -16,6 +17,10 @@ const routes: Routes = [{
     {
       path: 'datos-generales',
       component: DatosGeneralesComponent,
+    },
+    {
+      path: 'geolocalizacion',
+      component: GeolocalizacionComponent,
     },
   ],
 }];
@@ -30,4 +35,5 @@ export const routedComponents = [
   ActivitiesComponent,
   NewActivityComponent,
   DatosGeneralesComponent,
+  GeolocalizacionComponent,
 ];

@@ -1,0 +1,8 @@
+<!-- Diseño de la Ventana de Ubicacion -->
+<!-- ==================================================================================== -->
+<nb-card accent="warning" status="primary">
+  <nb-card-header>Ubicación del Proyecto | {{ idProyectoTab }} </nb-card-header>
+  <nb-card-body>
+    <div leaflet [leafletOptions]="options" [leafletLayersControl]="layersControl"></div>
+  </nb-card-body>
+</nb-card>

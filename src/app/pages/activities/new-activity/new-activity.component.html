@@ -325,7 +325,8 @@
                       <strong> <label>Resultados Esperados</label> </strong>
                       <div class="form-group">
                         <textarea #resultadosEsperados class="form-control" id="resultadosEsperados" name="resultadosEsperados"
-                          ngControl="resultadosEsperados" [(ngModel)]="_activityModel.resultadosEsperados" placeholder="Resultados Esperados del Proyecto/Programa" rows="5"></textarea>
+                          ngControl="resultadosEsperados" [(ngModel)]="_activityModel.resultadosEsperados" placeholder="Resultados Esperados del Proyecto/Programa"
+                          rows="5"></textarea>
                       </div>
                     </div>
                   </div>
@@ -334,7 +335,8 @@
                       <strong> <label>Resultados a la Fecha</label> </strong>
                       <div class="form-group">
                         <textarea #resultadosAlaFecha class="form-control" id="resultadosAlaFecha" name="resultadosAlaFecha"
-                          ngControl="resultadosAlaFecha" [(ngModel)]="_activityModel.resultadosAlaFecha" placeholder="Resultados a la Fecha del Proyecto/Programa" rows="5"></textarea>
+                          ngControl="resultadosAlaFecha" [(ngModel)]="_activityModel.resultadosAlaFecha" placeholder="Resultados a la Fecha del Proyecto/Programa"
+                          rows="5"></textarea>
                       </div>
                     </div>
                   </div>
@@ -404,13 +406,6 @@
                   <div class="col-sm-3">
                     <div class="form-group">
                       <strong> <label>País Organización</label> </strong>
-                      <!-- <select #idPais class="form-control" id="idPais" name="idPais" ngControl="idPais" [(ngModel)]="_activityModel.idPais"
-                                          (change)="organizacionesIdTipoIdPaisListService(_activityModel.idTipoOrganizacion, _activityModel.idPais )">
-                                          <option value="0">**** Selecciona el País de la Organizacion ****</option>
-                                          <option *ngFor="let item of JsonReceptionPaises" [value]="item.idPais">
-                                            {{item.descPais}}
-                                          </option>
-                                        </select> -->
                       <angular2-multiselect [data]="dropdownListPais" [(ngModel)]="selectedItemsPais" [settings]="dropdownSettings"
                         (onSelect)="onItemSelectPais($event)"></angular2-multiselect>
                     </div>
@@ -572,31 +567,6 @@
                 <button class="btn btn-warning with-margins" nbPopover="Hello, how are you today?" nbPopoverMode="hint"
                   nbPopoverPlacement="right" (click)="newActividadIdInterna()">Probar</button>
               </div>
-
-
-              <!-- <div class="col-sm-6">
-                <div class="btn-group"> -->
-              <!-- Boton de Guardar como Borrador -->
-              <!-- <button type="button" class="btn btn-warning btn-group-icon btn-group-divider">
-                    <i class="ion-clipboard"></i>
-                  </button> -->
-              <!-- <button type="button" class="btn btn-warning" nbPopover="Guarda la Información de tu Proyecto de forma temporal; para que luego puedas seguir actualizandola."
-                    nbPopoverMode="hint" (click)="saveActivity(1)">Guardar como borrador</button> -->
-
-              <!-- Boton de Guardar y Enviar -->
-              <!-- <button type="button" class="btn btn-primary btn-group-icon btn-group-divider botonSave">
-                    <i class="ion-folder"></i>
-                  </button> -->
-              <!-- <button type="button" class="btn btn-primary botonSave" (click)="saveActivity(2)">Guardar y Enviar</button> -->
-
-              <!-- Boton de Limpiar -->
-              <!-- <button type="button" class="btn btn-danger btn-group-icon btn-group-divider">
-                    <i class="ion-backspace-outline"></i>
-                  </button> -->
-              <!-- <button type="button" class="btn btn-danger" (click)="resetActivity()">Limpiar Formulario</button>
-                  <button type="button" class="btn btn-warning" (click)="ejecutar()">Probar</button>
-                </div> -->
-              <!-- </div> -->
             </div>
 
           </nb-card-body>
@@ -604,22 +574,35 @@
         <!-- Fin de Datos Generales -->
         <!-- ==================================================================================== -->
 
-        <!-- Tab #2 de Sectores y Programas del Proyecto/Programa -->
-        <nb-tab tabTitle="Paso #2 | Sectores y Programas">
-          <span id="sectorPrograms">Content #2</span>
+        <!-- Tab #2 de Ubicacion Proyecto/Programa -->
+        <nb-tab tabTitle="Paso #2 | Datos de Ubicación" tabIcon="nb-email" responsive>
+          <!-- <span id="sectorPrograms">Content #2</span> -->
+          <ngx-ubicacion [idProyectoTab]="idProyectoTab">
+          </ngx-ubicacion>
         </nb-tab>
-        <!-- Fin de Datos Generales -->
+        <!-- Fin de Datos de Ubicacion Proyecto/Programa -->
         <!-- ==================================================================================== -->
 
-        <nb-tab tabTitle="Paso #3 | Información Financiera">
+        <!-- Tab #3 de Sectores y Programas -->
+        <nb-tab tabTitle="Paso #3 | Sectores y Programas">
           <span>Content #3</span>
         </nb-tab>
-        <nb-tab tabTitle="Paso #4 | Datos de Ubicación">
+        <!-- Fin de Datos de Sectores y Programas -->
+        <!-- ==================================================================================== -->
+
+        <!-- Tab #4 de Sectores y Programas -->
+        <nb-tab tabTitle="Paso #4 | Información Financiera">
           <span>Content #4</span>
         </nb-tab>
+        <!-- Fin de Datos de Información Financiera -->
+        <!-- ==================================================================================== -->
+
+        <!-- Tab #5 de Sectores y Programas -->
         <nb-tab tabTitle="Paso #5 | Documentos de Soporte">
           <span>Content #5</span>
         </nb-tab>
+        <!-- Fin de Datos de Documentos de Soporte -->
+        <!-- ==================================================================================== -->
       </nb-tabset>
     </nb-card>
   </div>

@@ -1,0 +1,99 @@
+<!-- Diseño de la Ventana de Ubicacion -->
+<!-- ==================================================================================== -->
+<nb-card accent="warning" status="primary">
+  <nb-card-header>Información de la Ubicación del Proyecto | {{ idProyectoTab }} </nb-card-header>
+  <nb-card-body>
+    <div class="row">
+      <div class="col-sm-2">
+        <!-- Columna de Nivel de Implementación -->
+        <div class="form-group">
+          <strong> <label>Nivel de Implementación</label> </strong>
+          <!-- <select #idTipoOrganizacion class="form-control" id="idTipoOrganizacion" name="idTipoOrganizacion" ngControl="idTipoOrganizacion"
+            [(ngModel)]="_activityModel.idTipoOrganizacion" (change)="categoriasOrganizacionListService(_activityModel.idTipoOrganizacion)">
+            <option value="0">**** Selecciona el tipo de Organizacion ****</option>
+            <option *ngFor="let item of JsonReceptionTiposOrganizacion" [value]="item.idTipoOrganizacion">
+              {{item.descTipoOrganizacion}}
+            </option>
+          </select> -->
+        </div>
+      </div>
+
+
+      <!-- Columna de Nivel Unicacion de Implementación -->
+      <div class="col-sm-3">
+        <div class="form-group">
+          <strong> <label>Ubicación de Implementación</label> </strong>
+          <!-- <angular2-multiselect [data]="dropdownListPais" [(ngModel)]="selectedItemsPais" [settings]="dropdownSettings"
+            (onSelect)="onItemSelectPais($event)"></angular2-multiselect> -->
+        </div>
+      </div>
+
+      <!-- Columna de Unicacion de Implementación -->
+      <div class="col-sm-3">
+        <div class="form-group">
+          <strong> <label>Ubicación</label> </strong>
+          <!-- <angular2-multiselect [data]="dropdownListPais" [(ngModel)]="selectedItemsPais" [settings]="dropdownSettings"
+            (onSelect)="onItemSelectPais($event)"></angular2-multiselect> -->
+        </div>
+      </div>
+
+      <!-- Porcentaje de Participacion -->
+      <div class="col-sm-2">
+        <div class="form-group">
+          <strong> <label>% de Participación</label> </strong>
+          <input type="text" placeholder="% de Participación" class="form-control" />
+        </div>
+      </div>
+
+      <!-- Porcentaje de Participacion -->
+      <div class="col-sm-2">
+        <button class="btn btn-primary botonSave with-margins" nbPopover="Ingresa la Información seleccionada al listado de las Ubicaciones del Proyecto"
+          nbPopoverMode="hint" nbPopoverPlacement="top" (click)="saveActivity(2)">Ingresar Ubicación</button>
+      </div>
+    </div>
+
+
+    <!-- Fila de las Ubicaciones seleccionadas -->
+    <div class="row">
+      <div class="col-sm-12">
+        <!-- Tabla de las Ubicaciones -->
+        <table class="table table-hover table-striped table-bordered" id="tableIdInterna">
+          <thead>
+            <tr class="tHeadSearch">
+              <th scope="col" colspan="2">
+                <input type="text" class="form-control" [(ngModel)]="queryString" placeholder="Buscar Ubicación">
+              </th>
+            </tr>
+            <tr class="tHeadTable">
+              <th scope="col" style="width: 2%;">No</th>
+              <th scope="col" style="width: 15%;">Nivel de Implementación</th>
+              <th scope="col" style="width: 15%;">Ubicación de Implementación</th>
+              <th scope="col" style="width: 40%;">Ubicación</th>
+              <th scope="col" style="width: 5%;">% de Participación</th>
+              <th scope="col" style="width: 5%;">Acción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let itemIdInterna of JsonIdInternaOrganizacion | filterdata: queryString : 'idInterna' | paginate: { itemsPerPage: 3, currentPage: p };let homeTableIndex = index">
+              <td>{{ homeTableIndex + 1 }}</td>
+              <td>{{ itemIdInterna.descOrganizacion }}</td>
+              <td>{{ itemIdInterna.descOrganizacion }}</td>
+              <td>{{ itemIdInterna.descOrganizacion }}</td>
+              <td>
+                {{ itemIdInterna.idInterna }}
+              </td>
+              <td>
+                <img class="pointerMouse" src="../../../../assets/icons/forms/rubbish-bin_24x.png" alt="" (click)="deleteRowHomeForm(homeTableIndex, itemIdInterna.idInterna)">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- paginador de la tabla -->
+        <pagination-controls autoHide="true" responsive="true" previousLabel="Anterior" nextLabel="Siguiente"
+          (pageChange)="p = $event"></pagination-controls>
+
+      </div>
+    </div>
+  </nb-card-body>
+</nb-card>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import * as L from 'leaflet';
 import 'style-loader!leaflet/dist/leaflet.css';
@@ -6,18 +6,23 @@ import 'style-loader!leaflet/dist/leaflet.css';
 import { icon, latLng, marker, polyline, tileLayer } from 'leaflet';
 
 @Component({
-  selector: 'ngx-leaflet',
-  styleUrls: ['./leaflet.component.scss'],
-  template: `
-    <nb-card>
-      <nb-card-header>Leaflet Maps</nb-card-header>
-      <nb-card-body>
-        <div leaflet [leafletOptions]="options" [leafletLayersControl]="layersControl"></div>
-      </nb-card-body>
-    </nb-card>
-  `,
+  selector: 'ngx-geolocalizacion',
+  templateUrl: './geolocalizacion.component.html',
+  styleUrls: ['./geolocalizacion.component.scss']
 })
-export class LeafletComponent {
+export class GeolocalizacionComponent implements OnInit {
+  // Dato
+  @Input() dato = null;
+
+  // Variables entre Tabs | Components
+  @Input() idProyectoTab: number;
+
+  ngOnChanges(changes) {
+    if (changes['idProyectoTab']) {
+      // Aquí ya sabes que has recibido un nuevo dato desde cualquier componente.
+      const nuevoDato = changes.idProyectoTab;
+    }
+  }
 
   // Define our base layers so we can reference them multiple times
   streetMaps = tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -86,4 +91,10 @@ export class LeafletComponent {
     zoom: 7,
     center: latLng([46.879966, -121.726909])
   };
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
 }

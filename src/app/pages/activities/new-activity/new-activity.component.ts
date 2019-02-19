@@ -6,7 +6,7 @@
  * @version 1.0.0
  * @fecha 10/01/2019
  */
-import { Component, OnInit, ChangeDetectorRef, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ElementRef, ViewChild, Input, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 
 // AutoCompleter Services
@@ -57,6 +57,15 @@ export class NewActivityComponent implements OnInit {
   // Manipulacion del DOM
   @ViewChild('nombreActividad') mySelectnombreActividad: ElementRef;
   @ViewChild('idInterna') mySelectIdInterna: ElementRef;
+
+  // Datos compartidos entre Componentes
+  public idProyectoTab: number = 0;
+
+  datos: string;
+
+  dato(dato) {
+    this.dato = dato;
+  }
 
   tabs: any[] = [
     {
@@ -212,6 +221,10 @@ export class NewActivityComponent implements OnInit {
      del Usuario */
     this.userDatailsService();
 
+    this.dato('Hola Modal');
+
+    this.idProyectoTab;
+
     // this.source = new LocalDataSource(this.data); // create the source
 
   } // FIN | constructor
@@ -226,7 +239,7 @@ export class NewActivityComponent implements OnInit {
   ****************************************************************************/
   ngOnInit() {
     /** spinner starts on init */
-    this.msgLoader = 'Cargand';
+    this.msgLoader = 'Cargando';
     this._spinner.show();
 
     /**
@@ -494,7 +507,7 @@ export class NewActivityComponent implements OnInit {
           this.showToast('error', 'Error al Obtener la Información del Usuario', result.message);
         } else {
           this.JsonReceptionUserDetail = result.data;
-          this.idTipoOrganizacionUsario = this.JsonReceptionUserDetail.idTipoOrganizacionUsario.idTipoOrganizacion;
+          this.idTipoOrganizacionUsario = this.JsonReceptionUserDetail.idTipoOrganizacionUsuario.idTipoOrganizacion;
 
           setTimeout(() => {
             /** spinner ends after 3 seconds */
@@ -1111,7 +1124,9 @@ export class NewActivityComponent implements OnInit {
       this.changeDetectorRef.detectChanges();
 
       // Borramos la Id Interna de la BD
-      this.deletedActividadIdInterna(codIdInternaIn);
+      if (this._activityModel.idActividad != 0 || this._activityModel.idActividad != null ){
+        this.deletedActividadIdInterna(codIdInternaIn);
+      }
     }
   } // FIN deleteRowHomeForm
 
@@ -1207,6 +1222,7 @@ export class NewActivityComponent implements OnInit {
       alert('Estado de Borrador Existente');
       // Estado de Validacion de Proyecto | Borrador Existente
       this._activityModel.idEstadoV = 15;
+      this.idProyectoTab = this._activityModel.idActividad;
       this._activityModel.idEstadoValid = { idEstado: this._activityModel.idEstadoV };
       this.editActivity(this._activityModel.idActividad);
     }
