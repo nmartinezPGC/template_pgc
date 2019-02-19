@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 
 import * as L from 'leaflet';
 import 'style-loader!leaflet/dist/leaflet.css';
@@ -10,7 +10,7 @@ import { icon, latLng, marker, polyline, tileLayer } from 'leaflet';
   templateUrl: './geolocalizacion.component.html',
   styleUrls: ['./geolocalizacion.component.scss'],
 })
-export class GeolocalizacionComponent implements OnInit {
+export class GeolocalizacionComponent implements OnInit, OnChanges {
   // Dato
   @Input() dato = null;
 

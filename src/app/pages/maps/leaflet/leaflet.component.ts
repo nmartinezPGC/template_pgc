@@ -45,7 +45,7 @@ export class LeafletComponent {
       iconSize: [25, 41],
       iconAnchor: [13, 41],
       iconUrl: 'leaflet/marker-icon.png',
-      shadowUrl: 'leaflet/marker-shadow.png'
+      shadowUrl: 'leaflet/marker-shadow.png',
     }),
   });
 

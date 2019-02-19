@@ -1124,7 +1124,7 @@ export class NewActivityComponent implements OnInit {
       this.changeDetectorRef.detectChanges();
 
       // Borramos la Id Interna de la BD
-      if (this._activityModel.idActividad !== 0 || this._activityModel.idActividad !== null ){
+      if (this._activityModel.idActividad !== 0 || this._activityModel.idActividad !== null ) {
         this.deletedActividadIdInterna(codIdInternaIn);
       }
     }
