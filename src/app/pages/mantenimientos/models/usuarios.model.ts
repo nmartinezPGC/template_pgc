@@ -14,6 +14,7 @@ export class UsuarioModel {
         public apellido2Usuario: string,
         public codUsuario: string,
         public emailUsuario: string,
+        public emailUsuario2: string,
         public direccion: string,
         public fechaCreacion: Date,
         public fechaModificacion: Date,
@@ -50,6 +51,7 @@ export class UsuarioModel {
         public nombre1Usuario: string,
         public nombre2Usuario: string,
         public passwordUsuario: string,
+        public passwordUsuario2: string,
         public rol: number,
     ) { }
 }
