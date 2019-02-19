@@ -40,6 +40,10 @@ export class UsuariosComponent implements OnInit {
   public JsonReceptionTipoOrganizacion: any;
   public JsonReceptionOrganizacion: any;
 
+  public JsonReceptionCategoriasOrganizacion: any;
+  protected JsonReceptionPaisOrganizacionesData: any;
+  protected JsonReceptionTipoPaisOrganizacionesData: any;
+
   // Instacia de la variable del Modelo | Json de Parametros
   public _usuarioModel: UsuarioModel;
 
@@ -165,7 +169,7 @@ export class UsuariosComponent implements OnInit {
     // Inicializacion del Modelo de la Clase
     this._usuarioModel = new UsuarioModel(
       true, null, null, null, null,
-      null, null, null, null, null, /* comienza los campos relacion */ null, 0, '', null, 0, '', null, 0, '', null, 0, '', null, 0, '', null, 0, '', /* datos del usuario */ 0, null, null, null, null, null, 1);
+      null, null, null, null, null, null, /* comienza los campos relacion */ null, 0, '', null, 0, '', null, 0, '', null, 0, '', null, 0, '', null, 0, '', /* datos del usuario */ 0, null, null, null, null, null, null, 1);
     // inicializar la lista de tipo de perfiles
     this.usuariosTipoService();
     // inicializa la lista de estados del usuario
@@ -570,6 +574,7 @@ export class UsuariosComponent implements OnInit {
       this._usuarioModel.apellido1Usuario = event.newData.apellido1Usuario;
       this._usuarioModel.apellido2Usuario = event.newData.apellido2Usuario;
       this._usuarioModel.codUsuario = event.newData.codUsuario;
+      this._usuarioModel.direccion = event.newData.direccion;
 
       this._usuarioModel.idEstado = event.newData.idEstado;
       this._usuarioModel.idEstadoUsuario = { idEstado: this._usuarioModel.idEstado };
@@ -579,6 +584,15 @@ export class UsuariosComponent implements OnInit {
 
       this._usuarioModel.idTipo = event.newData.idTipo;
       this._usuarioModel.idTipoUsuario = { idTipo: this._usuarioModel.idTipo };
+
+      this._usuarioModel.idTipoOrganizacion = event.newData.idTipoOrganizacion;
+      this._usuarioModel.idTipoOrganizacionUsuario = { idTipoOrganizacion: this._usuarioModel.idTipoOrganizacion };
+
+      this._usuarioModel.idCatOrganizacion = event.newData.idCatOrganizacion;
+      this._usuarioModel.idCatOrganizacionUsuario = { idCatOrganizacion: this._usuarioModel.idCatOrganizacion };
+
+      this._usuarioModel.idOrganizacion = event.newData.idOrganizacion;
+      this._usuarioModel.idOrganizacionUsuario = { idOrganizacion: this._usuarioModel.idOrganizacion };
 
       this._usuarioModel.inicialesUsuario = event.newData.inicialesUsuario;
       this._usuarioModel.nombre1Usuario = event.newData.nombre1Usuario;
@@ -708,6 +722,9 @@ export class UsuariosComponent implements OnInit {
     } else if (usuarioModelIn.emailUsuario === null || usuarioModelIn.emailUsuario === '') {
       this.responsedata.msg = 'Debes ingresar el email del usuario';
       this.responsedata = true;
+    } else if (usuarioModelIn.direccion === null || usuarioModelIn.direccion === '') {
+      this.responsedata.msg = 'Debes ingresar la direccion del usuario';
+      this.responsedata = true;
     } else if (usuarioModelIn.passwordUsuario === null || usuarioModelIn.passwordUsuario === '') {
       this.responsedata.msg = 'Debes ingresar el segundo apellido del usuario';
       this.responsedata = true;
@@ -719,6 +736,15 @@ export class UsuariosComponent implements OnInit {
       this.responsedata = true;
     } else if (usuarioModelIn.descTipo === null || usuarioModelIn.descTipo === '') {
       this.responsedata.msg = 'Debes ingresar el tipo de perfil del usuario';
+      this.responsedata = true;
+    } else if (usuarioModelIn.descTipoOrganizacion === null || usuarioModelIn.descTipoOrganizacion === '') {
+      this.responsedata.msg = 'Debes ingresar el tipo de organizacion del usuario';
+      this.responsedata = true;
+    } else if (usuarioModelIn.descCatOrganizacion === null || usuarioModelIn.descCatOrganizacion === '') {
+      this.responsedata.msg = 'Debes ingresar la categoria de la organizacion del usuario';
+      this.responsedata = true;
+    } else if (usuarioModelIn.descOrganizacion === null || usuarioModelIn.descOrganizacion === '') {
+      this.responsedata.msg = 'Debes ingresar la organizacion del usuario';
       this.responsedata = true;
     }
     return this.responsedata;
@@ -862,6 +888,8 @@ export class UsuariosComponent implements OnInit {
  * Autor: Edgar Ramirez
  ****************************************************************************/
   private OrganizacionService() {
+    // Resetea todos los valores previos
+    this.JsonReceptionCategoriasOrganizacion = null;
     this._usuariosService.ListAllOrganizaciones().subscribe(
       response => {
         if (response.status !== 200) {
@@ -899,5 +927,138 @@ export class UsuariosComponent implements OnInit {
       },
     );
   } // FIN | OrganizacionService
+
+
+    /****************************************************************************
+  * Funcion: categoriasOrganizacionListService
+  * Object Number: 013.1
+  * Fecha: 18-02-2019
+  * Descripcion: Method categoriasOrganizacionListService of the Class
+  * Objetivo: categoriasOrganizacionListService listados de las Categorias de la
+  * Organizacion del Formulario de Actividad llamando a la API
+  ****************************************************************************/
+ private categoriasOrganizacionListService(idTipoOrganizacionSend: number) {
+  this._listasComunesService.getCategoriaOrganizacionByTipo(idTipoOrganizacionSend).subscribe(
+    result => {
+      // console.log(result.status);
+      if (result.status !== 200) {
+        // Respuesta del Error
+        this.JsonReceptionCategoriasOrganizacion = null;
+        this.showToast('error', 'Error al Obtener la Información de las Categorias de Organizacion', result.message);
+      } else if (result.status === 200) {
+        this.JsonReceptionCategoriasOrganizacion = result.data;
+        // console.log(this.JsonReceptionCategoriasOrganizacion);
+
+        // Ejecutamos la Consulta de las Organizaciones, segun el Tipo Seleccionado
+        if (this._usuarioModel.idPais === 0 || this._usuarioModel.idPais == null) {
+          this.organizacionesIdTipoListService(this._usuarioModel.idTipoOrganizacion);
+        } else {
+          this.organizacionesIdTipoIdPaisListService(this._usuarioModel.idTipoOrganizacion, this._usuarioModel.idPais)
+        }
+      }
+    },
+    error => {
+      this.showToast('error', 'Error al Obtener la Información de las Categorias de Organizacion', JSON.stringify(error.message));
+    },
+  );
+} // FIN | tiposOrganizacionListService
+
+
+  /****************************************************************************
+  * Funcion: organizacionesIdTipoListService
+  * Object Number: 016.2
+  * Fecha: 18-02-2019
+  * Descripcion: Method organizacionesIdTipoListService of the Class
+  * Objetivo: Buscar las Organizaciones segun el Filtro Aplicado, Tipo de
+  * Organizacion, en Formulario de Actividad llamando a la API
+  ****************************************************************************/
+ private organizacionesIdTipoListService(idTipoOrganizacion: number) {
+  // Cargamos el compoenete de AutoCompletar
+  this.dropdownList = [];
+  this.selectedItems = [];
+
+  // Condicion para evaluar que opcion se pulsa
+  this._listasComunesService.getIdTipoOrganizaciones(idTipoOrganizacion).subscribe(
+    result => {
+      // console.log(result.status);
+      if (result.status !== 200) {
+        // Resultados del Error
+        // Cargamos el compoenete de AutoCompletar
+        this.dropdownList = [];
+        this.selectedItems = [];
+
+        this.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', result.message);
+      } else if (result.status === 200) {
+        this.JsonReceptionPaisOrganizacionesData = result.data;
+        // console.log(this.JsonReceptionPaisOrganizacionesData);
+        // Asignacion de los Valores del Json al Select
+        this.dropdownList = this.JsonReceptionPaisOrganizacionesData.map((item) => {
+          return {
+            id: item.idOrganizacion,
+            itemName: item.descOrganizacion,
+            nombreTipoOrganizacion: item.idTipoOrganizacion.descTipoOrganizacion,
+            descPais: item.idPaisOrganizacion.descPais,
+            inicialesOrganizacion: item.inicalesOrganizacion,
+          }
+        })
+      }
+    },
+    error => {
+      this.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', JSON.stringify(error));
+    },
+  );
+} // FIN | organizacionesIdTipoListService
+
+
+  /****************************************************************************
+  * Funcion: organizacionesIdTipoIdPaisListService
+  * Object Number: 016
+  * Fecha: 18-02-2019
+  * Descripcion: Method organizacionesIdTipoIdPaisListService of the Class
+  * Objetivo: Buscar las Organizaciones segun el Filtro Aplicado, Tipo, Categoria
+  * y Pais de Organizacion, en Formulario de Usuarios llamando a la API
+  ****************************************************************************/
+ private organizacionesIdTipoIdPaisListService(idTipoOrganizacionSend: number, idPais: number) {
+  // Condicion para evaluar que opcion se pulsa
+  this._listasComunesService.getIdTipoIdPaisOrganizaciones(idTipoOrganizacionSend, idPais).subscribe(
+    result => {
+      if (result.status !== 200) {
+        // Resultados del Error
+        // Cargamos el compoenete de AutoCompletar
+        this.dropdownList = [];
+        this.selectedItems = [];
+
+        this.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', result.message);
+      } else if (result.status === 200) {
+        this.JsonReceptionTipoPaisOrganizacionesData = result.data;
+        /*this.data1 = this.JsonReceptionTipoPaisOrganizacionesData;
+
+        // Carga los Items para el List de la Smart table
+        this.listArrayOrg = new Array();
+
+        this.data1.forEach(element => {
+          this.listArrayOrg.push({ title: element['descOrganizacion'], value: element['idOrganizacion'] });
+        });
+
+        this.settings.columns.idOrganizacion.editor.config.list = this.listArrayOrg;
+        this.settings = Object.assign({}, this.settings);*/
+
+        // Asignacion de los Valores del Json al Select
+        this.dropdownList = this.JsonReceptionTipoPaisOrganizacionesData.map((item) => {
+          return {
+            id: item.idOrganizacion,
+            itemName: item.descOrganizacion,
+            nombreTipoOrganizacion: item.idTipoOrganizacion.descTipoOrganizacion,
+            descPais: item.idPaisOrganizacion.descPais,
+            inicialesOrganizacion: item.inicalesOrganizacion,
+          }
+        })
+      }
+    },
+    error => {
+      this.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', JSON.stringify(error.message));
+    },
+  );
+} // FIN | organizacionesIdTipoIdPaisListService
 
 }
