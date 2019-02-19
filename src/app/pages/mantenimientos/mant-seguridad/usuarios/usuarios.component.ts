@@ -169,7 +169,9 @@ export class UsuariosComponent implements OnInit {
     // Inicializacion del Modelo de la Clase
     this._usuarioModel = new UsuarioModel(
       true, null, null, null, null,
-      null, null, null, null, null, null, /* comienza los campos relacion */ null, 0, '', null, 0, '', null, 0, '', null, 0, '', null, 0, '', null, 0, '', /* datos del usuario */ 0, null, null, null, null, null, null, 1);
+      null, null, null, null, null, null, /* comienza los campos relacion */
+      null, 0, '', null, 0, '', null, 0, '', null, 0, '', null, 0, '', null, 0, '',
+      /* datos del usuario */ 0, null, null, null, null, null, null, 1);
     // inicializar la lista de tipo de perfiles
     this.usuariosTipoService();
     // inicializa la lista de estados del usuario
