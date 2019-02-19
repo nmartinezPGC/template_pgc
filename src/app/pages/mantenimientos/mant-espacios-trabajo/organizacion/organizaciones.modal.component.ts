@@ -15,7 +15,7 @@ import { nullSafeIsEquivalent, THIS_EXPR } from '@angular/compiler/src/output/ou
 })
 export class OrganizacionModalComponent implements OnInit {
   // @ ViewChild ( ' primaryColorSample ' );
-  muestra: string = "hola";
+
 
   @Input() idOrganizacion;
 
@@ -192,7 +192,7 @@ export class OrganizacionModalComponent implements OnInit {
           this._OrganizacionModal1.idPais = this.data4.idPaisOrganizacion.idPais;
 
           this.selectedItemsPais = [
-            { "id": this._OrganizacionModal1.idPais, "itemName": this._OrganizacionModal1.descPais },
+            { 'id': this._OrganizacionModal1.idPais, 'itemName': this._OrganizacionModal1.descPais },
           ];
 
 
