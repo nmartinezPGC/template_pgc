@@ -3,7 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 @Component({
   selector: 'ngx-ubicacion',
   templateUrl: './ubicacion.component.html',
-  styleUrls: ['./ubicacion.component.scss']
+  styleUrls: ['./ubicacion.component.scss'],
 })
 export class UbicacionComponent implements OnInit {
   // Variables entre Tabs | Components
