@@ -28,34 +28,34 @@
         <!-- Area de la estructura del primer tab donde se crean los usuarios-->
         <nb-tab tabTitle="Creacion de Usuario">
           <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-4">
               <nb-card>
                 <nb-card-body>
                   <div class="row full-name-inputs">
                     <div class="col-sm-6 input-group">
                       <input type="text" #nombre1Usuario="ngModel" placeholder="Primer Nombre" class="form-control"
-                        name="nombre1Usuario" id="nombre1Usuario" ngControl="nombre1Usuario" [(ngModel)]="_usuarioModel.nombre1Usuario"
-                        required />
+                        name="nombre1Usuario" id="nombre1Usuario" ngControl="nombre1Usuario"
+                        [(ngModel)]="_usuarioModel.nombre1Usuario" required />
                     </div>
                     <div class="col-sm-6 input-group">
                       <input type="text" #nombre2Usuario="ngModel" placeholder="Segundo Nombre" class="form-control"
-                        name="nombre2Usuario" id="nombre2Usuario" ngControl="nombre2Usuario" [(ngModel)]="_usuarioModel.nombre2Usuario"
-                        required />
+                        name="nombre2Usuario" id="nombre2Usuario" ngControl="nombre2Usuario"
+                        [(ngModel)]="_usuarioModel.nombre2Usuario" required />
                     </div>
                     <div class="col-sm-6 input-group">
                       <input type="text" #apellido1Usuario="ngModel" placeholder="Primer Apellido" class="form-control"
-                        name="apellido1Usuario" id="apellido1Usuario" ngControl="apellido1Usuario" [(ngModel)]="_usuarioModel.apellido1Usuario"
-                        required />
+                        name="apellido1Usuario" id="apellido1Usuario" ngControl="apellido1Usuario"
+                        [(ngModel)]="_usuarioModel.apellido1Usuario" required />
                     </div>
                     <div class="col-sm-6 input-group">
                       <input type="text" #apellido2Usuario="ngModel" placeholder="Segundo Apellido" class="form-control"
-                        name="apellido2Usuario" id="apellido2Usuario" ngControl="apellido2Usuario" [(ngModel)]="_usuarioModel.apellido2Usuario"
-                        required />
+                        name="apellido2Usuario" id="apellido2Usuario" ngControl="apellido2Usuario"
+                        [(ngModel)]="_usuarioModel.apellido2Usuario" required />
                     </div>
                     <div class="col-sm-6 input-group">
-                      <input type="text" #inicialesUsuario="ngModel" placeholder="Iniciales del Usuario" class="form-control"
-                        name="inicialesUsuario" id="inicialesUsuario" ngControl="inicialesUsuario" [(ngModel)]="_usuarioModel.inicialesUsuario"
-                        required />
+                      <input type="text" #inicialesUsuario="ngModel" placeholder="Iniciales del Usuario"
+                        class="form-control" name="inicialesUsuario" id="inicialesUsuario" ngControl="inicialesUsuario"
+                        [(ngModel)]="_usuarioModel.inicialesUsuario" required />
                     </div>
                     <div class="col-sm-6 input-group">
                       <input type="text" #codUsuario="ngModel" placeholder="Codigo del Usuario" class="form-control"
@@ -64,36 +64,77 @@
                     </div>
                   </div>
                   <div class="input-group">
-                    <input type="text" #emailUsuario="ngModel" placeholder="Email" class="form-control" name="emailUsuario"
-                      id="emailUsuario" ngControl="emailUsuario" [(ngModel)]="_usuarioModel.emailUsuario" required />
+                    <input type="text" #emailUsuario="ngModel" placeholder="Correo Electronico"
+                      class="form-control input-lg" name="emailUsuario" id="emailUsuario" ngControl="emailUsuario"
+                      [(ngModel)]="_usuarioModel.emailUsuario" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required minlength="5" />
+                      <div *ngIf="emailUsuario.errors &&(emailUsuario.touched || emailUsuario.dirty)" class ="aler alert-danger">
+                          <div [hidden]="!emailUsuario.errors?.pattern">
+                            Ingresa un Correo Real
+                          </div>
+                         </div>
+                      <!-- <small class="form-text error" *ngIf="emailUsuario.errors?.minlength">Se nesesita por lo
+                      menos {{ emailUsuario.errors.minlength.requiredLength }} caracteres</small> -->
+                    <small class="form-text error" *ngIf="emailUsuario.errors?.required">El correo es
+                      obligatorio</small>
                   </div>
                   <div class="input-group">
-                    <input type="password" #passwordUsuario="ngModel" placeholder="Password" class="form-control" name="passwordUsuario"
-                      id="passwordUsuario" ngControl="passwordUsuario" [(ngModel)]="_usuarioModel.passwordUsuario"
-                      required />
+                      <!-- <label for ="email">Email</label> -->
+                    <input type="text" #emailUsuario2="ngModel" placeholder="Repetir Correo Electronico"
+                      class="form-control" name="emailUsuario2" id="emailUsuario2" ngControl="emailUsuario2"
+                      [(ngModel)]="_usuarioModel.emailUsuario2" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required />
+                      <div *ngIf="emailUsuario2.errors &&(emailUsuario2.touched || emailUsuario2.dirty)" class ="aler alert-danger">
+                        <div [hidden]="!emailUsuario2.errors?.pattern">
+                          Ingresa un Correo Real
+                        </div>
+                       </div>
+                      <small class="form-text error"
+                      *ngIf=" _usuarioModel.emailUsuario != _usuarioModel.emailUsuario2 ">Los
+                      Correos no son iguales</small>
                   </div>
+                  <!-- <div class="row full-name-inputs"> -->
+                    <div class="input-group">
+                      <input type="password" #passwordUsuario="ngModel" placeholder="Contraseña" class="form-control"
+                        name="passwordUsuario" id="passwordUsuario" ngControl="passwordUsuario"
+                        [(ngModel)]="_usuarioModel.passwordUsuario" required minlength="5" maxlength="20" />
+                      <small class="form-text error" *ngIf="passwordUsuario.errors?.minlength">Se nesesita por lo
+                        menos {{ passwordUsuario.errors.minlength.requiredLength }} caracteres</small>
+                      <small class="form-text error" *ngIf="passwordUsuario.errors?.required">La Contraseña es
+                        obligatoria</small>
+                    </div>
+                    <div class="input-group">
+                        <input type="password" #passwordUsuario2="ngModel" placeholder="Repetir Contraseña"
+                          class="form-control" name="passwordUsuario2" id="passwordUsuario2" ngControl="passwordUsuario2"
+                          [(ngModel)]="_usuarioModel.passwordUsuario2" required maxlength="20" />
+                        <small class="form-text error"
+                          *ngIf=" _usuarioModel.passwordUsuario != _usuarioModel.passwordUsuario2 ">Las Contraseñas no son
+                          iguales</small>
+                      </div>
+                  <!-- </div> -->
                 </nb-card-body>
               </nb-card>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-4">
               <nb-card>
                 <nb-card-body>
-                  <div class="form-group">
-                    <strong> <label>País Organización</label> </strong>
-                    <!-- <select #idPais class="form-control" id="idPais" name="idPais" ngControl="idPais" [(ngModel)]="_activityModel.idPais"
-                        (change)="organizacionesIdTipoIdPaisListService(_activityModel.idTipoOrganizacion, _activityModel.idPais )">
-                        <option value="0">**** Selecciona el País de la Organizacion ****</option>
-                        <option *ngFor="let item of JsonReceptionPaises" [value]="item.idPais">
-                          {{item.descPais}}
-                        </option>
-                      </select> -->
-                    <angular2-multiselect [data]="dropdownListPais" [(ngModel)]="selectedItemsPais" [settings]="dropdownSettings"
-                      (onSelect)="onItemSelectPais($event)" required></angular2-multiselect>
+                  <div class="input-group">
+                    <input type="text" #direccion="ngModel" placeholder="Direccion" class="form-control"
+                      name="direccion" id="direccion" ngControl="direccion" [(ngModel)]="_usuarioModel.direccion"
+                      required />
                   </div>
                   <div class="form-group">
-                    <strong> <label>Elija un Estado</label> </strong>
-                    <select class="form-control" name="idEstado" id="idEstado" ngControl="idEstado" [(ngModel)]="_usuarioModel.idEstado"
-                      required>
+                    <strong> <label>Seleccione un Perfil</label> </strong>
+                    <select class="form-control" name="idTipo" id="idTipo" ngControl="idTipo"
+                      [(ngModel)]="_usuarioModel.idTipo" required>
+                      <option value="0">Seleccione una Opcion</option>
+                      <option *ngFor="let item of JsonReceptionTipoUsuarios" [value]="item.idTipo">
+                        {{item.descTipo}}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <strong> <label>Seleccione un Estado</label> </strong>
+                    <select class="form-control" name="idEstado" id="idEstado" ngControl="idEstado"
+                      [(ngModel)]="_usuarioModel.idEstado" required>
                       <option value="0">Seleccione una Opcion</option>
                       <option *ngFor="let item of JsonReceptionEstados" [value]="item.idEstado">
                         {{item.descEstado}}
@@ -101,12 +142,51 @@
                     </select>
                   </div>
                   <div class="form-group">
-                    <strong> <label>Elija un Perfil</label> </strong>
-                    <select class="form-control" name="idTipo" id="idTipo" ngControl="idTipo" [(ngModel)]="_usuarioModel.idTipo"
-                      required>
+                      <strong> <label>País Residencia</label> </strong>
+                      <!-- <select #idPais class="form-control" id="idPais" name="idPais" ngControl="idPais" [(ngModel)]="_activityModel.idPais"
+                          (change)="organizacionesIdTipoIdPaisListService(_activityModel.idTipoOrganizacion, _activityModel.idPais )">
+                          <option value="0">**** Selecciona el País de la Organizacion ****</option>
+                          <option *ngFor="let item of JsonReceptionPaises" [value]="item.idPais">
+                            {{item.descPais}}
+                          </option>
+                        </select> -->
+                      <angular2-multiselect [data]="dropdownListPais" [(ngModel)]="selectedItemsPais"
+                        [settings]="dropdownSettings" (onSelect)="onItemSelectPais($event)" required>
+                      </angular2-multiselect>
+                    </div>
+                </nb-card-body>
+              </nb-card>
+            </div>
+            <div class="col-lg-4">
+              <nb-card>
+                <nb-card-body>
+                  <div class="form-group">
+                    <strong> <label>Seleccione un Tipo Organizacion</label> </strong>
+                    <select class="form-control" name="idTipoOrganizacion" id="idTipoOrganizacion"
+                      ngControl="idTipoOrganizacion" [(ngModel)]="_usuarioModel.idTipoOrganizacion" (change)="categoriasOrganizacionListService(_usuarioModel.idTipoOrganizacion)" required>
                       <option value="0">Seleccione una Opcion</option>
-                      <option *ngFor="let item of JsonReceptionTipoUsuarios" [value]="item.idTipo">
-                        {{item.descTipo}}
+                      <option *ngFor="let item of JsonReceptionTipoOrganizacion" [value]="item.idTipoOrganizacion">
+                        {{item.descTipoOrganizacion}}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <strong> <label>Seleccione Categoria Organizacion</label> </strong>
+                    <select class="form-control" name="idCatOrganizacion" id="idCatOrganizacion"
+                      ngControl="idCatOrganizacion" [(ngModel)]="_usuarioModel.idCatOrganizacion" required>
+                      <option value="0">Seleccione una Opcion</option>
+                      <option *ngFor="let item of JsonReceptionCatOrganizacion" [value]="item.idCatOrganizacion">
+                        {{item.descCatOrganizacion}}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <strong> <label>Seleccione la Organizacion</label> </strong>
+                    <select class="form-control" name="idOrganizacion" id="idOrganizacion" ngControl="idOrganizacion"
+                      [(ngModel)]="_usuarioModel.idOrganizacion" required>
+                      <option value="0">Seleccione una Opcion</option>
+                      <option *ngFor="let item of JsonReceptionOrganizacion" [value]="item.idOrganizacion">
+                        {{item.descOrganizacion}}
                       </option>
                     </select>
                   </div>

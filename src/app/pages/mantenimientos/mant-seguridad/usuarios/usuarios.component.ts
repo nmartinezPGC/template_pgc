@@ -36,6 +36,13 @@ export class UsuariosComponent implements OnInit {
   public JsonReceptionTipoUsuarios: any;
   public JsonReceptionEstados: any;
   public JsonReceptionPaises: any;
+  public JsonReceptionCatOrganizacion: any;
+  public JsonReceptionTipoOrganizacion: any;
+  public JsonReceptionOrganizacion: any;
+
+  public JsonReceptionCategoriasOrganizacion: any;
+  protected JsonReceptionPaisOrganizacionesData: any;
+  protected JsonReceptionTipoPaisOrganizacionesData: any;
 
   // Instacia de la variable del Modelo | Json de Parametros
   public _usuarioModel: UsuarioModel;
@@ -60,9 +67,15 @@ export class UsuariosComponent implements OnInit {
   data1: any;
   data2: any;
   data3: any;
+  data4: any;
+  data5: any;
+  data6: any;
   arrayTipoUsuarios: any
   arrayEstados: any
   arrayPaises: any
+  arrayCatOrg: any
+  arrayTipoOrganizacion: any
+  arrayOrganizacion: any
   responseStatus: number
 
   public onSaveConfirm(id) {
@@ -137,7 +150,7 @@ export class UsuariosComponent implements OnInit {
     private _toasterService: ToasterService,
     public _configSmartTableService: ConfigSmartTableService, public _listasComunesService: ListasComunesService) {
     // Llamamos a la Funcion de Configuracion de las Smart Table
-    this._configSmartTableService.configSmartTable('userSmart', 1, null, null, null);
+    this._configSmartTableService.configSmartTable('userSmart', 1, null, null, null, null, null, null);
     this.settings = this._configSmartTableService.settings;
     /* Llamado a la Funcion: 007, la cual obtiene el detalle da la Info.
      del Usuario */
@@ -156,13 +169,21 @@ export class UsuariosComponent implements OnInit {
     // Inicializacion del Modelo de la Clase
     this._usuarioModel = new UsuarioModel(
       true, null, null, null, null,
-      null, null, null, null, /* comienza los campos relacion */ null, 0, '', null, 0, '', null, 0, '', /* datos del usuario */ 0, null, null, null, null, null, 1);
+      null, null, null, null, null, null, /* comienza los campos relacion */
+      null, 0, '', null, 0, '', null, 0, '', null, 0, '', null, 0, '', null, 0, '',
+      /* datos del usuario */ 0, null, null, null, null, null, null, 1);
     // inicializar la lista de tipo de perfiles
     this.usuariosTipoService();
     // inicializa la lista de estados del usuario
     this.estadoService();
     // inicializa la lista de paises de la base de datos
     this.paisesAllListService();
+    // inicializa la lista de categoria de organizaciones
+    this.categoriaOrganizacionService();
+    // inicializa la lista de tipo de organizacion
+    this.TipoOrganizacionService();
+    // inicializa la lista de organizaciones
+    this.OrganizacionService();
 
 
     /**
@@ -211,7 +232,7 @@ export class UsuariosComponent implements OnInit {
           // console.log(result.status);
           this.JsonReceptionUsuarios = response.data;
           this.data = this.JsonReceptionUsuarios;
-          // console.log(this.data2);
+          // console.log(this.data);
         }
       },
       error => {
@@ -245,6 +266,9 @@ export class UsuariosComponent implements OnInit {
     this._usuarioModel.idTipoUsuario = { idTipo: this._usuarioModel.idTipo };
     this._usuarioModel.idPaisUsuario = { idPais: this._usuarioModel.idPais };
     this._usuarioModel.idEstadoUsuario = { idEstado: this._usuarioModel.idEstado };
+    this._usuarioModel.idTipoOrganizacionUsuario = { idTipoOrganizacion: this._usuarioModel.idTipoOrganizacion };
+    this._usuarioModel.idCatOrganizacionUsuario = { idCatOrganizacion: this._usuarioModel.idCatOrganizacion };
+    this._usuarioModel.idOrganizacionUsuario = { idOrganizacion: this._usuarioModel.idOrganizacion };
     this.validateUsuarios(this._usuarioModel);
 
     const responsedataExt: any = this.responsedata;
@@ -283,9 +307,6 @@ export class UsuariosComponent implements OnInit {
         } else if (response.status === 200) {
           // console.log(result.status);
           this.showToast('default', 'La Información del Usuario, se ha ingresado con exito', response.message);
-          // console.log(response.data);
-          // Carga la tabla Nuevamente
-          // this.usuariosDatailsService();
         }
       },
       error => {
@@ -368,17 +389,12 @@ export class UsuariosComponent implements OnInit {
           // this.productos = result.data;
           // console.log(result.status);
           this.JsonReceptionEstados = response.data;
-          // console.log(this.JsonReceptionEstados);
-          // instancia data con los tipos de usuarios;
           this.data2 = this.JsonReceptionEstados;
-          // console.log(this.data1);
           // Carga los Items para el List de la Smart table
           this.arrayEstados = new Array();
-          // console.log(this.data2);
           this.data2.forEach(element => {
             this.arrayEstados.push({ title: element['descEstado'], value: element['idEstado'] });
           });
-          // console.log("hola");
           this.settings.columns.idEstado.editor.config.list = this.arrayEstados;
           this.settings = Object.assign({}, this.settings);
           // console.log(response.data);
@@ -463,7 +479,6 @@ export class UsuariosComponent implements OnInit {
     // console.log(this._usuarioModel.idPais);
     // this.inicialesPais = item.iniciales;
 
-    // this.organizacionesIdTipoIdPaisListService(this._activityModel.idCatOrganizacion, 0, this._activityModel.idPais)
   } // FIN | OnItemDeSelect
 
 
@@ -545,19 +560,6 @@ export class UsuariosComponent implements OnInit {
         }
       },
       error => {
-        // Redirecciona al Login
-        // alert('Error en la petición de la API ' + <any>error);
-
-        // Borramos los datos del LocalStorage
-        /*localStorage.removeItem('auth_app_token');
-        localStorage.removeItem('identity');
-
-        const redirect = '/auth/login';
-        setTimeout(() => {
-          // Iniciativa Temporal
-          location.reload();
-          return this._router.navigateByUrl(redirect);
-        }, 2000);*/
       },
     );
   } // FIN | updateUsuarioService
@@ -574,6 +576,7 @@ export class UsuariosComponent implements OnInit {
       this._usuarioModel.apellido1Usuario = event.newData.apellido1Usuario;
       this._usuarioModel.apellido2Usuario = event.newData.apellido2Usuario;
       this._usuarioModel.codUsuario = event.newData.codUsuario;
+      this._usuarioModel.direccion = event.newData.direccion;
 
       this._usuarioModel.idEstado = event.newData.idEstado;
       this._usuarioModel.idEstadoUsuario = { idEstado: this._usuarioModel.idEstado };
@@ -583,6 +586,15 @@ export class UsuariosComponent implements OnInit {
 
       this._usuarioModel.idTipo = event.newData.idTipo;
       this._usuarioModel.idTipoUsuario = { idTipo: this._usuarioModel.idTipo };
+
+      this._usuarioModel.idTipoOrganizacion = event.newData.idTipoOrganizacion;
+      this._usuarioModel.idTipoOrganizacionUsuario = { idTipoOrganizacion: this._usuarioModel.idTipoOrganizacion };
+
+      this._usuarioModel.idCatOrganizacion = event.newData.idCatOrganizacion;
+      this._usuarioModel.idCatOrganizacionUsuario = { idCatOrganizacion: this._usuarioModel.idCatOrganizacion };
+
+      this._usuarioModel.idOrganizacion = event.newData.idOrganizacion;
+      this._usuarioModel.idOrganizacionUsuario = { idOrganizacion: this._usuarioModel.idOrganizacion };
 
       this._usuarioModel.inicialesUsuario = event.newData.inicialesUsuario;
       this._usuarioModel.nombre1Usuario = event.newData.nombre1Usuario;
@@ -603,10 +615,10 @@ export class UsuariosComponent implements OnInit {
   } // fin de onSaveConfirm1
 
 
-    /**
-   * onDeleteConfirm
-   * @param event
-   */
+  /**
+ * onDeleteConfirm
+ * @param event
+ */
   onDeleteConfirm(event) {
     if (window.confirm('Esta seguro en Inhabilitar este usuario?')) {
       this._usuarioModel.idUsuario = event.data.idUsuario;
@@ -712,6 +724,9 @@ export class UsuariosComponent implements OnInit {
     } else if (usuarioModelIn.emailUsuario === null || usuarioModelIn.emailUsuario === '') {
       this.responsedata.msg = 'Debes ingresar el email del usuario';
       this.responsedata = true;
+    } else if (usuarioModelIn.direccion === null || usuarioModelIn.direccion === '') {
+      this.responsedata.msg = 'Debes ingresar la direccion del usuario';
+      this.responsedata = true;
     } else if (usuarioModelIn.passwordUsuario === null || usuarioModelIn.passwordUsuario === '') {
       this.responsedata.msg = 'Debes ingresar el segundo apellido del usuario';
       this.responsedata = true;
@@ -724,41 +739,328 @@ export class UsuariosComponent implements OnInit {
     } else if (usuarioModelIn.descTipo === null || usuarioModelIn.descTipo === '') {
       this.responsedata.msg = 'Debes ingresar el tipo de perfil del usuario';
       this.responsedata = true;
+    } else if (usuarioModelIn.descTipoOrganizacion === null || usuarioModelIn.descTipoOrganizacion === '') {
+      this.responsedata.msg = 'Debes ingresar el tipo de organizacion del usuario';
+      this.responsedata = true;
+    } else if (usuarioModelIn.descCatOrganizacion === null || usuarioModelIn.descCatOrganizacion === '') {
+      this.responsedata.msg = 'Debes ingresar la categoria de la organizacion del usuario';
+      this.responsedata = true;
+    } else if (usuarioModelIn.descOrganizacion === null || usuarioModelIn.descOrganizacion === '') {
+      this.responsedata.msg = 'Debes ingresar la organizacion del usuario';
+      this.responsedata = true;
     }
     return this.responsedata;
   } // FIN | validateUsuarios
 
 
-    /****************************************************************************
- * Funcion: deleteUsuario
- * Object Number: 015
- * Fecha: 01-02-2019
- * Descripcion: Method deleteUsuario
- * Objetivo: actualizar los usuarios existentes.
- ****************************************************************************/
-private deleteUsuario(): void {
-  // Seteo de las variables del Model al json de Java
+  /****************************************************************************
+* Funcion: deleteUsuario
+* Object Number: 015
+* Fecha: 01-02-2019
+* Descripcion: Method deleteUsuario
+* Objetivo: actualizar los usuarios existentes.
+****************************************************************************/
+  private deleteUsuario(): void {
+    // Seteo de las variables del Model al json de Java
 
-  // Ejecutamos el Recurso del EndPoint
-  this._usuariosService.usuariodelete(this._usuarioModel.idUsuario).subscribe(
-    response => {
-      if (response.status !== 200) {
-        // console.log(response.status);
-        // console.log(response.message);
-        this.showToast('error', 'Error al actualizar los cambios', response.message);
-      } else if (response.status === 200) {
-        // console.log(result.status);
-        this.showToast('default', 'se actualizaron con exito los datos', response.message);
-        // console.log(response.data);
-        // Carga la tabla Nuevamente
-        this.usuariosDatailsService();
+    // Ejecutamos el Recurso del EndPoint
+    this._usuariosService.usuariodelete(this._usuarioModel.idUsuario).subscribe(
+      response => {
+        if (response.status !== 200) {
+          // console.log(response.status);
+          // console.log(response.message);
+          this.showToast('error', 'Error al actualizar los cambios', response.message);
+        } else if (response.status === 200) {
+          // console.log(result.status);
+          this.showToast('default', 'se actualizaron con exito los datos', response.message);
+          // console.log(response.data);
+          // Carga la tabla Nuevamente
+          this.usuariosDatailsService();
+        }
+      },
+      error => {
+        // Redirecciona al Login
+        alert('Error en la petición de la API ' + <any>error);
+      },
+    );
+  } // FIN | deleteUsuario
+
+  /****************************************************************************
+ * Funcion: categoriaOrganizacionService
+ * Object Number: 016
+ * Fecha: 12-02-2019
+ * Descripcion: Method categoriaOrganizacionService of the Class
+ * Objetivo: categoriaOrganizacionService detalle de las categoria de la organizacion llamando a la API
+ * Autor: Edgar Ramirez
+ ****************************************************************************/
+  private categoriaOrganizacionService() {
+    this._usuariosService.listAllCategoria().subscribe(
+      response => {
+        if (response.status !== 200) {
+          // console.log(response.status);
+          // console.log(response.message);
+          // this.showToast('error', 'Error al Obtener la Información del usuario', response.message);
+        } else if (response.status === 200) {
+          this.JsonReceptionCatOrganizacion = response.data;
+          // instancia data con los tipos de usuarios;
+          this.data5 = this.JsonReceptionCatOrganizacion;
+          // Carga los Items para el List de la Smart table
+          this.arrayCatOrg = new Array();
+
+          this.data5.forEach(element => {
+            this.arrayCatOrg.push({ title: element['descCatOrganizacion'], value: element['idCatOrganizacion'] });
+          });
+          this.settings.columns.idCatOrganizacion.editor.config.list = this.arrayCatOrg;
+          this.settings = Object.assign({}, this.settings);
+        }
+      },
+      error => {
+        // Redirecciona al Login
+        alert('Error en la petición de la API ' + <any>error);
+
+        // Borramos los datos del LocalStorage
+        localStorage.removeItem('auth_app_token');
+        localStorage.removeItem('identity');
+
+        const redirect = '/auth/login';
+        setTimeout(() => {
+          // Iniciativa Temporal
+          location.reload();
+          return this._router.navigateByUrl(redirect);
+        }, 2000);
+      },
+    );
+  } // FIN | categoriaOrganizacionService
+
+
+  /****************************************************************************
+ * Funcion: TipoOrganizacionService
+ * Object Number: 017
+ * Fecha: 12-02-2019
+ * Descripcion: Method TipoOrganizacionService of the Class
+ * Objetivo: TipoOrganizacionService detalle de los Tipos de organizacion llamando a la API
+ * Autor: Edgar Ramirez
+ ****************************************************************************/
+  private TipoOrganizacionService() {
+    this._usuariosService.listAllTipoOrganizaciones().subscribe(
+      response => {
+        if (response.status !== 200) {
+          // console.log(response.status);
+          // console.log(response.message);
+          // this.showToast('error', 'Error al Obtener la Información del usuario', response.message);
+        } else if (response.status === 200) {
+          this.JsonReceptionTipoOrganizacion = response.data;
+          // instancia data con los tipos de usuarios;
+          this.data4 = this.JsonReceptionTipoOrganizacion;
+          // Carga los Items para el List de la Smart table
+          this.arrayTipoOrganizacion = new Array();
+
+          this.data4.forEach(element => {
+            this.arrayTipoOrganizacion.push({ title: element['descTipoOrganizacion'], value: element['idTipoOrganizacion'] });
+          });
+          this.settings.columns.idTipoOrganizacion.editor.config.list = this.arrayTipoOrganizacion;
+          this.settings = Object.assign({}, this.settings);
+        }
+      },
+      error => {
+        // Redirecciona al Login
+        alert('Error en la petición de la API ' + <any>error);
+
+        // Borramos los datos del LocalStorage
+        localStorage.removeItem('auth_app_token');
+        localStorage.removeItem('identity');
+
+        const redirect = '/auth/login';
+        setTimeout(() => {
+          // Iniciativa Temporal
+          location.reload();
+          return this._router.navigateByUrl(redirect);
+        }, 2000);
+      },
+    );
+  } // FIN | TipoOrganizacionService
+
+
+  /****************************************************************************
+ * Funcion: OrganizacionService
+ * Object Number: 017
+ * Fecha: 12-02-2019
+ * Descripcion: Method OrganizacionService of the Class
+ * Objetivo: OrganizacionService detalle de las organizaciones llamando a la API
+ * Autor: Edgar Ramirez
+ ****************************************************************************/
+  private OrganizacionService() {
+    // Resetea todos los valores previos
+    this.JsonReceptionCategoriasOrganizacion = null;
+    this._usuariosService.ListAllOrganizaciones().subscribe(
+      response => {
+        if (response.status !== 200) {
+          // console.log(response.status);
+          // console.log(response.message);
+          // this.showToast('error', 'Error al Obtener la Información del usuario', response.message);
+        } else if (response.status === 200) {
+          this.JsonReceptionOrganizacion = response.data;
+          // instancia data con los tipos de usuarios;
+          this.data6 = this.JsonReceptionOrganizacion;
+          // Carga los Items para el List de la Smart table
+          this.arrayOrganizacion = new Array();
+
+          this.data6.forEach(element => {
+            this.arrayOrganizacion.push({ title: element['descOrganizacion'], value: element['idOrganizacion'] });
+          });
+          this.settings.columns.idOrganizacion.editor.config.list = this.arrayOrganizacion;
+          this.settings = Object.assign({}, this.settings);
+        }
+      },
+      error => {
+        // Redirecciona al Login
+        alert('Error en la petición de la API ' + <any>error);
+
+        // Borramos los datos del LocalStorage
+        localStorage.removeItem('auth_app_token');
+        localStorage.removeItem('identity');
+
+        const redirect = '/auth/login';
+        setTimeout(() => {
+          // Iniciativa Temporal
+          location.reload();
+          return this._router.navigateByUrl(redirect);
+        }, 2000);
+      },
+    );
+  } // FIN | OrganizacionService
+
+
+    /****************************************************************************
+  * Funcion: categoriasOrganizacionListService
+  * Object Number: 013.1
+  * Fecha: 18-02-2019
+  * Descripcion: Method categoriasOrganizacionListService of the Class
+  * Objetivo: categoriasOrganizacionListService listados de las Categorias de la
+  * Organizacion del Formulario de Actividad llamando a la API
+  ****************************************************************************/
+ private categoriasOrganizacionListService(idTipoOrganizacionSend: number) {
+  this._listasComunesService.getCategoriaOrganizacionByTipo(idTipoOrganizacionSend).subscribe(
+    result => {
+      // console.log(result.status);
+      if (result.status !== 200) {
+        // Respuesta del Error
+        this.JsonReceptionCategoriasOrganizacion = null;
+        this.showToast('error', 'Error al Obtener la Información de las Categorias de Organizacion', result.message);
+      } else if (result.status === 200) {
+        this.JsonReceptionCategoriasOrganizacion = result.data;
+        // console.log(this.JsonReceptionCategoriasOrganizacion);
+
+        // Ejecutamos la Consulta de las Organizaciones, segun el Tipo Seleccionado
+        if (this._usuarioModel.idPais === 0 || this._usuarioModel.idPais == null) {
+          this.organizacionesIdTipoListService(this._usuarioModel.idTipoOrganizacion);
+        } else {
+          this.organizacionesIdTipoIdPaisListService(this._usuarioModel.idTipoOrganizacion, this._usuarioModel.idPais)
+        }
       }
     },
     error => {
-      // Redirecciona al Login
-      alert('Error en la petición de la API ' + <any>error);
+      this.showToast('error', 'Error al Obtener la Información de las Categorias de Organizacion', JSON.stringify(error.message));
     },
   );
-} // FIN | deleteUsuario
+} // FIN | tiposOrganizacionListService
+
+
+  /****************************************************************************
+  * Funcion: organizacionesIdTipoListService
+  * Object Number: 016.2
+  * Fecha: 18-02-2019
+  * Descripcion: Method organizacionesIdTipoListService of the Class
+  * Objetivo: Buscar las Organizaciones segun el Filtro Aplicado, Tipo de
+  * Organizacion, en Formulario de Actividad llamando a la API
+  ****************************************************************************/
+ private organizacionesIdTipoListService(idTipoOrganizacion: number) {
+  // Cargamos el compoenete de AutoCompletar
+  this.dropdownList = [];
+  this.selectedItems = [];
+
+  // Condicion para evaluar que opcion se pulsa
+  this._listasComunesService.getIdTipoOrganizaciones(idTipoOrganizacion).subscribe(
+    result => {
+      // console.log(result.status);
+      if (result.status !== 200) {
+        // Resultados del Error
+        // Cargamos el compoenete de AutoCompletar
+        this.dropdownList = [];
+        this.selectedItems = [];
+
+        this.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', result.message);
+      } else if (result.status === 200) {
+        this.JsonReceptionPaisOrganizacionesData = result.data;
+        // console.log(this.JsonReceptionPaisOrganizacionesData);
+        // Asignacion de los Valores del Json al Select
+        this.dropdownList = this.JsonReceptionPaisOrganizacionesData.map((item) => {
+          return {
+            id: item.idOrganizacion,
+            itemName: item.descOrganizacion,
+            nombreTipoOrganizacion: item.idTipoOrganizacion.descTipoOrganizacion,
+            descPais: item.idPaisOrganizacion.descPais,
+            inicialesOrganizacion: item.inicalesOrganizacion,
+          }
+        })
+      }
+    },
+    error => {
+      this.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', JSON.stringify(error));
+    },
+  );
+} // FIN | organizacionesIdTipoListService
+
+
+  /****************************************************************************
+  * Funcion: organizacionesIdTipoIdPaisListService
+  * Object Number: 016
+  * Fecha: 18-02-2019
+  * Descripcion: Method organizacionesIdTipoIdPaisListService of the Class
+  * Objetivo: Buscar las Organizaciones segun el Filtro Aplicado, Tipo, Categoria
+  * y Pais de Organizacion, en Formulario de Usuarios llamando a la API
+  ****************************************************************************/
+ private organizacionesIdTipoIdPaisListService(idTipoOrganizacionSend: number, idPais: number) {
+  // Condicion para evaluar que opcion se pulsa
+  this._listasComunesService.getIdTipoIdPaisOrganizaciones(idTipoOrganizacionSend, idPais).subscribe(
+    result => {
+      if (result.status !== 200) {
+        // Resultados del Error
+        // Cargamos el compoenete de AutoCompletar
+        this.dropdownList = [];
+        this.selectedItems = [];
+
+        this.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', result.message);
+      } else if (result.status === 200) {
+        this.JsonReceptionTipoPaisOrganizacionesData = result.data;
+        /*this.data1 = this.JsonReceptionTipoPaisOrganizacionesData;
+
+        // Carga los Items para el List de la Smart table
+        this.listArrayOrg = new Array();
+
+        this.data1.forEach(element => {
+          this.listArrayOrg.push({ title: element['descOrganizacion'], value: element['idOrganizacion'] });
+        });
+
+        this.settings.columns.idOrganizacion.editor.config.list = this.listArrayOrg;
+        this.settings = Object.assign({}, this.settings);*/
+
+        // Asignacion de los Valores del Json al Select
+        this.dropdownList = this.JsonReceptionTipoPaisOrganizacionesData.map((item) => {
+          return {
+            id: item.idOrganizacion,
+            itemName: item.descOrganizacion,
+            nombreTipoOrganizacion: item.idTipoOrganizacion.descTipoOrganizacion,
+            descPais: item.idPaisOrganizacion.descPais,
+            inicialesOrganizacion: item.inicalesOrganizacion,
+          }
+        })
+      }
+    },
+    error => {
+      this.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', JSON.stringify(error.message));
+    },
+  );
+} // FIN | organizacionesIdTipoIdPaisListService
 
 }

@@ -177,4 +177,52 @@ export class UsuarioService {
         });
     }// FIN | FND-00008
 
+
+    /****************************************************************************
+    * Funcion: FND-00009
+    * Fecha: 08-02-2019
+    * Descripcion: Metodo para obtener los tipo de organizacion
+    * Objetivo: datos para obtener los tipo de organizacion
+    * Params: { }
+    ****************************************************************************/
+    listAllCategoria(): Observable<any> {
+        // Retorno de la Funcion
+        return this._http.get(this._systemEndPointsService.getEndPointService('organizacionesGroup', 14), {
+            headers: this.headers,
+            params: { 'tokenApi': this.tokenHeader },
+        });
+    }// FIN | FND-00009
+
+
+    /****************************************************************************
+     * Funcion: FND-00010
+     * Fecha: 12-02-2019
+     * Descripcion: Metodo para obtener los tipo de organizacion
+     * Objetivo: datos para obtener los tipo de organizacion
+     * Params: { }
+     ****************************************************************************/
+    listAllTipoOrganizaciones(): Observable<any> {
+        // Retorno de la Funcion
+        return this._http.get(this._systemEndPointsService.getEndPointService('organizacionesGroup', 1), {
+            headers: this.headers,
+            params: { 'tokenApi': this.tokenHeader },
+        });
+    }// FIN | FND-00010
+
+
+    /****************************************************************************
+   * Funcion: FND-00011
+   * Fecha: 12-02-2019
+   * Descripcion: Metodo para obtener las organizaciones
+   * Objetivo: datos para obtener las organizaciones
+   * Params: { }
+   ****************************************************************************/
+    ListAllOrganizaciones(): Observable<any> {
+        // Retorno de la Funcion
+        return this._http.get(this._systemEndPointsService.getEndPointService('organizacionesGroup', 4), {
+            headers: this.headers,
+            params: { 'tokenApi': this.tokenHeader },
+        });
+    }// FIN | FND-00011
+
 }

@@ -15,6 +15,7 @@ import { ListasComunesService } from '../common-list/services/listas-comunes.ser
 import { MantEspaciosTrabajoComponent } from './mant-espacios-trabajo/mant.espacios.trabajo.component';
 import { GrupoTrabajoComponent } from './mant-espacios-trabajo/grupo-trabajo/grupo.trabajo.component';
 import { AgregarCategoriaComponent } from './mant-espacios-trabajo/agregar-categoria/agregar-categoria.component';
+import { EspaciosTrabajoComponent } from './mant-espacios-trabajo/espacios-trabajo/espacios-trabajo.component';
 import { OrganizacionComponent } from './mant-espacios-trabajo/organizacion/organizacion.component';
 import { OrganizacionModalComponent } from './mant-espacios-trabajo/organizacion/organizaciones.modal.component';
 
@@ -33,6 +34,7 @@ import { OrganizacionModalComponent } from './mant-espacios-trabajo/organizacion
     MantEspaciosTrabajoComponent,
     GrupoTrabajoComponent,
     AgregarCategoriaComponent,
+    EspaciosTrabajoComponent,
     OrganizacionComponent,
     OrganizacionModalComponent,
   ],
