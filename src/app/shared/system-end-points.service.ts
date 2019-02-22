@@ -269,6 +269,7 @@ export class SystemEndPointsService extends ListEndPointsService {
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointMantGenericosUsuario.deleteUsuario.urlEndPoint;
             break;
         }
+        break;
       case 'endPointImplementacion': // Llamados a los EndPoint de Implementacion
         switch (indicadorEndPoint) {
           case 1:

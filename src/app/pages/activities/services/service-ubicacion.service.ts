@@ -14,7 +14,7 @@ import { SystemPropertiesService } from '../../../shared/system-properties.servi
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ServiceUbicacionService {
   // Variables de la Ruta de la API

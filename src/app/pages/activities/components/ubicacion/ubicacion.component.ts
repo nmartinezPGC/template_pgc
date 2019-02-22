@@ -19,7 +19,7 @@ import { ActivityUbicacionModel } from '../../models/model-ubicacion-activity';
   selector: 'ngx-ubicacion',
   templateUrl: './ubicacion.component.html',
   styleUrls: ['./ubicacion.component.scss'],
-  providers: [ToasterService, ListasComunesService, ServiceUbicacionService]
+  providers: [ToasterService, ListasComunesService, ServiceUbicacionService],
 })
 export class UbicacionComponent implements OnInit, OnChanges {
   // Variables entre Tabs | Components
