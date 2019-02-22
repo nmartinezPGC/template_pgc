@@ -4,17 +4,17 @@
   <nb-card-header>Información de la Ubicación del Proyecto | {{ idProyectoTab }} </nb-card-header>
   <nb-card-body>
     <div class="row">
-      <div class="col-sm-2">
+      <div class="col-sm-3">
         <!-- Columna de Nivel de Implementación -->
         <div class="form-group">
           <strong> <label>Nivel de Implementación</label> </strong>
-          <!-- <select #idTipoOrganizacion class="form-control" id="idTipoOrganizacion" name="idTipoOrganizacion" ngControl="idTipoOrganizacion"
-            [(ngModel)]="_activityModel.idTipoOrganizacion" (change)="categoriasOrganizacionListService(_activityModel.idTipoOrganizacion)">
-            <option value="0">**** Selecciona el tipo de Organizacion ****</option>
-            <option *ngFor="let item of JsonReceptionTiposOrganizacion" [value]="item.idTipoOrganizacion">
-              {{item.descTipoOrganizacion}}
+          <select #idNivel class="form-control" id="idNivel" name="idNivel" ngControl="idNivel" [(ngModel)]="_activityUbicacionModel.idNivel"
+            (change)="getListNivelUbicacionByIdNivelImplementacionService(_activityUbicacionModel.idNivel)">
+            <option value="0">**** Selecciona el Nivel de Implementación ****</option>
+            <option *ngFor="let item of JsonReceptionNivelImplementacion" [value]="item.idNivel">
+              {{item.nombreNivelImpl}}
             </option>
-          </select> -->
+          </select>
         </div>
       </div>
 
@@ -22,14 +22,42 @@
       <!-- Columna de Nivel Unicacion de Implementación -->
       <div class="col-sm-3">
         <div class="form-group">
-          <strong> <label>Ubicación de Implementación</label> </strong>
-          <!-- <angular2-multiselect [data]="dropdownListPais" [(ngModel)]="selectedItemsPais" [settings]="dropdownSettings"
-            (onSelect)="onItemSelectPais($event)"></angular2-multiselect> -->
+          <strong> <label>Nivel de Ubicación de Implementación</label> </strong>
+          <select #idNivelUbicacion class="form-control" id="idNivelUbicacion" name="idNivelUbicacion" ngControl="idNivelUbicacion" [(ngModel)]="_activityUbicacionModel.idNivelUbicacion">
+            <option value="0">**** Selecciona el Nivel de Ubicación ****</option>
+            <option *ngFor="let item of JsonReceptionNivelUbicacionImplementacion" [value]="item.idNivelUbicacion">
+              {{item.nombreNivelUbicacion}}
+            </option>
+          </select>
         </div>
       </div>
 
+      <!-- Columna de Nivel Unicacion de Implementación -->
+      <div class="col-sm-4">
+        <div class="form-group">
+          <strong> <label>Ubicación de Implementación</label> </strong>
+          <select #idNivel class="form-control" id="idNivel" name="idNivel" ngControl="idNivel" [(ngModel)]="_activityUbicacionModel.idNivel"
+            (change)="categoriasOrganizacionListService(_activityUbicacionModel.idNivel)">
+            <option value="0">**** Selecciona el Nivel de Ubicación ****</option>
+            <option *ngFor="let item of JsonReceptionNivelImplementacion" [value]="item.idNivel">
+              {{item.nombreNivelImpl}}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Porcentaje de Participacion -->
+      <div class="col-sm-1">
+        <div class="form-group">
+          <strong> <label>Porcentaje</label> </strong>
+          <input type="text" placeholder="% de Participación" class="form-control" />
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
       <!-- Columna de Unicacion de Implementación -->
-      <div class="col-sm-3">
+      <div class="col-sm-6">
         <div class="form-group">
           <strong> <label>Ubicación</label> </strong>
           <!-- <angular2-multiselect [data]="dropdownListPais" [(ngModel)]="selectedItemsPais" [settings]="dropdownSettings"
@@ -38,7 +66,7 @@
       </div>
 
       <!-- Porcentaje de Participacion -->
-      <div class="col-sm-2">
+      <div class="col-sm-3">
         <div class="form-group">
           <strong> <label>% de Participación</label> </strong>
           <input type="text" placeholder="% de Participación" class="form-control" />

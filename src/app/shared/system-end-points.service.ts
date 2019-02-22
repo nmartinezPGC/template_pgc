@@ -269,6 +269,27 @@ export class SystemEndPointsService extends ListEndPointsService {
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointMantGenericosUsuario.deleteUsuario.urlEndPoint;
             break;
         }
+      case 'endPointImplementacion': // Llamados a los EndPoint de Implementacion
+        switch (indicadorEndPoint) {
+          case 1:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointImplementacion.listAllNivelImplementacion.urlEndPoint;
+            break;
+          case 2:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointImplementacion.findByIdNivel.urlEndPoint;
+            break;
+          case 3:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointImplementacion.listAllNivelUbicacionImplementacion.urlEndPoint;
+            break;
+          case 4:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointImplementacion.findByIdNivelUbicacion.urlEndPoint;
+            break;
+          case 5:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointImplementacion.findByIdNivelImplementacion.urlEndPoint;
+            break;
+          /*case 6:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointImplementacion.deleteUsuario.urlEndPoint;
+            break;*/
+        }
         break;
     }
 

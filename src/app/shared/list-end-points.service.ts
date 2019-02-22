@@ -494,5 +494,42 @@ export class ListEndPointsService {
         descEndPoint: 'inhabilita los usuarios',
       },
     },
+    endPointImplementacion: { // NAM | Implenetacion de Proyectos
+      listAllNivelImplementacion: {
+        id: 1,
+        nameEndpoint: 'List All Nivel de Implementacion',
+        urlEndPoint: '/ubicacion-geografica/nivel-implementacion',
+        groupEndPoint: 'endPointImplementacion',
+        descEndPoint: 'Listar todos los Niveles de Implementacion',
+      },
+      findByIdNivel: {
+        id: 2,
+        nameEndpoint: 'List Nivel de Implementacion',
+        urlEndPoint: '/ubicacion-geografica/nivel-implementacion/findByIdNivel/',
+        groupEndPoint: 'endPointImplementacion',
+        descEndPoint: 'Listar el Nivel de Implementacion, buscado por el ID',
+      },
+      listAllNivelUbicacionImplementacion: {
+        id: 3,
+        nameEndpoint: 'List All Nivel de Ubicacion de Implementacion',
+        urlEndPoint: '/ubicacion-geografica/nivel-ubicacion-implementacion',
+        groupEndPoint: 'endPointImplementacion',
+        descEndPoint: 'Listar Todos Nivel de Ubicacion de Implementacion',
+      },
+      findByIdNivelUbicacion: {
+        id: 4,
+        nameEndpoint: 'List Nivel de Ubicacion de Implementacion',
+        urlEndPoint: '/ubicacion-geografica/nivel-ubicacion-implementacion/findByIdNivelUbicacion/',
+        groupEndPoint: 'endPointImplementacion',
+        descEndPoint: 'Listar el Nivel de Ubicacion de Implementacion, buscado por el ID',
+      },
+      findByIdNivelImplementacion: {
+        id: 5,
+        nameEndpoint: 'List Nivel de Ubicacion de Implementacion, por Nivel de Implementacion',
+        urlEndPoint: '/ubicacion-geografica/nivel-ubicacion-implementacion/findByIdNivelImplementacion/',
+        groupEndPoint: 'endPointImplementacion',
+        descEndPoint: 'Listar el Nivel de Ubicacion de Implementacion, buscado por el ID Nivel de Implementacion',
+      },
+    },
   }
 } // FIN de Clase
