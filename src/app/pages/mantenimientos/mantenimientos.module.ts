@@ -18,8 +18,10 @@ import { AgregarCategoriaComponent } from './mant-espacios-trabajo/agregar-categ
 import { EspaciosTrabajoComponent } from './mant-espacios-trabajo/espacios-trabajo/espacios-trabajo.component';
 import { OrganizacionComponent } from './mant-espacios-trabajo/organizacion/organizacion.component';
 import { OrganizacionModalComponent } from './mant-espacios-trabajo/organizacion/organizaciones.modal.component';
+import { UsuarioModalComponent } from './mant-seguridad/usuarios/usuario.modal.component';
 import { NgxPaginationModule } from 'ngx-pagination'; // <-- import the module
 import { FilterdataPipe } from '../activities/pipes/filterdata.pipe';
+
 // Composicion del Modulo
 @NgModule({
   imports: [
@@ -39,10 +41,12 @@ import { FilterdataPipe } from '../activities/pipes/filterdata.pipe';
     EspaciosTrabajoComponent,
     OrganizacionComponent,
     OrganizacionModalComponent,
+    UsuarioModalComponent,
     FilterdataPipe,
   ],
   entryComponents: [
     OrganizacionModalComponent,
+    UsuarioModalComponent,
   ],
   providers: [
     ListasComunesService,
