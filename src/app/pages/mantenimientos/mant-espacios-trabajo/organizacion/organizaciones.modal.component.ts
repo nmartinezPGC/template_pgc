@@ -4,17 +4,16 @@ import { OrganizacionService } from '../../services/organizaciones.service';
 import { OrganizacionModal } from '../../models/organizacion.modal';
 import { Router } from '@angular/router';
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster';
-import { nullSafeIsEquivalent, THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'ngx-organizacion',
   templateUrl: './organizaciones.modal.component.html',
   styleUrls: ['./organizaciones.modal.component.scss'],
-  // providers: [NgbActiveModal]
+
   providers: [OrganizacionService],
 })
 export class OrganizacionModalComponent implements OnInit {
-  // @ ViewChild ( ' primaryColorSample ' );
+
 
 
   @Input() idOrganizacion;
@@ -29,6 +28,10 @@ export class OrganizacionModalComponent implements OnInit {
   data2: any;
   arrayCategoria: any;
   public JsonReceptionPaises: any;
+  marked = false;
+  theCheckbox = false;
+
+  p: number = 1;
 
   /**
      * Configuracion del Dropdow List
@@ -61,7 +64,7 @@ export class OrganizacionModalComponent implements OnInit {
 
   constructor(private activeModal: NgbActiveModal, public _OrganizacionService: OrganizacionService,
     protected _router: Router, private _toasterService: ToasterService) {
-
+    this.responsedata = { 'error': false, 'msg': 'error campos solicitado' }
 
   }
   /****************************************************************************
@@ -73,7 +76,6 @@ export class OrganizacionModalComponent implements OnInit {
 ****************************************************************************/
   makeToast() {
     this.showToast(this.type, this.title, this.content);
-    // console.log('Opcion de Toaster 1.3 ' + JSON.stringify(this.content));
   } // FIN | makeToast
 
   /****************************************************************************
@@ -101,7 +103,7 @@ export class OrganizacionModalComponent implements OnInit {
       showCloseButton: this.isCloseButton,
       bodyOutputType: BodyOutputType.TrustedHtml,
     };
-    this._toasterService.pop(toast);
+    // this._toasterService.pop(toast);
   } // FIN | showToast
 
   closeModal() {
@@ -131,22 +133,23 @@ export class OrganizacionModalComponent implements OnInit {
     this._OrganizacionModal1 = new OrganizacionModal(null, null, null, null, null,
       null, null, null, null, null,
       null, null, null, null, null,
-      null, null, null, null, null, null);
-    this._OrganizacionModal1.codOrganizacionModal;
-    this._OrganizacionModal1.inicalesOrganizacionModal;
-    this._OrganizacionModal1.nombreOrganizacionModal;
-    this._OrganizacionModal1.direccionFisicaOrganizacionModal;
-    this._OrganizacionModal1.telefonoOrganizacionModal;
-    this._OrganizacionModal1.emailOrganizacionModal;
-    this._OrganizacionModal1.deptoReferenciaModal;
-    this._OrganizacionModal1.contactoReferenciaModal;
-    this._OrganizacionModal1.socioDesarrolloModal;
-    this._OrganizacionModal1.agenciaBeneficiariaModadal;
-    this._OrganizacionModal1.unidadEjecutoraModal;
-    this._OrganizacionModal1.administradorFinancieroModal;
-    this._OrganizacionModal1.webOrganizacionModal;
-    this._OrganizacionModal1.idTipoOrganizacion1Modal;
-    this._OrganizacionModal1.idCatOrganizacion1Modal;
+      null, null, null, null, null,
+      null, null, null);
+    this._OrganizacionModal1.codOrganizacion;
+    this._OrganizacionModal1.inicalesOrganizacion;
+    this._OrganizacionModal1.nombreOrganizacion;
+    this._OrganizacionModal1.direccionFisicaOrganizacion;
+    this._OrganizacionModal1.telefonoOrganizacion;
+    this._OrganizacionModal1.emailOrganizacion;
+    this._OrganizacionModal1.deptoReferencia;
+    this._OrganizacionModal1.contactoReferencia;
+    this._OrganizacionModal1.socioDesarrollo;
+    this._OrganizacionModal1.agenciaBeneficiaria;
+    this._OrganizacionModal1.unidadEjecutora;
+    this._OrganizacionModal1.administradorFinanciero;
+    this._OrganizacionModal1.webOrganizacion;
+    this._OrganizacionModal1.idTipoOrganizacion1;
+    this._OrganizacionModal1.idCatOrganizacion1;
     this._OrganizacionModal1.idPais;
     this._OrganizacionModal1.descPais;
 
@@ -172,31 +175,30 @@ export class OrganizacionModalComponent implements OnInit {
           this.JsonReceptionFyByOrganizaciones = response.data;
           // instancia data con los perfiles;
           this.data4 = this.JsonReceptionFyByOrganizaciones;
-          this._OrganizacionModal1.codOrganizacionModal = this.data4.codOrganizacion;
-          this._OrganizacionModal1.inicalesOrganizacionModal = this.data4.inicalesOrganizacion;
-          this._OrganizacionModal1.nombreOrganizacionModal = this.data4.nombreOrganizacion;
-          this._OrganizacionModal1.descOrganizacionModal = this.data4.descOrganizacion;
-          this._OrganizacionModal1.direccionFisicaOrganizacionModal = this.data4.direccionFisicaOrganizacion;
-          this._OrganizacionModal1.telefonoOrganizacionModal = this.data4.telefonoOrganizacion;
-          this._OrganizacionModal1.emailOrganizacionModal = this.data4.emailOrganizacion;
-          this._OrganizacionModal1.deptoReferenciaModal = this.data4.deptoReferencia;
-          this._OrganizacionModal1.contactoReferenciaModal = this.data4.contactoReferencia;
-          this._OrganizacionModal1.socioDesarrolloModal = this.data4.socioDesarrollo;
-          this._OrganizacionModal1.agenciaBeneficiariaModadal = this.data4.agenciaBeneficiaria;
-          this._OrganizacionModal1.unidadEjecutoraModal = this.data4.unidadEjecutora;
-          this._OrganizacionModal1.administradorFinancieroModal = this.data4.administradorFinanciero;
-          this._OrganizacionModal1.webOrganizacionModal = this.data4.webOrganizacion
-          this._OrganizacionModal1.idTipoOrganizacion1Modal = this.data4.idTipoOrganizacion.idTipoOrganizacion
-          this._OrganizacionModal1.idCatOrganizacion1Modal = this.data4.idCatOrganizacion.idCatOrganizacion;
+          this._OrganizacionModal1.codOrganizacion = this.data4.codOrganizacion;
+          this._OrganizacionModal1.inicalesOrganizacion = this.data4.inicalesOrganizacion;
+          this._OrganizacionModal1.nombreOrganizacion = this.data4.nombreOrganizacion;
+          this._OrganizacionModal1.descOrganizacion = this.data4.descOrganizacion;
+          this._OrganizacionModal1.direccionFisicaOrganizacion = this.data4.direccionFisicaOrganizacion;
+          this._OrganizacionModal1.telefonoOrganizacion = this.data4.telefonoOrganizacion;
+          this._OrganizacionModal1.emailOrganizacion = this.data4.emailOrganizacion;
+          this._OrganizacionModal1.deptoReferencia = this.data4.deptoReferencia;
+          this._OrganizacionModal1.contactoReferencia = this.data4.contactoReferencia;
+          this._OrganizacionModal1.socioDesarrollo = this.data4.socioDesarrollo;
+          this._OrganizacionModal1.agenciaBeneficiaria = this.data4.agenciaBeneficiaria;
+          this._OrganizacionModal1.unidadEjecutora = this.data4.unidadEjecutora;
+          this._OrganizacionModal1.administradorFinanciero = this.data4.administradorFinanciero;
+          this._OrganizacionModal1.webOrganizacion = this.data4.webOrganizacion
+          this._OrganizacionModal1.idTipoOrganizacion1 = this.data4.idTipoOrganizacion.idTipoOrganizacion
+          this._OrganizacionModal1.idCatOrganizacion1 = this.data4.idCatOrganizacion.idCatOrganizacion;
           this._OrganizacionModal1.descPais = this.data4.idPaisOrganizacion.descPais;
           this._OrganizacionModal1.idPais = this.data4.idPaisOrganizacion.idPais;
+          this._OrganizacionModal1.activo = this.data4.activo;
+
 
           this.selectedItemsPais = [
             { 'id': this._OrganizacionModal1.idPais, 'itemName': this._OrganizacionModal1.descPais },
           ];
-
-
-
           // Verificamos que la Actividad no Exista en la BD
         }
       },
@@ -318,7 +320,86 @@ export class OrganizacionModalComponent implements OnInit {
   } // FIN | paisesAllListService
 
   onItemSlectPais(item: any) {
-
+    this._OrganizacionModal1.idPais = item.id;
   }
+  /****************************************************************************
+ * Funcion: upTipoOrganzacion()
+ * Object Number: 0003
+ * Fecha: 21-01-2019
+ * Descripcion: Method updateTipoOganizacion
+ * Objetivo: actualizar los Tipo de organizacion existentes perfiles.
+ ****************************************************************************/
+  private UpdateOrganizacion() {
+    // Seteo de las variables del Model al json de Java
+
+    this._OrganizacionModal1.idCatOrganizacion = { idCatOrganizacion: this._OrganizacionModal1.idCatOrganizacion1 };
+    this._OrganizacionModal1.idPaisOrganizacion = { idPais: this._OrganizacionModal1.idPais };
+    this._OrganizacionModal1.idTipoOrganizacion = { idTipoOrganizacion: this._OrganizacionModal1.idTipoOrganizacion1 };
+
+    // this.validateUsuarios(this._usuarioModel);
+    const responsedataExt: any = this.responsedata;
+
+    if (responsedataExt.error === true) {
+      this.showToast('error', 'Error al ingresar los datos', responsedataExt.msg);
+      return -1;
+    }
+    // Ejecutamos el Recurso del EndPoint
+    this._OrganizacionService.OrganizacionUpdate(this._OrganizacionModal1, this.idOrganizacion).subscribe(
+      response => {
+        if (response.status !== 200) {
+          this.showToast('error', 'Error al Ingresar la Información del Usuario', response.message);
+        } else if (response.status === 200) {
+          this.showToast('default', 'se actualizo con exito la informacion de la organizacion', response.message);
+          this.ListAllCategoria();
+        }
+      },
+    );
+  } // FIN | newUsuarioService
+
+  /****************************************************************************
+    * Funcion: toggleVisibility1
+    * Object Number: 004
+    * Fecha:13-02-2019
+    * Descripcion: Method tIPO DE ORGANIZACION
+    * Objetivo:asignar si es alguna unidad ejecutora en los chekcbox
+    * Autor: David Ricardo Pavon
+    ****************************************************************************/
+  toggleVisibility1(e) {
+    if (this.marked = e.target.checked) {
+      this._OrganizacionModal1.agenciaBeneficiaria = true;
+    } else {
+      this._OrganizacionModal1.agenciaBeneficiaria = false;
+    }
+  }
+  toggleVisibility(e) {
+    if (this.marked = e.target.checked) {
+      this._OrganizacionModal1.socioDesarrollo = true;
+    } else {
+      this._OrganizacionModal1.socioDesarrollo = false;
+    }
+  }
+  toggleVisibilit2(e) {
+    if (this.marked = e.target.checked) {
+      this._OrganizacionModal1.unidadEjecutora = true;
+    } else {
+      this._OrganizacionModal1.unidadEjecutora = false;
+    }
+  }
+  toggleVisibilit3(e) {
+    if (this.marked = e.target.checked) {
+      this._OrganizacionModal1.administradorFinanciero = true;
+    } else {
+      this._OrganizacionModal1.administradorFinanciero = false;
+    }
+  }
+  toggleVisibilit4(e) {
+    if (this.marked = e.target.checked) {
+      this._OrganizacionModal1.activo = true;
+    } else {
+      this._OrganizacionModal1.activo = false;
+    }
+  }// fin de toggleVisibilit
+
+
 
 }

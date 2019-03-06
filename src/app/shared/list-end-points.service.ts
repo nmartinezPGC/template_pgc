@@ -293,6 +293,20 @@ export class ListEndPointsService {
         groupEndPoint: 'organizacionesGroup',
         descEndPoint: 'Busca la Organizacion con el IdTipo, IdPais y IdCategoria de Organizacion , de parametro',
       },
+      UpdateOrganizaciones: {
+        id: 21,
+        nameEndpoint: 'updateOrganizaciones',
+        urlEndPoint: '/organizaciones/edit/',
+        groupEndPoint: 'organizacionesGroup',
+        descEndPoint: 'Actualizar las orgnizacion',
+      },
+      deleteOrganizacion: {
+        id: 22,
+        nameEndpoint: 'deleteOrganizaciones',
+        urlEndPoint: '/organizaciones/delete/',
+        groupEndPoint: 'organizacionesGroup',
+        descEndPoint: 'inhabilitar las orgnizaciones',
+      },
     }, // Modulo de Mantenimientos Genericos
     endPointMantGenericos: {
       listAllPaises: {

@@ -7,24 +7,26 @@
  *
  */
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { OrganizacionModalComponent } from './organizaciones.modal.component';
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster'; // Servicio de Notificaciones
 import { Router } from '@angular/router';
 import { OrganizacionModel } from '../../models/organizacion.model';
-import { OrganizacionModal } from '../../models/organizacion.modal';
 import { OrganizacionService } from '../../services/organizaciones.service';
 import { delay } from 'q';
 @Component({
   selector: 'ngx-organizacion',
   templateUrl: './organizacion.component.html',
   styleUrls: ['./organizacion.component.scss'],
-  providers: [OrganizacionService],
+  providers: [OrganizacionService, ToasterService],
 })
 
 
 export class OrganizacionComponent implements OnInit {
+  @Input() idOrganizacion;
+
+
   public _OrganizacionModel: OrganizacionModel;
   public JsonReceptionPrefiles: any;
   public JsonReceptionTipoPerfiles: any;
@@ -32,6 +34,8 @@ export class OrganizacionComponent implements OnInit {
   public JsonReceptionPaises: any;
   public JsonReceptionOrganizaciones: any;
   public JsonReceptionFyByOrganizaciones: any;
+  public secuenciaDeActividad: any;
+
   data2: any;
   data: any;
   config: ToasterConfig;
@@ -72,11 +76,11 @@ export class OrganizacionComponent implements OnInit {
 
 
 
-  showLargeModal(idOrganizacion: number, codOrganizacion: string) {
+  showLargeModal(idOrganizacion: number) {
     const activeModal = this.modalService.open(OrganizacionModalComponent, { size: 'lg', container: 'nb-layout' });
     activeModal.componentInstance.modalHeader = 'Large Modal Parametro ';
     activeModal.componentInstance.idOrganizacion = idOrganizacion;
-    activeModal.componentInstance.codOrganizacion = codOrganizacion;
+
 
     activeModal.componentInstance.JsonReceptionFyByOrganizaciones = this.JsonReceptionFyByOrganizaciones;
 
@@ -99,7 +103,6 @@ export class OrganizacionComponent implements OnInit {
 ****************************************************************************/
   makeToast() {
     this.showToast(this.type, this.title, this.content);
-    // console.log('Opcion de Toaster 1.3 ' + JSON.stringify(this.content));
   } // FIN | makeToast
 
   /****************************************************************************
@@ -155,19 +158,17 @@ export class OrganizacionComponent implements OnInit {
 
     this._OrganizacionModel = new OrganizacionModel(
       true, 0, null, null, null, null, null, null, null, null, false, false, false, false, null, null,
-      null, null,
-      null, null,
-      null, null,
+      null, 1, // relaciones de tipo de organizacion
+      null, 1, // pais de la organiacion
+      null, 1, // categoria de la organizacion
     );
     this.TipoOrganizacion();
     this.ListAllCategoria();
     this.paisesAllListService();
     this.ListAllOranizacion();
-
-
   }
   /****************************************************************************
-* Funcion: perfilesTipoService
+* Funcion: TipoOrganizacion()
 * Object Number: 004
 * Fecha: 08-01-2019
 * Descripcion: Method perfilesTipoService of the Class
@@ -269,7 +270,6 @@ export class OrganizacionComponent implements OnInit {
         }
       },
       error => {
-        // console.log(<any>error);
         this.showToast('error', 'Error al Obtener la Información de los Paises', error);
       },
     );
@@ -283,14 +283,23 @@ export class OrganizacionComponent implements OnInit {
   * Objetivo: crear nuevos usuarios.
   * Autor: Edgar Ramirez
   ****************************************************************************/
-  private newOrganizacion() {
+  async  newOrganizacion() {
+    this.getSecuenciaListService('NEW-ACT');
+
+    await delay(100);
+    this.validateOrganizacion(this._OrganizacionModel);
+
+    const responsedataExt: any = this.responsedata;
+
+    if (responsedataExt.error === true) {
+      this.showToast('error', 'Error al ingresar los datos', responsedataExt.msg);
+      return -1;
+    }
+
     // Seteo de las variables del Model al json de Java
     this._OrganizacionModel.idCatOrganizacion = { idCatOrganizacion: this._OrganizacionModel.idCatOrganizacion1 };
     this._OrganizacionModel.idPaisOrganizacion = { idPais: this._OrganizacionModel.idPais };
     this._OrganizacionModel.idTipoOrganizacion = { idTipoOrganizacion: this._OrganizacionModel.idTipoOrganizacion1 };
-
-    // this.validateUsuarios(this._usuarioModel);
-    const responsedataExt: any = this.responsedata;
 
     if (responsedataExt.error === true) {
       this.showToast('error', 'Error al ingresar los datos', responsedataExt.msg);
@@ -302,8 +311,8 @@ export class OrganizacionComponent implements OnInit {
         if (response.status !== 200) {
           this.showToast('error', 'Error al Ingresar la Información del Usuario', response.message);
         } else if (response.status === 200) {
-          // console.log(result.status);
           this.showToast('default', 'La Información de la Organizacion, se ha ingresado con exito', response.message);
+          this.ListAllCategoria();
         }
       },
     );
@@ -387,6 +396,111 @@ export class OrganizacionComponent implements OnInit {
     );
   } // FIN | perfilesTipoService
 
+  fyByIdOrganizacion(idOrganizacion: number) {
+    // Ejecutamos el Recurso del EndPoint
+    this._OrganizacionService.FindByIdOrganizacion(idOrganizacion).subscribe(
+      response => {
+        if (response.status !== 200) {
+          this.showToast('error', 'Error al Eliminar la Id Interna de la Planificacion del Proyecto', response.message);
+        } else if (response.status === 200) {
+          this.JsonReceptionFyByOrganizaciones = response.data;
+          // instancia data con los perfiles;
+          this.data4 = this.JsonReceptionFyByOrganizaciones;
+          // Verificamos que la Actividad no Exista en la BD
+        }
+      },
+      error => {
+        // Informacion del Error que se capturo de la Secuencia
+        this.showToast('error', 'Ha ocurrido un Error al cargar de orgnizacion, por favor verifica que todo este bien!!', JSON.stringify(error.error.message));
+        // Ocultamos el Loader la Funcion
+      },
+    );
+    // Return
+  } // FIN | deleteActividadIdInterna
 
+  private deleteOrganizacion(idOrganizacion: number) {
 
+    const responsedataExt: any = this.responsedata;
+
+    if (responsedataExt.error === true) {
+      this.showToast('error', 'Error al ingresar los datos', responsedataExt.msg);
+      return -1;
+    }
+    // Ejecutamos el Recurso del EndPoint
+    this._OrganizacionService.organizacionDelete(idOrganizacion).subscribe(
+      response => {
+        if (response.status !== 200) {
+          this.showToast('error', 'Error al desahabilitar la organizacion con exito', response.message);
+        } else if (response.status === 200) {
+          this.showToast('default', 'se deshabilito la organizacion de forma exitosa', response.message);
+          this.ListAllCategoria();
+        }
+      },
+    );
+  } // FIN | newUsuarioService
+
+  /****************************************************************************
+   * Funcion: validateTipoOganizacion(_grupoModel: any)
+   * Object Number: 0005
+   * Fecha: 22-01-2019
+   * Descripcion: Method para validar que los campos esten llenos
+   * Objetivo: validatePerfiles  procurar que llegue a la base de datos toda la informacion de tipo de organizacion.
+   ****************************************************************************/
+  private validateOrganizacion(_OrganizacionModel: any) {
+    // seteo el modelo para que los campos sean verificados
+    this.responsedata.error = false;
+    if (_OrganizacionModel.inicalesOrganizacion === '' || _OrganizacionModel.inicalesOrganizacion === null) {
+      this.responsedata.msg = 'Por favor ingresa las inciales de la organizacion';
+      this.responsedata.error = true;
+    } if (_OrganizacionModel.codOrganizacion === '' || _OrganizacionModel.codOrganizacion === null) {
+      this.responsedata.msg = 'Por favor ingrese el codigo de la organizacion';
+      this.responsedata.error = true;
+    } if (_OrganizacionModel.nombreOrganizacion === '' || _OrganizacionModel.nombreOrganizacion === null) {
+      this.responsedata.msg = 'Por favor ingrese el nombre de la organizacion';
+      this.responsedata.error = true;
+    } if (_OrganizacionModel.descOrganizacion === '' || _OrganizacionModel.descOrganizacion === null) {
+      this.responsedata.msg = 'Por favor ingrese una descripcion de la organizacion';
+      this.responsedata.error = true;
+    } if (_OrganizacionModel.telefonoOrganizacion === '' || _OrganizacionModel.telefonoOrganizacion === null) {
+      this.responsedata.msg = 'Por favor ingrese un numero de la organizacion';
+      this.responsedata.error = true;
+    } if (_OrganizacionModel.emailOrganizacion === '' || _OrganizacionModel.emailOrganizacion === null) {
+      this.responsedata.msg = 'Por favor ingrese un email de la organizacion';
+      this.responsedata.error = true;
+    } if (_OrganizacionModel.socioDesarrollo === '' || _OrganizacionModel.socioDesarrollo === null ||
+      _OrganizacionModel.agenciaBeneficiaria === '' || _OrganizacionModel.agenciaBeneficiaria === null ||
+      _OrganizacionModel.unidadEjecutora === '' || _OrganizacionModel.unidadEjecutora === null ||
+      _OrganizacionModel.administradorFinanciero === '' || _OrganizacionModel.administradorFinanciero === null) {
+      this.responsedata.msg = 'Por favor ingrese por lo menos un tipo de organifacion';
+      this.responsedata.error = true;
+    }
+    return this.responsedata;
+  } // FIN
+
+  /*****************************************************
+    * Funcion: FND-00001
+    * Fecha: 21-01-2019
+    * Descripcion: Funcion que Obtiene la Secuencia del
+    * Proyecto o Actividad
+    * Params: codSecuencia
+    ******************************************************/
+  protected getSecuenciaListService(codSecuencia: string) {
+    // Envia la Secuencia a Buscar
+    this._OrganizacionService.getSecuenciaActividad(codSecuencia).subscribe(
+      result => {
+        if (result.status !== 200) {
+          this.showToast('error', 'Error al Obtener la Información de la Secuencia', JSON.stringify(result.message));
+        } else if (result.status === 200) {
+          this.secuenciaDeActividad = result.data;
+
+          // Componemos la Secuencia a Generar
+          const prefixHND: string = 'ORG-';
+          this._OrganizacionModel.codOrganizacion = prefixHND + (Number(this.secuenciaDeActividad.valor2));
+        }
+      },
+      error => {
+        this.showToast('error', 'Error al Obtener la Información de la Secuencia', JSON.stringify(error.message));
+      },
+    );
+  } // FIN | FND-00001
 }
