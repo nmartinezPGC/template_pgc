@@ -29,6 +29,7 @@ import { NbRouteTabsetModule } from '@nebular/theme/components/route-tabset/rout
 // Modulo de Mapas
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { UbicacionComponent } from './components/ubicacion/ubicacion.component';
+import { OdsComponent } from './components/sectores/ods/ods.component';
 
 @NgModule({
   imports: [
@@ -51,6 +52,7 @@ import { UbicacionComponent } from './components/ubicacion/ubicacion.component';
     ...routedComponents,
     FilterdataPipe,
     UbicacionComponent,
+    OdsComponent,
   ],
   providers: [
     // SmartTableService, // Defincion del Servicio que provee los Datos de la Tabla: ID's Internas

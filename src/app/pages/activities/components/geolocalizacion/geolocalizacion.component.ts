@@ -30,7 +30,12 @@ export class GeolocalizacionComponent implements OnInit, OnChanges {
     }
   }
 
-  // Opciones del Mapa
+  // Variables Globales del Mapa
+  datos = [];
+  public marker1;
+  layers = this.datos;
+
+  // Definicion de Opciones del Mapa
   options = {
     layers: [
       tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: 'Creado por: Nahum Martínez' }),
@@ -53,9 +58,51 @@ export class GeolocalizacionComponent implements OnInit, OnChanges {
     },
   }
 
-  datos = [];
 
-  pointsVal() {
+  borrarMarcador(latlng) {
+    // console.log('sdsd');
+  }
+
+
+  /****************************************************************************
+  * Funcion: constructor
+  * Object Number: 001
+  * Fecha: 06-03-2019
+  * Descripcion: Method constructor of the Class
+  * Objetivo: constructor in the method header API
+  ****************************************************************************/
+  constructor(private activeModal: NgbActiveModal) { } // FIN constructor
+
+
+  /****************************************************************************
+  * Funcion: ngOnInit
+  * Object Number: 002
+  * Fecha: 06-03-2019
+  * Descripcion: Method constructor of the Class
+  * Objetivo: ngOnInit in the method header API
+  ****************************************************************************/
+  ngOnInit() {
+    // this.pointsVal();
+  } // FIN ngOnInit
+
+
+  /**
+   * closeModal
+   * Cerrar ventana Modal desde el boton
+   */
+  closeModal() {
+    this.activeModal.close();
+  }
+
+
+  /****************************************************************************
+  * Funcion: pointsRecsources
+  * Object Number: 002
+  * Fecha: 06-03-2019
+  * Descripcion: Method constructor of the Class
+  * Objetivo: ngOnInit in the method header API
+  ****************************************************************************/
+  pointsRecsources() {
     // const element = array[index];
     let lat = 15.505230;
     let long = -88.224971;
@@ -75,13 +122,16 @@ export class GeolocalizacionComponent implements OnInit, OnChanges {
       lat = lat + 0.1;
       long = long - 0.1;
     }
-  }
+  } // FIN pointsRecsources
 
-  layers = this.datos;
 
-  public marker1;
-
-  // Al cargar el Mapa
+  /****************************************************************************
+  * Funcion: onMapReady
+  * Object Number: 004
+  * Fecha: 06-03-2019
+  * Descripcion: Method Configuracion Inicial del Mapa of the Class
+  * Objetivo: onMapReady in the method header API
+  ****************************************************************************/
   onMapReady(map: L.Map) {
     map.doubleClickZoom.disable();
 
@@ -132,22 +182,5 @@ export class GeolocalizacionComponent implements OnInit, OnChanges {
       // console.log('Coordenadas a Borrar ' + this.marker1);
       // map.removeLayer(marka)
     });
-  }
-
-  borrarMarcador(latlng) {
-    // console.log('sdsd');
-  }
-
-
-
-  constructor(private activeModal: NgbActiveModal) { }
-
-  ngOnInit() {
-    // this.pointsVal();
-  }
-
-
-  closeModal() {
-    this.activeModal.close();
-  }
+  } // FIN onMapReady
 }
