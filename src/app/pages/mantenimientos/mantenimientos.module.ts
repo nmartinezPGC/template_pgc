@@ -18,7 +18,7 @@ import { AgregarCategoriaComponent } from './mant-espacios-trabajo/agregar-categ
 import { EspaciosTrabajoComponent } from './mant-espacios-trabajo/espacios-trabajo/espacios-trabajo.component';
 import { OrganizacionComponent } from './mant-espacios-trabajo/organizacion/organizacion.component';
 import { OrganizacionModalComponent } from './mant-espacios-trabajo/organizacion/organizaciones.modal.component';
-import { usuarioModalComponent } from './mant-seguridad/usuarios/usuario.modal.component';
+import { UsuarioModalComponent } from './mant-seguridad/usuarios/usuario.modal.component';
 
 // Composicion del Modulo
 @NgModule({
@@ -38,11 +38,11 @@ import { usuarioModalComponent } from './mant-seguridad/usuarios/usuario.modal.c
     EspaciosTrabajoComponent,
     OrganizacionComponent,
     OrganizacionModalComponent,
-    usuarioModalComponent,
+    UsuarioModalComponent,
   ],
   entryComponents: [
     OrganizacionModalComponent,
-    usuarioModalComponent,
+    UsuarioModalComponent,
   ],
   providers: [
     ListasComunesService,
