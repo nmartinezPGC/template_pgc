@@ -99,6 +99,8 @@ export class CategoriaService {
             params: { 'tokenApi': this.tokenHeader },
         });
     }// FIN | FND-00004
+
+
 /****************************************************************************
     * Funcion: FND-00004
     * Fecha: 21-01-2019

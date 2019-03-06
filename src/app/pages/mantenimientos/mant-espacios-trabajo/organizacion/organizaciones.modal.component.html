@@ -11,27 +11,41 @@
         <nb-card-body>
           <strong><label>Codigo de la Organizacion</label></strong>
           <div class="form-group">
-            <input class="form-control" type="text" placeholder="Codigo de la Organizacion" required />
+            <input #codOrganizacion="ngModel" class="form-control" type="text" disabled
+              placeholder="Codigo de la Organizacion" name="codOrganizacion" id="codOrganizacion"
+              ngControl="codOrganizacion" [(ngModel)]="_OrganizacionModal1.codOrganizacion" required />
           </div>
           <strong><label>Iniciales de la Organizacion</label></strong>
           <div class="form-group">
-            <input class="form-control" type="text" placeholder="Iniciales de la Organizacion" required />
+            <input #inicalesOrganizacion="ngModel" class="form-control" type="text"
+              placeholder="Iniciales de la Organizacion" name="inicalesOrganizacion" id="inicalesOrganizacion"
+              ngControl="inicalesOrganizacion" [(ngModel)]="_OrganizacionModal1.inicalesOrganizacion" required />
           </div>
           <strong><label>Nombre de la Organizacion</label></strong>
           <div class="form-group">
-            <input class="form-control" type="text" placeholder="Nombre de la Organizacion" required />
+            <input #nombreOrganizacion="ngModel" class="form-control" type="text"
+              placeholder="Nombre de la Organizacion" placeholder="Iniciales de la Organizacion"
+              name="nombreOrganizacion" id="nombreOrganizacion" ngControl="nombreOrganizacion"
+              [(ngModel)]="_OrganizacionModal1.nombreOrganizacion" required />
           </div>
           <strong><label>Descripcion de la Organizacion</label></strong>
           <div class="form-group">
-            <input class="form-control" type="text" placeholder="Descripcion de la Organizacion" required />
+            <input #descOrganizacion="ngModel" class="form-control" type="text"
+              placeholder="Direccion de la Organizacion" name="descOrganizacion" id="descOrganizacion"
+              ngControl="descOrganizacion" [(ngModel)]="_OrganizacionModal1.descOrganizacion" required />
           </div>
           <strong><label>Direccion de la Organizacion</label></strong>
           <div class="form-group">
-            <input class="form-control" type="text" placeholder="Direccion de la Organizacion" required />
+            <input #direccionFisicaOrganizacion="ngModel" class="form-control" type="text"
+              placeholder="Direccion de la Organizacion" name="direccionFisicaOrganizacion"
+              id="direccionFisicaOrganizacion" ngControl="direccionFisicaOrganizacion"
+              [(ngModel)]="_OrganizacionModal1.direccionFisicaOrganizacion" required />
           </div>
           <strong><label>Telefono</label></strong>
           <div class="form-group">
-            <input class="form-control" type="text" placeholder="Telefono" required />
+            <input #telefonoOrganizacion="ngModel" class="form-control" type="text" placeholder="Telefono"
+              name="telefonoOrganizacion" id="telefonoOrganizacion" ngControl="telefonoOrganizacion"
+              [(ngModel)]="_OrganizacionModal1.telefonoOrganizacion" required />
           </div>
         </nb-card-body>
       </nb-card>
@@ -41,29 +55,47 @@
         <nb-card-body>
           <strong><label>Email</label></strong>
           <div class="form-group">
-            <input class="form-control" type="text" placeholder="Email" required />
+            <input #emailOrganizacion="ngModel" class="form-control" type="text" placeholder="Email"
+              name="emailOrganizacion" id="emailOrganizacion" ngControl="emailOrganizacion"
+              [(ngModel)]="_OrganizacionModal1.emailOrganizacion" />
           </div>
           <strong><label>Departamento de la Organizacion</label></strong>
           <div class="form-group">
-            <input class="form-control" type="text" placeholder="Departamento de la Organizacion" required />
+            <input #deptoReferencia="ngModel" class="form-control" type="text"
+              placeholder="Departamento de la Organizacion" name="deptoReferencia" id="deptoReferencia"
+              ngControl="deptoReferencia" [(ngModel)]="_OrganizacionModal1.deptoReferencia" required />
           </div>
           <strong><label>Contacto de Referencia</label></strong>
           <div class="form-group">
-            <input class="form-control" type="text" placeholder="Departamento de la Organizacion" required />
+            <input #contactoReferencia="ngModel" class="form-control" type="text"
+              placeholder="Departamento de la Organizacion" name="contactoReferencia" id="contactoReferencia"
+              ngControl="contactoReferencia" [(ngModel)]="_OrganizacionModal1.contactoReferencia" required />
           </div>
           <fieldset class="fieldCheck">
             <div class="demo-checkboxes">
               <strong>
-                <nb-checkbox>Socio en Desarrollo</nb-checkbox>
+                <nb-checkbox (change)="toggleVisibility($event)" #socioDesarrollo="ngModel" type="checkbox"
+                  [(ngModel)]="_OrganizacionModal1.socioDesarrollo" name="socioDesarrollo" id="socioDesarrollo">Socio en
+                  Desarrollo</nb-checkbox>
               </strong>
               <strong>
-                <nb-checkbox [value]="true">Agencia Beneficiaria</nb-checkbox>
+                <nb-checkbox (change)="toggleVisibility1($event)" #agenciaBeneficiaria="ngModel" type="checkbox"
+                  [(ngModel)]="_OrganizacionModal1.agenciaBeneficiaria" name="agenciaBeneficiaria"
+                  id="agenciaBeneficiaria">Agencia Beneficiaria</nb-checkbox>
               </strong>
               <strong>
-                <nb-checkbox [value]="true">Unidad Ejecutora</nb-checkbox>
+                <nb-checkbox (change)="toggleVisibilit2($event)" #unidadEjecutora="ngModel" type="checkbox"
+                  [(ngModel)]="_OrganizacionModal1.unidadEjecutora" name="unidadEjecutora" id="unidadEjecutora">Unidad
+                  Ejecutora</nb-checkbox>
               </strong>
               <strong>
-                <nb-checkbox>Administrador Financiero</nb-checkbox>
+                <nb-checkbox (change)="toggleVisibilit3($event)" #administradorFinanciero="ngModel" type="checkbox"
+                  [(ngModel)]="_OrganizacionModal1.administradorFinanciero" name="administradorFinanciero"
+                  id="administradorFinanciero">Administrador Financiero</nb-checkbox>
+                <strong>
+                  <nb-checkbox (change)="toggleVisibilit4($event)" #activo="ngModel" type="checkbox"
+                    [(ngModel)]="_OrganizacionModal1.activo" name="activo" id="activo">Estado del Proyecto</nb-checkbox>
+                </strong>
               </strong>
             </div>
           </fieldset>
@@ -75,30 +107,30 @@
         <nb-card-body>
           <strong><label>Web de la Organizacion</label></strong>
           <div class="form-group">
-            <input class="form-control" type="text" placeholder="Web de la Organizacion" required />
+            <input #webOrganizacion="ngModel" class="form-control" type="text" placeholder="Web de la Organizacion"
+              name="webOrganizacion" id="webOrganizacion" ngControl="webOrganizacion"
+              [(ngModel)]="_OrganizacionModal1.webOrganizacion" required />
           </div>
           <div class="form-group">
             <strong><label>Elija un Tipo De Organizacion</label></strong>
-            <select class="form-control" required>
+            <select name="idTipoOrganizacion1" id="idTipoOrganizacion1" ngControl="idTipoOrganizacion1"
+              class="form-control" [(ngModel)]="_OrganizacionModal1.idTipoOrganizacion1" required>
               <option value="0">Seleccione una Opcion</option>
+              <option *ngFor="let item of JsonReceptionTipoPerfiles" [value]="item.idTipoOrganizacion">
+                {{item.descTipoOrganizacion}}
+              </option>
             </select>
           </div>
-          <div class="form-group">
-            <strong><label>Grupo de Organizacion</label></strong>
-            <select class="form-control" required>
-              <option value="0">Seleccione una Opcion</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <strong><label>Tipo de Organizacion</label></strong>
-            <select class="form-control" required>
-              <option value="0">Seleccione una Opcion</option>
-            </select>
-          </div>
+          <strong> <label>País Organización</label> </strong>
+          <angular2-multiselect [data]="dropdownListPais" [(ngModel)]="selectedItemsPais" [settings]="dropdownSettings"
+            (onSelect)="onItemSlectPais($event)" required></angular2-multiselect>
           <div class="form-group">
             <strong><label>Categoria de la Organizacion</label></strong>
-            <select class="form-control" required>
+            <select name="idCatOrganizacion1" id="idCatOrganizacion1" ngControl="idCatOrganizacion1"
+              class="form-control" [(ngModel)]="_OrganizacionModal1.idCatOrganizacion1" required>
               <option value="0">Seleccione una Opcion</option>
+              <option *ngFor="let item of JsonCategoria" [value]="item.idCatOrganizacion">
+                {{item.descCatOrganizacion}}></option>
             </select>
           </div>
         </nb-card-body>
@@ -107,5 +139,5 @@
   </div>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-md btn-primary" (click)="closeModal()">Guardar los Cambios</button>
+  <button class="btn btn-md btn-primary" (click)="UpdateOrganizacion()">Guardar los Cambios</button>
 </div>

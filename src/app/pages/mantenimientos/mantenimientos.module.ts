@@ -19,6 +19,8 @@ import { EspaciosTrabajoComponent } from './mant-espacios-trabajo/espacios-traba
 import { OrganizacionComponent } from './mant-espacios-trabajo/organizacion/organizacion.component';
 import { OrganizacionModalComponent } from './mant-espacios-trabajo/organizacion/organizaciones.modal.component';
 import { UsuarioModalComponent } from './mant-seguridad/usuarios/usuario.modal.component';
+import { NgxPaginationModule } from 'ngx-pagination'; // <-- import the module
+import { FilterdataPipe } from '../activities/pipes/filterdata.pipe';
 
 // Composicion del Modulo
 @NgModule({
@@ -29,6 +31,7 @@ import { UsuarioModalComponent } from './mant-seguridad/usuarios/usuario.modal.c
     NgxDatatableModule,
     Ng2SmartTableModule,
     AngularMultiSelectModule,
+    NgxPaginationModule,
   ],
   declarations: [
     ...routedComponentsMant,
@@ -39,6 +42,7 @@ import { UsuarioModalComponent } from './mant-seguridad/usuarios/usuario.modal.c
     OrganizacionComponent,
     OrganizacionModalComponent,
     UsuarioModalComponent,
+    FilterdataPipe,
   ],
   entryComponents: [
     OrganizacionModalComponent,

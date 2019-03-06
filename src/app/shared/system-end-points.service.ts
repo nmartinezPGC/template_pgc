@@ -173,7 +173,12 @@ export class SystemEndPointsService extends ListEndPointsService {
             break;
           case 20:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointOrganizaciones.findByIdTipoPaisCategoriaOrganizacion.urlEndPoint;
-
+            break;
+          case 21:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointOrganizaciones.UpdateOrganizaciones.urlEndPoint;
+            break;
+          case 22:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointOrganizaciones.deleteOrganizacion.urlEndPoint;
         }
         break;
       case 'mantGenericosGroup': // Llamados a los EndPoint de Mantenimientos Genericos
@@ -246,6 +251,18 @@ export class SystemEndPointsService extends ListEndPointsService {
           case 9:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActivityIdInterna.urlEndPoint;
             break;
+          case 10: // NAM | 2019-02-28 | Mapeo de los EndPoins de Ubicaciones
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.newActivityUbicacion.urlEndPoint;
+            break;
+          case 11:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.listAllActivityUbicaciones.urlEndPoint;
+            break;
+          case 12:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdActivity.urlEndPoint;
+            break;
+          case 13:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActivityUbicacion.urlEndPoint;
+            break;
         }
         break;
       case 'mantGenericosUsuarioGroup': // Llamados a los EndPoint de usuarios
@@ -267,6 +284,40 @@ export class SystemEndPointsService extends ListEndPointsService {
             break;
           case 6:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointMantGenericosUsuario.deleteUsuario.urlEndPoint;
+            break;
+        }
+        break;
+      case 'endPointImplementacion': // Llamados a los EndPoint de Implementacion
+        switch (indicadorEndPoint) {
+          case 1:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointImplementacion.listAllNivelImplementacion.urlEndPoint;
+            break;
+          case 2:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointImplementacion.findByIdNivel.urlEndPoint;
+            break;
+          case 3:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointImplementacion.listAllNivelUbicacionImplementacion.urlEndPoint;
+            break;
+          case 4:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointImplementacion.findByIdNivelUbicacion.urlEndPoint;
+            break;
+          case 5:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointImplementacion.findByIdNivelImplementacion.urlEndPoint;
+            break;
+          case 6:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointImplementacion.listAllUbicaciones.urlEndPoint;
+            break;
+          case 7:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointImplementacion.findByIdUbicacion.urlEndPoint;
+            break;
+          case 8:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointImplementacion.findByUbicIdNivelImplementacion.urlEndPoint;
+            break;
+          case 9:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointImplementacion.findByUbicIdNivelUbicacion.urlEndPoint;
+            break;
+          case 10:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointImplementacion.findByUbicIdNivelImplAndIdNivelUbicacion.urlEndPoint;
             break;
         }
         break;

@@ -29,7 +29,7 @@
                   <div class="form-group">
                     <input #codOrganizacion="ngModel" class="form-control" type="text"
                       placeholder="Codigo de la Organizacion" name="codOrganizacion" id="codOrganizacion"
-                      ngControl="codOrganizacion" [(ngModel)]="_OrganizacionModel.codOrganizacion" required />
+                      ngControl="codOrganizacion" [(ngModel)]="_OrganizacionModel.codOrganizacion" disabled required />
                   </div>
                   <strong><label>Iniciales de la Organizacion</label></strong>
                   <div class="form-group">
@@ -39,9 +39,9 @@
                   </div>
                   <strong><label>Nombre de la Organizacion</label></strong>
                   <div class="form-group">
-                    <input #nombreOrganizacion="ngModel" class="form-control" type="text"
+                    <input #nombreOrganizacionModal="ngModel" class="form-control" type="text"
                       placeholder="Nombre de la Organizacion" placeholder="Iniciales de la Organizacion"
-                      name="nombreOrganizacion" id="nombreOrganizacion" ngControl="nombreOrganizacion"
+                      name="nombreOrganizacionModal" id="nombreOrganizacionModal" ngControl="nombreOrganizacion"
                       [(ngModel)]="_OrganizacionModel.nombreOrganizacion" required />
                   </div>
                   <strong><label>Descripcion de la Organizacion</label></strong>
@@ -137,9 +137,9 @@
                     <strong><label>Elija un Tipo De Organizacion</label></strong>
                     <select name="idTipoOrganizacion1" id="idTipoOrganizacion1" ngControl="idTipoOrganizacion1"
                       class="form-control" [(ngModel)]="_OrganizacionModel.idTipoOrganizacion1" required>
-                      <option value="0">Seleccione una Opcion</option>
                       <option *ngFor="let item of JsonReceptionTipoPerfiles" [value]="item.idTipoOrganizacion">
                         {{item.descTipoOrganizacion}}
+                      </option>
                     </select>
                   </div>
                   <strong> <label>País Organización</label> </strong>
@@ -149,7 +149,6 @@
                     <strong><label>Categoria de la Organizacion</label></strong>
                     <select name="idCatOrganizacion1" id="idCatOrganizacion1" ngControl="idCatOrganizacion1"
                       class="form-control" [(ngModel)]="_OrganizacionModel.idCatOrganizacion1" required>
-                      <option>Seleccione una Opcion</option>
                       <option *ngFor="let item of JsonCategoria" [value]="item.idCatOrganizacion">
                         {{item.descCatOrganizacion}}
                     </select>
@@ -177,10 +176,12 @@
                   <thead>
                     <tr class="tHeadSearch">
                       <th scope="col" colspan="2">
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" [(ngModel)]="queryString"
+                          placeholder="Buscar nombre de la Organizacion :">
                       </th>
                     </tr>
                     <tr class="tHeadTable">
+                      <th scope="col" style="width: 5%;">No</th>
                       <th scope="col" style="width: 30%;">Nombre</th>
                       <th scope="col" style="width: 10%;">Pais</th>
                       <th scope="col" style="width: 5%;">Iniciales</th>
@@ -192,7 +193,9 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let item of JsonReceptionOrganizaciones">
+                    <tr
+                      *ngFor="let item of JsonReceptionOrganizaciones  | filterdata: queryString : 'nombreOrganizacion' | paginate: { itemsPerPage: 5, currentPage: p };let homeTableIndex = index">
+                      <td>{{ homeTableIndex + 1 }}</td>
                       <td> {{item.nombreOrganizacion}}</td>
                       <td>{{item.idPaisOrganizacion.descPais}}</td>
                       <td>{{item.idPaisOrganizacion.inicialesPais}}</td>
@@ -201,13 +204,17 @@
                       <td>{{item.agenciaBeneficiaria}}</td>
                       <td>{{item.socioDesarrollo}}</td>
                       <td>
-                        <img class="pointerMouse" src="../../../../assets/icons/forms/rubbish-bin_24x.png" alt=""><img
-                          (click)="showLargeModal()" class="pointerMouse"
+                        <img><img (click)="showLargeModal(item.idOrganizacion)" class="pointerMouse"
                           src="../../../../assets/icons/forms/pencil-striped-symbol_24.png" alt="">
+                        <img (click)="deleteOrganizacion(item.idOrganizacion)" class="pointerMouse"
+                          src="../../../../assets/icons/forms/rubbish-bin_24x.png" alt=""><img alt="">
                       </td>
                     </tr>
                   </tbody>
                 </table>
+                <!-- paginador de la tabla -->
+                <pagination-controls autoHide="true" responsive="true" previousLabel="Anterior" nextLabel="Siguiente"
+                  (pageChange)="p = $event"></pagination-controls>
               </nb-card-body>
             </nb-card>
           </div>

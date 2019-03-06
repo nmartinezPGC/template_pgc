@@ -1,8 +1,26 @@
 <!-- Diseño de la Ventana de Ubicacion -->
 <!-- ==================================================================================== -->
-<nb-card accent="warning" status="primary">
-  <nb-card-header>Ubicación del Proyecto | {{ idProyectoTab }} </nb-card-header>
-  <nb-card-body>
-    <div leaflet [leafletOptions]="options" [leafletLayersControl]="layersControl"></div>
-  </nb-card-body>
-</nb-card>
+<div class="modal-content">
+  <div>
+    <!-- {{ modalContent }} -->
+
+    <nb-card accent="warning" status="primary">
+      <nb-card-header>Ingreso de Localidad del Proyecto | {{ idProyectoTab }}
+        <button class="close" aria-label="Close" (click)="closeModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </nb-card-header>
+      <nb-card-body>
+        <div style="height: 550px;" leaflet [leafletOptions]="options" [leafletLayersControl]="layersControl"
+          [leafletLayers]="layers" (leafletMapReady)="onMapReady($event)">
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </div>
+
+  <div class="modal-footer">
+    <button class="btn btn-primary botonSave" nbPopover="Enviar la Información de Localidad" nbPopoverMode="hint"
+      nbPopoverPlacement="top" (click)="closeModal()">Guardar</button>
+    <button class="btn btn-danger" (click)="closeModal()">Cerrar</button>
+  </div>
+</div>
