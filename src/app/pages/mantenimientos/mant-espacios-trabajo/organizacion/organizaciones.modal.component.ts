@@ -4,17 +4,16 @@ import { OrganizacionService } from '../../services/organizaciones.service';
 import { OrganizacionModal } from '../../models/organizacion.modal';
 import { Router } from '@angular/router';
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster';
-import { nullSafeIsEquivalent, THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'ngx-organizacion',
   templateUrl: './organizaciones.modal.component.html',
   styleUrls: ['./organizaciones.modal.component.scss'],
-  // providers: [NgbActiveModal]
+
   providers: [OrganizacionService],
 })
 export class OrganizacionModalComponent implements OnInit {
-  // @ ViewChild ( ' primaryColorSample ' );
+
 
 
   @Input() idOrganizacion;
@@ -77,7 +76,6 @@ export class OrganizacionModalComponent implements OnInit {
 ****************************************************************************/
   makeToast() {
     this.showToast(this.type, this.title, this.content);
-    // console.log('Opcion de Toaster 1.3 ' + JSON.stringify(this.content));
   } // FIN | makeToast
 
   /****************************************************************************

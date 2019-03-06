@@ -80,7 +80,7 @@ export class OrganizacionComponent implements OnInit {
     const activeModal = this.modalService.open(OrganizacionModalComponent, { size: 'lg', container: 'nb-layout' });
     activeModal.componentInstance.modalHeader = 'Large Modal Parametro ';
     activeModal.componentInstance.idOrganizacion = idOrganizacion;
-    console.log(idOrganizacion);
+
 
     activeModal.componentInstance.JsonReceptionFyByOrganizaciones = this.JsonReceptionFyByOrganizaciones;
 
