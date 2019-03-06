@@ -10,33 +10,33 @@
 export class OrganizacionModal {
     constructor(
         // mapeo de la tabla tbl_organizaciones
-        // public activo: boolean = true,
-        // public idOrganizacion: number,
-        public codOrganizacionModal: string,
-        public inicalesOrganizacionModal: string,
-        public nombreOrganizacionModal: string,
-        public descOrganizacionModal: string,
-        public direccionFisicaOrganizacionModal: string,
-        public telefonoOrganizacionModal: string,
-        public deptoReferenciaModal: string,
-        public contactoReferenciaModal: string,
-        public socioDesarrolloModal: boolean = true,
-        public agenciaBeneficiariaModadal: boolean = true,
-        public unidadEjecutoraModal: boolean = true,
-        public administradorFinancieroModal: boolean = true,
-        public emailOrganizacionModal: Date,
-        public webOrganizacionModal: string,
+        public activo: boolean = true,
+        public idOrganizacion: number,
+        public codOrganizacion: string,
+        public inicalesOrganizacion: string,
+        public nombreOrganizacion: string,
+        public descOrganizacion: string,
+        public direccionFisicaOrganizacion: string,
+        public telefonoOrganizacion: string,
+        public deptoReferencia: string,
+        public contactoReferencia: string,
+        public socioDesarrollo: boolean = true,
+        public agenciaBeneficiaria: boolean = true,
+        public unidadEjecutora: boolean = true,
+        public administradorFinanciero: boolean = true,
+        public emailOrganizacion: Date,
+        public webOrganizacion: string,
         // mapeo de la variables que estan relacionadas con la tabla
         public idPaisOrganizacion: { idPais: number },
         public idPais: number,
         public descPais: string,
         // // mapeo de la variables que estan relacionadas con la tabla
         public idTipoOrganizacion: { idTipoOrganizacion: number },
-        public idTipoOrganizacion1Modal: number,
+        public idTipoOrganizacion1: number,
 
         // // mapeo de la variables que estan relacionadas con la tabla
         public idCatOrganizacion: { idCatOrganizacion: number },
-        public idCatOrganizacion1Modal: number,
+        public idCatOrganizacion1: number,
 
         // mapeo de la variables que estan relacionadas con la tabla
     ) {

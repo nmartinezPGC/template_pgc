@@ -18,7 +18,8 @@ import { AgregarCategoriaComponent } from './mant-espacios-trabajo/agregar-categ
 import { EspaciosTrabajoComponent } from './mant-espacios-trabajo/espacios-trabajo/espacios-trabajo.component';
 import { OrganizacionComponent } from './mant-espacios-trabajo/organizacion/organizacion.component';
 import { OrganizacionModalComponent } from './mant-espacios-trabajo/organizacion/organizaciones.modal.component';
-
+import { NgxPaginationModule } from 'ngx-pagination'; // <-- import the module
+import { FilterdataPipe } from '../activities/pipes/filterdata.pipe';
 // Composicion del Modulo
 @NgModule({
   imports: [
@@ -28,6 +29,7 @@ import { OrganizacionModalComponent } from './mant-espacios-trabajo/organizacion
     NgxDatatableModule,
     Ng2SmartTableModule,
     AngularMultiSelectModule,
+    NgxPaginationModule,
   ],
   declarations: [
     ...routedComponentsMant,
@@ -37,6 +39,7 @@ import { OrganizacionModalComponent } from './mant-espacios-trabajo/organizacion
     EspaciosTrabajoComponent,
     OrganizacionComponent,
     OrganizacionModalComponent,
+    FilterdataPipe,
   ],
   entryComponents: [
     OrganizacionModalComponent,
