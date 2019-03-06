@@ -225,4 +225,38 @@ export class UsuarioService {
         });
     }// FIN | FND-00011
 
+
+    /****************************************************************************
+* Funcion: FND-00012
+* Fecha: 27-02-2019
+* Descripcion: Metodo para obtener los Datos de los espacios de trabajo por su tipo
+* Objetivo: datos de los espacios de trabajo
+* Params: { }
+****************************************************************************/
+    getAllEspaciosTrabajo(): Observable<any> {
+        // Retorno de la Funcion
+        return this._http.get(this._systemEndPointsService.getEndPointService('espacioTrabajoGroup', 1), {
+            headers: this.headers,
+            params: { 'tokenApi': this.tokenHeader },
+        });
+    }// FIN | FND-00012
+
+
+        /****************************************************************************
+    * Funcion: FND-00013
+    * Fecha: 05-03-2019
+    * Descripcion: Metodo que sirve para poder optener los espacios de trabajo por
+    * Params: {  }
+    * Autor: Edgar Ramirez
+    ****************************************************************************/
+   fyByIdEspacioTrabajo(idEspacioTrabajoIn: number): Observable<any> {
+    // Retorno de la Funcion
+    // console.log("hola");
+    const idEspacioTrabajo: number = idEspacioTrabajoIn;
+    return this._http.get(this._systemEndPointsService.getEndPointService('espacioTrabajoGroup', 2) + idEspacioTrabajo, {
+        headers: this.headers,
+        params: { 'tokenApi': this.tokenHeader },
+    });
+}// FIN | FND-00013
+
 }

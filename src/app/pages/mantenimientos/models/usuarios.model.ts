@@ -20,6 +20,7 @@ export class UsuarioModel {
         public fechaModificacion: Date,
         public horaCreacion: Date,
         public horaModificacion: Date,
+        public asignarEspacioTrabajo: boolean = false,
         // mapeo de la relacion del estado del usuario
         public idEstadoUsuario: { idEstado: number },
         public idEstado: number,

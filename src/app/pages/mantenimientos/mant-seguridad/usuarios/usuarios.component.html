@@ -66,49 +66,53 @@
                   <div class="input-group">
                     <input type="text" #emailUsuario="ngModel" placeholder="Correo Electronico"
                       class="form-control input-lg" name="emailUsuario" id="emailUsuario" ngControl="emailUsuario"
-                      [(ngModel)]="_usuarioModel.emailUsuario" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required minlength="5" />
-                      <div *ngIf="emailUsuario.errors &&(emailUsuario.touched || emailUsuario.dirty)" class ="aler alert-danger">
-                          <div [hidden]="!emailUsuario.errors?.pattern">
-                            Ingresa un Correo Real
-                          </div>
-                         </div>
-                      <!-- <small class="form-text error" *ngIf="emailUsuario.errors?.minlength">Se nesesita por lo
+                      [(ngModel)]="_usuarioModel.emailUsuario" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                      required minlength="5" />
+                    <div *ngIf="emailUsuario.errors &&(emailUsuario.touched || emailUsuario.dirty)"
+                      class="aler alert-danger">
+                      <div [hidden]="!emailUsuario.errors?.pattern">
+                        Ingresa un Correo Real
+                      </div>
+                    </div>
+                    <!-- <small class="form-text error" *ngIf="emailUsuario.errors?.minlength">Se nesesita por lo
                       menos {{ emailUsuario.errors.minlength.requiredLength }} caracteres</small> -->
                     <small class="form-text error" *ngIf="emailUsuario.errors?.required">El correo es
                       obligatorio</small>
                   </div>
                   <div class="input-group">
-                      <!-- <label for ="email">Email</label> -->
+                    <!-- <label for ="email">Email</label> -->
                     <input type="text" #emailUsuario2="ngModel" placeholder="Repetir Correo Electronico"
                       class="form-control" name="emailUsuario2" id="emailUsuario2" ngControl="emailUsuario2"
-                      [(ngModel)]="_usuarioModel.emailUsuario2" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required />
-                      <div *ngIf="emailUsuario2.errors &&(emailUsuario2.touched || emailUsuario2.dirty)" class ="aler alert-danger">
-                        <div [hidden]="!emailUsuario2.errors?.pattern">
-                          Ingresa un Correo Real
-                        </div>
-                       </div>
-                      <small class="form-text error"
+                      [(ngModel)]="_usuarioModel.emailUsuario2" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                      required />
+                    <div *ngIf="emailUsuario2.errors &&(emailUsuario2.touched || emailUsuario2.dirty)"
+                      class="aler alert-danger">
+                      <div [hidden]="!emailUsuario2.errors?.pattern">
+                        Ingresa un Correo Real
+                      </div>
+                    </div>
+                    <small class="form-text error"
                       *ngIf=" _usuarioModel.emailUsuario != _usuarioModel.emailUsuario2 ">Los
                       Correos no son iguales</small>
                   </div>
                   <!-- <div class="row full-name-inputs"> -->
-                    <div class="input-group">
-                      <input type="password" #passwordUsuario="ngModel" placeholder="Contraseña" class="form-control"
-                        name="passwordUsuario" id="passwordUsuario" ngControl="passwordUsuario"
-                        [(ngModel)]="_usuarioModel.passwordUsuario" required minlength="5" maxlength="20" />
-                      <small class="form-text error" *ngIf="passwordUsuario.errors?.minlength">Se nesesita por lo
-                        menos {{ passwordUsuario.errors.minlength.requiredLength }} caracteres</small>
-                      <small class="form-text error" *ngIf="passwordUsuario.errors?.required">La Contraseña es
-                        obligatoria</small>
-                    </div>
-                    <div class="input-group">
-                        <input type="password" #passwordUsuario2="ngModel" placeholder="Repetir Contraseña"
-                          class="form-control" name="passwordUsuario2" id="passwordUsuario2" ngControl="passwordUsuario2"
-                          [(ngModel)]="_usuarioModel.passwordUsuario2" required maxlength="20" />
-                        <small class="form-text error"
-                          *ngIf=" _usuarioModel.passwordUsuario != _usuarioModel.passwordUsuario2 ">Las Contraseñas no son
-                          iguales</small>
-                      </div>
+                  <div class="input-group">
+                    <input type="password" #passwordUsuario="ngModel" placeholder="Contraseña" class="form-control"
+                      name="passwordUsuario" id="passwordUsuario" ngControl="passwordUsuario"
+                      [(ngModel)]="_usuarioModel.passwordUsuario" required minlength="5" maxlength="20" />
+                    <small class="form-text error" *ngIf="passwordUsuario.errors?.minlength">Se nesesita por lo
+                      menos {{ passwordUsuario.errors.minlength.requiredLength }} caracteres</small>
+                    <small class="form-text error" *ngIf="passwordUsuario.errors?.required">La Contraseña es
+                      obligatoria</small>
+                  </div>
+                  <div class="input-group">
+                    <input type="password" #passwordUsuario2="ngModel" placeholder="Repetir Contraseña"
+                      class="form-control" name="passwordUsuario2" id="passwordUsuario2" ngControl="passwordUsuario2"
+                      [(ngModel)]="_usuarioModel.passwordUsuario2" required maxlength="20" />
+                    <small class="form-text error"
+                      *ngIf=" _usuarioModel.passwordUsuario != _usuarioModel.passwordUsuario2 ">Las Contraseñas no son
+                      iguales</small>
+                  </div>
                   <!-- </div> -->
                 </nb-card-body>
               </nb-card>
@@ -116,10 +120,11 @@
             <div class="col-lg-4">
               <nb-card>
                 <nb-card-body>
-                  <div class="input-group">
-                    <input type="text" #direccion="ngModel" placeholder="Direccion" class="form-control"
-                      name="direccion" id="direccion" ngControl="direccion" [(ngModel)]="_usuarioModel.direccion"
-                      required />
+                  <div class="form-group">
+                    <strong> <label>País Residencia</label> </strong>
+                    <angular2-multiselect [data]="dropdownListPais" [(ngModel)]="selectedItemsPais"
+                      [settings]="dropdownSettings" (onSelect)="onItemSelectPais($event)" required>
+                    </angular2-multiselect>
                   </div>
                   <div class="form-group">
                     <strong> <label>Seleccione un Perfil</label> </strong>
@@ -141,19 +146,22 @@
                       </option>
                     </select>
                   </div>
+                  <div class="input-group">
+                    <input type="text" #direccion="ngModel" placeholder="Direccion" class="form-control"
+                      name="direccion" id="direccion" ngControl="direccion" [(ngModel)]="_usuarioModel.direccion"
+                      required />
+                  </div>
                   <div class="form-group">
-                      <strong> <label>País Residencia</label> </strong>
-                      <!-- <select #idPais class="form-control" id="idPais" name="idPais" ngControl="idPais" [(ngModel)]="_activityModel.idPais"
-                          (change)="organizacionesIdTipoIdPaisListService(_activityModel.idTipoOrganizacion, _activityModel.idPais )">
-                          <option value="0">**** Selecciona el País de la Organizacion ****</option>
-                          <option *ngFor="let item of JsonReceptionPaises" [value]="item.idPais">
-                            {{item.descPais}}
-                          </option>
-                        </select> -->
-                      <angular2-multiselect [data]="dropdownListPais" [(ngModel)]="selectedItemsPais"
-                        [settings]="dropdownSettings" (onSelect)="onItemSelectPais($event)" required>
-                      </angular2-multiselect>
-                    </div>
+                    <strong> <label>Seleccione un Tipo Organizacion</label> </strong>
+                    <select class="form-control" name="idTipoOrganizacion" id="idTipoOrganizacion"
+                      ngControl="idTipoOrganizacion" [(ngModel)]="_usuarioModel.idTipoOrganizacion"
+                      (change)="categoriasOrganizacionListService(_usuarioModel.idTipoOrganizacion)" required>
+                      <option value="0">Seleccione una Opcion</option>
+                      <option *ngFor="let item of JsonReceptionTipoOrganizacion" [value]="item.idTipoOrganizacion">
+                        {{item.descTipoOrganizacion}}
+                      </option>
+                    </select>
+                  </div>
                 </nb-card-body>
               </nb-card>
             </div>
@@ -161,19 +169,10 @@
               <nb-card>
                 <nb-card-body>
                   <div class="form-group">
-                    <strong> <label>Seleccione un Tipo Organizacion</label> </strong>
-                    <select class="form-control" name="idTipoOrganizacion" id="idTipoOrganizacion"
-                      ngControl="idTipoOrganizacion" [(ngModel)]="_usuarioModel.idTipoOrganizacion" (change)="categoriasOrganizacionListService(_usuarioModel.idTipoOrganizacion)" required>
-                      <option value="0">Seleccione una Opcion</option>
-                      <option *ngFor="let item of JsonReceptionTipoOrganizacion" [value]="item.idTipoOrganizacion">
-                        {{item.descTipoOrganizacion}}
-                      </option>
-                    </select>
-                  </div>
-                  <div class="form-group">
                     <strong> <label>Seleccione Categoria Organizacion</label> </strong>
                     <select class="form-control" name="idCatOrganizacion" id="idCatOrganizacion"
-                      ngControl="idCatOrganizacion" [(ngModel)]="_usuarioModel.idCatOrganizacion" required>
+                      ngControl="idCatOrganizacion" [(ngModel)]="_usuarioModel.idCatOrganizacion" (change)="organizacionesIdTipoIdPaisIdCategoriaListService(_usuarioModel.idTipoOrganizacion,
+                      _usuarioModel.idPais, _usuarioModel.idCatOrganizacion)" required>
                       <option value="0">Seleccione una Opcion</option>
                       <option *ngFor="let item of JsonReceptionCatOrganizacion" [value]="item.idCatOrganizacion">
                         {{item.descCatOrganizacion}}
@@ -189,6 +188,21 @@
                         {{item.descOrganizacion}}
                       </option>
                     </select>
+                  </div>
+                  <!-- <div class="form-group">
+                    <strong> <label>Organizacion</label> </strong>
+                    <angular2-multiselect [data]="dropdownList" [(ngModel)]="selectedItems"
+                      [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" required>
+                    </angular2-multiselect>
+                  </div> -->
+                  <div class="form-control">
+                    <div class="row demo-checkboxes-radio">
+                      <!-- <div class="demo-checkboxes col-sm-6"> -->
+                      <nb-checkbox (change)="toggleVisibilit($event)" #asignarEspacioTrabajo="ngModel" type="checkbox"
+                        [(ngModel)]="_usuarioModel.asignarEspacioTrabajo" name="asignarEspacioTrabajo"
+                        id="asignarEspacioTrabajo">Asignar Espacio de Trabajo</nb-checkbox>
+                      <!-- </div> -->
+                    </div>
                   </div>
                   <div class="btn-group">
                     <button type="button" class="btn btn-primary btn-group-icon btn-group-divider">
@@ -210,6 +224,45 @@
                 <ng2-smart-table [settings]="settings" [source]="data" (editConfirm)="onSaveConfirm1($event)"
                   (deleteConfirm)="onDeleteConfirm($event)">
                 </ng2-smart-table>
+              </nb-card-body>
+            </nb-card>
+          </div>
+        </nb-tab>
+        <!-- Comienzo de estructura del tab tres donde se consultan los espacios de trabajo por usuario -->
+        <nb-tab tabTitle="Usuarios/Espacios de Trabajo">
+          <div class="col-lg-12">
+            <nb-card>
+              <nb-card-body>
+                <table class="table table-hover table-striped table-bordered" id="tableIdInterna">
+                  <thead>
+                    <tr class="tHeadSearch">
+                      <th scope="col" colspan="2">
+                        <input type="text" class="form-control">
+                      </th>
+                    </tr>
+                    <tr class="tHeadTable">
+                      <th scope="col" style="width: 10%;">Codigo</th>
+                      <th scope="col" style="width: 10%;">Nombre Usuario</th>
+                      <th scope="col" style="width: 20%;">Correo</th>
+                      <th scope="col" style="width: 5%;">Activo</th>
+                      <!-- <th scope="col" style="width: 10%;">Vista Publica</th> -->
+                      <th scope="col" style="width: 5%;">Acción</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of JsonReceptionUsuarios">
+                      <td> {{item.codUsuario}}</td>
+                      <td>{{item.nombre1Usuario}}</td>
+                      <td>{{item.emailUsuario}}</td>
+                      <td>{{item.activo}}</td>
+                      <!-- <td>{{item.vistaPublica}}</td> -->
+                      <td>
+                        <img class="pointerMouse" src="../../../../assets/icons/forms/eye-24.png" alt=""
+                          (click)="usuariosTipoService()">
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </nb-card-body>
             </nb-card>
           </div>
