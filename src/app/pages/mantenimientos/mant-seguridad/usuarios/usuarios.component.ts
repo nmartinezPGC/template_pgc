@@ -19,7 +19,7 @@ import { ConfigSmartTableService } from '../../services/usuarios.settings.smart-
 import { ListasComunesService } from '../../../common-list/services/listas-comunes.service';
 import { delay } from 'q';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { usuarioModalComponent } from './usuario.modal.component';
+import { UsuarioModalComponent } from './usuario.modal.component';
 import { EspacioTrabajoModel } from '../../models/usuario.espacio.model';
 
 // Varieble Jquey
@@ -1115,7 +1115,7 @@ export class UsuariosComponent implements OnInit {
     }
   }
   showLargeModal(idUsuario1: number) {
-    const activeModal = this.modalService.open(usuarioModalComponent, { size: 'lg', container: 'nb-layout' });
+    const activeModal = this.modalService.open(UsuarioModalComponent, { size: 'lg', container: 'nb-layout' });
     activeModal.componentInstance.modalHeader = 'Asignar Espacio de Trabajo';
     activeModal.componentInstance.idUsuario = idUsuario1;
     // console.log(idUsuario1);

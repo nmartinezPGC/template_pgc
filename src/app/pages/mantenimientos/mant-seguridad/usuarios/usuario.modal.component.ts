@@ -11,7 +11,7 @@ import { EspacioTrabajoModel } from '../../models/usuario.espacio.model';
   providers: [UsuarioService],
 })
 
-export class usuarioModalComponent implements OnInit {
+export class UsuarioModalComponent implements OnInit {
   @Input() idUsuario;
   @Input() idEspacioTrabajo;
   public JsonReceptionEspaciosTrabajo: any;
