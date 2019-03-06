@@ -162,7 +162,7 @@ export class OrganizacionService {
     return this._http.put(this._systemEndPointsService.getEndPointService('organizacionesGroup', 21) + idOrg, paramsSend, {
       headers: this.headers,
       params: { 'tokenApi': this.tokenHeader },
-    });// FIN | FND-00004
+    }); // FIN | FND-00004
   }
 
 
