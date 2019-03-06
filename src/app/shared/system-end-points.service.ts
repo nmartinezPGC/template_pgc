@@ -246,6 +246,18 @@ export class SystemEndPointsService extends ListEndPointsService {
           case 9:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActivityIdInterna.urlEndPoint;
             break;
+          case 10: // NAM | 2019-02-28 | Mapeo de los EndPoins de Ubicaciones
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.newActivityUbicacion.urlEndPoint;
+            break;
+          case 11:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.listAllActivityUbicaciones.urlEndPoint;
+            break;
+          case 12:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdActivity.urlEndPoint;
+            break;
+          case 13:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActivityUbicacion.urlEndPoint;
+            break;
         }
         break;
       case 'mantGenericosUsuarioGroup': // Llamados a los EndPoint de usuarios
@@ -287,9 +299,21 @@ export class SystemEndPointsService extends ListEndPointsService {
           case 5:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointImplementacion.findByIdNivelImplementacion.urlEndPoint;
             break;
-          /*case 6:
-            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointImplementacion.deleteUsuario.urlEndPoint;
-            break;*/
+          case 6:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointImplementacion.listAllUbicaciones.urlEndPoint;
+            break;
+          case 7:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointImplementacion.findByIdUbicacion.urlEndPoint;
+            break;
+          case 8:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointImplementacion.findByUbicIdNivelImplementacion.urlEndPoint;
+            break;
+          case 9:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointImplementacion.findByUbicIdNivelUbicacion.urlEndPoint;
+            break;
+          case 10:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointImplementacion.findByUbicIdNivelImplAndIdNivelUbicacion.urlEndPoint;
+            break;
         }
         break;
     }

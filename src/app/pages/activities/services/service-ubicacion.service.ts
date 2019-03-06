@@ -73,11 +73,11 @@ export class ServiceUbicacionService {
     * Descripcion: Metodo para obtener los Datos de todos los Niveles de Ubicacion
     * de Implementacion
     * Objetivo: datos de Niveles de Implementacion
-    * Params: { idNivelUbicacion }
+    * Params: { idNivelImplementacion }
     ****************************************************************************/
-  getAllNivelesUbicacionImplementacion(idNivelUbicacionIn: number): Observable<any> {
+  getAllNivelesUbicacionImplementacion(idNivelImplementacionIn: number): Observable<any> {
     // Parametros
-    const paramSend: number = idNivelUbicacionIn;
+    const paramSend: number = idNivelImplementacionIn;
 
     // Retorno de la Funcion
     return this._http.get(this._systemEndPointsService.getEndPointService('endPointImplementacion', 5) + paramSend, {
@@ -85,4 +85,81 @@ export class ServiceUbicacionService {
       params: { 'tokenApi': this.tokenHeader },
     });
   } // FIN | FND-00003
+
+
+  /****************************************************************************
+    * Funcion: FND-00004
+    * Fecha: 25-02-2019
+    * Descripcion: Metodo para obtener los Datos de todos las Ubicaciones
+    * Objetivo: datos de las Ubicaciones
+    * Params: { idNivelImplementacion, idNivelUbicacion }
+    ****************************************************************************/
+  getUbicacionesByIdNivelImplAndIdNivelUbicacion(idNivelImplementacionIn: number, idNivelUbicacionIn): Observable<any> {
+    // Parametros
+    const paramSend: any = idNivelImplementacionIn + '/' + idNivelUbicacionIn;
+
+    // Retorno de la Funcion
+    return this._http.get(this._systemEndPointsService.getEndPointService('endPointImplementacion', 10) + paramSend, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  } // FIN | FND-00004
+
+
+  /****************************************************************************
+    * Funcion: FND-00005
+    * Fecha: 25-02-2019
+    * Descripcion: Metodo para obtener los Datos de todos las Ubicaciones
+    * Objetivo: datos de las Ubicaciones
+    * Params: { idNivelUbicacion }
+    ****************************************************************************/
+  getUbicacionesByIdNivelUbicacion(idNivelUbicacionIn): Observable<any> {
+    // Parametros
+    const paramSend: any = idNivelUbicacionIn;
+
+    // Retorno de la Funcion
+    return this._http.get(this._systemEndPointsService.getEndPointService('endPointImplementacion', 9) + paramSend, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  } // FIN | FND-00005
+
+
+  /****************************************************************************
+    * Funcion: FND-00006
+    * Fecha: 28-02-2019
+    * Descripcion: Metodo para ingresar los Datos de la Ubicacion
+    * Objetivo: Ingresar datos de las Ubicaciones con Proyectos
+    * Params: { jsonUbicacionActivity }
+    ****************************************************************************/
+  newUbicacionProyecto(jsonUbicacionActivity:any): Observable<any> {
+    // Parametros
+    const paramSend: any = jsonUbicacionActivity;
+
+    // Retorno de la Funcion
+    return this._http.post(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 10), paramSend, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  } // FIN | FND-00006
+
+
+  /****************************************************************************
+    * Funcion: FND-00007
+    * Fecha: 01-03-2019
+    * Descripcion: Metodo para borrar los Datos de la Ubicacion relacionada con
+    * el Proyecto
+    * Objetivo: Borrar datos de las Ubicaciones con Proyectos
+    * Params: { idUbicacionImpl , idActividad }
+    ****************************************************************************/
+  deletedActivityUbicacion(idUbicacionImplIn: number, idActividadIn: number): Observable<any> {
+    // Parametros
+    const paramSend: any = idUbicacionImplIn + '/' + idActividadIn;
+
+    // Retorno de la Funcion
+    return this._http.delete(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 13) + paramSend, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  } // FIN | FND-00007
 }

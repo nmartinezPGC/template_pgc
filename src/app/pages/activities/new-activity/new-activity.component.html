@@ -466,7 +466,7 @@
                         <!-- Botonera de Organizaciones -->
                         <button type="button" class="btn btn-primary btn-group-icon btn-group-divider botonSpecial"
                           nbPopover="Agrega la ID Interna a la lista" nbPopoverMode="hint" (click)="pushJsonIdInterna()">
-                          <i class="ion-checkmark-round"></i>
+                          <i class="ion-plus-round"></i>
                         </button>
                       </div>
                     </div>
@@ -543,31 +543,31 @@
               </nb-card-body>
             </nb-card>
 
-            <!-- <nb-card>
-              <nb-card-header>
-                Tiny MCE
-              </nb-card-header>
-              <nb-card-body>
-                <ngx-tiny-mce></ngx-tiny-mce>
-              </nb-card-body>
-            </nb-card> -->
-
             <!-- Botones  -->
-            <div class="row">
-              <div class="col-lg-12">
-                <button class="btn btn-warning with-margins" nbPopover="Guarda la Información de tu Proyecto de forma temporal; para que luego puedas seguir actualizandola."
-                  nbPopoverMode="hint" nbPopoverPlacement="left" (click)="saveActivity(1)">Guardar como borrador</button>
+            <nb-card>
+              <!-- <nb-card-header>
+                Tiny MCE
+              </nb-card-header> -->
+              <nb-card-body>
+                <!-- <ngx-tiny-mce></ngx-tiny-mce> -->
+                <div class="row">
+                  <div class="col-lg-12">
+                    <button class="btn btn-warning with-margins" nbPopover="Guarda la Información de tu Proyecto de forma temporal; para que luego puedas seguir actualizandola."
+                      nbPopoverMode="hint" nbPopoverPlacement="left" (click)="saveActivity(1)">Guardar como borrador</button>
 
-                <button class="btn btn-primary botonSave with-margins" nbPopover="Enviar la Información del Proyecto, para luego validar por el Administrador"
-                  nbPopoverMode="hint" nbPopoverPlacement="top" (click)="saveActivity(2)">Guardar y Enviar</button>
+                    <button class="btn btn-primary botonSave with-margins" nbPopover="Enviar la Información del Proyecto, para luego validar por el Administrador"
+                      nbPopoverMode="hint" nbPopoverPlacement="top" (click)="saveActivity(2)">Guardar y Enviar</button>
 
-                <button class="btn btn-danger with-margins" nbPopover="Limpiar la Información del formulario del Proyecto"
-                  nbPopoverMode="hint" nbPopoverPlacement="bottom" (click)="resetActivity()">Limpiar Formulario</button>
+                    <button class="btn btn-danger with-margins" nbPopover="Limpiar la Información del formulario del Proyecto"
+                      nbPopoverMode="hint" nbPopoverPlacement="bottom" (click)="resetActivity()">Limpiar Formulario</button>
 
-                <button class="btn btn-warning with-margins" nbPopover="Hello, how are you today?" nbPopoverMode="hint"
-                  nbPopoverPlacement="right" (click)="newActividadIdInterna()">Probar</button>
-              </div>
-            </div>
+                    <button class="btn btn-warning with-margins" nbPopover="Hello, how are you today?" nbPopoverMode="hint"
+                      nbPopoverPlacement="right" (click)="newActividadIdInterna()">Probar</button>
+                  </div>
+                </div>
+              </nb-card-body>
+            </nb-card>
+
 
           </nb-card-body>
         </nb-tab>
@@ -575,9 +575,9 @@
         <!-- ==================================================================================== -->
 
         <!-- Tab #2 de Ubicacion Proyecto/Programa -->
-        <nb-tab tabTitle="Paso #2 | Datos de Ubicación" tabIcon="nb-email" responsive>
+        <nb-tab tabTitle="Paso #2 | Datos de Ubicación">
           <!-- <span id="sectorPrograms">Content #2</span> -->
-          <ngx-ubicacion [idProyectoTab]="idProyectoTab">
+          <ngx-ubicacion [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab" [codigoProyectoTab]="codigoProyectoTab"  [JsonPassData]="JsonPassData">
           </ngx-ubicacion>
         </nb-tab>
         <!-- Fin de Datos de Ubicacion Proyecto/Programa -->

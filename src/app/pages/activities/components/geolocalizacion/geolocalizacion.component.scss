@@ -23,4 +23,21 @@ $color-loader: #9aa0a5;
     color: rgb(255, 255, 255);
     font-size: 17px;
   }
+
+  @media screen and (min-width: 992px) {
+    .modal-content {
+      width: 120% !important;
+      margin-left: -10%;
+    }
+  }
+
+  .botonSave {
+    background-color: #204f85;
+    cursor: pointer;
+  }
+
+  .botonSave:hover {
+    background-color: #1f6abe;
+    cursor: pointer;
+  }
 }

@@ -59,7 +59,16 @@ export class NewActivityComponent implements OnInit {
   @ViewChild('idInterna') mySelectIdInterna: ElementRef;
 
   // Datos compartidos entre Componentes
-  public idProyectoTab: number = 0;
+  public idProyectoTab: number = 65;
+  public idUsuarioTab: number = 0;
+  public codigoProyectoTab: string;
+
+  public JsonPassData: any[] = [
+    {
+      idProyectoTab: '',
+      idUsuarioTab: '',
+    }
+  ];
 
   datos: string;
 
@@ -202,7 +211,7 @@ export class NewActivityComponent implements OnInit {
   * Objetivo: constructor in the method header API
   ****************************************************************************/
   constructor(private _userService: UserService,
-    private completerService: CompleterService,
+    // private completerService: CompleterService,
     private _listasComunesService: ListasComunesService,
     // private service: SmartTableService,
     private changeDetectorRef: ChangeDetectorRef,
@@ -220,10 +229,6 @@ export class NewActivityComponent implements OnInit {
     /* Llamado a la Funcion: 007, la cual obtiene el detalle da la Info.
      del Usuario */
     this.userDatailsService();
-
-    this.dato('Hola Modal');
-
-    this.idProyectoTab;
 
     // this.source = new LocalDataSource(this.data); // create the source
 
@@ -508,6 +513,9 @@ export class NewActivityComponent implements OnInit {
         } else {
           this.JsonReceptionUserDetail = result.data;
           this.idTipoOrganizacionUsario = this.JsonReceptionUserDetail.idTipoOrganizacionUsuario.idTipoOrganizacion;
+          this.idUsuarioTab = this.JsonReceptionUserDetail.idUsuario;
+
+          this.JsonPassData['idUsuarioTab'] = this.JsonReceptionUserDetail.idUsuario;
 
           setTimeout(() => {
             /** spinner ends after 3 seconds */
@@ -1124,7 +1132,7 @@ export class NewActivityComponent implements OnInit {
       this.changeDetectorRef.detectChanges();
 
       // Borramos la Id Interna de la BD
-      if (this._activityModel.idActividad !== 0 || this._activityModel.idActividad !== null ) {
+      if (this._activityModel.idActividad !== 0 || this._activityModel.idActividad !== null) {
         this.deletedActividadIdInterna(codIdInternaIn);
       }
     }
@@ -1223,6 +1231,7 @@ export class NewActivityComponent implements OnInit {
       // Estado de Validacion de Proyecto | Borrador Existente
       this._activityModel.idEstadoV = 15;
       this.idProyectoTab = this._activityModel.idActividad;
+      this.codigoProyectoTab = this._activityModel.codigoActividad;
       this._activityModel.idEstadoValid = { idEstado: this._activityModel.idEstadoV };
       this.editActivity(this._activityModel.idActividad);
     }
@@ -1271,6 +1280,10 @@ export class NewActivityComponent implements OnInit {
 
             this._activityPlanificacionModel.codigoActividad = this._activityModel.codigoActividad;
             this._activityPlanificacionModel.idActividadPlan = { idActividad: this._activityModel.idActividad };
+
+            // Asigna el valor de
+            this.idProyectoTab = this._activityModel.idActividad;
+            this.codigoProyectoTab = this._activityModel.codigoActividad;
 
             // Ejecuta el Llenado de la Planificacion
             this.newActividadPlanificacion();

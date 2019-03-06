@@ -449,6 +449,39 @@ export class ListEndPointsService {
         groupEndPoint: 'actividadesCRUDGroup',
         descEndPoint: 'Eliminar la Id Interna al proyecto',
       },
+      // NAM | 2019-02-28 | Mapping Ubicaciones de Actividades
+      newActivityUbicacion: {
+        id: 10,
+        nameEndpoint: 'Agregar Ubicacion a Proyecto',
+        urlEndPoint: '/mant-actividades/ubicaciones/new',
+        params: '{ jsonUbicacionActivity }',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Agregar la Ubicacion al proyecto recien Ingresado',
+      },
+      listAllActivityUbicaciones: {
+        id: 11,
+        nameEndpoint: 'Listar todas las Ubicaciones de los Proyecto',
+        urlEndPoint: '/mant-actividades/ubicaciones',
+        params: '{}',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Listar todas las Ubicaciones de los proyectos',
+      },
+      findByIdActivity: {
+        id: 12,
+        nameEndpoint: 'Listar todas las Ubicaciones de un Proyecto',
+        urlEndPoint: '/mant-actividades/ubicaciones/findByIdActividadUbicacion/',
+        params: '{ idActividadUbicacion }',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Listar todas las Ubicaciones del proyecto a consultado',
+      },
+      deleteActivityUbicacion: {
+        id: 13,
+        nameEndpoint: 'Eliminar Id Interna a Proyecto',
+        urlEndPoint: '/mant-actividades/ubicaciones/delete/',
+        params: '{ idUbicacionImpl}/{idActividad }',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Eliminar la Ubicacion al proyecto, selecionado',
+      },
     }, // modulo de mantenimientos generico de usuarios
     endPointMantGenericosUsuario: {
       listAllUsuarios: {
@@ -529,6 +562,41 @@ export class ListEndPointsService {
         urlEndPoint: '/ubicacion-geografica/nivel-ubicacion-implementacion/findByIdNivelImplementacion/',
         groupEndPoint: 'endPointImplementacion',
         descEndPoint: 'Listar el Nivel de Ubicacion de Implementacion, buscado por el ID Nivel de Implementacion',
+      },
+      listAllUbicaciones: {
+        id: 6,
+        nameEndpoint: 'List de Ubicaciones',
+        urlEndPoint: '/ubicacion-geografica/ubicacion-implementacion',
+        groupEndPoint: 'endPointImplementacion',
+        descEndPoint: 'Listar el Nivel de Ubicacion de Implementacion, buscado por el ID Nivel de Implementacion',
+      },
+      findByIdUbicacion: {
+        id: 7,
+        nameEndpoint: 'List de Ubicacion, por Id',
+        urlEndPoint: '/ubicacion-geografica/ubicacion-implementacion/findByIdUbicacion/',
+        groupEndPoint: 'endPointImplementacion',
+        descEndPoint: 'Listar la Ubicacion de Implementacion, buscado por el ID',
+      },
+      findByUbicIdNivelImplementacion: {
+        id: 8,
+        nameEndpoint: 'List de Ubicaciones, por Nivel de Implementacion',
+        urlEndPoint: '/ubicacion-geografica/ubicacion-implementacion/findByIdNivelImplementacion/',
+        groupEndPoint: 'endPointImplementacion',
+        descEndPoint: 'Listar las Ubicaciones de Implementacion, buscado por el ID Nivel de Implementacion',
+      },
+      findByUbicIdNivelUbicacion: {
+        id: 9,
+        nameEndpoint: 'List de Ubicaciones, por Nivel de Ubicacion',
+        urlEndPoint: '/ubicacion-geografica/ubicacion-implementacion/findByIdNivelUbicacion/',
+        groupEndPoint: 'endPointImplementacion',
+        descEndPoint: 'Listar las Ubicaciones de Implementacion, buscado por el ID de Nivel Ubicacion',
+      },
+      findByUbicIdNivelImplAndIdNivelUbicacion: {
+        id: 10,
+        nameEndpoint: 'List de Ubicaciones, por Nivel de Implementacion y Nivel de Ubicacion de Implementacion',
+        urlEndPoint: '/ubicacion-geografica/ubicacion-implementacion/findByIdNivelImplementacionAndIdNivelUbicacion/',
+        groupEndPoint: 'endPointImplementacion',
+        descEndPoint: 'Listar las Ubicaciones de Implementacion, buscado por el ID Nivel de Implementacion y Nivel de Unicacion de Implementacion',
       },
     },
   }

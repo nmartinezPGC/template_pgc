@@ -25,6 +25,8 @@ import { MyDatePickerModule } from 'mydatepicker';
 
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NbRouteTabsetModule } from '@nebular/theme/components/route-tabset/route-tabset.module';
+
+// Modulo de Mapas
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { UbicacionComponent } from './components/ubicacion/ubicacion.component';
 
