@@ -67,7 +67,7 @@ export class NewActivityComponent implements OnInit {
     {
       idProyectoTab: '',
       idUsuarioTab: '',
-    }
+    },
   ];
 
   datos: string;

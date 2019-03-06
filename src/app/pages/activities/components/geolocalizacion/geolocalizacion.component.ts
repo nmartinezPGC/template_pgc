@@ -33,24 +33,24 @@ export class GeolocalizacionComponent implements OnInit, OnChanges {
   // Opciones del Mapa
   options = {
     layers: [
-      tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: 'Creado por: Nahum Martínez' })
+      tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: 'Creado por: Nahum Martínez' }),
     ],
     zoom: 8,
     detectRetina: true,
-    center: latLng(14.520611, -87.136183)
+    center: latLng(14.520611, -87.136183),
   };
 
   // Capas del Mapa
   layersControl = {
     baseLayers: {
       'Open Street Map': tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '...' }),
-      'Open Cycle Map': tileLayer('http://{s}.tile.opencyclemap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '...' })
+      'Open Cycle Map': tileLayer('http://{s}.tile.opencyclemap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '...' }),
     },
     overlays: {
       'Tegucigalpa': L.circle([14.072275, -87.192139], { radius: 10000 }),
       'San Pedro Sula': L.circle([15.505230, -88.024971], { radius: 10000 }),
       // 'San Pedro Sula': L.polygon([[46.8, -121.55], [46.9, -121.55], [46.9, -121.7], [46.8, -121.7]])
-    }
+    },
   }
 
   datos = [];

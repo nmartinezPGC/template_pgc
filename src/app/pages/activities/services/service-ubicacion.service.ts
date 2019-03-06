@@ -132,7 +132,7 @@ export class ServiceUbicacionService {
     * Objetivo: Ingresar datos de las Ubicaciones con Proyectos
     * Params: { jsonUbicacionActivity }
     ****************************************************************************/
-  newUbicacionProyecto(jsonUbicacionActivity:any): Observable<any> {
+  newUbicacionProyecto(jsonUbicacionActivity: any): Observable<any> {
     // Parametros
     const paramSend: any = jsonUbicacionActivity;
 

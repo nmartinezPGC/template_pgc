@@ -397,7 +397,7 @@ export class UbicacionComponent implements OnInit, OnChanges {
         if (element.nombreUbicacionImpl === this._activityUbicacionModel.nombreUbicacionImpl) {
           this.findData = true;
           this.showToast('error', 'Error al Ingresar la Información de la Ubicación del Proyecto', 'Ya existe una Ubicación seleccionada para este Proyecto, ingresa una distinta para continuar');
-        } else if ((element.nombreUbicacionImpl !== this._activityUbicacionModel.nombreUbicacionImpl) && (this.findData == false)) {
+        } else if ((element.nombreUbicacionImpl !== this._activityUbicacionModel.nombreUbicacionImpl) && (this.findData === false)) {
           this.findData = false;
         }
       });
