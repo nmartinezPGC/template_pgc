@@ -242,21 +242,57 @@ export class UsuarioService {
     }// FIN | FND-00012
 
 
-        /****************************************************************************
-    * Funcion: FND-00013
-    * Fecha: 05-03-2019
-    * Descripcion: Metodo que sirve para poder optener los espacios de trabajo por
-    * Params: {  }
-    * Autor: Edgar Ramirez
+    /****************************************************************************
+* Funcion: FND-00013
+* Fecha: 05-03-2019
+* Descripcion: Metodo que sirve para poder optener los espacios de trabajo por
+* Params: {  }
+* Autor: Edgar Ramirez
+****************************************************************************/
+    fyByIdEspacioTrabajo(idEspacioTrabajoIn: number): Observable<any> {
+        // Retorno de la Funcion
+        // console.log("hola");
+        const idEspacioTrabajo: number = idEspacioTrabajoIn;
+        return this._http.get(this._systemEndPointsService.getEndPointService('espacioTrabajoGroup', 2) + idEspacioTrabajo, {
+            headers: this.headers,
+            params: { 'tokenApi': this.tokenHeader },
+        });
+    }// FIN | FND-00013
+
+
+    /****************************************************************************
+    * Funcion: FND-00014
+    * Fecha: 08-03-2019
+    * Descripcion: Metodo para obtener los Datos de la Organizacion por Codigo
+    * Objetivo: Validar si una Organizacion existe por Codigo
+    * Params: { codTipoRol }
     ****************************************************************************/
-   fyByIdEspacioTrabajo(idEspacioTrabajoIn: number): Observable<any> {
-    // Retorno de la Funcion
-    // console.log("hola");
-    const idEspacioTrabajo: number = idEspacioTrabajoIn;
-    return this._http.get(this._systemEndPointsService.getEndPointService('espacioTrabajoGroup', 2) + idEspacioTrabajo, {
-        headers: this.headers,
-        params: { 'tokenApi': this.tokenHeader },
-    });
-}// FIN | FND-00013
+    getRolByCodigoCount(codTipoRol: string): Observable<any> {
+        // Parametros de la Funcion
+        const paramsSend = codTipoRol;
+        // Retorno de la Funcion
+        return this._http.get(this._systemEndPointsService.getEndPointService('idInternaGroup', 3) + paramsSend, {
+            headers: this.headers,
+            params: { 'tokenApi': this.tokenHeader },
+        });
+    }// FIN | FND-00014
+
+
+    /****************************************************************************
+  * Funcion: FND-00015
+  * Fecha: 13-03-2019
+  * Descripcion: Metodo para obtener los Datos de los roles
+  * Objetivo: datos de los Roles de espacios de trabajo
+  * Params: {  }
+  ****************************************************************************/
+    fyByIdRolEspacio(idGrupo): Observable<any> {
+        // Parametros solicitados (Grupo Solicitao)
+        const paramSend = idGrupo;
+        // Retorno de la Funcion
+        return this._http.get(this._systemEndPointsService.getEndPointService('mantGenericosGroup', 9) + paramSend, {
+            headers: this.headers,
+            params: { 'tokenApi': this.tokenHeader },
+        });
+    }// FIN | FND-00015
 
 }

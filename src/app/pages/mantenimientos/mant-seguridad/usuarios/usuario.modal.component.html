@@ -11,26 +11,44 @@
         <table class="table table-hover table-striped table-bordered" id="tableIdInterna">
           <thead>
             <tr class="tHeadSearch">
-              <th scope="col" colspan="2">
+              <th scope="col" colspan="1">
                 <input type="text" class="form-control">
               </th>
             </tr>
             <tr class="tHeadTable">
+              <th scope="col" style="width: 5%;">No</th>
               <th scope="col" style="width: 20%;">Codigo</th>
-              <th scope="col" style="width: 30%;">Nombre Espacio Trabajo</th>
-              <th scope="col" style="width: 30%;">Descripcion Espacio Trabajo</th>
+              <th scope="col" style="width: 20%;">Nombre Espacio Trabajo</th>
+              <!-- <th scope="col" style="width: 20%;">Descripcion Espacio Trabajo</th> -->
               <!-- <th scope="col" style="width: 10%;">Espacio Padre</th>
               <th scope="col" style="width: 10%;">Vista Publica</th> -->
+              <th scope="col" style="width: 20%;">Rol</th>
               <th scope="col" style="width: 5%;">Acción</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let item of JsonReceptionEspaciosTrabajo">
+            <tr *ngFor="let item of JsonReceptionEspaciosTrabajo let homeFormIndex = index">
+              <td>{{ homeFormIndex + 1 }}</td>
               <td> {{item.codEspacioTrabajo}}</td>
               <td>{{item.nombreEspacioTrabajo}}</td>
-              <td>{{item.descripcionEspacioTrabajo}}</td>
+              <!-- <td>{{item.descripcionEspacioTrabajo}}</td> -->
               <!-- <td>{{item.espacioPadre}}</td>
               <td>{{item.vistaPublica}}</td> -->
+              <td>
+                <!-- <div class="form-control"> -->
+
+                <select class="form-control" (change)="capturar($event.target.value)" required>
+                  <option value="0">Seleccione una Opcion</option>
+                  <option *ngFor="let dato of JsonReceptionRolEspacio" [value]="dato.idRol">
+                    {{dato.nombre1Usuario}}
+                  </option>
+                  <!-- <option value="5">Administrador Espacio de Trabajo</option>
+                    <option value="6">Aprobador Espacio de Trabajo</option>
+                    <option value="7">Miembro Espacio de Trabajo</option> -->
+
+                </select>
+                <!-- </div> -->
+              </td>
               <td>
                 <!-- <img class="pointerMouse" src="../../../../assets/icons/forms/plus-24.png" alt="" (click)="agregarEspacioTrabajo(idUsuario)"> -->
                 <div class="col-sm-4">
@@ -45,6 +63,7 @@
             </tr>
           </tbody>
         </table>
+
       </nb-card-body>
     </nb-card>
   </div>

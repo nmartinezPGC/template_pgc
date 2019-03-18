@@ -320,6 +320,7 @@ export class UsuariosComponent implements OnInit {
           this.showToast('error', 'Error al Ingresar la Información del Usuario', response.message);
         } else if (response.status === 200) {
           this.idUsuario = response.data.idUsuario;
+          // console.log(this.idUsuario + ' id usuario');
           this.showToast('default', 'La Información del Usuario, se ha ingresado con exito', response.message);
           if (this._usuarioModel.asignarEspacioTrabajo === true) {
             this.showLargeModal(this.idUsuario);
@@ -1107,7 +1108,7 @@ export class UsuariosComponent implements OnInit {
     if (this.marked = e.target.checked) {
       this._usuarioModel.asignarEspacioTrabajo = true
 
-      // this.showLargeModal(this.idUsuario)
+      this.showLargeModal(this.idUsuario)
     } else {
       this._usuarioModel.asignarEspacioTrabajo = false
 

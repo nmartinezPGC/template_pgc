@@ -365,6 +365,13 @@ export class ListEndPointsService {
         groupEndPoint: 'mantGenericosGroup',
         descEndPoint: 'inhabilita los perfiles',
       },
+      getAllTipoRol: {
+        id: 9,
+        nameEndpoint: 'listar tipo rol',
+        urlEndPoint: '/roles/findByIdGrupo/',
+        groupEndPoint: 'mantGenericosGroup',
+        descEndPoint: 'listar los tipos de roles',
+      },
     }, // Modulo de Mantenimientos Genericos
     endPointIdInternasActividades: {
       listAllidInternas: {
