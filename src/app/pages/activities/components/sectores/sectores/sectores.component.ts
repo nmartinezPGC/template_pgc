@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { TreeNode, MessageService } from 'primeng/api';
 import { ServiceSectoresService } from '../../../services/service-sectores.service';
 
@@ -8,7 +8,7 @@ import { ServiceSectoresService } from '../../../services/service-sectores.servi
   styleUrls: ['./sectores.component.scss'],
   providers: [ServiceSectoresService, MessageService ],
 })
-export class SectoresComponent implements OnInit {
+export class SectoresComponent implements OnInit, OnChanges {
   // Variables entre Tabs | Components
   @Input() idProyectoTab: number;
   @Input() idUsuarioTab: number;
