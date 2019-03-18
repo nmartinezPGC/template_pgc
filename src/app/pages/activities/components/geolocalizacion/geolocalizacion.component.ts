@@ -184,7 +184,7 @@ export class GeolocalizacionComponent implements OnInit, OnChanges {
       // Despliega el PopUp de Localidad
       this.marker1.bindPopup(customPopup, customOptions);
 
-      var domi = L.DomUtil.get('btnPopup');
+      const domi = L.DomUtil.get('btnPopup');
       // console.log(domi );
 
       L.DomEvent.addListener(domi, 'click', function (e) {

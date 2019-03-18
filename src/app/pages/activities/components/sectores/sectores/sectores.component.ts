@@ -62,12 +62,12 @@ export class SectoresComponent implements OnInit {
    */
   ngOnInit() {
     this.dropdownList = [
-      { "id": 1, "itemName": "India", "category": "asia" },
-      { "id": 2, "itemName": "Singapore", "category": "asia pacific" },
-      { "id": 3, "itemName": "Germany", "category": "Europe" },
-      { "id": 4, "itemName": "France", "category": "Europe" },
-      { "id": 5, "itemName": "South Korea", "category": "asia" },
-      { "id": 6, "itemName": "Sweden", "category": "Europe" }
+      { 'id': 1, 'itemName': 'India', 'category': 'asia' },
+      { 'id': 2, 'itemName': 'Singapore', 'category': 'asia pacific' },
+      { 'id': 3, 'itemName': 'Germany', 'category': 'Europe' },
+      { 'id': 4, 'itemName': 'France', 'category': 'Europe' },
+      { 'id': 5, 'itemName': 'South Korea', 'category': 'asia' },
+      { 'id': 6, 'itemName': 'Sweden', 'category': 'Europe' },
     ];
 
     // Llenado del Treeview de la Tabla
@@ -82,7 +82,7 @@ export class SectoresComponent implements OnInit {
       classes: 'comboSea',
       showCheckbox: false,
       lazyLoading: false,
-      groupBy: "category",
+      groupBy: 'category',
       // selectGroup: true,
     };
   }

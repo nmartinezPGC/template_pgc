@@ -1,11 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'ngx-programas',
   templateUrl: './programas.component.html',
   styleUrls: ['./programas.component.scss'],
 })
-export class ProgramasComponent implements OnInit {
+export class ProgramasComponent implements OnInit, OnChanges {
   // Variables entre Tabs | Components
   @Input() idProyectoTab: number;
   @Input() idUsuarioTab: number;
