@@ -17,6 +17,21 @@
     flex: 1;
   }
 
+  nb-card.inline-form-card nb-card-body {
+    padding-bottom: 0;
+  }
+
+  nb-card-header {
+    background-color: #204f85;
+    color: rgb(255, 255, 255);
+    font-size: 17px;
+  }
+
+  btn-nam {
+    background-color: #204f85;
+    color: rgb(243, 239, 233);
+    font-size: 15px;
+  }
   .details {
     padding: 1.25rem 1.25rem 0;
 
@@ -61,5 +76,29 @@
         font-size: 1.75rem;
       }
     }
+  }
+
+  nb-card-front {
+    border: solid black 1px;
+  }
+
+  .imgOds {
+    width: 95%;
+    height: 80%;
+    margin-left: 3%;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  .imgOds:hover {
+    width: 100%;
+    margin-left: 0%;
+    border-radius: 15px;
+    box-shadow: #204f85 15px;
+    transition-delay: 0.3s;
+  }
+
+  .div1 {
+    width: 80%;
   }
 }

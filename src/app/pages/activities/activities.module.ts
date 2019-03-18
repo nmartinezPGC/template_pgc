@@ -30,6 +30,17 @@ import { NbRouteTabsetModule } from '@nebular/theme/components/route-tabset/rout
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { UbicacionComponent } from './components/ubicacion/ubicacion.component';
 import { OdsComponent } from './components/sectores/ods/ods.component';
+import { SectoresComponent } from './components/sectores/sectores/sectores.component';
+import { ProgramasComponent } from './components/sectores/programas/programas.component';
+import { SectoresProgramasOdsComponent } from './components/sectores/sectores-programas-ods.component';
+
+// Modulo de la Libreria Primeng
+import { FieldsetModule } from 'primeng/fieldset';
+import { TreeModule } from 'primeng/tree';
+import { TreeNode } from 'primeng/api';
+import { MessagesModule } from 'primeng/messages';
+import { MessageModule } from 'primeng/message';
+
 
 @NgModule({
   imports: [
@@ -47,16 +58,23 @@ import { OdsComponent } from './components/sectores/ods/ods.component';
     NgxSpinnerModule, // Modulo de Spinner
     NbRouteTabsetModule, // Modulo de Rutas para los tabs,
     LeafletModule.forRoot(),
+    FieldsetModule,
+    TreeModule,
+    MessagesModule,
+    MessageModule,
   ],
   declarations: [
     ...routedComponents,
     FilterdataPipe,
     UbicacionComponent,
     OdsComponent,
+    SectoresComponent,
+    ProgramasComponent,
+    SectoresProgramasOdsComponent,
   ],
   providers: [
     // SmartTableService, // Defincion del Servicio que provee los Datos de la Tabla: ID's Internas
     ListasComunesService,
   ],
 })
-export class ActivitiesPGCModule {}
+export class ActivitiesPGCModule { }

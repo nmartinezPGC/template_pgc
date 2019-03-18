@@ -20,7 +20,7 @@ import { NbAuthResult } from '../../../../../../node_modules/@nebular/auth/servi
       <form (ngSubmit)="login()" #form="ngForm" autocomplete="nope">
         <div *ngIf="showMessages.error && errors && errors.length > 0 && !submitted"
              class="alert alert-danger" role="alert">
-          <div><strong>Ha Ocurrido un Error!</strong></div>
+          <div><strong>Ha Ocurrido un Error! </strong></div>
           <div *ngFor="let error of errors">{{ error }}</div>
         </div>
         <div *ngIf="showMessages.success && messages && messages.length > 0 && !submitted"

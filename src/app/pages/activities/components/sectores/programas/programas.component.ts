@@ -1,0 +1,44 @@
+import { Component, OnInit, Input } from '@angular/core';
+
+@Component({
+  selector: 'ngx-programas',
+  templateUrl: './programas.component.html',
+  styleUrls: ['./programas.component.scss'],
+})
+export class ProgramasComponent implements OnInit {
+  // Variables entre Tabs | Components
+  @Input() idProyectoTab: number;
+  @Input() idUsuarioTab: number;
+  @Input() codigoProyectoTab: string;
+
+  // variable del Json
+  @Input() JsonPassData: any;
+
+  ngOnChanges(changes) {
+    if (changes['idProyectoTab']) {
+      // Aquí ya sabes que has recibido un nuevo dato desde cualquier componente.
+      const nuevoDato = changes.idProyectoTab;
+    }
+
+    if (changes['idUsuarioTab']) {
+      // Aquí ya sabes que has recibido un nuevo dato desde cualquier componente.
+      const nuevoDato = changes.idUsuarioTab;
+    }
+
+    if (changes['codigoProyectoTab']) {
+      // Aquí ya sabes que has recibido un nuevo dato desde cualquier componente.
+      const nuevoDato = changes.idUsuarioTab;
+    }
+
+    if (changes['JsonPassData']) {
+      // Aquí ya sabes que has recibido un nuevo dato desde cualquier componente.
+      const nuevoDato = changes.JsonPassData;
+    }
+  }
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}

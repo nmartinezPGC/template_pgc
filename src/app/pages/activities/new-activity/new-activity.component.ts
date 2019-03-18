@@ -31,6 +31,7 @@ import { ActivityValidateFormService } from '../services/activity-validate-form.
 import { delay } from 'q';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ActivityIdInternaModel } from '../models/model-idinterna-activity';
+import { FilterdataPipe } from '../pipes/filterdata.pipe';
 
 @Component({
   selector: 'ngx-new-activity',

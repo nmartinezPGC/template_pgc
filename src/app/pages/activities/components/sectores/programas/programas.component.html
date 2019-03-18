@@ -1,10 +1,10 @@
-<!-- Diseño de la Ventana de Ubicacion -->
+<!-- Maquetacion de los Programas del Proyecto -->
 <!-- Componente para los Mensajes en pantalla -->
-<toaster-container [toasterconfig]="config"></toaster-container>
+<!-- <toaster-container [toasterconfig]="config"></toaster-container> -->
 
 <!-- ==================================================================================== -->
 <nb-card accent="warning" status="primary">
-  <nb-card-header>Información de la Ubicación del Proyecto {{ idProyectoTab }} | Codigo de Proyecto {{
+  <nb-card-header>Información de Programas del Proyecto {{ idProyectoTab }} | Codigo de Proyecto {{
     codigoProyectoTab }} | Usuario {{ idUsuarioTab }}
   </nb-card-header>
   <nb-card-body>
@@ -12,55 +12,13 @@
       <div class="col-sm-3">
         <!-- Columna de Nivel de Implementación -->
         <div class="form-group">
-          <strong> <label>Nivel de Implementación</label> </strong>
-          <select #idNivel class="form-control" id="idNivel" name="idNivel" ngControl="idNivel" [(ngModel)]="_activityUbicacionModel.idNivel"
-            (change)="getListNivelUbicacionByIdNivelImplementacionService(_activityUbicacionModel.idNivel)">
+          <strong> <label>Nivel de Sector</label> </strong>
+          <select #idNivel class="form-control" id="idNivel" name="idNivel" ngControl="idNivel">
             <option value="0">Selecciona el Nivel de Implementación</option>
             <option *ngFor="let item of JsonReceptionNivelImplementacion" [value]="item.idNivel">
               {{item.nombreNivelImpl}}
             </option>
           </select>
-        </div>
-      </div>
-
-
-      <!-- Columna de Nivel Unicacion de Implementación -->
-      <div class="col-sm-3">
-        <div class="form-group">
-          <strong> <label>Nivel de Ubicación de Implementación</label> </strong>
-          <select #idNivelUbicacion class="form-control" id="idNivelUbicacion" name="idNivelUbicacion" ngControl="idNivelUbicacion"
-            [(ngModel)]="_activityUbicacionModel.idNivelUbicacion" (change)="getListUbicacionService(_activityUbicacionModel.idNivelUbicacion)">
-            <option value="0">Selecciona el Nivel de Ubicación</option>
-            <option *ngFor="let item of JsonReceptionNivelUbicacionImplementacion" [value]="item.idNivelUbicacion">
-              {{item.nombreNivelUbicacion}}
-            </option>
-          </select>
-        </div>
-      </div>
-
-      <!-- Columna de Nivel Unicacion de Implementación -->
-      <div class="col-sm-4">
-        <div class="form-group">
-          <strong> <label>Ubicación de Implementación</label> </strong>
-          <angular2-multiselect [data]="dropdownList" [(ngModel)]="selectedItems" [settings]="dropdownSettings"
-            (onSelect)="onItemSelect($event)"></angular2-multiselect>
-        </div>
-      </div>
-
-      <!-- Porcentaje de Participacion -->
-      <div class="col-sm-2">
-        <div class="form-group">
-          <strong> <label>Porcentaje Part.</label> </strong>
-          <div class="input-group">
-            <input #porcentajeUbicacion class="form-control" id="porcentajeUbicacion" name="porcentajeUbicacion"
-              ngControl="porcentajeUbicacion" [(ngModel)]="_activityUbicacionModel.porcentajeUbicacion" type="text"
-              placeholder="% de Part." class="form-control" maxlength="5" />
-            <!-- Boton para Agregar Ubicaciones -->
-            <button type="button" class="btn btn-primary btn-group-icon btn-group-divider botonSpecial" nbPopover="Ingresa la Información seleccionada al listado de las Ubicaciones del Proyecto"
-              nbPopoverMode="hint" (click)="pushJsonIdUbicacion()">
-              <i class="ion-plus-round"></i>
-            </button>
-          </div>
         </div>
       </div>
     </div>
@@ -118,7 +76,7 @@ itemUbicacion.idUbicacionImpl.idUbicacionImplementacion, itemUbicacion.idActivid
     </div>
 
     <!-- Botones  -->
-    <nb-card>
+    <!-- <nb-card>
       <nb-card-body>
         <div class="row">
           <div class="col-lg-12">
@@ -126,13 +84,13 @@ itemUbicacion.idUbicacionImpl.idUbicacionImplementacion, itemUbicacion.idActivid
               nbPopoverMode="hint" nbPopoverPlacement="left" (click)="saveUbicaciones()">Guardar como borrador</button>
 
             <button class="btn btn-primary botonSave with-margins" nbPopover="Enviar la Información del Proyecto, para luego validar por el Administrador"
-              nbPopoverMode="hint" nbPopoverPlacement="top" (click)="saveActivity(2)">Guardar y Enviar</button>
+              nbPopoverMode="hint" nbPopoverPlacement="top" (click)="saveActivity(2)">Guardar y Enviar</button> -->
 
             <!-- <button class="btn btn-success" (click)="showLargeModal()">Large modal</button> -->
             <!-- <button class="btn btn-primary" (click)="showStaticModal()">Static modal</button> -->
-          </div>
+          <!-- </div>
         </div>
       </nb-card-body>
-    </nb-card>
+    </nb-card> -->
   </nb-card-body>
 </nb-card>

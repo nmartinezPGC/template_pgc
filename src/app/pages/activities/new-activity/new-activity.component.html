@@ -584,22 +584,29 @@
         <!-- Fin de Datos de Ubicacion Proyecto/Programa -->
         <!-- ==================================================================================== -->
 
-        <!-- Tab #3 de Sectores y Programas -->
-        <nb-tab tabTitle="Paso #3 | Sectores y Programas">
-          <ngx-ods></ngx-ods>
+        <!-- Tab #3 de Sectores y ODS -->
+        <nb-tab tabTitle="Paso #3 | Sectores y ODS">
+          <ngx-sectores-programas-ods [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab" [codigoProyectoTab]="codigoProyectoTab"></ngx-sectores-programas-ods>
         </nb-tab>
-        <!-- Fin de Datos de Sectores y Programas -->
+        <!-- Fin de Datos de Sectores y ODS -->
+        <!-- ==================================================================================== -->
+
+        <!-- Tab #3 de Programas -->
+        <nb-tab tabTitle="Paso #4 | Programas de Nación">
+          <ngx-programas [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab" [codigoProyectoTab]="codigoProyectoTab"></ngx-programas>
+        </nb-tab>
+        <!-- Fin de Datos de Programas -->
         <!-- ==================================================================================== -->
 
         <!-- Tab #4 de Sectores y Programas -->
-        <nb-tab tabTitle="Paso #4 | Información Financiera">
+        <nb-tab tabTitle="Paso #5 | Información Financiera">
           <span>Content #4</span>
         </nb-tab>
         <!-- Fin de Datos de Información Financiera -->
         <!-- ==================================================================================== -->
 
         <!-- Tab #5 de Sectores y Programas -->
-        <nb-tab tabTitle="Paso #5 | Documentos de Soporte">
+        <nb-tab tabTitle="Paso #6 | Documentos de Soporte">
           <span>Content #5</span>
         </nb-tab>
         <!-- Fin de Datos de Documentos de Soporte -->

@@ -10,6 +10,7 @@ import 'leaflet/dist/leaflet.css';
 import { icon, latLng, marker, polyline, tileLayer } from 'leaflet';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AlertPromise } from 'selenium-webdriver';
+import { LeafletComponent } from '../../../maps/leaflet/leaflet.component';
 
 @Component({
   selector: 'ngx-geolocalizacion',
@@ -34,6 +35,8 @@ export class GeolocalizacionComponent implements OnInit, OnChanges {
   datos = [];
   public marker1;
   layers = this.datos;
+
+  mapCenter;
 
   // Definicion de Opciones del Mapa
   options = {
@@ -124,6 +127,9 @@ export class GeolocalizacionComponent implements OnInit, OnChanges {
     }
   } // FIN pointsRecsources
 
+  hola() {
+    alert('Hola');
+  }
 
   /****************************************************************************
   * Funcion: onMapReady
@@ -133,23 +139,32 @@ export class GeolocalizacionComponent implements OnInit, OnChanges {
   * Objetivo: onMapReady in the method header API
   ****************************************************************************/
   onMapReady(map: L.Map) {
+    // Deshabilita el Zoom con dblClick
     map.doubleClickZoom.disable();
+
+    // var sidebar = L.control.sidebar({
+    //   autopan: false,       // whether to maintain the centered map point when opening the sidebar
+    //   closeButton: true,    // whether t add a close button to the panes
+    //   container: 'sidebar', // the DOM container or #ID of a predefined sidebar container that should be used
+    //   position: 'left',     // left or right
+    // }).addTo(map);
 
     map.on('popupopen', function (e) {
       // console.log('prueba' + e.latlng);
     });
 
-    map.on('click', function (event) {
+    map.on('dblclick', function <LeafletMouseEvent>(event) {
       // Coordenadas Geograficas capturadas
-      // const lat: number = event.latlng.lat;
-      // const lng: number = event.latlng.lng;
+      const lat: number = event.latlng.lat;
+      const lng: number = event.latlng.lng;
 
       // create popup contents
-      // const customPopup = '<div> ' +
-      //   '<form> <h4> Ingreso de Localidad </h4> <hr> <input class="form-control" type = "text" placeholder = "Nombre de Localidad" class= "form-control" /> <br> ' +
-      //   '<textarea class="form-control" type = "text" placeholder = "Descripción de Localidad" class= "form-control"></textarea> </form>  ' +
-      //   '<hr> <p><strong>Latitud: </strong>' + ' ' + lat + ' <strong>Longitud: </strong>' + lng + ' </p>' +
-      //   ' <button class="btn btn-primary botonSave with-margins" onclick="this.saveLocalidad()" > Guardar</button> </div>';
+      const customPopup = '<div> ' +
+        '<form> <h4> Ingreso de Localidad </h4> <hr> ' +
+        '<input class="form-control" type = "text" placeholder="Nombre de Localidad"/> <br> ' +
+        '<textarea id="text" class="form-control" type = "text" placeholder = "Descripción de Localidad"></textarea> </form>  ' +
+        '<hr> <p id="paF"><strong>Latitud: </strong>' + ' ' + lat + ' <strong>Longitud: </strong>' + lng + ' </p>' +
+        ' <button id="btnPopup" class="btn btn-primary botonSave with-margins" (click)="alert()" > Guardar</button> </div>';
 
       // specify popup options
       const customOptions = {
@@ -158,21 +173,27 @@ export class GeolocalizacionComponent implements OnInit, OnChanges {
       }
 
       // Crea el Nuevo marcador
-      // this.marker1 = new L.Marker([lat, lng], {
-      //   icon: icon({
-      //     iconUrl: 'assets/icons/forms/map_24.png',
-      //     shadowUrl: 'assets/icons/forms/map_24.png',
-      //   }),
-      // draggable: true,
-      // });
+      this.marker1 = new L.Marker([lat, lng], {
+        icon: icon({
+          iconUrl: 'assets/icons/forms/map_24.png',
+          shadowUrl: 'assets/icons/forms/map_24.png',
+        }),
+      });
       map.addLayer(this.marker1);
 
       // Despliega el PopUp de Localidad
-      // this.marker1.bindPopup(customPopup, customOptions);
+      this.marker1.bindPopup(customPopup, customOptions);
+
+      var domi = L.DomUtil.get('btnPopup');
+      // console.log(domi );
+
+      L.DomEvent.addListener(domi, 'click', function (e) {
+        // console.log('Mapa ' + domi.textContent);
+      });
     });
 
     // Remover marcadores del Mapa
-    map.on('dblclick', function (event) {
+    map.on('click', function (event) {
       // map.removeLayer(this);
       // Coordenadas Geograficas capturadas
       // const lat: number = event.latlng.lat;
