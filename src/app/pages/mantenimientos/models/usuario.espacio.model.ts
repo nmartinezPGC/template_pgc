@@ -27,6 +27,9 @@ export class EspacioTrabajoModel {
         public idEstadoEspacioTrabajo: { idEstadoEspacio: number },
         public idEstadoEspacio: number,
 
+        public iRolEspacio: { idRol: number },
+        public idRol: number,
+
         // mapeo de la variables que estan relacionadas con la tabla
     ) {
     }

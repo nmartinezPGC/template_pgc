@@ -207,6 +207,9 @@ export class SystemEndPointsService extends ListEndPointsService {
           case 8:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointMantGenericos.deletePerfil.urlEndPoint;
             break;
+          case 9:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointMantGenericos.getAllTipoRol.urlEndPoint;
+            break;
         }
         break;
       case 'idInternaGroup': // Llamados a los EndPoint de Id Internas de los Proyectos
