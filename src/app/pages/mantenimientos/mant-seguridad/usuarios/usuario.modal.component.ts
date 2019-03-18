@@ -124,7 +124,7 @@ export class UsuarioModalComponent implements OnInit {
 
         if (this.marked = e.target.checked) {
             this.idEspacioTrabajo = idEspacioTrabajo;
-            console.log(idEspacioTrabajo + ' id Espacio');
+            // console.log(idEspacioTrabajo + ' id Espacio');
             this.pushJsonIdEspacioUsuario();
             // console.log(this._usuarioModel.asignarEspacioTrabajo);
             // this.showLargeModal(this.idUsuario)
@@ -230,7 +230,7 @@ export class UsuarioModalComponent implements OnInit {
                 }
             });
             this.JsonIdEspacioUsuario.splice(homeFormIndex);
-            console.log(this.JsonIdEspacioUsuario);
+            // console.log(this.JsonIdEspacioUsuario);
 
 
             // this.changeDetectorRef.detectChanges();
