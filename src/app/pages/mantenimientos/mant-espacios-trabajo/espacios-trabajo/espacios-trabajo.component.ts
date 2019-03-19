@@ -78,16 +78,16 @@ private estadoService() {
  ****************************************************************************/
 private TipoService() {
   const idTipoSen: number = 4;
-  console.log(this.data3);
+//  console.log(this.data3);
   this._listasComunesService.getAllTipo(idTipoSen).subscribe(
     response => {
-      console.log(this.data3)
+     // console.log(this.data3)
       if (response.status !== 200) {
-          console.log(response.status);
+         // console.log(response.status);
       } else if (response.status === 200) {
         this.JsonReceptionTipo = response.data;
         this.data2 = this.JsonReceptionTipo;
-        console.log(this.data3);
+        // console.log(this.data3);
         // Carga los Items para el List de la Smart table
       }
     },

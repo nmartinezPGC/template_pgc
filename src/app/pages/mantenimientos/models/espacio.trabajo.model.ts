@@ -12,7 +12,7 @@ export class EspacioTrabajoModel {
         // mapeo de la tabla  tbl_tipo_organizacion
         public idEspacioTrabajo: number,
         public codEspacioTrabajo: string,
-        public nombreEspacioTrabajo : string,
+        public nombreEspacioTrabajo: string,
         public descripcionEspacioTrabajo: String,
         public fechaCreacion: string,
         public horaCreacion: Date,
@@ -23,11 +23,11 @@ export class EspacioTrabajoModel {
         public idTipoEspacioTrabajo1: number,
 
         // mapeo de la tabla que estab relaciones con pais
-        public idPaisEspacioTrabajo: {idpais : number},
+        public idPaisEspacioTrabajo: {idpais: number},
         public idPais: number,
 
         //  mapeo de la variables que esta relacionada con la tabla
-        public idEstadoEspacioTrabajo : {idEstado : number},
+        public idEstadoEspacioTrabajo: {idEstado: number},
         public idEstado1: number,
     ) { }
 }
