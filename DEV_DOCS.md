@@ -8,7 +8,7 @@ Anotacion de DAP - David Pavon - 2019-03-19 v1
 
 Anotacion de EDR - Edgar Ramirez v0
 
-Anootacion de EDR - Edgar Ramirez - 2019-03-19 v0
+Anootacion de EDR - Edgar Ramirez - 2019-03-19 v1
 
 Anotacion de  GEC - Gabriel Callejas v0
 
