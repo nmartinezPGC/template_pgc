@@ -94,7 +94,7 @@ export class OrganizacionComponent implements OnInit {
     this.responsedata = { 'error': false, 'msg': 'error campos solicitado' };
   }
 
-  /****************************************************************************
+/****************************************************************************
 * Funcion: makeToast
 * Object Number: 003
 * Fecha: 16-08-2018
