@@ -24,6 +24,13 @@ export class ListEndPointsService {
         groupEndPoint: 'estadosGroup',
         descEndPoint: 'Busca todos los Estados de la API, que sean de Actividades',
       },
+      listAllTipoActividades: {
+        id: 3,
+        nameEndpoint: 'ListAllTipoActividades',
+        urlEndPoint: '/tipos/findByIdGrupo/',
+        groupEndPoint: 'estadosGroup',
+        descEndPoint: 'Busca todos los Estados de la API, que sean de Actividades',
+      },
     },
     endPointUsers: {
       findByMail: {

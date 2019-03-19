@@ -82,7 +82,7 @@ export class ActivityService {
     const paramsSend = jsonActivity;
 
     // Retorno de la Funcion
-    return this._http.post(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 1), paramsSend, {
+    return this._http.post(this._systemEndPointsService.getEndPointService('', 1), paramsSend, {
       headers: this.headers,
       params: { 'tokenApi': this.tokenHeader },
     });
