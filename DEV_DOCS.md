@@ -2,22 +2,14 @@ Please have a look at [Nebular Dev Docs](https://github.com/akveo/nebular/blob/m
 
 Anotacion de David Pavon - 2018-12-11
 
-Anotacion de Nahum Martinez - 2018-12-11
+Anotacion de NAM -  Nahum Martinez -  v0
 
-Comentario de DAP - David Pavon hola de nuevo
+Anotacion de DAP - David Pavon - 2019-03-19 v1
 
+Anotacion de EDR - Edgar Ramirez v0
 
-Comentario de EDR -Edgar Ramirez v4
+Anootacion de EDR - Edgar Ramirez - 2019-03-19 v0
 
-Comentario de EDR -Edgar Ramirez - v7 2019-03-19 hola5
+Anotacion de  GEC - Gabriel Callejas v0
 
-
-Comentario de GEC -Gabriel Callejas 2018-12-21
-comentario de DAP - comentario de prueba para le manual de git
-holaaaaaaaaa
-
-hola22222222222.
-
-holaaa
-
-solicitando cambios de papi
+Anotacion de AMA - G Allan Madrid v0
