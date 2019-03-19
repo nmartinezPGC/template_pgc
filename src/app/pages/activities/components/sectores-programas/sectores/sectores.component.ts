@@ -1,12 +1,12 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
-import { TreeNode, MessageService } from 'primeng/api';
+import { TreeNode, MessageService, MenuItem } from 'primeng/api';
 import { ServiceSectoresService } from '../../../services/service-sectores.service';
 
 @Component({
   selector: 'ngx-sectores',
   templateUrl: './sectores.component.html',
   styleUrls: ['./sectores.component.scss'],
-  providers: [ServiceSectoresService, MessageService ],
+  providers: [ServiceSectoresService, MessageService],
 })
 export class SectoresComponent implements OnInit, OnChanges {
   // Variables entre Tabs | Components
@@ -53,9 +53,21 @@ export class SectoresComponent implements OnInit, OnChanges {
   // Propieades de los Nodos del Tree
   filesTree4: TreeNode[];
   selectedFiles2: TreeNode[];
+  items: MenuItem[];
+  selectedFile2: TreeNode;
+
 
   constructor(private _serviceSectoresService: ServiceSectoresService,
     private messageService: MessageService) { }
+
+  nodeSelect(event) {
+    this.messageService.add({ severity: 'info', summary: 'Node Selected', detail: event.node.label });
+    console.log(event.node.label );
+  }
+
+  nodeUnselect(event) {
+    this.messageService.add({ severity: 'info', summary: 'Node Unselected', detail: event.node.label });
+  }
 
   /**
    * Inicializacion de la Clase
@@ -68,6 +80,11 @@ export class SectoresComponent implements OnInit, OnChanges {
       { 'id': 4, 'itemName': 'France', 'category': 'Europe' },
       { 'id': 5, 'itemName': 'South Korea', 'category': 'asia' },
       { 'id': 6, 'itemName': 'Sweden', 'category': 'Europe' },
+    ];
+
+    this.items = [
+      { label: 'View', icon: 'fa fa-search', command: (event) => this.viewFile(this.selectedFile2) },
+      { label: 'Unselect', icon: 'fa fa-close', command: (event) => this.unselectFile() }
     ];
 
     // Llenado del Treeview de la Tabla
@@ -85,6 +102,14 @@ export class SectoresComponent implements OnInit, OnChanges {
       groupBy: 'category',
       // selectGroup: true,
     };
+  }
+
+  viewFile(file: TreeNode) {
+    this.messageService.add({ severity: 'info', summary: 'Node Selected with Right Click', detail: file.label });
+  }
+
+  unselectFile() {
+    this.selectedFile2 = null;
   }
 
 }

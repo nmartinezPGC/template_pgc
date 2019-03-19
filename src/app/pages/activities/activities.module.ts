@@ -29,10 +29,10 @@ import { NbRouteTabsetModule } from '@nebular/theme/components/route-tabset/rout
 // Modulo de Mapas
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { UbicacionComponent } from './components/ubicacion/ubicacion.component';
-import { OdsComponent } from './components/sectores/ods/ods.component';
-import { SectoresComponent } from './components/sectores/sectores/sectores.component';
-import { ProgramasComponent } from './components/sectores/programas/programas.component';
-import { SectoresProgramasOdsComponent } from './components/sectores/sectores-programas-ods.component';
+import { OdsComponent } from './components/sectores-programas/ods/ods.component';
+import { SectoresComponent } from './components/sectores-programas/sectores/sectores.component';
+import { ProgramasComponent } from './components/sectores-programas/programas/programas.component';
+import { SectoresProgramasOdsComponent } from './components/sectores-programas/sectores-programas-ods.component';
 
 // Modulo de la Libreria Primeng
 import { FieldsetModule } from 'primeng/fieldset';
