@@ -1,4 +1,4 @@
-Pleases have a look at [Nebular Dev Docs](https://github.com/akveo/nebular/blob/master/DEV_DOCS.md).
+Please have a look at [Nebular Dev Docs](https://github.com/akveo/nebular/blob/master/DEV_DOCS.md).
 
 Anotacion de NAM -  Nahum Martinez - 2019-03-19 - v1
 
