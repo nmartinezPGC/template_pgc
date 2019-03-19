@@ -62,7 +62,7 @@ export class SectoresComponent implements OnInit, OnChanges {
 
   nodeSelect(event) {
     this.messageService.add({ severity: 'info', summary: 'Node Selected', detail: event.node.label });
-    console.log(event.node.label );
+    // console.log(event.node.label );
   }
 
   nodeUnselect(event) {
@@ -84,7 +84,7 @@ export class SectoresComponent implements OnInit, OnChanges {
 
     this.items = [
       { label: 'View', icon: 'fa fa-search', command: (event) => this.viewFile(this.selectedFile2) },
-      { label: 'Unselect', icon: 'fa fa-close', command: (event) => this.unselectFile() }
+      { label: 'Unselect', icon: 'fa fa-close', command: (event) => this.unselectFile() },
     ];
 
     // Llenado del Treeview de la Tabla
