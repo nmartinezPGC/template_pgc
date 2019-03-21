@@ -2,7 +2,7 @@ Pleases have a look at [Nebular Dev Docs](https://github.com/akveo/nebular/blob/
 
 Anotacion de David Pavon - 2019-03-21 v3
 
-Anotacion de NAM -  Nahum Martinez -  v0
+Anotacion de NAM -  Nahum Martinez - 2019-03-21 v1
 
 Anootacion de EDR - Edgar Ramirez - 2019-03-21 v1
 
