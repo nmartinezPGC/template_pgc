@@ -40,7 +40,7 @@ export class SectoresComponent implements OnInit, OnChanges {
   }
 
   /**
-   * Configuracion del Dropdow List
+   * Configuracion del Dropdow List NMA
    */
   dropdownList = [];
   dropdownListPais = [];
