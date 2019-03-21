@@ -295,4 +295,23 @@ export class UsuarioService {
         });
     }// FIN | FND-00015
 
+
+        /****************************************************************************
+* Funcion: FND-00016
+* Fecha: 20-03-2019
+* Descripcion: Metodo que sirve para poder ingresar un nuevo espacio de trabajo a un Usuario
+* Params: { jsonEspacioTrabajoUsuario }
+* autor: Edgar Ramirez
+****************************************************************************/
+newEspacioTrabajoUsuario(jsonEspacioTrabajoUsuario): Observable<any> {
+    // Parametros del EndPoint
+    const paramsSend = jsonEspacioTrabajoUsuario;
+    // console.log(paramsSend);
+    // Retorno de la Funcion
+    return this._http.post(this._systemEndPointsService.getEndPointService('mantGenericosGroup', 3), paramsSend, {
+        headers: this.headers,
+        params: { 'tokenApi': this.tokenHeader },
+    });
+}// FIN | FND-00016
+
 }
