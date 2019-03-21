@@ -15,6 +15,7 @@ import { Observable } from 'rxjs';
 import { TreeNode } from 'primeng/api';
 import { Http } from '@angular/http';
 
+
 @Injectable({
   providedIn: 'root',
 })
@@ -61,8 +62,28 @@ export class ServiceSectoresService {
   * Objetivo: Seteo de las variables en json, con datos de prueba
   ****************************************************************************/
   getFiles() {
-    return this.http.get('./files.json')
+    return this.http.get('../assets/json/files.json')
       .toPromise()
       .then(res => <TreeNode[]>res.json().data);
+  }
+
+  /****************************************************************************
+    * Funcion: FND-00003
+    * Fecha: 21-02-2019
+    * Descripcion: Metodo para obtener los Datos de Sectores OCDE/CAD
+    * Objetivo: datos de Sectores OCDE/CAD
+    * Params: { }
+    ****************************************************************************/
+  getAllNivelesImplementacion(): Observable<any> {
+    // Retorno de la Funcion
+    return this._http.get(this._systemEndPointsService.getEndPointService('endPointImplementacion', 1), {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  } // FIN | FND-00002
+
+  getContentJSON() {
+    return this.http.get('files.json')
+      .map(response => response.json());
   }
 }
