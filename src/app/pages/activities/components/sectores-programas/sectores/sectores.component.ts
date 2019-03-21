@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
-import { TreeNode, MessageService, MenuItem } from 'primeng/api';
+import { Tree, TreeNode, MessageService, MenuItem } from 'primeng/primeng';
 import { ServiceSectoresService } from '../../../services/service-sectores.service';
 
 @Component({

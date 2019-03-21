@@ -68,10 +68,10 @@ export class ServiceSectoresService {
   }
 
   /****************************************************************************
-    * Funcion: FND-00002
+    * Funcion: FND-00003
     * Fecha: 21-02-2019
-    * Descripcion: Metodo para obtener los Datos de todos los Niveles de Implementacion
-    * Objetivo: datos de Niveles de Implementacion
+    * Descripcion: Metodo para obtener los Datos de Sectores OCDE/CAD
+    * Objetivo: datos de Sectores OCDE/CAD
     * Params: { }
     ****************************************************************************/
   getAllNivelesImplementacion(): Observable<any> {
