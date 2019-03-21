@@ -37,7 +37,8 @@
               <td>
                 <!-- <div class="form-control"> -->
 
-                <select class="form-control" (change)="capturar($event.target.value)" required>
+                <select class="form-control" (change)="capturar($event.target.value)" name="idRol"
+                  id="idRol" required>
                   <option value="0">Seleccione una Opcion</option>
                   <option *ngFor="let dato of JsonReceptionRolEspacio" [value]="dato.idRol">
                     {{dato.nombre1Usuario}}
@@ -69,5 +70,5 @@
   </div>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-md btn-primary" (click)="closeModal()">Save changes</button>
+  <button class="btn btn-md btn-primary" (click)="saveEspaciosTrabajoUsuario()">Save changes</button>
 </div>
