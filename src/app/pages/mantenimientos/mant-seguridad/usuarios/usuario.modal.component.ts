@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { UsuarioService } from '../../services/usuarios.service';
 import { Router } from '@angular/router';
@@ -24,7 +24,7 @@ export class UsuarioModalComponent implements OnInit {
     public opcionSeleccionado: any;
     public JsonIdEspacioUsuario = [];
     public findData: boolean;
-    verSeleccion: number = 0;
+    verSeleccion: string = '';
     datos;
 
 
@@ -34,7 +34,7 @@ export class UsuarioModalComponent implements OnInit {
     arrayEspaciosTrabajo: any
     marked = false;
 
-    constructor(private activeModal: NgbActiveModal, public _usuariosService: UsuarioService, protected _router: Router) {
+    constructor(private activeModal: NgbActiveModal, public _usuariosService: UsuarioService, protected _router: Router, private changeDetectorRef: ChangeDetectorRef) {
         this.datos = this.data2
     }
 
@@ -43,6 +43,11 @@ export class UsuarioModalComponent implements OnInit {
     }
 
     ngOnInit() {
+        // Inicializacion del Modelo de la Clase
+        this._espacioTrabajoUsuarioModel = new EspacioTrabajoUsuarioModel(
+            0, null,
+            null, null, null, 0,
+            true);
 
         this.ListAllEspaciosTrabajo();
         this.rolEspacioService();
@@ -215,7 +220,7 @@ export class UsuarioModalComponent implements OnInit {
     } // FIN | pushJsonIdEspacioUsuario
 
 
-    deleteRowHomeForm(homeFormIndex: number, idRol: number) {
+    deleteRowHomeForm(homeFormIndex: number, idEspacioTrabajo: number) {
 
         const deletedItem = confirm('Esta seguro de borrar el Item');
 
@@ -225,18 +230,65 @@ export class UsuarioModalComponent implements OnInit {
                 // console.log('hola 2');
                 // console.log(this.JsonIdEspacioUsuario);
 
-                if (element.idRol === idRol) {
+                if (element.idEspacioTrabajo === idEspacioTrabajo) {
                     homeFormIndex = index
                 }
             });
-            this.JsonIdEspacioUsuario.splice(homeFormIndex);
+            this.JsonIdEspacioUsuario.splice(homeFormIndex, 1);
             // console.log(this.JsonIdEspacioUsuario);
 
 
-            // this.changeDetectorRef.detectChanges();
+            this.changeDetectorRef.detectChanges();
         }
 
     }
+
+
+    /****************************************************************************
+* Funcion: saveUbicaciones
+* Object Number: 006
+* Fecha: 28-02-2019
+* Descripcion: Method Save Ubicaciones, en BD por llamado a la API
+* Objetivo: Salvar Ubicaciones de Proyectos, en BD por llamado a EndPoint de
+* la API | /mant-actividades/ubicaciones/new
+* @param jsonUbicacionActivity
+****************************************************************************/
+    saveEspaciosTrabajoUsuario() {
+        /** spinner starts on Start Function */
+
+
+        // Seteo de los Campo Relacionales
+        // this._espacioTrabajoUsuarioModel.idRolEspacioTrabajo = { idRol: this.idRol };
+        // this._espacioTrabajoUsuarioModel.idEspacioTrabajo =  this.idEspacioTrabajo;
+        this._espacioTrabajoUsuarioModel.idUsuarioEspacioTrabajo = { idUsuario: this.idUsuario };
+        this._espacioTrabajoUsuarioModel.codEspacioTrabajoUsuario = '00010';
+        this._espacioTrabajoUsuarioModel.idEspacioTrabajo = { idEspacio: 6 }
+
+        this.JsonIdEspacioUsuario.forEach(element => {
+            this._espacioTrabajoUsuarioModel.idRol = 6;
+            this._espacioTrabajoUsuarioModel.idEspacioTrabajo = element.idEspacioTrabajo;
+            // console.log(this._espacioTrabajoUsuarioModel);
+
+            // console.log('paso 1');
+            this._usuariosService.newEspacioTrabajoUsuario(this._espacioTrabajoUsuarioModel).subscribe(
+                response => {
+                    // console.log('paso 2');
+                    // console.log(this._espacioTrabajoModel);
+                    if (response.status !== 200) {
+
+                        // console.log('error al ingresar el espacio de trabajo de usuario');
+                        // this.showToast('error', 'Error al Ingresar la Información del Usuario', response.message);
+                    } else if (response.status === 200) {
+                        // console.log('ingreso con exito el espacio de trabajo de usuario');
+                        // console.log(this.idUsuario + ' id usuario');
+                        // this.showToast('default', 'La Información del Usuario, se ha ingresado con exito', response.message);
+
+                    }
+                },
+            );
+        });
+
+    } // FIN saveUbicaciones
 
 
 }
