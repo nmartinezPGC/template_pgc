@@ -40,6 +40,7 @@ import { TreeModule } from 'primeng/tree';
 import { TreeNode } from 'primeng/api';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
+import { ListboxModule } from 'primeng/listbox';
 
 
 @NgModule({
@@ -62,6 +63,7 @@ import { MessageModule } from 'primeng/message';
     TreeModule,
     MessagesModule,
     MessageModule,
+    ListboxModule,
   ],
   declarations: [
     ...routedComponents,

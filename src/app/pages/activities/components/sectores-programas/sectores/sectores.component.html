@@ -1,6 +1,6 @@
 <!-- Maquetacion de los Sectores del Proyecto -->
 <!-- Componente para los Mensajes en pantalla -->
-<!-- <toaster-container [toasterconfig]="config"></toaster-container> -->
+<toaster-container [toasterconfig]="config"></toaster-container>
 
 <!-- ==================================================================================== -->
 <nb-card accent="warning" status="primary">
@@ -15,57 +15,34 @@
         <nb-card-body>
           <div class="row">
             <div class="col-sm-6">
-              <h3>Multiple Selection with Checkbox</h3>
-              <p-tree [style]="{'width': '85%'}" [value]="filesTree4" selectionMode="checkbox"
-                (onNodeSelect)="nodeSelect($event)"  [(selection)]="selectedFiles2"></p-tree>
-              <div>Selected Nodes: <span *ngFor="let file of selectedFiles2">{{file.data}} </span></div>
+              <h3>Selecciona los Sectores | OCDE/CAD</h3>
+              <input type="text" class="form-control txtSearch" [(ngModel)]="queryString" placeholder="Buscar Sector">
+              <br>
+              <p-tree [style]="{'width': '100%'}" [value]="arrayPush | filterdata: queryString : 'label'"
+                selectionMode="checkbox" (onNodeSelect)="nodeSelect($event)" dynamic="true"></p-tree>
+              <br>
+              <div>Sectores seleccionados: <span *ngFor="let file of selectedFiles2">{{file.parent.data}} </span></div>
             </div>
 
-            <!-- <div class="col-sm-6">
-              <h3>Context Menu</h3>
-              <p-tree [value]="filesTree4" selectionMode="single" [(selection)]="selectedFile2" [contextMenu]="cm">
-              </p-tree>
-            </div> -->
+            <div class="col-sm-6">
+              <h3>Sectores OCDE/CAD seleccionados</h3>
+              <p-listbox [options]="cities" [style]="{'width': '100%'}" [(ngModel)]="selectedCities" multiple="multiple"
+                checkbox="checkbox"
+                filter="filter" optionLabel="name">
+                <p-header>
+                  <i class="fa fa-file"></i>
+                  Sectores
+                </p-header>
+              </p-listbox>
+              <p>Selected Cities: <span *ngFor="let c of selectedCities" style="margin-right: 10px">{{c.name}}</span>
+              </p>
+            </div>
           </div>
+          <br>
 
           <!-- Fila de las Ubicaciones seleccionadas -->
           <div class="row">
             <div class="col-sm-12">
-              <!-- <table class="table table-hover table-striped table-bordered" id="tableIdInterna">
-                <thead>
-                  <tr class="tHeadSearch">
-                    <th scope="col" colspan="2">
-                      <input type="text" class="form-control" [(ngModel)]="queryString" placeholder="Buscar Ubicación">
-                    </th>
-                  </tr>
-                  <tr class="tHeadTable">
-                    <th scope="col" style="width: 2%;">No</th>
-                    <th scope="col" style="width: 20%;">Nivel de Implementación</th>
-                    <th scope="col" style="width: 25%;">Ubicación de Implementación</th>
-                    <th scope="col" style="width: 30%;">Ubicación</th>
-                    <th scope="col" style="width: 5%;">% de Part.</th>
-                    <th scope="col" style="width: 5%;">Acción</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let itemUbicacion of JsonIdUbicacionesProyecto | filterdata: queryString : 'nombreUbicacionImpl' | paginate: { itemsPerPage: 5, currentPage: page, id: '1' }; let homeTableIndex = index">
-                    <td>{{ homeTableIndex + 1 }}</td>
-                    <td>{{ itemUbicacion.nombreNivelImpl }}</td>
-                    <td>{{ itemUbicacion.nombreNivelUbicacion }}</td>
-                    <td>{{ itemUbicacion.nombreUbicacionImpl }}</td>
-                    <td>{{ itemUbicacion.porcentajeUbicacion | number : '1.2-2' }} </td>
-                    <td>
-                      <img class="pointerMouse" src="../../../../assets/icons/forms/map_24.png" nbPopover="Visualiza el mapa, para ingresar las localidades"
-                        nbPopoverMode="hint" alt="Mapa" (click)="showStaticModal()">
-
-                      <img class="pointerMouse" src="../../../../assets/icons/forms/rubbish-bin_24x.png" nbPopover="Borra del listado, la Ubicación seleccionada"
-                        nbPopoverMode="hint" alt="Borrar" (click)="deleteRowHomeForm(homeTableIndex, itemUbicacion.nombreUbicacionImpl,
-itemUbicacion.idUbicacionImpl.idUbicacionImplementacion, itemUbicacion.idActividad)">
-                    </td>
-                  </tr>
-                </tbody>
-              </table> -->
-
               <!-- Boton para Calcular los Porcentajes Ubicaciones -->
               <button class="btn btn-primary botonSave with-margins"
                 nbPopover="Calcula de igual forma todos los porcentajes para las Ubicaciones" nbPopoverMode="hint"

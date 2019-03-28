@@ -269,6 +269,18 @@ export class SystemEndPointsService extends ListEndPointsService {
           case 13:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActivityUbicacion.urlEndPoint;
             break;
+          case 14: // NAM | 2019-03-22 | Mapeo de los EndPoins de Sectores
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findAllSectoresOcdeCad.urlEndPoint; // Secores OCDE/CAD
+            break;
+          case 15:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdSectorOcdeCad.urlEndPoint;
+            break;
+          case 16:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdNivelSectorOcdeCad.urlEndPoint;
+            break;
+          case 17:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdNivelSectorAndSectorPadreOcdeCad.urlEndPoint;
+            break;
         }
         break;
       case 'mantGenericosUsuarioGroup': // Llamados a los EndPoint de usuarios
