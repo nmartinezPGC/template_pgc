@@ -246,7 +246,7 @@ export class SectoresComponent implements OnInit, OnChanges {
         // console.log(element);
       }
     }
-  } // FIN | nodeSelect
+  } // FIN | nodeSelects
 
 
   /****************************************************************************
