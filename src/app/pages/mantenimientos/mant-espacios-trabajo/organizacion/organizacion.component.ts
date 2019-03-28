@@ -35,6 +35,8 @@ export class OrganizacionComponent implements OnInit {
   public JsonReceptionOrganizaciones: any;
   public JsonReceptionFyByOrganizaciones: any;
   public secuenciaDeActividad: any;
+   // Audotoria
+   public JsonReceptionUserDetail: any;
 
   data2: any;
   data: any;
@@ -284,11 +286,15 @@ export class OrganizacionComponent implements OnInit {
   * Autor: Edgar Ramirez
   ****************************************************************************/
   async  newOrganizacion() {
-    this.getSecuenciaListService('NEW-ACT');
+    this.getSecuenciaListService('NEW-ORG');
 
     await delay(100);
     this.validateOrganizacion(this._OrganizacionModel);
 
+    await delay(100);
+    this.updateSecuenciaService(this.JsonReceptionUserDetail.idUsuario, 1);
+
+    await delay(100);
     const responsedataExt: any = this.responsedata;
 
     if (responsedataExt.error === true) {
@@ -503,4 +509,34 @@ export class OrganizacionComponent implements OnInit {
       },
     );
   } // FIN | FND-00001
+
+  /*****************************************************
+  * Funcion: FND-00001.1
+  * Fecha: 21-01-2019
+  * Descripcion: Funcion que Actuaiza la Secuencia del
+  * Proyecto o Actividad
+  * Params: { jsonSecuencia, idSecuencia }
+  ******************************************************/
+ protected updateSecuenciaService(idUsuarioMod: number, idSecuencia: number) {
+  // Envia la Secuencia a Buscar
+  const jsonSecuencia = {
+    'idUsuarioMod': {
+      'idUsuario': idUsuarioMod,
+    },
+  };
+
+  this._OrganizacionService.updateSecuence(jsonSecuencia, idSecuencia).subscribe(
+    result => {
+      if (result.status !== 200) {
+        this.showToast('error', 'Error al Actualizar la Información de la Secuencia', JSON.stringify(result.message));
+      } else if (result.status === 200) {
+        // Result success
+      }
+    },
+    error => {
+      this.showToast('error', 'Error al Actualizar la Información de la Secuencia', JSON.stringify(error.message));
+    },
+  );
+} // FIN | FND-00001.1
+
 }
