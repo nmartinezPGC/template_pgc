@@ -4,7 +4,7 @@ Anotacion de David Pavon - 2019-03-28 v5
 
 Anotacion de NAM -  Nahum Martinez - 2019-03-21 v1
 
-Anootacion de EDR - Edgar Ramirez - 2019-03-28 v0
+Anootacion de EDR - Edgar Ramirez - 2019-03-28 v1
 
 Anotacion de  GEC - Gabriel Callejas v0
 
