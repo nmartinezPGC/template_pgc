@@ -89,7 +89,7 @@ export class SectoresComponent implements OnInit, OnChanges {
   isCloseButton = true;
   config: ToasterConfig;
 
-  cities:any [];
+  cities: any [];
 
 
   /**
@@ -105,7 +105,7 @@ export class SectoresComponent implements OnInit, OnChanges {
       { name: 'Rome', code: 'RM' },
       { name: 'London', code: 'LDN' },
       { name: 'Istanbul', code: 'IST' },
-      { name: 'Paris', code: 'PRS' }
+      { name: 'Paris', code: 'PRS' },
     ];
   }
 
@@ -285,14 +285,14 @@ export class SectoresComponent implements OnInit, OnChanges {
             return {
               label: item.nombreSector,
               data: item.codigoSector,
-              expandedIcon: "fa fa-folder-open",
-              collapsedIcon: "fa fa-folder",
+              expandedIcon: 'fa fa-folder-open',
+              collapsedIcon: 'fa fa-folder',
               children: [{
                 label: item.idNivelSector.nombreNivelSector,
                 data: item.codigoSector,
-                expandedIcon: "fa fa-folder-open",
-                collapsedIcon: "fa fa-folder",
-              }]
+                expandedIcon: 'fa fa-folder-open',
+                collapsedIcon: 'fa fa-folder',
+              }],
             }
           })
         }
@@ -403,12 +403,12 @@ export class SectoresComponent implements OnInit, OnChanges {
 
               // Ejecutamos el Sevicio, para el Nivel 3
               this._serviceSectoresService.getfindByIdNivelSectorAndSectorPadreId(3, element2.idSector).subscribe(
-                result => {
-                  if (result.status !== 200) {
-                    this.showToast('error', 'Error al Obtener la Información del Sector Nivel 3', result.message);
+                result2 => {
+                  if (result2.status !== 200) {
+                    this.showToast('error', 'Error al Obtener la Información del Sector Nivel 3', result2.message);
                     this.JsonReceptionSectorByNivelOcdeCad3 = [];
-                  } else if (result.status === 200) {
-                    this.JsonReceptionSectorByNivelOcdeCad3 = result.data;
+                  } else if (result2.status === 200) {
+                    this.JsonReceptionSectorByNivelOcdeCad3 = result2.data;
 
                     for (let n3 = 0; n3 < this.JsonReceptionSectorByNivelOcdeCad3.length; n3++) { // Definir el Nivel 3
                       const element3 = this.JsonReceptionSectorByNivelOcdeCad3[n3];
@@ -440,8 +440,8 @@ export class SectoresComponent implements OnInit, OnChanges {
             this.arrayPush.push({
               'label': element.nombreSector,
               'data': element.idSector,
-              'expandedIcon': "fa fa-folder-open",
-              'collapsedIcon': "fa fa-folder",
+              'expandedIcon': 'fa fa-folder-open',
+              'collapsedIcon': 'fa fa-folder',
               'children': array2,
             });
           }
