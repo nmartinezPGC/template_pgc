@@ -200,4 +200,23 @@ export class OrganizacionService {
       params: { 'tokenApi': this.tokenHeader },
     });
   }// FIN | FND-00013
+
+
+  /****************************************************************************
+    * Funcion: FND-00004
+    * Fecha: 21-01-2019
+    * Descripcion: Metodo para Actualizar el Valor de la Secuencia
+    * Objetivo: Actualizar el valor de la Secuencia
+    * Params: { jsonSecuencia, idSecuencia }
+    ****************************************************************************/
+  updateSecuence(jsonSecuencia, idSecuencia: number): Observable<any> {
+    // Valores Constantes
+    const idSecuenciaSend: number = idSecuencia;
+    // Retorno de la Funcion
+    return this._http.put(this._systemEndPointsService.getEndPointService('userGroup', 4) + idSecuenciaSend, jsonSecuencia, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  } // FIN | FND-00004
+
 }
