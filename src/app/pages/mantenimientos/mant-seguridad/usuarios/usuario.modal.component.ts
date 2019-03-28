@@ -4,6 +4,7 @@ import { UsuarioService } from '../../services/usuarios.service';
 import { Router } from '@angular/router';
 import { EspacioTrabajoModel } from '../../models/usuario.espacio.model';
 import { EspacioTrabajoUsuarioModel } from '../../models/espacio.trabajo.usuario.model';
+import { delay } from 'q';
 
 @Component({
     selector: 'ngx-usuarios',
@@ -22,8 +23,12 @@ export class UsuarioModalComponent implements OnInit {
     public _espacioTrabajoUsuarioModel: EspacioTrabajoUsuarioModel;
     public JsonReceptionRolEspacio: any;
     public opcionSeleccionado: any;
+    public secuenciaDeActividad: any;
+    public rol1: any;
     public JsonIdEspacioUsuario = [];
+    public JsonReceptionUserDetail: any;
     public findData: boolean;
+    public codSec: any;
     verSeleccion: string = '';
     datos;
 
@@ -54,11 +59,11 @@ export class UsuarioModalComponent implements OnInit {
     }
 
     /****************************************************************************
-  * Funcion: perfilesTipoService
-  * Object Number: 004
-  * Fecha: 08-01-2019
-  * Descripcion: Method perfilesTipoService of the Class
-  * Objetivo: perfilesTipoService detalle de los Tipos de Perfil llamando a la API
+  * Funcion: ListAllEspaciosTrabajo
+  * Object Number: 001
+  * Fecha: 22-03-2019
+  * Descripcion: Method ListAllEspaciosTrabajo of the Class
+  * Objetivo: ListAllEspaciosTrabajo detalle de los espacios de trabajo llamando a la API
   ****************************************************************************/
     private ListAllEspaciosTrabajo() {
         this._usuariosService.getAllEspaciosTrabajo().subscribe(
@@ -66,7 +71,7 @@ export class UsuarioModalComponent implements OnInit {
                 if (response.status !== 200) {
                 } else if (response.status === 200) {
                     this.JsonReceptionEspaciosTrabajo = response.data;
-                    // instancia data con los perfiles;
+                    // instancia data con los espacios de trabajo;
                     this.data = this.JsonReceptionEspaciosTrabajo;
                     // Carga los Items para el List de la Smart table
                     this.arrayEspaciosTrabajo = new Array();
@@ -89,8 +94,17 @@ export class UsuarioModalComponent implements OnInit {
                 }, 2000);
             },
         );
-    } // FIN | perfilesTipoService
+    } // FIN | ListAllEspaciosTrabajo
 
+
+    /****************************************************************************
+* Funcion: getIdEspacioTrabajo
+* Object Number: 002
+* Fecha: 22-03-2019
+* Descripcion: Method getIdEspacioTrabajo of the Class
+* Objetivo: getIdEspacioTrabajo detalle de los espacios de trabajo por id llamando a la API
+* Autor: Edgar Ramirez
+****************************************************************************/
     getIdEspacioTrabajo(idEspacioTrabajo1: number) {
         // Ejecutamos el Recurso del EndPoint
         this._usuariosService.fyByIdEspacioTrabajo(idEspacioTrabajo1).subscribe(
@@ -114,12 +128,12 @@ export class UsuarioModalComponent implements OnInit {
             },
         );
         // Return
-    } // FIN |
+    } // FIN | getIdEspacioTrabajo
 
 
     /****************************************************************************
   * Funcion: toggleVisibility
-  * Object Number: 004
+  * Object Number: 003
   * Fecha:26-02-2019
   * Descripcion: Method Asiganar espacio de trabajo
   * Objetivo:asignar si es alguna unidad ejecutora en los chekcbox
@@ -145,7 +159,7 @@ export class UsuarioModalComponent implements OnInit {
 
     /****************************************************************************
  * Funcion: rolEspacioService
- * Object Number: 007
+ * Object Number: 004
  * Fecha: 22-01-2019
  * Descripcion: Method rolEspacioService of the Class
  * Objetivo: rolEspacioService detalle de los roles de los espacios de trabajo llamando a la API
@@ -183,7 +197,7 @@ export class UsuarioModalComponent implements OnInit {
                 }, 2000);
             },
         );
-    } // FIN | estadoService
+    } // FIN | rolEspacioService
 
 
     capturar(idRol) {
@@ -196,11 +210,12 @@ export class UsuarioModalComponent implements OnInit {
 
     /****************************************************************************
 * Funcion: pushJsonIdEspacioUsuario
-* Object Number: 019
+* Object Number: 005
 * Fecha: 15-03-2019
 * Descripcion: Method que valida si un Codigo de Organizacion para Id Interna
 * Existe, y no permitir su ingreso nuevamente
 * Objetivo: Validacion de Id Interna por Codigo
+* Autor: Edgar Ramirez
 ****************************************************************************/
     private pushJsonIdEspacioUsuario() {
         // Condicion para evaluar que opcion se pulsa
@@ -220,6 +235,14 @@ export class UsuarioModalComponent implements OnInit {
     } // FIN | pushJsonIdEspacioUsuario
 
 
+    /****************************************************************************
+* Funcion: deleteRowHomeForm
+* Object Number: 006
+* Fecha: 20-03-2019
+* Descripcion: Method que valida si un Codigo de Organizacion para Id Interna
+* Existe, y no permitir su ingreso nuevamente
+* Objetivo: Validacion de Id Interna por Codigo
+****************************************************************************/
     deleteRowHomeForm(homeFormIndex: number, idEspacioTrabajo: number) {
 
         const deletedItem = confirm('Esta seguro de borrar el Item');
@@ -228,7 +251,6 @@ export class UsuarioModalComponent implements OnInit {
             // console.log('hola');
             this.JsonIdEspacioUsuario.forEach(function (element, index) {
                 // console.log('hola 2');
-                // console.log(this.JsonIdEspacioUsuario);
 
                 if (element.idEspacioTrabajo === idEspacioTrabajo) {
                     homeFormIndex = index
@@ -246,14 +268,21 @@ export class UsuarioModalComponent implements OnInit {
 
     /****************************************************************************
 * Funcion: saveUbicaciones
-* Object Number: 006
-* Fecha: 28-02-2019
+* Object Number: 007
+* Fecha: 21-03-2019
 * Descripcion: Method Save Ubicaciones, en BD por llamado a la API
 * Objetivo: Salvar Ubicaciones de Proyectos, en BD por llamado a EndPoint de
 * la API | /mant-actividades/ubicaciones/new
 * @param jsonUbicacionActivity
 ****************************************************************************/
-    saveEspaciosTrabajoUsuario() {
+    async  saveEspaciosTrabajoUsuario() {
+        this.getSecuenciaListService('NEW-ACT');
+
+        await delay(100);
+
+        // Actualizamos la Siguiente Secuencia
+        // this.updateSecuenciaService(this.JsonReceptionUserDetail.idUsuario, 1);
+
         /** spinner starts on Start Function */
 
 
@@ -261,12 +290,16 @@ export class UsuarioModalComponent implements OnInit {
         // this._espacioTrabajoUsuarioModel.idRolEspacioTrabajo = { idRol: this.idRol };
         // this._espacioTrabajoUsuarioModel.idEspacioTrabajo =  this.idEspacioTrabajo;
         this._espacioTrabajoUsuarioModel.idUsuarioEspacioTrabajo = { idUsuario: this.idUsuario };
-        this._espacioTrabajoUsuarioModel.codEspacioTrabajoUsuario = '00010';
-        this._espacioTrabajoUsuarioModel.idEspacioTrabajo = { idEspacio: 6 }
+        this._espacioTrabajoUsuarioModel.codEspacioTrabajoUsuario = this.codSec;
 
         this.JsonIdEspacioUsuario.forEach(element => {
-            this._espacioTrabajoUsuarioModel.idRol = 6;
-            this._espacioTrabajoUsuarioModel.idEspacioTrabajo = element.idEspacioTrabajo;
+            this._espacioTrabajoUsuarioModel.idRol = element.idRol;
+            this._espacioTrabajoUsuarioModel.idRolEspacioTrabajo = { idRol: this._espacioTrabajoUsuarioModel.idRol };
+            // this._espacioTrabajoUsuarioModel.idEspacio = element.idEspacio;
+            this.idEspacioTrabajo = element.idEspacioTrabajo;
+            this._espacioTrabajoUsuarioModel.idEspacioTrabajo = { idEspacioTrabajo: this.idEspacioTrabajo };
+
+            // this._espacioTrabajoUsuarioModel.idEspacioTrabajo = element.idEspacioTrabajo;
             // console.log(this._espacioTrabajoUsuarioModel);
 
             // console.log('paso 1');
@@ -289,6 +322,36 @@ export class UsuarioModalComponent implements OnInit {
         });
 
     } // FIN saveUbicaciones
+
+
+    /*****************************************************
+    * Funcion: FND-00008
+    * Fecha: 22-03-2019
+    * Descripcion: Funcion que Obtiene la Secuencia del
+    * Proyecto o Actividad
+    * Params: codSecuencia
+    ******************************************************/
+    protected getSecuenciaListService(codSecuencia: string) {
+        // Envia la Secuencia a Buscar
+        this._usuariosService.getSecuenciaActividad(codSecuencia).subscribe(
+            result => {
+                if (result.status !== 200) {
+                    //   this.showToast('error', 'Error al Obtener la Información de la Secuencia', JSON.stringify(result.message));
+                } else if (result.status === 200) {
+                    this.secuenciaDeActividad = result.data;
+
+                    // Componemos la Secuencia a Generar
+                    const prefixHND: string = 'NEW-ESP-TRAB-USER-';
+                    this._espacioTrabajoUsuarioModel.codEspacioTrabajoUsuario = prefixHND + (Number(this.secuenciaDeActividad.valor2));
+                    this.codSec = this._espacioTrabajoUsuarioModel.codEspacioTrabajoUsuario;
+                }
+            },
+            error => {
+                // this.showToast('error', 'Error al Obtener la Información de la Secuencia', JSON.stringify(error.message));
+            },
+        );
+    } // FIN | FND-00008
+
 
 
 }

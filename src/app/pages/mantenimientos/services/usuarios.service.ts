@@ -314,4 +314,40 @@ newEspacioTrabajoUsuario(jsonEspacioTrabajoUsuario): Observable<any> {
     });
 }// FIN | FND-00016
 
+
+  /****************************************************************************
+    * Funcion: FND-00017
+    * Fecha: 22-03-2019
+    * Descripcion: Metodo para obtener los Datos de la Secuencia
+    * Objetivo: Obtener la Secuencia de la Actividad
+    * Params: { codSecuencia }
+    ****************************************************************************/
+   getSecuenciaActividad(codSecuencia: string): Observable<any> {
+    // Parametros de la Funcion
+    const paramsSend = codSecuencia;
+    // Retorno de la Funcion
+    return this._http.get(this._systemEndPointsService.getEndPointService('userGroup', 3) + paramsSend, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  }// FIN | FND-00017
+
+
+  /****************************************************************************
+    * Funcion: FND-00018
+    * Fecha: 22-03-2019
+    * Descripcion: Metodo para Actualizar el Valor de la Secuencia
+    * Objetivo: Actualizar el valor de la Secuencia
+    * Params: { jsonSecuencia, idSecuencia }
+    ****************************************************************************/
+   updateSecuence(jsonSecuencia, idSecuencia: number): Observable<any> {
+    // Valores Constantes
+    const idSecuenciaSend: number = idSecuencia;
+    // Retorno de la Funcion
+    return this._http.put(this._systemEndPointsService.getEndPointService('userGroup', 4) + idSecuenciaSend, jsonSecuencia, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  } // FIN | FND-00018
+
 }

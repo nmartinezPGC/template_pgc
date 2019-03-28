@@ -14,7 +14,7 @@ export class EspacioTrabajoUsuarioModel {
         public codEspacioTrabajoUsuario: string,
 
         // mapeo de la variables que estan relacionadas con la tabla
-        public idEspacioTrabajo: { idEspacio: number },
+        public idEspacioTrabajo: { idEspacioTrabajo: number },
         // public idEspacio: number,
         // mapeo de la variables que estan relacionadas con la tabla
         public idUsuarioEspacioTrabajo: { idUsuario: number },

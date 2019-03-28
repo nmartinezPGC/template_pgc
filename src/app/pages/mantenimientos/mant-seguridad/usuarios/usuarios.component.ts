@@ -1108,7 +1108,7 @@ export class UsuariosComponent implements OnInit {
     if (this.marked = e.target.checked) {
       this._usuarioModel.asignarEspacioTrabajo = true
 
-      this.showLargeModal(this.idUsuario)
+      // this.showLargeModal(this.idUsuario)
     } else {
       this._usuarioModel.asignarEspacioTrabajo = false
 
