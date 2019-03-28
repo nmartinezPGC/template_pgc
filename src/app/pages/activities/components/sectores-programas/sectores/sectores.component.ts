@@ -430,8 +430,8 @@ export class SectoresComponent implements OnInit, OnChanges {
               array2.push({
                 'label': element2.nombreSector,
                 'data': element2.idSector,
-                'expandedIcon': "fa fa-folder-open",
-                'collapsedIcon': "fa fa-folder",
+                'expandedIcon': 'fa fa-folder-open',
+                'collapsedIcon': 'fa fa-folder',
                 'children': array3,
               });
             }
