@@ -510,6 +510,38 @@ export class ListEndPointsService {
         groupEndPoint: 'actividadesCRUDGroup',
         descEndPoint: 'Eliminar la Ubicacion al proyecto, selecionado',
       },
+      findAllSectoresOcdeCad: { // Modulo de Sectores OCDE/CAD
+        id: 14,
+        nameEndpoint: 'findAllSectoresOcdeCad',
+        urlEndPoint: '/sectores/ocde-cad',
+        params: '{ }',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Listar todos los Sectores OCDE/CAD registrados en la BD',
+      },
+      findByIdSectorOcdeCad: {
+        id: 15,
+        nameEndpoint: 'findByIdSectorOcdeCad',
+        urlEndPoint: '/sectores/ocde-cad/findByIdSector/',
+        params: '{ idSector }',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Listar el Sector OCDE/CAD consultado',
+      },
+      findByIdNivelSectorOcdeCad: {
+        id: 16,
+        nameEndpoint: 'findByIdNivelSectorOcdeCad',
+        urlEndPoint: '/sectores/ocde-cad/findByIdNivelSector/',
+        params: '{ idNivelSector }',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Listar el Sector OCDE/CAD consultado, por el Nivel que pertenencen',
+      },
+      findByIdNivelSectorAndSectorPadreOcdeCad: {
+        id: 17,
+        nameEndpoint: 'findByIdNivelSectorAndSectorPadreOcdeCad',
+        urlEndPoint: '/sectores/ocde-cad/findByIdNivelSector/',
+        params: '{ idNivelSector, sectorPadreId }',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Listar el Sector OCDE/CAD consultado, por el Sector Padre y Nivel que pertenencen',
+      },
     }, // modulo de mantenimientos generico de usuarios
     endPointMantGenericosUsuario: {
       listAllUsuarios: {

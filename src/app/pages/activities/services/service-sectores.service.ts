@@ -74,16 +74,67 @@ export class ServiceSectoresService {
     * Objetivo: datos de Sectores OCDE/CAD
     * Params: { }
     ****************************************************************************/
-  getAllNivelesImplementacion(): Observable<any> {
+  getAllSectoresOcdeCad(): Observable<any> {
     // Retorno de la Funcion
-    return this._http.get(this._systemEndPointsService.getEndPointService('endPointImplementacion', 1), {
+    return this._http.get(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 14), {
       headers: this.headers,
       params: { 'tokenApi': this.tokenHeader },
-    });
-  } // FIN | FND-00002
+    }).map(response => <TreeNode[]>response);
+  } // FIN | FND-00003
 
-  getContentJSON() {
-    return this.http.get('files.json')
-      .map(response => response.json());
-  }
+
+  /****************************************************************************
+    * Funcion: FND-00004
+    * Fecha: 22-02-2019
+    * Descripcion: Metodo para obtener los Datos del Sector OCDE/CAD
+    * Objetivo: datos del Sector OCDE/CAD
+    * Params: { idSector }
+    ****************************************************************************/
+  getfindByIdSector(idSector: number): Observable<any> {
+    // Parametros del EndPoint
+    const paramSend = idSector;
+
+    // Retorno de la Funcion
+    return this._http.get(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 15) + paramSend, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    }).map(response => <TreeNode[]>response);
+  } // FIN | FND-00004
+
+
+  /****************************************************************************
+    * Funcion: FND-00005
+    * Fecha: 25-03-2019
+    * Descripcion: Metodo para obtener los Datos del Sector OCDE/CAD
+    * Objetivo: datos del Sector OCDE/CAD, pr Nivel
+    * Params: { idNivelSector }
+    ****************************************************************************/
+  getfindByIdNivelSector(idNivelSector: number): Observable<any> {
+    // Parametros del EndPoint
+    const paramSend = idNivelSector;
+
+    // Retorno de la Funcion
+    return this._http.get(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 16) + paramSend, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    }).map(response => <TreeNode[]>response);
+  } // FIN | FND-00005
+
+  /****************************************************************************
+    * Funcion: FND-00006
+    * Fecha: 25-03-2019
+    * Descripcion: Metodo para obtener los Datos del Sector OCDE/CAD
+    * Objetivo: datos del Sector OCDE/CAD, pr Nivel
+    * Params: { idNivelSector, sectorPadreId }
+    ****************************************************************************/
+  getfindByIdNivelSectorAndSectorPadreId(idNivelSector: number, sectorPadreId: number): Observable<any> {
+    // Parametros del EndPoint
+    const paramSend = idNivelSector + '/findBySectorPadreId/' + sectorPadreId;
+
+    // Retorno de la Funcion
+    return this._http.get(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 17) + paramSend, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    }).map(response => <TreeNode[]>response);
+  } // FIN | FND-00006
 }
