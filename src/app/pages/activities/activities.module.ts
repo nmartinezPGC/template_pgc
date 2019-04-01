@@ -41,6 +41,7 @@ import { TreeNode } from 'primeng/api';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import { ListboxModule } from 'primeng/listbox';
+import { RecursosProyectoComponent } from './components/recursos-proyecto/recursos-proyecto.component';
 
 
 @NgModule({
@@ -73,6 +74,7 @@ import { ListboxModule } from 'primeng/listbox';
     SectoresComponent,
     ProgramasComponent,
     SectoresProgramasOdsComponent,
+    RecursosProyectoComponent,
   ],
   providers: [
     // SmartTableService, // Defincion del Servicio que provee los Datos de la Tabla: ID's Internas

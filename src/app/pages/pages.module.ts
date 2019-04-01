@@ -8,6 +8,7 @@ import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
 
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NbRouteTabsetModule } from '@nebular/theme/components/route-tabset/route-tabset.module';
+// import { RecursosProyectoComponent } from './app/pages/activities/components/recursos-proyecto/recursos-proyecto.component';
  // <-- import the module
 
 const PAGES_COMPONENTS = [
@@ -25,6 +26,7 @@ const PAGES_COMPONENTS = [
   ],
   declarations: [
     ...PAGES_COMPONENTS,
+  //  RecursosProyectoComponent,
   ],
 })
 export class PagesModule {
