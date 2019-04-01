@@ -21,6 +21,7 @@ import { NgxAuthComponent } from './@theme/components/auth/auth.component';
 import { NgxAuthBlockComponent } from './@theme/components/auth/auth-block/auth-block.component';
 import { NgxLoginComponent } from './@theme/components/auth/login/login.component';
 import { NgxLogoutComponent } from './@theme/components/auth/logout/logout.component';
+// import { RecursosProyectoComponent } from './src/pages/activities/component/recursos-proyecto/recursos-proyecto.component';
 /*import { NgxRegisterComponent } from './components/auth/register/register.component';
 import { NgxRequestPasswordComponent } from './components/auth/request-password/request-password.component';
 import { NgxResetPasswordComponent } from './components/auth/reset-password/reset-password.component';
@@ -37,6 +38,7 @@ import { NgxResetPasswordComponent } from './components/auth/reset-password/rese
     NgxAuthBlockComponent,
     NgxLoginComponent,
     NgxLogoutComponent,
+   // RecursosProyectoComponent,
 
     /*NgxRegisterComponent,
     NgxRequestPasswordComponent,
