@@ -8,5 +8,5 @@ Anootacion de EDR - Edgar Ramirez - 2019-03-28 v0
 
 Anotacion de  GEC - Gabriel Callejas v0
 
-Anotacion de AMA - Allan Madrid v0
+Anotacion de AMA - Allan Madrid - 2019-04-01 v2
 ******************************************************
