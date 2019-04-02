@@ -42,6 +42,7 @@ import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import { ListboxModule } from 'primeng/listbox';
 import { RecursosProyectoComponent } from './components/recursos-proyecto/recursos-proyecto.component';
+import { FileUploadModule } from 'primeng/fileupload';
 
 
 @NgModule({
@@ -65,6 +66,7 @@ import { RecursosProyectoComponent } from './components/recursos-proyecto/recurs
     MessagesModule,
     MessageModule,
     ListboxModule,
+    FileUploadModule, // modulo de file upload
   ],
   declarations: [
     ...routedComponents,
