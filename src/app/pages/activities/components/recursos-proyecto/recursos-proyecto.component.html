@@ -25,10 +25,12 @@
         </div>
         <strong><label>nota</label></strong>
         <div class="form-group">
-          <input class="form-control" type="text" placeholder="Departamento de la Organizacion" required />
+          <input class="form-control" type="text" placeholder="Agregar una nota" required />
         </div>
         <strong><label>Subir Recurso</label></strong>
-
+        <p-fileUpload (change)="upload($event)" name="myfile[]" url="./upload.php" multiple="multiple" accept="image/*"
+          maxFileSize="1000000"></p-fileUpload>
+        <br>
         <button type="button" class="btn btn-primary">Guardar</button>
       </fieldset>
     </div>
@@ -36,16 +38,40 @@
 </p-fieldset>
 <br>
 <p-fieldset legend="Agregar Link" [toggleable]="true">
-  <div class="col-md-6">
-    <fieldset class="fieldCheck">
-      <strong><label>Email</label></strong>
-      <div class="form-group">
-        <input class="form-control" type="text" placeholder="Email" required />
-      </div>
-      <strong><label>Contacto de Referencia</label></strong>
-      <div class="form-group">
-        <input class="form-control" type="text" placeholder="Departamento de la Organizacion" required />
-      </div>
-    </fieldset>
+  <div class="row">
+    <div class="col-md-6">
+      <fieldset class="fieldCheck">
+        <strong><label>Titulo</label></strong>
+        <div class="form-group">
+          <input class="form-control" type="text" placeholder="Titulo" required />
+        </div>
+        <strong><label>Descripcion</label></strong>
+        <div class="form-group">
+          <textarea rows="5" placeholder="Descripcion" class="form-control" required></textarea>
+        </div>
+      </fieldset>
+    </div>
+    <div class="col-md-6">
+      <fieldset class="fieldCheck">
+        <div class="form-group">
+          <label>Tipo</label>
+          <select class="form-control" required>
+            <option value="0">Seleccione una Opcion</option>
+            <option>
+            </option>
+          </select>
+        </div>
+        <strong><label>nota</label></strong>
+        <div class="form-group">
+          <input class="form-control" type="text" placeholder="Agregar una nota" required />
+        </div>
+        <strong><label>Web Link</label></strong>
+        <div class="form-group">
+          <input class="form-control" type="text" placeholder="Web link" required />
+        </div>
+        <br>
+        <button type="button" class="btn btn-primary">Guardar</button>
+      </fieldset>
+    </div>
   </div>
 </p-fieldset>
