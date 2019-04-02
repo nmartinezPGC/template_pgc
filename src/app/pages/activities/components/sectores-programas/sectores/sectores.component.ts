@@ -496,6 +496,6 @@ export class SectoresComponent implements OnInit, OnChanges {
 
 
   saveSectoresOcdeCad() {
-    console.log(this.JsonSendSectoresOcdeCadOpciones);
+    // console.log(this.JsonSendSectoresOcdeCadOpciones);
   }
 }
