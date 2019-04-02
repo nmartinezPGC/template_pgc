@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Input, OnChanges } from '@angular/core';
 import { Tree, TreeNode, MessageService, MenuItem } from 'primeng/primeng';
 import { ServiceSectoresService } from '../../../services/service-sectores.service';
 import { ToasterConfig, Toast, BodyOutputType, ToasterService } from 'angular2-toaster';
@@ -65,6 +65,7 @@ export class SectoresComponent implements OnInit, OnChanges {
 
   // Json, de cargado de Sectores
   public JsonSendSectoresOcdeCad: any = [];
+  public JsonSendSectoresOcdeCadOpciones: any = [];
 
   // Json Recpetion de la Clase
   public JsonReceptionAllSectoresOcdeCad: any;
@@ -89,8 +90,7 @@ export class SectoresComponent implements OnInit, OnChanges {
   isCloseButton = true;
   config: ToasterConfig;
 
-  cities: any [];
-
+  cities: any[];
 
   /**
    * constructor
@@ -99,6 +99,7 @@ export class SectoresComponent implements OnInit, OnChanges {
    */
   constructor(private _serviceSectoresService: ServiceSectoresService,
     private messageService: MessageService,
+    private changeDetectorRef: ChangeDetectorRef,
     private _toasterService: ToasterService) {
     this.cities = [
       { name: 'New York', code: 'NY' },
@@ -236,16 +237,32 @@ export class SectoresComponent implements OnInit, OnChanges {
   * Objetivo: nodeSelect in the method selected item with Treeview
   ****************************************************************************/
   nodeSelect(event) {
-    this.messageService.add({ severity: 'info', summary: 'Node Selected', detail: event.node.label });
     // Condicion de Agregar los Nodos
-    if (event.node.children == null) {
-      // console.log(event.node);
-    } else if (event.node.children) {
-      for (let index = 0; index < event.node.children.length; index++) {
-        const element = event.node.children[index];
-        // console.log(element);
+    // console.log(event);
+    // Definicion de Items del Nivel 3
+    if (event.node.children === undefined) {
+      // console.log('Sin Nodos Nivel 1 ' + event.node.label + ' Data: ' + event.node.label);
+      this.JsonSendSectoresOcdeCadOpciones = [...this.JsonSendSectoresOcdeCadOpciones, { name: event.node.label, code: event.node.data }];
+    } else if (event.node.children !== undefined) {
+      // Evaluar si el Nivel 2 o Nivel 3
+      if (event.node.children !== undefined && event.node.parent !== undefined) {
+        // Nodos del Nivel 2
+        for (let index = 0; index < event.node.children.length; index++) {
+          const element = event.node.children[index];
+          // console.log('Con Nodos Nivel 2 ' + element.label + ' Data: ' + element.label);
+          this.JsonSendSectoresOcdeCadOpciones = [...this.JsonSendSectoresOcdeCadOpciones, { name: element.label, code: element.data }];
+        }
+      } else {
+        // Nodos del Nivel 3
+        for (let index = 0; index < event.node.children.length; index++) {
+          const element = event.node.children[index];
+          // console.log('Con Nodos Nivel 3 ' + element.label + ' Data: ' + element.label);
+          this.JsonSendSectoresOcdeCadOpciones = [...this.JsonSendSectoresOcdeCadOpciones, { name: element.label, code: element.data }];
+        }
       }
     }
+    this.JsonSendSectoresOcdeCadOpciones.sort();
+    // console.log(this.JsonSendSectoresOcdeCadOpciones);
   } // FIN | nodeSelects
 
 
@@ -257,7 +274,32 @@ export class SectoresComponent implements OnInit, OnChanges {
   * Objetivo: nodeUnselect in the method selected item with Treeview
   ****************************************************************************/
   nodeUnselect(event) {
-    this.messageService.add({ severity: 'info', summary: 'Node Unselected', detail: event.node.label });
+    // Condicion de Agregar los Nodos
+    // console.log(event);
+    // Definicion de Items del Nivel 3
+    if (event.node.children === undefined) {
+      // console.log('Sin Nodos Nivel 1 ' + event.node.label + ' Data: ' + event.node.label);
+      this.JsonSendSectoresOcdeCadOpciones = [this.JsonReceptionSectorByNivelOcdeCad.splice(0, 0)];
+      // this.JsonSendSectoresOcdeCadOpciones = [...this.JsonSendSectoresOcdeCadOpciones, []];
+    } else if (event.node.children !== undefined) {
+      // Evaluar si el Nivel 2 o Nivel 3
+      if (event.node.children !== undefined && event.node.parent !== undefined) {
+        // Nodos del Nivel 2
+        for (let index = 0; index < event.node.children.length; index++) {
+          const element = event.node.children[index];
+          // console.log('Con Nodos Nivel 2 ' + element.label + ' Data: ' + element.label);
+          this.JsonSendSectoresOcdeCadOpciones = [...this.JsonSendSectoresOcdeCadOpciones, { name: element.label, code: element.data }];
+        }
+      } else {
+        // Nodos del Nivel 3
+        for (let index = 0; index < event.node.children.length; index++) {
+          const element = event.node.children[index];
+          // console.log('Con Nodos Nivel 3 ' + element.label + ' Data: ' + element.label);
+          this.JsonSendSectoresOcdeCadOpciones = [...this.JsonSendSectoresOcdeCadOpciones, { name: element.label, code: element.data }];
+        }
+      }
+    }
+    // console.log(this.JsonSendSectoresOcdeCadOpciones);
   } // FIN | nodeUnselect
 
 
@@ -352,7 +394,6 @@ export class SectoresComponent implements OnInit, OnChanges {
           this.nodes = [];
         } else if (result.status === 200) {
           this.JsonReceptionSectorByNivelOcdeCad = result.data;
-
           this.getSectorOcdeCadNivel2(this.JsonReceptionSectorByNivelOcdeCad);
         }
       },
@@ -452,4 +493,9 @@ export class SectoresComponent implements OnInit, OnChanges {
       );
     }
   } // FIN | getSectorOcdeCadNivel2
+
+
+  saveSectoresOcdeCad() {
+    console.log(this.JsonSendSectoresOcdeCadOpciones);
+  }
 }
