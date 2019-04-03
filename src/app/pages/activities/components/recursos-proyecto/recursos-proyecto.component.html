@@ -31,11 +31,47 @@
         <p-fileUpload (change)="upload($event)" name="myfile[]" url="./upload.php" multiple="multiple" accept="image/*"
           maxFileSize="1000000"></p-fileUpload>
         <br>
-        <button type="button" class="btn btn-primary">Guardar</button>
+        <!-- <button type="button" class="btn btn-warning">Agregar</button> -->
       </fieldset>
     </div>
   </div>
+  <hr/>
+  <table class="table table-hover table-striped table-bordered" id="tableIdInterna">
+      <thead>
+        <tr class="tHeadSearch">
+          <th scope="col" colspan="2">
+            <input type="text" class="form-control" [(ngModel)]="queryString"
+              placeholder="Buscar nombre de la Organizacion :">
+          </th>
+        </tr>
+        <tr class="tHeadTable">
+          <th scope="col" style="width: 5%;">No</th>
+          <th scope="col" style="width: 20%;">Titulo</th>
+          <th scope="col" style="width: 20%;">Descripcion</th>
+          <th scope="col" style="width: 15%;">Tipo</th>
+          <th scope="col" style="width: 15%;">Nota</th>
+          <th scope="col" style="width: 15%;">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>PNUD</td>
+          <td>actividad por realizar en olancho</td>
+          <td>Work</td>
+          <td>Ninguna</td>
+          <td>
+            <img><img (click)="showLargeModal(item.idOrganizacion)" class="pointerMouse"
+              src="../../../../assets/icons/forms/pencil-striped-symbol_24.png" alt="">
+            <img (click)="deleteOrganizacion(item.idOrganizacion)" class="pointerMouse"
+              src="../../../../assets/icons/forms/rubbish-bin_24x.png" alt=""><img alt="">
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button type="button" class="btn btn-primary">Guardar Datos</button>
 </p-fieldset>
+
 <br>
 <p-fieldset legend="Agregar Link" [toggleable]="true">
   <div class="row">
