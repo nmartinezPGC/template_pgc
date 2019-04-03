@@ -189,4 +189,22 @@ Seccion de formularios
   transition: border-color 0.15s ease-in-out,
   box-shadow 0.15s ease-in-out;
 }
+hr {
+  height: 2px;
+  background-color: #204f85;
+}
+// Estilos de Botones
+.botonSpecial {
+  background-color: #204f85;
+  margin-left: 2px;
+}
 
+.botonSave {
+  background-color: #204f85;
+  cursor: pointer;
+}
+
+.botonSave:hover {
+  background-color: #1f6abe;
+  cursor: pointer;
+}
