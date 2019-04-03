@@ -1,3 +1,12 @@
+/**
+* @author Nahum Martinez
+* @returns Sectores OCDE/CAD
+* @name SectoresComponent
+* @alias _sectoresComponent
+* @version 1.0.0
+* @date 2019-04-02
+*/
+
 import { Component, OnInit, ChangeDetectorRef, Input, OnChanges } from '@angular/core';
 import { Tree, TreeNode, MessageService, MenuItem } from 'primeng/primeng';
 import { ServiceSectoresService } from '../../../services/service-sectores.service';
@@ -279,7 +288,9 @@ export class SectoresComponent implements OnInit, OnChanges {
     // Definicion de Items del Nivel 3
     if (event.node.children === undefined) {
       // console.log('Sin Nodos Nivel 1 ' + event.node.label + ' Data: ' + event.node.label);
-      this.JsonSendSectoresOcdeCadOpciones = [this.JsonReceptionSectorByNivelOcdeCad.splice(0, 0)];
+      this.JsonReceptionSectorByNivelOcdeCad.splice(0, 0);
+      // console.log(this.JsonReceptionSectorByNivelOcdeCad);
+      this.JsonSendSectoresOcdeCadOpciones = [this.JsonReceptionSectorByNivelOcdeCad];
       // this.JsonSendSectoresOcdeCadOpciones = [...this.JsonSendSectoresOcdeCadOpciones, []];
     } else if (event.node.children !== undefined) {
       // Evaluar si el Nivel 2 o Nivel 3
