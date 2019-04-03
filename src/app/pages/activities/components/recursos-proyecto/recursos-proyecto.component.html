@@ -110,4 +110,41 @@
       </fieldset>
     </div>
   </div>
+  <hr/>
+  <table class="table table-hover table-striped table-bordered" id="tableIdInterna">
+    <thead>
+      <tr class="tHeadSearch">
+        <th scope="col" colspan="2">
+          <input type="text" class="form-control" [(ngModel)]="queryString"
+            placeholder="Buscar nombre de la Organizacion :">
+        </th>
+      </tr>
+      <tr class="tHeadTable">
+        <th scope="col" style="width: 5%;">No</th>
+        <th scope="col" style="width: 10%;">Nombre del Recurso</th>
+        <th scope="col" style="width: 5%;">Fecha</th>
+        <th scope="col" style="width: 5%;">Año</th>
+        <th scope="col" style="width: 5%;">Tamaño</th>
+        <th scope="col" style="width: 10%;">Web Link</th>
+        <th scope="col" style="width: 8%;">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>PNUD</td>
+        <td>03/04/2019</td>
+        <td>2019</td>
+        <td>300000</td>
+        <td>www.pgc.com</td>
+        <td>
+          <img><img (click)="showLargeModal(item.idOrganizacion)" class="pointerMouse"
+            src="../../../../assets/icons/forms/pencil-striped-symbol_24.png" alt="">
+          <img (click)="deleteOrganizacion(item.idOrganizacion)" class="pointerMouse"
+            src="../../../../assets/icons/forms/rubbish-bin_24x.png" alt=""><img alt="">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button type="button" class="btn btn-primary">Guardar Datos</button>
 </p-fieldset>
