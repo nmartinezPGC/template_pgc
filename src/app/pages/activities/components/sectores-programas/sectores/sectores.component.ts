@@ -499,8 +499,7 @@ export class SectoresComponent implements OnInit, OnChanges {
                                       'data': element4.idSector,
                                     });
                                   }
-                                }
-                                else {
+                                } else {
                                   // console.log('No hay Datos Nivel 4 ***********************************************');
                                 }
                               }
