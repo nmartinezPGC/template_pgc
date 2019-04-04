@@ -28,6 +28,9 @@ export class SectoresComponent implements OnInit, OnChanges {
   // variable del Json
   @Input() JsonPassData: any;
 
+  // Variable del Pipe Filter
+  queryString = '';
+
   ngOnChanges(changes) {
     if (changes['idProyectoTab']) {
       // Aquí ya sabes que has recibido un nuevo dato desde cualquier componente.
@@ -252,6 +255,7 @@ export class SectoresComponent implements OnInit, OnChanges {
     if (event.node.children === undefined) {
       // console.log('Sin Nodos Nivel 1 ' + event.node.label + ' Data: ' + event.node.label);
       this.JsonSendSectoresOcdeCadOpciones = [...this.JsonSendSectoresOcdeCadOpciones, { name: event.node.label, code: event.node.data }];
+      // console.log(this.JsonSendSectoresOcdeCadOpciones);
     } else if (event.node.children !== undefined) {
       // Evaluar si el Nivel 2 o Nivel 3
       if (event.node.children !== undefined && event.node.parent !== undefined) {
@@ -288,10 +292,12 @@ export class SectoresComponent implements OnInit, OnChanges {
     // Definicion de Items del Nivel 3
     if (event.node.children === undefined) {
       // console.log('Sin Nodos Nivel 1 ' + event.node.label + ' Data: ' + event.node.label);
-      this.JsonReceptionSectorByNivelOcdeCad.splice(0, 0);
-      // console.log(this.JsonReceptionSectorByNivelOcdeCad);
-      this.JsonSendSectoresOcdeCadOpciones = [this.JsonReceptionSectorByNivelOcdeCad];
-      // this.JsonSendSectoresOcdeCadOpciones = [...this.JsonSendSectoresOcdeCadOpciones, []];
+      // this.JsonSendSectoresOcdeCadOpciones = [...this.JsonSendSectoresOcdeCadOpciones.splice(1, 1)];
+      // console.log(this.JsonSendSectoresOcdeCadOpciones);
+      for (let index = 0; index < this.JsonSendSectoresOcdeCadOpciones.length; index++) {
+        const element = this.JsonSendSectoresOcdeCadOpciones[index];
+        // console.log(element);
+      }
     } else if (event.node.children !== undefined) {
       // Evaluar si el Nivel 2 o Nivel 3
       if (event.node.children !== undefined && event.node.parent !== undefined) {
@@ -429,6 +435,7 @@ export class SectoresComponent implements OnInit, OnChanges {
     // Inicializacion del Arraeglo de Nivel 2
     this.JsonReceptionSectorByNivelOcdeCad2 = [];
     this.JsonReceptionSectorByNivelOcdeCad3 = [];
+    this.JsonReceptionSectorByNivelOcdeCad4 = [];
 
     // Ejecucion del EndPoint de Consulta de Sector, por ID
     for (let n1 = 0; n1 < array.length; n1++) { // Ciclo del Nivel 1, definir el Nivel 2
@@ -447,55 +454,102 @@ export class SectoresComponent implements OnInit, OnChanges {
             // Array para el Segundo Ciclo | Nivel 2
             const array2 = [];
 
-            for (let n2 = 0; n2 < this.JsonReceptionSectorByNivelOcdeCad2.length; n2++) { // Ciclo del Nivel 2, definir el Nivel 3
-              // Array para el segundo Ciclo | Nivel 3
-              const array3 = [];
+            // Condicion de Jerarquia de Nivel 2
+            if (this.JsonReceptionSectorByNivelOcdeCad2 !== undefined) {
+              for (let n2 = 0; n2 < this.JsonReceptionSectorByNivelOcdeCad2.length; n2++) { // Ciclo del Nivel 2, definir el Nivel 3
+                // Array para el segundo Ciclo | Nivel 3
+                const array3 = [];
 
-              const element2 = this.JsonReceptionSectorByNivelOcdeCad2[n2];
+                const element2 = this.JsonReceptionSectorByNivelOcdeCad2[n2];
 
-              // Ejecutamos el Sevicio, para el Nivel 3
-              this._serviceSectoresService.getfindByIdNivelSectorAndSectorPadreId(3, element2.idSector).subscribe(
-                result2 => {
-                  if (result2.status !== 200) {
-                    this.showToast('error', 'Error al Obtener la Información del Sector Nivel 3', result2.message);
-                    this.JsonReceptionSectorByNivelOcdeCad3 = [];
-                  } else if (result2.status === 200) {
-                    this.JsonReceptionSectorByNivelOcdeCad3 = result2.data;
+                // Ejecutamos el Sevicio, para el Nivel 3
+                this._serviceSectoresService.getfindByIdNivelSectorAndSectorPadreId(3, element2.idSector).subscribe(
+                  result2 => {
+                    if (result2.status !== 200) {
+                      this.showToast('error', 'Error al Obtener la Información del Sector Nivel 3', result2.message);
+                      this.JsonReceptionSectorByNivelOcdeCad3 = [];
+                    } else if (result2.status === 200) {
+                      this.JsonReceptionSectorByNivelOcdeCad3 = result2.data;
 
-                    for (let n3 = 0; n3 < this.JsonReceptionSectorByNivelOcdeCad3.length; n3++) { // Definir el Nivel 3
-                      const element3 = this.JsonReceptionSectorByNivelOcdeCad3[n3];
+                      // Condicion de Jerarquia de Nivel 3
+                      if (this.JsonReceptionSectorByNivelOcdeCad3 !== undefined) {
+                        for (let n3 = 0; n3 < this.JsonReceptionSectorByNivelOcdeCad3.length; n3++) { // Definir el Nivel 3
+                          // Array para el segundo Ciclo | Nivel 4
+                          const array4 = [];
 
-                      // Hacemos el push al Array Principal, para cargar los nodos de Nivel 3
-                      array3.push({
-                        'label': element3.nombreSector,
-                        'data': element3.idSector,
-                      });
+                          const element3 = this.JsonReceptionSectorByNivelOcdeCad3[n3];
+
+                          // Ejecutamos el Sevicio, para el Nivel 4
+                          this._serviceSectoresService.getfindByIdNivelSectorAndSectorPadreId(4, element3.idSector).subscribe(
+                            result3 => {
+                              if (result3.status !== 200) {
+                                this.showToast('error', 'Error al Obtener la Información del Sector Nivel 4', result3.message);
+                                this.JsonReceptionSectorByNivelOcdeCad4 = [];
+                              } else if (result3.status === 200) {
+                                this.JsonReceptionSectorByNivelOcdeCad4 = result3.data;
+
+                                // Condicion de Jerarquia de Nivel 4
+                                if (this.JsonReceptionSectorByNivelOcdeCad4 !== undefined) {
+                                  for (let n4 = 0; n4 < this.JsonReceptionSectorByNivelOcdeCad4.length; n4++) { // Definir el Nivel 3
+                                    const element4 = this.JsonReceptionSectorByNivelOcdeCad4[n4];
+
+                                    // Hacemos el push al Array Principal, para cargar los nodos de Nivel 4
+                                    array4.push({
+                                      'label': element4.nombreSector,
+                                      'data': element4.idSector,
+                                    });
+                                  }
+                                }
+                                else {
+                                  // console.log('No hay Datos Nivel 4 ***********************************************');
+                                }
+                              }
+                            },
+                            error => {
+                              this.showToast('error', 'Error al Obtener la Información de Sectores de Desarrollo', JSON.stringify(error.message));
+                            },
+                          );
+
+                          // Hacemos el push al Array Principal, para cargar los nodos de Nivel 3
+                          array3.push({
+                            'label': element3.nombreSector,
+                            'data': element3.idSector,
+                            'expandedIcon': 'fa fa-folder-open',
+                            'collapsedIcon': 'fa fa-folder',
+                            'children': array4,
+                          });
+                        }
+                      } else {
+                        // console.log('No hay Datos Nivel 3 ***********************************************');
+                      }
                     }
-                  }
-                },
-                error => {
-                  this.showToast('error', 'Error al Obtener la Información de Sectores de Desarrollo', JSON.stringify(error.message));
-                },
-              );
+                  },
+                  error => {
+                    this.showToast('error', 'Error al Obtener la Información de Sectores de Desarrollo', JSON.stringify(error.message));
+                  },
+                );
 
-              // Hacemos el push al Array Principal, para cargar los nodos de Nivel 2
-              array2.push({
-                'label': element2.nombreSector,
-                'data': element2.idSector,
+                // Hacemos el push al Array Principal, para cargar los nodos de Nivel 2
+                array2.push({
+                  'label': element2.nombreSector,
+                  'data': element2.idSector,
+                  'expandedIcon': 'fa fa-folder-open',
+                  'collapsedIcon': 'fa fa-folder',
+                  'children': array3,
+                });
+              }
+
+              // Hacemos el push al Array Principal, para cargar los nodos de Nivel 1
+              this.arrayPush.push({
+                'label': element.nombreSector,
+                'data': element.idSector,
                 'expandedIcon': 'fa fa-folder-open',
                 'collapsedIcon': 'fa fa-folder',
-                'children': array3,
+                'children': array2,
               });
             }
-
-            // Hacemos el push al Array Principal, para cargar los nodos de Nivel 1
-            this.arrayPush.push({
-              'label': element.nombreSector,
-              'data': element.idSector,
-              'expandedIcon': 'fa fa-folder-open',
-              'collapsedIcon': 'fa fa-folder',
-              'children': array2,
-            });
+          } else {
+            // console.log('No hay Datos Nivel 2 ***********************************************');
           }
         },
         error => {

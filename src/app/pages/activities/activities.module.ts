@@ -43,6 +43,7 @@ import { MessageModule } from 'primeng/message';
 import { ListboxModule } from 'primeng/listbox';
 import { RecursosProyectoComponent } from './components/recursos-proyecto/recursos-proyecto.component';
 import { FileUploadModule } from 'primeng/fileupload';
+import { FilterPipe } from './pipes/filter.pipe';
 
 
 @NgModule({
@@ -77,6 +78,7 @@ import { FileUploadModule } from 'primeng/fileupload';
     ProgramasComponent,
     SectoresProgramasOdsComponent,
     RecursosProyectoComponent,
+    FilterPipe,
   ],
   providers: [
     // SmartTableService, // Defincion del Servicio que provee los Datos de la Tabla: ID's Internas
