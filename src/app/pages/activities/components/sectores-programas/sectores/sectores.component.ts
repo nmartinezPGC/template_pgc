@@ -250,26 +250,22 @@ export class SectoresComponent implements OnInit, OnChanges {
   ****************************************************************************/
   nodeSelect(event) {
     // Condicion de Agregar los Nodos
-    // console.log(event);
-    // Definicion de Items del Nivel 3
-    if (event.node.children === undefined) {
-      // console.log('Sin Nodos Nivel 1 ' + event.node.label + ' Data: ' + event.node.label);
+    if (event.node.children === undefined) { // Definicion de Items del Nivel 4
       this.JsonSendSectoresOcdeCadOpciones = [...this.JsonSendSectoresOcdeCadOpciones, { name: event.node.label, code: event.node.data }];
-      // console.log(this.JsonSendSectoresOcdeCadOpciones);
-    } else if (event.node.children !== undefined) {
+    } else if (event.node.children.length === 0) { // Definicion de Items del Nivel 3
+      this.JsonSendSectoresOcdeCadOpciones = [...this.JsonSendSectoresOcdeCadOpciones, { name: event.node.label, code: event.node.data }];
+    } else if (event.node.children.length !== 0) { // Definicion de Items del Nivel 2
       // Evaluar si el Nivel 2 o Nivel 3
-      if (event.node.children !== undefined && event.node.parent !== undefined) {
+      if (event.node.children.length !== 0 && event.node.parent !== undefined) {
         // Nodos del Nivel 2
         for (let index = 0; index < event.node.children.length; index++) {
           const element = event.node.children[index];
-          // console.log('Con Nodos Nivel 2 ' + element.label + ' Data: ' + element.label);
           this.JsonSendSectoresOcdeCadOpciones = [...this.JsonSendSectoresOcdeCadOpciones, { name: element.label, code: element.data }];
         }
       } else {
         // Nodos del Nivel 3
         for (let index = 0; index < event.node.children.length; index++) {
           const element = event.node.children[index];
-          // console.log('Con Nodos Nivel 3 ' + element.label + ' Data: ' + element.label);
           this.JsonSendSectoresOcdeCadOpciones = [...this.JsonSendSectoresOcdeCadOpciones, { name: element.label, code: element.data }];
         }
       }
@@ -292,12 +288,14 @@ export class SectoresComponent implements OnInit, OnChanges {
     // Definicion de Items del Nivel 3
     if (event.node.children === undefined) {
       // console.log('Sin Nodos Nivel 1 ' + event.node.label + ' Data: ' + event.node.label);
-      // this.JsonSendSectoresOcdeCadOpciones = [...this.JsonSendSectoresOcdeCadOpciones.splice(1, 1)];
+      this.JsonSendSectoresOcdeCadOpciones = [...this.JsonSendSectoresOcdeCadOpciones.splice(1, 1)];
       // console.log(this.JsonSendSectoresOcdeCadOpciones);
       for (let index = 0; index < this.JsonSendSectoresOcdeCadOpciones.length; index++) {
         const element = this.JsonSendSectoresOcdeCadOpciones[index];
         // console.log(element);
       }
+    } else if (event.node.children.length === 0) {
+      this.JsonSendSectoresOcdeCadOpciones = [...this.JsonSendSectoresOcdeCadOpciones.splice(1, 1)];
     } else if (event.node.children !== undefined) {
       // Evaluar si el Nivel 2 o Nivel 3
       if (event.node.children !== undefined && event.node.parent !== undefined) {

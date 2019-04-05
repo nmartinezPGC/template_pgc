@@ -10,16 +10,17 @@
   <nb-card-body>
 
     <!-- Agrupacion de la Informacion de Sectores OCD/CAD -->
-    <p-fieldset legend="Sectores OCDE/CAD" [toggleable]="true" class="fieldSet" >
+    <p-fieldset legend="Sectores OCDE/CAD" [toggleable]="true" class="fieldSet">
       <nb-card accent="warning" status="primary">
         <nb-card-body>
           <div class="row">
             <div class="col-sm-6">
               <h4>Selecciona los Sectores | OCDE/CAD</h4>
-              <input type="text" class="form-control txtSearch" name="queryString" [(ngModel)]="queryString" placeholder="Buscar Sector">
+              <input type="text" class="form-control txtSearch" name="queryString" [(ngModel)]="queryString"
+                placeholder="Buscar Sector">
               <br>
-              <p-tree [style]="{'width': '100%'}" [value]="arrayPush | filter: queryString"
-                selectionMode="checkbox" (onNodeUnselect)="nodeUnselect($event)" (onNodeSelect)="nodeSelect($event)" dynamic="true"></p-tree>
+              <p-tree [style]="{'width': '100%'}" [value]="arrayPush | filter: queryString" selectionMode="checkbox"
+                (onNodeUnselect)="nodeUnselect($event)" (onNodeSelect)="nodeSelect($event)" dynamic="true"></p-tree>
               <br>
               <div>Sectores seleccionados: <span *ngFor="let file of selectedFiles2">{{file.parent.data}} </span></div>
             </div>
@@ -33,13 +34,14 @@
                   Confirma cuales sectores deben de registrarse...
                 </p-header>
                 <!-- <ng-template let-JsonSendSectoresOcdeCadOpciones pTemplate="item"> -->
-                  <!-- <div class="ui-inputgroup"> -->
-                    <!-- <span>{{JsonSendSectoresOcdeCadOpciones.label}}</span>
+                <!-- <div class="ui-inputgroup"> -->
+                <!-- <span>{{JsonSendSectoresOcdeCadOpciones.label}}</span>
                     <input style="width: 10%; float:right; text-align: right" placeholder="%" type="text"> -->
-                  <!-- </div> -->
+                <!-- </div> -->
                 <!-- </ng-template> -->
               </p-listbox>
-              <p>Sectores a Registrar: <span *ngFor="let c of selectedCities" style="margin-right: 10px">{{c.name}}</span>
+              <p>Sectores a Registrar: <span *ngFor="let c of selectedCities"
+                  style="margin-right: 10px">{{c.name}}</span>
               </p>
             </div>
           </div>
