@@ -42,8 +42,8 @@ export class FilterPipe implements PipeTransform {
                   // Cuarto Nivel
                   // Valida que tenga hijos
                   if (element2.children.length !== 0) {
-                    for (let index = 0; index < element2.length; index++) {
-                      const element3 = element2.children[index];
+                    for (let index1 = 0; index1 < element2.length; index1++) {
+                      const element3 = element2.children[index1];
 
                       if (element3.label.toLowerCase().indexOf(arg.toLowerCase()) > -1) {
                         resultSectores.push(element3);
