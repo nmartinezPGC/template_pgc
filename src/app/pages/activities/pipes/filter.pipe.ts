@@ -33,8 +33,8 @@ export class FilterPipe implements PipeTransform {
             // Valida que tenga hijos
             if (element.children.length !== 0) {
               // Terce Nivel
-              for (let index = 0; index < element.children.length; index++) {
-                const element2 = element.children[index];
+              for (let indexn = 0; indexn < element.children.length; indexn++) {
+                const element2 = element.children[indexn];
 
                 if (element2.label.toLowerCase().indexOf(arg.toLowerCase()) > -1) {
                   resultSectores.push(element2);
