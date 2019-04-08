@@ -57,8 +57,6 @@ export class SectoresComponent implements OnInit, OnChanges {
    * Configuracion del Dropdow List NMA
    */
   dropdownList = [];
-  dropdownListPais = [];
-  dropdownListEspacioTrabajo = [];
   selectedItems = [];
   selectedItemsPais = [];
   selectedItemsEspacioTrabajo = [];
@@ -102,8 +100,6 @@ export class SectoresComponent implements OnInit, OnChanges {
   isCloseButton = true;
   config: ToasterConfig;
 
-  cities: any[];
-
   /**
    * constructor
    * @param _serviceSectoresService
@@ -113,28 +109,12 @@ export class SectoresComponent implements OnInit, OnChanges {
     private messageService: MessageService,
     private changeDetectorRef: ChangeDetectorRef,
     private _toasterService: ToasterService) {
-    this.cities = [
-      { name: 'New York', code: 'NY' },
-      { name: 'Rome', code: 'RM' },
-      { name: 'London', code: 'LDN' },
-      { name: 'Istanbul', code: 'IST' },
-      { name: 'Paris', code: 'PRS' },
-    ];
   }
 
   /**
    * Inicializacion de la Clase
    */
   ngOnInit() {
-    this.dropdownList = [
-      { 'id': 1, 'itemName': 'India', 'category': 'asia' },
-      { 'id': 2, 'itemName': 'Singapore', 'category': 'asia pacific' },
-      { 'id': 3, 'itemName': 'Germany', 'category': 'Europe' },
-      { 'id': 4, 'itemName': 'France', 'category': 'Europe' },
-      { 'id': 5, 'itemName': 'South Korea', 'category': 'asia' },
-      { 'id': 6, 'itemName': 'Sweden', 'category': 'Europe' },
-    ];
-
     this.items = [
       { label: 'View', icon: 'fa fa-search', command: (event) => this.viewFile(this.selectedFile2) },
       { label: 'Unselect', icon: 'fa fa-close', command: (event) => this.unselectFile() },
@@ -142,21 +122,6 @@ export class SectoresComponent implements OnInit, OnChanges {
 
     // Llenado del Treeview de la Tabla
     this._serviceSectoresService.getFiles().then(files => this.filesTree4 = files);
-
-    // this.filesTree4 = this.JsonReceptionUbicacion;
-
-    // Configuracion del Muliteselect
-    this.dropdownSettings = {
-      singleSelection: true,
-      text: 'Seleccione una Opción',
-      enableSearchFilter: true,
-      searchPlaceholderText: 'Buscar Elemento',
-      classes: 'comboSea',
-      showCheckbox: false,
-      lazyLoading: false,
-      groupBy: 'category',
-      // selectGroup: true,
-    };
 
     // this.getAllSectoresOcdeCadService();
     this.getfindByIdNivelSectorService(1);
