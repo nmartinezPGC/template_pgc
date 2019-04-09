@@ -90,10 +90,6 @@ export class SectoresOcdeComponent implements OnInit, OnChanges {
   isCloseButton = true;
   config: ToasterConfig;
 
-<<<<<<< HEAD:src/app/pages/activities/components/sectores-programas/sectores/sectores.component.ts
-=======
-
->>>>>>> sectoresOcde:src/app/pages/activities/components/sectores-programas/sectores/sectores-ocde/sectores-ocde.component.ts
   /**
    * constructor
    * @param _serviceSectoresService
@@ -103,24 +99,13 @@ export class SectoresOcdeComponent implements OnInit, OnChanges {
     private messageService: MessageService,
     private changeDetectorRef: ChangeDetectorRef,
     private _toasterService: ToasterService) {
-<<<<<<< HEAD:src/app/pages/activities/components/sectores-programas/sectores/sectores.component.ts
-=======
     // Codigo del Constructor
->>>>>>> sectoresOcde:src/app/pages/activities/components/sectores-programas/sectores/sectores-ocde/sectores-ocde.component.ts
   }
 
   /**
    * Inicializacion de la Clase
    */
   ngOnInit() {
-<<<<<<< HEAD:src/app/pages/activities/components/sectores-programas/sectores/sectores.component.ts
-    this.items = [
-      { label: 'View', icon: 'fa fa-search', command: (event) => this.viewFile(this.selectedFile2) },
-      { label: 'Unselect', icon: 'fa fa-close', command: (event) => this.unselectFile() },
-    ];
-
-=======
->>>>>>> sectoresOcde:src/app/pages/activities/components/sectores-programas/sectores/sectores-ocde/sectores-ocde.component.ts
     // Llenado del Treeview de la Tabla
     this._serviceSectoresService.getFiles().then(files => this.filesTree4 = files);
 
