@@ -1,25 +1,15 @@
-/**
-* @author Nahum Martinez
-* @returns Sectores OCDE/CAD
-* @name SectoresComponent
-* @alias _sectoresComponent
-* @version 1.0.0
-* @date 2019-04-02
-*/
-
-import { Component, OnInit, ChangeDetectorRef, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef, OnChanges } from '@angular/core';
 import { Tree, TreeNode, MessageService, MenuItem } from 'primeng/primeng';
-import { ServiceSectoresService } from '../../../services/service-sectores.service';
-import { ToasterConfig, Toast, BodyOutputType, ToasterService } from 'angular2-toaster';
-import { delay } from 'q';
+import { ToasterConfig, ToasterService, Toast, BodyOutputType } from 'angular2-toaster';
+import { ServiceSectoresService } from '../../../../services/service-sectores.service';
 
 @Component({
-  selector: 'ngx-sectores',
-  templateUrl: './sectores.component.html',
-  styleUrls: ['./sectores.component.scss'],
+  selector: 'ngx-sectores-ocde',
+  templateUrl: './sectores-ocde.component.html',
+  styleUrls: ['./sectores-ocde.component.scss'],
   providers: [ServiceSectoresService, MessageService, ToasterService],
 })
-export class SectoresComponent implements OnInit, OnChanges {
+export class SectoresOcdeComponent implements OnInit, OnChanges {
   // Variables entre Tabs | Components
   @Input() idProyectoTab: number;
   @Input() idUsuarioTab: number;
@@ -102,7 +92,6 @@ export class SectoresComponent implements OnInit, OnChanges {
   isCloseButton = true;
   config: ToasterConfig;
 
-  cities: any[];
 
   /**
    * constructor
@@ -113,50 +102,15 @@ export class SectoresComponent implements OnInit, OnChanges {
     private messageService: MessageService,
     private changeDetectorRef: ChangeDetectorRef,
     private _toasterService: ToasterService) {
-    this.cities = [
-      { name: 'New York', code: 'NY' },
-      { name: 'Rome', code: 'RM' },
-      { name: 'London', code: 'LDN' },
-      { name: 'Istanbul', code: 'IST' },
-      { name: 'Paris', code: 'PRS' },
-    ];
+    // Codigo del Constructor
   }
 
   /**
    * Inicializacion de la Clase
    */
   ngOnInit() {
-    this.dropdownList = [
-      { 'id': 1, 'itemName': 'India', 'category': 'asia' },
-      { 'id': 2, 'itemName': 'Singapore', 'category': 'asia pacific' },
-      { 'id': 3, 'itemName': 'Germany', 'category': 'Europe' },
-      { 'id': 4, 'itemName': 'France', 'category': 'Europe' },
-      { 'id': 5, 'itemName': 'South Korea', 'category': 'asia' },
-      { 'id': 6, 'itemName': 'Sweden', 'category': 'Europe' },
-    ];
-
-    this.items = [
-      { label: 'View', icon: 'fa fa-search', command: (event) => this.viewFile(this.selectedFile2) },
-      { label: 'Unselect', icon: 'fa fa-close', command: (event) => this.unselectFile() },
-    ];
-
     // Llenado del Treeview de la Tabla
     this._serviceSectoresService.getFiles().then(files => this.filesTree4 = files);
-
-    // this.filesTree4 = this.JsonReceptionUbicacion;
-
-    // Configuracion del Muliteselect
-    this.dropdownSettings = {
-      singleSelection: true,
-      text: 'Seleccione una Opción',
-      enableSearchFilter: true,
-      searchPlaceholderText: 'Buscar Elemento',
-      classes: 'comboSea',
-      showCheckbox: false,
-      lazyLoading: false,
-      groupBy: 'category',
-      // selectGroup: true,
-    };
 
     // this.getAllSectoresOcdeCadService();
     this.getfindByIdNivelSectorService(1);
@@ -292,7 +246,7 @@ export class SectoresComponent implements OnInit, OnChanges {
     // Definicion de Items del Nivel 3
     if (event.node.children === undefined) {
       // console.log('Sin Nodos Nivel 1 ' + event.node.label + ' Data: ' + event.node.label);
-      // this.JsonSendSectoresOcdeCadOpciones = [...this.JsonSendSectoresOcdeCadOpciones.splice(1, 1)];
+      this.JsonSendSectoresOcdeCadOpciones = [...this.JsonSendSectoresOcdeCadOpciones.splice(1, 1)];
       // console.log(this.JsonSendSectoresOcdeCadOpciones);
       for (let index = 0; index < this.JsonSendSectoresOcdeCadOpciones.length; index++) {
         const element = this.JsonSendSectoresOcdeCadOpciones[index];
@@ -563,4 +517,5 @@ export class SectoresComponent implements OnInit, OnChanges {
   saveSectoresOcdeCad() {
     // console.log(this.JsonSendSectoresOcdeCadOpciones);
   }
+
 }

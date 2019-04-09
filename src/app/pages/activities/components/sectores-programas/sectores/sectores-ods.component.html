@@ -1,0 +1,31 @@
+<!-- Maquetacion de los Sectores del Proyecto -->
+<!-- ======================================== -->
+
+<!-- Diagramacion de Pantallas -->
+<!-- <ngx-sectores [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab" [codigoProyectoTab]="codigoProyectoTab"></ngx-sectores> -->
+
+<!-- <ngx-programas [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab" [codigoProyectoTab]="codigoProyectoTab"></ngx-programas> -->
+
+<nb-card accent="warning" status="primary">
+  <nb-card-header>Información de Sectores del Proyecto {{ idProyectoTab }} | Codigo de Proyecto {{
+    codigoProyectoTab }} | Usuario {{ idUsuarioTab }}
+  </nb-card-header>
+  <nb-card-body>
+    <!-- ======== Objetivos de Desarrollo Sostenible ============ -->
+    <ngx-ods></ngx-ods>
+
+    <br>
+    <!-- ================ Sectores Ocde/Cad ==================== -->
+    <ngx-sectores-ocde [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
+      [codigoProyectoTab]="codigoProyectoTab"></ngx-sectores-ocde>
+
+    <br>
+    <!-- ================ Sectores de Gobierno ================= -->
+    <ngx-sectores-gobierno></ngx-sectores-gobierno>
+
+    <br>
+    <!-- ================ Campos Transversales ================== -->
+    <ngx-sectores-campos-transversales></ngx-sectores-campos-transversales>
+
+  </nb-card-body>
+</nb-card>

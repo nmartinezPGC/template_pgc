@@ -1,0 +1,55 @@
+<!-- Agrupacion de la Informacion de Sectores OCD/CAD -->
+<p-fieldset legend="Sectores OCDE/CAD" [toggleable]="true" class="fieldSet">
+  <nb-card accent="warning" status="primary">
+    <nb-card-body>
+      <div class="row">
+        <div class="col-sm-6">
+          <h4>Selecciona los Sectores | OCDE/CAD</h4>
+          <input type="text" class="form-control txtSearch" name="queryString" [(ngModel)]="queryString"
+            placeholder="Buscar Sector">
+          <br>
+          <p-tree [style]="{'width': '100%'}" [value]="arrayPush | filter: queryString" selectionMode="checkbox"
+            (onNodeUnselect)="nodeUnselect($event)" (onNodeSelect)="nodeSelect($event)" dynamic="true"></p-tree>
+          <br>
+          <div>Sectores seleccionados: <span *ngFor="let file of selectedFiles2">{{file.parent.data}} </span></div>
+        </div>
+
+        <div class="col-sm-6">
+          <h4>Sectores OCDE/CAD seleccionados</h4>
+          <p-listbox [options]="JsonSendSectoresOcdeCadOpciones" [style]="{'width': '100%'}"
+            [(ngModel)]="selectedCities" multiple="multiple" filter="filter" optionLabel="name">
+            <p-header>
+              <i class="fa fa-file"></i>
+              Confirma cuales sectores deben de registrarse...
+            </p-header>
+            <!-- <ng-template let-JsonSendSectoresOcdeCadOpciones pTemplate="item"> -->
+            <!-- <div class="ui-inputgroup"> -->
+            <!-- <span>{{JsonSendSectoresOcdeCadOpciones.label}}</span>
+                    <input style="width: 10%; float:right; text-align: right" placeholder="%" type="text"> -->
+            <!-- </div> -->
+            <!-- </ng-template> -->
+          </p-listbox>
+          <p>Sectores a Registrar: <span *ngFor="let c of selectedCities" style="margin-right: 10px">{{c.name}}</span>
+          </p>
+        </div>
+      </div>
+      <br>
+
+      <!-- Fila de las Ubicaciones seleccionadas -->
+      <div class="row">
+        <div class="col-sm-12">
+          <!-- Boton para Calcular los Porcentajes Ubicaciones -->
+          <button class="btn btn-primary botonSave with-margins"
+            nbPopover="Calcula de igual forma todos los porcentajes para las Ubicaciones" nbPopoverMode="hint"
+            nbPopoverPlacement="top" (click)="saveSectoresOcdeCad()">Calcular %</button>
+          <button class="btn btn-warning with-margins"
+            nbPopover="Calcula de igual forma todos los porcentajes para las Ubicaciones" nbPopoverMode="hint"
+            nbPopoverPlacement="top" (click)="calcPorcForm()">Limpiar</button>
+          <!-- paginador de la tabla -->
+          <pagination-controls autoHide="true" responsive="true" previousLabel="Anterior" nextLabel="Siguiente"
+            (pageChange)="page = $event" id="1" directionLinks="true"></pagination-controls>
+        </div>
+      </div>
+    </nb-card-body>
+  </nb-card>
+</p-fieldset>
