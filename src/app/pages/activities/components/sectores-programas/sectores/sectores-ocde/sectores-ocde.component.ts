@@ -1,25 +1,15 @@
-/**
-* @author Nahum Martinez
-* @returns Sectores OCDE/CAD
-* @name SectoresComponent
-* @alias _sectoresComponent
-* @version 1.0.0
-* @date 2019-04-02
-*/
-
-import { Component, OnInit, ChangeDetectorRef, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef, OnChanges } from '@angular/core';
 import { Tree, TreeNode, MessageService, MenuItem } from 'primeng/primeng';
-import { ServiceSectoresService } from '../../../services/service-sectores.service';
-import { ToasterConfig, Toast, BodyOutputType, ToasterService } from 'angular2-toaster';
-import { delay } from 'q';
+import { ToasterConfig, ToasterService, Toast, BodyOutputType } from 'angular2-toaster';
+import { ServiceSectoresService } from '../../../../services/service-sectores.service';
 
 @Component({
-  selector: 'ngx-sectores',
-  templateUrl: './sectores.component.html',
-  styleUrls: ['./sectores.component.scss'],
+  selector: 'ngx-sectores-ocde',
+  templateUrl: './sectores-ocde.component.html',
+  styleUrls: ['./sectores-ocde.component.scss'],
   providers: [ServiceSectoresService, MessageService, ToasterService],
 })
-export class SectoresComponent implements OnInit, OnChanges {
+export class SectoresOcdeComponent implements OnInit, OnChanges {
   // Variables entre Tabs | Components
   @Input() idProyectoTab: number;
   @Input() idUsuarioTab: number;
@@ -100,6 +90,10 @@ export class SectoresComponent implements OnInit, OnChanges {
   isCloseButton = true;
   config: ToasterConfig;
 
+<<<<<<< HEAD:src/app/pages/activities/components/sectores-programas/sectores/sectores.component.ts
+=======
+
+>>>>>>> sectoresOcde:src/app/pages/activities/components/sectores-programas/sectores/sectores-ocde/sectores-ocde.component.ts
   /**
    * constructor
    * @param _serviceSectoresService
@@ -109,17 +103,24 @@ export class SectoresComponent implements OnInit, OnChanges {
     private messageService: MessageService,
     private changeDetectorRef: ChangeDetectorRef,
     private _toasterService: ToasterService) {
+<<<<<<< HEAD:src/app/pages/activities/components/sectores-programas/sectores/sectores.component.ts
+=======
+    // Codigo del Constructor
+>>>>>>> sectoresOcde:src/app/pages/activities/components/sectores-programas/sectores/sectores-ocde/sectores-ocde.component.ts
   }
 
   /**
    * Inicializacion de la Clase
    */
   ngOnInit() {
+<<<<<<< HEAD:src/app/pages/activities/components/sectores-programas/sectores/sectores.component.ts
     this.items = [
       { label: 'View', icon: 'fa fa-search', command: (event) => this.viewFile(this.selectedFile2) },
       { label: 'Unselect', icon: 'fa fa-close', command: (event) => this.unselectFile() },
     ];
 
+=======
+>>>>>>> sectoresOcde:src/app/pages/activities/components/sectores-programas/sectores/sectores-ocde/sectores-ocde.component.ts
     // Llenado del Treeview de la Tabla
     this._serviceSectoresService.getFiles().then(files => this.filesTree4 = files);
 
@@ -525,4 +526,5 @@ export class SectoresComponent implements OnInit, OnChanges {
   saveSectoresOcdeCad() {
     // console.log(this.JsonSendSectoresOcdeCadOpciones);
   }
+
 }

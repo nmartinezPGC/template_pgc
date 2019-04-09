@@ -29,10 +29,9 @@ import { NbRouteTabsetModule } from '@nebular/theme/components/route-tabset/rout
 // Modulo de Mapas
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { UbicacionComponent } from './components/ubicacion/ubicacion.component';
-import { OdsComponent } from './components/sectores-programas/ods/ods.component';
-import { SectoresComponent } from './components/sectores-programas/sectores/sectores.component';
+import { OdsComponent } from './components/sectores-programas/sectores/ods/ods.component';
 import { ProgramasComponent } from './components/sectores-programas/programas/programas.component';
-import { SectoresProgramasOdsComponent } from './components/sectores-programas/sectores-programas-ods.component';
+import { SectoresProgramasOdsComponent } from './components/sectores-programas/sectores/sectores-ods.component';
 
 // Modulo de la Libreria Primeng
 import { FieldsetModule } from 'primeng/fieldset';
@@ -44,6 +43,9 @@ import { ListboxModule } from 'primeng/listbox';
 import { RecursosProyectoComponent } from './components/recursos-proyecto/recursos-proyecto.component';
 import { FileUploadModule } from 'primeng/fileupload';
 import { FilterPipe } from './pipes/filter.pipe';
+import { SectoresGobiernoComponent } from './components/sectores-programas/sectores/sectores-gobierno/sectores-gobierno.component';
+import { SectoresOcdeComponent } from './components/sectores-programas/sectores/sectores-ocde/sectores-ocde.component';
+import { SectoresCamposTransversalesComponent } from './components/sectores-programas/sectores/sectores-campos-transversales/sectores-campos-transversales.component';
 
 
 @NgModule({
@@ -74,11 +76,13 @@ import { FilterPipe } from './pipes/filter.pipe';
     FilterdataPipe,
     UbicacionComponent,
     OdsComponent,
-    SectoresComponent,
     ProgramasComponent,
     SectoresProgramasOdsComponent,
     RecursosProyectoComponent,
     FilterPipe,
+    SectoresGobiernoComponent,
+    SectoresOcdeComponent,
+    SectoresCamposTransversalesComponent,
   ],
   providers: [
     // SmartTableService, // Defincion del Servicio que provee los Datos de la Tabla: ID's Internas

@@ -2,8 +2,8 @@ import { Component, OnInit, Input, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'ngx-sectores-programas-ods',
-  templateUrl: './sectores-programas-ods.component.html',
-  // styleUrls: ['./sectores.component.scss'],
+  templateUrl: './sectores-ods.component.html',
+  styleUrls: ['./sectores-ods.component.scss'],
 })
 export class SectoresProgramasOdsComponent implements OnInit, OnChanges {
   // Variables entre Tabs | Components

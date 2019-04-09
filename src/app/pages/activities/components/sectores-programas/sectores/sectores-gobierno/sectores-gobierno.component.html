@@ -1,0 +1,32 @@
+<!-- Agrupacion de la Informacion de Sectores de Gobierno -->
+<p-fieldset legend="Sectores de Gobierno" [toggleable]="true" class="fieldSet">
+  <nb-card accent="warning" status="primary">
+    <nb-card-body>
+      <div class="row">
+        <div class="col-sm-6">
+          <h4>Selecciona los Sectores | Gobierno</h4>
+          <input type="text" class="form-control txtSearch" name="queryString" [(ngModel)]="queryString"
+            placeholder="Buscar Sector">
+          <br>
+          <p-tree [style]="{'width': '100%'}" [value]="arrayPush | filter: queryString" selectionMode="checkbox"
+            (onNodeUnselect)="nodeUnselect($event)" (onNodeSelect)="nodeSelect($event)" dynamic="true"></p-tree>
+          <br>
+          <div>Sectores seleccionados: <span *ngFor="let file of selectedFiles2">{{file.parent.data}} </span></div>
+        </div>
+
+        <div class="col-sm-6">
+          <h4>Sectores de Gobierno seleccionados</h4>
+          <p-listbox [options]="JsonSendSectoresOcdeCadOpciones" [style]="{'width': '100%'}"
+            [(ngModel)]="selectedCities" multiple="multiple" filter="filter" optionLabel="name">
+            <p-header>
+              <i class="fa fa-file"></i>
+              Confirma cuales sectores deben de registrarse...
+            </p-header>
+          </p-listbox>
+          <p>Sectores a Registrar: <span *ngFor="let c of selectedCities" style="margin-right: 10px">{{c.name}}</span>
+          </p>
+        </div>
+      </div>
+    </nb-card-body>
+  </nb-card>
+</p-fieldset>
