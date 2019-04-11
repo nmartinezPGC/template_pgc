@@ -13,5 +13,5 @@ export class RecursosProyectoComponent implements OnInit {
 
   ngOnInit() {
   }
-//hola
+
 }
