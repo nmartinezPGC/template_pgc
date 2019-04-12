@@ -235,12 +235,12 @@ export class SectoresOcdeComponent implements OnInit, OnChanges {
   ****************************************************************************/
   nodeUnselect(event) {
     // Condicion de Agregar los Nodos
-    console.log(event);
+    // console.log(event);
     // Definicion de Items del Nivel 3
     if (event.node.children === undefined) {
       // console.log('Sin Nodos Nivel 4 ' + event.node.label + ' Data: ' + event.node.label);
       this.JsonSendSectoresOcdeCadOpciones = [...this.JsonSendSectoresOcdeCadOpciones.splice(1, 1)];
-      console.log(this.JsonSendSectoresOcdeCadOpciones);
+      // console.log(this.JsonSendSectoresOcdeCadOpciones);
       for (let index = 0; index < this.JsonSendSectoresOcdeCadOpciones.length; index++) {
         const element = this.JsonSendSectoresOcdeCadOpciones[index];
         // console.log(element);
