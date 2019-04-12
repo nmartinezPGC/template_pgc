@@ -46,6 +46,7 @@ import { FilterPipe } from './pipes/filter.pipe';
 import { SectoresGobiernoComponent } from './components/sectores-programas/sectores/sectores-gobierno/sectores-gobierno.component';
 import { SectoresOcdeComponent } from './components/sectores-programas/sectores/sectores-ocde/sectores-ocde.component';
 import { SectoresCamposTransversalesComponent } from './components/sectores-programas/sectores/sectores-campos-transversales/sectores-campos-transversales.component';
+import { VisionpaisComponent } from './components/sectores-programas/programas/visionpais/visionpais.component';
 
 
 @NgModule({
@@ -83,6 +84,7 @@ import { SectoresCamposTransversalesComponent } from './components/sectores-prog
     SectoresGobiernoComponent,
     SectoresOcdeComponent,
     SectoresCamposTransversalesComponent,
+    VisionpaisComponent,
   ],
   providers: [
     // SmartTableService, // Defincion del Servicio que provee los Datos de la Tabla: ID's Internas
