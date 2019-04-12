@@ -235,17 +235,18 @@ export class SectoresOcdeComponent implements OnInit, OnChanges {
   ****************************************************************************/
   nodeUnselect(event) {
     // Condicion de Agregar los Nodos
-    // console.log(event);
+    console.log(event);
     // Definicion de Items del Nivel 3
     if (event.node.children === undefined) {
-      // console.log('Sin Nodos Nivel 1 ' + event.node.label + ' Data: ' + event.node.label);
+      // console.log('Sin Nodos Nivel 4 ' + event.node.label + ' Data: ' + event.node.label);
       this.JsonSendSectoresOcdeCadOpciones = [...this.JsonSendSectoresOcdeCadOpciones.splice(1, 1)];
-      // console.log(this.JsonSendSectoresOcdeCadOpciones);
+      console.log(this.JsonSendSectoresOcdeCadOpciones);
       for (let index = 0; index < this.JsonSendSectoresOcdeCadOpciones.length; index++) {
         const element = this.JsonSendSectoresOcdeCadOpciones[index];
         // console.log(element);
       }
     } else if (event.node.children.length === 0) {
+      // console.log('Sin Nodos Nivel 3 ' + event.node.label + ' Data: ' + event.node.label);
       this.JsonSendSectoresOcdeCadOpciones = [...this.JsonSendSectoresOcdeCadOpciones.splice(1, 1)];
     } else if (event.node.children !== undefined) {
       // Evaluar si el Nivel 2 o Nivel 3
@@ -254,14 +255,14 @@ export class SectoresOcdeComponent implements OnInit, OnChanges {
         for (let index = 0; index < event.node.children.length; index++) {
           const element = event.node.children[index];
           // console.log('Con Nodos Nivel 2 ' + element.label + ' Data: ' + element.label);
-          this.JsonSendSectoresOcdeCadOpciones = [...this.JsonSendSectoresOcdeCadOpciones, { name: element.label, code: element.data }];
+          this.JsonSendSectoresOcdeCadOpciones = [...this.JsonSendSectoresOcdeCadOpciones.splice(1, 1)];
         }
       } else {
         // Nodos del Nivel 3
         for (let index = 0; index < event.node.children.length; index++) {
           const element = event.node.children[index];
           // console.log('Con Nodos Nivel 3 ' + element.label + ' Data: ' + element.label);
-          this.JsonSendSectoresOcdeCadOpciones = [...this.JsonSendSectoresOcdeCadOpciones, { name: element.label, code: element.data }];
+          this.JsonSendSectoresOcdeCadOpciones = [...this.JsonSendSectoresOcdeCadOpciones.splice(1, 1)];
         }
       }
     }
