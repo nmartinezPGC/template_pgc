@@ -43,10 +43,16 @@ import { ListboxModule } from 'primeng/listbox';
 import { RecursosProyectoComponent } from './components/recursos-proyecto/recursos-proyecto.component';
 import { FileUploadModule } from 'primeng/fileupload';
 import { FilterPipe } from './pipes/filter.pipe';
+
+// Sectores de Proyectos
 import { SectoresGobiernoComponent } from './components/sectores-programas/sectores/sectores-gobierno/sectores-gobierno.component';
 import { SectoresOcdeComponent } from './components/sectores-programas/sectores/sectores-ocde/sectores-ocde.component';
 import { SectoresCamposTransversalesComponent } from './components/sectores-programas/sectores/sectores-campos-transversales/sectores-campos-transversales.component';
+
+// Programas de Nacion
 import { VisionpaisComponent } from './components/sectores-programas/programas/visionpais/visionpais.component';
+import { VidaMejorComponent } from './components/sectores-programas/programas/vida-mejor/vida-mejor.component';
+import { PlanNacionComponent } from './components/sectores-programas/programas/plan-nacion/plan-nacion.component';
 
 
 @NgModule({
@@ -85,6 +91,8 @@ import { VisionpaisComponent } from './components/sectores-programas/programas/v
     SectoresOcdeComponent,
     SectoresCamposTransversalesComponent,
     VisionpaisComponent,
+    VidaMejorComponent,
+    PlanNacionComponent,
   ],
   providers: [
     // SmartTableService, // Defincion del Servicio que provee los Datos de la Tabla: ID's Internas

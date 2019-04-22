@@ -6,5 +6,16 @@
 <nb-card accent="warning" status="primary">
   <nb-card-header>Información de Programas del Proyecto {{ idProyectoTab }} | Codigo de Proyecto {{
     codigoProyectoTab }} | Usuario {{ idUsuarioTab }}
-  </nb-card-header></nb-card>
-  <ngx-visionpais></ngx-visionpais>
+  </nb-card-header>
+</nb-card>
+<ngx-visionpais></ngx-visionpais>
+
+<br>
+<!-- ================ Programas | Plan de Nacion ==================== -->
+<ngx-plan-nacion [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab" [codigoProyectoTab]="codigoProyectoTab">
+</ngx-plan-nacion>
+
+<br>
+<!-- ================ Programas | Vida Mejor ==================== -->
+<ngx-vida-mejor [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab" [codigoProyectoTab]="codigoProyectoTab">
+</ngx-vida-mejor>

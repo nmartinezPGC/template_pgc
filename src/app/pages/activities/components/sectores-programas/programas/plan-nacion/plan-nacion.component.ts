@@ -1,27 +1,26 @@
 /**
 * @author Nahum Martinez
-* @returns Componente de Sectores de Gobierno
-* @name SectoresGobiernoComponent
-* @alias _sectoresGobiernoComponent
+* @returns Componente de Plan de Nacion
+* @name PlanNacionComponent
+* @alias _planNacionComponent
 * @version 1.0.0
-* @fecha 2019-04-15
+* @fecha 16-04-2019
 */
 
 import { Component, OnInit, Input, ChangeDetectorRef, OnChanges } from '@angular/core';
-import { Tree, TreeNode, MessageService, MenuItem } from 'primeng/primeng';
+import { TreeNode, MessageService, MenuItem } from 'primeng/primeng';
 import { ToasterConfig, ToasterService, Toast, BodyOutputType } from 'angular2-toaster';
 import { ListasComunesService } from '../../../../../common-list/services/listas-comunes.service';
-import { ActivitySectoresOcdeModel } from '../../../../models/sectores/model-sectores-ocde';
-import { ActivitySectoresGobiernoModel } from '../../../../models/sectores/model-sectores-gobierno';
-import { ServiceSectoresGobiernoService } from '../../../../services/sectores/service-sectores-gobierno.service';
+import { ServicePlanNacionService } from '../../../../services/programas/service-plan-nacion.service';
+import { ActivityProgramaPlanNacionModel } from '../../../../models/programas/model-programa-plan-nacion';
 
 @Component({
-  selector: 'ngx-sectores-gobierno',
-  templateUrl: './sectores-gobierno.component.html',
-  styleUrls: ['./sectores-gobierno.component.scss'],
-  providers: [ServiceSectoresGobiernoService, MessageService, ToasterService, ListasComunesService],
+  selector: 'ngx-plan-nacion',
+  templateUrl: './plan-nacion.component.html',
+  styleUrls: ['./plan-nacion.component.scss'],
+  providers: [ServicePlanNacionService, MessageService, ToasterService, ListasComunesService],
 })
-export class SectoresGobiernoComponent implements OnInit {
+export class PlanNacionComponent implements OnInit {
   // Variables entre Tabs | Components
   @Input() idProyectoTab: number;
   @Input() idUsuarioTab: number;
@@ -60,15 +59,6 @@ export class SectoresGobiernoComponent implements OnInit {
    */
   loading: boolean;
 
-  /**
-   * Configuracion del Dropdow List NMA
-   */
-  dropdownList = [];
-  selectedItems = [];
-  selectedItemsPais = [];
-  selectedItemsEspacioTrabajo = [];
-  dropdownSettings = {};
-
   // Propieades de los Nodos del Tree
   filesTree4: TreeNode[];
   selectedFiles2: TreeNode[];
@@ -80,23 +70,23 @@ export class SectoresGobiernoComponent implements OnInit {
   public arrayPush = [];
   public arrayPush2 = [];
 
-  // Json, de cargado de Sectores
-  public JsonSendSectoresGobierno: any = [];
-  public JsonSendSectoresGobiernoOpciones: any = [];
+  // Json, de cargado de Programa
+  public JsonSendProgramaPlanNacion: any = [];
+  public JsonSendProgramaPlanNacionOpciones: any = [];
 
   // Json Recpetion de la Clase
-  public JsonReceptionAllSectoresGobierno: any;
-  public JsonReceptionSectorGobierno: any;
-  public JsonReceptionSectorByNivelGobierno: any;
-  public JsonReceptionSectorByNivelGobierno2: any;
-  public JsonReceptionSectorByNivelGobierno3: any;
-  public JsonReceptionSectorByNivelGobierno4: any;
+  public JsonReceptionAllProgramasPlanNacion: any;
+  public JsonReceptionProgramaPlanNacion: any;
+  public JsonReceptionProgramaByNivelPlanNacion: any;
+  public JsonReceptionProgramaByNivelPlanNacion2: any;
+  public JsonReceptionProgramaByNivelPlanNacion3: any;
+  public JsonReceptionProgramaByNivelPlanNacion4: any;
 
   // Auditoria
   public secuenciaDeActividad: any;
 
   // Modelo de la Clase
-  public _activitySectoresGobiernoModel: ActivitySectoresGobiernoModel;
+  public _activityProgramaPlanNacion: ActivityProgramaPlanNacionModel;
 
   // Consfiguracion del Notificador
   position = 'toast-bottom-full-width';
@@ -115,10 +105,10 @@ export class SectoresGobiernoComponent implements OnInit {
 
   /**
    * constructor
-   * @param _serviceSectoresGobiernoService
+   * @param _servicePlanNacionService
    * @param messageService
    */
-  constructor(private _serviceSectoresGobiernoService: ServiceSectoresGobiernoService,
+  constructor(private _servicePlanNacionService: ServicePlanNacionService,
     private messageService: MessageService,
     private changeDetectorRef: ChangeDetectorRef,
     private _toasterService: ToasterService,
@@ -134,7 +124,7 @@ export class SectoresGobiernoComponent implements OnInit {
     this.loading = true;
 
     // Inicializacion del Modelo
-    this._activitySectoresGobiernoModel = new ActivitySectoresGobiernoModel(
+    this._activityProgramaPlanNacion = new ActivityProgramaPlanNacionModel(
       0, null, // Datos Generales
       null, 0, // Relacionales
       null, 0, 0,
@@ -142,10 +132,9 @@ export class SectoresGobiernoComponent implements OnInit {
     );
 
     // Llenado del Treeview de la Tabla
-    this._serviceSectoresGobiernoService.getFiles().then(files => this.filesTree4 = files);
+    this._servicePlanNacionService.getFiles().then(files => this.filesTree4 = files);
 
-    // this.getAllSectoresGobiernoService();
-    this.getfindByIdNivelSectorService(1);
+    this.getfindByIdNivelProgramaService(1);
   }
 
 
@@ -235,36 +224,35 @@ export class SectoresGobiernoComponent implements OnInit {
   * Objetivo: nodeSelect in the method selected item with Treeview
   ****************************************************************************/
   nodeSelect(event) {
-    console.log(event);
     // Condicion de Agregar los Nodos
     if (event.node.children === undefined) { // Definicion de Items del Nivel 4
-      this.JsonSendSectoresGobiernoOpciones = [...this.JsonSendSectoresGobiernoOpciones, { name: event.node.label, code: event.node.data }];
+      this.JsonSendProgramaPlanNacionOpciones = [...this.JsonSendProgramaPlanNacionOpciones, { name: event.node.label, code: event.node.data }];
     } else if (event.node.children.length === 0) { // Definicion de Items del Nivel 3
-      this.JsonSendSectoresGobiernoOpciones = [...this.JsonSendSectoresGobiernoOpciones, { name: event.node.label, code: event.node.data }];
+      this.JsonSendProgramaPlanNacionOpciones = [...this.JsonSendProgramaPlanNacionOpciones, { name: event.node.label, code: event.node.data }];
     } else if (event.node.children.length !== 0) { // Definicion de Items del Nivel 2
       // Evaluar si el Nivel 2 o Nivel 3
       if (event.node.children.length !== 0 && event.node.parent !== undefined) {
         // Nodos del Nivel 2
         for (let index = 0; index < event.node.children.length; index++) {
           const element = event.node.children[index];
-          const resultado = this.JsonSendSectoresGobiernoOpciones.findIndex(sector => sector.name === element.label);
+          const resultado = this.JsonSendProgramaPlanNacionOpciones.findIndex(Programa => Programa.name === element.label);
           // Evalua que el Item no este dentro del Json
           if (resultado !== -1) {
             // No carga Item porque ya existe
           } else {
-            this.JsonSendSectoresGobiernoOpciones = [...this.JsonSendSectoresGobiernoOpciones, { name: element.label, code: element.data }];
+            this.JsonSendProgramaPlanNacionOpciones = [...this.JsonSendProgramaPlanNacionOpciones, { name: element.label, code: element.data }];
           }
         }
       } else {
         // Nodos del Nivel 3
         for (let index = 0; index < event.node.children.length; index++) {
           const element = event.node.children[index];
-          this.JsonSendSectoresGobiernoOpciones = [...this.JsonSendSectoresGobiernoOpciones, { name: element.label, code: element.data }];
+          this.JsonSendProgramaPlanNacionOpciones = [...this.JsonSendProgramaPlanNacionOpciones, { name: element.label, code: element.data }];
         }
       }
     }
-    this.JsonSendSectoresGobiernoOpciones.sort();
-    // console.log(this.JsonSendSectoresGobiernoOpciones);
+    this.JsonSendProgramaPlanNacionOpciones.sort();
+    // console.log(this.JsonSendProgramaPlanNacionOpciones);
   } // FIN | nodeSelects
 
 
@@ -280,56 +268,56 @@ export class SectoresGobiernoComponent implements OnInit {
     if (event.node.children !== undefined) {
       const itemNodeLabel = event.node.label;
       // Ejecucion del splice del elemento
-      const resultado = this.JsonSendSectoresGobiernoOpciones.findIndex(sector => sector.name === itemNodeLabel);
-      this.JsonSendSectoresGobiernoOpciones.splice(Number(resultado), 1)
-      this.JsonSendSectoresGobiernoOpciones = [...this.JsonSendSectoresGobiernoOpciones];
+      const resultado = this.JsonSendProgramaPlanNacionOpciones.findIndex(Programa => Programa.name === itemNodeLabel);
+      this.JsonSendProgramaPlanNacionOpciones.splice(Number(resultado), 1)
+      this.JsonSendProgramaPlanNacionOpciones = [...this.JsonSendProgramaPlanNacionOpciones];
     } else if (event.node.children !== undefined && event.node.children.length !== 0) {
       for (let index = 0; index < event.node.children.length; index++) {
         const element = event.node.children[index];
         // Ejecucion del splice por el item de iteracion
-        const resultado = this.JsonSendSectoresGobiernoOpciones.findIndex(sector => sector.name === element.label);
-        this.JsonSendSectoresGobiernoOpciones.splice(Number(resultado), 1)
-        this.JsonSendSectoresGobiernoOpciones = [...this.JsonSendSectoresGobiernoOpciones];
+        const resultado = this.JsonSendProgramaPlanNacionOpciones.findIndex(Programa => Programa.name === element.label);
+        this.JsonSendProgramaPlanNacionOpciones.splice(Number(resultado), 1)
+        this.JsonSendProgramaPlanNacionOpciones = [...this.JsonSendProgramaPlanNacionOpciones];
       }
     } else if (event.node.children !== undefined && event.node.children.length === 0) {
       const itemNodeLabel = event.node.label;
       // Ejecucion del splice del elemento
-      const resultado = this.JsonSendSectoresGobiernoOpciones.findIndex(sector => sector.name === itemNodeLabel);
-      this.JsonSendSectoresGobiernoOpciones.splice(Number(resultado), 1)
-      this.JsonSendSectoresGobiernoOpciones = [...this.JsonSendSectoresGobiernoOpciones];
+      const resultado = this.JsonSendProgramaPlanNacionOpciones.findIndex(Programa => Programa.name === itemNodeLabel);
+      this.JsonSendProgramaPlanNacionOpciones.splice(Number(resultado), 1)
+      this.JsonSendProgramaPlanNacionOpciones = [...this.JsonSendProgramaPlanNacionOpciones];
     }
   } // FIN | nodeUnselect
 
 
   /****************************************************************************
-  * Funcion: getAllSectoresGobiernoService
+  * Funcion: getAllProgramaCampoTransversalService
   * Object Number: 003
   * Fecha: 21-02-2019
-  * Descripcion: Method getAllSectoresGobiernoService of the Class
-  * Objetivo: getAllSectoresGobiernoService listados de los Niveles
+  * Descripcion: Method getAllProgramaCampoTransversalService of the Class
+  * Objetivo: getAllProgramaCampoTransversalService listados de los Niveles
   * de Ubicacion de Implementacion del Formulario de Actividad llamando a la API
   * Params: { }
   ****************************************************************************/
-  private getAllSectoresGobiernoService() {
-    // Ejecuta el Servicio de invocar todos los Sectores de Desarrollo
-    this._serviceSectoresGobiernoService.getAllSectoresGobierno().subscribe(
+  private getAllProgramaCampoTransversalService() {
+    // Ejecuta el Servicio de invocar todos los Programa de Desarrollo
+    this._servicePlanNacionService.getAllProgramasPlanNacion().subscribe(
       result => {
         if (result.status !== 200) {
-          this.showToast('error', 'Error al Obtener la Información de todos los Sectores de Desarrollo', result.message);
-          this.JsonReceptionAllSectoresGobierno = [];
+          this.showToast('error', 'Error al Obtener la Información de todos los Programa de Desarrollo', result.message);
+          this.JsonReceptionAllProgramasPlanNacion = [];
         } else if (result.status === 200) {
-          this.JsonReceptionAllSectoresGobierno = result.data;
+          this.JsonReceptionAllProgramasPlanNacion = result.data;
 
-          // Setea la Lista de los todos Sectores Ocde/Cad
-          this.nodes = this.JsonReceptionAllSectoresGobierno.map((item) => {
+          // Setea la Lista de los todos Programa Ocde/Cad
+          this.nodes = this.JsonReceptionAllProgramasPlanNacion.map((item) => {
             return {
-              label: item.nombreSector,
-              data: item.codigoSector,
+              label: item.nombrePrograma,
+              data: item.codigoPrograma,
               expandedIcon: 'fa fa-folder-open',
               collapsedIcon: 'fa fa-folder',
               children: [{
-                label: item.idNivelSector.nombreNivelSector,
-                data: item.codigoSector,
+                label: item.idNivelPrograma.nombreNivelPrograma,
+                data: item.codigoPrograma,
                 expandedIcon: 'fa fa-folder-open',
                 collapsedIcon: 'fa fa-fold*er',
               }],
@@ -338,114 +326,117 @@ export class SectoresGobiernoComponent implements OnInit {
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información de todos los Sectores de Desarrollo', JSON.stringify(error.message));
+        this.showToast('error', 'Error al Obtener la Información de todos los Programa de Desarrollo', JSON.stringify(error.message));
       },
     );
-  } // FIN | getAllSectoresGobiernoService
+  } // FIN | getAllProgramaCampoTransversalService
 
 
 
   /****************************************************************************
-  * Funcion: getfindByIdSectorService
+  * Funcion: getfindByIdProgramaService
   * Object Number: 004
   * Fecha: 22-03-2019
-  * Descripcion: Method getfindByIdSectorService of the Class
-  * Objetivo: getfindByIdSectorService detalle del Sector Gobierno, con el ID
-  * Params: { idSector }
+  * Descripcion: Method getfindByIdProgramaService of the Class
+  * Objetivo: getfindByIdProgramaService detalle del Plan de Nacion, con el ID
+  * Params: { idPrograma }
   ****************************************************************************/
-  private getfindByIdSectorService(idSector: number) {
+  private getfindByIdProgramaService(idPrograma: number) {
 
-    // Ejecucion del EndPoint de Consulta de Sector, por ID
-    this._serviceSectoresGobiernoService.getfindByIdSector(idSector).subscribe(
+    // Ejecucion del EndPoint de Consulta de Programa, por ID
+    this._servicePlanNacionService.getfindByIdPrograma(idPrograma).subscribe(
       result => {
         if (result.status !== 200) {
-          this.showToast('error', 'Error al Obtener la Información del Sector de Desarrollo', result.message);
-          this.JsonReceptionSectorGobierno = [];
+          this.showToast('error', 'Error al Obtener la Información del Programa de Desarrollo', result.message);
+          this.JsonReceptionProgramaPlanNacion = [];
         } else if (result.status === 200) {
-          this.JsonReceptionSectorGobierno = result.data;
+          this.JsonReceptionProgramaPlanNacion = result.data;
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información del Sector de Desarrollo', JSON.stringify(error.message));
+        this.showToast('error', 'Error al Obtener la Información del Programa de Desarrollo', JSON.stringify(error.message));
       },
     );
-  } // FIN | getfindByIdSectorService
+  } // FIN | getfindByIdProgramaService
 
 
   /****************************************************************************
-  * Funcion: getfindByIdNivelSectorService
+  * Funcion: getfindByIdNivelProgramaService
   * Object Number: 005
   * Fecha: 25-03-2019
-  * Descripcion: Method getfindByIdNivelSectorService of the Class
-  * Objetivo: getfindByIdNivelSectorService detalle del Sector OCDE/CAD, con el
-  * Id Nivel de Sector
+  * Descripcion: Method getfindByIdNivelProgramaService of the Class
+  * Objetivo: getfindByIdNivelProgramaService detalle del Programa OCDE/CAD, con el
+  * Id Nivel de Programa
   * Params: { idSNivelector }
   ****************************************************************************/
-  private getfindByIdNivelSectorService(idSNivelector: number) {
+  private getfindByIdNivelProgramaService(idSNivelector: number) {
 
-    // Ejecucion del EndPoint de Consulta de Sector, por ID
-    this._serviceSectoresGobiernoService.getfindByIdNivelSector(idSNivelector).subscribe(
+    // Ejecucion del EndPoint de Consulta de Programa, por ID
+    this._servicePlanNacionService.getfindByIdNivelPrograma(idSNivelector).subscribe(
       result => {
         if (result.status !== 200) {
-          this.showToast('error', 'Error al Obtener la Información de Sector Nivel 1', result.message);
-          this.JsonReceptionSectorByNivelGobierno = [];
+          this.showToast('error', 'Error al Obtener la Información de Programa Nivel 1', result.message);
+          this.JsonReceptionProgramaByNivelPlanNacion = [];
           this.nodes = [];
         } else if (result.status === 200) {
-          this.JsonReceptionSectorByNivelGobierno = result.data;
-          this.getSectorOcdeCadNivel2(this.JsonReceptionSectorByNivelGobierno);
+          this.JsonReceptionProgramaByNivelPlanNacion = result.data;
+          this.getProgramaPlanNacionNivel2(this.JsonReceptionProgramaByNivelPlanNacion);
         }
       },
       error => {
         this.showToast('error', 'Error al Obtener la Información de Secotores de Desarrollo', JSON.stringify(error.message));
       },
     );
-  } // FIN | getfindByIdNivelSectorService
+  } // FIN | getfindByIdNivelProgramaService
 
 
 
   /****************************************************************************
-  * Funcion: getSectorOcdeCadNivel2
+  * Funcion: getProgramaPlanNacionNivel2
   * Object Number: 006
   * Fecha: 25-03-2019
-  * Descripcion: Method getSectorOcdeCadNivel2 of the Class
-  * Objetivo: getSectorOcdeCadNivel2 de los Niveles inferiores Sector OCDE/CAD,
-  * con el Id Nivel 1 de Sector
+  * Descripcion: Method getProgramaPlanNacionNivel2 of the Class
+  * Objetivo: getProgramaPlanNacionNivel2 de los Niveles inferiores Programa OCDE/CAD,
+  * con el Id Nivel 1 de Programa
   * Params: { arrayN1 }
   ****************************************************************************/
-  getSectorOcdeCadNivel2(array: any) {
+  getProgramaPlanNacionNivel2(array: any) {
     // Inicializacion del Arraeglo de Nivel 2
-    this.JsonReceptionSectorByNivelGobierno2 = [];
+    this.JsonReceptionProgramaByNivelPlanNacion2 = [];
+    this.JsonReceptionProgramaByNivelPlanNacion3 = [];
+    this.JsonReceptionProgramaByNivelPlanNacion4 = [];
 
-    // Ejecucion del EndPoint de Consulta de Sector, por ID
+    // Ejecucion del EndPoint de Consulta de Programa, por ID
     for (let n1 = 0; n1 < array.length; n1++) { // Ciclo del Nivel 1, definir el Nivel 2
       const element = array[n1];
 
       // Ejecutamos el servicio, para el Nivel 2
       setTimeout(() => {
-        this._serviceSectoresGobiernoService.getfindByIdNivelSectorAndSectorPadreId(2, element.idSector).subscribe(
+        this._servicePlanNacionService.getfindByIdNivelProgramaAndProgramaPadreId(2, element.idPrograma).subscribe(
           result => {
             if (result.status !== 200) {
-              this.showToast('error', 'Error al Obtener la Información de los Sectores Nivel 2', result.message);
-              this.JsonReceptionSectorByNivelGobierno2 = [];
+              this.showToast('error', 'Error al Obtener la Información de los Programa Nivel 2', result.message);
+              this.JsonReceptionProgramaByNivelPlanNacion2 = [];
               this.arrayPush = [];
-            } else if (result.status === 200) {
-              this.JsonReceptionSectorByNivelGobierno2 = result.data;
+              this.loading = false;
+            } else if (result.status === 200 && result.data !== undefined) {
+              this.JsonReceptionProgramaByNivelPlanNacion2 = result.data;
 
               // Array para el Segundo Ciclo | Nivel 2
               const array2 = [];
 
               // Condicion de Jerarquia de Nivel 2
-              if (this.JsonReceptionSectorByNivelGobierno2 !== undefined) {
-                for (let n2 = 0; n2 < this.JsonReceptionSectorByNivelGobierno2.length; n2++) { // Ciclo del Nivel 2, definir el Nivel 3
+              if (this.JsonReceptionProgramaByNivelPlanNacion2 !== undefined) {
+                for (let n2 = 0; n2 < this.JsonReceptionProgramaByNivelPlanNacion2.length; n2++) { // Ciclo del Nivel 2, definir el Nivel 3
                   // Array para el segundo Ciclo | Nivel 3
                   const array3 = [];
 
-                  const element2 = this.JsonReceptionSectorByNivelGobierno2[n2];
+                  const element2 = this.JsonReceptionProgramaByNivelPlanNacion2[n2];
 
                   // Hacemos el push al Array Principal, para cargar los nodos de Nivel 2
                   array2.push({
-                    'label': element2.nombreSector,
-                    'data': element2.idSector,
+                    'label': element2.nombrePrograma,
+                    'data': element2.idPrograma,
                     'expandedIcon': 'fa fa-folder-open',
                     'collapsedIcon': 'fa fa-folder',
                     'children': array3,
@@ -454,8 +445,8 @@ export class SectoresGobiernoComponent implements OnInit {
 
                 // Hacemos el push al Array Principal, para cargar los nodos de Nivel 1
                 this.arrayPush.push({
-                  'label': element.nombreSector,
-                  'data': element.idSector,
+                  'label': element.nombrePrograma,
+                  'data': element.idPrograma,
                   'expandedIcon': 'fa fa-folder-open',
                   'collapsedIcon': 'fa fa-folder',
                   'children': array2,
@@ -463,6 +454,12 @@ export class SectoresGobiernoComponent implements OnInit {
                 this.loading = false;
               }
             } else {
+              // Hacemos el push al Array Principal, para cargar los nodos de Nivel 1
+              this.arrayPush.push({
+                'label': element.nombrePrograma,
+                'data': element.idPrograma,
+              });
+              this.loading = false;
               // console.log('No hay Datos Nivel 2 ***********************************************');
             }
           },
@@ -470,73 +467,71 @@ export class SectoresGobiernoComponent implements OnInit {
             this.showToast('error', 'Error al Obtener la Información de Secotores de Desarrollo', JSON.stringify(error.message));
           },
         );
-      }, 3000);
+      }, 1000);
     }
-  } // FIN | getSectorOcdeCadNivel2
+  } // FIN | getProgramaPlanNacionNivel2
 
 
   /****************************************************************************
-  * Funcion: saveSectoresGobierno
+  * Funcion: saveProgramaVidaMejor
   * Object Number: 007
   * Fecha: 15-04-2019
-  * Descripcion: Method saveSectoresGobierno of the Class
-  * Objetivo: saveSectoresGobierno Grabar listado Sector de Gobierno
-  * Params: { JsonSendSectoresGobiernoOpciones }
+  * Descripcion: Method saveProgramaVidaMejor of the Class
+  * Objetivo: saveProgramaVidaMejor Grabar listado Campo Transversal
+  * Params: { JsonSendProgramaPlanNacionOpciones }
   ****************************************************************************/
-  saveSectoresGobierno() {
+  saveProgramaVidaMejor() {
     // Seteo de los campos iniciales
-    this._activitySectoresGobiernoModel.idActividad = { idActividad: this.idProyectoTab };
+    this._activityProgramaPlanNacion.idActividad = { idActividad: this.idProyectoTab };
 
     // Validacion de Items seleccionados
-    if (this.JsonSendSectoresGobiernoOpciones.length > 0) {
+    if (this.JsonSendProgramaPlanNacionOpciones.length > 0) {
       // Recorre los items seleccionados del Treeview
-      for (let index = 0; index < this.JsonSendSectoresGobiernoOpciones.length; index++) {
-        const element = this.JsonSendSectoresGobiernoOpciones[index];
+      for (let index = 0; index < this.JsonSendProgramaPlanNacionOpciones.length; index++) {
+        const element = this.JsonSendProgramaPlanNacionOpciones[index];
 
-        // Asignacion del Sector de Gobierno
-        this._activitySectoresGobiernoModel.idSectorGobierno = { idSector: element.code };
+        // Asignacion del Campo Transversal
+        this._activityProgramaPlanNacion.idProgramaPlanNacion = { idPrograma: element.code };
 
-        this._activitySectoresGobiernoModel.codigoActividad = this.codigoProyectoTab + '-ASG-' + element.code;
+        this._activityProgramaPlanNacion.codigoActividad = this.codigoProyectoTab + '-APP-' + element.code;
 
-        // Ejecucion del Sector de Gobierno
-        this._serviceSectoresGobiernoService.saveActividadSectorGobierno(this._activitySectoresGobiernoModel).subscribe(
+        // Ejecucion del Campo Transversal
+        this._servicePlanNacionService.saveActividadProgramaPlanNacion(this._activityProgramaPlanNacion).subscribe(
           result => {
             if (result.status !== 200) {
-              this.showToast('error', 'Error al Ingresar la Información del Sector de Gobierno asociado al Proyecto', JSON.stringify(result.message));
+              this.showToast('error', 'Error al Ingresar la Información del Campo Transversal asociado al Proyecto', JSON.stringify(result.message));
             } else if (result.status === 200) {
               // Evalua los resultados de la query
               if (result.findRecord === false) {
-                this.showToast('error', 'Error al Ingresar la Información del Sector de Gobierno asociado al Proyecto', JSON.stringify(result.message));
+                this.showToast('error', 'Error al Ingresar la Información del Campo Transversal asociado al Proyecto', JSON.stringify(result.message));
               } else {
-                this.showToast('success', 'Sector de Gobierno asociado al Proyecto', JSON.stringify(result.message));
+                this.showToast('success', 'Campo Transversal asociado al Proyecto', JSON.stringify(result.message));
               }
             }
           },
           error => {
-            this.showToast('error', 'Error al ingresar el Sector de Gobierno al Proyecto', JSON.stringify(error.message));
+            this.showToast('error', 'Error al ingresar el Campo Transversal al Proyecto', JSON.stringify(error.message));
           },
         );
       }
     } else {
-      this.showToast('error', 'Error al ingresar la Información Sectores de Gobierno', 'Debes de seleccionar los sectores de Gobierno, para continuar');
+      this.showToast('error', 'Error al ingresar la Información Programa de Gobierno', 'Debes de seleccionar los Programa de Gobierno, para continuar');
       return -1;
     }
-  } // FIN | saveSectoresGobierno
+  } // FIN | saveProgramaVidaMejor
 
 
   /****************************************************************************
-  * Funcion: cleanSectoresGobierno
+  * Funcion: cleanProgramaCamposTransversales
   * Object Number: 008
-  * Fecha: 15-04-2019
-  * Descripcion: Method cleanSectoresGobierno of the Class
-  * Objetivo: cleanSectoresGobierno Limpia listado Sector de Gobierno
+  * Fecha: 16-04-2019
+  * Descripcion: Method cleanProgramaCamposTransversales of the Class
+  * Objetivo: cleanProgramaCamposTransversales Limpia listado Campo Transversal
   * Params: { }
   ****************************************************************************/
-  cleanSectoresGobierno() {
-    this.JsonSendSectoresGobiernoOpciones = [];
+  cleanProgramaPlanNacion() {
+    this.JsonSendProgramaPlanNacionOpciones = [];
     this.changeDetectorRef.detectChanges();
-    this.JsonSendSectoresGobiernoOpciones = [...this.JsonSendSectoresGobiernoOpciones];
-    console.log(this.JsonSendSectoresGobiernoOpciones);
-  } // FIN | cleanSectoresGobierno
-
+    this.JsonSendProgramaPlanNacionOpciones = [...this.JsonSendProgramaPlanNacionOpciones];
+  } // FIN | cleanProgramaCamposTransversales
 }

@@ -21,11 +21,13 @@
 
     <br>
     <!-- ================ Sectores de Gobierno ================= -->
-    <ngx-sectores-gobierno></ngx-sectores-gobierno>
+    <ngx-sectores-gobierno [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
+      [codigoProyectoTab]="codigoProyectoTab"></ngx-sectores-gobierno>
 
     <br>
     <!-- ================ Campos Transversales ================== -->
-    <ngx-sectores-campos-transversales></ngx-sectores-campos-transversales>
+    <ngx-sectores-campos-transversales [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
+      [codigoProyectoTab]="codigoProyectoTab"></ngx-sectores-campos-transversales>
 
   </nb-card-body>
 </nb-card>

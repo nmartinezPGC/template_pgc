@@ -246,4 +246,23 @@ $color-loader: #9aa0a5;
   .fieldSet {
     background: #204f85;
   }
+
+  // Clase de los Botones
+  .icon-button-examples {
+    display: flex;
+    justify-content: space-between;
+
+    button {
+      min-width: 4rem;
+    }
+  }
+
+  .icon-button-examples:not(:last-child) {
+    margin-bottom: 1rem;
+  }
+
+  // Boton de eventos
+  .btnEvent {
+    border: 3px solid;
+  }
 }

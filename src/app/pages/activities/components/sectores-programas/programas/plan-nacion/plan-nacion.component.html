@@ -1,14 +1,14 @@
-<!-- Maquetacion de los Setores de Gobierno del Proyecto -->
+<!-- Maquetacion de los Programas de Plan de Nacion -->
 <!-- Componente para los Mensajes en pantalla -->
 <toaster-container [toasterconfig]="config"></toaster-container>
 
-<!-- Agrupacion de la Informacion de Sectores OCD/CAD NAM -->
-<p-fieldset legend="Sectores de Gobierno" [toggleable]="true" class="fieldSet">
+<!-- Agrupacion de la Informacion de Programas Plan de Nacion -->
+<p-fieldset legend="Plan de Nacion" [toggleable]="true" class="fieldSet">
   <nb-card accent="warning" status="primary">
     <nb-card-body>
       <div class="row">
         <div class="col-sm-6">
-          <h4>Selecciona los Sectores | Gobierno</h4>
+          <h4>Selecciona los Programas | Plan de Nacion</h4>
           <input type="text" class="form-control txtSearch" name="queryString" [(ngModel)]="queryString"
             placeholder="Buscar Sector">
           <br>
@@ -20,8 +20,8 @@
         </div>
 
         <div class="col-sm-6">
-          <h4>Sectores de Gobierno seleccionados</h4>
-          <p-listbox [options]="JsonSendSectoresGobiernoOpciones" [style]="{'width': '100%'}"
+          <h4>Programas de Plan de Nacion seleccionados</h4>
+          <p-listbox [options]="JsonSendProgramaPlanNacionOpciones" [style]="{'width': '100%'}"
             [(ngModel)]="selectedCities" multiple="multiple" filter="filter" optionLabel="name">
             <p-header>
               <i class="fa fa-file"></i>
@@ -34,7 +34,7 @@
           <div class="icon-button-examples">
             <!-- Boton de Calcular Porcentajes -->
             <button type="button" class="btn btn-outline-danger btn-icon" nbPopover="Limpia el listado de Sectores de Gobierno"
-              nbPopoverMode="hint" nbPopoverPlacement="top" (click)="cleanSectoresGobierno()">
+              nbPopoverMode="hint" nbPopoverPlacement="top" (click)="cleanProgramaPlanNacion()">
               <i class="ion-trash-a"></i>
             </button>
 
@@ -46,8 +46,8 @@
 
             <!-- Boton para Grabar Sectores OCDE -->
             <button type="button" class="btn btn-outline-primary btn-icon"
-              nbPopover="Registra el listado de Gobierno" nbPopoverMode="hint" nbPopoverPlacement="top"
-              (click)="saveSectoresGobierno()">
+              nbPopover="Registra el listado Plan de Nacion" nbPopoverMode="hint" nbPopoverPlacement="top"
+              (click)="saveProgramaVidaMejor()">
               <i class="ion-upload"></i>
             </button>
           </div>

@@ -1,22 +1,27 @@
-<!-- Agrupacion de la Informacion de Campos Transversales -->
+<!-- Maquetacion de los Setores de Campos Transversales -->
+<!-- Componente para los Mensajes en pantalla -->
+<toaster-container [toasterconfig]="config"></toaster-container>
+
+<!-- Agrupacion de la Informacion de Sectores Campos Transversales -->
 <p-fieldset legend="Campos Transversales" [toggleable]="true" class="fieldSet">
   <nb-card accent="warning" status="primary">
     <nb-card-body>
       <div class="row">
         <div class="col-sm-6">
-          <h4>Selecciona los | Campos Transversales</h4>
+          <h4>Selecciona los Sectores | Campos Transversales</h4>
           <input type="text" class="form-control txtSearch" name="queryString" [(ngModel)]="queryString"
             placeholder="Buscar Sector">
           <br>
           <p-tree [style]="{'width': '100%'}" [value]="arrayPush | filter: queryString" selectionMode="checkbox"
-            (onNodeUnselect)="nodeUnselect($event)" (onNodeSelect)="nodeSelect($event)" dynamic="true"></p-tree>
+            (onNodeUnselect)="nodeUnselect($event)" [loading]="loading" (onNodeSelect)="nodeSelect($event)"
+            dynamic="true"></p-tree>
           <br>
           <div>Sectores seleccionados: <span *ngFor="let file of selectedFiles2">{{file.parent.data}} </span></div>
         </div>
 
         <div class="col-sm-6">
           <h4>Campos Transversales seleccionados</h4>
-          <p-listbox [options]="JsonSendSectoresOcdeCadOpciones" [style]="{'width': '100%'}"
+          <p-listbox [options]="JsonSendSectoresCampoTransversalOpciones" [style]="{'width': '100%'}"
             [(ngModel)]="selectedCities" multiple="multiple" filter="filter" optionLabel="name">
             <p-header>
               <i class="fa fa-file"></i>
@@ -25,6 +30,27 @@
           </p-listbox>
           <p>Sectores a Registrar: <span *ngFor="let c of selectedCities" style="margin-right: 10px">{{c.name}}</span>
           </p>
+          <hr>
+          <div class="icon-button-examples">
+            <!-- Boton de Calcular Porcentajes -->
+            <button type="button" class="btn btn-outline-danger btn-icon" nbPopover="Limpia el listado de Campos Transversales"
+              nbPopoverMode="hint" nbPopoverPlacement="top" (click)="cleanSectoresCamposTransversales()">
+              <i class="ion-trash-a"></i>
+            </button>
+
+            <!-- Boton para Calcular los Porcentajes Sectores OCDE -->
+            <button type="button" class="btn btn-outline-success btn-icon"
+              nbPopover="Calcula el % de participacion de Sectores" nbPopoverMode="hint" nbPopoverPlacement="top">
+              <i class="ion-calculator"></i>
+            </button>
+
+            <!-- Boton para Grabar Sectores OCDE -->
+            <button type="button" class="btn btn-outline-primary btn-icon"
+              nbPopover="Registra el listado de Campos Transversales" nbPopoverMode="hint" nbPopoverPlacement="top"
+              (click)="saveSectoresCampoTransversal()">
+              <i class="ion-upload"></i>
+            </button>
+          </div>
         </div>
       </div>
     </nb-card-body>

@@ -281,6 +281,102 @@ export class SystemEndPointsService extends ListEndPointsService {
           case 17:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdNivelSectorAndSectorPadreOcdeCad.urlEndPoint;
             break;
+          case 18:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.newActividadSectorOcdeCad.urlEndPoint;
+            break;
+          case 19:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActividadSectorOcdeCad.urlEndPoint;
+            break;
+          case 20: // NAM | 2019-04-15 | Mapeo de los EndPoins de Sectores de Gobierno
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findAllSectoresGobierno.urlEndPoint;
+            break;
+          case 21:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdSectorGobierno.urlEndPoint;
+            break;
+          case 22:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdNivelSectorGobierno.urlEndPoint;
+            break;
+          case 23:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdNivelSectorAndSectorPadreGobierno.urlEndPoint;
+            break;
+          case 24:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.newActividadSectorGobierno.urlEndPoint;
+            break;
+          case 25:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActividadSectorGobierno.urlEndPoint;
+            break;
+          case 26: // NAM | 2019-04-16 | Mapeo de los EndPoins de Campos Transversales
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findAllSectoresCamposTransversales.urlEndPoint;
+            break;
+          case 27:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdSectorCamposTransversales.urlEndPoint;
+            break;
+          case 28:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdNivelSectorCamposTransversales.urlEndPoint;
+            break;
+          case 29:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdNivelSectorAndSectorPadreCamposTransversales.urlEndPoint;
+            break;
+          case 30:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.newActividadSectorCamposTransversales.urlEndPoint;
+            break;
+          case 31:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActividadSectorCamposTransversales.urlEndPoint;
+            break;
+          case 32: // NAM | 2019-04-17 | Mapeo de los EndPoins de Programas
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findAllProgramasPlanNacion.urlEndPoint; // Programas Plan de Nacion
+            break;
+          case 33:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdProgramaPlanNacion.urlEndPoint;
+            break;
+          case 34:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdNivelProgramaPlanNacion.urlEndPoint;
+            break;
+          case 35:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdNivelProgramaPlanNacionPadre.urlEndPoint;
+            break;
+          case 36:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.newActividadProgramaPlanNacion.urlEndPoint;
+            break;
+          case 37:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActividadProgramaPlanNacion.urlEndPoint;
+            break;
+          case 38: // NAM | 2019-04-17 | Mapeo de los EndPoins de Programas
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findAllProgramasVidaMejor.urlEndPoint; // Programas Vida Mejor
+            break;
+          case 39:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdProgramaVidaMejor.urlEndPoint;
+            break;
+          case 40:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdNivelProgramaVidaMejor.urlEndPoint;
+            break;
+          case 41:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdNivelProgramaVidaMejorPadre.urlEndPoint;
+            break;
+          case 42:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.newActividadProgramaVidaMejor.urlEndPoint;
+            break;
+          case 43:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActividadProgramaVidaMejor.urlEndPoint;
+            break;
+          case 44: // NAM | 2019-04-17 | Mapeo de los ODS
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findAllSectoresOds.urlEndPoint; // Sectores ODS
+            break;
+          case 45:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdSectorOds.urlEndPoint;
+            break;
+          case 46:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdNivelSectorOds.urlEndPoint;
+            break;
+          case 47:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdNivelSectorOdsPadre.urlEndPoint;
+            break;
+          case 48:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.newActividadSectorOds.urlEndPoint;
+            break;
+          case 49:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActividadSectorOds.urlEndPoint;
+            break;
         }
         break;
       case 'mantGenericosUsuarioGroup': // Llamados a los EndPoint de usuarios

@@ -1,26 +1,26 @@
 /**
 * @author Nahum Martinez
-* @returns Componente de Campos Transversales
-* @name SectoresCamposTransversalesComponent
-* @alias _sectoresCamposTransversalesComponent
+* @returns Componente de Plan de Nacion
+* @name VidaMejorComponent
+* @alias _vidaMejorComponent
 * @version 1.0.0
-* @fecha 16-04-2019
+* @fecha 17-04-2019
 */
 
 import { Component, OnInit, Input, ChangeDetectorRef, OnChanges } from '@angular/core';
 import { TreeNode, MessageService, MenuItem } from 'primeng/primeng';
 import { ToasterConfig, ToasterService, Toast, BodyOutputType } from 'angular2-toaster';
 import { ListasComunesService } from '../../../../../common-list/services/listas-comunes.service';
-import { ActivitySectoresCampoTransversalModel } from '../../../../models/sectores/model-sectores-campo-transversal';
-import { ServiceSectoresCampoTransversalService } from '../../../../services/sectores/service-sectores-campo-transversal.service';
+import { ServiceVidaMejorService } from '../../../../services/programas/service-vida-mejor.service';
+import { ActivityProgramaVidaMejorModel } from '../../../../models/programas/model-programa-vida-mejor';
 
 @Component({
-  selector: 'ngx-sectores-campos-transversales',
-  templateUrl: './sectores-campos-transversales.component.html',
-  styleUrls: ['./sectores-campos-transversales.component.scss'],
-  providers: [ServiceSectoresCampoTransversalService, MessageService, ToasterService, ListasComunesService],
+  selector: 'ngx-vida-mejor',
+  templateUrl: './vida-mejor.component.html',
+  styleUrls: ['./vida-mejor.component.scss'],
+  providers: [ServiceVidaMejorService, MessageService, ToasterService, ListasComunesService],
 })
-export class SectoresCamposTransversalesComponent implements OnInit {
+export class VidaMejorComponent implements OnInit {
   // Variables entre Tabs | Components
   @Input() idProyectoTab: number;
   @Input() idUsuarioTab: number;
@@ -59,15 +59,6 @@ export class SectoresCamposTransversalesComponent implements OnInit {
    */
   loading: boolean;
 
-  /**
-   * Configuracion del Dropdow List NMA
-   */
-  dropdownList = [];
-  selectedItems = [];
-  selectedItemsPais = [];
-  selectedItemsEspacioTrabajo = [];
-  dropdownSettings = {};
-
   // Propieades de los Nodos del Tree
   filesTree4: TreeNode[];
   selectedFiles2: TreeNode[];
@@ -79,23 +70,23 @@ export class SectoresCamposTransversalesComponent implements OnInit {
   public arrayPush = [];
   public arrayPush2 = [];
 
-  // Json, de cargado de Sectores
-  public JsonSendSectoresCampoTransversal: any = [];
-  public JsonSendSectoresCampoTransversalOpciones: any = [];
+  // Json, de cargado de Programa
+  public JsonSendProgramaVidaMejor: any = [];
+  public JsonSendProgramaVidaMejorOpciones: any = [];
 
   // Json Recpetion de la Clase
-  public JsonReceptionAllSectoresCampoTransversal: any;
-  public JsonReceptionSectorCampoTransversal: any;
-  public JsonReceptionSectorByNivelCampoTransversal: any;
-  public JsonReceptionSectorByNivelCampoTransversal2: any;
-  public JsonReceptionSectorByNivelCampoTransversal3: any;
-  public JsonReceptionSectorByNivelCampoTransversal4: any;
+  public JsonReceptionAllProgramasVidaMejor: any;
+  public JsonReceptionProgramaVidaMejor: any;
+  public JsonReceptionProgramaByNivelVidaMejor: any;
+  public JsonReceptionProgramaByNivelVidaMejor2: any;
+  public JsonReceptionProgramaByNivelVidaMejor3: any;
+  public JsonReceptionProgramaByNivelVidaMejor4: any;
 
   // Auditoria
   public secuenciaDeActividad: any;
 
   // Modelo de la Clase
-  public _activitySectoresCampoTransversalModel: ActivitySectoresCampoTransversalModel;
+  public _activityProgramaVidaMejorModel: ActivityProgramaVidaMejorModel;
 
   // Consfiguracion del Notificador
   position = 'toast-bottom-full-width';
@@ -114,14 +105,13 @@ export class SectoresCamposTransversalesComponent implements OnInit {
 
   /**
    * constructor
-   * @param _serviceSectoresCampoTransversalService
+   * @param _serviceVidaMejorService
    * @param messageService
    */
-  constructor(private _serviceSectoresCampoTransversalService: ServiceSectoresCampoTransversalService,
+  constructor(private _serviceVidaMejorService: ServiceVidaMejorService,
     private messageService: MessageService,
     private changeDetectorRef: ChangeDetectorRef,
-    private _toasterService: ToasterService,
-    private _listasComunesService: ListasComunesService) {
+    private _toasterService: ToasterService) {
     // Codigo del Constructor
   }
 
@@ -133,7 +123,7 @@ export class SectoresCamposTransversalesComponent implements OnInit {
     this.loading = true;
 
     // Inicializacion del Modelo
-    this._activitySectoresCampoTransversalModel = new ActivitySectoresCampoTransversalModel(
+    this._activityProgramaVidaMejorModel = new ActivityProgramaVidaMejorModel(
       0, null, // Datos Generales
       null, 0, // Relacionales
       null, 0, 0,
@@ -141,10 +131,9 @@ export class SectoresCamposTransversalesComponent implements OnInit {
     );
 
     // Llenado del Treeview de la Tabla
-    this._serviceSectoresCampoTransversalService.getFiles().then(files => this.filesTree4 = files);
+    this._serviceVidaMejorService.getFiles().then(files => this.filesTree4 = files);
 
-    // this.getAllSectoresGobiernoService();
-    this.getfindByIdNivelSectorService(1);
+    this.getfindByIdNivelProgramaService(1);
   }
 
 
@@ -234,36 +223,35 @@ export class SectoresCamposTransversalesComponent implements OnInit {
   * Objetivo: nodeSelect in the method selected item with Treeview
   ****************************************************************************/
   nodeSelect(event) {
-    console.log(event);
     // Condicion de Agregar los Nodos
     if (event.node.children === undefined) { // Definicion de Items del Nivel 4
-      this.JsonSendSectoresCampoTransversalOpciones = [...this.JsonSendSectoresCampoTransversalOpciones, { name: event.node.label, code: event.node.data }];
+      this.JsonSendProgramaVidaMejorOpciones = [...this.JsonSendProgramaVidaMejorOpciones, { name: event.node.label, code: event.node.data }];
     } else if (event.node.children.length === 0) { // Definicion de Items del Nivel 3
-      this.JsonSendSectoresCampoTransversalOpciones = [...this.JsonSendSectoresCampoTransversalOpciones, { name: event.node.label, code: event.node.data }];
+      this.JsonSendProgramaVidaMejorOpciones = [...this.JsonSendProgramaVidaMejorOpciones, { name: event.node.label, code: event.node.data }];
     } else if (event.node.children.length !== 0) { // Definicion de Items del Nivel 2
       // Evaluar si el Nivel 2 o Nivel 3
       if (event.node.children.length !== 0 && event.node.parent !== undefined) {
         // Nodos del Nivel 2
         for (let index = 0; index < event.node.children.length; index++) {
           const element = event.node.children[index];
-          const resultado = this.JsonSendSectoresCampoTransversalOpciones.findIndex(sector => sector.name === element.label);
+          const resultado = this.JsonSendProgramaVidaMejorOpciones.findIndex(Programa => Programa.name === element.label);
           // Evalua que el Item no este dentro del Json
           if (resultado !== -1) {
             // No carga Item porque ya existe
           } else {
-            this.JsonSendSectoresCampoTransversalOpciones = [...this.JsonSendSectoresCampoTransversalOpciones, { name: element.label, code: element.data }];
+            this.JsonSendProgramaVidaMejorOpciones = [...this.JsonSendProgramaVidaMejorOpciones, { name: element.label, code: element.data }];
           }
         }
       } else {
         // Nodos del Nivel 3
         for (let index = 0; index < event.node.children.length; index++) {
           const element = event.node.children[index];
-          this.JsonSendSectoresCampoTransversalOpciones = [...this.JsonSendSectoresCampoTransversalOpciones, { name: element.label, code: element.data }];
+          this.JsonSendProgramaVidaMejorOpciones = [...this.JsonSendProgramaVidaMejorOpciones, { name: element.label, code: element.data }];
         }
       }
     }
-    this.JsonSendSectoresCampoTransversalOpciones.sort();
-    // console.log(this.JsonSendSectoresCampoTransversalOpciones);
+    this.JsonSendProgramaVidaMejorOpciones.sort();
+    // console.log(this.JsonSendProgramaVidaMejorOpciones);
   } // FIN | nodeSelects
 
 
@@ -279,56 +267,56 @@ export class SectoresCamposTransversalesComponent implements OnInit {
     if (event.node.children !== undefined) {
       const itemNodeLabel = event.node.label;
       // Ejecucion del splice del elemento
-      const resultado = this.JsonSendSectoresCampoTransversalOpciones.findIndex(sector => sector.name === itemNodeLabel);
-      this.JsonSendSectoresCampoTransversalOpciones.splice(Number(resultado), 1)
-      this.JsonSendSectoresCampoTransversalOpciones = [...this.JsonSendSectoresCampoTransversalOpciones];
+      const resultado = this.JsonSendProgramaVidaMejorOpciones.findIndex(Programa => Programa.name === itemNodeLabel);
+      this.JsonSendProgramaVidaMejorOpciones.splice(Number(resultado), 1)
+      this.JsonSendProgramaVidaMejorOpciones = [...this.JsonSendProgramaVidaMejorOpciones];
     } else if (event.node.children !== undefined && event.node.children.length !== 0) {
       for (let index = 0; index < event.node.children.length; index++) {
         const element = event.node.children[index];
         // Ejecucion del splice por el item de iteracion
-        const resultado = this.JsonSendSectoresCampoTransversalOpciones.findIndex(sector => sector.name === element.label);
-        this.JsonSendSectoresCampoTransversalOpciones.splice(Number(resultado), 1)
-        this.JsonSendSectoresCampoTransversalOpciones = [...this.JsonSendSectoresCampoTransversalOpciones];
+        const resultado = this.JsonSendProgramaVidaMejorOpciones.findIndex(Programa => Programa.name === element.label);
+        this.JsonSendProgramaVidaMejorOpciones.splice(Number(resultado), 1)
+        this.JsonSendProgramaVidaMejorOpciones = [...this.JsonSendProgramaVidaMejorOpciones];
       }
     } else if (event.node.children !== undefined && event.node.children.length === 0) {
       const itemNodeLabel = event.node.label;
       // Ejecucion del splice del elemento
-      const resultado = this.JsonSendSectoresCampoTransversalOpciones.findIndex(sector => sector.name === itemNodeLabel);
-      this.JsonSendSectoresCampoTransversalOpciones.splice(Number(resultado), 1)
-      this.JsonSendSectoresCampoTransversalOpciones = [...this.JsonSendSectoresCampoTransversalOpciones];
+      const resultado = this.JsonSendProgramaVidaMejorOpciones.findIndex(Programa => Programa.name === itemNodeLabel);
+      this.JsonSendProgramaVidaMejorOpciones.splice(Number(resultado), 1)
+      this.JsonSendProgramaVidaMejorOpciones = [...this.JsonSendProgramaVidaMejorOpciones];
     }
   } // FIN | nodeUnselect
 
 
   /****************************************************************************
-  * Funcion: getAllSectoresCampoTransversalService
+  * Funcion: getAllProgramaVidaMejorService
   * Object Number: 003
   * Fecha: 21-02-2019
-  * Descripcion: Method getAllSectoresCampoTransversalService of the Class
-  * Objetivo: getAllSectoresCampoTransversalService listados de los Niveles
+  * Descripcion: Method getAllProgramaVidaMejorService of the Class
+  * Objetivo: getAllProgramaVidaMejorService listados de los Niveles
   * de Ubicacion de Implementacion del Formulario de Actividad llamando a la API
   * Params: { }
   ****************************************************************************/
-  private getAllSectoresCampoTransversalService() {
-    // Ejecuta el Servicio de invocar todos los Sectores de Desarrollo
-    this._serviceSectoresCampoTransversalService.getAllSectoresCamposTransversales().subscribe(
+  private getAllProgramaVidaMejorService() {
+    // Ejecuta el Servicio de invocar todos los Programa de Desarrollo
+    this._serviceVidaMejorService.getAllProgramasVidaMejor().subscribe(
       result => {
         if (result.status !== 200) {
-          this.showToast('error', 'Error al Obtener la Información de todos los Sectores de Desarrollo', result.message);
-          this.JsonReceptionAllSectoresCampoTransversal = [];
+          this.showToast('error', 'Error al Obtener la Información de todos los Programa de Desarrollo', result.message);
+          this.JsonReceptionAllProgramasVidaMejor = [];
         } else if (result.status === 200) {
-          this.JsonReceptionAllSectoresCampoTransversal = result.data;
+          this.JsonReceptionAllProgramasVidaMejor = result.data;
 
-          // Setea la Lista de los todos Sectores Ocde/Cad
-          this.nodes = this.JsonReceptionAllSectoresCampoTransversal.map((item) => {
+          // Setea la Lista de los todos Programa Vida Mejor
+          this.nodes = this.JsonReceptionAllProgramasVidaMejor.map((item) => {
             return {
-              label: item.nombreSector,
-              data: item.codigoSector,
+              label: item.nombrePrograma,
+              data: item.codigoPrograma,
               expandedIcon: 'fa fa-folder-open',
               collapsedIcon: 'fa fa-folder',
               children: [{
-                label: item.idNivelSector.nombreNivelSector,
-                data: item.codigoSector,
+                label: item.idNivelPrograma.nombreNivelPrograma,
+                data: item.codigoPrograma,
                 expandedIcon: 'fa fa-folder-open',
                 collapsedIcon: 'fa fa-fold*er',
               }],
@@ -337,87 +325,82 @@ export class SectoresCamposTransversalesComponent implements OnInit {
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información de todos los Sectores de Desarrollo', JSON.stringify(error.message));
+        this.showToast('error', 'Error al Obtener la Información de todos los Programa de Desarrollo', JSON.stringify(error.message));
       },
     );
-  } // FIN | getAllSectoresCampoTransversalService
+  } // FIN | getAllProgramaVidaMejorService
 
 
 
   /****************************************************************************
-  * Funcion: getfindByIdSectorService
+  * Funcion: getfindByIdProgramaService
   * Object Number: 004
   * Fecha: 22-03-2019
-  * Descripcion: Method getfindByIdSectorService of the Class
-  * Objetivo: getfindByIdSectorService detalle del Sector Gobierno, con el ID
-  * Params: { idSector }
+  * Descripcion: Method getfindByIdProgramaService of the Class
+  * Objetivo: getfindByIdProgramaService detalle del Plan de Nacion, con el ID
+  * Params: { idPrograma }
   ****************************************************************************/
-  private getfindByIdSectorService(idSector: number) {
+  private getfindByIdProgramaService(idPrograma: number) {
 
-    // Ejecucion del EndPoint de Consulta de Sector, por ID
-    this._serviceSectoresCampoTransversalService.getfindByIdSector(idSector).subscribe(
+    // Ejecucion del EndPoint de Consulta de Programa, por ID
+    this._serviceVidaMejorService.getfindByIdPrograma(idPrograma).subscribe(
       result => {
         if (result.status !== 200) {
-          this.showToast('error', 'Error al Obtener la Información del Sector de Desarrollo', result.message);
-          this.JsonReceptionSectorCampoTransversal = [];
+          this.showToast('error', 'Error al Obtener la Información del Programa de Desarrollo', result.message);
+          this.JsonReceptionProgramaVidaMejor = [];
         } else if (result.status === 200) {
-          this.JsonReceptionSectorCampoTransversal = result.data;
+          this.JsonReceptionProgramaVidaMejor = result.data;
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información del Sector de Desarrollo', JSON.stringify(error.message));
+        this.showToast('error', 'Error al Obtener la Información del Programa de Desarrollo', JSON.stringify(error.message));
       },
     );
-  } // FIN | getfindByIdSectorService
+  } // FIN | getfindByIdProgramaService
 
 
   /****************************************************************************
-  * Funcion: getfindByIdNivelSectorService
+  * Funcion: getfindByIdNivelProgramaService
   * Object Number: 005
   * Fecha: 25-03-2019
-  * Descripcion: Method getfindByIdNivelSectorService of the Class
-  * Objetivo: getfindByIdNivelSectorService detalle del Sector OCDE/CAD, con el
-  * Id Nivel de Sector
+  * Descripcion: Method getfindByIdNivelProgramaService of the Class
+  * Objetivo: getfindByIdNivelProgramaService detalle del Programa Vida Mejor, con el
+  * Id Nivel de Programa
   * Params: { idSNivelector }
   ****************************************************************************/
-  private getfindByIdNivelSectorService(idSNivelector: number) {
+  private getfindByIdNivelProgramaService(idSNivelector: number) {
 
-    // Ejecucion del EndPoint de Consulta de Sector, por ID
-    this._serviceSectoresCampoTransversalService.getfindByIdNivelSector(idSNivelector).subscribe(
+    // Ejecucion del EndPoint de Consulta de Programa, por ID
+    this._serviceVidaMejorService.getfindByIdNivelPrograma(idSNivelector).subscribe(
       result => {
         if (result.status !== 200) {
-          this.showToast('error', 'Error al Obtener la Información de Sector Nivel 1', result.message);
-          this.JsonReceptionSectorByNivelCampoTransversal = [];
+          this.showToast('error', 'Error al Obtener la Información de Programa Nivel 1', result.message);
+          this.JsonReceptionProgramaByNivelVidaMejor = [];
           this.nodes = [];
         } else if (result.status === 200) {
-          this.JsonReceptionSectorByNivelCampoTransversal = result.data;
-          this.getSectorOcdeCadNivel2(this.JsonReceptionSectorByNivelCampoTransversal);
+          this.JsonReceptionProgramaByNivelVidaMejor = result.data;
+          this.getProgramaVidaMejorNivel2(this.JsonReceptionProgramaByNivelVidaMejor);
         }
       },
       error => {
         this.showToast('error', 'Error al Obtener la Información de Secotores de Desarrollo', JSON.stringify(error.message));
       },
     );
-  } // FIN | getfindByIdNivelSectorService
+  } // FIN | getfindByIdNivelProgramaService
 
 
 
   /****************************************************************************
-  * Funcion: getSectorOcdeCadNivel2
+  * Funcion: getProgramaVidaMejorNivel2
   * Object Number: 006
   * Fecha: 25-03-2019
-  * Descripcion: Method getSectorOcdeCadNivel2 of the Class
-  * Objetivo: getSectorOcdeCadNivel2 de los Niveles inferiores Sector OCDE/CAD,
-  * con el Id Nivel 1 de Sector
+  * Descripcion: Method getProgramaVidaMejorNivel2 of the Class
+  * Objetivo: getProgramaVidaMejorNivel2 de los Niveles inferiores Programa Vida Mejor,
+  * con el Id Nivel 1 de Programa
   * Params: { arrayN1 }
   ****************************************************************************/
-  getSectorOcdeCadNivel2(array: any) {
-    // Inicializacion del Arraeglo de Nivel 2
-    this.JsonReceptionSectorByNivelCampoTransversal2 = [];
-    this.JsonReceptionSectorByNivelCampoTransversal3 = [];
-    this.JsonReceptionSectorByNivelCampoTransversal4 = [];
-
-    // Ejecucion del EndPoint de Consulta de Sector, por ID
+  getProgramaVidaMejorNivel2(array: any) {
+    // Ejecucion del EndPoint de Consulta de Programa, por ID
     for (let n1 = 0; n1 < array.length; n1++) { // Ciclo del Nivel 1, definir el Nivel 2
       const element = array[n1];
 
@@ -425,77 +408,75 @@ export class SectoresCamposTransversalesComponent implements OnInit {
       setTimeout(() => {
         // Hacemos el push al Array Principal, para cargar los nodos de Nivel 1
         this.arrayPush.push({
-          'label': element.nombreSector,
-          'data': element.idSector,
+          'label': element.nombrePrograma,
+          'data': element.idPrograma,
         });
         this.loading = false;
       }, 1000);
     }
-  } // FIN | getSectorOcdeCadNivel2
+  } // FIN | getProgramaVidaMejorNivel2
 
 
   /****************************************************************************
-  * Funcion: saveSectoresCampoTransversal
+  * Funcion: saveProgramaVidaMejor
   * Object Number: 007
   * Fecha: 15-04-2019
-  * Descripcion: Method saveSectoresCampoTransversal of the Class
-  * Objetivo: saveSectoresCampoTransversal Grabar listado Campo Transversal
-  * Params: { JsonSendSectoresCampoTransversalOpciones }
+  * Descripcion: Method saveProgramaVidaMejor of the Class
+  * Objetivo: saveProgramaVidaMejor Grabar listado Vida Mejor
+  * Params: { JsonSendProgramaVidaMejorOpciones }
   ****************************************************************************/
-  saveSectoresCampoTransversal() {
+  saveProgramaVidaMejor() {
     // Seteo de los campos iniciales
-    this._activitySectoresCampoTransversalModel.idActividad = { idActividad: this.idProyectoTab };
+    this._activityProgramaVidaMejorModel.idActividad = { idActividad: this.idProyectoTab };
 
     // Validacion de Items seleccionados
-    if (this.JsonSendSectoresCampoTransversalOpciones.length > 0) {
+    if (this.JsonSendProgramaVidaMejorOpciones.length > 0) {
       // Recorre los items seleccionados del Treeview
-      for (let index = 0; index < this.JsonSendSectoresCampoTransversalOpciones.length; index++) {
-        const element = this.JsonSendSectoresCampoTransversalOpciones[index];
+      for (let index = 0; index < this.JsonSendProgramaVidaMejorOpciones.length; index++) {
+        const element = this.JsonSendProgramaVidaMejorOpciones[index];
 
-        // Asignacion del Campo Transversal
-        this._activitySectoresCampoTransversalModel.idSectorCampo = { idSector: element.code };
+        // Asignacion del Vida Mejor
+        this._activityProgramaVidaMejorModel.idProgramaVidaMejor = { idPrograma: element.code };
 
-        this._activitySectoresCampoTransversalModel.codigoActividad = this.codigoProyectoTab + '-ASC-' + element.code;
-        console.log(this._activitySectoresCampoTransversalModel);
-        // Ejecucion del Campo Transversal
-        this._serviceSectoresCampoTransversalService.saveActividadSectorCampoTransversal(this._activitySectoresCampoTransversalModel).subscribe(
+        this._activityProgramaVidaMejorModel.codigoActividad = this.codigoProyectoTab + '-APP-' + element.code;
+
+        // Ejecucion del Vida Mejor
+        this._serviceVidaMejorService.saveActividadProgramaVidaMejor(this._activityProgramaVidaMejorModel).subscribe(
           result => {
             if (result.status !== 200) {
-              this.showToast('error', 'Error al Ingresar la Información del Campo Transversal asociado al Proyecto', JSON.stringify(result.message));
+              this.showToast('error', 'Error al Ingresar la Información del Vida Mejor asociado al Proyecto', JSON.stringify(result.message));
             } else if (result.status === 200) {
               // Evalua los resultados de la query
               if (result.findRecord === false) {
-                this.showToast('error', 'Error al Ingresar la Información del Campo Transversal asociado al Proyecto', JSON.stringify(result.message));
+                this.showToast('error', 'Error al Ingresar la Información del Vida Mejor asociado al Proyecto', JSON.stringify(result.message));
               } else {
-                this.showToast('success', 'Campo Transversal asociado al Proyecto', JSON.stringify(result.message));
+                this.showToast('success', 'Vida Mejor asociado al Proyecto', JSON.stringify(result.message));
               }
             }
           },
           error => {
-            this.showToast('error', 'Error al ingresar el Campo Transversal al Proyecto', JSON.stringify(error.message));
+            this.showToast('error', 'Error al ingresar el Vida Mejor al Proyecto', JSON.stringify(error.message));
           },
         );
       }
     } else {
-      this.showToast('error', 'Error al ingresar la Información Sectores de Gobierno', 'Debes de seleccionar los sectores de Gobierno, para continuar');
+      this.showToast('error', 'Error al ingresar la Información Programa de Gobierno', 'Debes de seleccionar los Programa de Gobierno, para continuar');
       return -1;
     }
-  } // FIN | saveSectoresCampoTransversal
+  } // FIN | saveProgramaVidaMejor
 
 
   /****************************************************************************
-  * Funcion: cleanSectoresCamposTransversales
+  * Funcion: cleanProgramaVidaMejor
   * Object Number: 008
   * Fecha: 16-04-2019
-  * Descripcion: Method cleanSectoresCamposTransversales of the Class
-  * Objetivo: cleanSectoresCamposTransversales Limpia listado Campo Transversal
+  * Descripcion: Method cleanProgramaVidaMejor of the Class
+  * Objetivo: cleanProgramaVidaMejor Limpia listado Vida Mejor
   * Params: { }
   ****************************************************************************/
-  cleanSectoresCamposTransversales() {
-    this.JsonSendSectoresCampoTransversalOpciones = [];
+  cleanProgramaVidaMejor() {
+    this.JsonSendProgramaVidaMejorOpciones = [];
     this.changeDetectorRef.detectChanges();
-    this.JsonSendSectoresCampoTransversalOpciones = [...this.JsonSendSectoresCampoTransversalOpciones];
-    console.log(this.JsonSendSectoresCampoTransversalOpciones);
-  } // FIN | cleanSectoresCamposTransversales
-
+    this.JsonSendProgramaVidaMejorOpciones = [...this.JsonSendProgramaVidaMejorOpciones];
+  } // FIN | cleanProgramaVidaMejor
 }

@@ -62,7 +62,7 @@ export class NewActivityComponent implements OnInit {
   // Datos compartidos entre Componentes
   public idProyectoTab: number = 65;
   public idUsuarioTab: number = 0;
-  public codigoProyectoTab: string;
+  public codigoProyectoTab: string = 'HND-0002';
 
   public JsonPassData: any[] = [
     {
