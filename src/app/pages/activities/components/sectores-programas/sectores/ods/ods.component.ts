@@ -126,7 +126,7 @@ export class OdsComponent implements OnInit, OnChanges {
       0, null, // Datos Generales
       null, 0, // Relacionales
       null, 0, 0,
-      true, null, null// Auditoria
+      true, null, null, // Auditoria
     );
 
     // Llenado del Treeview de la Tabla
