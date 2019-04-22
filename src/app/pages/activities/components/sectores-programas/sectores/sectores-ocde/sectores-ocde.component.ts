@@ -394,7 +394,7 @@ export class SectoresOcdeComponent implements OnInit, OnChanges {
           this.nodes = [];
         } else if (result.status === 200) {
           this.JsonReceptionSectorByNivelOcdeCad = result.data;
-          this.getSectorOcdeCadNivel2(this.JsonReceptionSectorByNivelOcdeCad);
+          // this.getSectorOcdeCadNivel2(this.JsonReceptionSectorByNivelOcdeCad);
         }
       },
       error => {
@@ -545,7 +545,7 @@ export class SectoresOcdeComponent implements OnInit, OnChanges {
             this.showToast('error', 'Error al Obtener la Información de Secotores de Desarrollo', JSON.stringify(error.message));
           },
         );
-      }, 10000);
+      }, 1000);
     }
     // console.log(this.arrayPush);
   } // FIN | getSectorOcdeCadNivel2

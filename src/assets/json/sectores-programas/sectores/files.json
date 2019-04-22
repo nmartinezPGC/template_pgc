@@ -1,0 +1,36 @@
+{
+  "data": [{
+    "label": "EDUCACION",
+    "data": "1",
+    "expandedIcon": "fa fa-folder-open",
+    "collapsedIcon": "fa fa-folder",
+    "children": [{
+      "label": "Educación, nivel no especificado",
+      "data": "2",
+      "expandedIcon": "fa fa-folder-open",
+      "collapsedIcon": "fa fa-folder",
+      "children": [{
+          "label": "Expenses.doc",
+          "data": "Expenses Document"
+        },
+        {
+          "label": "Resume.doc",
+          "data": "Resume Document"
+        }
+      ],
+      "label": "Educación básica",
+      "data": "7",
+      "expandedIcon": "fa fa-folder-open",
+      "collapsedIcon": "fa fa-folder",
+      "children": [{
+          "label": "Eduacion Primaria",
+          "data": "Expenses Document"
+        },
+        {
+          "label": "Capacitacion Basica",
+          "data": "Resume Document"
+        }
+      ]
+    }]
+  }]
+}

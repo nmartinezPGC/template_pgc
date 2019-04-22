@@ -2,7 +2,7 @@
 <!-- Componente para los Mensajes en pantalla -->
 <toaster-container [toasterconfig]="config"></toaster-container>
 
-<!-- Agrupacion de la Informacion de Sectores OCD/CAD NAM -->
+<!-- Agrupacion de la Informacion de Sectores OCD/CAD -->
 <p-fieldset legend="Sectores OCDE/CAD" [toggleable]="true" class="fieldSet">
   <nb-card accent="warning" status="primary">
     <nb-card-body>
@@ -12,7 +12,7 @@
           <input type="text" class="form-control txtSearch" name="queryString" [(ngModel)]="queryString"
             placeholder="Buscar Sector">
           <br>
-          <p-tree [style]="{'width': '100%'}" [value]="arrayPush | filter: queryString" selectionMode="checkbox"
+          <p-tree [style]="{'width': '100%'}" [value]="filesTree4 | filter: queryString" selectionMode="checkbox"
             (onNodeUnselect)="nodeUnselect($event)" [loading]="loading" (onNodeSelect)="nodeSelect($event)"
             dynamic="true"></p-tree>
           <br>
