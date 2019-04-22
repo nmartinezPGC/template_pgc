@@ -61,7 +61,7 @@ export class ServicePlanNacionService {
   * Objetivo: Seteo de las variables en json, con datos de prueba
   ****************************************************************************/
   getFiles() {
-    return this.http.get('../assets/json/files.json')
+    return this.http.get('../assets/json/sectores-programas/sectores/files.json')
       .toPromise()
       .then(res => <TreeNode[]>res.json().data);
   }

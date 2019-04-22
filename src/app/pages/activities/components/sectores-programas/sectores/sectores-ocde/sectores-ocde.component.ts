@@ -133,6 +133,9 @@ export class SectoresOcdeComponent implements OnInit, OnChanges {
   ngOnInit() {
     // Cargando los Items del TreeView
     this.loading = true;
+    setTimeout(() => {
+      this.loading = false;
+    }, 1000);
 
     // Inicializacion del Modelo
     this._activitySectoresOcdeModel = new ActivitySectoresOcdeModel(
@@ -146,7 +149,7 @@ export class SectoresOcdeComponent implements OnInit, OnChanges {
     this._serviceSectoresService.getFiles().then(files => this.filesTree4 = files);
 
     // this.getAllSectoresOcdeCadService();
-    this.getfindByIdNivelSectorService(1);
+    // this.getfindByIdNivelSectorService(1);
   }
 
 
