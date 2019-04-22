@@ -20,7 +20,7 @@ import { ActivityProgramaPlanNacionModel } from '../../../../models/programas/mo
   styleUrls: ['./plan-nacion.component.scss'],
   providers: [ServicePlanNacionService, MessageService, ToasterService, ListasComunesService],
 })
-export class PlanNacionComponent implements OnInit {
+export class PlanNacionComponent implements OnInit, OnChanges {
   // Variables entre Tabs | Components
   @Input() idProyectoTab: number;
   @Input() idUsuarioTab: number;
@@ -128,7 +128,7 @@ export class PlanNacionComponent implements OnInit {
       0, null, // Datos Generales
       null, 0, // Relacionales
       null, 0, 0,
-      true, null, null// Auditoria
+      true, null, null, // Auditoria
     );
 
     // Llenado del Treeview de la Tabla

@@ -20,7 +20,7 @@ import { ActivityProgramaVidaMejorModel } from '../../../../models/programas/mod
   styleUrls: ['./vida-mejor.component.scss'],
   providers: [ServiceVidaMejorService, MessageService, ToasterService, ListasComunesService],
 })
-export class VidaMejorComponent implements OnInit {
+export class VidaMejorComponent implements OnInit, OnChanges {
   // Variables entre Tabs | Components
   @Input() idProyectoTab: number;
   @Input() idUsuarioTab: number;
@@ -127,7 +127,7 @@ export class VidaMejorComponent implements OnInit {
       0, null, // Datos Generales
       null, 0, // Relacionales
       null, 0, 0,
-      true, null, null// Auditoria
+      true, null, null, // Auditoria
     );
 
     // Llenado del Treeview de la Tabla

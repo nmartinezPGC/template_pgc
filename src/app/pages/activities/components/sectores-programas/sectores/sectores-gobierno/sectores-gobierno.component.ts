@@ -21,7 +21,7 @@ import { ServiceSectoresGobiernoService } from '../../../../services/sectores/se
   styleUrls: ['./sectores-gobierno.component.scss'],
   providers: [ServiceSectoresGobiernoService, MessageService, ToasterService, ListasComunesService],
 })
-export class SectoresGobiernoComponent implements OnInit {
+export class SectoresGobiernoComponent implements OnInit, OnChanges {
   // Variables entre Tabs | Components
   @Input() idProyectoTab: number;
   @Input() idUsuarioTab: number;
@@ -138,7 +138,7 @@ export class SectoresGobiernoComponent implements OnInit {
       0, null, // Datos Generales
       null, 0, // Relacionales
       null, 0, 0,
-      true, null, null// Auditoria
+      true, null, null, // Auditoria
     );
 
     // Llenado del Treeview de la Tabla
@@ -235,7 +235,7 @@ export class SectoresGobiernoComponent implements OnInit {
   * Objetivo: nodeSelect in the method selected item with Treeview
   ****************************************************************************/
   nodeSelect(event) {
-    console.log(event);
+    // console.log(event);
     // Condicion de Agregar los Nodos
     if (event.node.children === undefined) { // Definicion de Items del Nivel 4
       this.JsonSendSectoresGobiernoOpciones = [...this.JsonSendSectoresGobiernoOpciones, { name: event.node.label, code: event.node.data }];
@@ -536,7 +536,7 @@ export class SectoresGobiernoComponent implements OnInit {
     this.JsonSendSectoresGobiernoOpciones = [];
     this.changeDetectorRef.detectChanges();
     this.JsonSendSectoresGobiernoOpciones = [...this.JsonSendSectoresGobiernoOpciones];
-    console.log(this.JsonSendSectoresGobiernoOpciones);
+    // console.log(this.JsonSendSectoresGobiernoOpciones);
   } // FIN | cleanSectoresGobierno
 
 }

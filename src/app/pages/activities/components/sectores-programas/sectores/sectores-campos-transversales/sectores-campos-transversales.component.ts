@@ -20,7 +20,7 @@ import { ServiceSectoresCampoTransversalService } from '../../../../services/sec
   styleUrls: ['./sectores-campos-transversales.component.scss'],
   providers: [ServiceSectoresCampoTransversalService, MessageService, ToasterService, ListasComunesService],
 })
-export class SectoresCamposTransversalesComponent implements OnInit {
+export class SectoresCamposTransversalesComponent implements OnInit, OnChanges {
   // Variables entre Tabs | Components
   @Input() idProyectoTab: number;
   @Input() idUsuarioTab: number;
@@ -137,7 +137,7 @@ export class SectoresCamposTransversalesComponent implements OnInit {
       0, null, // Datos Generales
       null, 0, // Relacionales
       null, 0, 0,
-      true, null, null// Auditoria
+      true, null, null, // Auditoria
     );
 
     // Llenado del Treeview de la Tabla
@@ -234,7 +234,7 @@ export class SectoresCamposTransversalesComponent implements OnInit {
   * Objetivo: nodeSelect in the method selected item with Treeview
   ****************************************************************************/
   nodeSelect(event) {
-    console.log(event);
+    // console.log(event);
     // Condicion de Agregar los Nodos
     if (event.node.children === undefined) { // Definicion de Items del Nivel 4
       this.JsonSendSectoresCampoTransversalOpciones = [...this.JsonSendSectoresCampoTransversalOpciones, { name: event.node.label, code: event.node.data }];
@@ -456,7 +456,7 @@ export class SectoresCamposTransversalesComponent implements OnInit {
         this._activitySectoresCampoTransversalModel.idSectorCampo = { idSector: element.code };
 
         this._activitySectoresCampoTransversalModel.codigoActividad = this.codigoProyectoTab + '-ASC-' + element.code;
-        console.log(this._activitySectoresCampoTransversalModel);
+        // console.log(this._activitySectoresCampoTransversalModel);
         // Ejecucion del Campo Transversal
         this._serviceSectoresCampoTransversalService.saveActividadSectorCampoTransversal(this._activitySectoresCampoTransversalModel).subscribe(
           result => {
@@ -495,7 +495,7 @@ export class SectoresCamposTransversalesComponent implements OnInit {
     this.JsonSendSectoresCampoTransversalOpciones = [];
     this.changeDetectorRef.detectChanges();
     this.JsonSendSectoresCampoTransversalOpciones = [...this.JsonSendSectoresCampoTransversalOpciones];
-    console.log(this.JsonSendSectoresCampoTransversalOpciones);
+    // console.log(this.JsonSendSectoresCampoTransversalOpciones);
   } // FIN | cleanSectoresCamposTransversales
 
 }
