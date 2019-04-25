@@ -8,19 +8,17 @@
 */
 
 import { Component, OnInit, Input, ChangeDetectorRef, OnChanges } from '@angular/core';
-import { Tree, TreeNode, MessageService, MenuItem } from 'primeng/primeng';
+import { TreeNode, MessageService, MenuItem } from 'primeng/primeng';
 import { ToasterConfig, ToasterService, Toast, BodyOutputType } from 'angular2-toaster';
 import { ServiceSectoresService } from '../../../../services/service-sectores.service';
 import { ServiceSectoresOcdeService } from '../../../../services/sectores/service-sectores-ocde.service';
-import { ListasComunesService } from '../../../../../common-list/services/listas-comunes.service';
 import { ActivitySectoresOcdeModel } from '../../../../models/sectores/model-sectores-ocde';
-import { delay, timeout } from 'q';
 
 @Component({
   selector: 'ngx-sectores-ocde',
   templateUrl: './sectores-ocde.component.html',
   styleUrls: ['./sectores-ocde.component.scss'],
-  providers: [ServiceSectoresService, MessageService, ToasterService, ListasComunesService],
+  providers: [ServiceSectoresService, MessageService, ToasterService],
 })
 export class SectoresOcdeComponent implements OnInit, OnChanges {
   // Variables entre Tabs | Components
@@ -122,8 +120,7 @@ export class SectoresOcdeComponent implements OnInit, OnChanges {
   constructor(private _serviceSectoresService: ServiceSectoresOcdeService,
     private messageService: MessageService,
     private changeDetectorRef: ChangeDetectorRef,
-    private _toasterService: ToasterService,
-    private _listasComunesService: ListasComunesService) {
+    private _toasterService: ToasterService) {
     // Codigo del Constructor
   }
 
@@ -621,5 +618,10 @@ export class SectoresOcdeComponent implements OnInit, OnChanges {
     this.changeDetectorRef.detectChanges();
     this.JsonSendSectoresOcdeCadOpciones = [...this.JsonSendSectoresOcdeCadOpciones];
   } // FIN | cleanSectoresOcdeCad
+
+
+  calcularPorc(){
+    console.log('Calcular el Porcentaje');
+  }
 
 }

@@ -1,0 +1,45 @@
+<!-- Diseño de la Ventana de Metas de ODS -->
+<!-- ==================================================================================== -->
+<!-- ==================================================================================== -->
+<toaster-container [toasterconfig]="config"></toaster-container>
+
+<p-confirmDialog></p-confirmDialog>
+
+<div class="modal-content">
+  <!-- Componente para el Espiner de la Pantalla -->
+  <!-- <ngx-spinner bdOpacity="0.1" bdColor="#0b547b" size="medium" color="#fff" type="line-spin-fade" [fullScreen]="false">
+    <p style="font-size: 20px; color: white"> {{ msgLoader }}... </p>
+  </ngx-spinner> -->
+
+  <div>
+    <nb-card accent="warning" status="primary">
+      <nb-card-header>
+        Ingreso de Metas
+        <button class="close" aria-label="Close" (click)="closeModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </nb-card-header>
+      <nb-card-body>
+        <!-- <img src="../../../../../../../../../assets/skins/lightgray/img/loader.gif" *ngIf="loader == true" alt=""> -->
+        <p-listbox [options]="sectoresOds" [(ngModel)]="selectedSectores" multiple="multiple" checkbox="checkbox"
+          filter="filter" [style]="{'width': '100%'}" optionLabel="name">
+          <p-header>
+            <i class="fa fa-file"></i>
+            Metas del ODS: {{ modalHeader }}
+            <img src="../../../../../../../../../assets/images/ods/{{ modalHeaderImagenSector }}" class="imgOds" alt="">
+          </p-header>
+        </p-listbox>
+      </nb-card-body>
+    </nb-card>
+  </div>
+
+  <div class="modal-footer">
+    <!-- <button type="button" class="btnClear" (click)="selectedSectores=null" pButton icon="pi pi-times"
+      label="Limpiar selección"></button> -->
+    <button class="btn btn-primary botonSave" nbPopover="Enviar la Información de Metas" nbPopoverMode="hint"
+      nbPopoverPlacement="top" (click)="saveMetasOds()">Guardar</button>
+    <button class="btn btn-warning" nbPopover="Limpiar las metas seleccionadas" nbPopoverMode="hint"
+      nbPopoverPlacement="top" (click)="selectedSectores=null">Limpiar</button>
+    <button class="btn btn-danger" (click)="closeModal()">Cerrar</button>
+  </div>
+</div>

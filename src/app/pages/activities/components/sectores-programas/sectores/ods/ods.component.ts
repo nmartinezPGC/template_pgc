@@ -8,16 +8,18 @@
 */
 
 import { Component, OnInit, Input, ChangeDetectorRef, OnChanges } from '@angular/core';
-import { TreeNode, MessageService, MenuItem } from 'primeng/primeng';
+import { TreeNode, MessageService, MenuItem, ConfirmationService, Message } from 'primeng/primeng';
 import { ToasterConfig, ToasterService, Toast, BodyOutputType } from 'angular2-toaster';
 import { ServiceOdsService } from '../../../../services/sectores/service-ods.service';
 import { ActivitySectoresOdsModel } from '../../../../models/sectores/model-sector-ods';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { OdsModalMetasComponent } from './modals/ods-modal-metas/ods-modal-metas.component';
 
 @Component({
   selector: 'ngx-ods',
   templateUrl: './ods.component.html',
   styleUrls: ['./ods.component.scss'],
-  providers: [ServiceOdsService, MessageService, ToasterService],
+  providers: [ServiceOdsService, MessageService, ToasterService, ConfirmationService],
 })
 export class OdsComponent implements OnInit, OnChanges {
   // Variables entre Tabs | Components
@@ -102,6 +104,8 @@ export class OdsComponent implements OnInit, OnChanges {
   isCloseButton = true;
   config: ToasterConfig;
 
+  msgs: Message[] = [];
+
   /**
    * constructor
    * @param _serviceOdsService
@@ -110,7 +114,9 @@ export class OdsComponent implements OnInit, OnChanges {
   constructor(private _serviceOdsService: ServiceOdsService,
     private messageService: MessageService,
     private changeDetectorRef: ChangeDetectorRef,
-    private _toasterService: ToasterService) {
+    private _toasterService: ToasterService,
+    private modalService: NgbModal,
+    private confirmationService: ConfirmationService, ) {
     // Codigo del Constructor
   }
 
@@ -284,8 +290,6 @@ export class OdsComponent implements OnInit, OnChanges {
       this.JsonSendSectoresOdsOpciones.splice(Number(resultado), 1)
       this.JsonSendSectoresOdsOpciones = [...this.JsonSendSectoresOdsOpciones];
     }
-
-    // console.log(this.JsonSendSectoresOdsOpciones);
   } // FIN | nodeUnselect
 
 
@@ -420,7 +424,6 @@ export class OdsComponent implements OnInit, OnChanges {
               this.arrayPush = [];
             } else if (result.status === 200) {
               this.JsonReceptionSectorByNivelOds2 = result.data;
-              // console.log(this.JsonReceptionSectorByNivelOds2);
 
               // Array para el Segundo Ciclo | Nivel 2
               const array2 = [];
@@ -435,8 +438,6 @@ export class OdsComponent implements OnInit, OnChanges {
 
                   // Ejecutamos el Sevicio, para el Nivel 3
                   setTimeout(() => {
-
-                    // console.log(element2[0]);
                     this._serviceOdsService.getfindByIdNivelSectorAndSectorPadreId(3, element2[0]).subscribe(
                       result2 => {
                         if (result2.status !== 200) {
@@ -537,70 +538,87 @@ export class OdsComponent implements OnInit, OnChanges {
 
 
   /****************************************************************************
-  * Funcion: saveSectoresOcdeCad
+  * Funcion: saveSectoresOds
   * Object Number: 007
   * Fecha: 25-03-2019
-  * Descripcion: Method saveSectoresOcdeCad of the Class
-  * Objetivo: saveSectoresOcdeCad Grabar listado Sector OCDE/CAD
-  * Params: { JsonSendSectoresOdsOpciones }
+  * Descripcion: Method saveSectoresOds of the Class
+  * Objetivo: saveSectoresOds Grabar listado Sector OCDE/CAD
+  * Params: { idSectorOds }
   ****************************************************************************/
-  async saveSectoresOcdeCad() {
-    // Seteo de los campos iniciales
-    this._activitySectoresOdsModel.idActividad = { idActividad: this.idProyectoTab };
+  saveSectoresOds(idSectorOds: number) {
+    // Verificacion de la Informacion
+    this.confirmationService.confirm({
+      message: '¿Estas seguro de registrar el ODS seleccionado?',
+      header: 'Ingreso de Información',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.msgs = [{ severity: 'info', summary: 'Confirmed', detail: 'You have accepted' }];
+        // Seteo de los campos iniciales
+        this._activitySectoresOdsModel.idActividad = { idActividad: this.idProyectoTab };
 
-    // Validacion de Items seleccionados
-    if (this.JsonSendSectoresOdsOpciones.length > 0) {
-      // Recorre los items seleccionados del Treeview
-      for (let index = 0; index < this.JsonSendSectoresOdsOpciones.length; index++) {
-        const element = this.JsonSendSectoresOdsOpciones[index];
-        // Creacion del Codigo de la Actividad con Sector Ocde/Cad | 3 = NEW-ASO
-        // this.getSecuenciaListService('NEW-ASO');
-
-        // await delay(100);
         // Asignacion del Sector Ocde/Cad
-        this._activitySectoresOdsModel.idSectorOds = { idSector: element.code };
+        this._activitySectoresOdsModel.idSectorOds = { idSector: idSectorOds };
 
-        this._activitySectoresOdsModel.codigoActividad = this.codigoProyectoTab + '-ASO-' + element.code;
+        this._activitySectoresOdsModel.codigoActividad = this.codigoProyectoTab + '-ODS-' + idSectorOds;
 
-        this._serviceOdsService.saveActividadSectorOcde(this._activitySectoresOdsModel).subscribe(
+        this._serviceOdsService.saveActividadSectorOds(this._activitySectoresOdsModel).subscribe(
           result => {
             if (result.status !== 200) {
-              this.showToast('error', 'Error al Ingresar la Información del Sector Ocde/Cad asociado al Proyecto', JSON.stringify(result.message));
+              this.showToast('error', 'Error al Ingresar la Información del ODS asociado al Proyecto', JSON.stringify(result.message));
             } else if (result.status === 200) {
               // Evalua los resuktados de la query
               if (result.findRecord === false) {
-                this.showToast('error', 'Error al Ingresar la Información del Sector Ocde/Cad asociado al Proyecto', JSON.stringify(result.message));
+                this.showToast('error', 'Error al Ingresar la Información del ODS asociado al Proyecto', JSON.stringify(result.message));
               } else {
-                this.showToast('success', 'Sector Ocde/Cad asociado al Proyecto', JSON.stringify(result.message));
+                this.showToast('success', 'ODS asociado al Proyecto', JSON.stringify(result.message));
               }
               // this.updateSecuenciaService(9, 3);
             }
           },
           error => {
-            this.showToast('error', 'Error al ingresar el Sector Ocde/Cad al Proyecto', JSON.stringify(error.message));
+            this.showToast('error', 'Error al ingresar el ODS al Proyecto', JSON.stringify(error.message));
           },
         );
-
-        // this.updateSecuenciaService(9, 3);
+      },
+      reject: () => {
+        this.msgs = [{ severity: 'info', summary: 'Rejected', detail: 'You have rejected' }];
       }
-    } else {
-      this.showToast('error', 'Error al ingresar la Información Sectores OCDE/CAD', 'Debes de seleccionar los sectores OCDE/CAD, para continuar');
-      return -1;
-    }
-  } // FIN | saveSectoresOcdeCad
+    });
+  } // FIN | saveSectoresOds
 
 
   /****************************************************************************
-  * Funcion: cleanSectoresOcdeCad
+  * Funcion: cleanSectoresOds
   * Object Number: 008
   * Fecha: 13-04-2019
-  * Descripcion: Method cleanSectoresOcdeCad of the Class
+  * Descripcion: Method cleanSectoresOds of the Class
   * Objetivo: cleanSectoresOcdeCad Limpia listado Sector OCDE/CAD
   * Params: { }
   ****************************************************************************/
-  cleanSectoresOcdeCad() {
+  cleanSectoresOds() {
     this.JsonSendSectoresOdsOpciones = [];
     this.changeDetectorRef.detectChanges();
     this.JsonSendSectoresOdsOpciones = [...this.JsonSendSectoresOdsOpciones];
-  } // FIN | cleanSectoresOcdeCad
+  } // FIN | cleanSectoresOds
+
+
+  /**
+   * Funcion de mostrar el Modal con Parametros enviados
+   * Autor: Nahum Martinez
+   * Fecha: 2019-04-22
+   */
+  showStaticModal(nombreSector: string, idSector: number, imagenSector: string) {
+    const activeModal = this.modalService.open(OdsModalMetasComponent, {
+      size: 'lg',
+      backdrop: 'static',
+      container: 'nb-layout',
+    });
+
+    // Valores de parametros a enviar
+    activeModal.componentInstance.modalHeader = nombreSector;
+    activeModal.componentInstance.modalHeaderId = idSector;
+    activeModal.componentInstance.modalHeaderCodigoActividad = this.codigoProyectoTab;
+    activeModal.componentInstance.modalHeaderIdActividad = this.idProyectoTab;
+    activeModal.componentInstance.modalHeaderImagenSector = imagenSector;
+  } // FIN | showStaticModal
 }

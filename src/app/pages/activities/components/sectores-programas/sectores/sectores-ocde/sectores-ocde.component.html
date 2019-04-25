@@ -27,12 +27,12 @@
               <i class="fa fa-file"></i>
               Confirma cuales sectores deben de registrarse...
             </p-header>
-            <!-- <ng-template let-JsonSendSectoresOcdeCadOpciones pTemplate="item"> -->
-            <!-- <div class="ui-inputgroup"> -->
-            <!-- <span>{{JsonSendSectoresOcdeCadOpciones.label}}</span>
-                    <input style="width: 10%; float:right; text-align: right" placeholder="%" type="text"> -->
-            <!-- </div> -->
-            <!-- </ng-template> -->
+            <ng-template let-JsonSendSectoresOcdeCadOpciones pTemplate="item">
+              <div class="ui-inputgroup">
+                <span>{{JsonSendSectoresOcdeCadOpciones.label}}</span>
+                <input style="width: 10%; float:right; text-align: right" placeholder="%" type="text">
+              </div>
+            </ng-template>
           </p-listbox>
           <p>Sectores a Registrar: <span *ngFor="let c of selectedCities" style="margin-right: 10px">{{c.name}}</span>
           </p>
@@ -45,7 +45,7 @@
             </button>
 
             <!-- Boton para Calcular los Porcentajes Sectores OCDE -->
-            <button type="button" class="btn btn-outline-success btn-icon"
+            <button type="button" class="btn btn-outline-success btn-icon" (click)="calcularPorc()"
               nbPopover="Calcula el % de participacion de Sectores" nbPopoverMode="hint" nbPopoverPlacement="top">
               <i class="ion-calculator"></i>
             </button>

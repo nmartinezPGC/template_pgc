@@ -36,12 +36,14 @@ import { SectoresProgramasOdsComponent } from './components/sectores-programas/s
 // Modulo de la Libreria Primeng
 import { FieldsetModule } from 'primeng/fieldset';
 import { TreeModule } from 'primeng/tree';
-import { TreeNode } from 'primeng/api';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import { ListboxModule } from 'primeng/listbox';
 import { RecursosProyectoComponent } from './components/recursos-proyecto/recursos-proyecto.component';
 import { FileUploadModule } from 'primeng/fileupload';
+import { DropdownModule, EditorModule } from 'primeng/primeng';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
 import { FilterPipe } from './pipes/filter.pipe';
 
 // Sectores de Proyectos
@@ -53,6 +55,7 @@ import { SectoresCamposTransversalesComponent } from './components/sectores-prog
 import { VisionpaisComponent } from './components/sectores-programas/programas/visionpais/visionpais.component';
 import { VidaMejorComponent } from './components/sectores-programas/programas/vida-mejor/vida-mejor.component';
 import { PlanNacionComponent } from './components/sectores-programas/programas/plan-nacion/plan-nacion.component';
+import { OdsModalMetasComponent } from './components/sectores-programas/sectores/ods/modals/ods-modal-metas/ods-modal-metas.component';
 
 
 @NgModule({
@@ -73,6 +76,9 @@ import { PlanNacionComponent } from './components/sectores-programas/programas/p
     LeafletModule.forRoot(),
     FieldsetModule,
     TreeModule,
+    DropdownModule,
+    ConfirmDialogModule,
+    EditorModule,
     MessagesModule,
     MessageModule,
     ListboxModule,
@@ -93,10 +99,15 @@ import { PlanNacionComponent } from './components/sectores-programas/programas/p
     VisionpaisComponent,
     VidaMejorComponent,
     PlanNacionComponent,
+    OdsModalMetasComponent,
   ],
   providers: [
     // SmartTableService, // Defincion del Servicio que provee los Datos de la Tabla: ID's Internas
     ListasComunesService,
+    ConfirmationService,
+  ],
+  entryComponents: [
+    OdsModalMetasComponent,
   ],
 })
 export class ActivitiesPGCModule { }
