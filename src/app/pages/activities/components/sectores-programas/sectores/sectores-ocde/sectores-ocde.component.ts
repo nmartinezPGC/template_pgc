@@ -620,8 +620,8 @@ export class SectoresOcdeComponent implements OnInit, OnChanges {
   } // FIN | cleanSectoresOcdeCad
 
 
-  calcularPorc(){
-    console.log('Calcular el Porcentaje');
+  calcularPorc() {
+    // console.log('Calcular el Porcentaje');
   }
 
 }

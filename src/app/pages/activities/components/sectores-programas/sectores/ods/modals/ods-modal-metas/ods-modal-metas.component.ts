@@ -16,7 +16,7 @@ import 'style-loader!angular2-toaster/toaster.css';
 import { ConfirmationService } from 'primeng/api';
 
 @Component({
-  selector: 'ods-modal-metas',
+  selector: 'ngx-ods-modal-metas',
   templateUrl: './ods-modal-metas.component.html',
   styleUrls: ['./ods-modal-metas.component.scss'],
   providers: [ServiceOdsService, ToasterService, ConfirmationService],
@@ -70,7 +70,7 @@ export class OdsModalMetasComponent implements OnInit {
   constructor(private activeModal: NgbActiveModal,
     private _serviceOdsService: ServiceOdsService,
     private _toasterService: ToasterService,
-    private confirmationService: ConfirmationService, ) { }
+    private confirmationService: ConfirmationService) { }
 
 
   /**
@@ -86,7 +86,7 @@ export class OdsModalMetasComponent implements OnInit {
     this._activitySectoresOdsModel = new ActivitySectoresOdsModel(
       0, null, // Datos Generales
       null, 0, null, 0, 0, // Relacionales
-      true, null, null // Auditoria
+      true, null, null, // Auditoria
     );
 
     // Carga segun los Parametros enviados
@@ -217,7 +217,7 @@ export class OdsModalMetasComponent implements OnInit {
       },
       reject: () => {
         // Nada
-      }
+      },
     });
   } // FIN | saveMetasOds
 

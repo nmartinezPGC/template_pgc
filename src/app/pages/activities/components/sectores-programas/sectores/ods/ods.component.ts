@@ -116,7 +116,7 @@ export class OdsComponent implements OnInit, OnChanges {
     private changeDetectorRef: ChangeDetectorRef,
     private _toasterService: ToasterService,
     private modalService: NgbModal,
-    private confirmationService: ConfirmationService, ) {
+    private confirmationService: ConfirmationService ) {
     // Codigo del Constructor
   }
 
@@ -582,7 +582,7 @@ export class OdsComponent implements OnInit, OnChanges {
       },
       reject: () => {
         this.msgs = [{ severity: 'info', summary: 'Rejected', detail: 'You have rejected' }];
-      }
+      },
     });
   } // FIN | saveSectoresOds
 
