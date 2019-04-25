@@ -21,8 +21,8 @@ export class SystemPropertiesService {
   // public urlLocalResourse:string = "/rest";
 
   // Entorno de Servidor
-  //public urlServerConfig: string = 'http://172.17.0.128:8090/API-Rest-PGC/api/v1';
-  //public urlServerResourse: string = 'http://172.17.0.128:8090/API-Rest-PGC/api/v1';
+  // public urlServerConfig: string = 'http://172.17.0.128:8090/API-Rest-PGC/api/v1';
+  // public urlServerResourse: string = 'http://172.17.0.128:8090/API-Rest-PGC/api/v1';
   public urlServerConfig: string = 'http://172.17.0.128:8090/api/v1';
   public urlServerResourse: string = 'http://172.17.0.128:8090/api/v1';
 
