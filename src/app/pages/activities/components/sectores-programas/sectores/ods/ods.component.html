@@ -16,7 +16,8 @@
           <nb-card>
             <nb-card-body>
               <img src="../../../../../../assets/images/ods/{{ item.imagenSector }}" class="imgOds" alt=""
-                (click)="saveSectoresOds(item.idSector)">
+                (click)="saveSectoresOds(item.idSector)" nbPopover="Selecciona el ODS, {{ item.nombreSector }}"
+                nbPopoverMode="hint">
             </nb-card-body>
 
             <nb-card-footer>
