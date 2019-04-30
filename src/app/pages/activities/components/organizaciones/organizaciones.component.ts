@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'ngx-organizaciones',
@@ -6,6 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./organizaciones.component.scss'],
 })
 export class OrganizacionesComponent implements OnInit {
+  // Variables entre Tabs | Components
+  @Input() idProyectoTab: number;
+  @Input() idUsuarioTab: number;
+  @Input() codigoProyectoTab: string;
 
   constructor() { }
 
