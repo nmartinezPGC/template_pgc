@@ -20,7 +20,7 @@ import { Http } from '@angular/http';
 @Injectable({
   providedIn: 'root',
 })
-export class ServiceVisionPaisService{
+export class ServiceVisionPaisService {
   // Variables de la Ruta de la API
   public _url: string;
   public _urlResourses: string;
