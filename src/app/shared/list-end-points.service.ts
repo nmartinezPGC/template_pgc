@@ -799,6 +799,55 @@ export class ListEndPointsService {
         groupEndPoint: 'actividadesCRUDGroup',
         descEndPoint: 'Eliminar ODS enviado y asociarlo al Proyecto',
       },
+      // Programas Vision de Pais
+      findAllProgramaVisionPais: {
+        id: 50,
+        nameEndpoint: 'findAllProgramaVisionPais',
+        urlEndPoint: '/programas/Vision-Pais',
+        params: '{ }',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Listar todos datos de  la Vision de Pais registrados en la BD',
+      },
+      findByIdProgramaVisionPais: {
+        id: 51,
+        nameEndpoint: 'findByIdProgramaVisionPais',
+        urlEndPoint: '/programas/Vision-Pais/findByIdPrograma/',
+        params: '{ idPrograma }',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Listar el dato de Vision  Pais consultado',
+      },
+      findByIdNivelProgramaVisionPais: {
+        id: 52,
+        nameEndpoint: 'findByIdNivelProgramaVisionPais',
+        urlEndPoint: '/programas/Vision-Pais/findByIdNivelPrograma/',
+        params: '{ idNivelSector }',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Listar los datos de Vision  Pais consultado, por el nivel que pertenencen',
+      },
+      findByIdNivelProgramaVisionPaisPadre: {
+        id: 53,
+        nameEndpoint: 'findByIdNivelProgramaVisionPaisPadre',
+        urlEndPoint: '/programas/Vision-Pais/findByIdNivelPrograma/',
+        params: '{ idNivelSector, sectorPadreId }',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Listar los datos de Vision Pais consultado, por el Programa Padre y Nivel que pertenencen',
+      },
+      newActividadProgramaVisionPaisPadre: {
+        id: 54,
+        nameEndpoint: 'newActividadProgramaVisionPaisPadre',
+        urlEndPoint: '/mant-actividades/programas/Vision-Pais-proyecto/new',
+        params: '{ jsonSendActividadProgramaVisionPais }',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Ingresar el dato Vision Pais enviado y asociarlo al Proyecto',
+      },
+      deleteActividadProgramaVisionPais: {
+        id: 55,
+        nameEndpoint: 'deleteActividadProgramaVisionPais',
+        urlEndPoint: '/mant-actividades/programas/Vision-Pais-proyecto/delete/',
+        params: '{ codigoActividad }',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Eliminar el dato de Vision Pais enviado y asociarlo al Proyecto',
+      },
     }, // modulo de mantenimientos generico de usuarios
     endPointMantGenericosUsuario: {
       listAllUsuarios: {

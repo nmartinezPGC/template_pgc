@@ -377,6 +377,24 @@ export class SystemEndPointsService extends ListEndPointsService {
           case 49:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActividadSectorOds.urlEndPoint;
             break;
+          case 50: // AMA | 2019-04-30 | Mapeo de Vision de Pais
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findAllProgramaVisionPais.urlEndPoint; // Sectores ODS
+            break;
+          case 51:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdProgramaVisionPais.urlEndPoint;
+            break;
+          case 52:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdNivelProgramaVisionPais.urlEndPoint;
+            break;
+          case 53:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdNivelProgramaVisionPaisPadre.urlEndPoint;
+            break;
+          case 54:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.newActividadProgramaVisionPaisPadre.urlEndPoint;
+            break;
+          case 55:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActividadProgramaVisionPais.urlEndPoint;
+            break;
         }
         break;
       case 'mantGenericosUsuarioGroup': // Llamados a los EndPoint de usuarios
