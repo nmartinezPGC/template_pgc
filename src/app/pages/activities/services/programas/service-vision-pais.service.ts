@@ -1,10 +1,10 @@
 /**
-* @author Nahum Martinez
-* @returns Servico de Sectores de Proyecto
-* @name ServiceSectoresService
-* @alias _serviceSectoresService
+* @author Allan Madrid
+* @returns Servicio de Vision Pais
+* @name ServiceVisionPaisService
+* @alias _serviceVisionPaisService
 * @version 1.0.0
-* @fecha 2019-03-15
+* @fecha 30-04-2019
 */
 
 import { Injectable } from '@angular/core';
@@ -15,10 +15,12 @@ import { Observable } from 'rxjs';
 import { TreeNode } from 'primeng/api';
 import { Http } from '@angular/http';
 
+
+
 @Injectable({
   providedIn: 'root',
 })
-export class ServiceSectoresOcdeService {
+export class ServiceVisionPaisService{
   // Variables de la Ruta de la API
   public _url: string;
   public _urlResourses: string;
@@ -61,21 +63,21 @@ export class ServiceSectoresOcdeService {
   * Objetivo: Seteo de las variables en json, con datos de prueba
   ****************************************************************************/
   getFiles() {
-    return this.http.get('../assets/json/sectores-programas/sectores/filesocde.json')
+    return this.http.get('../assets/json/sectores-programas/programas/filesVisionPais.json')
       .toPromise()
       .then(res => <TreeNode[]>res.json().data);
   }
 
   /****************************************************************************
     * Funcion: FND-00003
-    * Fecha: 21-02-2019
-    * Descripcion: Metodo para obtener los Datos de Sectores OCDE/CAD
-    * Objetivo: datos de Sectores OCDE/CAD
+    * Fecha: 17-04-2019
+    * Descripcion: Metodo para obtener los Datos de Vision Pais
+    * Objetivo: datos de Vision de Pais
     * Params: { }
     ****************************************************************************/
-  getAllSectoresOcdeCad(): Observable<any> {
+  getAllProgramasVisionPais(): Observable<any> {
     // Retorno de la Funcion
-    return this._http.get(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 14), {
+    return this._http.get(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 50), {
       headers: this.headers,
       params: { 'tokenApi': this.tokenHeader },
     }).map(response => <TreeNode[]>response);
@@ -84,17 +86,17 @@ export class ServiceSectoresOcdeService {
 
   /****************************************************************************
     * Funcion: FND-00004
-    * Fecha: 22-02-2019
-    * Descripcion: Metodo para obtener los Datos del Sector OCDE/CAD
-    * Objetivo: datos del Sector OCDE/CAD
-    * Params: { idSector }
+    * Fecha: 17-04-2019
+    * Descripcion: Metodo para obtener los Datos del Plan de Nacion
+    * Objetivo: datos del Plan de Nacion
+    * Params: { idPrograma }
     ****************************************************************************/
-  getfindByIdSector(idSector: number): Observable<any> {
+  getfindByIdPrograma(idPrograma: number): Observable<any> {
     // Parametros del EndPoint
-    const paramSend = idSector;
+    const paramSend = idPrograma;
 
     // Retorno de la Funcion
-    return this._http.get(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 15) + paramSend, {
+    return this._http.get(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 51) + paramSend, {
       headers: this.headers,
       params: { 'tokenApi': this.tokenHeader },
     }).map(response => <TreeNode[]>response);
@@ -103,17 +105,17 @@ export class ServiceSectoresOcdeService {
 
   /****************************************************************************
     * Funcion: FND-00005
-    * Fecha: 25-03-2019
-    * Descripcion: Metodo para obtener los Datos del Sector OCDE/CAD
-    * Objetivo: datos del Sector OCDE/CAD, pr Nivel
-    * Params: { idNivelSector }
+    * Fecha: 17-04-2019
+    * Descripcion: Metodo para obtener los Datos del Plan de Nacion
+    * Objetivo: datos del Plan de Nacion, pr Nivel
+    * Params: { idNivelPrograma }
     ****************************************************************************/
-  getfindByIdNivelSector(idNivelSector: number): Observable<any> {
+  getfindByIdNivelPrograma(idNivelPrograma: number): Observable<any> {
     // Parametros del EndPoint
-    const paramSend = idNivelSector;
+    const paramSend = idNivelPrograma;
 
     // Retorno de la Funcion
-    return this._http.get(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 16) + paramSend, {
+    return this._http.get(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 52) + paramSend, {
       headers: this.headers,
       params: { 'tokenApi': this.tokenHeader },
     }).map(response => <TreeNode[]>response);
@@ -122,55 +124,39 @@ export class ServiceSectoresOcdeService {
 
   /****************************************************************************
     * Funcion: FND-00006
-    * Fecha: 25-03-2019
-    * Descripcion: Metodo para obtener los Datos del Sector OCDE/CAD
-    * Objetivo: datos del Sector OCDE/CAD, pr Nivel
-    * Params: { idNivelSector, sectorPadreId }
+    * Fecha: 17-04-2019
+    * Descripcion: Metodo para obtener los Datos del Programa Plan de Nacion
+    * Objetivo: datos del Plan de Nacion, pr Nivel
+    * Params: { idNivelPrograma, ProgramaPadreId }
     ****************************************************************************/
-  getfindByIdNivelSectorAndSectorPadreId(idNivelSector: number, sectorPadreId: number): Observable<any> {
+  getfindByIdNivelProgramaAndProgramaPadreId(idNivelPrograma: number, ProgramaPadreId: number): Observable<any> {
     // Parametros del EndPoint
-    const paramSend = idNivelSector + '/findBySectorPadreId/' + sectorPadreId;
+    const paramSend = idNivelPrograma + '/findByProgramaPadreId/' + ProgramaPadreId;
 
     // Retorno de la Funcion
-    return this._http.get(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 17) + paramSend, {
+    return this._http.get(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 53) + paramSend, {
       headers: this.headers,
       params: { 'tokenApi': this.tokenHeader },
     }).map(response => <TreeNode[]>response);
   } // FIN | FND-00006
 
+
   /****************************************************************************
     * Funcion: FND-00007
-    * Fecha: 14-04-2019
-    * Descripcion: Metodo para Ingresar los Datos del Sector OCDE/CAD
-    * Objetivo: Ingresar datos del Sector OCDE/CAD, pr Nivel
-    * Params: { jsonSendActividadSectorOcde }
+    * Fecha: 30-04-2019
+    * Descripcion: Metodo para Ingresar los Datos de Vision de Pais
+    * Objetivo: Ingresar datos de Vision Pais , por Nivel
+    * Params: { jsonSendActividadProgramaVisionpais }
     ****************************************************************************/
-  saveActividadSectorOcde(jsonSendActividadSectorOcde: any): Observable<any> {
+  saveActividadProgramaPlanNacion(jsonSendActividadProgramaVisionpais: any): Observable<any> {
     // Parametros del EndPoint
-    const paramSend = jsonSendActividadSectorOcde;
+    const paramSend = jsonSendActividadProgramaVisionpais;
 
     // Retorno de la Funcion
-    return this._http.post(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 18), paramSend, {
+    return this._http.post(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 54), paramSend, {
       headers: this.headers,
       params: { 'tokenApi': this.tokenHeader },
     }).map(response => <TreeNode[]>response);
   } // FIN | FND-00007
 
-
-  /****************************************************************************
-    * Funcion: FND-00004
-    * Fecha: 21-01-2019
-    * Descripcion: Metodo para Actualizar el Valor de la Secuencia
-    * Objetivo: Actualizar el valor de la Secuencia
-    * Params: { jsonSecuencia, idSecuencia }
-    ****************************************************************************/
-  updateSecuence(jsonSecuencia, idSecuencia: number): Observable<any> {
-    // Valores Constantes
-    const idSecuenciaSend: number = idSecuencia;
-    // Retorno de la Funcion
-    return this._http.put(this._systemEndPointsService.getEndPointService('userGroup', 4) + idSecuenciaSend, jsonSecuencia, {
-      headers: this.headers,
-      params: { 'tokenApi': this.tokenHeader },
-    });
-  } // FIN | FND-00008
 }

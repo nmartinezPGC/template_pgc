@@ -1,0 +1,98 @@
+{
+  "data": [{
+    "label": "Objetivo 1: Una Honduras sin pobreza extrema, educada y sana, con sistemas consolidados de previsión social",
+    "data": "1",
+    "expandedIcon": "fa fa-folder-open",
+    "collapsedIcon": "fa fa-folder",
+    "children": [{
+      "label": "Meta 1.1: Erradicar la pobreza extrema ",
+      "data": "2"},
+      {
+      "label": "Meta 1.2:  Reducir a menos de 15% el porcentaje de hogares en situación de pobrez ",
+      "data": "3"},
+      {
+      "label": "Meta 1.3: Elevar la escolaridad promedio a 9 años ",
+      "data": "4"},
+      {
+      "label": "Meta 1.4: Alcanzar 90% de cobertura de salud en todos los niveles del sistema",
+      "data": "5"},
+      {
+      "label": "Meta 1.5: Universalizar el régimen de jubilaciones y pensiones para el 90% de los asalariados del país y 50% de los ocupados no asalariados ",
+      "data": "6"}
+      ]
+  },
+  {
+    "label": "Objetivo 2:  Una Honduras que se desarrolla en democracia, con seguridad y sin violencia",
+    "data": "7",
+    "expandedIcon": "fa fa-folder-open",
+    "collapsedIcon": "fa fa-folder",
+    "children": [{
+      "label": "Meta 2.1: Siete procesos electorales democráticos continuos y transparentes celebrados a partir de 2009",
+      "data": "8"},
+      {
+      "label": "Meta 2.2: Reducir los niveles de criminalidad a un nivel por debajo del promedio internacional ",
+      "data": "9"},
+      {
+      "label": "Meta 2.3: Reducir el Índice de Conflictividad Social a menos de 6 ",
+      "data": "10"},
+      {
+      "label": "Meta 2.4: Reducir a menos del 5% el índice de ocupación extralegal de tierras ",
+      "data": "11"},
+      {
+      "label": "Meta 2.5 Mejorar la protección de fronteras como condición para la disuasión externa y aumento de la confianza interna",
+      "data": "12"}
+      ]
+  },
+  {
+    "label": "Objetivo 3: Una Honduras productiva, generadora de oportunidades y empleo digno, que aprovecha de manera sostenible sus recursos y reduce la vulnerabilidad ambiental",
+    "data": "13",
+    "expandedIcon": "fa fa-folder-open",
+    "collapsedIcon": "fa fa-folder",
+    "children": [{
+      "label": "Meta 3.1: Reducir la tasa de desempleo abierto al 2% y la tasa de subempleo invisible al 5% de la población ocupada ",
+      "data": "14"},
+      {
+      "label": "Meta 3.2: Ampliar la relación Exportaciones/PIB al 75% ",
+      "data": "15"},
+      {
+      "label": "Meta 3.3: Elevar al 80% la tasa de participación de energía renovable en la matriz de generación eléctrica del país",
+      "data": "16"},
+      {
+      "label": "Meta 3.4: Alcanzar 400,000 hectáreas de tierras bajo riego,  atendiendo el 100% de la demanda alimentaria nacional",
+      "data": "17"},
+      {
+      "label": "Meta 3.5: Elevar la tasa de represamiento y aprovechamiento hídrico al 25% ",
+      "data": "18"},
+      {
+      "label": "Meta 3.6: Alcanzar 1,000,000 de hectáreas de tierras de vocación forestal en proceso de restauración ecológica y productiva accediendo al mercado internacional de bonos de carbono",
+      "data": "19"},
+      {
+      "label": "Meta 3.7: Llevar el índice Global de Riesgo Climático a un nivel superior a 50 % ",
+      "data": "20"}
+      ]
+  },
+  {
+    "label": "Objetivo 4: Un Estado moderno, transparente, responsable, eficiente y competitivo ",
+    "data": "21",
+    "expandedIcon": "fa fa-folder-open",
+    "collapsedIcon": "fa fa-folder",
+    "children": [{
+      "label": "Meta 4.1: Mejorar la posición de Honduras en el índice de Competitividad Global a la posición 50 ",
+      "data": "22"},
+      {
+      "label": "Meta 4.2: Haber alcanzado una descentralización de la inversión pública del 40% hacia el nivel municipal ",
+      "data": "23"},
+      {
+      "label": "Meta 4.3: Llegar a una proporción de 90% de los funcionarios públicos acogidos a un régimen estable de servicio civil que premie la competencia, capacidad y desempeño",
+      "data": "24"},
+      {
+      "label": "Meta 4.4: Desarrollar los principales procesos de atención al ciudadano en las Instituciones del Estado por medios electrónicos",
+      "data": "25"},
+      {
+      "label": "Meta 4.5 Llevar a la posición de Honduras en el Índice de Control de la Corrupción, de los indicadores de gobernabilidad del Banco Mundial al percentil 90-100. ",
+      "data": "26"}
+      ]
+  }
+
+   ]
+     }
