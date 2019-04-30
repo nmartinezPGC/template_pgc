@@ -1,3 +1,14 @@
-<p>
-  organizaciones works!
-</p>
+<!-- Maquetacion de las Oganizaciones del Proyecto -->
+<!-- Componente para los Mensajes en pantalla -->
+
+<!-- ==================================================================================== -->
+<nb-card accent="warning" status="primary">
+  <nb-card-header>Información de Organizaciones del Proyecto {{ idProyectoTab }} | Codigo de Proyecto {{
+    codigoProyectoTab }} | Usuario {{ idUsuarioTab }}
+  </nb-card-header>
+</nb-card>
+
+<!-- ================ Organizaciones | Socio al Desarrollo ==================== -->
+<ngx-socio-desarrollo [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
+  [codigoProyectoTab]="codigoProyectoTab">
+</ngx-socio-desarrollo>

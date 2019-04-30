@@ -57,6 +57,7 @@ import { VidaMejorComponent } from './components/sectores-programas/programas/vi
 import { PlanNacionComponent } from './components/sectores-programas/programas/plan-nacion/plan-nacion.component';
 import { OdsModalMetasComponent } from './components/sectores-programas/sectores/ods/modals/ods-modal-metas/ods-modal-metas.component';
 import { OrganizacionesComponent } from './components/organizaciones/organizaciones.component';
+import { SocioDesarrolloComponent } from './components/organizaciones/socio-desarrollo/socio-desarrollo.component';
 
 
 @NgModule({
@@ -102,6 +103,7 @@ import { OrganizacionesComponent } from './components/organizaciones/organizacio
     PlanNacionComponent,
     OdsModalMetasComponent,
     OrganizacionesComponent,
+    SocioDesarrolloComponent,
   ],
   providers: [
     // SmartTableService, // Defincion del Servicio que provee los Datos de la Tabla: ID's Internas
