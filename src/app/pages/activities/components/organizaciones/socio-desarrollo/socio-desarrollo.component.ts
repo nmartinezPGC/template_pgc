@@ -57,7 +57,7 @@ export class SocioDesarrolloComponent implements OnInit {
    */
   constructor(private _toasterService: ToasterService,
     private _socioDesarrolloService: SocioDesarrolloService,
-    private _sharedOrganizacionesService: SharedOrganizacionesService, ) {
+    private _sharedOrganizacionesService: SharedOrganizacionesService ) {
     // Codigo del Constructor
   }
 
@@ -157,7 +157,6 @@ export class SocioDesarrolloComponent implements OnInit {
           this.JsonReceptionAllSocioDesarrollo = [];
         } else if (result.status === 200) {
           this.JsonReceptionAllSocioDesarrollo = result.data;
-          console.log(this.JsonReceptionAllSocioDesarrollo);
 
           // Setea la Lista de los todos Socios al Desarrollo
           this.dropdownListSocioDesarrollo = this.JsonReceptionAllSocioDesarrollo.map((item) => {
@@ -185,8 +184,8 @@ export class SocioDesarrolloComponent implements OnInit {
   * información que ocupa la API
   ****************************************************************************/
   OnItemDeSelectSocioDesarrollo(item: any) {
-    var foundSocioDesarrollo = this.JsonSendSociosDesarrollo.find(function (element) {
-      return element.name == item.itemName;
+    const foundSocioDesarrollo = this.JsonSendSociosDesarrollo.find(function (element) {
+      return element.name === item.itemName;
     });
 
     if (foundSocioDesarrollo !== undefined) {

@@ -16,7 +16,7 @@ import { TreeNode } from 'primeng/api';
 import { Http } from '@angular/http';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SharedOrganizacionesService {
   // Variables de la Ruta de la API

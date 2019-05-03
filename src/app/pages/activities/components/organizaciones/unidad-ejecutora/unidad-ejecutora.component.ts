@@ -54,7 +54,7 @@ export class UnidadEjecutoraComponent implements OnInit {
    */
   constructor(private _toasterService: ToasterService,
     private _unidadEjecutoraService: UnidadEjecutoraService,
-    private _sharedOrganizacionesService: SharedOrganizacionesService, ) {
+    private _sharedOrganizacionesService: SharedOrganizacionesService ) {
     // Codigo del Constructor
   }
 

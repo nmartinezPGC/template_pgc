@@ -111,7 +111,7 @@ export class PlanNacionComponent implements OnInit, OnChanges {
   constructor(private _servicePlanNacionService: ServicePlanNacionService,
     private messageService: MessageService,
     private changeDetectorRef: ChangeDetectorRef,
-    private _toasterService: ToasterService,) {
+    private _toasterService: ToasterService) {
     // Codigo del Constructor
   }
 
