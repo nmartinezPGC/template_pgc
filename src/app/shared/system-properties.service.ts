@@ -21,13 +21,13 @@ export class SystemPropertiesService {
   // public urlLocalResourse:string = "/rest";
 
   // Entorno de Servidor
-  // public urlServerConfig: string = 'http://172.17.0.128:8090/API-Rest-PGC/api/v1';
-  // public urlServerResourse: string = 'http://172.17.0.128:8090/API-Rest-PGC/api/v1';
+  // public urlServerConfig: string = 'http://172.17.0.128:8080/API-Rest-PGC/api/v1';
+  // public urlServerResourse: string = 'http://172.17.0.128:8080/API-Rest-PGC/api/v1';
   public urlServerConfig: string = 'http://172.17.0.128:8090/api/v1';
   public urlServerResourse: string = 'http://172.17.0.128:8090/api/v1';
 
   // Indicador del entorno a Copilar | 1 = Server | 2 = Localhost
-  public indicatorIPCompiler: number = 2;
+  public indicatorIPCompiler: number = 1;
 
   /****************************************************
   * Funcion: FND-00001
