@@ -182,6 +182,7 @@ export class SystemEndPointsService extends ListEndPointsService {
             break;
           case 22:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointOrganizaciones.deleteOrganizacion.urlEndPoint;
+            break;
           case 23:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointOrganizaciones.caseOrganizacion.urlEndPoint;
             break;
