@@ -53,6 +53,7 @@ import { SectoresCamposTransversalesComponent } from './components/sectores-prog
 import { VisionpaisComponent } from './components/sectores-programas/programas/visionpais/visionpais.component';
 import { VidaMejorComponent } from './components/sectores-programas/programas/vida-mejor/vida-mejor.component';
 import { PlanNacionComponent } from './components/sectores-programas/programas/plan-nacion/plan-nacion.component';
+import { PoliticasPublicasComponent } from './components/sectores-programas/programas/politicas-publicas/politicas-publicas.component';
 
 
 @NgModule({
@@ -93,6 +94,7 @@ import { PlanNacionComponent } from './components/sectores-programas/programas/p
     VisionpaisComponent,
     VidaMejorComponent,
     PlanNacionComponent,
+    PoliticasPublicasComponent,
   ],
   providers: [
     // SmartTableService, // Defincion del Servicio que provee los Datos de la Tabla: ID's Internas
