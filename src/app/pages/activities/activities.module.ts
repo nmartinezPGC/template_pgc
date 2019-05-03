@@ -41,7 +41,7 @@ import { MessageModule } from 'primeng/message';
 import { ListboxModule } from 'primeng/listbox';
 import { RecursosProyectoComponent } from './components/recursos-proyecto/recursos-proyecto.component';
 import { FileUploadModule } from 'primeng/fileupload';
-import { DropdownModule, EditorModule } from 'primeng/primeng';
+import { DropdownModule, EditorModule, AutoCompleteModule } from 'primeng/primeng';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { FilterPipe } from './pipes/filter.pipe';
@@ -58,6 +58,7 @@ import { PlanNacionComponent } from './components/sectores-programas/programas/p
 import { OdsModalMetasComponent } from './components/sectores-programas/sectores/ods/modals/ods-modal-metas/ods-modal-metas.component';
 import { OrganizacionesComponent } from './components/organizaciones/organizaciones.component';
 import { SocioDesarrolloComponent } from './components/organizaciones/socio-desarrollo/socio-desarrollo.component';
+import { UnidadEjecutoraComponent } from './components/organizaciones/unidad-ejecutora/unidad-ejecutora.component';
 
 
 @NgModule({
@@ -85,6 +86,7 @@ import { SocioDesarrolloComponent } from './components/organizaciones/socio-desa
     MessageModule,
     ListboxModule,
     FileUploadModule, // modulo de file upload
+    AutoCompleteModule,
   ],
   declarations: [
     ...routedComponents,
@@ -104,6 +106,7 @@ import { SocioDesarrolloComponent } from './components/organizaciones/socio-desa
     OdsModalMetasComponent,
     OrganizacionesComponent,
     SocioDesarrolloComponent,
+    UnidadEjecutoraComponent,
   ],
   providers: [
     // SmartTableService, // Defincion del Servicio que provee los Datos de la Tabla: ID's Internas

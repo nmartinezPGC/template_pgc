@@ -111,8 +111,7 @@ export class PlanNacionComponent implements OnInit, OnChanges {
   constructor(private _servicePlanNacionService: ServicePlanNacionService,
     private messageService: MessageService,
     private changeDetectorRef: ChangeDetectorRef,
-    private _toasterService: ToasterService,
-    private _listasComunesService: ListasComunesService) {
+    private _toasterService: ToasterService,) {
     // Codigo del Constructor
   }
 
@@ -252,7 +251,6 @@ export class PlanNacionComponent implements OnInit, OnChanges {
       }
     }
     this.JsonSendProgramaPlanNacionOpciones.sort();
-    // console.log(this.JsonSendProgramaPlanNacionOpciones);
   } // FIN | nodeSelects
 
 

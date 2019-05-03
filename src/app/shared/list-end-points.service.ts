@@ -314,6 +314,13 @@ export class ListEndPointsService {
         groupEndPoint: 'organizacionesGroup',
         descEndPoint: 'inhabilitar las orgnizaciones',
       },
+      caseOrganizacion: {
+        id: 23,
+        nameEndpoint: 'caseOrganizacion',
+        urlEndPoint: '/organizaciones/findByBoolean/',
+        groupEndPoint: 'organizacionesGroup',
+        descEndPoint: 'Escoger las Organizaciones segun el area indicada',
+      },
     }, // Modulo de Mantenimientos Genericos
     endPointMantGenericos: {
       listAllPaises: {

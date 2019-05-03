@@ -27,7 +27,7 @@ export class SystemPropertiesService {
   public urlServerResourse: string = 'http://172.17.0.128:8090/api/v1';
 
   // Indicador del entorno a Copilar | 1 = Server | 2 = Localhost
-  public indicatorIPCompiler: number = 1;
+  public indicatorIPCompiler: number = 2;
 
   /****************************************************
   * Funcion: FND-00001
