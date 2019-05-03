@@ -54,15 +54,10 @@
                       <div class="col-12 col-sm-6 col-md-4">
                         <div class="form-group">
                           <strong> <label>Espacio de Trabajo</label> </strong>
-                          <!-- <select class="form-control" #idEspacioTrabajo="ngModel" name="idEspacioTrabajo" id="idEspacioTrabajo"
-                            ngControl="idEspacioTrabajo" [(ngModel)]="_activityModel.idEspacioTrabajo" required>
-                            <option value="0">**** Selecciona el Espacio de Trabajo ****</option>
-                            <option *ngFor="let item of JsonReceptionEspaciosTrabajoUsuario" [value]="item.idEspacioTrabajo.idEspacioTrabajo">
-                              {{item.idEspacioTrabajo.descripcionEspacioTrabajo}}
-                            </option>
-                          </select> -->
-                          <angular2-multiselect [data]="dropdownListEspacioTrabajo" [(ngModel)]="selectedItemsEspacioTrabajo"
-                            [settings]="dropdownSettings" (onSelect)="OnItemDeSelectEspacioTrabajo($event)"></angular2-multiselect>
+
+                          <angular2-multiselect [data]="dropdownListEspacioTrabajo"
+                            [(ngModel)]="selectedItemsEspacioTrabajo" [settings]="dropdownSettings"
+                            (onSelect)="OnItemDeSelectEspacioTrabajo($event)"></angular2-multiselect>
                         </div>
                       </div>
                     </div>
@@ -85,8 +80,9 @@
                       <div class="col-sm-9">
                         <div class="form-group">
                           <strong> <label for="inputWebsite">Explicación de Estado</label> </strong>
-                          <textarea #explicacionEstado class="form-control" id="explicacionEstado" name="explicacionEstado"
-                            ngControl="explicacionEstado" [(ngModel)]="_activityModel.explicacionEstado" required
+                          <textarea #explicacionEstado class="form-control" id="explicacionEstado"
+                            name="explicacionEstado" ngControl="explicacionEstado"
+                            [(ngModel)]="_activityModel.explicacionEstado" required
                             placeholder="Nombre del Proyecto/Programa"></textarea>
                         </div>
                       </div>
@@ -99,9 +95,10 @@
                         <div class="form-group">
                           <strong> <label>Descripción</label> </strong>
                           <div class="form-group">
-                            <textarea #descripcionActividad class="form-control" id="descripcionActividad" name="descripcionActividad"
-                              ngControl="descripcionActividad" [(ngModel)]="_activityModel.descripcionActividad"
-                              required placeholder="Descripción del Proyecto/Programa" rows="5"></textarea>
+                            <textarea #descripcionActividad class="form-control" id="descripcionActividad"
+                              name="descripcionActividad" ngControl="descripcionActividad"
+                              [(ngModel)]="_activityModel.descripcionActividad" required
+                              placeholder="Descripción del Proyecto/Programa" rows="5"></textarea>
                           </div>
                         </div>
                       </div>
@@ -109,8 +106,9 @@
                         <div class="form-group">
                           <strong> <label>Objetivo</label> </strong>
                           <div class="form-group">
-                            <textarea #objetivoActividad class="form-control" id="objetivoActividad" name="objetivoActividad"
-                              ngControl="objetivoActividad" [(ngModel)]="_activityModel.objetivoActividad" required
+                            <textarea #objetivoActividad class="form-control" id="objetivoActividad"
+                              name="objetivoActividad" ngControl="objetivoActividad"
+                              [(ngModel)]="_activityModel.objetivoActividad" required
                               placeholder="Objetivo del Proyecto/Programa" rows="5"></textarea>
                           </div>
                         </div>
@@ -124,8 +122,9 @@
                         <div class="form-group">
                           <strong> <label>Antecedentes</label> </strong>
                           <div class="form-group">
-                            <textarea #antecedentesActividad class="form-control" id="antecedentesActividad" name="antecedentesActividad"
-                              ngControl="antecedentesActividad" [(ngModel)]="_activityModel.antecedentesActividad"
+                            <textarea #antecedentesActividad class="form-control" id="antecedentesActividad"
+                              name="antecedentesActividad" ngControl="antecedentesActividad"
+                              [(ngModel)]="_activityModel.antecedentesActividad"
                               placeholder="Antecedentes del Proyecto/Programa" rows="5"></textarea>
                           </div>
                         </div>
@@ -134,8 +133,9 @@
                         <div class="form-group">
                           <strong> <label>Condiciones Previas</label> </strong>
                           <div class="form-group">
-                            <textarea #condicionesActividad class="form-control" id="condicionesActividad" name="condicionesActividad"
-                              ngControl="condicionesActividad" [(ngModel)]="_activityModel.condicionesActividad"
+                            <textarea #condicionesActividad class="form-control" id="condicionesActividad"
+                              name="condicionesActividad" ngControl="condicionesActividad"
+                              [(ngModel)]="_activityModel.condicionesActividad"
                               placeholder="Condiciones Previas del Proyecto/Programa" rows="5"></textarea>
                           </div>
                         </div>
@@ -146,8 +146,8 @@
                           <strong> <label>Actividades</label> </strong>
                           <div class="form-group">
                             <textarea #actividadesCss class="form-control" id="actividadesCss" name="actividadesCss"
-                              ngControl="actividadesCss" [(ngModel)]="_activityModel.actividadesCss" placeholder="Actividades del Proyecto/Programa"
-                              rows="5"></textarea>
+                              ngControl="actividadesCss" [(ngModel)]="_activityModel.actividadesCss"
+                              placeholder="Actividades del Proyecto/Programa" rows="5"></textarea>
                           </div>
                         </div>
                       </div>
@@ -160,9 +160,10 @@
                         <div class="form-group">
                           <strong> <label>Justificación</label> </strong>
                           <div class="form-group">
-                            <textarea #justificacionActividad class="form-control" id="justificacionActividad" name="justificacionActividad"
-                              ngControl="justificacionActividad" [(ngModel)]="_activityModel.justificacionActividad"
-                              required placeholder="Justificación del Proyecto/Programa" rows="5"></textarea>
+                            <textarea #justificacionActividad class="form-control" id="justificacionActividad"
+                              name="justificacionActividad" ngControl="justificacionActividad"
+                              [(ngModel)]="_activityModel.justificacionActividad" required
+                              placeholder="Justificación del Proyecto/Programa" rows="5"></textarea>
                           </div>
                         </div>
                       </div>
@@ -170,8 +171,9 @@
                         <div class="form-group">
                           <strong> <label>Productos Esperados</label> </strong>
                           <div class="form-group">
-                            <textarea #productosEsperados class="form-control" id="productosEsperados" name="productosEsperados"
-                              ngControl="productosEsperados" [(ngModel)]="_activityModel.productosEsperados"
+                            <textarea #productosEsperados class="form-control" id="productosEsperados"
+                              name="productosEsperados" ngControl="productosEsperados"
+                              [(ngModel)]="_activityModel.productosEsperados"
                               placeholder="Productos Esperados del Proyecto/Programa" rows="5"></textarea>
                           </div>
                         </div>
@@ -201,8 +203,8 @@
                       <div class="col-sm-6">
                         <div class="form-group">
                           <strong> <label>Estrategia</label> </strong>
-                          <select #idEstrategia class="form-control" id="idEstrategia" name="idEstrategia" ngControl="idEstrategia"
-                            [(ngModel)]="_activityModel.idEstrategia">
+                          <select #idEstrategia class="form-control" id="idEstrategia" name="idEstrategia"
+                            ngControl="idEstrategia" [(ngModel)]="_activityModel.idEstrategia">
                             <option value="0">**** Selecciona la Estrategia ****</option>
                             <option *ngFor="let item of JsonReceptionEstrategias" [value]="item.idEstrategia">
                               {{item.descripcionEstrategia}}
@@ -213,8 +215,9 @@
                       <div class="col-sm-6">
                         <div class="form-group">
                           <strong> <label for="inputcodigoSIAFIBIP">Código BIP / SIAFI</label> </strong>
-                          <input #codigoSIAFIBIP type="text" class="form-control" id="codigoSIAFIBIP" name="codigoSIAFIBIP"
-                            ngControl="codigoSIAFIBIP" [(ngModel)]="_activityModel.codigoSIAFIBIP" placeholder="Código BIP / SIAFI">
+                          <input #codigoSIAFIBIP type="text" class="form-control" id="codigoSIAFIBIP"
+                            name="codigoSIAFIBIP" ngControl="codigoSIAFIBIP" [(ngModel)]="_activityModel.codigoSIAFIBIP"
+                            placeholder="Código BIP / SIAFI">
                         </div>
                       </div>
                     </div>
@@ -224,8 +227,8 @@
                       <div class="col-sm-6" *ngIf="idTipoOrganizacionUsario != 4">
                         <div class="form-group">
                           <strong> <label>Presupuesto</label> </strong>
-                          <select #idPresupuesto class="form-control" id="idPresupuesto" name="idPresupuesto" ngControl="idPresupuesto"
-                            [(ngModel)]="_activityModel.idPresupuesto">
+                          <select #idPresupuesto class="form-control" id="idPresupuesto" name="idPresupuesto"
+                            ngControl="idPresupuesto" [(ngModel)]="_activityModel.idPresupuesto">
                             <option value="0">**** Selecciona el Presupuesto ****</option>
                             <option *ngFor="let item of JsonReceptionPresupuesto" [value]="item.idPresupuesto">
                               {{item.descPresupuesto}}
@@ -324,9 +327,10 @@
                     <div class="form-group">
                       <strong> <label>Resultados Esperados</label> </strong>
                       <div class="form-group">
-                        <textarea #resultadosEsperados class="form-control" id="resultadosEsperados" name="resultadosEsperados"
-                          ngControl="resultadosEsperados" [(ngModel)]="_activityModel.resultadosEsperados" placeholder="Resultados Esperados del Proyecto/Programa"
-                          rows="5"></textarea>
+                        <textarea #resultadosEsperados class="form-control" id="resultadosEsperados"
+                          name="resultadosEsperados" ngControl="resultadosEsperados"
+                          [(ngModel)]="_activityModel.resultadosEsperados"
+                          placeholder="Resultados Esperados del Proyecto/Programa" rows="5"></textarea>
                       </div>
                     </div>
                   </div>
@@ -334,9 +338,10 @@
                     <div class="form-group">
                       <strong> <label>Resultados a la Fecha</label> </strong>
                       <div class="form-group">
-                        <textarea #resultadosAlaFecha class="form-control" id="resultadosAlaFecha" name="resultadosAlaFecha"
-                          ngControl="resultadosAlaFecha" [(ngModel)]="_activityModel.resultadosAlaFecha" placeholder="Resultados a la Fecha del Proyecto/Programa"
-                          rows="5"></textarea>
+                        <textarea #resultadosAlaFecha class="form-control" id="resultadosAlaFecha"
+                          name="resultadosAlaFecha" ngControl="resultadosAlaFecha"
+                          [(ngModel)]="_activityModel.resultadosAlaFecha"
+                          placeholder="Resultados a la Fecha del Proyecto/Programa" rows="5"></textarea>
                       </div>
                     </div>
                   </div>
@@ -353,22 +358,25 @@
                   <div class="col-sm-4">
                     <div class="form-group">
                       <strong> <label>Fecha de Firma</label> </strong>
-                      <my-date-picker name="mydate" class="form-control" [options]="myDatePickerOptions" [(ngModel)]="_activityModel.fechaFirma"
-                        required (dateChanged)="onDateChanged($event, 1)"></my-date-picker>
+                      <my-date-picker name="mydate" class="form-control" [options]="myDatePickerOptions"
+                        [(ngModel)]="_activityModel.fechaFirma" required (dateChanged)="onDateChanged($event, 1)">
+                      </my-date-picker>
                     </div>
                   </div>
                   <div class="col-sm-4">
                     <div class="form-group">
                       <strong> <label for="inputfechaEfectividad">Fecha de Efectividad</label> </strong>
-                      <my-date-picker name="mydate" class="form-control" [options]="myDatePickerOptions" [(ngModel)]="_activityModel.fechaEfectividad"
-                        required (dateChanged)="onDateChanged($event, 2)"></my-date-picker>
+                      <my-date-picker name="mydate" class="form-control" [options]="myDatePickerOptions"
+                        [(ngModel)]="_activityModel.fechaEfectividad" required (dateChanged)="onDateChanged($event, 2)">
+                      </my-date-picker>
                     </div>
                   </div>
                   <div class="col-sm-4">
                     <div class="form-group">
                       <strong> <label for="inputfechaCierre">Fecha Cierre</label> </strong>
-                      <my-date-picker name="mydate" class="form-control" [options]="myDatePickerOptions" [(ngModel)]="_activityModel.fechaCierre"
-                        (dateChanged)="onDateChanged($event, 3)"></my-date-picker>
+                      <my-date-picker name="mydate" class="form-control" [options]="myDatePickerOptions"
+                        [(ngModel)]="_activityModel.fechaCierre" (dateChanged)="onDateChanged($event, 3)">
+                      </my-date-picker>
                     </div>
                   </div>
                 </div>
@@ -377,15 +385,17 @@
                     <div class="form-group">
                       <strong> <label for="inputfechaPropuestaFinalizacion">Fecha Propuesta Finalización</label>
                       </strong>
-                      <my-date-picker name="mydate" class="form-control" [options]="myDatePickerOptions" [(ngModel)]="_activityModel.fechaPropuestaFinalizacion"
+                      <my-date-picker name="mydate" class="form-control" [options]="myDatePickerOptions"
+                        [(ngModel)]="_activityModel.fechaPropuestaFinalizacion"
                         (dateChanged)="onDateChanged($event, 4)"></my-date-picker>
                     </div>
                   </div>
                   <div class="col-sm-4">
                     <div class="form-group">
                       <strong> <label for="inputfechaFinalizacion">Fecha Finalización</label> </strong>
-                      <my-date-picker name="mydate" class="form-control" [options]="myDatePickerOptions" [(ngModel)]="_activityModel.fechaFinalizacion"
-                        (dateChanged)="onDateChanged($event, 5)"></my-date-picker>
+                      <my-date-picker name="mydate" class="form-control" [options]="myDatePickerOptions"
+                        [(ngModel)]="_activityModel.fechaFinalizacion" (dateChanged)="onDateChanged($event, 5)">
+                      </my-date-picker>
                     </div>
                   </div>
                 </div>
@@ -406,8 +416,8 @@
                   <div class="col-sm-3">
                     <div class="form-group">
                       <strong> <label>País Organización</label> </strong>
-                      <angular2-multiselect [data]="dropdownListPais" [(ngModel)]="selectedItemsPais" [settings]="dropdownSettings"
-                        (onSelect)="onItemSelectPais($event)"></angular2-multiselect>
+                      <angular2-multiselect [data]="dropdownListPais" [(ngModel)]="selectedItemsPais"
+                        [settings]="dropdownSettings" (onSelect)="onItemSelectPais($event)"></angular2-multiselect>
                     </div>
                   </div>
 
@@ -415,7 +425,8 @@
                     <div class="form-group">
                       <strong> <label>Tipo Organización</label> </strong>
                       <select #idTipoOrganizacion class="form-control" id="idTipoOrganizacion" name="idTipoOrganizacion"
-                        ngControl="idTipoOrganizacion" [(ngModel)]="_activityModel.idTipoOrganizacion" (change)="categoriasOrganizacionListService(_activityModel.idTipoOrganizacion)">
+                        ngControl="idTipoOrganizacion" [(ngModel)]="_activityModel.idTipoOrganizacion"
+                        (change)="categoriasOrganizacionListService(_activityModel.idTipoOrganizacion)">
                         <option value="0">**** Selecciona el tipo de Organizacion ****</option>
                         <option *ngFor="let item of JsonReceptionTiposOrganizacion" [value]="item.idTipoOrganizacion">
                           {{item.descTipoOrganizacion}}
@@ -431,7 +442,8 @@
                         ngControl="idCatOrganizacion" [(ngModel)]="_activityModel.idCatOrganizacion" (change)="organizacionesIdTipoIdPaisIdCategoriaListService(_activityModel.idTipoOrganizacion,
                         _activityModel.idPais, _activityModel.idCatOrganizacion)">
                         <option value="0">**** Selecciona la Categoría ****</option>
-                        <option *ngFor="let item of JsonReceptionCategoriasOrganizacion" [value]="item.idCatOrganizacion">
+                        <option *ngFor="let item of JsonReceptionCategoriasOrganizacion"
+                          [value]="item.idCatOrganizacion">
                           {{item.descCatOrganizacion}}
                         </option>
                       </select>
@@ -444,12 +456,13 @@
                     <div class="form-group">
                       <strong> <label for="inputWebsite">Buscar Organización</label> </strong>
                       <div class="input-group">
-                        <angular2-multiselect [data]="dropdownList" [(ngModel)]="selectedItems" [settings]="dropdownSettings"
-                          (onSelect)="onItemSelect($event)"></angular2-multiselect>
+                        <angular2-multiselect [data]="dropdownList" [(ngModel)]="selectedItems"
+                          [settings]="dropdownSettings" (onSelect)="onItemSelect($event)"></angular2-multiselect>
 
                         <!-- Boton de Todas las Organizaciones -->
-                        <button type="button" class="btn btn-primary botonSpecial" nbPopover="Listar todas las Organizaciones, registradas en la PGC"
-                          nbPopoverMode="hint" (click)="organizacionesAllListService()">
+                        <button type="button" class="btn btn-primary botonSpecial"
+                          nbPopover="Listar todas las Organizaciones, registradas en la PGC" nbPopoverMode="hint"
+                          (click)="organizacionesAllListService()">
                           Todas las Organizaciones
                         </button>
                       </div>
@@ -460,12 +473,13 @@
                     <div class="form-group">
                       <strong> <label for="inputWebsite">Id Interna</label> </strong>
                       <div class="input-group">
-                        <input #idInterna type="text" class="form-control" name="idInterna" id="idInterna" ngControl="idInterna"
-                          [(ngModel)]="_activityModel.idInterna" placeholder="ID Interna">
+                        <input #idInterna type="text" class="form-control" name="idInterna" id="idInterna"
+                          ngControl="idInterna" [(ngModel)]="_activityModel.idInterna" placeholder="ID Interna">
 
                         <!-- Botonera de Organizaciones -->
                         <button type="button" class="btn btn-primary btn-group-icon btn-group-divider botonSpecial"
-                          nbPopover="Agrega la ID Interna a la lista" nbPopoverMode="hint" (click)="pushJsonIdInterna()">
+                          nbPopover="Agrega la ID Interna a la lista" nbPopoverMode="hint"
+                          (click)="pushJsonIdInterna()">
                           <i class="ion-plus-round"></i>
                         </button>
                       </div>
@@ -500,7 +514,8 @@
                       <thead>
                         <tr class="tHeadSearch">
                           <th scope="col" colspan="2">
-                            <input type="text" class="form-control" [(ngModel)]="queryString" placeholder="Buscar Id Interna :">
+                            <input type="text" class="form-control" [(ngModel)]="queryString"
+                              placeholder="Buscar Id Interna :">
                           </th>
                         </tr>
                         <tr class="tHeadTable">
@@ -513,7 +528,8 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr *ngFor="let itemIdInterna of JsonIdInternaOrganizacion | filterdata: queryString : 'idInterna' | paginate: { itemsPerPage: 3, currentPage: p };let homeTableIndex = index">
+                        <tr
+                          *ngFor="let itemIdInterna of JsonIdInternaOrganizacion | filterdata: queryString : 'idInterna' | paginate: { itemsPerPage: 3, currentPage: p };let homeTableIndex = index">
                           <td>{{ homeTableIndex + 1 }}</td>
                           <td>{{ itemIdInterna.descTipoOrganizacion }}</td>
                           <td>{{ itemIdInterna.descPaisOrganizacion }}</td>
@@ -534,8 +550,8 @@
                     </table>
 
                     <!-- paginador de la tabla -->
-                    <pagination-controls autoHide="true" responsive="true" previousLabel="Anterior" nextLabel="Siguiente"
-                      (pageChange)="p = $event"></pagination-controls>
+                    <pagination-controls autoHide="true" responsive="true" previousLabel="Anterior"
+                      nextLabel="Siguiente" (pageChange)="p = $event"></pagination-controls>
 
                   </div>
                 </div>
@@ -552,17 +568,21 @@
                 <!-- <ngx-tiny-mce></ngx-tiny-mce> -->
                 <div class="row">
                   <div class="col-lg-12">
-                    <button class="btn btn-warning with-margins" nbPopover="Guarda la Información de tu Proyecto de forma temporal; para que luego puedas seguir actualizandola."
-                      nbPopoverMode="hint" nbPopoverPlacement="left" (click)="saveActivity(1)">Guardar como borrador</button>
+                    <button class="btn btn-warning with-margins"
+                      nbPopover="Guarda la Información de tu Proyecto de forma temporal; para que luego puedas seguir actualizandola."
+                      nbPopoverMode="hint" nbPopoverPlacement="left" (click)="saveActivity(1)">Guardar como
+                      borrador</button>
 
-                    <button class="btn btn-primary botonSave with-margins" nbPopover="Enviar la Información del Proyecto, para luego validar por el Administrador"
+                    <button class="btn btn-primary botonSave with-margins"
+                      nbPopover="Enviar la Información del Proyecto, para luego validar por el Administrador"
                       nbPopoverMode="hint" nbPopoverPlacement="top" (click)="saveActivity(2)">Guardar y Enviar</button>
 
-                    <button class="btn btn-danger with-margins" nbPopover="Limpiar la Información del formulario del Proyecto"
-                      nbPopoverMode="hint" nbPopoverPlacement="bottom" (click)="resetActivity()">Limpiar Formulario</button>
+                    <button class="btn btn-danger with-margins"
+                      nbPopover="Limpiar la Información del formulario del Proyecto" nbPopoverMode="hint"
+                      nbPopoverPlacement="bottom" (click)="resetActivity()">Limpiar Formulario</button>
 
-                    <button class="btn btn-warning with-margins" nbPopover="Hello, how are you today?" nbPopoverMode="hint"
-                      nbPopoverPlacement="right" (click)="newActividadIdInterna()">Probar</button>
+                    <button class="btn btn-warning with-margins" nbPopover="Hello, how are you today?"
+                      nbPopoverMode="hint" nbPopoverPlacement="right" (click)="newActividadIdInterna()">Probar</button>
                   </div>
                 </div>
               </nb-card-body>
@@ -577,8 +597,8 @@
         <!-- Tab #2 de Ubicacion Proyecto/Programa -->
         <nb-tab tabTitle="Paso #2 | Datos de Ubicación">
           <!-- <span id="sectorPrograms">Content #2</span> -->
-          <ngx-ubicacion [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab" [codigoProyectoTab]="codigoProyectoTab"
-            [JsonPassData]="JsonPassData">
+          <ngx-ubicacion [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
+            [codigoProyectoTab]="codigoProyectoTab" [JsonPassData]="JsonPassData">
           </ngx-ubicacion>
         </nb-tab>
         <!-- Fin de Datos de Ubicacion Proyecto/Programa -->
@@ -586,28 +606,38 @@
 
         <!-- Tab #3 de Sectores y ODS -->
         <nb-tab tabTitle="Paso #3 | Sectores y ODS">
-          <ngx-sectores-programas-ods [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab" [codigoProyectoTab]="codigoProyectoTab"></ngx-sectores-programas-ods>
+          <ngx-sectores-programas-ods [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
+            [codigoProyectoTab]="codigoProyectoTab"></ngx-sectores-programas-ods>
         </nb-tab>
         <!-- Fin de Datos de Sectores y ODS -->
         <!-- ==================================================================================== -->
 
         <!-- Tab #4 de Programas -->
         <nb-tab tabTitle="Paso #4 | Programas de Nación">
-          <ngx-programas [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab" [codigoProyectoTab]="codigoProyectoTab"></ngx-programas>
-          <ngx-politicas-publicas></ngx-politicas-publicas>
+          <ngx-programas [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
+            [codigoProyectoTab]="codigoProyectoTab"></ngx-programas>
         </nb-tab>
         <!-- Fin de Datos de Programas -->
         <!-- ==================================================================================== -->
 
+        <!-- Tab #5 de Información de Organizaciones -->
+        <nb-tab tabTitle="Paso #5 | Organizaciones">
+          <ngx-organizaciones [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
+            [codigoProyectoTab]="codigoProyectoTab">
+          </ngx-organizaciones>
+        </nb-tab>
+        <!-- Fin de Datos de Información Organizaciones -->
+        <!-- ==================================================================================== -->
+
         <!-- Tab #5 de Información Financiera -->
-        <nb-tab tabTitle="Paso #5 | Información Financiera">
-          <span>Content #4</span>
+        <nb-tab tabTitle="Paso #6 | Información Financiera">
+          <span>Content #6</span>
         </nb-tab>
         <!-- Fin de Datos de Información Financiera -->
         <!-- ==================================================================================== -->
 
         <!-- Tab #6 Recursos de soporte -->
-        <nb-tab tabTitle="Paso #6 | Recursos de Soporte">
+        <nb-tab tabTitle="Paso #7 | Recursos de Soporte">
           <ngx-recursos-proyecto></ngx-recursos-proyecto>
         </nb-tab>
         <!-- Fin de Datos de Documentos de Soporte -->

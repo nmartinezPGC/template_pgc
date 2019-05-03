@@ -4,20 +4,28 @@
 
 <!-- ==================================================================================== -->
 <!-- Agrupacion de la Informacion de Sectores de ODS -->
+<p-confirmDialog></p-confirmDialog>
+
 <p-fieldset legend="Objetivos de Desarrollo Sostenible" [toggleable]="true" class="fieldSet">
   <nb-card accent="warning" status="primary">
     <nb-card-body>
       <br>
       <div class="row">
-        <!-- Tarjeta para el OSD 1 -->
+        <!-- Tarjeta para los OSD -->
         <div class="col-xxxl-1 col-xxl-1 col-sm-6 col-md-2" *ngFor="let item of JsonReceptionSectorByNivelOds">
           <nb-card>
             <nb-card-body>
-              <img src="../../../../../../assets/images/ods/{{ item.imagenSector }}" class="imgOds" alt="">
+              <img src="../../../../../../assets/images/ods/{{ item.imagenSector }}" class="imgOds" alt=""
+                (click)="saveSectoresOds(item.idSector)" nbPopover="Selecciona el ODS, {{ item.nombreSector }}"
+                nbPopoverMode="hint">
             </nb-card-body>
 
             <nb-card-footer>
-              <a routerLink="/pages/mantenimientos/mant-espacios-trabajo/grupo-trabajo"
+              <!-- <a [routerLink]="['./']" nbPopover="Registrar ODS: {{ item.codigoSector }}"
+                (click)="saveSectoresOds(item.idSector)" nbPopoverMode="hint">
+                <i class="ion-archive"></i>
+              </a> -->
+              <a (click)="showStaticModal(item.nombreSector, item.idSector, item.imagenSector )"
                 nbPopover="Selecciona la Meta del ODS {{ item.codigoSector }}" nbPopoverMode="hint">
                 <i class="ion-flag"></i>
               </a>

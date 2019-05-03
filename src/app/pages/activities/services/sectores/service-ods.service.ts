@@ -145,7 +145,7 @@ export class ServiceOdsService {
     * Objetivo: Ingresar datos del Sector ODS, pr Nivel
     * Params: { jsonSendActividadSectorOds }
     ****************************************************************************/
-  saveActividadSectorOcde(jsonSendActividadSectorOds: any): Observable<any> {
+  saveActividadSectorOds(jsonSendActividadSectorOds: any): Observable<any> {
     // Parametros del EndPoint
     const paramSend = jsonSendActividadSectorOds;
 
