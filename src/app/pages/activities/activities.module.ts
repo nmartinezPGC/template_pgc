@@ -41,7 +41,7 @@ import { MessageModule } from 'primeng/message';
 import { ListboxModule } from 'primeng/listbox';
 import { RecursosProyectoComponent } from './components/recursos-proyecto/recursos-proyecto.component';
 import { FileUploadModule } from 'primeng/fileupload';
-import { DropdownModule, EditorModule, AutoCompleteModule } from 'primeng/primeng';
+import { DropdownModule, EditorModule, AutoCompleteModule, KeyFilterModule } from 'primeng/primeng';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { FilterPipe } from './pipes/filter.pipe';
@@ -88,6 +88,7 @@ import { UnidadEjecutoraComponent } from './components/organizaciones/unidad-eje
     ListboxModule,
     FileUploadModule, // modulo de file upload
     AutoCompleteModule,
+    KeyFilterModule,
   ],
   declarations: [
     ...routedComponents,

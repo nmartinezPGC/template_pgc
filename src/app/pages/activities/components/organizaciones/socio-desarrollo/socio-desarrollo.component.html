@@ -23,7 +23,9 @@
             </p-header>
             <ng-template let-socio pTemplate="item">
               <div class="ui-helper-clearfix">
-                <span style="float:right">{{socio.label}}</span> <input type="text">
+                <span style="float:left">{{socio.label}}</span>
+                <input style="float: right; width: 15%; height: 10px; text-align: center" class="form-control"
+                  type="text" pInputText pKeyFilter="int" placeholder="%" maxlength="2">
               </div>
             </ng-template>
           </p-listbox>
@@ -46,7 +48,7 @@
             <!-- Boton para Grabar Organizaciones  -->
             <button type="button" class="btn btn-outline-primary btn-icon"
               nbPopover="Registra el listado Socios al Desarrollo" nbPopoverMode="hint" nbPopoverPlacement="top"
-              (click)="saveProgramaVidaMejor()">
+              (click)="saveSocioDesarrollo()">
               <i class="ion-upload"></i>
             </button>
           </div>

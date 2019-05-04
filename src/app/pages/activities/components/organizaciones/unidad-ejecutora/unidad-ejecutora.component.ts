@@ -161,7 +161,7 @@ export class UnidadEjecutoraComponent implements OnInit {
               id: item.idOrganizacion,
               itemName: item.descOrganizacion,
             }
-          })
+          });
         }
       },
       error => {

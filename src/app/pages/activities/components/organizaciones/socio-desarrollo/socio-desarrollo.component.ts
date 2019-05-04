@@ -164,7 +164,7 @@ export class SocioDesarrolloComponent implements OnInit {
               id: item.idOrganizacion,
               itemName: item.descOrganizacion,
             }
-          })
+          });
         }
       },
       error => {
@@ -195,5 +195,19 @@ export class SocioDesarrolloComponent implements OnInit {
       this.JsonSendSociosDesarrollo = [...this.JsonSendSociosDesarrollo, { name: item.itemName, code: item.id }];
     }
   } // FIN | OnItemDeSelectSocioDesarrollo
+
+
+  /****************************************************************************
+  * Funcion: saveSocioDesarrollo
+  * Object Number: 004
+  * Fecha: 03-05-2019
+  * Descripcion: Method para Ingresar Items del Socio al Desarrollo
+  * en la Insercion del Proyecto
+  * Objetivo: enviar al Json del Socio al Desarrollo
+  * información que ocupa la API
+  ****************************************************************************/
+  saveSocioDesarrollo() {
+    // console.log('Dato seleccionado ' + JSON.stringify( this.JsonSendSociosDesarrollo ));
+  } // FIN | saveSocioDesarrollo
 
 }
