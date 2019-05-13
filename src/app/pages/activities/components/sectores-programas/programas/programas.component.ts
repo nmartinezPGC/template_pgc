@@ -5,6 +5,7 @@ import { Component, OnInit, Input, OnChanges } from '@angular/core';
   templateUrl: './programas.component.html',
   styleUrls: ['./programas.component.scss'],
 })
+//git config --global core.editor "code --wait"
 export class ProgramasComponent implements OnInit, OnChanges {
   // Variables entre Tabs | Components
   @Input() idProyectoTab: number;
