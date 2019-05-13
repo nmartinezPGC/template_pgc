@@ -1,0 +1,58 @@
+<!-- Maquetacion de los Objetivos de Vision País -->
+<!-- Componente para los Mensajes en pantalla -->
+<toaster-container [toasterconfig]="config"></toaster-container>
+
+<!-- Agrupacion de la Informacion de Objetivos Vision de País -->
+<p-fieldset legend="Políticas Publicas y Estrategias Nacionales" [toggleable]="true" class="fieldSet">
+  <nb-card accent="warning" status="primary">
+    <nb-card-body>
+      <div class="row">
+        <div class="col-sm-6">
+          <h4>Selecciona los Objetivos | Políticas Publicas y Estrategias Nacionales</h4>
+          <input type="text" class="form-control txtSearch" name="queryString" [(ngModel)]="queryString"
+            placeholder="Buscar Políticas Publicas y Estrategias Nacionales">
+          <br>
+          <p-tree [style]="{'width': '100%'}" [value]="filesTree4 | filter: queryString" selectionMode="checkbox"
+            (onNodeUnselect)="nodeUnselect($event)"  (onNodeSelect)="nodeSelect($event)"
+            dynamic="true"></p-tree>
+        <br>
+          <div>Políticas Publicas y Estrategias Nacionales Seleccionados: <span *ngFor="let file of selectedFiles2">{{file.parent.data}} </span></div>
+        </div>
+
+        <div class="col-sm-6">
+          <h4>Políticas Publicas y Estrategias Nacionales seleccionados</h4>
+          <p-listbox [options]="JsonSendProgramaPoliticasPublicasOpciones" [style]="{'width': '100%'}"
+            [(ngModel)]="selectedCities" multiple="multiple" filter="filter" optionLabel="name">
+            <p-header>
+              <i class="fa fa-file"></i>
+              Confirma cuales Políticas Publicas y Estrategias Nacionales deben registrarse...
+            </p-header>
+          </p-listbox>
+          <p>Políticas Publicas y Estrategias Nacionales a Registrar: <span *ngFor="let c of selectedCities" style="margin-right: 10px">{{c.name}}</span>
+          </p>
+          <hr>
+          <div class="icon-button-examples">
+            <!-- Boton de Calcular Porcentajes -->
+            <button type="button" class="btn btn-outline-danger btn-icon" nbPopover="Limpia el listado de Políticas Publicas y Estrategias Nacionales"
+              nbPopoverMode="hint" nbPopoverPlacement="top" (click)="cleanProgramaPoliticasPublicas()">
+              <i class="ion-trash-a"></i>
+            </button>
+
+            <!-- Boton para Calcular los Porcentajes de Políticas Publicas y Estrategias Nacionales -->
+            <button type="button" class="btn btn-outline-success btn-icon"
+              nbPopover="Calcula el % de participacion de Políticas Publicas y Estrategias Nacionales" nbPopoverMode="hint" nbPopoverPlacement="top">
+              <i class="ion-calculator"></i>
+            </button>
+
+            <!-- Boton para Grabar Políticas Publicas y Estrategias Nacionales -->
+            <button type="button" class="btn btn-outline-primary btn-icon"
+              nbPopover="Registra el listado de Políticas Publicas y Estrategias Nacionales" nbPopoverMode="hint" nbPopoverPlacement="top"
+              (click)="saveProgramaPoliticasPublicas()">
+              <i class="ion-upload"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </nb-card-body>
+  </nb-card>
+</p-fieldset>

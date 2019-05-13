@@ -145,7 +145,7 @@ export class SectoresGobiernoComponent implements OnInit, OnChanges {
     this._serviceSectoresGobiernoService.getFiles().then(files => this.filesTree4 = files);
 
     // this.getAllSectoresGobiernoService();
-    this.getfindByIdNivelSectorService(1);
+   // this.getfindByIdNivelSectorService(1);
   }
 
 
@@ -222,9 +222,7 @@ export class SectoresGobiernoComponent implements OnInit, OnChanges {
   * Descripcion: Method unselectFile of the Class
   * Objetivo: unselectFile in the method selected item with Treeview
   ****************************************************************************/
-  unselectFile() {
-    this.selectedFile2 = null;
-  } // FIN | unselectFile
+  // FIN | unselectFile
 
 
   /****************************************************************************
@@ -239,13 +237,13 @@ export class SectoresGobiernoComponent implements OnInit, OnChanges {
     // Condicion de Agregar los Nodos
     if (event.node.children === undefined) { // Definicion de Items del Nivel 4
       this.JsonSendSectoresGobiernoOpciones = [...this.JsonSendSectoresGobiernoOpciones, { name: event.node.label, code: event.node.data }];
-    } else if (event.node.children.length === 0) { // Definicion de Items del Nivel 3
+    } else if (event.node.children.length === 0 ) { // Definicion de Items del Nivel 3
       this.JsonSendSectoresGobiernoOpciones = [...this.JsonSendSectoresGobiernoOpciones, { name: event.node.label, code: event.node.data }];
     } else if (event.node.children.length !== 0) { // Definicion de Items del Nivel 2
       // Evaluar si el Nivel 2 o Nivel 3
-      if (event.node.children.length !== 0 && event.node.parent !== undefined) {
+      if (event.node.children.length !== 0 && event.node.children.parent !== undefined) {
         // Nodos del Nivel 2
-        for (let index = 0; index < event.node.children.length; index++) {
+        for (let index = 0; index < event.node.children; index++) {
           const element = event.node.children[index];
           const resultado = this.JsonSendSectoresGobiernoOpciones.findIndex(sector => sector.name === element.label);
           // Evalua que el Item no este dentro del Json
@@ -277,24 +275,17 @@ export class SectoresGobiernoComponent implements OnInit, OnChanges {
   ****************************************************************************/
   nodeUnselect(event) {
     // Condicion de Agregar los Nodos
-    if (event.node.children !== undefined) {
+    if (event.node !== undefined) {
       const itemNodeLabel = event.node.label;
       // Ejecucion del splice del elemento
-      const resultado = this.JsonSendSectoresGobiernoOpciones.findIndex(sector => sector.name === itemNodeLabel);
-      this.JsonSendSectoresGobiernoOpciones.splice(Number(resultado), 1)
+      const resultado = this.JsonSendSectoresGobiernoOpciones.findIndex(sector => sector.name !== itemNodeLabel);
+      this.JsonSendSectoresGobiernoOpciones.splice(Number(resultado))
       this.JsonSendSectoresGobiernoOpciones = [...this.JsonSendSectoresGobiernoOpciones];
-    } else if (event.node.children !== undefined && event.node.children.length !== 0) {
-      for (let index = 0; index < event.node.children.length; index++) {
-        const element = event.node.children[index];
-        // Ejecucion del splice por el item de iteracion
-        const resultado = this.JsonSendSectoresGobiernoOpciones.findIndex(sector => sector.name === element.label);
-        this.JsonSendSectoresGobiernoOpciones.splice(Number(resultado), 1)
-        this.JsonSendSectoresGobiernoOpciones = [...this.JsonSendSectoresGobiernoOpciones];
-      }
-    } else if (event.node.children !== undefined && event.node.children.length === 0) {
+    } 
+     else if (event.node !== 0 ) {
       const itemNodeLabel = event.node.label;
       // Ejecucion del splice del elemento
-      const resultado = this.JsonSendSectoresGobiernoOpciones.findIndex(sector => sector.name === itemNodeLabel);
+      const resultado = this.JsonSendSectoresGobiernoOpciones.findIndex(sector => sector.name !== itemNodeLabel);
       this.JsonSendSectoresGobiernoOpciones.splice(Number(resultado), 1)
       this.JsonSendSectoresGobiernoOpciones = [...this.JsonSendSectoresGobiernoOpciones];
     }
@@ -532,11 +523,13 @@ export class SectoresGobiernoComponent implements OnInit, OnChanges {
   * Objetivo: cleanSectoresGobierno Limpia listado Sector de Gobierno
   * Params: { }
   ****************************************************************************/
+
   cleanSectoresGobierno() {
+    this._serviceSectoresGobiernoService.getFiles().then(files => this.filesTree4 = files);
     this.JsonSendSectoresGobiernoOpciones = [];
     this.changeDetectorRef.detectChanges();
     this.JsonSendSectoresGobiernoOpciones = [...this.JsonSendSectoresGobiernoOpciones];
-    // console.log(this.JsonSendSectoresGobiernoOpciones);
-  } // FIN | cleanSectoresGobierno
+       // console.log(this.JsonSendSectoresGobiernoOpciones);
+      } // FIN | cleanSectoresGobierno
 
 }

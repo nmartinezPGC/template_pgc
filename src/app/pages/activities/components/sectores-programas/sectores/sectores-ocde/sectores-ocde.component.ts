@@ -145,7 +145,6 @@ export class SectoresOcdeComponent implements OnInit, OnChanges {
     // Llenado del Treeview de la Tabla
     this._serviceSectoresService.getFiles().then(files => this.filesTree4 = files);
 
-    // this.getAllSectoresOcdeCadService();
     // this.getfindByIdNivelSectorService(1);
   }
 
@@ -277,11 +276,11 @@ export class SectoresOcdeComponent implements OnInit, OnChanges {
   ****************************************************************************/
   nodeUnselect(event) {
     // Condicion de Agregar los Nodos
-    if (event.node.children !== undefined) {
+    if (event.node !== undefined) {
       const itemNodeLabel = event.node.label;
       // Ejecucion del splice del elemento
-      const resultado = this.JsonSendSectoresOcdeCadOpciones.findIndex(sector => sector.name === itemNodeLabel);
-      this.JsonSendSectoresOcdeCadOpciones.splice(Number(resultado), 1)
+      const resultado = this.JsonSendSectoresOcdeCadOpciones.findIndex(sector => sector.name !== itemNodeLabel);
+      this.JsonSendSectoresOcdeCadOpciones.splice(Number(resultado))
       this.JsonSendSectoresOcdeCadOpciones = [...this.JsonSendSectoresOcdeCadOpciones];
     } else if (event.node.children !== undefined && event.node.children.length !== 0) {
       for (let index = 0; index < event.node.children.length; index++) {
@@ -614,6 +613,7 @@ export class SectoresOcdeComponent implements OnInit, OnChanges {
   * Params: { }
   ****************************************************************************/
   cleanSectoresOcdeCad() {
+    this._serviceSectoresService.getFiles().then(files => this.filesTree4 = files);
     this.JsonSendSectoresOcdeCadOpciones = [];
     this.changeDetectorRef.detectChanges();
     this.JsonSendSectoresOcdeCadOpciones = [...this.JsonSendSectoresOcdeCadOpciones];

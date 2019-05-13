@@ -1,0 +1,83 @@
+{
+  "data": [{
+    "label": "Promocion y Proteccion Humana",
+    "data": "1",
+    "expandedIcon": "fa fa-folder-open",
+    "collapsedIcon": "fa fa-folder",
+    "children": [{
+      "label": "Salud",
+      "data": "2"},
+      {
+      "label": "Educacion y Cultura",
+      "data": "3"},
+      {
+      "label": "Vivienda",
+      "data": "4"},
+      {
+      "label": "Proteccion Social",
+      "data": "5"},
+      {
+      "label": "Agua y Saneamiento",
+      "data": "6"},
+      {
+      "label": "Infraestructura Social",
+      "data": "7"}
+      ]
+  },
+  {
+    "label": "Comunicaciones y Energia",
+    "data": "8",
+    "expandedIcon": "fa fa-folder-open",
+    "collapsedIcon": "fa fa-folder",
+    "children": [{
+      "label": "Vialidad",
+      "data": "9"},
+      {
+      "label": "Comunicacion",
+      "data": "10"},
+      {
+      "label": "Energia",
+      "data": "11"},
+      {
+      "label": "Transporte y Obras Publicas ",
+      "data": "12"}
+      ]
+  },
+  {
+    "label": "Agroforestal y Turismo",
+    "data": "13",
+    "expandedIcon": "fa fa-folder-open",
+    "collapsedIcon": "fa fa-folder",
+    "children": [{
+      "label": "Agricultura, Agroindustria y Ganaderia",
+      "data": "14"},
+      {
+      "label": "Recursos Forestal y Ambiente",
+      "data": "15"},
+      {
+      "label": "Actividad Turistica",
+      "data": "16"}
+      ]
+  },
+  {
+    "label": "Fortalecimiento Institucional",
+    "data": "17",
+    "expandedIcon": "fa fa-folder-open",
+    "collapsedIcon": "fa fa-folder",
+    "children": [{
+      "label": "Modernizacion del Estado",
+      "data": "18"},
+      {
+      "label": "Competitividad y MIPYMES",
+      "data": "19"},
+      {
+      "label": "Defensa y Seguridad",
+      "data": "20"},
+      {
+      "label": "Descentralizacion",
+      "data": "21"}
+      ]
+  }
+
+   ]
+     }

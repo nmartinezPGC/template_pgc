@@ -133,7 +133,7 @@ export class VidaMejorComponent implements OnInit, OnChanges {
     // Llenado del Treeview de la Tabla
     this._serviceVidaMejorService.getFiles().then(files => this.filesTree4 = files);
 
-    this.getfindByIdNivelProgramaService(1);
+    //this.getfindByIdNivelProgramaService(1);
   }
 
 
@@ -211,7 +211,7 @@ export class VidaMejorComponent implements OnInit, OnChanges {
   * Objetivo: unselectFile in the method selected item with Treeview
   ****************************************************************************/
   unselectFile() {
-    this.selectedFile2 = null;
+    this.filesTree4 = null;
   } // FIN | unselectFile
 
 
@@ -264,7 +264,7 @@ export class VidaMejorComponent implements OnInit, OnChanges {
   ****************************************************************************/
   nodeUnselect(event) {
     // Condicion de Agregar los Nodos
-    if (event.node.children !== undefined) {
+    if (event.node !== undefined) {
       const itemNodeLabel = event.node.label;
       // Ejecucion del splice del elemento
       const resultado = this.JsonSendProgramaVidaMejorOpciones.findIndex(Programa => Programa.name === itemNodeLabel);
@@ -475,6 +475,7 @@ export class VidaMejorComponent implements OnInit, OnChanges {
   * Params: { }
   ****************************************************************************/
   cleanProgramaVidaMejor() {
+    this._serviceVidaMejorService.getFiles().then(files => this.filesTree4 = files);
     this.JsonSendProgramaVidaMejorOpciones = [];
     this.changeDetectorRef.detectChanges();
     this.JsonSendProgramaVidaMejorOpciones = [...this.JsonSendProgramaVidaMejorOpciones];

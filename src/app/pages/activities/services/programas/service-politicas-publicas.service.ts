@@ -1,10 +1,10 @@
 /**
-* @author Nahum Martinez
-* @returns Servico de Campos Transversales
-* @name ServiceSectoresCampoTransversalService
-* @alias _serviceSectoresCampoTransversalService
+* @author Allan Madrid
+* @returns Servicio de Politicas Publicas
+* @name ServicePoliticasPublicasService
+* @alias _servicePoliticasPublicasService
 * @version 1.0.0
-* @fecha 16-04-2019
+* @fecha 06-05-2019
 */
 
 import { Injectable } from '@angular/core';
@@ -14,11 +14,10 @@ import { SystemPropertiesService } from '../../../../shared/system-properties.se
 import { Observable } from 'rxjs';
 import { TreeNode } from 'primeng/api';
 import { Http } from '@angular/http';
-
 @Injectable({
   providedIn: 'root',
 })
-export class ServiceSectoresCampoTransversalService {
+export class ServicePoliticasPublicasService {
   // Variables de la Ruta de la API
   public _url: string;
   public _urlResourses: string;
@@ -35,7 +34,7 @@ export class ServiceSectoresCampoTransversalService {
 
   /****************************************************************************
   * Funcion: FND-00001
-  * Fecha: 01-09-2019
+  * Fecha: 01-09-2019P
   * Descripcion: Metodo para obtener los Datos de la
   * variable identity del localStorage
   * Objetivo: Seteo de las variables en json
@@ -61,21 +60,21 @@ export class ServiceSectoresCampoTransversalService {
   * Objetivo: Seteo de las variables en json, con datos de prueba
   ****************************************************************************/
   getFiles() {
-    return this.http.get('../assets/json/sectores-programas/sectores/filesCamposTransversales.json')
+    return this.http.get('../assets/json/sectores-programas/programas/filesPoliticasPublicas.json')
       .toPromise()
       .then(res => <TreeNode[]>res.json().data);
   }
 
   /****************************************************************************
     * Funcion: FND-00003
-    * Fecha: 16-04-2019
-    * Descripcion: Metodo para obtener los Datos de Campo Transversal
-    * Objetivo: datos de Campo Transversal
+    * Fecha: 17-04-2019
+    * Descripcion: Metodo para obtener los Datos de Vision Pais
+    * Objetivo: datos de Vision de Pais
     * Params: { }
     ****************************************************************************/
-  getAllSectoresCamposTransversales(): Observable<any> {
+  getAllProgramasPoliticasPublicas(): Observable<any> {
     // Retorno de la Funcion
-    return this._http.get(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 26), {
+    return this._http.get(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 56), {
       headers: this.headers,
       params: { 'tokenApi': this.tokenHeader },
     }).map(response => <TreeNode[]>response);
@@ -84,17 +83,17 @@ export class ServiceSectoresCampoTransversalService {
 
   /****************************************************************************
     * Funcion: FND-00004
-    * Fecha: 16-04-2019
-    * Descripcion: Metodo para obtener los Datos del Campo Transversal
-    * Objetivo: datos del Campo Transversal
-    * Params: { idSector }
+    * Fecha: 17-04-2019
+    * Descripcion: Metodo para obtener los Datos de Vision Pais
+    * Objetivo: datos del Plan de Nacion
+    * Params: { idPrograma }
     ****************************************************************************/
-  getfindByIdSector(idSector: number): Observable<any> {
+  getfindByIdPrograma(idPrograma: number): Observable<any> {
     // Parametros del EndPoint
-    const paramSend = idSector;
+    const paramSend = idPrograma;
 
     // Retorno de la Funcion
-    return this._http.get(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 27) + paramSend, {
+    return this._http.get(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 57) + paramSend, {
       headers: this.headers,
       params: { 'tokenApi': this.tokenHeader },
     }).map(response => <TreeNode[]>response);
@@ -103,17 +102,17 @@ export class ServiceSectoresCampoTransversalService {
 
   /****************************************************************************
     * Funcion: FND-00005
-    * Fecha: 16-04-2019
-    * Descripcion: Metodo para obtener los Datos del Campo Transversal
-    * Objetivo: datos del Campo Transversal, pr Nivel
-    * Params: { idNivelSector }
+    * Fecha: 17-04-2019
+    * Descripcion: Metodo para obtener los Datos del Plan de Nacion
+    * Objetivo: datos del Plan de Nacion, pr Nivel
+    * Params: { idNivelPrograma }
     ****************************************************************************/
-  getfindByIdNivelSector(idNivelSector: number): Observable<any> {
+  getfindByIdNivelPrograma(idNivelPrograma: number): Observable<any> {
     // Parametros del EndPoint
-    const paramSend = idNivelSector;
+    const paramSend = idNivelPrograma;
 
     // Retorno de la Funcion
-    return this._http.get(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 28) + paramSend, {
+    return this._http.get(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 58) + paramSend, {
       headers: this.headers,
       params: { 'tokenApi': this.tokenHeader },
     }).map(response => <TreeNode[]>response);
@@ -122,17 +121,17 @@ export class ServiceSectoresCampoTransversalService {
 
   /****************************************************************************
     * Funcion: FND-00006
-    * Fecha: 16-04-2019
-    * Descripcion: Metodo para obtener los Datos del Sector Campo Transversal
-    * Objetivo: datos del Campo Transversal, pr Nivel
-    * Params: { idNivelSector, sectorPadreId }
+    * Fecha: 17-04-2019
+    * Descripcion: Metodo para obtener los Datos del Programa Plan de Nacion
+    * Objetivo: datos del Plan de Nacion, pr Nivel
+    * Params: { idNivelPrograma, ProgramaPadreId }
     ****************************************************************************/
-  getfindByIdNivelSectorAndSectorPadreId(idNivelSector: number, sectorPadreId: number): Observable<any> {
+  getfindByIdNivelProgramaAndProgramaPadreId(idNivelPrograma: number, ProgramaPadreId: number): Observable<any> {
     // Parametros del EndPoint
-    const paramSend = idNivelSector + '/findBySectorPadreId/' + sectorPadreId;
+    const paramSend = idNivelPrograma + '/findByProgramaPadreId/' + ProgramaPadreId;
 
     // Retorno de la Funcion
-    return this._http.get(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 29) + paramSend, {
+    return this._http.get(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 59) + paramSend, {
       headers: this.headers,
       params: { 'tokenApi': this.tokenHeader },
     }).map(response => <TreeNode[]>response);
@@ -141,37 +140,21 @@ export class ServiceSectoresCampoTransversalService {
 
   /****************************************************************************
     * Funcion: FND-00007
-    * Fecha: 16-04-2019
-    * Descripcion: Metodo para Ingresar los Datos del Campo Transversal
-    * Objetivo: Ingresar datos del Campo Transversal, pr Nivel
-    * Params: { jsonSendActividadSectorCampoTransversal }
+    * Fecha: 30-04-2019
+    * Descripcion: Metodo para Ingresar los Datos de Vision de Pais
+    * Objetivo: Ingresar datos de Vision Pais , por Nivel
+    * Params: { jsonSendActividadProgramaVisionpais }
     ****************************************************************************/
-  saveActividadSectorCampoTransversal(jsonSendActividadSectorCampoTransversal: any): Observable<any> {
+  saveActividadProgramaPoliticasPublicas(jsonSendActividadProgramaPoliticasPublicas: any): Observable<any> {
     // Parametros del EndPoint
-    const paramSend = jsonSendActividadSectorCampoTransversal;
+    const paramSend = jsonSendActividadProgramaPoliticasPublicas;
 
     // Retorno de la Funcion
-    return this._http.post(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 30), paramSend, {
+    return this._http.post(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 60), paramSend, {
       headers: this.headers,
       params: { 'tokenApi': this.tokenHeader },
     }).map(response => <TreeNode[]>response);
   } // FIN | FND-00007
 
-
-  /****************************************************************************
-    * Funcion: FND-00004
-    * Fecha: 16-04-2019
-    * Descripcion: Metodo para Actualizar el Valor de la Secuencia
-    * Objetivo: Actualizar el valor de la Secuencia
-    * Params: { jsonSecuencia, idSecuencia }
-    ****************************************************************************/
-  updateSecuence(jsonSecuencia, idSecuencia: number): Observable<any> {
-    // Valores Constantes
-    const idSecuenciaSend: number = idSecuencia;
-    // Retorno de la Funcion
-    return this._http.put(this._systemEndPointsService.getEndPointService('userGroup', 4) + idSecuenciaSend, jsonSecuencia, {
-      headers: this.headers,
-      params: { 'tokenApi': this.tokenHeader },
-    });
-  } // FIN | FND-00008
 }
+

@@ -378,7 +378,7 @@ export class SystemEndPointsService extends ListEndPointsService {
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActividadSectorOds.urlEndPoint;
             break;
           case 50: // AMA | 2019-04-30 | Mapeo de Vision de Pais
-            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findAllProgramaVisionPais.urlEndPoint; // Sectores ODS
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findAllProgramaVisionPais.urlEndPoint;
             break;
           case 51:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdProgramaVisionPais.urlEndPoint;
@@ -394,6 +394,24 @@ export class SystemEndPointsService extends ListEndPointsService {
             break;
           case 55:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActividadProgramaVisionPais.urlEndPoint;
+            break;
+            case 56: // AMA | 2019-05-06 | Mapeo de Vision de Politicas Publicas
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findAllProgramaPoliticasPublicas.urlEndPoint;
+            break;
+          case 57:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdProgramaPoliticasPublicas.urlEndPoint;
+            break;
+          case 58:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdNivelProgramaPoliticasPublicas.urlEndPoint;
+            break;
+          case 59:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdNivelProgramaPoliticasPublicasPadre.urlEndPoint;
+            break;
+          case 60:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.newActividadProgramaPoliticasPublicasPadre.urlEndPoint;
+            break;
+          case 61:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActividadProgramaPoliticasPublicas.urlEndPoint;
             break;
         }
         break;

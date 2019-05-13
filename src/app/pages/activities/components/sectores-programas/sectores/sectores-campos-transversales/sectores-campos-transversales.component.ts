@@ -95,7 +95,7 @@ export class SectoresCamposTransversalesComponent implements OnInit, OnChanges {
   public secuenciaDeActividad: any;
 
   // Modelo de la Clase
-  public _activitySectoresCampoTransversalModel: ActivitySectoresCampoTransversalModel;
+  public _activitySectoresCampoTransversal: ActivitySectoresCampoTransversalModel;
 
   // Consfiguracion del Notificador
   position = 'toast-bottom-full-width';
@@ -133,7 +133,7 @@ export class SectoresCamposTransversalesComponent implements OnInit, OnChanges {
     this.loading = true;
 
     // Inicializacion del Modelo
-    this._activitySectoresCampoTransversalModel = new ActivitySectoresCampoTransversalModel(
+    this._activitySectoresCampoTransversal = new ActivitySectoresCampoTransversalModel(
       0, null, // Datos Generales
       null, 0, // Relacionales
       null, 0, 0,
@@ -143,8 +143,7 @@ export class SectoresCamposTransversalesComponent implements OnInit, OnChanges {
     // Llenado del Treeview de la Tabla
     this._serviceSectoresCampoTransversalService.getFiles().then(files => this.filesTree4 = files);
 
-    // this.getAllSectoresGobiernoService();
-    this.getfindByIdNivelSectorService(1);
+    // this.getfindByIdNivelSectorService(1);
   }
 
 
@@ -222,7 +221,7 @@ export class SectoresCamposTransversalesComponent implements OnInit, OnChanges {
   * Objetivo: unselectFile in the method selected item with Treeview
   ****************************************************************************/
   unselectFile() {
-    this.selectedFile2 = null;
+    this.filesTree4 = null;
   } // FIN | unselectFile
 
 
@@ -276,7 +275,7 @@ export class SectoresCamposTransversalesComponent implements OnInit, OnChanges {
   ****************************************************************************/
   nodeUnselect(event) {
     // Condicion de Agregar los Nodos
-    if (event.node.children !== undefined) {
+    if (event.node !== undefined) {
       const itemNodeLabel = event.node.label;
       // Ejecucion del splice del elemento
       const resultado = this.JsonSendSectoresCampoTransversalOpciones.findIndex(sector => sector.name === itemNodeLabel);
@@ -444,7 +443,7 @@ export class SectoresCamposTransversalesComponent implements OnInit, OnChanges {
   ****************************************************************************/
   saveSectoresCampoTransversal() {
     // Seteo de los campos iniciales
-    this._activitySectoresCampoTransversalModel.idActividad = { idActividad: this.idProyectoTab };
+    this._activitySectoresCampoTransversal.idActividad = { idActividad: this.idProyectoTab };
 
     // Validacion de Items seleccionados
     if (this.JsonSendSectoresCampoTransversalOpciones.length > 0) {
@@ -453,12 +452,12 @@ export class SectoresCamposTransversalesComponent implements OnInit, OnChanges {
         const element = this.JsonSendSectoresCampoTransversalOpciones[index];
 
         // Asignacion del Campo Transversal
-        this._activitySectoresCampoTransversalModel.idSectorCampo = { idSector: element.code };
+        this._activitySectoresCampoTransversal.idSectorCampo = { idSector: element.code };
 
-        this._activitySectoresCampoTransversalModel.codigoActividad = this.codigoProyectoTab + '-ASC-' + element.code;
+        this._activitySectoresCampoTransversal.codigoActividad = this.codigoProyectoTab + '-ASC-' + element.code;
         // console.log(this._activitySectoresCampoTransversalModel);
         // Ejecucion del Campo Transversal
-        this._serviceSectoresCampoTransversalService.saveActividadSectorCampoTransversal(this._activitySectoresCampoTransversalModel).subscribe(
+        this._serviceSectoresCampoTransversalService.saveActividadSectorCampoTransversal(this._activitySectoresCampoTransversal).subscribe(
           result => {
             if (result.status !== 200) {
               this.showToast('error', 'Error al Ingresar la Información del Campo Transversal asociado al Proyecto', JSON.stringify(result.message));
@@ -492,6 +491,7 @@ export class SectoresCamposTransversalesComponent implements OnInit, OnChanges {
   * Params: { }
   ****************************************************************************/
   cleanSectoresCamposTransversales() {
+    this._serviceSectoresCampoTransversalService.getFiles().then(files => this.filesTree4 = files);
     this.JsonSendSectoresCampoTransversalOpciones = [];
     this.changeDetectorRef.detectChanges();
     this.JsonSendSectoresCampoTransversalOpciones = [...this.JsonSendSectoresCampoTransversalOpciones];

@@ -1,0 +1,548 @@
+{
+  "data": [
+  {
+    "label": "estategia de seguridad alimentaria",
+    "data": "1"
+
+  }, {
+    "label": "politica de proteccion social",
+      "data": "2"
+        },
+        {
+          "label": "politica integral de convivencia y seguridad ciudadana",
+            "data": "3"
+              },
+              {
+                "label": "politica publica y plan nacional de accion en derechos Humanos",
+                  "data": "4"
+                },
+                {
+                  "label": "estrategia nacional de competitividad",
+                    "data": "5",
+                    "expandedIcon": "fa fa-folder-open",
+                    "collapsedIcon": "fa fa-folder",
+                      "children": [{
+                    "label": "EJE-institucionalidad",
+                    "data": "6",
+                    "expandedIcon": "fa fa-folder-open",
+                    "collapsedIcon": "fa fa-folder",
+                    "children": [
+                      {
+                        "label": "corrupcion",
+                         "data": "7",
+                         "expandedIcon": "fa fa-folder-open",
+                         "collapsedIcon": "fa fa-folder",
+                       "children": [{
+                         "label": "indicador de  control de la corrupcion",
+                             "data": "8"
+                           },
+                          {
+                            "label": "porcentaje de recomendaciones del TSC implementadas",
+                            "data": "9"
+                          },
+                          {
+                            "label": "calificacion del cumplimiento de la TLAIP",
+                            "data": "10"
+                          },
+                          {
+                            "label": "comportamiento etico de las empresas (puntuacion en el WEF)",
+                            "data": "11"
+                          }
+                           ]
+                       },
+                       { "label": "modernazionalizacion del estado",
+                         "data": "12",
+                         "expandedIcon": "fa fa-folder-open",
+                         "collapsedIcon": "fa fa-folder",
+                       "children": [{
+                         "label": "numero de procesos de atencion a ciudadanos certificados",
+                             "data": "13"
+                           },
+                          {
+                            "label": "indice de servicios en linea del gobierno",
+                            "data": "14"
+                          }
+
+                           ]
+
+                       },
+                      {
+                        "label": "seguridad juridica",
+                         "data": "15",
+                         "expandedIcon": "fa fa-folder-open",
+                         "collapsedIcon": "fa fa-folder",
+                       "children": [{
+                         "label": "numero de transacciones",
+                             "data": "16"
+                           },
+                          {
+                            "label": "numero de transacciones registrales anuales en el folio real sobre transacciones registrales totales anuales",
+                            "data": "17"
+                          },
+                          {
+                            "label": "porcentaje de acupacion extralegal de tierras rurales",
+                            "data": "18"
+                          },
+                           {
+                            "label": "porcentaje de ocupacion extralegal de predios urbanos",
+                            "data": "19"
+                          },
+                          {
+                            "label": "puntuacion en el indice  internacional de derechos de la propiedad intelectual",
+                            "data": "20"
+                          }
+                           ]
+                      },
+                       {
+                         "label": "seguridad ciudadana",
+                         "data": "21",
+                         "expandedIcon": "fa fa-folder-open",
+                       "collapsedIcon": "fa fa-folder",
+                       "children": [{
+                         "label": "posicion de Honduras en el indicador cumplimiento de contratos de Doing Bussines",
+                             "data": "22"
+                           }, {
+                            "label": "tasa de Homicidios por 100, habitantes",
+                                "data": "23"
+                              }
+                           ]
+                       }
+
+                      ]
+                },
+                {
+                  "label": "EJE - infraestrucutura",
+                  "data": "24",
+                  "expandedIcon": "fa fa-folder-open",
+                  "collapsedIcon": "fa fa-folder",
+                  "children": [{
+                    "label": "servicio electrico",
+                    "data": "25",
+                    "expandedIcon": "fa fa-folder-open",
+                    "collapsedIcon": "fa fa-folder",
+                    "children": [{
+                        "label": "porcentaje de energia electrica renovable participando en matriz de generacion",
+                        "data": "26"
+                      },
+                      {
+                        "label": "porcentaje de perdidas en la transmision electricas",
+                        "data": "27"
+                      },
+                      {
+                        "label": "porcentajes de personas con acceso a energia electrica",
+                        "data": "28"
+                      },
+                      {
+                        "label": "infraestructura vial, portuaria, aeroportuaria y ferroviaria",
+                        "data": "29",
+                        "expandedIcon": "fa fa-folder-open",
+                        "collapsedIcon": "fa fa-folder",
+                        "children": [{
+                        "label": "Dencidad de la red vial oficial (km de red vial oficial por cien k,2 de territorio)",
+                        "data": "30"
+                      },
+                      {
+                        "label": "Porcentaje de kilometros de la red vial oficial primaria y secundaria pavimentada mantenimiento por niveles de servicios",
+                        "data": "31"
+                      },
+                      {
+                        "label": "numero de kms de vias ferreas.",
+                        "data": "32"
+                      },
+                      {
+                        "label": "volumen de carga manejado en los puertos (TM por año)",
+                        "data": "33"
+                      },
+                      {
+                        "label": "posicion de Honduras en el indice de conectividad de las lineas navieras (LCSI)",
+                        "data": "34"
+                      },
+                      {
+                        "label": "numero de pasajeros transportados por vias areas",
+                        "data": "35"
+                      },
+                      {
+                        "label": "volumen de carga transportada por via aerea (kg)",
+                        "data": "36"
+                      }
+                      ]
+                      },
+                      {
+                  "label": "acceso a internet",
+                  "data": "37",
+                  "expandedIcon": "fa fa-folder-open",
+                  "collapsedIcon": "fa fa-folder",
+                  "children": [{
+                    "label": "porcentaje de la poblacion con acceso a internet",
+                    "data": "38"
+                  }
+                      ]
+                      },
+                      {
+                        "label": "infraestructura Hidrica",
+                        "data": "39",
+                        "expandedIcon": "fa fa-folder-open",
+                        "collapsedIcon": "fa fa-folder",
+                        "children": [{
+                          "label": "Tasa nacional de represamiento y aprovechamiento de recurso Hidricos",
+                          "data": "40"
+                        },
+                        {
+                          "label": "numero de hectareas de tierra agricola con acceso a riego",
+                          "data": "41"
+                        }
+                            ]
+                      },
+                      {
+
+                        "label": "sistema de manejo de riego",
+                        "data": "42",
+                        "expandedIcon": "fa fa-folder-open",
+                        "collapsedIcon": "fa fa-folder",
+                        "children": [{
+                          "label": "numero de municipios con PDM-OT registrado con el RENOT",
+                          "data": "43"
+                        },
+                        {
+                          "label": "Numero de regiones con PDR-OT registrados en el RENOT",
+                          "data": "106"
+                        },
+                        {
+                          "label": "Numero de municipios implementado SINAGER",
+                          "data": "107"
+                        }
+                     ]
+
+                      }
+                    ]
+                    }  ]
+
+
+                 },
+                 {
+                  "label": "EJE- ambiente Marcroeconomico",
+                  "data": "44",
+                  "expandedIcon": "fa fa-folder-open",
+                  "collapsedIcon": "fa fa-folder",
+                  "children": [{
+                    "label": "estabilidad macroeconomica",
+                    "data": "45",
+                 "expandedIcon": "fa fa-folder-open",
+                  "collapsedIcon": "fa fa-folder",
+                  "children": [{
+                    "label": "tasa de inflacion anual.",
+                    "data": "46"
+                  },
+                  {
+                    "label": "deficit fiscal del gobierno central como porcentaje del PIB",
+                    "data": "47"
+                  },
+                  {
+                    "label": "deuda publica como porcentaje del PIB",
+                    "data": "48"
+                  },
+                  {
+                    "label": "recaudacion fiscal como porcenteja del PIB",
+                    "data": "49"
+                  },
+                  {
+                    "label": "inversion real del gobierno central respecto del PIB",
+                    "data": "50"
+                  }
+                      ]
+
+                  },
+                  {
+                    "label": "ahorro interno",
+                    "data": "51",
+                 "expandedIcon": "fa fa-folder-open",
+                  "collapsedIcon": "fa fa-folder",
+                  "children": [{
+                    "label": "porcentaje de trabajadores asalariados afiliados a sistema de prevision",
+                    "data": "52"
+                  },
+                  {
+                    "label": "tasa de ahorro total como porcentaje de PIB",
+                    "data": "53"
+                  }
+                ]
+                  },
+                  {
+                    "label": "financiamiento de actividades productivas",
+                    "data": "54",
+                 "expandedIcon": "fa fa-folder-open",
+                  "collapsedIcon": "fa fa-folder",
+                  "children": [{
+                    "label": "creditos de sectores productivos como porcentajes del credito local",
+                    "data": "55"
+                  },
+                  {
+                    "label": "creditos a la MIPYMES como porcentaje del credito total",
+                    "data": "56"
+                  }
+                ]
+                  },
+                  {
+                    "label": "inversion extranjera",
+                    "data": "57",
+                 "expandedIcon": "fa fa-folder-open",
+                  "collapsedIcon": "fa fa-folder",
+                  "children": [{
+                    "label": "valor a la inversion en APP como porcentaje del PIB",
+                    "data": "58"
+                  },
+                  {
+                    "label": "monto de la inversion extranjera directa como porcentaje del PIB",
+                    "data": "59"
+                  }
+                ]
+                  }
+
+
+                      ]
+
+                 },
+                 {
+                  "label": "EJE: Capital Humano",
+                    "data": "60",
+                 "expandedIcon": "fa fa-folder-open",
+                  "collapsedIcon": "fa fa-folder",
+                  "children": [{
+                    "label": "Educacion",
+                    "data": "61",
+                    "expandedIcon": "fa fa-folder-open",
+                    "collapsedIcon": "fa fa-folder",
+                    "children": [{
+                      "label": "Tasa neta de cobertura en educacion basica en sus dos primeros ciclos(1ero a 6to grado)",
+                      "data": "62"
+                    },
+                    {
+                      "label": "tasa neta de cobertura en educaion basica en su tercer ciclo(7mo a 9no grado)",
+                      "data": "63"
+                    },
+                    {
+                      "label": "Rendimiento promedio en matematicas en el nivel basico",
+                      "data": "64"
+                    },
+                    {
+                      "label": "Rendimiento promedio en español en el nivel basico",
+                      "data": "65"
+                    },
+                    {
+                      "label": "tasa neta de cobertura en educacion media",
+                      "data": "66"
+                    }
+                  ]
+
+                  },
+
+                  {
+                    "label": "Educacion Tecnica",
+                    "data": "67",
+                    "expandedIcon": "fa fa-folder-open",
+                    "collapsedIcon": "fa fa-folder",
+                    "children": [{
+                      "label": "Porcentajes de estudiantes matriculados en bachillerato tecnicos profesionales(nuevo curricular)",
+                      "data": "68"
+                    }
+                  ]
+
+                  },
+                  {
+                    "label": "Salud",
+                    "data": "69",
+                    "expandedIcon": "fa fa-folder-open",
+                    "collapsedIcon": "fa fa-folder",
+                    "children": [{
+                      "label": "Razon de mortalidad materna (muertes maternas por 100 niños)",
+                      "data": "70"
+                    },
+                    {
+                      "label": "tasa de  mortalidad en niños menores de 5 años (muertes por 1,000 niños)",
+                      "data": "71"
+                    },
+                    {
+                      "label": "Tasa de desnutricion cronica",
+                      "data": "72"
+                    }
+                  ]
+
+                  },
+                  {
+                    "label": "agua potable y saneamiento basico",
+                    "data": "73",
+                    "expandedIcon": "fa fa-folder-open",
+                    "collapsedIcon": "fa fa-folder",
+                    "children": [{
+                      "label": "Porcentaje de `personas con acceso a un servicio adecuado de agua",
+                      "data": "74"
+                    },
+                    {
+                      "label": "Porcentaje de personas con acceso a un  sistema de saneamiento adecuado",
+                      "data": "75"
+                    }
+                  ]
+
+                  },
+                  {
+                    "label": "Enfermedades infeccion transmiciosas",
+                    "data": "76",
+                    "expandedIcon": "fa fa-folder-open",
+                    "collapsedIcon": "fa fa-folder",
+                    "children": [{
+                      "label": "Tasa de incidencias de casos de malaria (por 1,000 habitantes)",
+                      "data": "77"
+                    },
+                    {
+                      "label": "Tasa de incidencias de casos de dengue (por 1,000 habitantes)",
+                      "data": "78"
+                    },
+                    {
+                      "label": "Tasa de incidencias de casos de tuberculosis ( tb x por 100,000 habitantes)",
+                      "data": "79"
+                    },
+                    {
+                      "label": "porcentaje de la poblacion con VIH/SIDA, con antirretrovirales",
+                      "data": "80"
+                    }
+
+                  ]
+
+                  }
+
+
+                ]
+
+                 },
+
+                 {
+                  "label": "EJE: Eficiencia de los mercados ",
+                  "data": "81",
+                  "expandedIcon": "fa fa-folder-open",
+                  "collapsedIcon": "fa fa-folder",
+                  "children": [{
+                    "label": "educacion y capacitacion",
+                    "data": "82",
+                    "expandedIcon": "fa fa-folder-open",
+                    "collapsedIcon": "fa fa-folder",
+                    "children": [{
+                      "label": "Tasa de matricula en programas de educacion ocupacional",
+                      "data": "83"
+                    },
+                    {
+                      "label": "Tasa de participacion laboral juvenil(16 a 30 años)",
+                      "data": "84"
+                    },
+                    {
+                      "label": "Tasa de partcipacion laboral femenina",
+                      "data": "85"
+                    },
+                    {
+                      "label": "porcentaje de persona adultas( de 25 a 64  años) que poseen estudios superiores",
+                      "data": "86"
+                    }
+
+                  ]
+
+                  },
+                  {
+                    "label": "Clima de negocios",
+                    "data": "87",
+                    "expandedIcon": "fa fa-folder-open",
+                    "collapsedIcon": "fa fa-folder",
+                    "children": [{
+                      "label": "Posiciones de Honduras en el indicador de apertura de un Doing Business",
+                      "data": "88"
+                    },
+                    {
+                      "label": "Posicion de Honduras de manejo de permisos de contruccion del Doing Business",
+                      "data": "89"
+                    },
+                    {
+                      "label": "Posicion de Honduras en el indicador de registro de Propiedades del Doing Business",
+                      "data": "90"
+                    },
+                    {
+                      "label": "Numero de recomendaciones de politicas Publicas",
+                      "data": "91"
+                    }
+                  ]
+
+                  },
+                  {
+                    "label": "Imagen Pais",
+                    "data": "92",
+                    "expandedIcon": "fa fa-folder-open",
+                    "collapsedIcon": "fa fa-folder",
+                    "children": [{
+                      "label": "Posicion de Honduras en el indicador de comercio tras-fronterizo del Doing Business",
+                      "data": "93"
+                    },
+                    {
+                      "label": "Relacion de exportaciones respecto al PIB",
+                      "data": "94"
+                    },
+                    {
+                      "label": "Indice imagen pais (East West Index)",
+                      "data": "95"
+                    },
+                    {
+                      "label": "Porcentaje de empresas con certificacion reconocida internacionalmente",
+                      "data": "96"
+                    }
+                  ]
+
+                  }
+
+                ]
+
+                 },
+
+                 {
+                  "label": "EJE: innovacion Productiva",
+                  "data": "97",
+                  "expandedIcon": "fa fa-folder-open",
+                  "collapsedIcon": "fa fa-folder",
+                  "children": [{
+                    "label": "Innovacion y Eficiencia Productiva",
+                    "data": "98",
+                    "expandedIcon": "fa fa-folder-open",
+                    "collapsedIcon": "fa fa-folder",
+                    "children": [{
+                      "label": "Porcentaje de inversion en investigacion y desarrollo experimental al respecto al PIB",
+                      "data": "99"
+                    },
+                    {
+                      "label": "Numero de estudiantes Universitarios matriculados en carrera de ciencias, tecnologias, ingenieria y matematicas",
+                      "data": "100"
+                    },
+                    {
+                      "label": "Numero de proyectos de investigacion de transferencias (vinculacion empresa-universidad-sociedad)",
+                      "data": "101"
+                    },
+                    {
+                      "label": "numero de publicaciones en SCImago(documentos citables)",
+                      "data": "102"
+                    },
+                    {
+                      "label": "numero de solicitades de registro de invenciones nacionales",
+                      "data": "103"
+                    },
+                    {
+                      "label": "numero de consultas contros CATI",
+                      "data": "104"
+                    },
+                    {
+                      "label": "Absorcion de nuevas tecnologias (puntuacion em el WEF)",
+                      "data": "105"
+                    }
+                  ]
+                  }
+                ]
+                 }
+
+  ]
+}
+
+]
+}
