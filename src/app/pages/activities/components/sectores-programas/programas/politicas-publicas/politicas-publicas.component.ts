@@ -18,7 +18,7 @@ import { ActivityPoliticasPublicasModel } from '../../../../models/programas/mod
   styleUrls: ['./politicas-publicas.component.scss'],
   providers: [ServicePoliticasPublicasService, MessageService, ToasterService, ListasComunesService],
 })
-export class PoliticasPublicasComponent implements OnInit {
+export class PoliticasPublicasComponent implements OnInit,OnChanges {
   // Variables entre Tabs | Components
 @Input() idProyectoTab: number;
 @Input() idUsuarioTab: number;

@@ -19,7 +19,7 @@ import { ActivityVisionPaisModel } from '../../../../models/programas/model-prog
   styleUrls: ['./visionpais.component.scss'],
   providers: [ServiceVisionPaisService, MessageService, ToasterService, ListasComunesService],
 })
-export class VisionPaisComponent implements OnInit {
+export class VisionPaisComponent implements OnInit,OnChanges {
        // Variables entre Tabs | Components
    @Input() idProyectoTab: number;
    @Input() idUsuarioTab: number;
