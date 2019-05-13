@@ -241,7 +241,7 @@ export class SocioDesarrolloComponent implements OnInit {
     const otroIn = event.target.value;
 
     this.JsonSendSociosDesarrollo.map(function (dato) {
-      if (dato.code == codeIn) {
+      if (dato.code === codeIn) {
         dato.otro = otroIn;
       }
       return dato;
