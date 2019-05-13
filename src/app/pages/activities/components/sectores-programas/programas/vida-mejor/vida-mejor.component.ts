@@ -133,7 +133,7 @@ export class VidaMejorComponent implements OnInit, OnChanges {
     // Llenado del Treeview de la Tabla
     this._serviceVidaMejorService.getFiles().then(files => this.filesTree4 = files);
 
-    //this.getfindByIdNivelProgramaService(1);
+    // this.getfindByIdNivelProgramaService(1);
   }
 
 

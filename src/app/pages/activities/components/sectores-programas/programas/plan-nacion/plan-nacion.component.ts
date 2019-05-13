@@ -134,7 +134,7 @@ export class PlanNacionComponent implements OnInit, OnChanges {
     // Llenado del Treeview de la Tabla
     this._servicePlanNacionService.getFiles().then(files => this.filesTree4 = files);
 
-    //this.getfindByIdNivelProgramaService(1);
+    // this.getfindByIdNivelProgramaService(1);
   }
 
 
