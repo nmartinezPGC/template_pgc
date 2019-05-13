@@ -51,13 +51,14 @@ export class SocioDesarrolloComponent implements OnInit {
 
   // Json a enviar
   public JsonSendSociosDesarrollo: any = [];
+  changeDetectorRef: any;
 
   /**
    * Constructor de la Clase
    */
   constructor(private _toasterService: ToasterService,
     private _socioDesarrolloService: SocioDesarrolloService,
-    private _sharedOrganizacionesService: SharedOrganizacionesService ) {
+    private _sharedOrganizacionesService: SharedOrganizacionesService) {
     // Codigo del Constructor
   }
 
@@ -183,7 +184,7 @@ export class SocioDesarrolloComponent implements OnInit {
   * Objetivo: enviar al Json de Proyectos el Id del Socio al Desarrollo
   * información que ocupa la API
   ****************************************************************************/
-  OnItemDeSelectSocioDesarrollo(item: any) {
+  OnItemSelectSocioDesarrollo(item: any) {
     const foundSocioDesarrollo = this.JsonSendSociosDesarrollo.find(function (element) {
       return element.name === item.itemName;
     });
@@ -192,7 +193,7 @@ export class SocioDesarrolloComponent implements OnInit {
       this.showToast('error', 'Error al seleccionar Socio al Desarrollo', 'Ya existe en el listado el Socio al Desarrollo seleccionado');
     } else {
       // Asignamos el Socio al Desarrollo seleccionado
-      this.JsonSendSociosDesarrollo = [...this.JsonSendSociosDesarrollo, { name: item.itemName, code: item.id }];
+      this.JsonSendSociosDesarrollo = [...this.JsonSendSociosDesarrollo, { name: item.itemName, code: item.id, otro: '' }];
     }
   } // FIN | OnItemDeSelectSocioDesarrollo
 
@@ -207,7 +208,62 @@ export class SocioDesarrolloComponent implements OnInit {
   * información que ocupa la API
   ****************************************************************************/
   saveSocioDesarrollo() {
-    // console.log('Dato seleccionado ' + JSON.stringify( this.JsonSendSociosDesarrollo ));
+    this.JsonSendSociosDesarrollo.forEach(element => {
+      // console.log('Idx: ' + JSON.stringify(element));
+    });
   } // FIN | saveSocioDesarrollo
 
+
+
+  /****************************************************************************
+  * Funcion: cleanSocioDesarrollo
+  * Object Number: 005
+  * Fecha: 13-05-2019
+  * Descripcion: Method para limpiar Items del Socio al Desarrollo
+  * en la Insercion del Proyecto
+  * Objetivo: limpiar el Json de los Items seleccionados
+  ****************************************************************************/
+  cleanSocioDesarrollo() {
+    this.JsonSendSociosDesarrollo = [];
+    this.JsonSendSociosDesarrollo = [...this.JsonSendSociosDesarrollo];
+  } // FIN | cleanSocioDesarrollo
+
+
+  /****************************************************************************
+  * Funcion: validaPercent
+  * Object Number: 006
+  * Fecha: 13-05-2019
+  * Descripcion: Method para validar % Items del Socio al Desarrollo
+  * en la Insercion del Proyecto
+  * Objetivo: % el Json de los Items seleccionados
+  ****************************************************************************/
+  validaPercent(event: any, codeIn: number) {
+    const otroIn = event.target.value;
+
+    this.JsonSendSociosDesarrollo.map(function (dato) {
+      if (dato.code == codeIn) {
+        dato.otro = otroIn;
+      }
+      return dato;
+    });
+  } // FIN | validaPercent
+
+
+  /****************************************************************************
+  * Funcion: calcularPercent
+  * Object Number: 007
+  * Fecha: 13-05-2019
+  * Descripcion: Method para calcular % Items del Socio al Desarrollo
+  * en la Insercion del Proyecto
+  * Objetivo: calculo de % el Json de los Items seleccionados
+  ****************************************************************************/
+  calcularPercent() {
+    // console.log(this.JsonSendSociosDesarrollo.length);
+    const valorMax = ( 100 / this.JsonSendSociosDesarrollo.length);
+
+    this.JsonSendSociosDesarrollo.map(function (dato) {
+      dato.otro =  valorMax.toFixed(2);
+      return dato;
+    });
+  } // FIN | calcularPercent
 }

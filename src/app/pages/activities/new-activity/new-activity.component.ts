@@ -1474,7 +1474,6 @@ export class NewActivityComponent implements OnInit {
         this._activityPlanificacionModel.fechaFinalizacion = event.jsdate;
         break;
     }
-    // FIN | onDateChanged
   } // FIN | onDateChanged
 
 

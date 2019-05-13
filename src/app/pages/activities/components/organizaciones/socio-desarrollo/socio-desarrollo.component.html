@@ -10,7 +10,7 @@
         <div class="col-sm-6">
           <h4>Selecciona las Organizaciones | Socio al Desarrollo</h4>
           <angular2-multiselect [data]="dropdownListSocioDesarrollo" [(ngModel)]="selectedItemsSocioDesarrollo"
-            [settings]="dropdownSettings" (onSelect)="OnItemDeSelectSocioDesarrollo($event)"></angular2-multiselect>
+            [settings]="dropdownSettings" (onSelect)="OnItemSelectSocioDesarrollo($event)"></angular2-multiselect>
         </div>
 
         <div class="col-sm-6">
@@ -25,7 +25,8 @@
               <div class="ui-helper-clearfix">
                 <span style="float:left">{{socio.label}}</span>
                 <input style="float: right; width: 15%; height: 10px; text-align: center" class="form-control"
-                  type="text" pInputText pKeyFilter="int" placeholder="%" maxlength="2">
+                  type="text" severity="error" pInputText pKeyFilter="int" placeholder="%" maxlength="2"
+                  value="{{socio.value.otro}}" (keyup)="validaPercent($event, socio.value.code)">
               </div>
             </ng-template>
           </p-listbox>
@@ -35,12 +36,12 @@
             <!-- Boton de Calcular Porcentajes -->
             <button type="button" class="btn btn-outline-danger btn-icon"
               nbPopover="Limpia el listado de Socio al Desarrollo" nbPopoverMode="hint" nbPopoverPlacement="top"
-              (click)="cleanProgramaPlanNacion()">
+              (click)="cleanSocioDesarrollo()">
               <i class="ion-trash-a"></i>
             </button>
 
             <!-- Boton para Calcular los Porcentajes Organizaciones  -->
-            <button type="button" class="btn btn-outline-success btn-icon"
+            <button type="button" class="btn btn-outline-success btn-icon" (click)="calcularPercent()"
               nbPopover="Calcula el % de participacion de Organizaciones" nbPopoverMode="hint" nbPopoverPlacement="top">
               <i class="ion-calculator"></i>
             </button>
