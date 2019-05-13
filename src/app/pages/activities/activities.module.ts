@@ -55,7 +55,6 @@ import { SectoresCamposTransversalesComponent } from './components/sectores-prog
 import { VisionPaisComponent } from './components/sectores-programas/programas/visionpais/visionpais.component';
 import { VidaMejorComponent } from './components/sectores-programas/programas/vida-mejor/vida-mejor.component';
 import { PlanNacionComponent } from './components/sectores-programas/programas/plan-nacion/plan-nacion.component';
-import { PoliticasPublicasComponent } from './components/sectores-programas/programas/politicas-publicas/politicas-publicas.component';
 import { OdsModalMetasComponent } from './components/sectores-programas/sectores/ods/modals/ods-modal-metas/ods-modal-metas.component';
 import { OrganizacionesComponent } from './components/organizaciones/organizaciones.component';
 import { SocioDesarrolloComponent } from './components/organizaciones/socio-desarrollo/socio-desarrollo.component';
