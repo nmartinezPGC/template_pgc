@@ -37,7 +37,7 @@ export class ServiceVisionPaisService {
 
   /****************************************************************************
   * Funcion: FND-00001
-  * Fecha: 01-09-2019
+  * Fecha: 01-09-2019P
   * Descripcion: Metodo para obtener los Datos de la
   * variable identity del localStorage
   * Objetivo: Seteo de las variables en json
@@ -87,7 +87,7 @@ export class ServiceVisionPaisService {
   /****************************************************************************
     * Funcion: FND-00004
     * Fecha: 17-04-2019
-    * Descripcion: Metodo para obtener los Datos del Plan de Nacion
+    * Descripcion: Metodo para obtener los Datos de Vision Pais
     * Objetivo: datos del Plan de Nacion
     * Params: { idPrograma }
     ****************************************************************************/
@@ -148,7 +148,7 @@ export class ServiceVisionPaisService {
     * Objetivo: Ingresar datos de Vision Pais , por Nivel
     * Params: { jsonSendActividadProgramaVisionpais }
     ****************************************************************************/
-  saveActividadProgramaPlanNacion(jsonSendActividadProgramaVisionpais: any): Observable<any> {
+  saveActividadProgramaVisionPais(jsonSendActividadProgramaVisionpais: any): Observable<any> {
     // Parametros del EndPoint
     const paramSend = jsonSendActividadProgramaVisionpais;
 

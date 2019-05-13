@@ -8,7 +8,9 @@
     codigoProyectoTab }} | Usuario {{ idUsuarioTab }}
   </nb-card-header>
 </nb-card>
-<ngx-visionpais></ngx-visionpais>
+<!-- ================ Programas | Vision Pais ==================== -->
+<ngx-visionpais [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab" [codigoProyectoTab]="codigoProyectoTab">
+</ngx-visionpais>
 
 <br>
 <!-- ================ Programas | Plan de Nacion ==================== -->
@@ -19,3 +21,8 @@
 <!-- ================ Programas | Vida Mejor ==================== -->
 <ngx-vida-mejor [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab" [codigoProyectoTab]="codigoProyectoTab">
 </ngx-vida-mejor>
+
+<br>
+<!-- ================ Programas | Politicas Publicas y Estrategias Nacionales ==================== -->
+<ngx-politicaspublicas [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab" [codigoProyectoTab]="codigoProyectoTab">
+</ngx-politicaspublicas>

@@ -27,12 +27,6 @@
               <i class="fa fa-file"></i>
               Confirma cuales sectores deben de registrarse...
             </p-header>
-            <ng-template let-JsonSendSectoresOcdeCadOpciones pTemplate="item">
-              <div class="ui-inputgroup">
-                <span>{{JsonSendSectoresOcdeCadOpciones.label}}</span>
-                <input style="width: 10%; float:right; text-align: right" placeholder="%" type="text">
-              </div>
-            </ng-template>
           </p-listbox>
           <p>Sectores a Registrar: <span *ngFor="let c of selectedCities" style="margin-right: 10px">{{c.name}}</span>
           </p>

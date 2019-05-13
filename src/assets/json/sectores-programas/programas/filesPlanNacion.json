@@ -1,0 +1,352 @@
+{
+  "data": [
+      {
+          "label": "Lineamiento 1: Adaptación y Mitigación al Cambio Climático",
+          "data": "1",
+          "expandedIcon": "fa fa-folder-open",
+          "collapsedIcon": "fa fa-folder",
+          "children": [
+              {
+                  "label": "Indicador 1.1: Sin Indicadores",
+                  "data": "2"
+              }
+          ]
+      },
+      {
+          "label": "Lineamiento 2: Competitividad, Imagen País y Sectores Productivos",
+          "data": "3",
+          "expandedIcon": "fa fa-folder-open",
+          "collapsedIcon": "fa fa-folder",
+          "children": [
+              {
+                  "label": "Indicador 2.1: Calificación de Honduras en el Índice de Competitividad",
+                  "data": "4"
+              },
+              {
+                "label": "Indicador 2.2: Inversión Público/Privada en Programa Imagen País (US$ millones por año)",
+                "data": "5"
+            },
+            {
+                "label": "Indicador 2.3: Numero de Procesos de Atención Ciudadana en las Instituciones del Estado realizados por medios electrónicos",
+                "data": "6"
+            },
+            {
+                "label": "Indicador 2.4: Número promedio de visitantes por año",
+                "data": "7"
+            },
+            {
+                "label": "Indicador 2.5: Relación de Exportaciones / PIB",
+                "data": "8"
+            }
+          ]
+      },
+      {
+          "label": "Lineamiento 3: Democracia, Ciudadanía y Gobernabilidad",
+          "data": "9",
+          "expandedIcon": "fa fa-folder-open",
+          "collapsedIcon": "fa fa-folder",
+          "children": [
+              {
+                  "label": "Indicador 3.1: % de Partidos Políticos con auditorías certificadas sobre origen de Recursos Invertidos en campañas Electorales",
+                  "data": "10"
+              },
+              {
+                "label": "Indicador 3.2: % de ciudadanos en cargos de elección popular presentando informes públicos sobre su contribución al logro de las metas del Plan de Nación",
+                "data": "11"
+            },
+            {
+                "label": "Indicador 3.3: Número de consultas ciudadanas al sistema de información presupuestaria regionalizado del Plan de Nación por año",
+                "data": "12"
+            },
+            {
+                "label": "Indicador 3.4: Número de mecanismos comunitarios donde ciudadanos y organizaciones comunitarias participan en procesos de Transparencia y Rendición de Cuentas sobre recursos utilizados en el cumplimiento de las metas del Plan de Nación.",
+                "data": "13"
+            },
+            {
+                "label": "Indicador 3.5: Tasa de Ocupación Extralegal de Tierras",
+                "data": "14"
+            },
+            {
+                "label": "Indicador 3.6: Índice de Conflictividad Social",
+                "data": "15"
+            },
+            {
+                "label": "Indicador 3.7: Índice de Potenciación de Género",
+                "data": "16"
+            }
+          ]
+      },
+      {
+          "label": "Lineamiento 4: Desarrollo Regional, Recursos Naturales y ambiente",
+          "data": "17",
+          "expandedIcon": "fa fa-folder-open",
+          "collapsedIcon": "fa fa-folder",
+          "children": [
+              {
+                  "label": "Indicador 4.1: % Regiones con Planes de Ordenamiento Territorial Aprobados y en Ejecución (Generando proyectos de inversión - Reduciendo sobre utilización - subutilización y vulnerabilidad física)",
+                  "data": "18"
+              },
+              {
+                "label": "Indicador 4.2: % Regiones con mecanismo de Mesa Regional funcionando adecuadamente.",
+                "data": "19"
+            },
+            {
+                "label": "Indicador 4.3: % Zonas de Recarga Hidráulica bajo Planes de Manejo",
+                "data": "20"
+            },
+            {
+                "label": "Indicador 4.4: % Áreas Protegidas con Planes de Manejo con Mecanismos Financieros de Sostenibilidad.",
+                "data": "21"
+            },
+            {
+                "label": "Indicador 4.5: Número de Hectáreas de Tierras Forestales en Restauración Ecológica y Productiva - Participando en el Mercado Internacional de Bonos de Carbono.",
+                "data": "22"
+            },
+            {
+                "label": "Indicador 4.6: Número de Municipios Certificados en Licenciamiento y Gestión Ambiental",
+                "data": "23"
+            },
+            {
+                "label": "Indicador 4.7: Tasa Nacional de Represamiento y Aprovechamiento de Recursos Hídricos",
+                "data": "24"
+            },
+            {
+                "label": "Indicador 4.8: Tasa de Descentralización del Gasto Público",
+                "data": "25"
+            },
+            {
+                "label": "Indicador 4.9: Índice Global de Riesgo Climático (posición de Honduras)",
+                "data": "26"
+            }
+          ]
+      },
+      {
+          "label": "Lineamiento 5: Desarrollo Sostenible de la Población",
+          "data": "27",
+          "expandedIcon": "fa fa-folder-open",
+          "collapsedIcon": "fa fa-folder",
+          "children": [
+              {
+                  "label": "Indicador 5.1: Tasa de Dependencia Demográfica",
+                  "data": "28"
+              },
+              {
+                "label": "Indicador 5.2: Tasa de Población recibiendo Información y Valores en el marco de una perspectiva Educacional de Familia",
+                "data": "29"
+            },
+            {
+                "label": "Indicador 5.3: Tasa de de Embarazos en Adolescentes",
+                "data": "30"
+            }
+          ]
+      },
+      {
+          "label": "Lineamiento 6: Educación y Cultura como medios de emancipación social",
+          "data": "31",
+          "expandedIcon": "fa fa-folder-open",
+          "collapsedIcon": "fa fa-folder",
+          "children": [
+              {
+                  "label": "Indicador 6.1: % Cobertura neta de Educación Básica en sus dos primeros ciclos",
+                  "data": "32"
+              },
+              {
+                "label": "Indicador 6.2: % Cobertura neta de Educación Básica en tercer ciclo",
+                "data": "33"
+            },
+            {
+                "label": "Indicador 6.3: % Cobertura neta de Educación Media",
+                "data": "34"
+            },
+            {
+                "label": "Indicador 6.4: % Cobertura neta de Educación Pre básica",
+                "data": "35"
+            },
+            {
+                "label": "Indicador 6.5: % de Centros Educativos Certificados",
+                "data": "36"
+            },
+            {
+                "label": "Indicador 6.6: % de cumplimiento del calendario escolar (200 días) en establecimientos educativos públicos",
+                "data": "37"
+            },
+            {
+                "label": "Indicador 6.7: Rendimiento Promedio en Español y Matemáticas en Nivel Básico y Medio",
+                "data": "38"
+            },
+            {
+                "label": "Indicador 6.8: Tasa de Escolaridad Promedio",
+                "data": "39"
+            }
+          ]
+      },
+      {
+          "label": "Lineamiento 7: Estabilidad macroeconómica como fundamento del ahorro interno",
+          "data": "40",
+          "expandedIcon": "fa fa-folder-open",
+          "collapsedIcon": "fa fa-folder",
+          "children": [
+              {
+                  "label": "Indicador 7.1: Coeficiente de GINI",
+                  "data": "41"
+              },
+              {
+                "label": "Indicador 7.2: Masa Salarial del Gobierno Central en relación al PIB",
+                "data": "42"
+            },
+            {
+                "label": "Indicador 7.3: Tasa Promedio de Inflación anual (4 años)",
+                "data": "43"
+            },
+            {
+                "label": "Indicador 7.4: Tasa de Ahorro Total / PIB - promedio anual",
+                "data": "44"
+            },
+            {
+                "label": "Indicador 7.5: Tasa de Crecimiento del PIB en términos reales - promedio anual (4 años)",
+                "data": "45"
+            }
+          ]
+      },
+      {
+          "label": "Lineamiento 8: Infraestructura Productiva como motor de la actividad económica",
+          "data": "46",
+          "expandedIcon": "fa fa-folder-open",
+          "collapsedIcon": "fa fa-folder",
+          "children": [
+              {
+                  "label": "Indicador 8.1: % de Energía Eléctrica Renovable participando en matriz de generación",
+                  "data": "47"
+              },
+              {
+                "label": "Indicador 8.2: % de avance del Programa de Rehabilitación y Reconstrucción Vial",
+                "data": "48"
+            },
+            {
+                "label": "Indicador 8.3: Inversión del Gobierno Central respecto del PIB",
+                "data": "49"
+            },
+            {
+                "label": "Indicador 8.4: Miles de Toneladas Métricas de Transporte de Carga transitando por territorio para fines de exportación",
+                "data": "50"
+            },
+            {
+                "label": "Indicador 8.5: Número de hectáreas de tierras agrícolas con acceso a riego",
+                "data": "51"
+            },
+            {
+                "label": "Indicador 8.6: Tasa Nacional de Articulación Productiva (% de territorio con acceso a red vial primaria)",
+                "data": "52"
+            },
+            {
+                "label": "Indicador 8.7: T Tasa Nacional de Articulación Social (% población con acceso a red vial primaria)",
+                "data": "53"
+            }
+          ]
+      },
+      {
+          "label": "Lineamiento 9: Reducción de la Pobreza, Generación de Activos e Igualdad de Oportunidades",
+          "data": "54",
+          "expandedIcon": "fa fa-folder-open",
+          "collapsedIcon": "fa fa-folder",
+          "children": [
+              {
+                  "label": "Indicador 9.1: % Hogares en Situación de Pobreza",
+                  "data": "55"
+              },
+              {
+                "label": "Indicador 9.2: % de Hogares en Situación de Pobreza Extrema",
+                "data": "56"
+            },
+            {
+                "label": "Indicador 9.3: % de Trabajadores afiliados a sistemas de previsión",
+                "data": "57"
+            },
+            {
+                "label": "Indicador 9.4: % de la PEA con problemas de empleo",
+                "data": "58"
+            },
+            {
+                "label": "Indicador 9.5: Tasa de Subempleo Invisible",
+                "data": "59"
+            }
+          ]
+      },
+      {
+          "label": "Lineamiento 10: Salud como fundamento para la mejora de las condiciones de vida",
+          "data": "60",
+          "expandedIcon": "fa fa-folder-open",
+          "collapsedIcon": "fa fa-folder",
+          "children": [
+              {
+                  "label": "Indicador 10.1: % Cobertura de Hogares Rurales con Acceso a Agua Potable",
+                  "data": "61"
+              },
+              {
+                "label": "Indicador 10.2: % Cobertura de Hogares con acceso a sistemas de Eliminación de Excretas",
+                "data": "62"
+            },
+            {
+                "label": "Indicador 10.3: Incidencia de Casos de Malaria/ Dengue",
+                "data": "63"
+            },
+            {
+                "label": "Indicador 10.4: Número de Municipios administrando sistemas de agua y saneamiento",
+                "data": "64"
+            },
+            {
+                "label": "Indicador 10.5: Porcentaje de prescripciones medicas totalmente atendidas en hospitales del Estado",
+                "data": "65"
+            },
+            {
+                "label": "Indicador 10.6: Tasa de Incidencia de casos de Enfermedades Infecciosas asociadas a Condiciones Materiales de Vida ( Diarrea-IRAS X 1000 hab) y TB x 100mil hab)",
+                "data": "66"
+            },
+            {
+                "label": "Indicador 10.7: Tasa de Mortalidad en menores 5 años",
+                "data": "67"
+            },
+            {
+                "label": "Indicador 10.8: Tasa de Prevalencia del VIH en población de 15-49 años",
+                "data": "68"
+            },
+            {
+                "label": "Indicador 10.9: Tiempo máximo de espera en días para la realización de intervenciones quirúrgicas programadas a pacientes en hospitales públicos",
+                "data": "69"
+            }
+          ]
+      },
+      {
+          "label": "Lineamiento 11: Seguridad como Requisito del Desarrollo",
+          "data": "70",
+          "expandedIcon": "fa fa-folder-open",
+          "collapsedIcon": "fa fa-folder",
+          "children": [
+              {
+                  "label": "Indicador 11.1: Juzgados sobre violencia doméstica operando a nivel nacional",
+                  "data": "71"
+              },
+              {
+                "label": "Indicador 11.2: Número de Delitos relacionados con Narcotráfico (por año).",
+                "data": "72"
+            },
+            {
+                "label": "Indicador 11.3: Tasa de Delitos Sexuales ( x 100mil hab.)",
+                "data": "73"
+            },
+            {
+                "label": "Indicador 11.4: Tasa de Homicidios ( x 100mil habitantes)",
+                "data": "74"
+            },
+            {
+                "label": "Indicador 11.5: Tasa de Homicidios asociados a Robo ( x 100mil hab)",
+                "data": "75"
+            },
+            {
+                "label": "Indicador 11.6: Tasa de Muertes por Accidentes de Tránsito ( X 100mil)",
+                "data": "76"
+            }
+          ]
+      }
+  ]
+}

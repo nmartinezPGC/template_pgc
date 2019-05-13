@@ -133,7 +133,7 @@ export class PlanNacionComponent implements OnInit, OnChanges {
     // Llenado del Treeview de la Tabla
     this._servicePlanNacionService.getFiles().then(files => this.filesTree4 = files);
 
-    this.getfindByIdNivelProgramaService(1);
+    // this.getfindByIdNivelProgramaService(1);
   }
 
 
@@ -263,11 +263,11 @@ export class PlanNacionComponent implements OnInit, OnChanges {
   ****************************************************************************/
   nodeUnselect(event) {
     // Condicion de Agregar los Nodos
-    if (event.node.children !== undefined) {
+    if (event.node !== undefined) {
       const itemNodeLabel = event.node.label;
       // Ejecucion del splice del elemento
-      const resultado = this.JsonSendProgramaPlanNacionOpciones.findIndex(Programa => Programa.name === itemNodeLabel);
-      this.JsonSendProgramaPlanNacionOpciones.splice(Number(resultado), 1)
+      const resultado = this.JsonSendProgramaPlanNacionOpciones.findIndex(Programa => Programa.name !== itemNodeLabel);
+      this.JsonSendProgramaPlanNacionOpciones.splice(Number(resultado))
       this.JsonSendProgramaPlanNacionOpciones = [...this.JsonSendProgramaPlanNacionOpciones];
     } else if (event.node.children !== undefined && event.node.children.length !== 0) {
       for (let index = 0; index < event.node.children.length; index++) {
@@ -516,20 +516,21 @@ export class PlanNacionComponent implements OnInit, OnChanges {
       this.showToast('error', 'Error al ingresar la Información Programa de Gobierno', 'Debes de seleccionar los Programa de Gobierno, para continuar');
       return -1;
     }
-  } // FIN | saveProgramaVidaMejor
+  } // FIN | saveProgramaPlanNacion
 
 
   /****************************************************************************
-  * Funcion: cleanProgramaCamposTransversales
+  * Funcion: cleanProgramaCamposPlanNacion
   * Object Number: 008
   * Fecha: 16-04-2019
-  * Descripcion: Method cleanProgramaCamposTransversales of the Class
+  * Descripcion: Method cleanProgramaCamposPlanNacion of the Class
   * Objetivo: cleanProgramaCamposTransversales Limpia listado Campo Transversal
   * Params: { }
   ****************************************************************************/
   cleanProgramaPlanNacion() {
+    this._servicePlanNacionService.getFiles().then(files => this.filesTree4 = files);
     this.JsonSendProgramaPlanNacionOpciones = [];
     this.changeDetectorRef.detectChanges();
     this.JsonSendProgramaPlanNacionOpciones = [...this.JsonSendProgramaPlanNacionOpciones];
-  } // FIN | cleanProgramaCamposTransversales
+  } // FIN | cleanProgramaPlanNacion
 }

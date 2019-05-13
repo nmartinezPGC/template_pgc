@@ -1,1607 +1,548 @@
 {
-  "data": [{
-    "label": "EDUCACION",
-    "data": "1",
-    "expandedIcon": "fa fa-folder-open",
-    "collapsedIcon": "fa fa-folder",
-    "children": [{
-      "label": "Educación, nivel no especificado",
-      "data": "2",
-      "expandedIcon": "fa fa-folder-open",
-      "collapsedIcon": "fa fa-folder",
-      "children": [{
-          "label": "Política educativa y gestión administrativa",
-          "data": "3"
-        },
-        {
-          "label": "Servicios e instalaciones educativos y formación",
-          "data": "4"
-        },
-        {
-          "label": "Formación de profesores",
-          "data": "5"
-        },
-        {
-          "label": "Investigación educativa",
-          "data": "6"
-        }]
-        },
-        {
-          "label": "Educación básica",
-          "data": "7",
-          "expandedIcon": "fa fa-folder-open",
-          "collapsedIcon": "fa fa-folder",
-          "children": [{
-          "label": "Educación primaria",
-              "data": "8"
-            },
-            {
-              "label": "Capacitación básica de jóvenes y adultos",
-              "data": "9"
-            },
-            {
-              "label": "Educación primera infancia",
-              "data": "10"
-            }]
-      },
-        {
-          "label": "Educación secundaria",
-          "data": "11",
-          "expandedIcon": "fa fa-folder-open",
-          "collapsedIcon": "fa fa-folder",
-          "children": [{
-              "label": "Educación secundaria",
-              "data": "12"
-            },
-            {
-              "label": "Formación profesional",
-              "data": "13"
-            }]
-            },
-            {
+  "data": [
+  {
+    "label": "estategia de seguridad alimentaria",
+    "data": "1"
 
-              "label": "Educación post-secundaria",
-              "data": "14",
-              "expandedIcon": "fa fa-folder-open",
-              "collapsedIcon": "fa fa-folder",
-              "children": [{
-                  "label": "Educación universitaria",
-                  "data": "15"
-                },
-                {
-                  "label": "Formación superior técnica y de dirección",
-                  "data": "16"
-                }]
-                }
-      ]
   }, {
-    "label": "SALUD",
-      "data": "17",
-      "expandedIcon": "fa fa-folder-open",
-      "collapsedIcon": "fa fa-folder",
-        "children": [{
-      "label": "Salud, general",
-      "data": "18",
-      "expandedIcon": "fa fa-folder-open",
-      "collapsedIcon": "fa fa-folder",
-      "children": [{
-        "label": "Política sanitaria y gestión administrativa",
-        "data": "19",
-        "expandedIcon": "fa fa-folder-open",
-      "collapsedIcon": "fa fa-folder",
-      "children": [{
-        "label": "Fortalecimiento institucional, dialogo de politicas",
-            "data": "20"
-          },
-          {
-            "label": "Eficacia/Enfoque programatico/IHP+",
-            "data": "21"
-          },
-          {
-            "label": "Cobertura Universal/Protección social",
-            "data": "22"
-          },
-          {
-            "label": "Politica sanitaria y gestión administrativa inclasificable",
-            "data": "23"
-          }] 
-         },
-          {
-            "label": "Enseñanza/formación médicas",
-            "data": "24",
-            "expandedIcon": "fa fa-folder-open",
-          "collapsedIcon": "fa fa-folder",
-          "children": [{
-            "label": "Hospitales de referencia",
-                "data": "25"
-              }
-             ]
-          },
-          {
-            "label": "Servicios médicos",
-            "data": "29",
-            "expandedIcon": "fa fa-folder-open",
-            "collapsedIcon": "fa fa-folder",
-            "children": [{
-              "label": "Atención Sanitaria Hospitalaria/No infecciosos",
-                  "data": "30"
-                },
-                {
-                  "label": "Medicamentos/Infraestructuras/Equipamientos/otros en hospitales",
-                      "data": "31"
-                    }
-               ]
-          }]
-    },
-      {
-        "label": "Salud básica",
-        "data": "32",
-        "expandedIcon": "fa fa-folder-open",
-        "collapsedIcon": "fa fa-folder",
-        "children": [{
-          "label": "Atención sanitaria básica",
-              "data": "33",
-              "expandedIcon": "fa fa-folder-open",
-              "collapsedIcon": "fa fa-folder",
-              "children": [{
-                "label": "Atención sanitaria no hospitalaria",
-                    "data": "34"
-                  },
-                  {
-                    "label": "Medicamentos/Equipamientos/RRHH (no formativos)Otros no hospitalarios",
-                        "data": "35"
-                      },
-                      {
-                        "label": "Salud Infantil",
-                            "data": "36"
-                          }
-                 ]
-            },
-            {
-              "label": "Infraestructura sanitaria básica",
-              "data": "37",
-              "expandedIcon": "fa fa-folder-open",
-              "collapsedIcon": "fa fa-folder",
-              "children": [{
-                "label": "Infraestructura (excluye hospitales de referencia)",
-                    "data": "38"
-                  }
-                 ]
-            },
-            {
-              "label": "Nutrición básica",
-              "data": "39",
-              "expandedIcon": "fa fa-folder-open",
-              "collapsedIcon": "fa fa-folder",
-              "children": [{
-                "label": "Educación, prevención, y atención de estado nutricional",
-                    "data": "40"
-                  }
-                 ]
-            },
-            {
-              "label": "Control enfermedades infecciosas",
-              "data": "41",
-              "expandedIcon": "fa fa-folder-open",
-              "collapsedIcon": "fa fa-folder",
-              "children": [{
-                "label": "Vacunas",
-                    "data": "42"
-                  },
-                  {
-                    "label": "Enfermedades olvidadas (no investigación)",
-                        "data": "43"
-                      },
-                      {
-                        "label": "Otras enfermedades transmisibles o infecciosas",
-                            "data": "44"
-                          }
-                 ]
-            },
-            {
-              "label": "Educación sanitaria",
-              "data": "45",
-              "expandedIcon": "fa fa-folder-open",
-              "collapsedIcon": "fa fa-folder",
-              "children": [{
-                "label": "Habitos saludables",
-                    "data": "46"
-                  }
-                 ]
-            },
-            {
-              "label": "Control de la malaria",
-              "data": "47",
-              "expandedIcon": "fa fa-folder-open",
-              "collapsedIcon": "fa fa-folder",
-              "children": [{
-                "label": "Atención sanitaria y tratamiento de la malaria",
-                    "data": "48"
-                  }
-                 ]
-            },
-            {
-              "label": "Control de la tuberculosis",
-              "data": "49",
-              "expandedIcon": "fa fa-folder-open",
-              "collapsedIcon": "fa fa-folder",
-              "children": [{
-                "label": "Atención sanitaria y tratamiento de la tuberculosis",
-                    "data": "50"
-                  }
-                 ]
-            },
-            {
-              "label": "Formación personal sanitario",
-              "data": "51",
-              "expandedIcon": "fa fa-folder-open",
-              "collapsedIcon": "fa fa-folder",
-              "children": [{
-                "label": "Formación Atención Primaria",
-                    "data": "52"
-                  }
-                 ]
-            }
-          ]
-      },
-
-      {
-        "label": "Programas/políticas sobre población y salud reproductiva",
-        "data": "53",
-        "expandedIcon": "fa fa-folder-open",
-        "collapsedIcon": "fa fa-folder",
-        "children": [{
-          "label": "Política sobre población y gestión administrativa",
-              "data": "54",
-              "expandedIcon": "fa fa-folder-open",
-              "collapsedIcon": "fa fa-folder",
-              "children": [{
-                "label": "Población y desarrollo",
-                    "data": "55"
-                  }
-                 ]
-            },
-            {
-          "label": "Atención salud reproductiva",
-              "data": "56",
-              "children": [{
-                "label": "Apoyo a atención de víctimas de violencia de genero",
-                    "data": "57"
-                  },
-                  {
-                    "label": "Atención obstétrica",
-                        "data": "58"
-                      },
-                      {
-                        "label": "Cuidados neonatales y perinatales",
-                            "data": "59"
-                          }
-                 ]
-            },
-            {
-              "label": "Planificación familiar",
-                  "data": "60",
-                  "expandedIcon": "fa fa-folder-open",
-                  "collapsedIcon": "fa fa-folder",
-                  "children": [{
-                    "label": "Anticonceptivos y Servicios de Planificación Familiar",
-                        "data": "61"
-                      },
-                      {
-                        "label": "Educación y capacitación",
-                            "data": "62"
-                          }
-                     ]
-                },
-                {
-                  "label": "Lucha contra ets (enfermedades de transmisión sexual), incluye sida",
-                      "data": "63",
-                      "expandedIcon": "fa fa-folder-open",
-                      "collapsedIcon": "fa fa-folder",
-                      "children": [{
-                        "label": "Acceso a tratamiento  ETS",
-                            "data": "64"
-                          }
-                         ]
-                    },
-                    {
-                      "label": "Formación de personal para población y salud reproductiva",
-                          "data": "65"
-                        }
-          ]
-      }
-    ]
+    "label": "politica de proteccion social",
+      "data": "2"
         },
         {
-          "label": "AGUA Y SANIAMIENTO",
-            "data": "66",
-            "expandedIcon": "fa fa-folder-open",
-            "collapsedIcon": "fa fa-folder",
-              "children": [{
-            "label": "Abastecimiento de agua y saniamiento",
-            "data": "67",
-            "expandedIcon": "fa fa-folder-open",
-            "collapsedIcon": "fa fa-folder",
-            "children": [{
-              "label": "Política de recursos hídricos y gestión administrativa",
-                  "data": "68"
-                },
-                {
-                  "label": "Protección recursos hídricos",
-                   "data": "74"
-                 },
-                 {
-                   "label": "Abastecimiento de agua y saneamiento-sistemas de envergadura",
-                   "data": "75"
-                 },
-                 {
-                   "label": "Abastecimiento de agua-sistemas de envergadura",
-                   "data": "76"
-                 },
-                 {
-                   "label": "Saneamiento-sistemas de envergadura",
-                   "data": "77"
-                 },
-                 {
-                   "label": "Abastecimiento básico de agua potable y saneamiento básico",
-                   "data": "78"
-                 },
-                 {
-                   "label": "Abastecimiento básico de agua potable",
-                   "data": "79"
-                 },
-                 {
-                   "label": "Saneamiento básico",
-                   "data": "80"
-                 },
-                 {
-                   "label": "Desarrollo de cuencas fluviales",
-                   "data": "81"
-                 },
-                 {
-                   "label": "Eliminación/tratamiento residuos sólidos",
-                   "data": "82"
-                 },
-                 {
-                   "label": "Educación y formación en abastecimiento de agua y saneamiento",
-                   "data": "83",
-                   "expandedIcon": "fa fa-folder-open",
-                   "collapsedIcon": "fa fa-folder",
-                   "children": [{
-                     "label": "Educación superior Gestión Integrada de Recursos Hídricos. Educación superior y de postgrado en materia de GIRH",
-                         "data": "84"
-                       },
-                       {
-                         "label": "Capacitacion en Gestion Integrada de Recursos Hidricos. Seminarios y talleres en materia de GIRH",
-                         "data": "85"
-                       },
-                       {
-                         "label": "Educacion superior sobre abastecimiento",
-                         "data": "86"
-                       },
-                       {
-                         "label": "Formacion profesional sobre abastecimiento",
-                         "data": "87"
-                       },
-                       {
-                         "label": "Capacitación en abastecimiento. Seminarios y talleres relacionados con sistemas",
-                         "data": "88"
-                       },
-                       {
-                         "label": "Educacion superior en gobernanza del agua",
-                         "data": "89"
-                       },
-                       {
-                         "label": "Capacitación en gobernanza del agua. Seminarios y talleres en materia de gobernanza y derecho humano al agua",
-                         "data": "90"
-                       }
-                     ]
-                 }
-               ]
-          }
-          ]
+          "label": "politica integral de convivencia y seguridad ciudadana",
+            "data": "3"
               },
               {
-                "label": "GOBIERNO Y SOCIEDAD CIVIL",
-                  "data": "91",
-                  "expandedIcon": "fa fa-folder-open",
-                  "collapsedIcon": "fa fa-folder",
-                    "children": [{
-                  "label": "Gobierno y sociedad civil,general",
-                  "data": "92",
-                  "expandedIcon": "fa fa-folder-open",
-                  "collapsedIcon": "fa fa-folder",
-                  "children": [
-                    {
-                      "label": "Política de administración y gestión del sector público",
-                       "data": "93",
-                       "expandedIcon": "fa fa-folder-open",
-                     "collapsedIcon": "fa fa-folder",
-                     "children": [{
-                       "label": "Gestión de las políticas macroeconómicas",
-                           "data": "94"
-                         },
-                         {
-                           "label": "Política de administración y gestión del sector público excepto políticas macroeconómicas",
-                           "data": "95"
-                         }
-                         ]
-                     },
-                     {
-                       "label": "Gestión financiera sector público",
-                       "data": "96",
-                       "expandedIcon": "fa fa-folder-open",
-                     "collapsedIcon": "fa fa-folder",
-                     "children": [{
-                       "label": "Política fiscal",
-                           "data": "97"
-                         }
-                         ]
-                     },
-                     {
-                       "label": "Descentralización y apoyo a gobiernos regionales y locales",
-                       "data": "98"
-                     },
-                     {
-                       "label": "Organizaciones e instituciones anti-corrupción",
-                       "data": "99"
-                     },
-                     {
-                       "label": "Desarrollo legal y judicial",
-                       "data": "100",
-                       "expandedIcon": "fa fa-folder-open",
-                     "collapsedIcon": "fa fa-folder",
-                     "children": [{
-                       "label": "Desarrollo de Marcos y medidas de seguridad jurídica",
-                           "data": "101"
-                         }
-                         ]
-                     },
-                     {
-                       "label": "La participación democrática y la sociedad civil",
-                       "data": "102",
-                       "expandedIcon": "fa fa-folder-open",
-                     "collapsedIcon": "fa fa-folder",
-                     "children": [{
-                       "label": "Dialogo Social",
-                           "data": "103"
-                         }
-                         ]
-                     },
-                     {
-                       "label": "Procesos electorales",
-                       "data": "104"
-                     },
-                     {
-                       "label": "Legislaturas y partidos políticos",
-                       "data": "105"
-                     },
-                     {
-                       "label": "Medios de comunicación y el libre flujo de información",
-                       "data": "106"
-                     },
-                     {
-                       "label": "Derechos humanos",
-                       "data": "107"
-                     },
-                     {
-                       "label": "Organizaciones e instituciones de la igualdad de las mujeres",
-                       "data": "119"
-                     }]
-                     },
-                     {
-                      "label": "Prevención y resolución de conflictos, paz y seguridad",
-                      "data": "122",
-                      "expandedIcon": "fa fa-folder-open",
-                      "collapsedIcon": "fa fa-folder",
-                      "children": [{
-                        "label": "Gestión y reforma de los sistemas de seguridad",
-                            "data": "123"
-                          },
-                          {
-                            "label": "Construcción de la Paz y prevención y solución de conflictos",
-                                "data": "124"
-                              }
-                              ,
-                              {
-                                "label": "Procesos de consolidación de la paz tras los conflictos (naciones unidas",
-                                    "data": "125"
-                                  },
-                                  {
-                                    "label": "Control de la proliferación de armas ligeras y de pequeño calibre",
-                                        "data": "126"
-                                      },
-                                      {
-                                        "label": "Retirada minas antipersonas",
-                                            "data": "127"
-                                          },
-                                          {
-                                            "label": "Niños soldados, prevención y desmovilización",
-                                                "data": "128"
-                                              }
-                         ]
-                    }
-                      ]
+                "label": "politica publica y plan nacional de accion en derechos Humanos",
+                  "data": "4"
                 },
                 {
-                  "label": "INFRAESTRUCTURAS SOCIALES",
-                    "data": "129",
+                  "label": "estrategia nacional de competitividad",
+                    "data": "5",
                     "expandedIcon": "fa fa-folder-open",
                     "collapsedIcon": "fa fa-folder",
                       "children": [{
-                    "label": "Otros servicios e infraestructuras sociales",
-                    "data": "130",
+                    "label": "EJE-institucionalidad",
+                    "data": "6",
                     "expandedIcon": "fa fa-folder-open",
                     "collapsedIcon": "fa fa-folder",
                     "children": [
                       {
-                        "label": "Servicios Sociales, Excepto Seguridad Social",
-                         "data": "131",
+                        "label": "corrupcion",
+                         "data": "7",
                          "expandedIcon": "fa fa-folder-open",
-                       "collapsedIcon": "fa fa-folder",
+                         "collapsedIcon": "fa fa-folder",
                        "children": [{
-                         "label": "Seguridad social",
-                             "data": "132"
-                           }
-                           ]
-                       },
-                       {
-                         "label": "Política de empleo y gestión administrativa",
-                         "data": "133"
-                       },
-                       {
-                         "label": "Política de vivienda y gestión administrativa",
-                         "data": "134"
-                       },
-                       {
-                         "label": "Viviendas de bajo coste",
-                         "data": "135"
-                       },
-                       {
-                         "label": "Ayuda multisectorial para servicios sociales básicos",
-                         "data": "136"
+                         "label": "indicador de  control de la corrupcion",
+                             "data": "8"
                            },
-                           {
-                            "label": "Capacitación estadística",
-                            "data": "145"
-                              },
-                              {
-                                "label": "Control estupefacientes",
-                                "data": "146"
-                                  },
-                                  {
-                                    "label": "Mitigación social del vih / sida",
-                                    "data": "147"
-                                      }
+                          {
+                            "label": "porcentaje de recomendaciones del TSC implementadas",
+                            "data": "9"
+                          },
+                          {
+                            "label": "calificacion del cumplimiento de la TLAIP",
+                            "data": "10"
+                          },
+                          {
+                            "label": "comportamiento etico de las empresas (puntuacion en el WEF)",
+                            "data": "11"
+                          }
                            ]
                        },
+                       { "label": "modernazionalizacion del estado",
+                         "data": "12",
+                         "expandedIcon": "fa fa-folder-open",
+                         "collapsedIcon": "fa fa-folder",
+                       "children": [{
+                         "label": "numero de procesos de atencion a ciudadanos certificados",
+                             "data": "13"
+                           },
+                          {
+                            "label": "indice de servicios en linea del gobierno",
+                            "data": "14"
+                          }
+
+                           ]
+
+                       },
+                      {
+                        "label": "seguridad juridica",
+                         "data": "15",
+                         "expandedIcon": "fa fa-folder-open",
+                         "collapsedIcon": "fa fa-folder",
+                       "children": [{
+                         "label": "numero de transacciones",
+                             "data": "16"
+                           },
+                          {
+                            "label": "numero de transacciones registrales anuales en el folio real sobre transacciones registrales totales anuales",
+                            "data": "17"
+                          },
+                          {
+                            "label": "porcentaje de acupacion extralegal de tierras rurales",
+                            "data": "18"
+                          },
+                           {
+                            "label": "porcentaje de ocupacion extralegal de predios urbanos",
+                            "data": "19"
+                          },
+                          {
+                            "label": "puntuacion en el indice  internacional de derechos de la propiedad intelectual",
+                            "data": "20"
+                          }
+                           ]
+                      },
                        {
-                         "label": "Cultura y ocio",
-                         "data": "137",
+                         "label": "seguridad ciudadana",
+                         "data": "21",
                          "expandedIcon": "fa fa-folder-open",
                        "collapsedIcon": "fa fa-folder",
                        "children": [{
-                         "label": "Capacitación profesional en cultura",
-                             "data": "138"
+                         "label": "posicion de Honduras en el indicador cumplimiento de contratos de Doing Bussines",
+                             "data": "22"
                            }, {
-                            "label": "Gobernabilidad y cultura",
-                                "data": "139"
-                              },{
-                                "label": "Economía y cultura",
-                                    "data": "140"
-                                  },{
-                                    "label": "Educación y cultura",
-                                        "data": "141"
-                                      },{
-                                        "label": "Patrimonio para el desarrollo",
-                                            "data": "142"
-                                          },{
-                                            "label": "Comunicación y cultura",
-                                                "data": "143"
-                                              },{
-                                                "label": "Fomento de Derechos Culturales",
-                                                    "data": "144"
-                                                  }
+                            "label": "tasa de Homicidios por 100, habitantes",
+                                "data": "23"
+                              }
                            ]
-                       }]
-                       },
-                       {
-                        "label": "TRANSPORTE Y ALMACENAMIENTO",
-                        "data": "148",
-                        "expandedIcon": "fa fa-folder-open",
-                        "collapsedIcon": "fa fa-folder",
-                        "children": [{
-                          "label": "Transporte y almacenamiento",
-                          "data": "149",
-                          "expandedIcon": "fa fa-folder-open",
-                          "collapsedIcon": "fa fa-folder",
-                          "children": [{
-                              "label": "Política transporte y gestión administrativa",
-                              "data": "150"
-                            },
-                            {
-                              "label": "Transporte por carretera",
-                              "data": "151"
-                            },
-                            {
-                              "label": "Transporte por ferrocarril",
-                              "data": "152"
-                            },
-                            {
-                              "label": "Transporte marítimo y fluvial",
-                              "data": "153"
-                            },
-                            {
-                              "label": "Transporte aéreo",
-                              "data": "154"
-                            },
-                            {
-                              "label": "Almacenamiento",
-                              "data": "155"
-                            },
-                            {
-                              "label": "Enseñanza y formación en materia de transporte y almacenamiento",
-                              "data": "156"
-                            }]
-                            }
-                          ]
-                      },
-                      {
-                        "label": "COMUNICACIONES",
-                        "data": "157",
-                        "expandedIcon": "fa fa-folder-open",
-                        "collapsedIcon": "fa fa-folder",
-                        "children": [{
-                          "label": "Comunicaciones",
-                          "data": "158",
-                          "expandedIcon": "fa fa-folder-open",
-                          "collapsedIcon": "fa fa-folder",
-                          "children": [{
-                              "label": "Política de comunicaciones y gestión administrativa",
-                              "data": "159"
-                            },
-                            {
-                              "label": "Telecomunicaciones",
-                              "data": "160"
-                            },
-                            {
-                              "label": "Radio, televisión, prensa",
-                              "data": "161"
-                            },
-                            {
-                              "label": "Tecnología de la información y de las comunicaciones (tic)",
-                              "data": "162"
-                            }
-                            ]
-                            }
-                          ]
-                      },
-                      {
-                        "label": "SUMINISTRO Y ENERGIA ",
-                          "data": "163",
-                          "expandedIcon": "fa fa-folder-open",
-                          "collapsedIcon": "fa fa-folder",
-                            "children": [{
-                          "label": "Generación y suministro de energía",
-                          "data": "164",
-                          "expandedIcon": "fa fa-folder-open",
-                          "collapsedIcon": "fa fa-folder",
-                          "children": [{
-                            "label": "Política energética y gestión administrativa",
-                                "data": "165",
-                                "expandedIcon": "fa fa-folder-open",
-                                "collapsedIcon": "fa fa-folder",
-                                "children": [{
-                                  "label": "Política energética, planificación y programas",
-                                      "data": "166"
-                                    },
-                                    {
-                                      "label": "Apoyo a Ministerios de energía",
-                                          "data": "167"
-                                        },
-                                        {
-                                          "label": "Eficiencia energética",
-                                              "data": "168"
-                                            }
-                                          ]
-                                        },
-                              {
-                                "label": "Producción energética - fuentes no renovables",
-                                 "data": "169"
-                               },
-                               {
-                                 "label": "Producción energética - fuentes renovables",
-                                 "data": "170",
-                                 "expandedIcon": "fa fa-folder-open",
-                          "collapsedIcon": "fa fa-folder",
-                          "children": [{
-                            "label": "Estudios y políticas de desarrollo",
-                                "data": "171"
-                              },
-                              {
-                                "label": "Fortalecimiento institucional (asesoramiento, asistencia técnica)",
-                                    "data": "172"
-                                  }
-                                    ]
-                               },
-                               {
-                                 "label": "Transmisión/distribución de energia electrica",
-                                 "data": "173"
-                               },
-                               {
-                                 "label": "Distribución gas",
-                                 "data": "174"
-                               },
-                               {
-                                 "label": "Centrales térmicas de petróleo",
-                                 "data": "175"
-                               },
-                               {
-                                 "label": "Centrales térmicas de gas",
-                                 "data": "176"
-                               },
-                               {
-                                 "label": "Centrales térmicas de carbón",
-                                 "data": "177"
-                               },
-                               {
-                                 "label": "Centrales nucleares",
-                                 "data": "178"
-                               },
-                               {
-                                 "label": "Centrales hidroeléctricas",
-                                 "data": "179"
-                               },
-                               {
-                                "label": "Energía geotérmica",
-                                "data": "180"
-                              },
-                              {
-                                "label": "Energia solar",
-                                "data": "181"
-                              },
-                              {
-                                "label": "Energia eólica",
-                                "data": "182"
-                              },
-                              {
-                                "label": "Energía maremotriz",
-                                "data": "183"
-                              },
-                              {
-                                "label": "Biomasa",
-                                "data": "184"
-                              },
-                              {
-                                "label": "Investigación Energética",
-                                "data": "188",
-                                "expandedIcon": "fa fa-folder-open",
-                                 "collapsedIcon": "fa fa-folder",
-                                 "children": [{
-                                  "label": "Investigación, inventarios y estudios en energía eólica",
-                                      "data": "189"
-                                    },
-                                    {
-                                      "label": "Investigación, inventarios y estudios en energía solar",
-                                      "data": "190"
-                                    },
-                                    {
-                                      "label": "Investigación, inventarios y estudios en biomasa",
-                                      "data": "191"
-                                    },
-                                    {
-                                      "label": "Investigación, inventarios y estudios en energía hidráulicar",
-                                      "data": "192"
-                                    },
-                                    {
-                                      "label": "Investigación, inventarios y estudios energía maremotriz",
-                                      "data": "193"
-                                    }
-                                  ]
-                              },
-                               {
-                                 "label": "Educación, formación temas energéticos",
-                                 "data": "185",
-                                 "expandedIcon": "fa fa-folder-open",
-                                 "collapsedIcon": "fa fa-folder",
-                                 "children": [{
-                                   "label": "Formación profesional en energías renovables y eficiencia energética",
-                                       "data": "186"
-                                     },
-                                     {
-                                       "label": "Investigación energética",
-                                       "data": "187"
-                                     }
-                                   ]
-                               }
-                        ]
-                            }
-                          ]
-                          },
-                          {
-                            "label": "SERVICIOS FINANCIEROS",
-                            "data": "194",
-                            "expandedIcon": "fa fa-folder-open",
-                            "collapsedIcon": "fa fa-folder",
-                            "children": [{
-                              "label": "Servicios bancarios y financieros",
-                              "data": "195",
-                              "expandedIcon": "fa fa-folder-open",
-                              "collapsedIcon": "fa fa-folder",
-                              "children": [{
-                                  "label": "Política financiera y gestión administrativa",
-                                  "data": "196"
-                                },
-                                {
-                                  "label": "Instituciones monetarias",
-                                  "data": "197"
-                                },
-                                {
-                                  "label": "Intermediarios financieros del sector formal",
-                                  "data": "198"
-                                },
-                                {
-                                  "label": "Intermediarios financieros semi-formales, informales",
-                                  "data": "199"
-                                },
-                                {
-                                  "label": "Enseñanza/formación en banca y servicios financieros",
-                                  "data": "200"
-                                }
-                                ]
-                                }
-                              ]
-                          },
-                          {
-                            "label": "EMPRESAS Y SERVICIOS",
-                            "data": "201",
-                            "expandedIcon": "fa fa-folder-open",
-                            "collapsedIcon": "fa fa-folder",
-                            "children": [{
-                              "label": "Empresas y otros servicios",
-                              "data": "202",
-                              "expandedIcon": "fa fa-folder-open",
-                              "collapsedIcon": "fa fa-folder",
-                              "children": [ {
-                                  "label": "Servicio e instituciones de apoyo a la empresa",
-                                  "data": "203",
-                                  "expandedIcon": "fa fa-folder-open",
-                                  "collapsedIcon": "fa fa-folder",
-                                  "children": [ {
-                                    "label": "Servicio e instituciones de apoyo a la empresa, excepto creación de redes público-privadas",
-                                     "data": "204"
-                                   },
-                                   {
-                                    "label": "Creación de redes público-privadas",
-                                    "data": "205"
-                                  }
-                                    ]
-                                },
-                                {
-                                  "label": "Privatizaciones",
-                                  "data": "206"
-                                },
-                                {
-                                  "label": "Política agraria y gestión administrativa",
-                                  "data": "208"
-                                },
-                                {
-                                  "label": "Desarrollo agrario",
-                                  "data": "209"
-                                },
-                                {
-                                  "label": "Tierras cultivables",
-                                  "data": "210"
-                                },
-                                {
-                                  "label": "Recursos hídricos para uso agrícola",
-                                  "data": "211"
-                                },
-                                {
-                                  "label": "Insumos agrícolas",
-                                  "data": "212"
-                                },
-                                {
-                                  "label": "Producción alimentos agrícolas",
-                                  "data": "213"
-                                },
-                                {
-                                  "label": "Cultivos industriales/para la exportación",
-                                  "data": "214"
-                                },
-                                {
-                                  "label": "Ganadería",
-                                  "data": "215"
-                                },
-                                {
-                                  "label": "Reforma agraria",
-                                  "data": "216"
-                                },
-                                {
-                                  "label": "Desarrollo agrario alternativo",
-                                  "data": "217"
-                                },
-                                {
-                                  "label": "Extensión agraria",
-                                  "data": "218"
-                                },
-                                {
-                                  "label": "Enseñanza/formación agraria",
-                                  "data": "219"
-                                },
-                                {
-                                  "label": "Investigación agraria",
-                                  "data": "220"
-                                },
-                                {
-                                  "label": "Servicios agrícolas",
-                                  "data": "221"
-                                },
-                                {
-                                  "label": "Protección plantas y poscosecha y lucha contra plagas",
-                                  "data": "222"
-                                },
-                                {
-                                  "label": "Servicios financieros agrícolas",
-                                  "data": "223"
-                                },
-                                {
-                                  "label": "Cooperativas agrícolas",
-                                  "data": "224"
-                                },
-                                {
-                                  "label": "Servicios veterinarios",
-                                  "data": "225",
-                                  "expandedIcon": "fa fa-folder-open",
-                                  "collapsedIcon": "fa fa-folder",
-                                  "children": [{
-                                    "label": "Comercialización ganadera",
-                                    "data": "226"
-                                      }
-                                    ]
-                                }
-                              ]
-                               },
-                               {
-                                "label": "Agricultura",
-                                "data": "207"
-                              },
-                              {
-                                "label": "Silvicultura",
-                                "data": "227",
-                                "expandedIcon": "fa fa-folder-open",
-                                "collapsedIcon": "fa fa-folder",
-                                "children": [{
-                                  "label": "Política forestal y gestión administrativa",
-                                  "data": "228"
-                                    },
-                                    {
-                                      "label": "Desarrollo forestal",
-                                      "data": "231",
-                                      "expandedIcon": "fa fa-folder-open",
-                                "collapsedIcon": "fa fa-folder",
-                                "children": [{
-                                  "label": "Reforestación; explotación y utilización forestal sostenible",
-                                  "data": "232"
-                                    },
-                                    {
-                                      "label": "Proyectos de restauración hidrológica-forestal",
-                                      "data": "233"
-                                        },
-                                        {
-                                          "label": "Lucha contra la desertificación y la erosión",
-                                          "data": "234"
-                                            },
-                                            {
-                                              "label": "Desarrollo forestal no centrado en el contenido de los CSE anteriores",
-                                              "data": "235"
-                                                }
-                                  ] },
-                                        {
-                                          "label": "Producción de carbón vegetal / leña",
-                                          "data": "236"
-                                            },
-                                            {
-                                              "label": "Educación, formación forestal",
-                                              "data": "237"
-                                                },
-                                                {
-                                                  "label": "Investigación silvicultura",
-                                                  "data": "238"
-                                                    },
-                                                    {
-                                                      "label": "Servicios forestales",
-                                                      "data": "239"
-                                                        }
-                                  ]
-                              },
-                              {
-                                "label": "Pesca",
-                                "data": "240",
-                                "expandedIcon": "fa fa-folder-open",
-                                "collapsedIcon": "fa fa-folder",
-                                 "children": [{
-                                "label": "Política pesquera y gestión administrativa",
-                                "data": "241"
-                                 },
-                                 {
-                                 "label": "Desarrollo pesquero",
-                                "data": "242"
-                                 },{
-                                "label": "Educación, formación pesquera",
-                                "data": "243"
-                                },  { "label": "Investigación pesquera",
-                                "data": "244"
-                                 }, {
-                                "label": "Servicios pesqueros",
-                                "data": "245" }
-                                ] }
-                             ]
-                        },
-                        {
-                          "label": "INDUSTRIAS",
-                          "data": "246",
-                          "expandedIcon": "fa fa-folder-open",
-                          "collapsedIcon": "fa fa-folder",
-                          "children": [{
-                         "label": "Industria",
-                         "data": "247",
-                          "expandedIcon": "fa fa-folder-open",
-                          "collapsedIcon": "fa fa-folder",
-                          "children": [{
-                            "label": "Política industrial y gestión administrativa",
-                            "data": "248"
-                           },
-                           {
-                            "label": "Desarrollo industrial",
-                            "data": "249"
-                            },
-                            {
-                              "label": "Desarrollo pymes",
-                              "data": "250"
-                              },
-                              {
-                                "label": "Industria artesanal",
-                                "data": "251"
-                                },
-                                {
-                                  "label": "Agro-industrias",
-                                  "data": "252"
-                                  },
-                                  {
-                                    "label": "Industrias forestales",
-                                    "data": "253"
-                                    },
-                                    {
-                                      "label": "Textiles, cuero y sustitutos",
-                                      "data": "254"
-                                      },
-                                      {
-                                        "label": "Productos químicos",
-                                        "data": "255"
-                                        }
-                                        ,{
-                                          "label": "Plantas de producción de fertilizantes",
-                                          "data": "256"
-                                          },{
-                                            "label": "Cemento, cal, yeso",
-                                            "data": "257"
-                                            },{
-                                              "label": "Fabricación productos energéticos",
-                                              "data": "258"
-                                              },{
-                                                "label": "Producción farmacéutica",
-                                                "data": "259"
-                                                },{
-                                                  "label": "Industria metalúrgica básica",
-                                                  "data": "260"
-                                                  },{
-                                                    "label": "Industrias metales no ferrosos",
-                                                    "data": "261"
-                                                    },{
-                                                      "label": "Construcción mecánica y eléctrica",
-                                                      "data": "262"
-                                                      },{
-                                                        "label": "Material de transporte",
-                                                        "data": "263"
-                                                        }
-                          ]
-                        },
-                              {
-                                  "label": "Industrias extractivas",
-                          "data": "265",
-                          "expandedIcon": "fa fa-folder-open",
-                          "collapsedIcon": "fa fa-folder",
-                          "children": [{
-                            "label": "Politica de las industrias extractivas y gestión administrativa",
-                            "data": "266"
-                           },
-                           {
-                            "label": "Prospecciones y análisis minerales",
-                            "data": "267"
-                            },
-                            {
-                              "label": "Carbón",
-                              "data": "268"
-                              },
-                              {
-                                "label": "Petróleo y gas",
-                                "data": "269"
-                                },
-                                {
-                                  "label": "Metales ferrosos",
-                                  "data": "270"
-                                  },
-                                  {
-                                    "label": "Metales no ferrosos",
-                                    "data": "271"
-                                    },
-                                    {
-                                      "label": "Metales/minerales preciosos",
-                                      "data": "272"
-                                      },
-                                      {
-                                        "label": "Minerales industriales",
-                                        "data": "273"
-                                        },
-                                        {
-                                          "label": "Fertilizantes minerales",
-                                          "data": "274"
-                                          },
-                                          {
-                                            "label": "Recursos minerales fondos marinos",
-                                            "data": "275"
-                                            }
-                          ]
-                        },
-                         {
-                         "label": "Construcción",
-                         "data": "276",
-                         "expandedIcon": "fa fa-folder-open",
-                          "collapsedIcon": "fa fa-folder",
-                          "children": [{
-                            "label": "Política construcción y gestión administrativa",
-                            "data": "277"
-                           }
-                          ]
-                          }
-                            ]
-  },
-  {
-    "label": "POLÍTICA  COMERCIAL",
-    "data": "278",
-    "expandedIcon": "fa fa-folder-open",
-    "collapsedIcon": "fa fa-folder",
-    "children": [{
-   "label": "Política y regulación comercial",
-   "data": "279",
-    "expandedIcon": "fa fa-folder-open",
-    "collapsedIcon": "fa fa-folder",
-    "children": [{
-      "label": "Política comercial y gestión administrativa",
-      "data": "280"
-     },
-     {
-      "label": "Fomento del comercio",
-      "data": "281"
-     },
-     {
-      "label": "Acuerdos comerciales regionales",
-      "data": "282"
-     },
-     {
-      "label": "Negociaciones comerciales multilaterales",
-      "data": "283"
-     },
-     {
-      "label": "Ajustes vinculados al comercio",
-      "data": "284"
-     },
-     {
-      "label": "Educación / formación comercial",
-      "data": "285"
-     }
-    ]
-  },
-  {
-    "label": "Turismo",
-    "data": "286",
-     "expandedIcon": "fa fa-folder-open",
-     "collapsedIcon": "fa fa-folder",
-     "children": [{
-       "label": "Política turística y gestión administrativa",
-       "data": "287",
-       "expandedIcon": "fa fa-folder-open",
-     "collapsedIcon": "fa fa-folder",
-     "children": [{
-       "label": "Ecoturismo",
-       "data": "288"
-      }
-    ]
-      }
-     ]
-   }
-      ]
-  },
-  {
-    "label": "PROTECCIÓN DEL MEDIO AMBIENTE",
-    "data": "289",
-    "expandedIcon": "fa fa-folder-open",
-    "collapsedIcon": "fa fa-folder",
-    "children": [{
-   "label": "Protección general medio ambiente",
-   "data": "290",
-    "expandedIcon": "fa fa-folder-open",
-    "collapsedIcon": "fa fa-folder",
-    "children": [{
-      "label": "Política medioambiental y gestión administrativa",
-      "data": "291",
-                "expandedIcon": "fa fa-folder-open",
-                "collapsedIcon": "fa fa-folder",
-                "children": [{
-                  "label": "Fortalecimiento institucional en cambio climático",
-                  "data": "292" },
-                  {
-                    "label": "Fortalecimiento institucional en conservación y servicios ambientales",
-                    "data": "293" }]
-     },
-     {
-      "label": "Protección biosfera",
-      "data": "294",
-      "expandedIcon": "fa fa-folder-open",
-                "collapsedIcon": "fa fa-folder",
-                "children": [{
-                  "label": "Lucha contra la contaminación del aire, protección de la capa de ozono",
-                  "data": "295" },
-                  {
-                    "label": "Lucha contra la contaminación marina",
-                    "data": "296" }]
-     },
-     {
-      "label": "Protección del patrimonio",
-      "data": "297",
-      "expandedIcon": "fa fa-folder-open",
-                "collapsedIcon": "fa fa-folder",
-                "children": [{
-                  "label": "Protección de paisajes naturales (lugares)",
-                  "data": "298" },
-                  {
-                    "label": "Protección del patrimonio cultural (bienes muebles e inmuebles y patrimonio intangible)",
-                    "data": "299" }]
-     },
-     {
-      "label": "Control / prevención de inundaciones",
-      "data": "300"
-     },
-     {
-      "label": "Educación / formación medioambiental",
-      "data": "301"
-     },
-     {
-      "label": "Investigación medioambiental",
-      "data": "302",
-      "expandedIcon": "fa fa-folder-open",
-                "collapsedIcon": "fa fa-folder",
-                "children": [{
-                  "label": "Investigación en materia de cambio climático",
-                  "data": "303" },
-                  {
-                    "label": "Investigación en materia de conservación de los ecosistemas y servicios ambientales",
-                    "data": "304" },
-                    {
-                      "label": "Investigación en materia de habitabilidad básica",
-                      "data": "305" }]
-     }
-    ]
-  },
-  {
-    "label": "Otras acciones multisectoriales",
-    "data": "306",
-     "expandedIcon": "fa fa-folder-open",
-     "collapsedIcon": "fa fa-folder",
-     "children": [{
-       "label": "Ayuda multisectorial",
-       "data": "307" },
-       {
-        "label": "Desarrollo y gestión urbanos",
-        "data": "308",
-        "expandedIcon": "fa fa-folder-open",
-                "collapsedIcon": "fa fa-folder",
-                "children": [{
-                  "label": "Mejora barrial",
-                  "data": "309" },
-                  {
-                    "label": "Medio ambiente urbano",
-                    "data": "310" },
-                    {
-                      "label": "Otros proyectos de desarrollo y gestión urbanos",
-                      "data": "311" }]
-      },
-        {
-          "label": "Desarrollo rural",
-          "data": "312",
-          "expandedIcon": "fa fa-folder-open",
-                "collapsedIcon": "fa fa-folder",
-                "children": [{
-                  "label": "Proyectos integrados de desarrollo rural en cambio climático)",
-                  "data": "313" },
-                  {
-                    "label": "Desarrollo rural (excepto proyectos integrados de desarrollo rural en cambio climático)",
-                    "data": "314" }]
-        },
-          {
-            "label": "Desarrollo alternativo no agrario",
-            "data": "315" },
-            {
-              "label": "Enseñanza/formación multisectorial",
-              "data": "316" },
-              {
-                "label": "Instituciones científicas y de investigación",
-                "data": "317",
-                "expandedIcon": "fa fa-folder-open",
-                "collapsedIcon": "fa fa-folder",
-                "children": [{
-                  "label": "Instituciones científicas y de investigación (excepto innovación empresarial)",
-                  "data": "318" }]
-               }
-     ]
-   }
-      ]
-  },
-  {
-    "label": "APOYO GENERAL",
-    "data": "319",
-    "expandedIcon": "fa fa-folder-open",
-    "collapsedIcon": "fa fa-folder",
-    "children": [{
-      "label": "Apoyo presupuestario general",
-      "data": "320",
-      "expandedIcon": "fa fa-folder-open",
+                       }
+
+                      ]
+                },
+                {
+                  "label": "EJE - infraestrucutura",
+                  "data": "24",
+                  "expandedIcon": "fa fa-folder-open",
                   "collapsedIcon": "fa fa-folder",
                   "children": [{
-                    "label": "Apoyo presupuestario general",
-                    "data": "321" }
-                    ]
-        },
-        {
-          "label": "Ayuda alimentaria para el desarrollo / ayuda a la seguridad alimentaria",
-          "data": "322",
-      "expandedIcon": "fa fa-folder-open",
-                  "collapsedIcon": "fa fa-folder",
-                  "children": [{
-                    "label": "Ayuda alimentaria/programas de seguridad alimentaria",
-                    "data": "323" }
-                    ]
-            },
-            {
-              "label": "Otras ayudas en forma de suministro de bienes",
-              "data": "324",
-              "expandedIcon": "fa fa-folder-open",
-                  "collapsedIcon": "fa fa-folder",
-                  "children": [{
-                    "label": "Apoyo importación (bienes de equipo)",
-                    "data": "325" },
-                    {
-                      "label": "Apoyo importación (productos)",
-                      "data": "326" }]
-                }
-      ]
-  },
-  {
-    "label": "ACTIVIDADES RELACIONADAS CON LA DEUDA",
-    "data": "327",
-    "expandedIcon": "fa fa-folder-open",
-    "collapsedIcon": "fa fa-folder",
-    "children": [{
-      "label": "Actividades relacionadas con la deuda",
-      "data": "328",
-      "expandedIcon": "fa fa-folder-open",
-                  "collapsedIcon": "fa fa-folder",
-                  "children": [{
-                    "label": "Actividades relacionadas con la deuda",
-                    "data": "329" },
-                    {
-                      "label": "Condonación de deuda",
-                      "data": "330" },
-                      {
-                        "label": "Alivio de la deuda multilateral",
-                        "data": "331" },
-                        {
-                          "label": "Reestructuración y refinanciación",
-                          "data": "332" },
-                          {
-                            "label": "Canje de deuda por desarrollo",
-                            "data": "333" },
-                            {
-                              "label": "Otros tipos de canje de deuda",
-                              "data": "334" },
-                              {
-                                "label": "Recompra deuda",
-                                "data": "335" }
-                    ]
-                    } ]
-  },
-  {
-    "label": "AYUDA DE EMERGENCIA",
-    "data": "336",
-    "expandedIcon": "fa fa-folder-open",
-    "collapsedIcon": "fa fa-folder",
-    "children": [{
-      "label": "Ayuda de emergencia",
-      "data": "337",
-      "expandedIcon": "fa fa-folder-open",
-                  "collapsedIcon": "fa fa-folder",
-                  "children": [{
-                    "label": "Ayuda y servicios materiales de emergencia",
-                    "data": "338",
+                    "label": "servicio electrico",
+                    "data": "25",
                     "expandedIcon": "fa fa-folder-open",
                     "collapsedIcon": "fa fa-folder",
                     "children": [{
-                      "label": "Artículos de primera necesidad",
-                      "data": "339"
-                       },
-                       {
-                       "label": "Medicina y salud",
-                      "data": "340"
-                       },
-                       {
-                        "label": "Logística ",
-                       "data": "341"
-                        },
-                        {
-                          "label": "Alojamiento",
-                         "data": "342"
-                          },
-                          {
-                            "label": "Agua y saneamiento",
-                           "data": "343"
-                            }
-                      ]
-                  },
-                    {
-                      "label": "Ayuda alimentaria de emergencia",
-                      "data": "344" },
+                        "label": "porcentaje de energia electrica renovable participando en matriz de generacion",
+                        "data": "26"
+                      },
                       {
-                        "label": "Coordinación de los servicios de protección de la ayuda",
-                        "data": "345",
+                        "label": "porcentaje de perdidas en la transmision electricas",
+                        "data": "27"
+                      },
+                      {
+                        "label": "porcentajes de personas con acceso a energia electrica",
+                        "data": "28"
+                      },
+                      {
+                        "label": "infraestructura vial, portuaria, aeroportuaria y ferroviaria",
+                        "data": "29",
                         "expandedIcon": "fa fa-folder-open",
                         "collapsedIcon": "fa fa-folder",
                         "children": [{
-                          "label": "Protección",
-                          "data": "346" },
-                          {
-                            "label": "Operaciones especiales de apoyo",
-                            "data": "347" }
-                          ] }
-                    ]
-                    },
-                    {
-                      "label": "Ayuda a la reconstrucción y a la rehabilitación",
-                      "data": "348",
-                      "expandedIcon": "fa fa-folder-open",
-                                  "collapsedIcon": "fa fa-folder",
-                                  "children": [{
-                                    "label": "Ayuda a la reconstrucción y a la rehabilitación",
-                                    "data": "349",
-                                    "expandedIcon": "fa fa-folder-open",
-                                  "collapsedIcon": "fa fa-folder",
-                                  "children": [{
-                                    "label": "Ayuda a la reconstrucción",
-                                    "data": "350" },
-                                    {
-                                      "label": "Desminado ",
-                                      "data": "351" },
-                                      {
-                                        "label": "Rehabilitación",
-                                        "data": "352" }
-                                    ]
-                                  }
-                                    ]
-                                    },
-                    {
-                      "label": "Prevención de desastres",
-                      "data": "353",
-                      "expandedIcon": "fa fa-folder-open",
-                                  "collapsedIcon": "fa fa-folder",
-                                  "children": [{
-                                    "label": "Prevención de desastres",
-                                    "data": "354" }
-                                    ]
-                                    }
-                   ]
-  },
-  {
-    "label": "COSTES DONANTES",
-    "data": "355",
-    "expandedIcon": "fa fa-folder-open",
-    "collapsedIcon": "fa fa-folder",
-    "children": [{
-      "label": "Costes administrativos donantes",
-      "data": "356",
-      "expandedIcon": "fa fa-folder-open",
+                        "label": "Dencidad de la red vial oficial (km de red vial oficial por cien k,2 de territorio)",
+                        "data": "30"
+                      },
+                      {
+                        "label": "Porcentaje de kilometros de la red vial oficial primaria y secundaria pavimentada mantenimiento por niveles de servicios",
+                        "data": "31"
+                      },
+                      {
+                        "label": "numero de kms de vias ferreas.",
+                        "data": "32"
+                      },
+                      {
+                        "label": "volumen de carga manejado en los puertos (TM por año)",
+                        "data": "33"
+                      },
+                      {
+                        "label": "posicion de Honduras en el indice de conectividad de las lineas navieras (LCSI)",
+                        "data": "34"
+                      },
+                      {
+                        "label": "numero de pasajeros transportados por vias areas",
+                        "data": "35"
+                      },
+                      {
+                        "label": "volumen de carga transportada por via aerea (kg)",
+                        "data": "36"
+                      }
+                      ]
+                      },
+                      {
+                  "label": "acceso a internet",
+                  "data": "37",
+                  "expandedIcon": "fa fa-folder-open",
                   "collapsedIcon": "fa fa-folder",
                   "children": [{
-                    "label": "Costes administrativos",
-                    "data": "357" }
+                    "label": "porcentaje de la poblacion con acceso a internet",
+                    "data": "38"
+                  }
+                      ]
+                      },
+                      {
+                        "label": "infraestructura Hidrica",
+                        "data": "39",
+                        "expandedIcon": "fa fa-folder-open",
+                        "collapsedIcon": "fa fa-folder",
+                        "children": [{
+                          "label": "Tasa nacional de represamiento y aprovechamiento de recurso Hidricos",
+                          "data": "40"
+                        },
+                        {
+                          "label": "numero de hectareas de tierra agricola con acceso a riego",
+                          "data": "41"
+                        }
+                            ]
+                      },
+                      {
+
+                        "label": "sistema de manejo de riego",
+                        "data": "42",
+                        "expandedIcon": "fa fa-folder-open",
+                        "collapsedIcon": "fa fa-folder",
+                        "children": [{
+                          "label": "numero de municipios con PDM-OT registrado con el RENOT",
+                          "data": "43"
+                        },
+                        {
+                          "label": "Numero de regiones con PDR-OT registrados en el RENOT",
+                          "data": "106"
+                        },
+                        {
+                          "label": "Numero de municipios implementado SINAGER",
+                          "data": "107"
+                        }
+                     ]
+
+                      }
                     ]
-                    },
-                    {
-                      "label": "Ayuda a refugiados en el país donante",
-                      "data": "358",
-                      "expandedIcon": "fa fa-folder-open",
-                                  "collapsedIcon": "fa fa-folder",
-                                  "children": [{
-                                    "label": "Ayuda a refugiados en el país donante",
-                                    "data": "359" }
-                                    ]
-                                    }
-                   ]
-  },
-  {
-    "label": "NO CLASIFICADOS",
-    "data": "360",
-    "expandedIcon": "fa fa-folder-open",
-    "collapsedIcon": "fa fa-folder",
-    "children": [{
-      "label": "Sin especificación / no clasificados",
-      "data": "361",
-      "expandedIcon": "fa fa-folder-open",
+                    }  ]
+
+
+                 },
+                 {
+                  "label": "EJE- ambiente Marcroeconomico",
+                  "data": "44",
+                  "expandedIcon": "fa fa-folder-open",
                   "collapsedIcon": "fa fa-folder",
                   "children": [{
-                    "label": "Sectores no especificados",
-                    "data": "362",
+                    "label": "estabilidad macroeconomica",
+                    "data": "45",
+                 "expandedIcon": "fa fa-folder-open",
+                  "collapsedIcon": "fa fa-folder",
+                  "children": [{
+                    "label": "tasa de inflacion anual.",
+                    "data": "46"
+                  },
+                  {
+                    "label": "deficit fiscal del gobierno central como porcentaje del PIB",
+                    "data": "47"
+                  },
+                  {
+                    "label": "deuda publica como porcentaje del PIB",
+                    "data": "48"
+                  },
+                  {
+                    "label": "recaudacion fiscal como porcenteja del PIB",
+                    "data": "49"
+                  },
+                  {
+                    "label": "inversion real del gobierno central respecto del PIB",
+                    "data": "50"
+                  }
+                      ]
+
+                  },
+                  {
+                    "label": "ahorro interno",
+                    "data": "51",
+                 "expandedIcon": "fa fa-folder-open",
+                  "collapsedIcon": "fa fa-folder",
+                  "children": [{
+                    "label": "porcentaje de trabajadores asalariados afiliados a sistema de prevision",
+                    "data": "52"
+                  },
+                  {
+                    "label": "tasa de ahorro total como porcentaje de PIB",
+                    "data": "53"
+                  }
+                ]
+                  },
+                  {
+                    "label": "financiamiento de actividades productivas",
+                    "data": "54",
+                 "expandedIcon": "fa fa-folder-open",
+                  "collapsedIcon": "fa fa-folder",
+                  "children": [{
+                    "label": "creditos de sectores productivos como porcentajes del credito local",
+                    "data": "55"
+                  },
+                  {
+                    "label": "creditos a la MIPYMES como porcentaje del credito total",
+                    "data": "56"
+                  }
+                ]
+                  },
+                  {
+                    "label": "inversion extranjera",
+                    "data": "57",
+                 "expandedIcon": "fa fa-folder-open",
+                  "collapsedIcon": "fa fa-folder",
+                  "children": [{
+                    "label": "valor a la inversion en APP como porcentaje del PIB",
+                    "data": "58"
+                  },
+                  {
+                    "label": "monto de la inversion extranjera directa como porcentaje del PIB",
+                    "data": "59"
+                  }
+                ]
+                  }
+
+
+                      ]
+
+                 },
+                 {
+                  "label": "EJE: Capital Humano",
+                    "data": "60",
+                 "expandedIcon": "fa fa-folder-open",
+                  "collapsedIcon": "fa fa-folder",
+                  "children": [{
+                    "label": "Educacion",
+                    "data": "61",
                     "expandedIcon": "fa fa-folder-open",
                     "collapsedIcon": "fa fa-folder",
                     "children": [{
-                      "label": "Participación social y política de las mujeres",
-                      "data": "363"
-                       },
-                       {
-                       "label": "Lucha contra la violencia de género",
-                      "data": "364"
-                       },
-                       {
-                        "label": "Mujer y construcción de paz",
-                       "data": "365"
-                        },
-                        {
-                          "label": "Empoderamiento económico de las mujeres",
-                         "data": "366"
-                          },
-                          {
-                            "label": "Fortalecimiento Institucional de género",
-                           "data": "367"
-                            }
-                      ]
-                  },
+                      "label": "Tasa neta de cobertura en educacion basica en sus dos primeros ciclos(1ero a 6to grado)",
+                      "data": "62"
+                    },
                     {
-                      "label": "Sensibilización sobre los problemas relacionados con el desarrollo",
-                      "data": "368","expandedIcon": "fa fa-folder-open",
-                      "collapsedIcon": "fa fa-folder",
-                       "children": [{
-                      "label": "Procesos de planificación",
-                      "data": "369"
-                       },
-                       {
-                       "label": "Difusión de Buenas Prácticas en el sector",
-                      "data": "370"
-                       },
-                       {
-                        "label": "Fortalecimiento de la capacidad técnica",
-                       "data": "371"
-                        },
-                        {
-                          "label": "Creación de red expertos. Coordinación interna, creación de una red de expertos y coordinación con otros actores",
-                         "data": "370"
-                          }
-                      ]
-                     }
-                    ]
+                      "label": "tasa neta de cobertura en educaion basica en su tercer ciclo(7mo a 9no grado)",
+                      "data": "63"
+                    },
+                    {
+                      "label": "Rendimiento promedio en matematicas en el nivel basico",
+                      "data": "64"
+                    },
+                    {
+                      "label": "Rendimiento promedio en español en el nivel basico",
+                      "data": "65"
+                    },
+                    {
+                      "label": "tasa neta de cobertura en educacion media",
+                      "data": "66"
                     }
-                   ]
-  }
+                  ]
+
+                  },
+
+                  {
+                    "label": "Educacion Tecnica",
+                    "data": "67",
+                    "expandedIcon": "fa fa-folder-open",
+                    "collapsedIcon": "fa fa-folder",
+                    "children": [{
+                      "label": "Porcentajes de estudiantes matriculados en bachillerato tecnicos profesionales(nuevo curricular)",
+                      "data": "68"
+                    }
+                  ]
+
+                  },
+                  {
+                    "label": "Salud",
+                    "data": "69",
+                    "expandedIcon": "fa fa-folder-open",
+                    "collapsedIcon": "fa fa-folder",
+                    "children": [{
+                      "label": "Razon de mortalidad materna (muertes maternas por 100 niños)",
+                      "data": "70"
+                    },
+                    {
+                      "label": "tasa de  mortalidad en niños menores de 5 años (muertes por 1,000 niños)",
+                      "data": "71"
+                    },
+                    {
+                      "label": "Tasa de desnutricion cronica",
+                      "data": "72"
+                    }
+                  ]
+
+                  },
+                  {
+                    "label": "agua potable y saneamiento basico",
+                    "data": "73",
+                    "expandedIcon": "fa fa-folder-open",
+                    "collapsedIcon": "fa fa-folder",
+                    "children": [{
+                      "label": "Porcentaje de `personas con acceso a un servicio adecuado de agua",
+                      "data": "74"
+                    },
+                    {
+                      "label": "Porcentaje de personas con acceso a un  sistema de saneamiento adecuado",
+                      "data": "75"
+                    }
+                  ]
+
+                  },
+                  {
+                    "label": "Enfermedades infeccion transmiciosas",
+                    "data": "76",
+                    "expandedIcon": "fa fa-folder-open",
+                    "collapsedIcon": "fa fa-folder",
+                    "children": [{
+                      "label": "Tasa de incidencias de casos de malaria (por 1,000 habitantes)",
+                      "data": "77"
+                    },
+                    {
+                      "label": "Tasa de incidencias de casos de dengue (por 1,000 habitantes)",
+                      "data": "78"
+                    },
+                    {
+                      "label": "Tasa de incidencias de casos de tuberculosis ( tb x por 100,000 habitantes)",
+                      "data": "79"
+                    },
+                    {
+                      "label": "porcentaje de la poblacion con VIH/SIDA, con antirretrovirales",
+                      "data": "80"
+                    }
+
+                  ]
+
+                  }
+
+
+                ]
+
+                 },
+
+                 {
+                  "label": "EJE: Eficiencia de los mercados ",
+                  "data": "81",
+                  "expandedIcon": "fa fa-folder-open",
+                  "collapsedIcon": "fa fa-folder",
+                  "children": [{
+                    "label": "educacion y capacitacion",
+                    "data": "82",
+                    "expandedIcon": "fa fa-folder-open",
+                    "collapsedIcon": "fa fa-folder",
+                    "children": [{
+                      "label": "Tasa de matricula en programas de educacion ocupacional",
+                      "data": "83"
+                    },
+                    {
+                      "label": "Tasa de participacion laboral juvenil(16 a 30 años)",
+                      "data": "84"
+                    },
+                    {
+                      "label": "Tasa de partcipacion laboral femenina",
+                      "data": "85"
+                    },
+                    {
+                      "label": "porcentaje de persona adultas( de 25 a 64  años) que poseen estudios superiores",
+                      "data": "86"
+                    }
+
+                  ]
+
+                  },
+                  {
+                    "label": "Clima de negocios",
+                    "data": "87",
+                    "expandedIcon": "fa fa-folder-open",
+                    "collapsedIcon": "fa fa-folder",
+                    "children": [{
+                      "label": "Posiciones de Honduras en el indicador de apertura de un Doing Business",
+                      "data": "88"
+                    },
+                    {
+                      "label": "Posicion de Honduras de manejo de permisos de contruccion del Doing Business",
+                      "data": "89"
+                    },
+                    {
+                      "label": "Posicion de Honduras en el indicador de registro de Propiedades del Doing Business",
+                      "data": "90"
+                    },
+                    {
+                      "label": "Numero de recomendaciones de politicas Publicas",
+                      "data": "91"
+                    }
+                  ]
+
+                  },
+                  {
+                    "label": "Imagen Pais",
+                    "data": "92",
+                    "expandedIcon": "fa fa-folder-open",
+                    "collapsedIcon": "fa fa-folder",
+                    "children": [{
+                      "label": "Posicion de Honduras en el indicador de comercio tras-fronterizo del Doing Business",
+                      "data": "93"
+                    },
+                    {
+                      "label": "Relacion de exportaciones respecto al PIB",
+                      "data": "94"
+                    },
+                    {
+                      "label": "Indice imagen pais (East West Index)",
+                      "data": "95"
+                    },
+                    {
+                      "label": "Porcentaje de empresas con certificacion reconocida internacionalmente",
+                      "data": "96"
+                    }
+                  ]
+
+                  }
+
+                ]
+
+                 },
+
+                 {
+                  "label": "EJE: innovacion Productiva",
+                  "data": "97",
+                  "expandedIcon": "fa fa-folder-open",
+                  "collapsedIcon": "fa fa-folder",
+                  "children": [{
+                    "label": "Innovacion y Eficiencia Productiva",
+                    "data": "98",
+                    "expandedIcon": "fa fa-folder-open",
+                    "collapsedIcon": "fa fa-folder",
+                    "children": [{
+                      "label": "Porcentaje de inversion en investigacion y desarrollo experimental al respecto al PIB",
+                      "data": "99"
+                    },
+                    {
+                      "label": "Numero de estudiantes Universitarios matriculados en carrera de ciencias, tecnologias, ingenieria y matematicas",
+                      "data": "100"
+                    },
+                    {
+                      "label": "Numero de proyectos de investigacion de transferencias (vinculacion empresa-universidad-sociedad)",
+                      "data": "101"
+                    },
+                    {
+                      "label": "numero de publicaciones en SCImago(documentos citables)",
+                      "data": "102"
+                    },
+                    {
+                      "label": "numero de solicitades de registro de invenciones nacionales",
+                      "data": "103"
+                    },
+                    {
+                      "label": "numero de consultas contros CATI",
+                      "data": "104"
+                    },
+                    {
+                      "label": "Absorcion de nuevas tecnologias (puntuacion em el WEF)",
+                      "data": "105"
+                    }
+                  ]
+                  }
+                ]
+                 }
 
   ]
-     }
+}
 
-
+]
+}

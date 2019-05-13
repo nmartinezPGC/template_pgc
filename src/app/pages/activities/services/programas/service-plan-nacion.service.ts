@@ -61,7 +61,7 @@ export class ServicePlanNacionService {
   * Objetivo: Seteo de las variables en json, con datos de prueba
   ****************************************************************************/
   getFiles() {
-    return this.http.get('../assets/json/sectores-programas/sectores/files.json')
+    return this.http.get('../assets/json/sectores-programas/programas/filesPlanNacion.json')
       .toPromise()
       .then(res => <TreeNode[]>res.json().data);
   }
@@ -78,7 +78,7 @@ export class ServicePlanNacionService {
     return this._http.get(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 32), {
       headers: this.headers,
       params: { 'tokenApi': this.tokenHeader },
-    }).map(response => <TreeNode[]>response);
+    });
   } // FIN | FND-00003
 
 

@@ -12,8 +12,8 @@
           <input type="text" class="form-control txtSearch" name="queryString" [(ngModel)]="queryString"
             placeholder="Buscar Sector">
           <br>
-          <p-tree [style]="{'width': '100%'}" [value]="arrayPush | filter: queryString" selectionMode="checkbox"
-            (onNodeUnselect)="nodeUnselect($event)" [loading]="loading" (onNodeSelect)="nodeSelect($event)"
+          <p-tree [style]="{'width': '100%'}" [value]="filesTree4 | filter: queryString" selectionMode="checkbox"
+            (onNodeUnselect)="nodeUnselect($event)"  (onNodeSelect)="nodeSelect($event)"
             dynamic="true"></p-tree>
           <br>
           <div>Sectores seleccionados: <span *ngFor="let file of selectedFiles2">{{file.parent.data}} </span></div>

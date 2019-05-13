@@ -1,0 +1,55 @@
+{
+  "data": [{
+    "label": "Agenda de Efectividad de la Ayuda",
+    "data": "1"
+  },
+  {
+    "label": "Ayuda Humanitaria",
+    "data": "2"
+  },
+  {
+    "label": "Competitividad e Innovacion",
+    "data": "3"
+  },
+  {
+    "label": "Derechos Humanos",
+    "data": "4"
+  },
+  {
+    "label": "Educacion y Cultura",
+    "data": "5"
+  },
+  {
+    "label": "Fortalecimiento de las Capacidades de las Instituciones Beneficiarias/Ejecutoras en Materia de Planificacion, Seguimiento y Evaluacion",
+    "data": "6"
+  },
+  {
+    "label": "Generacion de Empleo",
+    "data": "7"
+  },
+  {
+    "label": "Medio Ambiente/Cambio Climatico",
+    "data": "8"
+  },
+  {
+    "label": "Niñez",
+    "data": "9"
+  },
+  {
+    "label": "Prevencion de Violencia",
+    "data": "10"
+  },
+  {
+    "label": "Pueblos Indigenas",
+    "data": "11"
+  },
+  {
+    "label": "Seguridad Alimentaria",
+    "data": "12"
+  },
+  {
+    "label": "Sensibilidad de Genero",
+    "data": "13"
+  }
+   ]
+     }
