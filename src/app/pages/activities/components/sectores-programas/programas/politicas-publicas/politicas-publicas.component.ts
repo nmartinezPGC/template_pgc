@@ -6,7 +6,7 @@
 * @version 1.0.0
 * @fecha 02-05-2019
 */
-import { Component, OnInit, Input, ChangeDetectorRef} from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef, OnChanges} from '@angular/core';
 import { TreeNode, MessageService, MenuItem } from 'primeng/primeng';
 import { ToasterConfig, ToasterService, Toast, BodyOutputType } from 'angular2-toaster';
 import { ListasComunesService } from '../../../../../common-list/services/listas-comunes.service';
