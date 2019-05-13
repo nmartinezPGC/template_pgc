@@ -1,24 +1,24 @@
 /**
 * @author Nahum Martinez
 * @returns Componente de Socio Desarrollo
-* @name SocioDesarrolloComponent
-* @alias _socioDesarrolloComponent
+* @name UnidadEjecutoraComponent
+* @alias _UnidadEjecutoraComponent
 * @version 1.0.0
 * @fecha 02-05-2019
 */
 
 import { Component, OnInit, Input } from '@angular/core';
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster';
-import { SocioDesarrolloService } from '../../../services/organizaciones/socio-desarrollo.service';
 import { SharedOrganizacionesService } from '../../../services/organizaciones/shared-organizaciones.service';
+import { UnidadEjecutoraService } from '../../../services/organizaciones/unidad-ejecutora.service';
 
 @Component({
-  selector: 'ngx-socio-desarrollo',
-  templateUrl: './socio-desarrollo.component.html',
-  styleUrls: ['./socio-desarrollo.component.scss'],
-  providers: [ToasterService, SocioDesarrolloService],
+  selector: 'ngx-unidad-ejecutora',
+  templateUrl: './unidad-ejecutora.component.html',
+  styleUrls: ['./unidad-ejecutora.component.scss'],
+  providers: [ToasterService, UnidadEjecutoraService],
 })
-export class SocioDesarrolloComponent implements OnInit {
+export class UnidadEjecutoraComponent implements OnInit {
   // Variables entre Tabs | Components
   @Input() idProyectoTab: number;
   @Input() idUsuarioTab: number;
@@ -27,8 +27,8 @@ export class SocioDesarrolloComponent implements OnInit {
   /**
    * Configuracion del Dropdow List
    */
-  dropdownListSocioDesarrollo = [];
-  selectedItemsSocioDesarrollo = [];
+  dropdownListUnidadEjecutora = [];
+  selectedItemsUnidadEjecutora = [];
   dropdownSettings = {};
 
   // Consfiguracion del Notificador
@@ -47,16 +47,13 @@ export class SocioDesarrolloComponent implements OnInit {
   config: ToasterConfig;
 
   // Json de recpcion de Informacion
-  public JsonReceptionAllSocioDesarrollo: any;
-
-  // Json a enviar
-  public JsonSendSociosDesarrollo: any = [];
+  public JsonReceptionAllUnidadEjecutora: any;
 
   /**
    * Constructor de la Clase
    */
   constructor(private _toasterService: ToasterService,
-    private _socioDesarrolloService: SocioDesarrolloService,
+    private _unidadEjecutoraService: UnidadEjecutoraService,
     private _sharedOrganizacionesService: SharedOrganizacionesService ) {
     // Codigo del Constructor
   }
@@ -67,10 +64,10 @@ export class SocioDesarrolloComponent implements OnInit {
    */
   ngOnInit() {
     // Carga los Datos de Socio al Desarrollo
-    this.getAllSocioDesarrolloService(1);
+    this.getAllUnidadEjecutoraService(2);
 
     // Inicio de las Configuraciones del DrowDown
-    this.dropdownListSocioDesarrollo = [];
+    this.dropdownListUnidadEjecutora = [];
 
     this.dropdownSettings = {
       singleSelection: true,
@@ -140,26 +137,26 @@ export class SocioDesarrolloComponent implements OnInit {
 
 
   /****************************************************************************
-  * Funcion: getAllSocioDesarrolloService
+  * Funcion: getAllUnidadEjecutoraService
   * Object Number: 002
   * Fecha: 05-05-2019
-  * Descripcion: Method getAllSocioDesarrolloService of the Class
-  * Objetivo: getAllSocioDesarrolloService listados de los Socios al Desarrollo
+  * Descripcion: Method getAllUnidadEjecutoraService of the Class
+  * Objetivo: getAllUnidadEjecutoraService listados de los Socios al Desarrollo
   * del Formulario de Actividad llamando a la API
   * Params: { caseBoolean }
   ****************************************************************************/
-  private getAllSocioDesarrolloService(caseOrg: number) {
+  private getAllUnidadEjecutoraService(caseOrg: number) {
     // Ejecuta el Servicio de invocar todos los Programa de Desarrollo
     this._sharedOrganizacionesService.getAllSociosDesarrollo(caseOrg).subscribe(
       result => {
         if (result.status !== 200) {
           this.showToast('error', 'Error al Obtener la Información de todos los Socios al Desarrollo', result.message);
-          this.JsonReceptionAllSocioDesarrollo = [];
+          this.JsonReceptionAllUnidadEjecutora = [];
         } else if (result.status === 200) {
-          this.JsonReceptionAllSocioDesarrollo = result.data;
+          this.JsonReceptionAllUnidadEjecutora = result.data;
 
           // Setea la Lista de los todos Socios al Desarrollo
-          this.dropdownListSocioDesarrollo = this.JsonReceptionAllSocioDesarrollo.map((item) => {
+          this.dropdownListUnidadEjecutora = this.JsonReceptionAllUnidadEjecutora.map((item) => {
             return {
               id: item.idOrganizacion,
               itemName: item.descOrganizacion,
@@ -171,11 +168,11 @@ export class SocioDesarrolloComponent implements OnInit {
         this.showToast('error', 'Error al Obtener la Información de todos los Socios al Desarrollo', JSON.stringify(error.message));
       },
     );
-  } // FIN | getAllSocioDesarrolloService
+  } // FIN | getAllUnidadEjecutoraService
 
 
   /****************************************************************************
-  * Funcion: OnItemDeSelectSocioDesarrollo
+  * Funcion: OnItemDeSelectUnidadEjecutora
   * Object Number: 003
   * Fecha: 03-05-2019
   * Descripcion: Method para Seleccionar Items del Socio al Desarrollo
@@ -183,31 +180,10 @@ export class SocioDesarrolloComponent implements OnInit {
   * Objetivo: enviar al Json de Proyectos el Id del Socio al Desarrollo
   * información que ocupa la API
   ****************************************************************************/
-  OnItemDeSelectSocioDesarrollo(item: any) {
-    const foundSocioDesarrollo = this.JsonSendSociosDesarrollo.find(function (element) {
-      return element.name === item.itemName;
-    });
-
-    if (foundSocioDesarrollo !== undefined) {
-      this.showToast('error', 'Error al seleccionar Socio al Desarrollo', 'Ya existe en el listado el Socio al Desarrollo seleccionado');
-    } else {
-      // Asignamos el Socio al Desarrollo seleccionado
-      this.JsonSendSociosDesarrollo = [...this.JsonSendSociosDesarrollo, { name: item.itemName, code: item.id }];
-    }
-  } // FIN | OnItemDeSelectSocioDesarrollo
-
-
-  /****************************************************************************
-  * Funcion: saveSocioDesarrollo
-  * Object Number: 004
-  * Fecha: 03-05-2019
-  * Descripcion: Method para Ingresar Items del Socio al Desarrollo
-  * en la Insercion del Proyecto
-  * Objetivo: enviar al Json del Socio al Desarrollo
-  * información que ocupa la API
-  ****************************************************************************/
-  saveSocioDesarrollo() {
-    // console.log('Dato seleccionado ' + JSON.stringify( this.JsonSendSociosDesarrollo ));
-  } // FIN | saveSocioDesarrollo
+  OnItemDeSelectEspacioTrabajo(item: any) {
+    // Asignamos el Pais seleccionado
+    // this..idEspacioTrabajo = item.id;
+    // this.tipoEspacioTrabajo = item.tipoEspacioTrabajo;
+  } // FIN | OnItemDeSelectUnidadEjecutora
 
 }

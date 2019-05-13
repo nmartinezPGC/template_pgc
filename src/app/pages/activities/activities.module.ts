@@ -41,7 +41,7 @@ import { MessageModule } from 'primeng/message';
 import { ListboxModule } from 'primeng/listbox';
 import { RecursosProyectoComponent } from './components/recursos-proyecto/recursos-proyecto.component';
 import { FileUploadModule } from 'primeng/fileupload';
-import { DropdownModule, EditorModule } from 'primeng/primeng';
+import { DropdownModule, EditorModule, AutoCompleteModule, KeyFilterModule } from 'primeng/primeng';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { FilterPipe } from './pipes/filter.pipe';
@@ -55,10 +55,12 @@ import { SectoresCamposTransversalesComponent } from './components/sectores-prog
 import { VisionPaisComponent } from './components/sectores-programas/programas/visionpais/visionpais.component';
 import { VidaMejorComponent } from './components/sectores-programas/programas/vida-mejor/vida-mejor.component';
 import { PlanNacionComponent } from './components/sectores-programas/programas/plan-nacion/plan-nacion.component';
+import { PoliticasPublicasComponent } from './components/sectores-programas/programas/politicas-publicas/politicas-publicas.component';
 import { OdsModalMetasComponent } from './components/sectores-programas/sectores/ods/modals/ods-modal-metas/ods-modal-metas.component';
 import { OrganizacionesComponent } from './components/organizaciones/organizaciones.component';
 import { SocioDesarrolloComponent } from './components/organizaciones/socio-desarrollo/socio-desarrollo.component';
 import { PoliticasPublicasComponent } from './components/sectores-programas/programas/politicas-publicas/politicas-publicas.component';
+import { UnidadEjecutoraComponent } from './components/organizaciones/unidad-ejecutora/unidad-ejecutora.component';
 
 
 @NgModule({
@@ -86,6 +88,8 @@ import { PoliticasPublicasComponent } from './components/sectores-programas/prog
     MessageModule,
     ListboxModule,
     FileUploadModule, // modulo de file upload
+    AutoCompleteModule,
+    KeyFilterModule,
   ],
   declarations: [
     ...routedComponents,
@@ -102,10 +106,12 @@ import { PoliticasPublicasComponent } from './components/sectores-programas/prog
     VisionPaisComponent,
     VidaMejorComponent,
     PlanNacionComponent,
+    PoliticasPublicasComponent,
     OdsModalMetasComponent,
     OrganizacionesComponent,
     SocioDesarrolloComponent,
     PoliticasPublicasComponent,
+    UnidadEjecutoraComponent,
   ],
   providers: [
     // SmartTableService, // Defincion del Servicio que provee los Datos de la Tabla: ID's Internas
