@@ -282,13 +282,6 @@ export class SectoresGobiernoComponent implements OnInit, OnChanges {
       this.JsonSendSectoresGobiernoOpciones.splice(Number(resultado))
       this.JsonSendSectoresGobiernoOpciones = [...this.JsonSendSectoresGobiernoOpciones];
     }
-     else if (event.node !== 0 ) {
-      const itemNodeLabel = event.node.label;
-      // Ejecucion del splice del elemento
-      const resultado = this.JsonSendSectoresGobiernoOpciones.findIndex(sector => sector.name !== itemNodeLabel);
-      this.JsonSendSectoresGobiernoOpciones.splice(Number(resultado), 1)
-      this.JsonSendSectoresGobiernoOpciones = [...this.JsonSendSectoresGobiernoOpciones];
-    }
   } // FIN | nodeUnselect
 
 
