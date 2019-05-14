@@ -26,8 +26,8 @@ export class AdmonFinancieroComponent implements OnInit {
   /**
    * Configuracion del Dropdow List
    */
-  dropdownListSocioDesarrollo = [];
-  selectedItemsSocioDesarrollo = [];
+  dropdownListAdmonFinanciero = [];
+  selectedItemsAdmonFinanciero = [];
   dropdownSettings = {};
 
   // Consfiguracion del Notificador
@@ -46,10 +46,10 @@ export class AdmonFinancieroComponent implements OnInit {
   config: ToasterConfig;
 
   // Json de recpcion de Informacion
-  public JsonReceptionAllSocioDesarrollo: any;
+  public JsonReceptionAllAdmonFinanciero: any;
 
   // Json a enviar
-  public JsonSendSociosDesarrollo: any = [];
+  public JsonSendAdmonFinanciero: any = [];
   changeDetectorRef: any;
 
   /**
@@ -66,10 +66,10 @@ export class AdmonFinancieroComponent implements OnInit {
    */
   ngOnInit() {
     // Carga los Datos de Socio al Desarrollo
-    this.getAllSocioDesarrolloService(1);
+    this.getAllAdmonFinancieroService(1);
 
     // Inicio de las Configuraciones del DrowDown
-    this.dropdownListSocioDesarrollo = [];
+    this.dropdownListAdmonFinanciero = [];
 
     this.dropdownSettings = {
       singleSelection: true,
@@ -139,26 +139,26 @@ export class AdmonFinancieroComponent implements OnInit {
 
 
   /****************************************************************************
-  * Funcion: getAllSocioDesarrolloService
+  * Funcion: getAllAdmonFinancieroService
   * Object Number: 002
   * Fecha: 05-05-2019
-  * Descripcion: Method getAllSocioDesarrolloService of the Class
-  * Objetivo: getAllSocioDesarrolloService listados de los Socios al Desarrollo
+  * Descripcion: Method getAllAdmonFinancieroService of the Class
+  * Objetivo: getAllAdmonFinancieroService listados de los Socios al Desarrollo
   * del Formulario de Actividad llamando a la API
   * Params: { caseBoolean }
   ****************************************************************************/
-  private getAllSocioDesarrolloService(caseOrg: number) {
+  private getAllAdmonFinancieroService(caseOrg: number) {
     // Ejecuta el Servicio de invocar todos los Programa de Desarrollo
     this._sharedOrganizacionesService.getAllSociosDesarrollo(caseOrg).subscribe(
       result => {
         if (result.status !== 200) {
           this.showToast('error', 'Error al Obtener la Información de todos los Socios al Desarrollo', result.message);
-          this.JsonReceptionAllSocioDesarrollo = [];
+          this.JsonReceptionAllAdmonFinanciero = [];
         } else if (result.status === 200) {
-          this.JsonReceptionAllSocioDesarrollo = result.data;
+          this.JsonReceptionAllAdmonFinanciero = result.data;
 
           // Setea la Lista de los todos Socios al Desarrollo
-          this.dropdownListSocioDesarrollo = this.JsonReceptionAllSocioDesarrollo.map((item) => {
+          this.dropdownListAdmonFinanciero = this.JsonReceptionAllAdmonFinanciero.map((item) => {
             return {
               id: item.idOrganizacion,
               itemName: item.descOrganizacion,
@@ -170,11 +170,11 @@ export class AdmonFinancieroComponent implements OnInit {
         this.showToast('error', 'Error al Obtener la Información de todos los Socios al Desarrollo', JSON.stringify(error.message));
       },
     );
-  } // FIN | getAllSocioDesarrolloService
+  } // FIN | getAllAdmonFinancieroService
 
 
   /****************************************************************************
-  * Funcion: OnItemDeSelectSocioDesarrollo
+  * Funcion: OnItemDeSelectAdmonFinanciero
   * Object Number: 003
   * Fecha: 03-05-2019
   * Descripcion: Method para Seleccionar Items del Socio al Desarrollo
@@ -182,22 +182,22 @@ export class AdmonFinancieroComponent implements OnInit {
   * Objetivo: enviar al Json de Proyectos el Id del Socio al Desarrollo
   * información que ocupa la API
   ****************************************************************************/
-  OnItemSelectSocioDesarrollo(item: any) {
-    const foundSocioDesarrollo = this.JsonSendSociosDesarrollo.find(function (element) {
+  OnItemSelectAdmonFinanciero(item: any) {
+    const foundAdmonFinanciero = this.JsonSendAdmonFinanciero.find(function (element) {
       return element.name === item.itemName;
     });
 
-    if (foundSocioDesarrollo !== undefined) {
+    if (foundAdmonFinanciero !== undefined) {
       this.showToast('error', 'Error al seleccionar Socio al Desarrollo', 'Ya existe en el listado el Socio al Desarrollo seleccionado');
     } else {
       // Asignamos el Socio al Desarrollo seleccionado
-      this.JsonSendSociosDesarrollo = [...this.JsonSendSociosDesarrollo, { name: item.itemName, code: item.id, otro: '' }];
+      this.JsonSendAdmonFinanciero = [...this.JsonSendAdmonFinanciero, { name: item.itemName, code: item.id, otro: '' }];
     }
-  } // FIN | OnItemDeSelectSocioDesarrollo
+  } // FIN | OnItemDeSelectAdmonFinanciero
 
 
   /****************************************************************************
-  * Funcion: saveSocioDesarrollo
+  * Funcion: saveAdmonFinanciero
   * Object Number: 004
   * Fecha: 03-05-2019
   * Descripcion: Method para Ingresar Items del Socio al Desarrollo
@@ -205,26 +205,26 @@ export class AdmonFinancieroComponent implements OnInit {
   * Objetivo: enviar al Json del Socio al Desarrollo
   * información que ocupa la API
   ****************************************************************************/
-  saveSocioDesarrollo() {
-    this.JsonSendSociosDesarrollo.forEach(element => {
+  saveAdmonFinanciero() {
+    this.JsonSendAdmonFinanciero.forEach(element => {
       // console.log('Idx: ' + JSON.stringify(element));
     });
-  } // FIN | saveSocioDesarrollo
+  } // FIN | saveAdmonFinanciero
 
 
 
   /****************************************************************************
-  * Funcion: cleanSocioDesarrollo
+  * Funcion: cleanAdmonFinanciero
   * Object Number: 005
   * Fecha: 13-05-2019
   * Descripcion: Method para limpiar Items del Socio al Desarrollo
   * en la Insercion del Proyecto
   * Objetivo: limpiar el Json de los Items seleccionados
   ****************************************************************************/
-  cleanSocioDesarrollo() {
-    this.JsonSendSociosDesarrollo = [];
-    this.JsonSendSociosDesarrollo = [...this.JsonSendSociosDesarrollo];
-  } // FIN | cleanSocioDesarrollo
+  cleanAdmonFinanciero() {
+    this.JsonSendAdmonFinanciero = [];
+    this.JsonSendAdmonFinanciero = [...this.JsonSendAdmonFinanciero];
+  } // FIN | cleanAdmonFinanciero
 
 
   /****************************************************************************
@@ -238,7 +238,7 @@ export class AdmonFinancieroComponent implements OnInit {
   validaPercent(event: any, codeIn: number) {
     const otroIn = event.target.value;
 
-    this.JsonSendSociosDesarrollo.map(function (dato) {
+    this.JsonSendAdmonFinanciero.map(function (dato) {
       if (dato.code === codeIn) {
         dato.otro = otroIn;
       }
@@ -256,10 +256,10 @@ export class AdmonFinancieroComponent implements OnInit {
   * Objetivo: calculo de % el Json de los Items seleccionados
   ****************************************************************************/
   calcularPercent() {
-    // console.log(this.JsonSendSociosDesarrollo.length);
-    const valorMax = (100 / this.JsonSendSociosDesarrollo.length);
+    // console.log(this.JsonSendAdmonFinanciero.length);
+    const valorMax = (100 / this.JsonSendAdmonFinanciero.length);
 
-    this.JsonSendSociosDesarrollo.map(function (dato) {
+    this.JsonSendAdmonFinanciero.map(function (dato) {
       dato.otro = valorMax.toFixed(2);
       return dato;
     });

@@ -26,8 +26,8 @@ export class AgenciaBeneficiariaComponent implements OnInit {
   /**
    * Configuracion del Dropdow List
    */
-  dropdownListSocioDesarrollo = [];
-  selectedItemsSocioDesarrollo = [];
+  dropdownListAgenciaBeneficiaria = [];
+  selectedItemsAgenciaBeneficiaria = [];
   dropdownSettings = {};
 
   // Consfiguracion del Notificador
@@ -46,7 +46,7 @@ export class AgenciaBeneficiariaComponent implements OnInit {
   config: ToasterConfig;
 
   // Json de recpcion de Informacion
-  public JsonReceptionAllSocioDesarrollo: any;
+  public JsonReceptionAllAgenciaBeneficiaria: any;
 
   // Json a enviar
   public JsonSendSociosDesarrollo: any = [];
@@ -66,10 +66,10 @@ export class AgenciaBeneficiariaComponent implements OnInit {
    */
   ngOnInit() {
     // Carga los Datos de Socio al Desarrollo
-    this.getAllSocioDesarrolloService(1);
+    this.getAllAgenciaBeneficiariaService(1);
 
     // Inicio de las Configuraciones del DrowDown
-    this.dropdownListSocioDesarrollo = [];
+    this.dropdownListAgenciaBeneficiaria = [];
 
     this.dropdownSettings = {
       singleSelection: true,
@@ -139,26 +139,26 @@ export class AgenciaBeneficiariaComponent implements OnInit {
 
 
   /****************************************************************************
-  * Funcion: getAllSocioDesarrolloService
+  * Funcion: getAllAgenciaBeneficiariaService
   * Object Number: 002
   * Fecha: 05-05-2019
-  * Descripcion: Method getAllSocioDesarrolloService of the Class
-  * Objetivo: getAllSocioDesarrolloService listados de los Socios al Desarrollo
+  * Descripcion: Method getAllAgenciaBeneficiariaService of the Class
+  * Objetivo: getAllAgenciaBeneficiariaService listados de los Socios al Desarrollo
   * del Formulario de Actividad llamando a la API
   * Params: { caseBoolean }
   ****************************************************************************/
-  private getAllSocioDesarrolloService(caseOrg: number) {
+  private getAllAgenciaBeneficiariaService(caseOrg: number) {
     // Ejecuta el Servicio de invocar todos los Programa de Desarrollo
     this._sharedOrganizacionesService.getAllSociosDesarrollo(caseOrg).subscribe(
       result => {
         if (result.status !== 200) {
           this.showToast('error', 'Error al Obtener la Información de todos los Socios al Desarrollo', result.message);
-          this.JsonReceptionAllSocioDesarrollo = [];
+          this.JsonReceptionAllAgenciaBeneficiaria = [];
         } else if (result.status === 200) {
-          this.JsonReceptionAllSocioDesarrollo = result.data;
+          this.JsonReceptionAllAgenciaBeneficiaria = result.data;
 
           // Setea la Lista de los todos Socios al Desarrollo
-          this.dropdownListSocioDesarrollo = this.JsonReceptionAllSocioDesarrollo.map((item) => {
+          this.dropdownListAgenciaBeneficiaria = this.JsonReceptionAllAgenciaBeneficiaria.map((item) => {
             return {
               id: item.idOrganizacion,
               itemName: item.descOrganizacion,
@@ -170,11 +170,11 @@ export class AgenciaBeneficiariaComponent implements OnInit {
         this.showToast('error', 'Error al Obtener la Información de todos los Socios al Desarrollo', JSON.stringify(error.message));
       },
     );
-  } // FIN | getAllSocioDesarrolloService
+  } // FIN | getAllAgenciaBeneficiariaService
 
 
   /****************************************************************************
-  * Funcion: OnItemDeSelectSocioDesarrollo
+  * Funcion: OnItemDeSelectAgenciaBeneficiaria
   * Object Number: 003
   * Fecha: 03-05-2019
   * Descripcion: Method para Seleccionar Items del Socio al Desarrollo
@@ -182,22 +182,22 @@ export class AgenciaBeneficiariaComponent implements OnInit {
   * Objetivo: enviar al Json de Proyectos el Id del Socio al Desarrollo
   * información que ocupa la API
   ****************************************************************************/
-  OnItemSelectSocioDesarrollo(item: any) {
-    const foundSocioDesarrollo = this.JsonSendSociosDesarrollo.find(function (element) {
+  OnItemSelectAgenciaBeneficiaria(item: any) {
+    const foundAgenciaBeneficiaria = this.JsonSendSociosDesarrollo.find(function (element) {
       return element.name === item.itemName;
     });
 
-    if (foundSocioDesarrollo !== undefined) {
+    if (foundAgenciaBeneficiaria !== undefined) {
       this.showToast('error', 'Error al seleccionar Socio al Desarrollo', 'Ya existe en el listado el Socio al Desarrollo seleccionado');
     } else {
       // Asignamos el Socio al Desarrollo seleccionado
       this.JsonSendSociosDesarrollo = [...this.JsonSendSociosDesarrollo, { name: item.itemName, code: item.id, otro: '' }];
     }
-  } // FIN | OnItemDeSelectSocioDesarrollo
+  } // FIN | OnItemDeSelectAgenciaBeneficiaria
 
 
   /****************************************************************************
-  * Funcion: saveSocioDesarrollo
+  * Funcion: saveAgenciaBeneficiaria
   * Object Number: 004
   * Fecha: 03-05-2019
   * Descripcion: Method para Ingresar Items del Socio al Desarrollo
@@ -205,26 +205,26 @@ export class AgenciaBeneficiariaComponent implements OnInit {
   * Objetivo: enviar al Json del Socio al Desarrollo
   * información que ocupa la API
   ****************************************************************************/
-  saveSocioDesarrollo() {
+  saveAgenciaBeneficiaria() {
     this.JsonSendSociosDesarrollo.forEach(element => {
       // console.log('Idx: ' + JSON.stringify(element));
     });
-  } // FIN | saveSocioDesarrollo
+  } // FIN | saveAgenciaBeneficiaria
 
 
 
   /****************************************************************************
-  * Funcion: cleanSocioDesarrollo
+  * Funcion: cleanAgenciaBeneficiaria
   * Object Number: 005
   * Fecha: 13-05-2019
   * Descripcion: Method para limpiar Items del Socio al Desarrollo
   * en la Insercion del Proyecto
   * Objetivo: limpiar el Json de los Items seleccionados
   ****************************************************************************/
-  cleanSocioDesarrollo() {
+  cleanAgenciaBeneficiaria() {
     this.JsonSendSociosDesarrollo = [];
     this.JsonSendSociosDesarrollo = [...this.JsonSendSociosDesarrollo];
-  } // FIN | cleanSocioDesarrollo
+  } // FIN | cleanAgenciaBeneficiaria
 
 
   /****************************************************************************
