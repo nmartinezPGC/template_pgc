@@ -209,7 +209,13 @@ export class SocioDesarrolloComponent implements OnInit {
   ****************************************************************************/
   saveSocioDesarrollo() {
     this.JsonSendSociosDesarrollo.forEach(element => {
-      // console.log('Idx: ' + JSON.stringify(element));
+      // Valida que se registre el % de participacion
+      if (element.otro === '') {
+        this.showToast('error', 'Error al ingresar Socio al Desarrollo', 'No tiene el % de participación ingresado');
+        return -1;
+      } else {
+        // console.log('Idx: ' + JSON.stringify(element));
+      }
     });
   } // FIN | saveSocioDesarrollo
 
@@ -259,10 +265,10 @@ export class SocioDesarrolloComponent implements OnInit {
   ****************************************************************************/
   calcularPercent() {
     // console.log(this.JsonSendSociosDesarrollo.length);
-    const valorMax = ( 100 / this.JsonSendSociosDesarrollo.length);
+    const valorMax = (100 / this.JsonSendSociosDesarrollo.length);
 
     this.JsonSendSociosDesarrollo.map(function (dato) {
-      dato.otro =  valorMax.toFixed(2);
+      dato.otro = valorMax.toFixed(2);
       return dato;
     });
   } // FIN | calcularPercent

@@ -8,7 +8,7 @@
     <nb-card-body>
       <div class="row">
         <div class="col-sm-6">
-          <h4>Selecciona las Organizaciones | Socio al Desarrollo</h4>
+          <h4>Selecciona | Socio al Desarrollo</h4>
           <angular2-multiselect [data]="dropdownListSocioDesarrollo" [(ngModel)]="selectedItemsSocioDesarrollo"
             [settings]="dropdownSettings" (onSelect)="OnItemSelectSocioDesarrollo($event)"></angular2-multiselect>
         </div>
@@ -42,7 +42,7 @@
 
             <!-- Boton para Calcular los Porcentajes Organizaciones  -->
             <button type="button" class="btn btn-outline-success btn-icon" (click)="calcularPercent()"
-              nbPopover="Calcula el % de participacion de Organizaciones" nbPopoverMode="hint" nbPopoverPlacement="top">
+              nbPopover="Calcula el % de participacion de Socio al Desarrollo" nbPopoverMode="hint" nbPopoverPlacement="top">
               <i class="ion-calculator"></i>
             </button>
 
