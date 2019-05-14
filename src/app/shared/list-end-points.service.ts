@@ -859,7 +859,7 @@ export class ListEndPointsService {
       findAllProgramaPoliticasPublicas: {
         id: 56,
         nameEndpoint: 'findAllProgramaPoliticasPublicas',
-        urlEndPoint: '/programas/vision-pais',
+        urlEndPoint: '/programas/politica-publica',
         params: '{ }',
         groupEndPoint: 'actividadesCRUDGroup',
         descEndPoint: 'Listar todos datos de Politicas Publicas registrados en la BD',
@@ -867,7 +867,7 @@ export class ListEndPointsService {
       findByIdProgramaPoliticasPublicas: {
         id: 57,
         nameEndpoint: 'findByIdProgramaPoliticasPublicas',
-        urlEndPoint: '/programas/vision-pais/findByIdPrograma',
+        urlEndPoint: '/programas/politica-publica/findByIdPrograma',
         params: '{ idPrograma }',
         groupEndPoint: 'actividadesCRUDGroup',
         descEndPoint: 'Listar el dato de Politicas Publicas consultado',
@@ -875,7 +875,7 @@ export class ListEndPointsService {
       findByIdNivelProgramaPoliticasPublicas: {
         id: 58,
         nameEndpoint: 'findByIdNivelProgramaPoliticasPublicas',
-        urlEndPoint: '/programas/vision-pais/findByIdNivelPrograma',
+        urlEndPoint: '/programas/politica-publica/findByIdNivelPrograma',
         params: '{ idNivelPrograma }',
         groupEndPoint: 'actividadesCRUDGroup',
         descEndPoint: 'Listar los datos de Politicas Publicas consultado, por el nivel que pertenencen',
@@ -883,7 +883,7 @@ export class ListEndPointsService {
       findByIdNivelProgramaPoliticasPublicasPadre: {
         id: 59,
         nameEndpoint: 'findByIdNivelProgramaPoliticasPublicasPadre',
-        urlEndPoint: '/programas/vision-pais/findByIdNivelPrograma/findByProgramaPadreId',
+        urlEndPoint: '/programas/politica-publica/findByIdNivelPrograma/findByProgramaPadreId',
         params: '{ idNivelPrograma,sectorPadreId }',
         groupEndPoint: 'actividadesCRUDGroup',
         descEndPoint: 'Listar los datos de Politicas Publicas consultado, por el Programa Padre y Nivel que pertenencen',
@@ -891,7 +891,7 @@ export class ListEndPointsService {
       newActividadProgramaPoliticasPublicasPadre: {
         id: 60,
         nameEndpoint: 'newActividadProgramaPoliticasPublicasPadre',
-        urlEndPoint: '/mant-actividades/programas/vision-pais-proyecto/new',
+        urlEndPoint: '/mant-actividades/programas/politica-publica-proyecto/new',
         params: '{ jsonSendActividadProgramaPoliticasPublicas }',
         groupEndPoint: 'actividadesCRUDGroup',
         descEndPoint: 'Ingresar el dato Politicas Publicas enviado y asociarlo al Proyecto',
@@ -899,7 +899,7 @@ export class ListEndPointsService {
       deleteActividadProgramaPoliticasPublicas: {
         id: 61,
         nameEndpoint: 'deleteActividadProgramaPoliticasPublicas',
-        urlEndPoint: '/mant-actividades/programas/vision-pais-proyecto/delete/',
+        urlEndPoint: '/mant-actividades/programas/politica-publica-proyecto/delete/',
         params: '{ codigoActividad }',
         groupEndPoint: 'actividadesCRUDGroup',
         descEndPoint: 'Eliminar el dato de Politicas Publicas enviado y asociarlo al Proyecto',

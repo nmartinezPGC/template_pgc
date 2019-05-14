@@ -61,7 +61,7 @@ export class ServiceSectoresOcdeService {
   * Objetivo: Seteo de las variables en json, con datos de prueba
   ****************************************************************************/
   getFiles() {
-    return this.http.get('../assets/json/sectores-programas/sectores/filesocde.json')
+    return this.http.get('../assets/json/sectores-programas/sectores/filesOcde.json')
       .toPromise()
       .then(res => <TreeNode[]>res.json().data);
   }

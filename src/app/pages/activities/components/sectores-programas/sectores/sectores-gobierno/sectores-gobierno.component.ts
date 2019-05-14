@@ -275,7 +275,7 @@ export class SectoresGobiernoComponent implements OnInit, OnChanges {
   ****************************************************************************/
   nodeUnselect(event) {
     // Condicion de Agregar los Nodos
-    if (event.node !== undefined) {
+    if (event.node.children !== undefined) {
       const itemNodeLabel = event.node.label;
       // Ejecucion del splice del elemento
       const resultado = this.JsonSendSectoresGobiernoOpciones.findIndex(sector => sector.name !== itemNodeLabel);
