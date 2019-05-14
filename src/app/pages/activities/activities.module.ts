@@ -60,6 +60,8 @@ import { OrganizacionesComponent } from './components/organizaciones/organizacio
 import { SocioDesarrolloComponent } from './components/organizaciones/socio-desarrollo/socio-desarrollo.component';
 import { PoliticasPublicasComponent } from './components/sectores-programas/programas/politicas-publicas/politicas-publicas.component';
 import { UnidadEjecutoraComponent } from './components/organizaciones/unidad-ejecutora/unidad-ejecutora.component';
+import { AdmonFinancieroComponent } from './components/organizaciones/admon-financiero/admon-financiero.component';
+import { AgenciaBeneficiariaComponent } from './components/organizaciones/agencia-beneficiaria/agencia-beneficiaria.component';
 
 
 @NgModule({
@@ -111,6 +113,8 @@ import { UnidadEjecutoraComponent } from './components/organizaciones/unidad-eje
     SocioDesarrolloComponent,
     PoliticasPublicasComponent,
     UnidadEjecutoraComponent,
+    AdmonFinancieroComponent,
+    AgenciaBeneficiariaComponent,
   ],
   providers: [
     // SmartTableService, // Defincion del Servicio que provee los Datos de la Tabla: ID's Internas
