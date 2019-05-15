@@ -73,9 +73,9 @@ export class SocioDesarrolloComponent implements OnInit {
   ngOnInit() {
     // inicializacion del Modelo
     this._activityOrganizacionSocioDesarrolloModel = new ActivityOrganizacionSocioDesarrolloModel(
-      0, '', //datos Generales
-      null, null, 0,// Relacionales
-      true, null, null // Auditoria
+      0, '', // datos Generales
+      null, null, 0, // Relacionales
+      true, null, null, // Auditoria
     );
     // Carga los Datos de Socio al Desarrollo
     this.getAllSocioDesarrolloService(1);
@@ -260,8 +260,8 @@ export class SocioDesarrolloComponent implements OnInit {
   * Objetivo: limpiar el Json de los Items seleccionados
   ****************************************************************************/
   cleanSocioDesarrollo(event: any) {
-    for (var i = 0; i < this.JsonSendSociosDesarrollo.length; i++) {
-      if (this.JsonSendSociosDesarrollo[i].code == event) {
+    for (let i = 0; i < this.JsonSendSociosDesarrollo.length; i++) {
+      if (this.JsonSendSociosDesarrollo[i].code === event) {
         // Ejecuta el Servicio de invocar el registro de Socio al Desarrollo
         this._socioDesarrolloService.deleteActividadSociosDesarrollo(this.codigoProyectoTab + '-ASD-' + this.JsonSendSociosDesarrollo[i].code).subscribe(
           result => {
