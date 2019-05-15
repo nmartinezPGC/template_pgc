@@ -27,6 +27,8 @@
                 <input style="float: right; width: 15%; height: 10px; text-align: center" class="form-control"
                   type="text" severity="error" pInputText pKeyFilter="int" placeholder="%" maxlength="2"
                   value="{{socio.value.otro}}" (keyup)="validaPercent($event, socio.value.code)">
+                <img style="float: right;" src="../../../../../../assets/icons/forms/rubbish-bin_24x.png" alt="Delete"
+                  (click)="cleanSocioDesarrollo(socio.value.code)">
               </div>
             </ng-template>
           </p-listbox>
@@ -36,13 +38,14 @@
             <!-- Boton de Calcular Porcentajes -->
             <button type="button" class="btn btn-outline-danger btn-icon"
               nbPopover="Limpia el listado de Socio al Desarrollo" nbPopoverMode="hint" nbPopoverPlacement="top"
-              (click)="cleanSocioDesarrollo()">
+              (click)="cleanAllSocioDesarrollo()">
               <i class="ion-trash-a"></i>
             </button>
 
             <!-- Boton para Calcular los Porcentajes Organizaciones  -->
             <button type="button" class="btn btn-outline-success btn-icon" (click)="calcularPercent()"
-              nbPopover="Calcula el % de participacion de Socio al Desarrollo" nbPopoverMode="hint" nbPopoverPlacement="top">
+              nbPopover="Calcula el % de participacion de Socio al Desarrollo" nbPopoverMode="hint"
+              nbPopoverPlacement="top">
               <i class="ion-calculator"></i>
             </button>
 

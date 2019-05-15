@@ -11,6 +11,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster';
 import { SocioDesarrolloService } from '../../../services/organizaciones/socio-desarrollo.service';
 import { SharedOrganizacionesService } from '../../../services/organizaciones/shared-organizaciones.service';
+import { ActivityOrganizacionSocioDesarrolloModel } from '../../../models/organizaciones/model-socio-desarrollo';
 
 @Component({
   selector: 'ngx-socio-desarrollo',
@@ -53,6 +54,9 @@ export class SocioDesarrolloComponent implements OnInit {
   public JsonSendSociosDesarrollo: any = [];
   changeDetectorRef: any;
 
+  // Modelo de la Clase
+  public _activityOrganizacionSocioDesarrolloModel: ActivityOrganizacionSocioDesarrolloModel;
+
   /**
    * Constructor de la Clase
    */
@@ -67,6 +71,12 @@ export class SocioDesarrolloComponent implements OnInit {
    * Funcion Inicial de la clase
    */
   ngOnInit() {
+    // inicializacion del Modelo
+    this._activityOrganizacionSocioDesarrolloModel = new ActivityOrganizacionSocioDesarrolloModel(
+      0, '', //datos Generales
+      null, null, 0,// Relacionales
+      true, null, null // Auditoria
+    );
     // Carga los Datos de Socio al Desarrollo
     this.getAllSocioDesarrolloService(1);
 
@@ -169,7 +179,7 @@ export class SocioDesarrolloComponent implements OnInit {
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información de todos los Socios al Desarrollo', JSON.stringify(error.message));
+        this.showToast('error', 'Error al Obtener la Información de todos los Socios al Desarrollo', JSON.stringify(error.error.message));
       },
     );
   } // FIN | getAllSocioDesarrolloService
@@ -214,22 +224,80 @@ export class SocioDesarrolloComponent implements OnInit {
         this.showToast('error', 'Error al ingresar Socio al Desarrollo', 'No tiene el % de participación ingresado');
         return -1;
       } else {
-        // console.log('Idx: ' + JSON.stringify(element));
+        this._activityOrganizacionSocioDesarrolloModel.codigoActividad = this.codigoProyectoTab + '-ASD-' + element.code;
+        this._activityOrganizacionSocioDesarrolloModel.idActividad = { idActividad: this.idProyectoTab };
+        this._activityOrganizacionSocioDesarrolloModel.idOrganizacion = { idOrganizacion: element.code };
+        this._activityOrganizacionSocioDesarrolloModel.porcentajePart = Number(element.otro);
+
+        // Ejecuta el Servicio de invocar el registro de Socio al Desarrollo
+        this._socioDesarrolloService.newActividadSociosDesarrollo(this._activityOrganizacionSocioDesarrolloModel).subscribe(
+          result => {
+            if (result.status !== 200) {
+              this.showToast('error', 'Error al Ingresar la Información de Socios al Desarrollo', result.message);
+            } else if (result.status === 200) {
+              if (result.findRecord === true) {
+                this.showToast('error', 'Error al Ingresar la Información de Socios al Desarrollo', result.message);
+              } else {
+                this.showToast('default', 'Socio al Desarrollo', result.message);
+              }
+            }
+          },
+          error => {
+            this.showToast('error', 'Error al Ingresar la Información de Socios al Desarrollo', JSON.stringify(error.error.message));
+          },
+        );
       }
     });
   } // FIN | saveSocioDesarrollo
-
 
 
   /****************************************************************************
   * Funcion: cleanSocioDesarrollo
   * Object Number: 005
   * Fecha: 13-05-2019
+  * Descripcion: Method para limpiar Item del Socio al Desarrollo
+  * en la Insercion del Proyecto
+  * Objetivo: limpiar el Json de los Items seleccionados
+  ****************************************************************************/
+  cleanSocioDesarrollo(event: any) {
+    for (var i = 0; i < this.JsonSendSociosDesarrollo.length; i++) {
+      if (this.JsonSendSociosDesarrollo[i].code == event) {
+        // Ejecuta el Servicio de invocar el registro de Socio al Desarrollo
+        this._socioDesarrolloService.deleteActividadSociosDesarrollo(this.codigoProyectoTab + '-ASD-' + this.JsonSendSociosDesarrollo[i].code).subscribe(
+          result => {
+            if (result.status !== 200) {
+              this.showToast('error', 'Error al Borrar la Información de Socios al Desarrollo', result.message);
+            } else if (result.status === 200) {
+              if (result.findRecord === true) {
+                this.showToast('error', 'Error al Borrar la Información de Socios al Desarrollo', result.message);
+              } else {
+                this.showToast('default', 'Socio al Desarrollo', result.message);
+              }
+            }
+          },
+          error => {
+            this.showToast('error', 'Error al Borrar la Información de Socios al Desarrollo', JSON.stringify(error.error.message));
+          },
+        );
+        // Borramos el Item del Json
+        this.JsonSendSociosDesarrollo.splice(i, 1);
+        // para el Bucle
+        break;
+      }
+    }
+    this.JsonSendSociosDesarrollo = [...this.JsonSendSociosDesarrollo];
+  } // FIN | cleanSocioDesarrollo
+
+
+  /****************************************************************************
+  * Funcion: cleanSocioDesarrollo
+  * Object Number: 005.1
+  * Fecha: 13-05-2019
   * Descripcion: Method para limpiar Items del Socio al Desarrollo
   * en la Insercion del Proyecto
   * Objetivo: limpiar el Json de los Items seleccionados
   ****************************************************************************/
-  cleanSocioDesarrollo() {
+  cleanAllSocioDesarrollo() {
     this.JsonSendSociosDesarrollo = [];
     this.JsonSendSociosDesarrollo = [...this.JsonSendSociosDesarrollo];
   } // FIN | cleanSocioDesarrollo
@@ -264,7 +332,6 @@ export class SocioDesarrolloComponent implements OnInit {
   * Objetivo: calculo de % el Json de los Items seleccionados
   ****************************************************************************/
   calcularPercent() {
-    // console.log(this.JsonSendSociosDesarrollo.length);
     const valorMax = (100 / this.JsonSendSociosDesarrollo.length);
 
     this.JsonSendSociosDesarrollo.map(function (dato) {

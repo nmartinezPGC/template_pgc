@@ -417,6 +417,21 @@ export class SystemEndPointsService extends ListEndPointsService {
           case 61:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActividadProgramaPoliticasPublicas.urlEndPoint;
             break;
+          case 62: // NAM | 2019-05-05 | Mapeo de Organizaciones de Proyectos
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findAllSocioDesarrollo.urlEndPoint;
+            break;
+          case 63:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdActividad.urlEndPoint;
+            break;
+          case 64:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByCodigoActividad.urlEndPoint;
+            break;
+          case 65:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.newActividadSocioDesarrollo.urlEndPoint;
+            break;
+          case 66:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActividadSocioDesarrollo.urlEndPoint;
+            break;
         }
         break;
       case 'mantGenericosUsuarioGroup': // Llamados a los EndPoint de usuarios

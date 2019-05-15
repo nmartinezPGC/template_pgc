@@ -13,7 +13,6 @@ import { SystemEndPointsService } from '../../../../shared/system-end-points.ser
 import { SystemPropertiesService } from '../../../../shared/system-properties.service';
 import { Observable } from 'rxjs';
 import { TreeNode } from 'primeng/api';
-import { Http } from '@angular/http';
 
 @Injectable({
   providedIn: 'root',
@@ -41,7 +40,6 @@ export class SocioDesarrolloService {
   * Objetivo: Seteo de las variables en json
   ****************************************************************************/
   constructor(private _http: HttpClient,
-    private http: Http,
     // Instanciamos la Url de la API
     private _systemEndPointsService: SystemEndPointsService,
     private _systemPropertiesService: SystemPropertiesService) {
@@ -55,7 +53,7 @@ export class SocioDesarrolloService {
 
 
   /****************************************************************************
-    * Funcion: FND-00003
+    * Funcion: FND-00002
     * Fecha: 17-04-2019
     * Descripcion: Metodo para obtener los Datos de Plan de Nacion
     * Objetivo: datos de Plan de Nacion
@@ -69,5 +67,41 @@ export class SocioDesarrolloService {
       headers: this.headers,
       params: { 'tokenApi': this.tokenHeader },
     }).map(response => <TreeNode[]>response);
+  } // FIN | FND-00002
+
+
+  /****************************************************************************
+    * Funcion: FND-00003
+    * Fecha: 15-05-2019
+    * Descripcion: Metodo para ingresar datos de Socio al Desarrollo
+    * Objetivo: Ingresar Socio al Desarrollo al Proyecto
+    * Params: { jsonSendActividadSocioDesarrollo }
+    ****************************************************************************/
+  newActividadSociosDesarrollo(jsonSendActividadSocioDesarrollo: any): Observable<any> {
+    const paramsSend: number = jsonSendActividadSocioDesarrollo;
+
+    // Retorno de la Funcion
+    return this._http.post(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 65), paramsSend, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
   } // FIN | FND-00003
+
+
+  /****************************************************************************
+    * Funcion: FND-00004
+    * Fecha: 15-05-2019
+    * Descripcion: Metodo para borrar datos de Socio al Desarrollo
+    * Objetivo: Borrar Socio al Desarrollo al Proyecto
+    * Params: { codigoActividad }
+    ****************************************************************************/
+  deleteActividadSociosDesarrollo(codigoActividad: string): Observable<any> {
+    const paramsSend: string = codigoActividad;
+
+    // Retorno de la Funcion
+    return this._http.delete(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 66) + paramsSend, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  } // FIN | FND-00004
 }
