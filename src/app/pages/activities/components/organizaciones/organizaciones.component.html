@@ -3,33 +3,33 @@
 
 <!-- ==================================================================================== -->
 <nb-card accent="warning" status="primary">
-  <nb-card-header>Información de Organizaciones del Proyecto {{ idProyectoTab }} | Codigo de Proyecto {{
-    codigoProyectoTab }} | Usuario {{ idUsuarioTab }}
+  <nb-card-header>Información de Organizaciones del Proyecto
   </nb-card-header>
+  <nb-card-body>
+    <!-- ================ Organizaciones | Socio al Desarrollo ==================== -->
+    <ngx-socio-desarrollo [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
+      [codigoProyectoTab]="codigoProyectoTab">
+    </ngx-socio-desarrollo>
+
+    <br>
+    <hr>
+    <!-- ================ Organizaciones | Unidad Eecutora ==================== -->
+    <ngx-unidad-ejecutora [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
+      [codigoProyectoTab]="codigoProyectoTab">
+    </ngx-unidad-ejecutora>
+
+    <br>
+    <hr>
+    <!-- ================ Organizaciones | Agencia Beneficiaria ==================== -->
+    <ngx-agencia-beneficiaria [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
+      [codigoProyectoTab]="codigoProyectoTab">
+    </ngx-agencia-beneficiaria>
+
+    <br>
+    <hr>
+    <!-- ================ Organizaciones | Admon Financiero ==================== -->
+    <ngx-admon-financiero [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
+      [codigoProyectoTab]="codigoProyectoTab">
+    </ngx-admon-financiero>
+  </nb-card-body>
 </nb-card>
-
-<!-- ================ Organizaciones | Socio al Desarrollo ==================== -->
-<ngx-socio-desarrollo [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
-  [codigoProyectoTab]="codigoProyectoTab">
-</ngx-socio-desarrollo>
-
-<br>
-<hr>
-<!-- ================ Organizaciones | Unidad Eecutora ==================== -->
-<ngx-unidad-ejecutora [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
-  [codigoProyectoTab]="codigoProyectoTab">
-</ngx-unidad-ejecutora>
-
-<br>
-<hr>
-<!-- ================ Organizaciones | Agencia Beneficiaria ==================== -->
-<ngx-agencia-beneficiaria [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
-  [codigoProyectoTab]="codigoProyectoTab">
-</ngx-agencia-beneficiaria>
-
-<br>
-<hr>
-<!-- ================ Organizaciones | Admon Financiero ==================== -->
-<ngx-admon-financiero [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
-  [codigoProyectoTab]="codigoProyectoTab">
-</ngx-admon-financiero>

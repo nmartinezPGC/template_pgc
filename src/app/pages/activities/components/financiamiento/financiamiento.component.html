@@ -1,0 +1,20 @@
+<!-- Maquetacion del Financiamiento del Proyecto -->
+<!-- Componente para los Mensajes en pantalla -->
+<!-- ==================================================================================== -->
+<nb-card accent="warning" status="primary">
+  <nb-card-header>Información financiera del Proyecto
+  </nb-card-header>
+  <nb-card-body>
+    <!-- ================ Encabezado | Financiamiento ==================== -->
+    <ngx-financ-encabezado [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
+      [codigoProyectoTab]="codigoProyectoTab">
+    </ngx-financ-encabezado>
+
+    <br>
+    <!-- ================ Detalle | Financiamiento ==================== -->
+    <ngx-financ-detalle [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
+      [codigoProyectoTab]="codigoProyectoTab">
+    </ngx-financ-detalle>
+
+  </nb-card-body>
+</nb-card>
