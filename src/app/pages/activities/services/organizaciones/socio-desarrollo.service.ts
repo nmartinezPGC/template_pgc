@@ -12,7 +12,6 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { SystemEndPointsService } from '../../../../shared/system-end-points.service';
 import { SystemPropertiesService } from '../../../../shared/system-properties.service';
 import { Observable } from 'rxjs';
-import { TreeNode } from 'primeng/api';
 
 @Injectable({
   providedIn: 'root',
@@ -66,7 +65,7 @@ export class SocioDesarrolloService {
     return this._http.get(this._systemEndPointsService.getEndPointService('organizacionesGroup', 23) + paramsSend, {
       headers: this.headers,
       params: { 'tokenApi': this.tokenHeader },
-    }).map(response => <TreeNode[]>response);
+    });
   } // FIN | FND-00002
 
 

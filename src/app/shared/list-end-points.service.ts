@@ -112,6 +112,20 @@ export class ListEndPointsService {
         groupEndPoint: 'matActGroup',
         descEndPoint: 'Busca los Tipos de Iniciativa de CSS',
       },
+      getAllMonedasActividad: { // NAM | 2019-05-21 | Monedas de Actividad
+        id: 8,
+        nameEndpoint: 'getAllMonedasActividad',
+        urlEndPoint: '/mant-actividades/moneda-actividad',
+        groupEndPoint: 'matActGroup',
+        descEndPoint: 'Busca todas las Monedas para el financiamiento',
+      },
+      getMonedaActividad: {
+        id: 9,
+        nameEndpoint: 'getMonedaActividad',
+        urlEndPoint: '/mant-actividades/moneda-actividad/findById/',
+        groupEndPoint: 'matActGroup',
+        descEndPoint: 'Busca la Moneda para el financiamiento',
+      },
     },
     endPointEspaciosTrabajo: {
       listAllEspaciosTrabajo: {

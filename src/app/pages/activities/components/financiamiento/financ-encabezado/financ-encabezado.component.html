@@ -1,5 +1,6 @@
 <!-- Maquetacion del Encabezado del Financiamiento del Proyecto -->
 <!-- Componente para los Mensajes en pantalla -->
+<toaster-container [toasterconfig]="config"></toaster-container>
 <!-- ==================================================================================== -->
 <div class="row">
   <div class="col-md-12">
@@ -10,19 +11,24 @@
           <div class="col-sm-3">
             <div class="form-group">
               <strong> <label>Monto de Proyecto</label> </strong>
-              <input class="form-control" type="text" pKeyFilter="money" required>
+              <input class="form-control" #montoActividad type="text" pKeyFilter="money" name="montoActividad"
+                id="montoActividad" [(ngModel)]="_activityFinanciamientoEncModel.montoActividad"
+                (keyup)="transformMiles(_activityFinanciamientoEncModel.montoActividad)" required>
+                 <p>{{values}}</p>
+                 <input class="form-control" currencyMask [(ngModel)]="value"
+                   [options]="{ prefix: '', thousands: '.', decimal: ',' }" />
             </div>
           </div>
 
           <div class="col-sm-3">
             <div class="form-group">
               <strong> <label>Moneda</label> </strong>
-              <select class="form-control" #idEstado="ngModel" name="idMoneda" id="idMoneda" required
-                ngControl="idMoneda" [(ngModel)]="idMoneda">
+              <select class="form-control" #idEstado="ngModel" name="idMonedaActividad" id="idMonedaActividad" required
+                [(ngModel)]="_activityFinanciamientoEncModel.idMoneda">
                 <option value="0">**** Selecciona el Estado ****</option>
-                <!-- <option *ngFor="let item of JsonReceptionEstados" [value]="item.idEstado"> -->
-                <!-- {{item.descEstado}}
-                </option> -->
+                <option *ngFor="let item of JsonReceptionAllMonedasProyecto" [value]="item.idMonedaActividad">
+                  {{item.nombreMoneda}}
+                </option>
               </select>
             </div>
           </div>
@@ -30,17 +36,16 @@
           <div class="col-sm-2">
             <div class="form-group">
               <strong> <label>Fecha de Transacción</label> </strong>
-              <!-- <my-date-picker name="mydate" class="form-control" [options]="myDatePickerOptions" [(ngModel)]="date6"
-                required (dateChanged)="onDateChanged($event, 1)">
-              </my-date-picker> -->
               <p-calendar [inline]="false" class="form-control" [showIcon]="true" [(ngModel)]="date6"
-                dateFormat="dd/mm/yy" (click)="showDialog()" [locale]="es">
+                dateFormat="dd/mm/yy" (click)="showDialog()" [locale]="es"
+                [(ngModel)]="_activityFinanciamientoEncModel.fechaTransaccion">
               </p-calendar>
             </div>
           </div>
         </div>
       </nb-card-body>
     </nb-card>
+    <input type="button" value="Save" (click)="saveFinanciamientoEncService()">
   </div>
 </div>
 

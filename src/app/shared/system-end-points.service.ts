@@ -87,6 +87,12 @@ export class SystemEndPointsService extends ListEndPointsService {
           case 7: // Llamado de los EndPoints de Listado de Tipo de Inciativas CSS
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointMantActividades.getTiposIniciativasCSS.urlEndPoint;
             break;
+          case 8: // Llamado de los EndPoints de Listado de Monedas
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointMantActividades.getAllMonedasActividad.urlEndPoint;
+            break;
+          case 9:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointMantActividades.getMonedaActividad.urlEndPoint;
+            break;
         }
         break;
       case 'espacioTrabajoGroup': // Llamados a los End Point del Espacios de Trabajo
@@ -399,7 +405,7 @@ export class SystemEndPointsService extends ListEndPointsService {
           case 55:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActividadProgramaVisionPais.urlEndPoint;
             break;
-            case 56: // AMA | 2019-05-06 | Mapeo de Vision de Politicas Publicas
+          case 56: // AMA | 2019-05-06 | Mapeo de Vision de Politicas Publicas
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findAllProgramaPoliticasPublicas.urlEndPoint;
             break;
           case 57:

@@ -7,20 +7,46 @@
 * @fecha 16-05-2019
 */
 
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
 // Datepicker
 import { IMyDpOptions, IMyDateModel } from 'mydatepicker';
+import { ActivityFinanciamientoEncModel } from '../../../models/financiamiento/model-financiamiento-enc';
+import { ToasterConfig, Toast, BodyOutputType, ToasterService } from 'angular2-toaster';
+import { FinanciamientoEncService } from '../../../services/financiamiento/financiamiento-enc.service';
 
 @Component({
   selector: 'ngx-financ-encabezado',
   templateUrl: './financ-encabezado.component.html',
   styleUrls: ['./financ-encabezado.component.scss'],
+  providers: [FinanciamientoEncService, ToasterService],
 })
 export class FinancEncabezadoComponent implements OnInit {
   // Variables entre Tabs | Components
   @Input() idProyectoTab: number;
   @Input() idUsuarioTab: number;
   @Input() codigoProyectoTab: string;
+  @ViewChild('montoActividad') montoActividadInput: ElementRef;
+
+  // Variables de Recepcion de Información
+  public JsonReceptionAllMonedasProyecto: any;
+
+  // Modelo de la Clase
+  public _activityFinanciamientoEncModel: ActivityFinanciamientoEncModel;
+
+  // Consfiguracion del Notificador
+  position = 'toast-bottom-full-width';
+  animationType = 'slideDown';
+  title = 'Se ha grabado la Información! ';
+  content = 'los cambios han sido grabados temporalmente, en la PGC!';
+  timeout = 20000;
+  toastsLimit = 5;
+  type = 'default';
+
+  isNewestOnTop = true;
+  isHideOnClick = true;
+  isDuplicatesPrevented = false;
+  isCloseButton = true;
+  config: ToasterConfig;
 
   // Ventana Modal de Fecha
   display: boolean = false;
@@ -34,8 +60,18 @@ export class FinancEncabezadoComponent implements OnInit {
    */
   public myDatePickerOptions: IMyDpOptions;
 
-  constructor() { }
 
+  /**
+   * Constructor de la Clase
+   */
+  constructor(private _financiamientoEncService: FinanciamientoEncService,
+    private changeDetectorRef: ChangeDetectorRef,
+    private _toasterService: ToasterService) { }
+
+
+  /**
+   * Inicializacion de la Clase
+   */
   ngOnInit() {
     this.myDatePickerOptions = {
       // other options...
@@ -43,6 +79,14 @@ export class FinancEncabezadoComponent implements OnInit {
       editableDateField: true,
       inline: false,
     };
+
+    // Inicializacion del Modelo
+    this._activityFinanciamientoEncModel = new ActivityFinanciamientoEncModel(
+      0, null, // Datos Generales
+      null, 0, null, 0, // Relacionales
+      null, null, // Transaccion
+      true, null, null, // Auditoria
+    );
 
     // Definicion del Idioma del Calendario
     this.es = {
@@ -55,45 +99,173 @@ export class FinancEncabezadoComponent implements OnInit {
       today: 'Hoy',
       clear: 'Borrar',
     };
+
+    // Recepcion de Información
+    this.getAllMonedasActividadService();
   }
 
   /****************************************************************************
-  * Funcion: onDateChanged
+  * Funcion: showDialog y closeDialog
   * Object Number: 001
-  * Fecha: 16-05-2019
+  * Fecha: 21-05-2019
   * Descripcion: Method que Genera las fechas de Transaccion y las asigan al
   * Modelo de la Clase
   * Objetivo: Generar las Fechas de Transaccion al Modelo
   * @param event
   ****************************************************************************/
-  onDateChanged(event: IMyDateModel, paraEvalDate: number) {
-    // event properties are: event.date, event.jsdate, event.formatted and event.epoc
-    // switch (paraEvalDate) {
-    //   case 1:
-    //     this._activityPlanificacionModel.fechaFirma = event.jsdate;
-    //     break;
-    //   case 2:
-    //     this._activityPlanificacionModel.fechaEfectividad = event.jsdate;
-    //     break;
-    //   case 3:
-    //     this._activityPlanificacionModel.fechaCierre = event.jsdate;
-    //     break;
-    //   case 4:
-    //     this._activityPlanificacionModel.fechaPropuestaFinalizacion = event.jsdate;
-    //     break;
-    //   case 5:
-    //     this._activityPlanificacionModel.fechaFinalizacion = event.jsdate;
-    //     break;
-    // }
-  } // FIN | onDateChanged
-
   showDialog() {
     this.display = true;
   }
 
   closeDialog() {
     this.display = false;
-    // console.log(this.date6);
+    // Asignacion de Fecha de Transaccion
+    this._activityFinanciamientoEncModel.fechaTransaccion = this.date6;
+  }
+
+  /****************************************************************************
+  * Funcion: makeToast
+  * Object Number: 002
+  * Fecha: 16-08-2018
+  * Descripcion: Method makeToast of the Class
+  * Objetivo: makeToast in the method header API
+  ****************************************************************************/
+  makeToast() {
+    this.showToast(this.type, this.title, this.content);
+  } // FIN | makeToast
+
+
+  /****************************************************************************
+  * Funcion: showToast
+  * Object Number: 002.1
+  * Fecha: 16-08-2018
+  * Descripcion: Method showToast of the Class
+  * Objetivo: showToast in the method header API
+  ****************************************************************************/
+  private showToast(type: string, title: string, body: string) {
+    this.config = new ToasterConfig({
+      positionClass: this.position,
+      timeout: this.timeout,
+      newestOnTop: this.isNewestOnTop,
+      tapToDismiss: this.isHideOnClick,
+      preventDuplicates: this.isDuplicatesPrevented,
+      animation: this.animationType,
+      limit: this.toastsLimit,
+    });
+    const toast: Toast = {
+      type: type,
+      title: title,
+      body: body,
+      timeout: this.timeout,
+      showCloseButton: this.isCloseButton,
+      bodyOutputType: BodyOutputType.TrustedHtml,
+    };
+    // this._toasterService.popAsync(toast);
+    this._toasterService.pop(toast);
+  } // FIN | showToast
+
+
+  /****************************************************************************
+  * Funcion: toasterconfig
+  * Object Number: 002.2
+  * Fecha: 16-08-2018
+  * Descripcion: Method showToast of the Class
+  * Objetivo: showToast in the method header API
+  ****************************************************************************/
+  public toasterconfig: ToasterConfig =
+    new ToasterConfig({
+      showCloseButton: { 'warning': true, 'error': true },
+    }); // FIN | toasterconfig
+
+
+  /**
+   * ******************* Funciones Propias **************************************
+   */
+
+  /****************************************************************************
+  * Funcion: getAllMonedasActividadService
+  * Object Number: 003
+  * Fecha: 21-05-2019
+  * Descripcion: Method getAllProgramaCampoTransversalService of the Class
+  * Objetivo: getAllMonedasActividadService listados de las Monedas de Proyecto
+  * Params: { }
+  ****************************************************************************/
+  private getAllMonedasActividadService() {
+    // Ejecuta el Servicio de invocar todos los Objetivos Vision Pais
+    this._financiamientoEncService.getAllMonedasProyecto().subscribe(
+      result => {
+        if (result.status !== 200) {
+          this.showToast('error', 'Error al Obtener la Información de todas las Monedas de Proyecto', result.message);
+          this.JsonReceptionAllMonedasProyecto = [];
+        } else if (result.status === 200) {
+          this.JsonReceptionAllMonedasProyecto = result.data;
+        }
+      },
+      error => {
+        this.showToast('error', 'Error al Obtener la Información de todas las Monedas de Proyecto', JSON.stringify(error.message));
+      },
+    );
+  } // FIN | getAllMonedasActividadService
+
+
+  /****************************************************************************
+  * Funcion: saveFinanciamientoEncService
+  * Object Number: 004
+  * Fecha: 21-05-2019
+  * Descripcion: Method saveFinanciamientoEncService of the Class
+  * Objetivo: saveFinanciamientoEncService listados de las Monedas de Proyecto
+  * Params: { this._activityFinanciamientoEncModel }
+  ****************************************************************************/
+  saveFinanciamientoEncService() {
+    if (this._activityFinanciamientoEncModel.montoActividad !== 0) {
+      // console.log(this._activityFinanciamientoEncModel);
+    } else {
+      this.showToast('error', 'Error al Obtener la Información de todas las Monedas de Proyecto', 'Debes de ingresar el Costo Total del Proyecto, para continuar');
+      this.montoActividadInput.nativeElement.focus();
+    }
+  } // FIN | saveFinanciamientoEncService
+
+
+  transform(number: any) {
+    let hasMinus = String(number).charAt(0) === '-' ? true : false;
+    number = String(number).charAt(0) === '-' ?
+      + String(number).substring(1, number.length) : number;
+    // hundreds
+    if (number <= 999) {
+      number = number;
+    }
+    // thousands
+    else if (number >= 1000 && number <= 999999) {
+      number = (number / 1000).toFixed(2) + 'K';
+    }
+    // millions
+    else if (number >= 1000000 && number <= 999999999) {
+      number = (number / 1000000).toFixed(2) + 'M';
+    }
+    // billions
+    else if (number >= 1000000000 && number <= 999999999999) {
+      number = (number / 1000000000).toFixed(2) + 'B';
+    }
+    if (hasMinus) {
+      // console.log(number);
+      return '-' + number;
+    } else {
+      // console.log(number);
+      return number;
+    }
+  }
+
+  transformMiles(number: any) {
+    number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    // console.log(number);
+    return  number;
+  }
+
+  values = '';
+  onKey(event: any) { // without type info
+    // const longitudNum = event.target.length;
+    // console.log(event);
+    this.values += event + ' | ';
   }
 
 }
