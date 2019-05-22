@@ -82,7 +82,7 @@ export const customCurrencyMaskConfig = {
   precision: 2,
   prefix: '',
   suffix: '',
-  thousands:',',
+  thousands: ',',
   nullable: true,
 };
 
