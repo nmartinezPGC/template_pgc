@@ -224,48 +224,4 @@ export class FinancEncabezadoComponent implements OnInit {
       this.montoActividadInput.nativeElement.focus();
     }
   } // FIN | saveFinanciamientoEncService
-
-
-  transform(number: any) {
-    let hasMinus = String(number).charAt(0) === '-' ? true : false;
-    number = String(number).charAt(0) === '-' ?
-      + String(number).substring(1, number.length) : number;
-    // hundreds
-    if (number <= 999) {
-      number = number;
-    }
-    // thousands
-    else if (number >= 1000 && number <= 999999) {
-      number = (number / 1000).toFixed(2) + 'K';
-    }
-    // millions
-    else if (number >= 1000000 && number <= 999999999) {
-      number = (number / 1000000).toFixed(2) + 'M';
-    }
-    // billions
-    else if (number >= 1000000000 && number <= 999999999999) {
-      number = (number / 1000000000).toFixed(2) + 'B';
-    }
-    if (hasMinus) {
-      // console.log(number);
-      return '-' + number;
-    } else {
-      // console.log(number);
-      return number;
-    }
-  }
-
-  transformMiles(number: any) {
-    number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-    // console.log(number);
-    return  number;
-  }
-
-  values = '';
-  onKey(event: any) { // without type info
-    // const longitudNum = event.target.length;
-    // console.log(event);
-    this.values += event + ' | ';
-  }
-
 }

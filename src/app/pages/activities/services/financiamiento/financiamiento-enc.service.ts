@@ -14,7 +14,7 @@ import { SystemPropertiesService } from '../../../../shared/system-properties.se
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FinanciamientoEncService {
   // Variables de la Ruta de la API

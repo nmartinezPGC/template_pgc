@@ -72,18 +72,18 @@ import { FinancDetalleGastosComponent } from './components/financiamiento/financ
 import { FinanciamientoComponent } from './components/financiamiento/financiamiento.component';
 
 // Monedas
-import { NgxCurrencyModule } from "ngx-currency";
+import { NgxCurrencyModule } from 'ngx-currency';
 
 export const customCurrencyMaskConfig = {
-  align: "right",
+  align: 'right',
   allowNegative: true,
   allowZero: true,
-  decimal: ",",
+  decimal: '.',
   precision: 2,
-  prefix: "R$ ",
-  suffix: "",
-  thousands: ".",
-  nullable: true
+  prefix: '',
+  suffix: '',
+  thousands:',',
+  nullable: true,
 };
 
 @NgModule({
@@ -116,7 +116,7 @@ export const customCurrencyMaskConfig = {
     CalendarModule,
     DialogModule,
     InputMaskModule,
-    NgxCurrencyModule.forRoot(customCurrencyMaskConfig)
+    NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
   ],
   declarations: [
     ...routedComponents,
