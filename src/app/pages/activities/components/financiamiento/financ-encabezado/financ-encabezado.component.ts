@@ -83,7 +83,7 @@ export class FinancEncabezadoComponent implements OnInit {
     // Inicializacion del Modelo
     this._activityFinanciamientoEncModel = new ActivityFinanciamientoEncModel(
       0, null, // Datos Generales
-      null, 0, null, 0, // Relacionales
+      null, 0, null, // Relacionales
       null, null, // Transaccion
       true, null, null, // Auditoria
     );
@@ -217,6 +217,10 @@ export class FinancEncabezadoComponent implements OnInit {
   * Params: { this._activityFinanciamientoEncModel }
   ****************************************************************************/
   saveFinanciamientoEncService() {
+    // Asignacion de nuevos valores de Modelo
+    this._activityFinanciamientoEncModel.idMonedaActividad = { idMonedaActividad: this._activityFinanciamientoEncModel.idMoneda };
+    this._activityFinanciamientoEncModel.idActividad = { idActividad: this.idProyectoTab };
+
     if (this._activityFinanciamientoEncModel.montoActividad !== 0) {
       // console.log(this._activityFinanciamientoEncModel);
     } else {

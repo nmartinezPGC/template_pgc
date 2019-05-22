@@ -11,12 +11,9 @@
           <div class="col-sm-3">
             <div class="form-group">
               <strong> <label>Monto de Proyecto</label> </strong>
-              <input class="form-control" #montoActividad type="text" pKeyFilter="money" name="montoActividad"
-                id="montoActividad" [(ngModel)]="_activityFinanciamientoEncModel.montoActividad"
-                (keyup)="transformMiles(_activityFinanciamientoEncModel.montoActividad)" required>
-                 <p>{{values}}</p>
-                 <input class="form-control" currencyMask [(ngModel)]="value"
-                   [options]="{ prefix: '', thousands: '.', decimal: ',' }" />
+              <input class="form-control" currencyMask [(ngModel)]="value" required
+                [options]="{ prefix: '', thousands: '.', decimal: ',' }"
+                [(ngModel)]="_activityFinanciamientoEncModel.montoActividad" />
             </div>
           </div>
 
@@ -43,9 +40,10 @@
             </div>
           </div>
         </div>
+        <button class="btn btn-primary botonSave" nbPopover="Registrar información de costo del proyecto"
+          nbPopoverMode="hint" nbPopoverPlacement="top" (click)="saveFinanciamientoEncService()">Guardar</button>
       </nb-card-body>
     </nb-card>
-    <input type="button" value="Save" (click)="saveFinanciamientoEncService()">
   </div>
 </div>
 

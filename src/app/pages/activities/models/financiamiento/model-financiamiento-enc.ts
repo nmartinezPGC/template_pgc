@@ -17,8 +17,7 @@ export class ActivityFinanciamientoEncModel {
         // Relacionales
         public idMonedaActividad: { idMonedaActividad: number },
         public idMoneda: number,
-        public idActividadMoneda: { idActividad: number },
-        public idActividad: number,
+        public idActividad: { idActividad: number },
 
         // Transaccion
         public montoActividad: number,
