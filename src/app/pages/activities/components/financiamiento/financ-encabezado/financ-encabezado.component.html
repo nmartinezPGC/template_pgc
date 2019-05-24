@@ -39,10 +39,16 @@
             </div>
           </div>
 
-          <div class="col-sm-2">
+          <div class="col-sm-1">
             <br><br>
             <button class="btn btn-primary botonSave" nbPopover="Registrar información de costo del proyecto"
               nbPopoverMode="hint" nbPopoverPlacement="top" (click)="saveFinanciamientoEncService()">Guardar</button>
+          </div>
+
+          <div class="col-sm-1">
+            <br><br>
+            <button class="btn btn-warning" nbPopover="Limpiar información" nbPopoverMode="hint"
+              nbPopoverPlacement="top" (click)="cleanForm()">Limpiar</button>
           </div>
         </div>
       </nb-card-body>

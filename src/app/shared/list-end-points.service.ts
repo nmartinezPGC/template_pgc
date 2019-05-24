@@ -958,6 +958,22 @@ export class ListEndPointsService {
         params: '{ codigoActividad }',
         groupEndPoint: 'actividadesCRUDGroup',
         descEndPoint: 'Eliminar el dato de Socio Desarrollo enviado y asociarlo al Proyecto',
+      }, // Modulo de Financiamiento de Proyectos | Encabezado
+      newActividadFinanciamientoEnc: {
+        id: 67,
+        nameEndpoint: 'newActividadFinanciamientoEnc',
+        urlEndPoint: '/mant-actividades/financiamiento/encabezado/new',
+        params: '{ jsonSendActividadFinanciamientoEnc }',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Ingresar el dato de Encabezado de Financiamiento enviado y asociarlo al Proyecto',
+      },
+      deleteActividadFinanciamientoEnc: {
+        id: 68,
+        nameEndpoint: 'deleteActividadFinanciamientoEnc',
+        urlEndPoint: '/mant-actividades/financiamiento/encabezado/delete/',
+        params: '{ codigoActividad }',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Eliminar el dato de Encabezado de Financiamiento enviado y asociarlo al Proyecto',
       },
     }, // modulo de mantenimientos generico de usuarios
     endPointMantGenericosUsuario: {

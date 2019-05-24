@@ -12,7 +12,7 @@ export class ActivityFinanciamientoEncModel {
         // Definicion de las variables Mapeadas a la Clase del Model
         // Generales de tabla
         public idActividadFinancEnc: number,
-        public codigoActividadEnc: string,
+        public codigoFinancEnc: string,
 
         // Relacionales
         public idMonedaActividad: { idMonedaActividad: number },

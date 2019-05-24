@@ -220,12 +220,50 @@ export class FinancEncabezadoComponent implements OnInit {
     // Asignacion de nuevos valores de Modelo
     this._activityFinanciamientoEncModel.idMonedaActividad = { idMonedaActividad: this._activityFinanciamientoEncModel.idMoneda };
     this._activityFinanciamientoEncModel.idActividad = { idActividad: this.idProyectoTab };
+    this._activityFinanciamientoEncModel.codigoFinancEnc = this.codigoProyectoTab + '-AFE-' + this.idProyectoTab;
 
+    // Evaluacion de Datos de Financiamiento de Proyecto
     if (this._activityFinanciamientoEncModel.montoActividad !== 0) {
       // console.log(this._activityFinanciamientoEncModel);
+
+      if (this._activityFinanciamientoEncModel.idMoneda) {
+        // Ejecuta el Servicio de invocar el registro de Socio al Desarrollo
+        this._financiamientoEncService.newActividadFinanciamientoEnc(this._activityFinanciamientoEncModel).subscribe(
+          result => {
+            if (result.status !== 200) {
+              this.showToast('error', 'Error al Ingresar la Información de Encabezado de Financiamiento', result.message);
+            } else if (result.status === 200) {
+              if (result.findRecord === true) {
+                this.showToast('error', 'Error al Ingresar la Información de Encabezado de Financiamiento', result.message);
+              } else {
+                this.showToast('default', 'Encabezado de Financiamiento', result.message);
+              }
+            }
+          },
+          error => {
+            this.showToast('error', 'Error al Ingresar la Información de Encabezado de Financiamiento', JSON.stringify(error.error.message));
+          },
+        );
+      } else {
+        this.showToast('error', 'Error al ingresar la Información de Moneda de Financiamiento', 'Debes de ingresar monenda de Financiamiento del Proyecto, para continuar');
+      }
     } else {
-      this.showToast('error', 'Error al Obtener la Información de todas las Monedas de Proyecto', 'Debes de ingresar el Costo Total del Proyecto, para continuar');
+      this.showToast('error', 'Error al ingresar la Información de Encabezado de Financiamiento', 'Debes de ingresar el Costo Total del Proyecto, para continuar');
       this.montoActividadInput.nativeElement.focus();
     }
   } // FIN | saveFinanciamientoEncService
+
+
+  /****************************************************************************
+  * Funcion: cleanForm
+  * Object Number: 005
+  * Fecha: 21-05-2019
+  * Descripcion: Method cleanForm of the Class
+  * Objetivo: cleanForm listados de las Monedas de Proyecto
+  * Params: { }
+  ****************************************************************************/
+  cleanForm() {
+    this.ngOnInit();
+    this.date6 = null;
+  } // FIN | cleanForm
 }
