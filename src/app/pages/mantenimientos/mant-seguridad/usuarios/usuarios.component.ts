@@ -315,19 +315,22 @@ export class UsuariosComponent implements OnInit {
 
     // Ejecutamos el Recurso del EndPoint
     this._usuariosService.newUsuario(this._usuarioModel).subscribe(
-      result => {
-        if (result.status !== 200) {
+      response=> {
+        if (response.status !== 200) {
 
-          this.showToast('error', 'Error al Ingresar la Información del Usuario', JSON.stringify(result.message));
-        } else if (result.status === 200) {
-          this.idUsuario = result.data.idUsuario;
+          this.showToast('error', 'Error al Ingresar la Información del Usuario', JSON.stringify(response.message));
+        } else if (response.status === 200) {
+          this.idUsuario = response.data.idUsuario;
           // console.log(this.idUsuario + ' id usuario');
-          this.showToast('default', 'La Información del Usuario, se ha ingresado con exito', JSON.stringify(result.message));
+          this.showToast('default', 'La Información del Usuario, se ha ingresado con exito', JSON.stringify(response.message));
           if (this._usuarioModel.asignarEspacioTrabajo === true) {
             this.showLargeModal(this.idUsuario);
 
           }
         }
+      },
+      error => {
+
       },
     );
   } // FIN | newUsuarioService

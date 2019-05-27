@@ -28,7 +28,7 @@ export class ConfigSmartTableService {
   * Objetivo: Establecer las configuraciones para la Smart Table de usuarios
   ****************************************************************************/
 
-    configSmartTable(smartTable: string, smartNormal: number, array:any) {
+    configSmartTable(smartTable: string, smartNormal: number, array: any) {
         switch (smartTable) {
             case 'userSmart':
                 switch (smartNormal) {
@@ -38,7 +38,7 @@ export class ConfigSmartTableService {
                             hideSubHeader: false,
 
                             actions: {
-                                add:false,
+                                add: false,
                             },
                             edit: {
                                 editButtonContent: '<i class="nb-edit"></i>',

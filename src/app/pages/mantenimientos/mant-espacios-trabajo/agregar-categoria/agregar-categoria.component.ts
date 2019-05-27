@@ -318,7 +318,7 @@ export class AgregarCategoriaComponent implements OnInit {
           this.showToast('error', 'Error al actualizar los cambios', JSON.stringify(result.message))
         } else if (result.status === 200) {
           // console.log(result.status);
-          this.showToast('success','se inhabilito con éxito', JSON.stringify(result.message))
+          this.showToast('success', 'se inhabilito con éxito', JSON.stringify(result.message))
           // Carga la tabla Nuevamente
           // this.perfilesDatailsService();
           this.listarTipoOrganizacion();
