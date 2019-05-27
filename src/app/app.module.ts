@@ -21,16 +21,10 @@ import { NgxAuthComponent } from './@theme/components/auth/auth.component';
 import { NgxAuthBlockComponent } from './@theme/components/auth/auth-block/auth-block.component';
 import { NgxLoginComponent } from './@theme/components/auth/login/login.component';
 import { NgxLogoutComponent } from './@theme/components/auth/logout/logout.component';
-// import { RecursosProyectoComponent } from './src/pages/activities/component/recursos-proyecto/recursos-proyecto.component';
-/*import { NgxRegisterComponent } from './components/auth/register/register.component';
-import { NgxRequestPasswordComponent } from './components/auth/request-password/request-password.component';
-import { NgxResetPasswordComponent } from './components/auth/reset-password/reset-password.component';
-*/
-
-// Nuevos Interceptores de las Entradas y Salidas Http
-// import { HTTP_INTERCEPTORS } from '@angular/common/http';
-// import { TokenInterceptorService } from './@theme/components/auth/interceptors/token.interceptor';
-// import { AuthService } from './@theme/components/auth/auth.service';
+import { RequestPasswordComponent} from './@theme/components/auth/request-password/request-password.component';
+//import { EspaciosTrabajoModalComponent } from './pages/mantenimientos/mant-espacios-trabajo/espacios-trabajo/espacios-trabajo-modal/espacios-trabajo-modal.component';
+import { EspaciosTrabajoModalComponent } from './pages/mantenimientos/mant-espacios-trabajo/espacios-trabajo/espacios-trabajo-modal/espacios-trabajo-modal.component';
+//import { EspaciosTrabajoModal } from './espacios-trabajo-modal.ts/espacios-trabajo-modal.ts.component';
 
 @NgModule({
   declarations: [AppComponent, // Auth Module
@@ -38,12 +32,17 @@ import { NgxResetPasswordComponent } from './components/auth/reset-password/rese
     NgxAuthBlockComponent,
     NgxLoginComponent,
     NgxLogoutComponent,
+   // EspaciosTrabajoModalComponent,
+    //EspaciosTrabajoModalComponent,
+    //EspaciosTrabajoModal.TsComponent,
    // RecursosProyectoComponent,
+  
 
     /*NgxRegisterComponent,
     NgxRequestPasswordComponent,
     NgxResetPasswordComponent,
     */],
+ 
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

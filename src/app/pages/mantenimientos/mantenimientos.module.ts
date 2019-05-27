@@ -21,6 +21,8 @@ import { OrganizacionModalComponent } from './mant-espacios-trabajo/organizacion
 import { UsuarioModalComponent } from './mant-seguridad/usuarios/usuario.modal.component';
 import { NgxPaginationModule } from 'ngx-pagination'; // <-- import the module
 import { FilterdataPipe } from '../mantenimientos/pipes/filterdata.pipe';
+import { EspaciosTrabajoModalComponent } from './mant-espacios-trabajo/espacios-trabajo/espacios-trabajo-modal/espacios-trabajo-modal.component';
+//import { EspaciosTrabajoModalComponent } from './mant-espacios-trabajo/espacios-trabajo/espacios-trabajo-modal/espacios-trabajo-modal.component';
 
 // Composicion del Modulo
 @NgModule({
@@ -43,6 +45,8 @@ import { FilterdataPipe } from '../mantenimientos/pipes/filterdata.pipe';
     OrganizacionModalComponent,
     UsuarioModalComponent,
     FilterdataPipe,
+    EspaciosTrabajoModalComponent,
+    //EspaciosTrabajoModalComponent,
   ],
   entryComponents: [
     OrganizacionModalComponent,
