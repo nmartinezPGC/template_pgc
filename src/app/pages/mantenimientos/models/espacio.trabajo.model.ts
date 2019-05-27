@@ -7,27 +7,26 @@
  * @fecha 23/01/2019
  *
  */
-export class EspacioTrabajoModel {
+export class EspaciosTrabajoModel {
+
+
     constructor(
         // mapeo de la tabla  tbl_tipo_organizacion
+        // datos generales
         public idEspacioTrabajo: number,
         public codEspacioTrabajo: string,
+        // datos de la tabala de espacios trabajo
         public nombreEspacioTrabajo: string,
-        public descripcionEspacioTrabajo: String,
+        public descripcionEspacioTrabajo: String,// todo bien hasta aqui
         public fechaCreacion: string,
         public horaCreacion: Date,
-        public idCatOrganizacion: number,
-
-        // mapeo de la variables que estan relacionadas con la tabla
-        public idTipoEspacioTrabajo: { idTipoEspacioTrabajo: number },
-        public idTipoEspacioTrabajo1: number,
-
-        // mapeo de la tabla que estab relaciones con pais
-        public idPaisEspacioTrabajo: {idpais: number},
-        public idPais: number,
-
-        //  mapeo de la variables que esta relacionada con la tabla
+        // datos relacionados con la tabla
+        public idTipoEspacioTrabajo: { idTipo: number },
+        public idTipoIN: number,
+        public idPais: { idPais: number },
+        public idPaisIN: number,
         public idEstadoEspacioTrabajo: {idEstado: number},
-        public idEstado1: number,
+        public idEstadoIN: number,
+
     ) { }
 }

@@ -104,6 +104,8 @@ export class LoginService {
   } // FIN | FND-00002
 
 
+
+
   /****************************************************************************
   * Funcion: FND-00003
   * Fecha: 01-06-2018
@@ -112,6 +114,7 @@ export class LoginService {
   * Objetivo: Seteo de las variables en json
   ****************************************************************************/
   getIdentity() {
+
     const identity = JSON.parse(localStorage.getItem('identity'));
     // Pregunta por el valor de la identity
       if (identity !== 'undefined') {

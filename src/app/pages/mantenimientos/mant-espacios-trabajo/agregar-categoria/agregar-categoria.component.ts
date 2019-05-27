@@ -182,7 +182,7 @@ export class AgregarCategoriaComponent implements OnInit {
   * Objetivo: crear nuevos perfiles.
   ****************************************************************************/
   private newCategoria() {
-    this.validateCtegoria(this._CategoriaModel);
+   this.validateCtegoria(this._CategoriaModel);
     // Seteo de las variables del Model al json de Java
     this._CategoriaModel.idTipoOrganizacionCat = { idTipoOrganizacion: this._CategoriaModel.idTipoOrganizacion };
     // this.validatePerfiles(this._perfilModel);

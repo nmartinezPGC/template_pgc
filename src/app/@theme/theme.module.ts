@@ -43,6 +43,8 @@ import {
 import { DEFAULT_THEME } from './styles/theme.default';
 import { COSMIC_THEME } from './styles/theme.cosmic';
 import { CORPORATE_THEME } from './styles/theme.corporate';
+import { RequestPasswordComponent } from './components/auth/request-password/request-password.component';
+import { ResetPasswordComponent } from './components/auth/reset-password/reset-password.component';
 
 // make sure the path is correct for your setup
 /*import { NgxAuthComponent } from './components/auth/auth.component';
@@ -123,7 +125,7 @@ const NB_THEME_PROVIDERS = [
 @NgModule({
   imports: [...BASE_MODULES, ...NB_MODULES],
   exports: [...BASE_MODULES, ...NB_MODULES, ...COMPONENTS, ...PIPES],
-  declarations: [...COMPONENTS, ...PIPES],
+  declarations: [...COMPONENTS, ...PIPES, RequestPasswordComponent, ResetPasswordComponent],
   entryComponents: [...ENTRY_COMPONENTS],
 })
 export class ThemeModule {

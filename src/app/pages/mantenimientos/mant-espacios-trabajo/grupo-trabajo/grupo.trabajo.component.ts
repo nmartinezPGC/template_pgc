@@ -29,6 +29,8 @@ export class GrupoTrabajoComponent implements OnInit {
   public _grupoModel: GrupoTrabajoModel;
   public JsonReceptionPrefiles: any;
   public JsonReceptionTipoPerfiles: any;
+  
+  
   data: any;
   config: ToasterConfig;
 
@@ -148,7 +150,7 @@ export class GrupoTrabajoComponent implements OnInit {
 
 
   /****************************************************************************
-  * Funcion:newTipoOrganizacion
+  * Funcion:newTipoOrganizacionnewTipoOrganizacion
   * Object Number: 002
   * Fecha: 21-01-2019
   * Descripcion: Method newTipoOrganizacion
@@ -177,17 +179,7 @@ export class GrupoTrabajoComponent implements OnInit {
       error => {
         // Redirecciona al Login
         alert('Error en la petición de la API ' + <any>error);
-
-        // Borramos los datos del LocalStorage
-        localStorage.removeItem('auth_app_token');
-        localStorage.removeItem('identity');
-
-        const redirect = '/auth/login';
-        setTimeout(() => {
-          // Iniciativa Temporal
-          location.reload();
-          return this._router.navigateByUrl(redirect);
-        }, 2000);
+        
       },
     );
   } // FIN | newPerfilService
@@ -208,7 +200,7 @@ export class GrupoTrabajoComponent implements OnInit {
       this.showToast('error', 'Error al actualizar los cambios', responsedataExt);
       return -1;
     }
-    // Ejecutamos el Recurso del EndPoint
+    // Ejecutamos el Recurso del EndPoint ///update
     this._tipo.tipoOganizacionUpdate(this._grupoModel, this._grupoModel.idTipoOrganizacion).subscribe(
       response => {
         if (response.status !== 200) {

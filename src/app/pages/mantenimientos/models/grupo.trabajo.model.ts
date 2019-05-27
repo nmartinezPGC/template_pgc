@@ -19,3 +19,4 @@ export class GrupoTrabajoModel {
         public horaCreacion: Date,
     ) { }
 }
+

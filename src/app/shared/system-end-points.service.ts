@@ -59,7 +59,7 @@ export class SystemEndPointsService extends ListEndPointsService {
           case 2:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointEstados.listAllEstadosActividades.urlEndPoint;
             break;
-          case 2:
+          case 3:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointEstados.listAllTipoActividades.urlEndPoint;
             break;
         }

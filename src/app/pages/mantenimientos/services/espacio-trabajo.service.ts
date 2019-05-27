@@ -15,11 +15,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 // Importamos la Clase de las Propiedades del Sistema
 import { SystemPropertiesService } from '../../../shared/system-properties.service';
 import { SystemEndPointsService } from '../../../shared/system-end-points.service';
+//import { all } from 'q';
 
-@Injectable({
-    providedIn: 'root',
-})
-export class EspacioTrabajoService {
+@Injectable()
+export class EspaciosTrabajoService {
+
+
     // Variables de la Ruta de la API
     public _url: string;
     public _urlResourses: string;
@@ -71,6 +72,7 @@ export class EspacioTrabajoService {
         });
     }// FIN | FND-00001
 
+    
 
     /****************************************************************************
     * Funcion: FND-00001
@@ -89,4 +91,75 @@ export class EspacioTrabajoService {
     });
 }// FIN | FND-00001
 
+
+/****************************************************************************
+* Funcion: FND-00009
+* Fecha: 13-10-2018
+* Descripcion: Metodo para obtener los Datos de los Paises
+* Objetivo: datos de los Tipos de Paises
+* Params: { }
+****************************************************************************/
+getAllPaises2(): Observable<any> {
+    // Retorno de la Funcion
+   
+    return this._http.get(this._systemEndPointsService.getEndPointService('mantGenericosGroup', 1), {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+      
+    });
+  }// FIN | FND-00009
+
+  /****************************************************************************
+* Funcion: FND-00009
+* Fecha: 13-10-2018
+* Descripcion: Metodo para obtener los Datos de los Paises
+* Objetivo: datos de los Tipos de Paises
+* Params: { }
+****************************************************************************/
+getAllEspaciostrabajo(): Observable<any> {
+    // Retorno de la Funcion
+   
+      return this._http.get(this._systemEndPointsService.getEndPointService('espacioTrabajoGroup', 1), {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+      
+    });
+  }// FIN | FND-00009
+
+
+  
+   /****************************************************************************
+       * Funcion: FND-00003
+       * Fecha: 21-01-2019
+       * Descripcion: Metodo que sirve para poder ingresar un nuevo Espacio de trabajo
+       * Params: { jsonPerfil }
+       ****************************************************************************/
+      newEspaciosTrabajo(jsonPerfil): Observable<any> {
+        // Parametros del EndPoint
+        const paramsSend = jsonPerfil;
+        // Retorno de la Funcion
+        return this._http.post(this._systemEndPointsService.getEndPointService('espacioTrabajoGroup', 3), paramsSend, {
+            headers: this.headers,
+            params: { 'tokenApi': this.tokenHeader },
+        });
+    }// FIN | FND-00003
+
+     /****************************************************************************
+ * Funcion: FND-00009
+ * Fecha: 13-10-2018
+ * Descripcion: Metodo para obtener los Datos de los Paises
+ * Objetivo: datos de los Tipos de Paises
+ * Params: { }
+ ****************************************************************************/
+  FindByIdEspacioTrabajo(idEspacioTrabajoIn: number): Observable<any> {
+    // Retorno de la Funcion
+    const idEspacioTrabajo: number = idEspacioTrabajoIn;
+    return this._http.get(this._systemEndPointsService.getEndPointService('espacioTrabajoGroup', 2) + idEspacioTrabajo, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  }// FIN | FND-00009
+
 }
+
+

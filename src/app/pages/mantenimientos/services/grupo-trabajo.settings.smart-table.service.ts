@@ -35,10 +35,8 @@ export class ConfigSmartTableService {
           case 1:
             const settings = {
               hideSubHeader : false,
-              add: {
-                addButtonContent: '<i class="nb-plus"></i>',
-                createButtonContent: '<i class="nb-checkmark"></i>',
-                cancelButtonContent: '<i class="nb-close"></i>',
+              actions: {
+               add:false,
               },
               edit: {
                 editButtonContent: '<i class="nb-edit"></i>',
