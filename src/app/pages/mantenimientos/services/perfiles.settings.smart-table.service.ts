@@ -28,14 +28,13 @@ export class ConfigSmartTableService {
 * Objetivo: Establecer las configuraciones para la Smart Table
 ****************************************************************************/
 
-  configSmartTable(smartTable: string, smartNormal:  any, arrayperfil: any) {
+  configSmartTable(smartTable: string, smartNormal:  any, arrayperfil:  any) {
     switch (smartTable) {
       case 'userSmart':
         switch (smartNormal) {
           case 1:
             const settings = {
               hideSubHeader: false,
-
               actions: {
                 add: false,
               },

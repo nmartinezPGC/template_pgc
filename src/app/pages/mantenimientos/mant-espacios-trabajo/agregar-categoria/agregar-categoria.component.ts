@@ -310,7 +310,6 @@ export class AgregarCategoriaComponent implements OnInit {
     const responsedataExt: any = this.responsedata;
     if (responsedataExt === true) {
       this.showToast('error', 'Error al actualizar los cambios', responsedataExt);
-      
     }
     // Ejecutamos el Recurso del EndPoint
     this._categoriaService.categoriaDelete(this._CategoriaModel.idCatOrganizacion).subscribe(
@@ -320,16 +319,13 @@ export class AgregarCategoriaComponent implements OnInit {
         } else if (result.status === 200) {
           // console.log(result.status);
           this.showToast('success','se inhabilito con éxito', JSON.stringify(result.message))
-          
           // Carga la tabla Nuevamente
           // this.perfilesDatailsService();
           this.listarTipoOrganizacion();
         }
       },
       error => {
-   
       },
-     
     );
   } // FIN | ondelete
 
@@ -346,7 +342,6 @@ export class AgregarCategoriaComponent implements OnInit {
     } else {
       event.confirm.reject();
     }
-    
   }
 
   /****************************************************************************

@@ -49,7 +49,7 @@ export class ConfigSmartTableService {
                 deleteButtonContent: '<i class="nb-trash"></i>',
                 confirmDelete: true,
                 confirmSave: true,
-                update:true,
+                update: true,
               },
               columns: {
                 codCatOrganizacion: {

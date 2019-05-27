@@ -305,7 +305,7 @@ export class UsuariosComponent implements OnInit {
       this.showToast('error', 'Error ya existe el codigo del usuario Intente con Otro', JSON.stringify(result.message));
       return -1;
     }
-    this.mailValidate();subscribeToResult
+    this.mailValidate(); subscribeToResult
     await delay(100);
 
     if (this.resultStatus === 200) {
