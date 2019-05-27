@@ -9,7 +9,7 @@
  */
 export class OrganizacionModel {
     constructor(
-        
+
         // mapeo de la tabla tbl_organizaciones
         public activo: boolean = true,
         public idOrganizacion: number,

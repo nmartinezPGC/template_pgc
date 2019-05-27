@@ -15,7 +15,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 // Importamos la Clase de las Propiedades del Sistema
 import { SystemPropertiesService } from '../../../shared/system-properties.service';
 import { SystemEndPointsService } from '../../../shared/system-end-points.service';
-//import { all } from 'q';
+// import { all } from 'q';
 
 @Injectable()
 export class EspaciosTrabajoService {
@@ -72,7 +72,7 @@ export class EspaciosTrabajoService {
         });
     }// FIN | FND-00001
 
-    
+
 
     /****************************************************************************
     * Funcion: FND-00001
@@ -101,11 +101,11 @@ export class EspaciosTrabajoService {
 ****************************************************************************/
 getAllPaises2(): Observable<any> {
     // Retorno de la Funcion
-   
+
     return this._http.get(this._systemEndPointsService.getEndPointService('mantGenericosGroup', 1), {
       headers: this.headers,
       params: { 'tokenApi': this.tokenHeader },
-      
+
     });
   }// FIN | FND-00009
 
@@ -118,16 +118,16 @@ getAllPaises2(): Observable<any> {
 ****************************************************************************/
 getAllEspaciostrabajo(): Observable<any> {
     // Retorno de la Funcion
-   
+
       return this._http.get(this._systemEndPointsService.getEndPointService('espacioTrabajoGroup', 1), {
       headers: this.headers,
       params: { 'tokenApi': this.tokenHeader },
-      
+
     });
   }// FIN | FND-00009
 
 
-  
+
    /****************************************************************************
        * Funcion: FND-00003
        * Fecha: 21-01-2019

@@ -8,7 +8,7 @@
  *
  */
 export class OrganizacionModal {
-    
+
     constructor(
         // mapeo de la tabla tbl_organizaciones
         public activo: boolean = true,

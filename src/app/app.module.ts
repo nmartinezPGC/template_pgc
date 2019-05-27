@@ -22,9 +22,9 @@ import { NgxAuthBlockComponent } from './@theme/components/auth/auth-block/auth-
 import { NgxLoginComponent } from './@theme/components/auth/login/login.component';
 import { NgxLogoutComponent } from './@theme/components/auth/logout/logout.component';
 import { RequestPasswordComponent} from './@theme/components/auth/request-password/request-password.component';
-//import { EspaciosTrabajoModalComponent } from './pages/mantenimientos/mant-espacios-trabajo/espacios-trabajo/espacios-trabajo-modal/espacios-trabajo-modal.component';
+// import { EspaciosTrabajoModalComponent } from './pages/mantenimientos/mant-espacios-trabajo/espacios-trabajo/espacios-trabajo-modal/espacios-trabajo-modal.component';
 import { EspaciosTrabajoModalComponent } from './pages/mantenimientos/mant-espacios-trabajo/espacios-trabajo/espacios-trabajo-modal/espacios-trabajo-modal.component';
-//import { EspaciosTrabajoModal } from './espacios-trabajo-modal.ts/espacios-trabajo-modal.ts.component';
+// import { EspaciosTrabajoModal } from './espacios-trabajo-modal.ts/espacios-trabajo-modal.ts.component';
 
 @NgModule({
   declarations: [AppComponent, // Auth Module
@@ -33,16 +33,16 @@ import { EspaciosTrabajoModalComponent } from './pages/mantenimientos/mant-espac
     NgxLoginComponent,
     NgxLogoutComponent,
    // EspaciosTrabajoModalComponent,
-    //EspaciosTrabajoModalComponent,
-    //EspaciosTrabajoModal.TsComponent,
+    // EspaciosTrabajoModalComponent,
+    // EspaciosTrabajoModal.TsComponent,
    // RecursosProyectoComponent,
-  
+
 
     /*NgxRegisterComponent,
     NgxRequestPasswordComponent,
     NgxResetPasswordComponent,
     */],
- 
+
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

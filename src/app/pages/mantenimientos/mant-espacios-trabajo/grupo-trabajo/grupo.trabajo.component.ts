@@ -29,8 +29,8 @@ export class GrupoTrabajoComponent implements OnInit {
   public _grupoModel: GrupoTrabajoModel;
   public JsonReceptionPrefiles: any;
   public JsonReceptionTipoPerfiles: any;
-  
-  
+
+
   data: any;
   config: ToasterConfig;
 
@@ -179,7 +179,7 @@ export class GrupoTrabajoComponent implements OnInit {
       error => {
         // Redirecciona al Login
         alert('Error en la petición de la API ' + <any>error);
-        
+
       },
     );
   } // FIN | newPerfilService

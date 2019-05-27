@@ -7,15 +7,12 @@ import { NbAuthService } from '../../../../../../node_modules/@nebular/auth/serv
 import { NbAuthResult } from '../../../../../../node_modules/@nebular/auth/services/auth-result';
 
 @Component({
-  selector: 'request-password',
+  selector: 'ngx-request-password',
   templateUrl: './request-password.component.html',
   styleUrls: ['./request-password.component.scss'],
-
 })
 export class RequestPasswordComponent {
-  
-
-  // Variables de la Clase
+// Variables de la Clase
   msgErrorApi: string[];
   jsonUser;
 
@@ -30,23 +27,18 @@ export class RequestPasswordComponent {
   socialLinks: NbAuthSocialLink[] = [];
 
   constructor(protected service: NbAuthService,
-    
-              @Inject(NB_AUTH_OPTIONS) protected options = {},
 
+              @Inject(NB_AUTH_OPTIONS) protected options = {},
               protected router: Router,
               private _route: ActivatedRoute) {
 
    // this.redirectDelay = this.getConfigValue('forms.login.redirectDelay');
     this.showMessages = this.getConfigValue('forms.login.showMessages');
     this.strategy = this.getConfigValue('forms.login.strategy');
-    //this.socialLinks = this.getConfigValue('forms.login.socialLinks');
+    // this.socialLinks = this.getConfigValue('forms.login.socialLinks');
 
     // Variables de paso para el logout
-    
-
   }
-
-
   /****************************************************************************
   * Funcion: FND-00001
   * Fecha: 30-06-2018
@@ -80,13 +72,11 @@ export class RequestPasswordComponent {
         this.errors = this.msgErrorApi;
       }
 
-     
+
     },
   );
   } // FIN | FND-00001
-
-
-  getConfigValue(key: string): any {
-    return getDeepFromObject(this.options, key, null);
+ getConfigValue(key: string): any {
+ return getDeepFromObject(this.options, key, null);
   }
 }

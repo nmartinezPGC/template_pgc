@@ -32,7 +32,7 @@ export class EspaciosTrabajoComponent implements OnInit {
   @Input() idEspacioTrabajo;
 
   public _espaciostrabajoModel: EspaciosTrabajoModel;
-  
+
   // Json reception
   public JsonReceptionEstados: any;
   public JsonReceptionTipo: any;
@@ -41,8 +41,8 @@ export class EspaciosTrabajoComponent implements OnInit {
   public JsonReceptionF
   private _toasterService: ToasterService;
   private JsonReceptionEspaciosTrabajoModal: EspaciosTrabajoModalComponent;
-  
-  
+
+
   data2: any;
   data: any;
   config: ToasterConfig;
@@ -81,21 +81,20 @@ export class EspaciosTrabajoComponent implements OnInit {
   settings: any;
   public responsedata: any;
 
- //levanta la modal de mantenimineto de organizacion/consulta
- 
+ // levanta la modal de mantenimineto de organizacion/consulta
  showLargeModal(FindByIdEspacioTrabajo: number) {
 
   const activeModal = this.modalService.open(OrganizacionComponent, { size: 'lg', container: 'nb-layout' });
-  console.log("paso por aqui 2");
-  
-  activeModal.componentInstance.modalHeader = 'Large Modal Parametro';
-  console.log("paso por aqui 3");
-  
+  // console.log("paso por aqui 2");
+
+ activeModal.componentInstance.modalHeader = 'Large Modal Parametro';
+ // console.log("paso por aqui 3");
+
   activeModal.componentInstance.idEspacioTrabajo = this.idEspacioTrabajo;
-  console.log("paso por aqui 4");
+  // console.log("paso por aqui 4");
 
 
- //activeModal.componentInstance.JsonReceptionListEspaciostrabajo = this.JsonReceptionListEspaciostrabajo;
+ // activeModal.componentInstance.JsonReceptionListEspaciostrabajo = this.JsonReceptionListEspaciostrabajo;
 
   this.data3 = this.JsonReceptionListEspaciostrabajo;
   this.arrayOrganizacion = new Array();
@@ -105,7 +104,7 @@ export class EspaciosTrabajoComponent implements OnInit {
     protected _router: Router, private modalService: NgbModal ) {
       this.responsedata = { 'error': false, 'msg': 'error campos solicitado' };
      }
-  
+
 /****************************************************************************
 * Funcion: makeToast
 * Object Number: 003
@@ -169,9 +168,9 @@ ngOnInit() {
   };
 
   this._espaciostrabajoModel = new EspaciosTrabajoModel(
-    0, null, //datos generales
+    0, null, // datos generales
     null, null, null, null, // datos de la tabla
-    null, 0, null, 0, null, 0 // datos relacionados con la tabla principal
+    null, 0, null, 0, null, 0, // datos relacionados con la tabla principal
 
   );
 
@@ -179,7 +178,7 @@ ngOnInit() {
   this.tipoService();
   this.paisesAllListService();
   this.ListAllEspaciosTrabajo();
- 
+
 }
 
 
@@ -192,18 +191,18 @@ ngOnInit() {
   * del Formulario de Actividad llamando a la API
   * Autor: Edgar Ramirez
   ****************************************************************************/
- 
+
  private paisesAllListService() {
-  
+
   this._espaciosTrabajoService.getAllPaises2().subscribe(
     result => {
       if (result.status !== 200) {
-       
+
         this.showToast('error', 'Error al Obtener la Información de los Paises', result.message);
       } else if (result.status === 200) {
        // console.log("paso por aqui 3");
         this.JsonReceptionPaises = result.data;
-console.log(this.JsonReceptionPaises);
+
 
         // Setea la Lista del Dropdown List
         this.dropdownListPais = this.JsonReceptionPaises.map((item) => {
@@ -221,7 +220,7 @@ console.log(this.JsonReceptionPaises);
     },
   );
 } // FIN | paisesAllListService
- // selector de paises 
+ // selector de paises
 onItemSlectPais(item: any) {
   this._espaciostrabajoModel.idPaisIN = item.id;
 }
@@ -283,7 +282,7 @@ onItemSlectPais(item: any) {
       },
     );
   } // FIN | estadoService
-  
+
   /****************************************************************************
   * Funcion:newEspacioTrbajo
   * Object Number: 002
@@ -292,13 +291,13 @@ onItemSlectPais(item: any) {
   * Objetivo: crear nuevos Espacios de trabajo
   ****************************************************************************/
  private newEspacioTrabajo() {
-   
+
 
 
   this.validateEspaciotrabajo(this._espaciostrabajoModel);
   // Seteo de las variables del Model al json de Java
     this._espaciostrabajoModel.idEstadoEspacioTrabajo = { idEstado: this._espaciostrabajoModel.idEstadoIN };
-    console.log("pasa por aqui el tipo");
+    // console.log("pasa por aqui el tipo");
 
     this._espaciostrabajoModel.idTipoEspacioTrabajo = { idTipo: this._espaciostrabajoModel.idTipoIN };
     this._espaciostrabajoModel.idPais = { idPais: this._espaciostrabajoModel.idPaisIN };
@@ -307,7 +306,7 @@ onItemSlectPais(item: any) {
   this._espaciosTrabajoService.newEspaciosTrabajo(this._espaciostrabajoModel).subscribe(
     response => {
       if (response.status !== 200) {
-        console.log("no paso el recurso 3");
+       // console.log("no paso el recurso 3");
         this.showToast('error', 'Error al Ingresar la Información del Perfil', response.message);
       } else if (response.status === 200) {
         this.showToast('default', 'La Información del espacio trabajo, se ha ingresado con exito', response.message);
@@ -318,7 +317,7 @@ onItemSlectPais(item: any) {
     error => {
       // Redirecciona al Login
       alert('Error en la petición de la API ' + <any>error);
-      
+
     },
   );
 } // FIN | newPerfilService
@@ -326,12 +325,13 @@ onItemSlectPais(item: any) {
 
  // * Funcion: perfilesTipoService
  // * Object Number: 004
-  //* Fecha: 08-01-2019
-  //* Descripcion: Method perfilesTipoService of the Class
-  //* Objetivo: perfilesTipoService detalle de los Tipos de Perfil llamando a la API
-  //****************************************************************************//
+  // * Fecha: 08-01-2019
+  // * Descripcion: Method perfilesTipoService of the Class
+ // * Objetivo: perfilesTipoService detalle de los Tipos de Perfil llamando a la API
+  // ****************************************************************************//
+
  private ListAllEspaciosTrabajo() {
-   
+
    this._espaciosTrabajoService.getAllEspaciostrabajo().subscribe(
      response => {
        if (response.status !== 200) {
@@ -347,7 +347,7 @@ onItemSlectPais(item: any) {
        // Redirecciona al Login
        alert('Error en la petición de la API ' + <any>error);
 
-       
+
      },
    );
  }// FIN | perfilesTipoService
@@ -361,7 +361,7 @@ onItemSlectPais(item: any) {
    ****************************************************************************/
   private validateEspaciotrabajo(_espaciostrabajoModel: any) {
     // seteo el modelo para que los campos sean verificados
-    //this.responsedata.error = false;
+    // this.responsedata.error = false;
     if (_espaciostrabajoModel.codEspacioTrabajo === null || _espaciostrabajoModel.codEspacioTrabajo === '') {
       this.responsedata.msg = 'Debes ingresar el codigo espacio trabajo';
       this.responsedata.error = true;
@@ -375,7 +375,7 @@ onItemSlectPais(item: any) {
     return this.responsedata;
   } // FIN | validateTipoOganizacion(_grupoModel: any)
 
-  
+
   fyByIdEspaciosTrabaj(idEspacioTrabajo: number) {
     // Ejecutamos el Recurso del EndPoint
     this._espaciosTrabajoService.FindByIdEspacioTrabajo(idEspacioTrabajo).subscribe(
