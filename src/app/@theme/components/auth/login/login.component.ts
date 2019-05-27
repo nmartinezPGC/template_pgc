@@ -1,5 +1,4 @@
 /**
- * 
  * @license
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
@@ -117,7 +116,6 @@ export class NgxLoginComponent {
   socialLinks: NbAuthSocialLink[] = [];
 
   constructor(protected service: NbAuthService,
-    
               @Inject(NB_AUTH_OPTIONS) protected options = {},
               protected router: Router,
               private _route: ActivatedRoute) {

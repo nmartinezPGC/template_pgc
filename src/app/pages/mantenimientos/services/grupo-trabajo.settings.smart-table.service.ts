@@ -36,7 +36,7 @@ export class ConfigSmartTableService {
             const settings = {
               hideSubHeader : false,
               actions: {
-               add:false,
+               add: false,
               },
               edit: {
                 editButtonContent: '<i class="nb-edit"></i>',

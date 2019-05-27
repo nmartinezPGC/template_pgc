@@ -22,7 +22,7 @@ import { UsuarioModalComponent } from './mant-seguridad/usuarios/usuario.modal.c
 import { NgxPaginationModule } from 'ngx-pagination'; // <-- import the module
 import { FilterdataPipe } from '../mantenimientos/pipes/filterdata.pipe';
 import { EspaciosTrabajoModalComponent } from './mant-espacios-trabajo/espacios-trabajo/espacios-trabajo-modal/espacios-trabajo-modal.component';
-//import { EspaciosTrabajoModalComponent } from './mant-espacios-trabajo/espacios-trabajo/espacios-trabajo-modal/espacios-trabajo-modal.component';
+// import { EspaciosTrabajoModalComponent } from './mant-espacios-trabajo/espacios-trabajo/espacios-trabajo-modal/espacios-trabajo-modal.component';
 
 // Composicion del Modulo
 @NgModule({
@@ -46,7 +46,7 @@ import { EspaciosTrabajoModalComponent } from './mant-espacios-trabajo/espacios-
     UsuarioModalComponent,
     FilterdataPipe,
     EspaciosTrabajoModalComponent,
-    //EspaciosTrabajoModalComponent,
+    // EspaciosTrabajoModalComponent,
   ],
   entryComponents: [
     OrganizacionModalComponent,

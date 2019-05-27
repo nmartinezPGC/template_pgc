@@ -1,4 +1,5 @@
-	/**
+
+/**
    * @author Jorge Escamilla
    * @returns Servicio de request-password
    * @name ServiceReset-passwordPublicasService
@@ -18,7 +19,7 @@ import { SystemPropertiesService } from '../../../../shared/system-properties.se
 import { SystemEndPointsService } from '../../../../shared/system-end-points.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ResetPasswordService {
  // Variables de la Ruta de la API

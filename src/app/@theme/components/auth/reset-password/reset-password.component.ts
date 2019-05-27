@@ -1,4 +1,5 @@
-	/**
+
+ /**
    * @author Jorge Escamilla
    * @returns componente de reset-password
    * @name ComponentReset-password
@@ -8,20 +9,20 @@
    */
 import { Component, OnInit } from '@angular/core';
 import { ResetPasswordService } from '../services/reset-password.service';
-//import { Component, OnInit } from '@angular/core';
+// import { Component, OnInit } from '@angular/core';
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster'; // Servicio de Notificaciones
 import { Router } from '@angular/router';
 // model class
 // Model of Class
-//import { GrupoTrabajoModel } from '../pages/manteniminetos/models/usuarios.';
+// import { GrupoTrabajoModel } from '../pages/manteniminetos/models/usuarios.';
 import { UsuarioModel } from '../../../../pages/mantenimientos/models/usuarios.model';
-//import { ConfigSmartTableService } from '../../services/grupo-trabajo.settings.smart-table.service';
-//import { GrupoTrabajoService } from '../../services/grupo.trabajo.service';
+// import { ConfigSmartTableService } from '../../services/grupo-trabajo.settings.smart-table.service';
+// import { GrupoTrabajoService } from '../../services/grupo.trabajo.service';
 
 @Component({
-  selector: 'reset-password',
+  selector: 'ngx-reset-password',
   templateUrl: './reset-password.component.html',
-  styleUrls: ['./reset-password.component.scss']
+  styleUrls: ['./reset-password.component.scss'],
 })
 export class ResetPasswordComponent implements OnInit {
   public _grupoModel: UsuarioModel ;
@@ -46,13 +47,13 @@ export class ResetPasswordComponent implements OnInit {
   public responsedata: any;
 
   constructor(protected _router: Router, private _toasterService: ToasterService,
-    //public _configSmartTableService: ConfigSmartTableService,
+    // public _configSmartTableService: ConfigSmartTableService,
     public _tipo: ResetPasswordService,
   ) {
     // Llamamos a la Funcion de Configuracion de las Smart Table
-    //this._configSmartTableService.configSmartTable('userSmart', 1, null);
-    //this.settings = this._configSmartTableService.settings;
-    //this.responsedata = { 'error': false, 'msg': 'error campos solicitado' };
+    // this._configSmartTableService.configSmartTable('userSmart', 1, null);
+    // this.settings = this._configSmartTableService.settings;
+    // this.responsedata = { 'error': false, 'msg': 'error campos solicitado' };
     //  this.listarTipoOrganizacion();
   }
 

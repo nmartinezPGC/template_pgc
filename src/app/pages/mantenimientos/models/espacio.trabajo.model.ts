@@ -17,7 +17,7 @@ export class EspaciosTrabajoModel {
         public codEspacioTrabajo: string,
         // datos de la tabala de espacios trabajo
         public nombreEspacioTrabajo: string,
-        public descripcionEspacioTrabajo: String,// todo bien hasta aqui
+        public descripcionEspacioTrabajo: String, // todo bien hasta aqui
         public fechaCreacion: string,
         public horaCreacion: Date,
         // datos relacionados con la tabla

@@ -1,4 +1,4 @@
-	/**
+/**
    * @author Jorge Escamilla
    * @returns Servicio de request-password
    * @name ServiceRequest-passwordService
@@ -13,22 +13,22 @@
   import 'rxjs/add/operator/catch';
   import 'rxjs/add/operator/map';
   // import { Observable } from 'rxjs/Observable';
-  
+
   // Importamos la Clase de las Propiedades del Sistema
   import { SystemPropertiesService } from '../../../../shared/system-properties.service';
-  
-  
+
+
   // Clase de Propieades Globales de la PGC
   @Injectable()
-  export class requestpasswordService {
+  export class RequestPasswordService {
     // Propiedades de la Clases *************************************************
     // URL Base de la Clase, Referencia a la API | Spring
     public _url: string;
-  
+
     // Variables para el localStorage
     public _identity;
     public _token;
-  
+
     /****************************************************************************
     * Funcion: Constructor
     * Fecha: 01-06-2018
@@ -39,8 +39,8 @@
                   private _systemPropertiesService: SystemPropertiesService ) {
       this._url = this._systemPropertiesService.getmethodUrlService();
     }// FIN | Contructor
-  
-  
+
+
     /****************************************************************************
     * Funcion: FND-00001
     * Fecha: 01-06-2018
@@ -54,12 +54,12 @@
       const params = json;
         // let headers = new Headers({ 'Content-Type':'application/x-www-form-urlencoded'});
         // let headers = new Headers({ 'Content-Type': 'application/json'});
-  
+
       // return this._http.post(this._url + "/auth/login", params, { headers:headers }).map( res => res.json());
       return this._http.post(this._url + '/auth/request-password', params)
                 .map( res => res.json() );
     }// FIN | FND-00001
-  
+
     estados() {
       const headers = new Headers({ 'Content-Type': 'application/json'});
       // let headers = new Headers({ 'Content-Type':'application/x-www-form-urlencoded' });
@@ -70,7 +70,7 @@
       headers.append('Access-Control-Allow-Headers', 'Content-Type');
       headers.append('Access-Control-Allow-Methods', 'GET');
       headers.append('Access-Control-Allow-Origin', 'http://localhost:8090');*/
-  
+
       return this._http.get(this._url + '/estados', { headers: headers })
                 .map( res => res.json().data );
     }
@@ -87,14 +87,12 @@
         const params = 'json=' + json + '&authorization=' + this.getToken();
         // console.log(json);
         const headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded'});
-  
+
       return this._http.post(this._url + '/auth/user/change-pass-user', params, { headers: headers })
                 .map( res => res.json());
-    } // FIN | FND-00002
-  
-  
-  
-  
+    }
+    // FIN | FND-00002
+
     /****************************************************************************
     * Funcion: FND-00003
     * Fecha: 01-06-2018
@@ -103,7 +101,7 @@
     * Objetivo: Seteo de las variables en json
     ****************************************************************************/
     getIdentity() {
-  
+
       const identity = JSON.parse(localStorage.getItem('identity'));
       // Pregunta por el valor de la identity
         if (identity !== 'undefined') {
@@ -111,11 +109,11 @@
         }else {
           this._identity = null;
         }
-  
+
       return this._identity;
     }// FIN | FND-00003
-  
-  
+
+
     /****************************************************************************
     * Funcion: FND-00004
     * Fecha: 01-06-2018
@@ -132,9 +130,9 @@
         }else {
           this._token = null;
         }
-  
+
       return this._token;
     }// FIN | FND-00004
-  
-  }// FIN | Clase
-  
+
+  }
+  // FIN | Clase
