@@ -315,7 +315,7 @@ export class UsuariosComponent implements OnInit {
 
     // Ejecutamos el Recurso del EndPoint
     this._usuariosService.newUsuario(this._usuarioModel).subscribe(
-      response=> {
+      response => {
         if (response.status !== 200) {
 
           this.showToast('error', 'Error al Ingresar la Información del Usuario', JSON.stringify(response.message));
