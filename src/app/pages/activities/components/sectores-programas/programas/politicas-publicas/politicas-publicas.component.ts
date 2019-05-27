@@ -74,7 +74,7 @@ public JsonSendProgramaPoliticasPublicasOpciones: any = [];
 
 // Json Reception de la Clase
 public JsonReceptionAllProgramasPoliticasPublicas: any;
-public JsonReceptionProgramaVisionPais: any;
+public JsonReceptionProgramaPoliticasPublicas: any;
 public JsonReceptionProgramaByNivelPoliticasPublicas: any;
 public JsonReceptionProgramaByNivelPoliticasPublicas2: any;
 public JsonReceptionProgramaByNivelPoliticasPublicas3: any;
@@ -84,7 +84,7 @@ public JsonReceptionProgramaByNivelPoliticasPublicas4: any;
 public secuenciaDeActividad: any;
 
 // Modelo de la Clase
-public _activityProgramaPoliticasPublicas: ActivityPoliticasPublicasModel;
+public _activityProgramaPoliticasPublicasModel: ActivityPoliticasPublicasModel;
 
 // Consfiguracion del Notificador
 position = 'toast-bottom-full-width';
@@ -103,7 +103,7 @@ config: ToasterConfig;
 
 /**
 * constructor
-* @param _serviceVisionPaisService
+* @param _servicePoliticasPublicasService
 * @param messageService
 */
 constructor(private _servicePoliticasPublicasService: ServicePoliticasPublicasService,
@@ -122,7 +122,7 @@ ngOnInit() {
  this.loading = true;
 
  // Inicializacion del Modelo
- this._activityProgramaPoliticasPublicas = new ActivityPoliticasPublicasModel (
+ this._activityProgramaPoliticasPublicasModel = new ActivityPoliticasPublicasModel (
    0, null, // Datos Generales
    null, 0, // Relacionales
    null, 0, 0,
@@ -208,7 +208,7 @@ this.messageService.add({ severity: 'info', summary: 'Node Selected with Right C
 * Objetivo: unselectFile in the method selected item with Treeview
 ****************************************************************************/
 unselectFile() {
-this.selectedFile2 = null;
+this.filesTree4 = null;
 } // FIN | unselectFile
 
 
@@ -248,7 +248,7 @@ if (event.node.children.length !== 0 && event.node.parent !== undefined) {
 }
 }
 this.JsonSendProgramaPoliticasPublicasOpciones.sort();
-// console.log(this.JsonSendProgramaPlanNacionOpciones);
+// console.log(this.JsonSendProgramaPoliticaPublicaOpciones);
 } // FIN | nodeSelects
 
 
@@ -267,35 +267,21 @@ const itemNodeLabel = event.node.label;
 const resultado = this.JsonSendProgramaPoliticasPublicasOpciones.findIndex(Programa => Programa.name !== itemNodeLabel);
 this.JsonSendProgramaPoliticasPublicasOpciones.splice(Number(resultado))
 this.JsonSendProgramaPoliticasPublicasOpciones = [...this.JsonSendProgramaPoliticasPublicasOpciones];
-} else if (event.node.children !== undefined && event.node.children.length !== 0) {
-for (let index = 0; index < event.node.children.length; index++) {
- const element = event.node.children[index];
- // Ejecucion del splice por el item de iteracion
- const resultado = this.JsonSendProgramaPoliticasPublicasOpciones.findIndex(Programa => Programa.name === element.label);
- this.JsonSendProgramaPoliticasPublicasOpciones.splice(Number(resultado), 1)
- this.JsonSendProgramaPoliticasPublicasOpciones = [...this.JsonSendProgramaPoliticasPublicasOpciones];
-}
-} else if (event.node.children !== undefined && event.node.children.length === 0) {
-const itemNodeLabel = event.node.label;
-// Ejecucion del splice del elemento
-const resultado = this.JsonSendProgramaPoliticasPublicasOpciones.findIndex(Programa => Programa.name === itemNodeLabel);
-this.JsonSendProgramaPoliticasPublicasOpciones.splice(Number(resultado), 1)
-this.JsonSendProgramaPoliticasPublicasOpciones = [...this.JsonSendProgramaPoliticasPublicasOpciones];
 }
 } // FIN | nodeUnselect
 
 
 /****************************************************************************
-* Funcion: getAllProgramaCampoTransversalService
+* Funcion: getAllProgramaPoliticasPublicasService
 * Object Number: 003
 * Fecha: 21-02-2019
-* Descripcion: Method getAllProgramaCampoTransversalService of the Class
-* Objetivo: getAllProgramaCampoTransversalService listados de los Niveles
+* Descripcion: Method getAllProgramaPoliticaPublicaService of the Class
+* Objetivo: getAllProgramaPolitica PublicaService listados de los Niveles
 * de Ubicacion de Implementacion del Formulario de Actividad llamando a la API
 * Params: { }
 ****************************************************************************/
-private getAllProgramasVisionPaisService() {
-// Ejecuta el Servicio de invocar todos los Objetivos Vision Pais
+private getAllProgramasPoliticasPublicasService() {
+// Ejecuta el Servicio de invocar todos los Objetivos Politica Publica
 this._servicePoliticasPublicasService.getAllProgramasPoliticasPublicas().subscribe(
 result => {
  if (result.status !== 200) {
@@ -304,7 +290,7 @@ result => {
  } else if (result.status === 200) {
    this.JsonReceptionAllProgramasPoliticasPublicas = result.data;
 
-   // Setea la Lista de los todos Objetivos de Vision Pais
+   // Setea la Lista de los todos Objetivos de Politica Publica
    this.nodes = this.JsonReceptionAllProgramasPoliticasPublicas.map((item) => {
      return {
        label: item.nombrePrograma,
@@ -322,10 +308,10 @@ result => {
  }
 },
 error => {
- this.showToast('error', 'Error al Obtener la Información de todos los Programa de Desarrollo', JSON.stringify(error.message));
+ this.showToast('error', 'Error al Obtener la Información de todos los Programa de Politicas Publicas', JSON.stringify(error.message));
 },
 );
-} // FIN | getAllProgramaVisionPaisService
+} // FIN | getAllProgramaPolitica PublicaService
 
 
 
@@ -334,7 +320,7 @@ error => {
 * Object Number: 004
 * Fecha: 22-03-2019
 * Descripcion: Method getfindByIdProgramaService of the Class
-* Objetivo: getfindByIdProgramaService detalle de Vision Pais, con el ID
+* Objetivo: getfindByIdProgramaService detalle de Politica Publica, con el ID
 * Params: { idPrograma }
 ****************************************************************************/
 private getfindByIdProgramaService(idPrograma: number) {
@@ -344,13 +330,13 @@ this._servicePoliticasPublicasService.getfindByIdPrograma(idPrograma).subscribe(
 result => {
  if (result.status !== 200) {
    this.showToast('error', 'Error al Obtener la Información del objetivo ', result.message);
-   this.JsonReceptionProgramaVisionPais = [];
+   this.JsonReceptionProgramaPoliticasPublicas = [];
  } else if (result.status === 200) {
-   this.JsonReceptionProgramaVisionPais = result.data;
+   this.JsonSendProgramaPoliticasPublicas = result.data;
  }
 },
 error => {
- this.showToast('error', 'Error al Obtener la Información del Objetivo de Vision Pais', JSON.stringify(error.message));
+ this.showToast('error', 'Error al Obtener la Información del Objetivo de Politica Publica', JSON.stringify(error.message));
 },
 );
 } // FIN | getfindByIdProgramaService
@@ -361,7 +347,7 @@ error => {
 * Object Number: 005
 * Fecha: 25-03-2019
 * Descripcion: Method getfindByIdNivelProgramaService of the Class
-* Objetivo: getfindByIdNivelProgramaService detalle del objetivo de Vision Pais
+* Objetivo: getfindByIdNivelProgramaService detalle del objetivo de Politica Publica
 * Id Nivel de Programa
 * Params: { idSNivelector }
 ****************************************************************************/
@@ -371,16 +357,16 @@ private getfindByIdNivelProgramaService(idSNivelector: number) {
 this._servicePoliticasPublicasService.getfindByIdNivelPrograma(idSNivelector).subscribe(
 result => {
  if (result.status !== 200) {
-   this.showToast('error', 'Error al Obtener la Información de Vision Pais del nivel 1 ', result.message);
+   this.showToast('error', 'Error al Obtener la Información de Politica Publica del nivel 1 ', result.message);
    this.JsonReceptionProgramaByNivelPoliticasPublicas = [];
    this.nodes = [];
  } else if (result.status === 200) {
    this.JsonReceptionProgramaByNivelPoliticasPublicas = result.data;
-   this.getProgramaVisionPaisNivel2(this.JsonReceptionProgramaByNivelPoliticasPublicas);
+   this.getProgramaPoliticasPublicasNivel2(this.JsonReceptionProgramaByNivelPoliticasPublicas);
  }
 },
 error => {
- this.showToast('error', 'Error al Obtener la Información de Vision Pais', JSON.stringify(error.message));
+ this.showToast('error', 'Error al Obtener la Información de Politicas Publicas', JSON.stringify(error.message));
 },
 );
 } // FIN | getfindByIdNivelProgramaService
@@ -388,15 +374,15 @@ error => {
 
 
 /****************************************************************************
-* Funcion: getProgramaVisionPaisNivel2
+* Funcion: getProgramaPolitica PublicaNivel2
 * Object Number: 006
 * Fecha: 25-03-2019
-* Descripcion: Method getProgramaVisionPaisNivel2 of the Class
-* Objetivo: getProgramaVisionPaisNivel2 de los Niveles inferiores objetivos de Vision Pais,
+* Descripcion: Method getProgramaPolitica PublicaNivel2 of the Class
+* Objetivo: getProgramaPolitica PublicaNivel2 de los Niveles inferiores objetivos de Politica Publica,
 * con el Id Nivel 1 de Programa
 * Params: { arrayN1 }
 ****************************************************************************/
-getProgramaVisionPaisNivel2(array: any) {
+getProgramaPoliticasPublicasNivel2(array: any) {
 // Inicializacion del Arraeglo de Nivel 2
 this.JsonReceptionProgramaByNivelPoliticasPublicas2 = [];
 this.JsonReceptionProgramaByNivelPoliticasPublicas3 = [];
@@ -460,25 +446,25 @@ setTimeout(() => {
      }
    },
    error => {
-     this.showToast('error', 'Error al Obtener la Información de objetivos de Vision Pais', JSON.stringify(error.message));
+     this.showToast('error', 'Error al Obtener la Información de objetivos de Politicas Publicas', JSON.stringify(error.error.message));
    },
  );
 }, 1000);
 }
-} // FIN | getProgramaVisionPaisNivel2
+} // FIN | getProgramaPolitica PublicaNivel2
 
 
 /****************************************************************************
-* Funcion: saveProgramaVisionPais
+* Funcion: saveProgramaPolitica Publica
 * Object Number: 007
 * Fecha: 15-04-2019
-* Descripcion: Method saveProgramaVisionPais of the Class
-* Objetivo: saveProgramaVisionPais Grabar listado Campo Transversal
+* Descripcion: Method saveProgramaPolitica Publica of the Class
+* Objetivo: saveProgramaPoliticaPublica Grabar listado Politica Publica
 * Params: { JsonSendProgramaPoliticasPublicasOpciones }
 ****************************************************************************/
 saveProgramaPoliticasPublicas() {
 // Seteo de los campos iniciales
-this._activityProgramaPoliticasPublicas.idActividad = { idActividad: this.idProyectoTab };
+this._activityProgramaPoliticasPublicasModel.idActividad = { idActividad: this.idProyectoTab };
 
 // Validacion de Items seleccionados
 if (this.JsonSendProgramaPoliticasPublicasOpciones.length > 0) {
@@ -487,31 +473,31 @@ for (let index = 0; index < this.JsonSendProgramaPoliticasPublicasOpciones.lengt
  const element = this.JsonSendProgramaPoliticasPublicasOpciones[index];
 
  // Asignacion del Campo Transversal
- this._activityProgramaPoliticasPublicas.idProgramaPoliticasPublicas = { idPrograma: element.code };
+ this._activityProgramaPoliticasPublicasModel.idProgramaPoliticaPublica = { idPrograma: element.code };
 
- this._activityProgramaPoliticasPublicas.codigoActividad = this.codigoProyectoTab + '-APP-' + element.code;
+ this._activityProgramaPoliticasPublicasModel.codigoActividad = this.codigoProyectoTab + '-APP-' + element.code;
 
  // Ejecucion del Campo Transversal
- this._servicePoliticasPublicasService.saveActividadProgramaPoliticasPublicas(this._activityProgramaPoliticasPublicas).subscribe(
+ this._servicePoliticasPublicasService.saveActividadProgramaPoliticasPublicas(this._activityProgramaPoliticasPublicasModel).subscribe(
    result => {
      if (result.status !== 200) {
-       this.showToast('error', 'Error al Ingresar la Información Vision Pais asociado al Proyecto', JSON.stringify(result.message));
+       this.showToast('error', 'Error al Ingresar la Información Politica Publica asociado al Proyecto', JSON.stringify(result.message));
      } else if (result.status === 200) {
        // Evalua los resultados de la query
        if (result.findRecord === false) {
-         this.showToast('error', 'Error al Ingresar la Información Vision Pais asociado al Proyecto', JSON.stringify(result.message));
+         this.showToast('error', 'Error al Ingresar la Información de Politica Publica asociado al Proyecto', JSON.stringify(result.message));
        } else {
-         this.showToast('success', 'Vision Pais asociado al Proyecto', JSON.stringify(result.message));
+         this.showToast('success', 'Programa de Politica Publica asociado al Proyecto', JSON.stringify(result.message));
        }
      }
    },
    error => {
-     this.showToast('error', 'Error al ingresar el Campo Transversal al Proyecto', JSON.stringify(error.message));
+     this.showToast('error', 'Error al ingresar la Información de Politicas Publicas', JSON.stringify(error.error.message));
    },
  );
 }
 } else {
-this.showToast('error', 'Error al ingresar la Información Objetivo de Vision Pais', 'Debes de seleccionar los Objetivos de Vision Pais, para continuar');
+this.showToast('error', 'Error al ingresar la Información  de Politicas Publicas', 'Debes de seleccionar los datos Politicas Publicas, para continuar');
 return -1;
 }
 } // FIN | saveProgramaPoliticasPublicas
@@ -522,7 +508,7 @@ return -1;
 * Object Number: 008
 * Fecha: 16-04-2019
 * Descripcion: Method cleanProgramaPoliticasPublicas of the Class
-* Objetivo: cleanProgramaPoliticasPublicas Limpia listado de Vision Pais
+* Objetivo: cleanProgramaPoliticasPublicas Limpia listado de Politicas Publicas
 * Params: { }
 ****************************************************************************/
 cleanProgramaPoliticasPublicas() {

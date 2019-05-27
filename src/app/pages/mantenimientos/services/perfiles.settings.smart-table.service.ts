@@ -28,17 +28,17 @@ export class ConfigSmartTableService {
 * Objetivo: Establecer las configuraciones para la Smart Table
 ****************************************************************************/
 
-  configSmartTable(smartTable: string, smartNormal: number, array: any) {
+  configSmartTable(smartTable: string, smartNormal:  any,arrayperfil: any) {
     switch (smartTable) {
       case 'userSmart':
         switch (smartNormal) {
           case 1:
             const settings = {
-              hideSubHeader : true,
-              add: {
-                addButtonContent: '<i class="nb-plus"></i>',
-                createButtonContent: '<i class="nb-checkmark"></i>',
-                cancelButtonContent: '<i class="nb-close"></i>',
+              hideSubHeader: false,
+
+              actions: {
+                add: false,
+                
               },
               edit: {
                 editButtonContent: '<i class="nb-edit"></i>',
@@ -68,14 +68,14 @@ export class ConfigSmartTableService {
                   editor: {
                     type: 'list',
                     config: {
-                      list: array,
+                      list: arrayperfil,
                     },
                   },
                 },
-                habilitado: {
+                activo: {
                   title: 'Habilitado',
-                  type: 'html',
-                 valuePrepareFunction: (cell: any, row: any) => row.activado,
+                  type: 'list',
+                valuePrepareFunction: (cell: any, row: any) => row.activado,
                   editor: {
                     type: 'list',
                     config: {

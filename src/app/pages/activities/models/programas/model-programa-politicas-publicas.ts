@@ -11,12 +11,12 @@ export class ActivityPoliticasPublicasModel {
     constructor(
          // Definicion de las variables Mapeadas a la Clase del Model
         // Generales de tabla
-        public idActividadProgramaPoliticasPublicas:  number,
+        public idActividadProgramaPoliticaPublica:  number,
         public codigoActividad: string,
 
         // Relacionales
-        public idProgramaPoliticasPublicas: {idPrograma: number},
-        public idProgramaPoliticasPublicasSend: number,
+        public idProgramaPoliticaPublica: {idPrograma: number},
+        public idProgramaPoliticaPublicaSend: number,
 
         public idActividad: {idActividad: number},
         public idActividadSend: number,

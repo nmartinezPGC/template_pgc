@@ -85,7 +85,7 @@ export class VisionPaisComponent implements OnInit, OnChanges {
   public secuenciaDeActividad: any;
 
   // Modelo de la Clase
-  public _activityProgramaVisionPais: ActivityVisionPaisModel;
+  public _activityProgramaVisionPaisModel: ActivityVisionPaisModel;
 
   // Consfiguracion del Notificador
   position = 'toast-bottom-full-width';
@@ -123,7 +123,7 @@ export class VisionPaisComponent implements OnInit, OnChanges {
       this.loading = true;
 
       // Inicializacion del Modelo
-      this._activityProgramaVisionPais = new ActivityVisionPaisModel (
+      this._activityProgramaVisionPaisModel = new ActivityVisionPaisModel (
         0, null, // Datos Generales
         null, 0, // Relacionales
         null, 0, 0,
@@ -249,7 +249,7 @@ nodeSelect(event) {
     }
   }
   this.JsonSendProgramaVisionPaisOpciones.sort();
-  // console.log(this.JsonSendProgramaPlanNacionOpciones);
+  // console.log(this.JsonSendProgramaVisionPaisOpciones);
 } // FIN | nodeSelects
 
 
@@ -323,7 +323,7 @@ private getAllProgramasVisionPaisService() {
       }
     },
     error => {
-      this.showToast('error', 'Error al Obtener la Información de todos los Programa de Desarrollo', JSON.stringify(error.message));
+      this.showToast('error', 'Error al Obtener la Información de todos los Programa de Desarrollo', JSON.stringify(error.error.message));
     },
   );
 } // FIN | getAllProgramaVisionPaisService
@@ -351,7 +351,7 @@ private getfindByIdProgramaService(idPrograma: number) {
       }
     },
     error => {
-      this.showToast('error', 'Error al Obtener la Información del Objetivo de Vision Pais', JSON.stringify(error.message));
+      this.showToast('error', 'Error al Obtener la Información del Objetivo de Vision Pais', JSON.stringify(error.error.message));
     },
   );
 } // FIN | getfindByIdProgramaService
@@ -381,7 +381,7 @@ private getfindByIdNivelProgramaService(idSNivelector: number) {
       }
     },
     error => {
-      this.showToast('error', 'Error al Obtener la Información de Vision Pais', JSON.stringify(error.message));
+      this.showToast('error', 'Error al Obtener la Información de Vision Pais', JSON.stringify(error.error.message));
     },
   );
 } // FIN | getfindByIdNivelProgramaService
@@ -461,7 +461,7 @@ getProgramaVisionPaisNivel2(array: any) {
           }
         },
         error => {
-          this.showToast('error', 'Error al Obtener la Información de objetivos de Vision Pais', JSON.stringify(error.message));
+          this.showToast('error', 'Error al Obtener la Información de objetivos de Vision Pais', JSON.stringify(error.error.message));
         },
       );
     }, 1000);
@@ -479,7 +479,7 @@ getProgramaVisionPaisNivel2(array: any) {
 ****************************************************************************/
 saveProgramaVisionPais() {
   // Seteo de los campos iniciales
-  this._activityProgramaVisionPais.idActividad = { idActividad: this.idProyectoTab };
+  this._activityProgramaVisionPaisModel.idActividad = { idActividad: this.idProyectoTab };
 
   // Validacion de Items seleccionados
   if (this.JsonSendProgramaVisionPaisOpciones.length > 0) {
@@ -488,12 +488,12 @@ saveProgramaVisionPais() {
       const element = this.JsonSendProgramaVisionPaisOpciones[index];
 
       // Asignacion del Campo Transversal
-      this._activityProgramaVisionPais.idProgramaVisionPais = { idPrograma: element.code };
+      this._activityProgramaVisionPaisModel.idProgramaVisionPais = { idPrograma: element.code };
 
-      this._activityProgramaVisionPais.codigoActividad = this.codigoProyectoTab + '-APP-' + element.code;
+      this._activityProgramaVisionPaisModel.codigoActividad = this.codigoProyectoTab + '-APP-' + element.code;
 
       // Ejecucion del Campo Transversal
-      this._serviceVisionPaisService.saveActividadProgramaVisionPais(this._activityProgramaVisionPais).subscribe(
+      this._serviceVisionPaisService.saveActividadProgramaVisionPais(this._activityProgramaVisionPaisModel).subscribe(
         result => {
           if (result.status !== 200) {
             this.showToast('error', 'Error al Ingresar la Información Vision Pais asociado al Proyecto', JSON.stringify(result.message));
@@ -507,7 +507,7 @@ saveProgramaVisionPais() {
           }
         },
         error => {
-          this.showToast('error', 'Error al ingresar el Campo Transversal al Proyecto', JSON.stringify(error.message));
+          this.showToast('error', 'Error al ingresar el Objetivo de Vision Pais', JSON.stringify(error.error.message));
         },
       );
     }

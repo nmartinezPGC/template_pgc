@@ -1,6 +1,6 @@
 /**
  * @author Nahum Martinez
- * @returns Modelo de los Campos Transversales
+ * @returns Modelo de Plan Nacion
  * @name ActivityProgramaPlanNacion
  * @alias _activityProgramaPlanNacion
  * @version 1.0.0

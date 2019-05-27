@@ -22,11 +22,23 @@ import { UsuarioModalComponent } from './mant-seguridad/usuarios/usuario.modal.c
 import { NgxPaginationModule } from 'ngx-pagination'; // <-- import the module
 import { FilterdataPipe } from '../mantenimientos/pipes/filterdata.pipe';
 
+// Imports de Libreria de PrimeNg
+import {KeyFilterModule} from 'primeng/keyfilter';
+import {ToastModule} from 'primeng/toast';
+import { MessagesModule } from 'primeng/messages';
+import { MessageModule } from 'primeng/message';
+
+
+
 // Composicion del Modulo
 @NgModule({
   imports: [
     ThemeModule,
-    MantenimientosRoutingModule,
+    KeyFilterModule,
+    ToastModule,
+    MessageModule,
+    MessagesModule,
+   MantenimientosRoutingModule,
     ToasterModule.forRoot(), // Modulo de Toaster-Notificatiion
     NgxDatatableModule,
     Ng2SmartTableModule,

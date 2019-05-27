@@ -1,23 +1,23 @@
 
-<!-- Maquetacion de los Objetivos de Vision País -->
+<!-- Maquetacion de los Programas de Politicas Publicas -->
 <!-- Componente para los Mensajes en pantalla -->
 <toaster-container [toasterconfig]="config"></toaster-container>
 
-<!-- Agrupacion de la Informacion de Objetivos Vision de País -->
+<!-- Agrupacion de la Informacion de Politicas Publicas -->
 <p-fieldset legend="Políticas Publicas y Estrategias Nacionales" [toggleable]="true" class="fieldSet">
   <nb-card accent="warning" status="primary">
     <nb-card-body>
       <div class="row">
         <div class="col-sm-6">
           <h4>Selecciona los Objetivos | Políticas Publicas y Estrategias Nacionales</h4>
-          <input type="text" class="form-control txtSearch" name="queryString" [(ngModel)]="queryString"
-            placeholder="Buscar Políticas Publicas y Estrategias Nacionales">
+          <input type="text" class="form-control "  [(ngModel)]="queryString"
+            placeholder="Buscar Politica Publica">
           <br>
-          <p-tree [style]="{'width': '100%'}" [value]="filesTree4 | filter: queryString" selectionMode="checkbox"
+          <p-tree [style]="{'width': '100%'}" [value]="filesTree4" selectionMode="checkbox"
             (onNodeUnselect)="nodeUnselect($event)"  (onNodeSelect)="nodeSelect($event)"
             dynamic="true"></p-tree>
         <br>
-          <div>Políticas Publicas y Estrategias Nacionales Seleccionados: <span *ngFor="let file of selectedFiles2">{{file.parent.data}} </span></div>
+          <div>Políticas Publicas y Estrategias Nacionales Seleccionados:<span *ngFor="let file of _servicePoliticasPublicasService| filterdata: queryString"> </span> </div>
         </div>
 
         <div class="col-sm-6">
@@ -29,11 +29,11 @@
               Confirma cuales Políticas Publicas y Estrategias Nacionales deben registrarse...
             </p-header>
           </p-listbox>
-          <p>Políticas Publicas y Estrategias Nacionales a Registrar: <span *ngFor="let c of selectedCities" style="margin-right: 10px">{{c.name}}</span>
+          <p> <span *ngFor="let c of selectedCities" style="margin-right: 10px">{{c.name}}</span>
           </p>
           <hr>
           <div class="icon-button-examples">
-            <!-- Boton de Calcular Porcentajes -->
+            <!-- Boton de limpiar listado Politicas Publicas -->
             <button type="button" class="btn btn-outline-danger btn-icon" nbPopover="Limpia el listado de Políticas Publicas y Estrategias Nacionales"
               nbPopoverMode="hint" nbPopoverPlacement="top" (click)="cleanProgramaPoliticasPublicas()">
               <i class="ion-trash-a"></i>
@@ -47,7 +47,7 @@
 
             <!-- Boton para Grabar Políticas Publicas y Estrategias Nacionales -->
             <button type="button" class="btn btn-outline-primary btn-icon"
-              nbPopover="Registra el listado de Políticas Publicas y Estrategias Nacionales" nbPopoverMode="hint" nbPopoverPlacement="top"
+              nbPopover="Registra los programas de Políticas Publicas y Estrategias Nacionales" nbPopoverMode="hint" nbPopoverPlacement="top"
               (click)="saveProgramaPoliticasPublicas()">
               <i class="ion-upload"></i>
             </button>

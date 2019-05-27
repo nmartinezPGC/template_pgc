@@ -318,7 +318,7 @@ export class SectoresCamposTransversalesComponent implements OnInit, OnChanges {
         } else if (result.status === 200) {
           this.JsonReceptionAllSectoresCampoTransversal = result.data;
 
-          // Setea la Lista de los todos Sectores Ocde/Cad
+          // Setea la Lista de los todos Sectores Campos Transversales
           this.nodes = this.JsonReceptionAllSectoresCampoTransversal.map((item) => {
             return {
               label: item.nombreSector,
@@ -375,7 +375,7 @@ export class SectoresCamposTransversalesComponent implements OnInit, OnChanges {
   * Object Number: 005
   * Fecha: 25-03-2019
   * Descripcion: Method getfindByIdNivelSectorService of the Class
-  * Objetivo: getfindByIdNivelSectorService detalle del Sector OCDE/CAD, con el
+  * Objetivo: getfindByIdNivelSectorService detalle del Sector Campos Transversales, con el
   * Id Nivel de Sector
   * Params: { idSNivelector }
   ****************************************************************************/
@@ -406,7 +406,7 @@ export class SectoresCamposTransversalesComponent implements OnInit, OnChanges {
   * Object Number: 006
   * Fecha: 25-03-2019
   * Descripcion: Method getSectorOcdeCadNivel2 of the Class
-  * Objetivo: getSectorOcdeCadNivel2 de los Niveles inferiores Sector OCDE/CAD,
+  * Objetivo: getSectorOcdeCadNivel2 de los Niveles inferiores Sector Campos Transversales,
   * con el Id Nivel 1 de Sector
   * Params: { arrayN1 }
   ****************************************************************************/
@@ -476,7 +476,7 @@ export class SectoresCamposTransversalesComponent implements OnInit, OnChanges {
         );
       }
     } else {
-      this.showToast('error', 'Error al ingresar la Información Sectores de Gobierno', 'Debes de seleccionar los sectores de Gobierno, para continuar');
+      this.showToast('error', 'Error al ingresar la Información Campos Transversales', 'Debes de seleccionar los Campos Transversales, para continuar');
       return -1;
     }
   } // FIN | saveSectoresCampoTransversal

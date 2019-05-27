@@ -35,10 +35,10 @@ export class ConfigSmartTableService {
           case 1:
             const settings = {
               hideSubHeader: false,
-              add: {
-                addButtonContent: '<i class="nb-plus"></i>',
-                createButtonContent: '<i class="nb-checkmark"></i>',
-                cancelButtonContent: '<i class="nb-close"></i>',
+              refresh:true,
+              
+              actions: {
+               add: false,
               },
               edit: {
                 editButtonContent: '<i class="nb-edit"></i>',
@@ -49,6 +49,8 @@ export class ConfigSmartTableService {
               delete: {
                 deleteButtonContent: '<i class="nb-trash"></i>',
                 confirmDelete: true,
+                confirmSave: true,
+                update:true,
               },
               columns: {
                 codCatOrganizacion: {
@@ -57,15 +59,13 @@ export class ConfigSmartTableService {
                   editable: false,
                 },
                 acronimoCatOrganizacion: {
-                  title: 'acronimo categoria orgnzacion',
+                  title: 'Acronimo categ. organizacion',
                   type: 'string',
                 },
                 descCatOrganizacion: {
-                  title: 'Descripcion catg',
+                  title: 'Descripcion categ.',
                   type: 'string',
                 },
-                // Json anidado para lograr capturar el valor de una entidad     ///https://github.com/akveo/ngx-admin/issues/1827
-                // bibliografia : https://github.com/akveo/ng2-smart-table/issues/375
                 activo: {
                   title: 'Habilitado',
                   type: 'list',

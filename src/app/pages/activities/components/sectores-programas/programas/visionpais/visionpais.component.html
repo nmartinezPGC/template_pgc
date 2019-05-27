@@ -28,11 +28,11 @@
               Confirma cuales datos Vision de Pais deben de registrarse...
             </p-header>
           </p-listbox>
-          <p>Sectores a Registrar: <span *ngFor="let c of selectedCities" style="margin-right: 10px">{{c.name}}</span>
+          <p> <span *ngFor="let c of selectedCities" style="margin-right: 10px">{{c.name}}</span>
           </p>
           <hr>
           <div class="icon-button-examples">
-            <!-- Boton de Calcular Porcentajes -->
+            <!-- Boton de limpiar listado Vision Pais -->
             <button type="button" class="btn btn-outline-danger btn-icon" nbPopover="Limpia el listado de Vision Pais"
               nbPopoverMode="hint" nbPopoverPlacement="top" (click)="cleanProgramaVisionPais()">
               <i class="ion-trash-a"></i>
@@ -46,7 +46,7 @@
 
             <!-- Boton para Grabar objetivos Vision Pais -->
             <button type="button" class="btn btn-outline-primary btn-icon"
-              nbPopover="Registra el listado de Vision Pais" nbPopoverMode="hint" nbPopoverPlacement="top"
+              nbPopover="Registra los objetivos de Vision Pais" nbPopoverMode="hint" nbPopoverPlacement="top"
               (click)="saveProgramaVisionPais()">
               <i class="ion-upload"></i>
             </button>

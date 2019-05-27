@@ -11,9 +11,7 @@
         <table class="table table-hover table-striped table-bordered" id="tableIdInterna">
           <thead>
             <tr class="tHeadSearch">
-              <th scope="col" colspan="1">
-                <input type="text" class="form-control">
-              </th>
+              
             </tr>
             <tr class="tHeadTable">
               <th scope="col" style="width: 5%;">No</th>
@@ -27,6 +25,7 @@
             </tr>
           </thead>
           <tbody>
+              
             <tr *ngFor="let item of JsonReceptionEspaciosTrabajo let homeTableIndex = index">
               <td>{{ homeTableIndex + 1 }}</td>
               <td> {{item.codEspacioTrabajo}}</td>

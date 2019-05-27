@@ -7,20 +7,27 @@
  *
  */
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input, ChangeDetectorRef, OnChanges } from '@angular/core';
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster'; // Servicio de Notificaciones
 import { Router } from '@angular/router';
+import {KeyFilterModule} from 'primeng/keyfilter';
+import {ToastModule} from 'primeng/toast';
+import { TreeNode, MessageService, MenuItem } from 'primeng/primeng';
+
+
+
 // model class
 // Model of Class
 import { AgregarCategoriaModel } from '../../models/agregar.categoria.model';
 import { ConfigSmartTableService } from '../../services/agregar-categoria.settings.smart-table.service';
 import { CategoriaService } from '../../services/agregar.categoria.service';
 
+
 @Component({
   selector: 'ngx-agregar-categoria',
   templateUrl: './agregar-categoria.component.html',
   styleUrls: ['./agregar-categoria.component.scss'],
-  providers: [ConfigSmartTableService, CategoriaService],
+  providers: [ConfigSmartTableService, CategoriaService,KeyFilterModule,ToastModule,MessageService],
 })
 export class AgregarCategoriaComponent implements OnInit {
   public _CategoriaModel: AgregarCategoriaModel;
@@ -47,6 +54,7 @@ export class AgregarCategoriaComponent implements OnInit {
   public responsedata: any;
 
   constructor(protected _router: Router, private _toasterService: ToasterService,
+    private messageService: MessageService,
     public _configSmartTableService: ConfigSmartTableService,
     public _categoriaService: CategoriaService) {
     this._configSmartTableService.configSmartTable('userSmart', 1, null);
@@ -197,7 +205,7 @@ export class AgregarCategoriaComponent implements OnInit {
       response => {
         if (response.status !== 200) {
           this.showToast('error', 'Error al Ingresar la Información del Perfil', response.message);
-        } else if (response.status === 200) {
+        } else if (response.tatus === 200) {
           // console.log(result.status);
           this.showToast('default', 'de la categoria se ingreso con exito, se ha ingresado con exito', response.message);
           // console.log(response.data);
@@ -239,14 +247,14 @@ export class AgregarCategoriaComponent implements OnInit {
     }
     // Ejecutamos el Recurso del EndPoint
     this._categoriaService.CategoriaUpdate(this._CategoriaModel, this._CategoriaModel.idCatOrganizacion).subscribe(
-      response => {
-        if (response.status !== 200) {
-          this.showToast('error', 'Error al actualizar los cambios', response.message);
-        } else if (response.status === 200) {
+      result => {
+        if (result.status !== 200) {
+          this.showToast('error', 'Error al actualizar los cambios',JSON.stringify(result.message))
+        } else if (result.status === 200) {
           // console.log(result.status);
-          this.showToast('default', 'se actualizaron con exito los datos', response.message);
+          this.showToast('success', 'se actualizaron con exito los datos',JSON.stringify(result.message))
           // Carga la tabla Nuevamente
-          // this.perfilesDatailsService();
+           this.updateCategoria
         }
       },
       error => {
@@ -299,32 +307,29 @@ export class AgregarCategoriaComponent implements OnInit {
 ****************************************************************************/
   private deleteCategoria(): void {
     // Seteo de las variables del Model al json de Java
-
+    const responsedataExt: any = this.responsedata;
+    if (responsedataExt === true) {
+      this.showToast('error', 'Error al actualizar los cambios', responsedataExt);
+      
+    }
     // Ejecutamos el Recurso del EndPoint
     this._categoriaService.categoriaDelete(this._CategoriaModel.idCatOrganizacion).subscribe(
-      response => {
-        if (response.status !== 200) {
-          this.showToast('error', 'Error al actualizar los cambios', response.message);
-        } else if (response.status === 200) {
-          this.showToast('default', 'se inhabilito el tipo de organizacion', response.message);
+      result => {
+        if (result.status !== 200) {
+          this.showToast('error', 'Error al actualizar los cambios',JSON.stringify(result.message))
+        } else if (result.status === 200) {
+          // console.log(result.status);
+          this.showToast('success','se inhabilito con éxito',JSON.stringify(result.message))
+          
           // Carga la tabla Nuevamente
           // this.perfilesDatailsService();
+          this.listarTipoOrganizacion();
         }
       },
       error => {
-        // Redirecciona al Login
-        alert('Error en la petición de la API ' + <any>error);
-
-        // Borramos los datos del LocalStorage
-        /*localStorage.removeItem('auth_app_token');
-        localStorage.removeItem('identity');
-        const redirect = '/auth/login';
-        setTimeout(() => {
-          // Iniciativa Temporal
-          location.reload();
-          return this._router.navigateByUrl(redirect);
-        }, 2000);*/
+   
       },
+     
     );
   } // FIN | ondelete
 
@@ -341,6 +346,7 @@ export class AgregarCategoriaComponent implements OnInit {
     } else {
       event.confirm.reject();
     }
+    
   }
 
   /****************************************************************************
@@ -353,15 +359,15 @@ export class AgregarCategoriaComponent implements OnInit {
   private validateCtegoria(_CategoriaModel: any) {
     // seteo el modelo para que los campos sean verificados
     this.responsedata.error = false;
-    if (_CategoriaModel.descCatOrganizacion === null || _CategoriaModel.descCatOrganizacion === '') {
+    if (_CategoriaModel.acronimoCatOrganizacion === null || _CategoriaModel.acronimoCatOrganizacion === '') {
+      this.responsedata.msg = 'Debes de ingresar un acronimo para la categoria';
+      this.responsedata.error = true;
+    }  if (_CategoriaModel.codCatOrganizacion === null || _CategoriaModel.codCatOrganizacion === '') {
+      this.responsedata.msg = 'Debes ingresar un codigo de la Categoria';
+      this.responsedata.error = true;
+    }  if (_CategoriaModel.descCatOrganizacion === null || _CategoriaModel.descCatOrganizacion === '') {
       this.responsedata.msg = 'Debes ingresar el nombre de la Categoria';
       this.responsedata.error = true;
-    } else if (_CategoriaModel.codCatOrganizacion === null || _CategoriaModel.codCatOrganizacion === '') {
-      this.responsedata.msg = 'Desbes ingresar un codigo de la Categpria';
-      this.responsedata = true;
-    } else if (_CategoriaModel.acronimoCatOrganizacion === null || _CategoriaModel.acronimoCatOrganizacion === '') {
-      this.responsedata.msg = 'Debes de ingresar un acronimo para la categoria';
-      this.responsedata = true;
     }
     return this.responsedata;
   } // FIN | validateTipoOganizacion(_grupoModel: any)

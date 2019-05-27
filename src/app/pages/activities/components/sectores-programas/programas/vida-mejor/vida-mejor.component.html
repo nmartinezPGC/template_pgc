@@ -10,13 +10,13 @@
         <div class="col-sm-6">
           <h4>Selecciona los Programas | Vida Mejor</h4>
           <input type="text" class="form-control txtSearch" name="queryString" [(ngModel)]="queryString"
-            placeholder="Buscar Sector">
+            placeholder="Buscar Vida Mejor">
           <br>
           <p-tree [style]="{'width': '100%'}" [value]="filesTree4 | filter: queryString" selectionMode="checkbox"
             (onNodeUnselect)="nodeUnselect($event)"  (onNodeSelect)="nodeSelect($event)"
             dynamic="true"></p-tree>
           <br>
-          <div>Programas seleccionados: <span *ngFor="let file of selectedFiles2">{{file.parent.data}} </span></div>
+          <div>Programas seleccionados: </div>
         </div>
 
         <div class="col-sm-6">
@@ -28,25 +28,25 @@
               Confirma cuales Programas deben de registrarse...
             </p-header>
           </p-listbox>
-          <p>Programas a Registrar: <span *ngFor="let c of selectedCities" style="margin-right: 10px">{{c.name}}</span>
+          <p> <span *ngFor="let c of selectedCities" style="margin-right: 10px">{{c.name}}</span>
           </p>
           <hr>
           <div class="icon-button-examples">
-            <!-- Boton de Calcular Porcentajes -->
+            <!-- Boton de limpiar listado Vida Mejor -->
             <button type="button" class="btn btn-outline-danger btn-icon" nbPopover="Limpia el listado de Programas de Vida Mejor"
               nbPopoverMode="hint" nbPopoverPlacement="top" (click)="cleanProgramaVidaMejor()">
               <i class="ion-trash-a"></i>
             </button>
 
-            <!-- Boton para Calcular los Porcentajes Sectores OCDE -->
+            <!-- Boton para Calcular los Porcentajes Vida Mejor -->
             <button type="button" class="btn btn-outline-success btn-icon"
-              nbPopover="Calcula el % de participacion de Sectores" nbPopoverMode="hint" nbPopoverPlacement="top">
+              nbPopover="Calcula el % de participacion de Vida Mejor" nbPopoverMode="hint" nbPopoverPlacement="top">
               <i class="ion-calculator"></i>
             </button>
 
-            <!-- Boton para Grabar Sectores OCDE -->
+            <!-- Boton para Grabar Programa Vida Mejor -->
             <button type="button" class="btn btn-outline-primary btn-icon"
-              nbPopover="Registra el listado de Programas de Vida Mejor" nbPopoverMode="hint" nbPopoverPlacement="top"
+              nbPopover="Registra los Programas de Vida Mejor" nbPopoverMode="hint" nbPopoverPlacement="top"
               (click)="saveProgramaVidaMejor()">
               <i class="ion-upload"></i>
             </button>

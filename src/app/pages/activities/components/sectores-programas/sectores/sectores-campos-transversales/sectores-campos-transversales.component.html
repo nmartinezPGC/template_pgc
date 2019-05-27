@@ -9,7 +9,7 @@
       <div class="row">
         <div class="col-sm-6">
           <h4>Selecciona los Sectores | Campos Transversales</h4>
-          <input type="text" class="form-control txtSearch" name="queryString" [(ngModel)]="queryString"
+          <input type="text" class="form-control txtsearch" name="queryString" [(ngModel)]="queryString"
             placeholder="Buscar Sector">
           <br>
           <p-tree [style]="{'width': '100%'}" [value]="filesTree4 | filter: queryString" selectionMode="checkbox"
@@ -28,25 +28,25 @@
               Confirma cuales sectores deben de registrarse...
             </p-header>
           </p-listbox>
-          <p>Sectores a Registrar: <span *ngFor="let c of selectedCities" style="margin-right: 10px">{{c.name}}</span>
+          <p> <span *ngFor="let c of selectedCities" style="margin-right: 10px">{{c.name}}</span>
           </p>
           <hr>
           <div class="icon-button-examples">
-            <!-- Boton de Calcular Porcentajes -->
+            <!-- Boton de limpiar listado Campos Transversales -->
             <button type="button" class="btn btn-outline-danger btn-icon" nbPopover="Limpia el listado de Campos Transversales"
               nbPopoverMode="hint" nbPopoverPlacement="top" (click)="cleanSectoresCamposTransversales()">
               <i class="ion-trash-a"></i>
             </button>
 
-            <!-- Boton para Calcular los Porcentajes Sectores OCDE -->
+            <!-- Boton para Calcular los Porcentajes Sectores Campos Transversales-->
             <button type="button" class="btn btn-outline-success btn-icon"
-              nbPopover="Calcula el % de participacion de Sectores" nbPopoverMode="hint" nbPopoverPlacement="top">
+              nbPopover="Calcula el % de participacion de Sectores Campos Transversales" nbPopoverMode="hint" nbPopoverPlacement="top">
               <i class="ion-calculator"></i>
             </button>
 
-            <!-- Boton para Grabar Sectores OCDE -->
+            <!-- Boton para Grabar Campos Transversales -->
             <button type="button" class="btn btn-outline-primary btn-icon"
-              nbPopover="Registra el listado de Campos Transversales" nbPopoverMode="hint" nbPopoverPlacement="top"
+              nbPopover="Registra los sectores de Campos Transversales" nbPopoverMode="hint" nbPopoverPlacement="top"
               (click)="saveSectoresCampoTransversal()">
               <i class="ion-upload"></i>
             </button>

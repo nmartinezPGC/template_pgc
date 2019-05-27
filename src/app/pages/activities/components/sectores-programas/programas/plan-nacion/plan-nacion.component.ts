@@ -288,11 +288,11 @@ export class PlanNacionComponent implements OnInit, OnChanges {
 
 
   /****************************************************************************
-  * Funcion: getAllProgramaCampoTransversalService
+  * Funcion: getAllProgramaPlanNacionService
   * Object Number: 003
   * Fecha: 21-02-2019
-  * Descripcion: Method getAllProgramaCampoTransversalService of the Class
-  * Objetivo: getAllProgramaCampoTransversalService listados de los Niveles
+  * Descripcion: Method getAllProgramaPlanNacionService of the Class
+  * Objetivo: getAllProgramaPlanNacionService listados de los Niveles
   * de Ubicacion de Implementacion del Formulario de Actividad llamando a la API
   * Params: { }
   ****************************************************************************/
@@ -301,7 +301,7 @@ export class PlanNacionComponent implements OnInit, OnChanges {
     this._servicePlanNacionService.getAllProgramasPlanNacion().subscribe(
       result => {
         if (result.status !== 200) {
-          this.showToast('error', 'Error al Obtener la Información de todos los Programa de Desarrollo', result.message);
+          this.showToast('error', 'Error al Obtener la Información de todos los Programa de Plan Nacion', result.message);
           this.JsonReceptionAllProgramasPlanNacion = [];
         } else if (result.status === 200) {
           this.JsonReceptionAllProgramasPlanNacion = result.data;
@@ -324,10 +324,10 @@ export class PlanNacionComponent implements OnInit, OnChanges {
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información de todos los Programa de Desarrollo', JSON.stringify(error.message));
+        this.showToast('error', 'Error al Obtener la Información de todos los Programa de Plan Nacion', JSON.stringify(error.error.message));
       },
     );
-  } // FIN | getAllProgramaCampoTransversalService
+  } // FIN | getAllProgramaPlanNacionlService
 
 
 
@@ -345,14 +345,14 @@ export class PlanNacionComponent implements OnInit, OnChanges {
     this._servicePlanNacionService.getfindByIdPrograma(idPrograma).subscribe(
       result => {
         if (result.status !== 200) {
-          this.showToast('error', 'Error al Obtener la Información del Programa de Desarrollo', result.message);
+          this.showToast('error', 'Error al Obtener la Información del Programa de Plan Nacion', result.message);
           this.JsonReceptionProgramaPlanNacion = [];
         } else if (result.status === 200) {
           this.JsonReceptionProgramaPlanNacion = result.data;
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información del Programa de Desarrollo', JSON.stringify(error.message));
+        this.showToast('error', 'Error al Obtener la Información del Programa de Plan Nacion', JSON.stringify(error.error.message));
       },
     );
   } // FIN | getfindByIdProgramaService
@@ -363,7 +363,7 @@ export class PlanNacionComponent implements OnInit, OnChanges {
   * Object Number: 005
   * Fecha: 25-03-2019
   * Descripcion: Method getfindByIdNivelProgramaService of the Class
-  * Objetivo: getfindByIdNivelProgramaService detalle del Programa OCDE/CAD, con el
+  * Objetivo: getfindByIdNivelProgramaService detalle del Programa Plan Nacion, con el
   * Id Nivel de Programa
   * Params: { idSNivelector }
   ****************************************************************************/
@@ -382,7 +382,7 @@ export class PlanNacionComponent implements OnInit, OnChanges {
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información de Secotores de Desarrollo', JSON.stringify(error.message));
+        this.showToast('error', 'Error al Obtener la Información de Plan de Nacion', JSON.stringify(error.error.message));
       },
     );
   } // FIN | getfindByIdNivelProgramaService
@@ -394,7 +394,7 @@ export class PlanNacionComponent implements OnInit, OnChanges {
   * Object Number: 006
   * Fecha: 25-03-2019
   * Descripcion: Method getProgramaPlanNacionNivel2 of the Class
-  * Objetivo: getProgramaPlanNacionNivel2 de los Niveles inferiores Programa OCDE/CAD,
+  * Objetivo: getProgramaPlanNacionNivel2 de los Niveles inferiores Programa Plan Nacion,
   * con el Id Nivel 1 de Programa
   * Params: { arrayN1 }
   ****************************************************************************/
@@ -462,7 +462,7 @@ export class PlanNacionComponent implements OnInit, OnChanges {
             }
           },
           error => {
-            this.showToast('error', 'Error al Obtener la Información de Secotores de Desarrollo', JSON.stringify(error.message));
+            this.showToast('error', 'Error al Obtener la Información de Plan Nacion', JSON.stringify(error.error.message));
           },
         );
       }, 1000);
@@ -471,14 +471,14 @@ export class PlanNacionComponent implements OnInit, OnChanges {
 
 
   /****************************************************************************
-  * Funcion: saveProgramaVidaMejor
+  * Funcion: saveProgramaPlanNacion
   * Object Number: 007
   * Fecha: 15-04-2019
-  * Descripcion: Method saveProgramaVidaMejor of the Class
-  * Objetivo: saveProgramaVidaMejor Grabar listado Campo Transversal
+  * Descripcion: Method saveProgramaPlanNacion of the Class
+  * Objetivo: saveProgramaPlanNacion Grabar listado Plan Nacion
   * Params: { JsonSendProgramaPlanNacionOpciones }
   ****************************************************************************/
-  saveProgramaVidaMejor() {
+  saveProgramaPlanNacion() {
     // Seteo de los campos iniciales
     this._activityProgramaPlanNacion.idActividad = { idActividad: this.idProyectoTab };
 
@@ -508,7 +508,7 @@ export class PlanNacionComponent implements OnInit, OnChanges {
             }
           },
           error => {
-            this.showToast('error', 'Error al ingresar el Campo Transversal al Proyecto', JSON.stringify(error.message));
+            this.showToast('error', 'Error al ingresar el Campo Transversal al Proyecto', JSON.stringify(error.error.message));
           },
         );
       }

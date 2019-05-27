@@ -28,19 +28,18 @@ export class ConfigSmartTableService {
   * Objetivo: Establecer las configuraciones para la Smart Table de usuarios
   ****************************************************************************/
 
-    configSmartTable(smartTable: string, smartNormal: number, arrayPais: any, arrayEstado: any, arrayTipo: any, arrayCatOrg: any, arrayOrganizacion: any, arrayTipoOrganizacion: any) {
+    configSmartTable(smartTable: string, smartNormal: number, array:any) {
         switch (smartTable) {
             case 'userSmart':
                 switch (smartNormal) {
                     case 1:
                         // estructura de la smart table donde mostramos los datos de los usuarios
                         const settings = {
+                            
                             hideSubHeader: false,
 
-                            add: {
-                                addButtonContent: '<i class="nb-plus"></i>',
-                                createButtonContent: '<i class="nb-checkmark"></i>',
-                                cancelButtonContent: '<i class="nb-close"></i>',
+                            actions: {
+                                add:false,
                             },
                             edit: {
                                 editButtonContent: '<i class="nb-edit"></i>',
@@ -91,7 +90,7 @@ export class ConfigSmartTableService {
                                     editor: {
                                         type: 'list',
                                         config: {
-                                            list: arrayTipo,
+                                            list: array,
                                         },
                                     },
                                 },
@@ -101,17 +100,17 @@ export class ConfigSmartTableService {
                                     editor: {
                                         type: 'list',
                                         config: {
-                                            list: arrayPais,
+                                            list: array,
                                         },
                                     },
                                 },
                                 idEstado: {
-                                    valuePrepareFunction: (cell: any, row: any) => row.idEstadoUsuario.descEstado,
+                                    //valuePrepareFunction: (cell: any, row: any) => row.idEstadoUsuario.descEstado,
                                     title: 'Estado Usuario',
                                     editor: {
                                         type: 'list',
                                         config: {
-                                            list: arrayEstado,
+                                            list: [{ value: '1', title: 'Activo' }, { value: '2', title: 'Inactivo' }],
                                         },
                                     },
                                 },
@@ -121,7 +120,7 @@ export class ConfigSmartTableService {
                                     editor: {
                                         type: 'list',
                                         config: {
-                                            list: arrayCatOrg,
+                                            list: array,
                                         },
                                     },
                                 },
@@ -131,7 +130,7 @@ export class ConfigSmartTableService {
                                     editor: {
                                         type: 'list',
                                         config: {
-                                            list: arrayOrganizacion,
+                                            list: array,
                                         },
                                     },
                                 },
@@ -141,16 +140,15 @@ export class ConfigSmartTableService {
                                     editor: {
                                         type: 'list',
                                         config: {
-                                            list: arrayTipoOrganizacion,
+                                            list: array,
                                         },
                                     },
                                 },
-                                activo: {
-                                    title: 'Activo',
-                                    type: 'string',
-                                },
+                                
                             },
+                            
                         };
+                        
                         // variable que retorne
                         this.settings = settings;
                         break;

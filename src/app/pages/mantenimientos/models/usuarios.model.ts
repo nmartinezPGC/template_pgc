@@ -44,7 +44,7 @@ export class UsuarioModel {
         // mapeo de relacion tipo de usuario
         public idOrganizacionUsuario: { idOrganizacion: number },
         public idOrganizacion: number,
-        public descOrganizacion: string,
+        public nombreOrganizacion: string,
         //  datos generales del usuario
         public idUsuario: number,
         public imagenUsuario: string,

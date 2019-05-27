@@ -839,9 +839,9 @@ export class ListEndPointsService {
         groupEndPoint: 'actividadesCRUDGroup',
         descEndPoint: 'Listar los datos de Vision Pais consultado, por el Programa Padre y Nivel que pertenencen',
       },
-      newActividadProgramaVisionPaisPadre: {
+      newActividadProgramaVisionPais: {
         id: 54,
-        nameEndpoint: 'newActividadProgramaVisionPaisPadre',
+        nameEndpoint: 'newActividadProgramaVisionPais',
         urlEndPoint: '/mant-actividades/programas/vision-pais-proyecto/new',
         params: '{ jsonSendActividadProgramaVisionPais }',
         groupEndPoint: 'actividadesCRUDGroup',
@@ -856,9 +856,9 @@ export class ListEndPointsService {
         descEndPoint: 'Eliminar el dato de Vision Pais enviado y asociarlo al Proyecto',
       },
       // Programas Politicas Publicas y Estrategias Nacionales
-      findAllProgramaPoliticasPublicas: {
+      findAllProgramasPoliticasPublicas: {
         id: 56,
-        nameEndpoint: 'findAllProgramaPoliticasPublicas',
+        nameEndpoint: 'findAllProgramasPoliticasPublicas',
         urlEndPoint: '/programas/politica-publica',
         params: '{ }',
         groupEndPoint: 'actividadesCRUDGroup',
@@ -888,9 +888,9 @@ export class ListEndPointsService {
         groupEndPoint: 'actividadesCRUDGroup',
         descEndPoint: 'Listar los datos de Politicas Publicas consultado, por el Programa Padre y Nivel que pertenencen',
       },
-      newActividadProgramaPoliticasPublicasPadre: {
+      newActividadProgramaPoliticasPublicas: {
         id: 60,
-        nameEndpoint: 'newActividadProgramaPoliticasPublicasPadre',
+        nameEndpoint: 'newActividadProgramaPoliticasPublicas',
         urlEndPoint: '/mant-actividades/programas/politica-publica-proyecto/new',
         params: '{ jsonSendActividadProgramaPoliticasPublicas }',
         groupEndPoint: 'actividadesCRUDGroup',

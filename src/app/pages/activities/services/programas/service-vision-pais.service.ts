@@ -156,7 +156,7 @@ export class ServiceVisionPaisService {
     return this._http.post(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 54), paramSend, {
       headers: this.headers,
       params: { 'tokenApi': this.tokenHeader },
-    }).map(response => <TreeNode[]>response);
+    });
   } // FIN | FND-00007
 
 }
