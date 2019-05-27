@@ -41,7 +41,7 @@ import { MessageModule } from 'primeng/message';
 import { ListboxModule } from 'primeng/listbox';
 import { RecursosProyectoComponent } from './components/recursos-proyecto/recursos-proyecto.component';
 import { FileUploadModule } from 'primeng/fileupload';
-import { DropdownModule, EditorModule, AutoCompleteModule, KeyFilterModule } from 'primeng/primeng';
+import { DropdownModule, EditorModule, AutoCompleteModule, KeyFilterModule, CalendarModule, DialogModule, InputMaskModule } from 'primeng/primeng';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { FilterPipe } from './pipes/filter.pipe';
@@ -63,6 +63,28 @@ import { UnidadEjecutoraComponent } from './components/organizaciones/unidad-eje
 import { AdmonFinancieroComponent } from './components/organizaciones/admon-financiero/admon-financiero.component';
 import { AgenciaBeneficiariaComponent } from './components/organizaciones/agencia-beneficiaria/agencia-beneficiaria.component';
 
+// Financiamiento de Proyecto
+import { FinancEncabezadoComponent } from './components/financiamiento/financ-encabezado/financ-encabezado.component';
+import { FinancDetalleComponent } from './components/financiamiento/financ-detalle/financ-detalle.component';
+import { FinancDetalleCompromisosComponent } from './components/financiamiento/financ-detalle/financ-detalle-compromisos/financ-detalle-compromisos.component';
+import { FinancDetalleDesembolsosComponent } from './components/financiamiento/financ-detalle/financ-detalle-desembolsos/financ-detalle-desembolsos.component';
+import { FinancDetalleGastosComponent } from './components/financiamiento/financ-detalle/financ-detalle-gastos/financ-detalle-gastos.component';
+import { FinanciamientoComponent } from './components/financiamiento/financiamiento.component';
+
+// Monedas
+import { NgxCurrencyModule } from 'ngx-currency';
+
+export const customCurrencyMaskConfig = {
+  align: 'right',
+  allowNegative: true,
+  allowZero: true,
+  decimal: '.',
+  precision: 2,
+  prefix: '',
+  suffix: '',
+  thousands: ',',
+  nullable: true,
+};
 
 @NgModule({
   imports: [
@@ -91,6 +113,10 @@ import { AgenciaBeneficiariaComponent } from './components/organizaciones/agenci
     FileUploadModule, // modulo de file upload
     AutoCompleteModule,
     KeyFilterModule,
+    CalendarModule,
+    DialogModule,
+    InputMaskModule,
+    NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
   ],
   declarations: [
     ...routedComponents,
@@ -115,6 +141,12 @@ import { AgenciaBeneficiariaComponent } from './components/organizaciones/agenci
     UnidadEjecutoraComponent,
     AdmonFinancieroComponent,
     AgenciaBeneficiariaComponent,
+    FinancEncabezadoComponent,
+    FinancDetalleComponent,
+    FinancDetalleCompromisosComponent,
+    FinancDetalleDesembolsosComponent,
+    FinancDetalleGastosComponent,
+    FinanciamientoComponent,
   ],
   providers: [
     // SmartTableService, // Defincion del Servicio que provee los Datos de la Tabla: ID's Internas

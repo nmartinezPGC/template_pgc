@@ -112,6 +112,20 @@ export class ListEndPointsService {
         groupEndPoint: 'matActGroup',
         descEndPoint: 'Busca los Tipos de Iniciativa de CSS',
       },
+      getAllMonedasActividad: { // NAM | 2019-05-21 | Monedas de Actividad
+        id: 8,
+        nameEndpoint: 'getAllMonedasActividad',
+        urlEndPoint: '/mant-actividades/moneda-actividad',
+        groupEndPoint: 'matActGroup',
+        descEndPoint: 'Busca todas las Monedas para el financiamiento',
+      },
+      getMonedaActividad: {
+        id: 9,
+        nameEndpoint: 'getMonedaActividad',
+        urlEndPoint: '/mant-actividades/moneda-actividad/findById/',
+        groupEndPoint: 'matActGroup',
+        descEndPoint: 'Busca la Moneda para el financiamiento',
+      },
     },
     endPointEspaciosTrabajo: {
       listAllEspaciosTrabajo: {
@@ -903,6 +917,63 @@ export class ListEndPointsService {
         params: '{ codigoActividad }',
         groupEndPoint: 'actividadesCRUDGroup',
         descEndPoint: 'Eliminar el dato de Politicas Publicas enviado y asociarlo al Proyecto',
+      },
+      // Organizaciones de Proyectos | Socio al Desarrollo
+      findAllSocioDesarrollo: {
+        id: 62,
+        nameEndpoint: 'findAllSocioDesarrollo',
+        urlEndPoint: '/mant-actividades/organizaciones/socio-desarrollo',
+        params: '{ }',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Listar todos datos de Socios al Desarrollo registrados en la BD',
+      },
+      findByIdActividad: {
+        id: 63,
+        nameEndpoint: 'findByIdActividad',
+        urlEndPoint: '/mant-actividades/organizaciones/socio-desarrollo/findByIdActividad',
+        params: '{ idActividad }',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Listar el dato de Socios al Desarrollo consultado',
+      },
+      findByCodigoActividad: {
+        id: 64,
+        nameEndpoint: 'findByCodigoActividad',
+        urlEndPoint: '/mant-actividades/organizaciones/socio-desarrollo/findByCodigoActividad',
+        params: '{ codigoActividad }',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Listar el dato de Socios al Desarrollo consultado',
+      },
+      newActividadSocioDesarrollo: {
+        id: 65,
+        nameEndpoint: 'newActividadSocioDesarrollo',
+        urlEndPoint: '/mant-actividades/organizaciones/socio-desarrollo/new',
+        params: '{ jsonSendActividadSocioDesarrollo }',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Ingresar el dato Socio Desarrollo enviado y asociarlo al Proyecto',
+      },
+      deleteActividadSocioDesarrollo: {
+        id: 66,
+        nameEndpoint: 'deleteActividadSocioDesarrollo',
+        urlEndPoint: '/mant-actividades/organizaciones/socio-desarrollo/delete/',
+        params: '{ codigoActividad }',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Eliminar el dato de Socio Desarrollo enviado y asociarlo al Proyecto',
+      }, // Modulo de Financiamiento de Proyectos | Encabezado
+      newActividadFinanciamientoEnc: {
+        id: 67,
+        nameEndpoint: 'newActividadFinanciamientoEnc',
+        urlEndPoint: '/mant-actividades/financiamiento/encabezado/new',
+        params: '{ jsonSendActividadFinanciamientoEnc }',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Ingresar el dato de Encabezado de Financiamiento enviado y asociarlo al Proyecto',
+      },
+      deleteActividadFinanciamientoEnc: {
+        id: 68,
+        nameEndpoint: 'deleteActividadFinanciamientoEnc',
+        urlEndPoint: '/mant-actividades/financiamiento/encabezado/delete/',
+        params: '{ codigoActividad }',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Eliminar el dato de Encabezado de Financiamiento enviado y asociarlo al Proyecto',
       },
     }, // modulo de mantenimientos generico de usuarios
     endPointMantGenericosUsuario: {

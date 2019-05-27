@@ -87,6 +87,12 @@ export class SystemEndPointsService extends ListEndPointsService {
           case 7: // Llamado de los EndPoints de Listado de Tipo de Inciativas CSS
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointMantActividades.getTiposIniciativasCSS.urlEndPoint;
             break;
+          case 8: // Llamado de los EndPoints de Listado de Monedas
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointMantActividades.getAllMonedasActividad.urlEndPoint;
+            break;
+          case 9:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointMantActividades.getMonedaActividad.urlEndPoint;
+            break;
         }
         break;
       case 'espacioTrabajoGroup': // Llamados a los End Point del Espacios de Trabajo
@@ -399,8 +405,8 @@ export class SystemEndPointsService extends ListEndPointsService {
           case 55:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActividadProgramaVisionPais.urlEndPoint;
             break;
-            case 56: // AMA | 2019-05-06 | Mapeo de Vision de Politicas Publicas
-            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findAllProgramasPoliticasPublicas.urlEndPoint;
+          case 56: // AMA | 2019-05-06 | Mapeo de Vision de Politicas Publicas
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findAllProgramaPoliticasPublicas.urlEndPoint;
             break;
           case 57:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdProgramaPoliticasPublicas.urlEndPoint;
@@ -416,6 +422,27 @@ export class SystemEndPointsService extends ListEndPointsService {
             break;
           case 61:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActividadProgramaPoliticasPublicas.urlEndPoint;
+            break;
+          case 62: // NAM | 2019-05-05 | Mapeo de Organizaciones de Proyectos
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findAllSocioDesarrollo.urlEndPoint;
+            break;
+          case 63:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdActividad.urlEndPoint;
+            break;
+          case 64:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByCodigoActividad.urlEndPoint;
+            break;
+          case 65:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.newActividadSocioDesarrollo.urlEndPoint;
+            break;
+          case 66:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActividadSocioDesarrollo.urlEndPoint;
+            break;
+          case 67: // NAM | 2019-05-23 | Mapeo de Financiamiento de Proyectos
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.newActividadFinanciamientoEnc.urlEndPoint;
+            break;
+          case 68:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActividadFinanciamientoEnc.urlEndPoint;
             break;
         }
         break;

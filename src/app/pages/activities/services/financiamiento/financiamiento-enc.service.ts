@@ -1,10 +1,10 @@
 /**
 * @author Nahum Martinez
-* @returns Servicio de Socio Desarrollo
-* @name SocioDesarrolloService
-* @alias _socioDesarrolloService
+* @returns Servicio de Financiamiento Enc
+* @name FinanciamientoEncService
+* @alias _financiamientoEncService
 * @version 1.0.0
-* @fecha 02-05-2019
+* @fecha 21-05-2019
 */
 
 import { Injectable } from '@angular/core';
@@ -16,7 +16,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class SocioDesarrolloService {
+export class FinanciamientoEncService {
   // Variables de la Ruta de la API
   public _url: string;
   public _urlResourses: string;
@@ -52,35 +52,49 @@ export class SocioDesarrolloService {
 
 
   /****************************************************************************
-    * Funcion: FND-00002
-    * Fecha: 17-04-2019
-    * Descripcion: Metodo para obtener los Datos de Plan de Nacion
-    * Objetivo: datos de Plan de Nacion
-    * Params: { }
-    ****************************************************************************/
-  getAllSociosDesarrollo(caseOrganizacion: number): Observable<any> {
-    const paramsSend: number = caseOrganizacion;
-
+  * Funcion: FND-00002
+  * Fecha: 21-05-2019
+  * Descripcion: Metodo para obtener las Monedas para el financiamiento
+  * Objetivo: Monedas de Proyecto
+  * Params: { }
+  ****************************************************************************/
+  getAllMonedasProyecto(): Observable<any> {
     // Retorno de la Funcion
-    return this._http.get(this._systemEndPointsService.getEndPointService('organizacionesGroup', 23) + paramsSend, {
+    return this._http.get(this._systemEndPointsService.getEndPointService('mantActGroup', 8), {
       headers: this.headers,
       params: { 'tokenApi': this.tokenHeader },
     });
   } // FIN | FND-00002
 
+  /****************************************************************************
+  * Funcion: FND-00002.1
+  * Fecha: 21-05-2019
+  * Descripcion: Metodo para obtener las Monedas para el financiamiento
+  * Objetivo: Monedas de Proyecto
+  * Params: { idMoneda }
+  ****************************************************************************/
+  getMonedaProyecto(idMoneda: number): Observable<any> {
+    const paramsSend: number = idMoneda;
+    // Retorno de la Funcion
+    return this._http.get(this._systemEndPointsService.getEndPointService('mantActGroup', 9) + paramsSend, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  } // FIN | FND-00002.1
+
 
   /****************************************************************************
     * Funcion: FND-00003
-    * Fecha: 15-05-2019
-    * Descripcion: Metodo para ingresar datos de Socio al Desarrollo
-    * Objetivo: Ingresar Socio al Desarrollo al Proyecto
-    * Params: { jsonSendActividadSocioDesarrollo }
+    * Fecha: 23-05-2019
+    * Descripcion: Metodo para ingresar datos de Financiamiento Encabezado
+    * Objetivo: Ingresar Financiamiento Encabezado al Proyecto
+    * Params: { jsonSendActividadFinanciamientoEnc }
     ****************************************************************************/
-  newActividadSociosDesarrollo(jsonSendActividadSocioDesarrollo: any): Observable<any> {
-    const paramsSend: number = jsonSendActividadSocioDesarrollo;
+  newActividadFinanciamientoEnc(jsonSendActividadFinanciamientoEnc: any): Observable<any> {
+    const paramsSend: number = jsonSendActividadFinanciamientoEnc;
 
     // Retorno de la Funcion
-    return this._http.post(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 65), paramsSend, {
+    return this._http.post(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 67), paramsSend, {
       headers: this.headers,
       params: { 'tokenApi': this.tokenHeader },
     });
@@ -89,16 +103,16 @@ export class SocioDesarrolloService {
 
   /****************************************************************************
     * Funcion: FND-00004
-    * Fecha: 15-05-2019
-    * Descripcion: Metodo para borrar datos de Socio al Desarrollo
-    * Objetivo: Borrar Socio al Desarrollo al Proyecto
-    * Params: { codigoActividad }
+    * Fecha: 23s-05-2019
+    * Descripcion: Metodo para eliminar datos de Financiamiento Encabezado
+    * Objetivo: Eliminar Financiamiento Encabezado al Proyecto
+    * Params: { codigoFinancEnc }
     ****************************************************************************/
-  deleteActividadSociosDesarrollo(codigoActividad: string): Observable<any> {
-    const paramsSend: string = codigoActividad;
+  deleteActividadFinanciamientoEnc(codigoFinancEnc: string): Observable<any> {
+    const paramsSend: string = codigoFinancEnc;
 
     // Retorno de la Funcion
-    return this._http.delete(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 66) + paramsSend, {
+    return this._http.delete(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 68) + paramsSend, {
       headers: this.headers,
       params: { 'tokenApi': this.tokenHeader },
     });

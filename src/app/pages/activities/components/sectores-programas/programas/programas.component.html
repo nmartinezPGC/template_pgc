@@ -4,25 +4,33 @@
 
 <!-- ==================================================================================== -->
 <nb-card accent="warning" status="primary">
-  <nb-card-header>Información de Programas del Proyecto {{ idProyectoTab }} | Codigo de Proyecto {{
-    codigoProyectoTab }} | Usuario {{ idUsuarioTab }}
+  <nb-card-header>Información de Programas del Proyecto
   </nb-card-header>
+  <nb-card-body>
+    <!-- ================ Programas | Vision Pais ==================== -->
+    <ngx-visionpais [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
+      [codigoProyectoTab]="codigoProyectoTab">
+    </ngx-visionpais>
+
+    <br>
+    <hr>
+    <!-- ================ Programas | Plan de Nacion ==================== -->
+    <ngx-plan-nacion [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
+      [codigoProyectoTab]="codigoProyectoTab">
+    </ngx-plan-nacion>
+
+    <br>
+    <hr>
+    <!-- ================ Programas | Vida Mejor ==================== -->
+    <ngx-vida-mejor [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
+      [codigoProyectoTab]="codigoProyectoTab">
+    </ngx-vida-mejor>
+
+    <br>
+    <hr>
+    <!-- ================ Programas | Politicas Publicas y Estrategias Nacionales ==================== -->
+    <ngx-politicaspublicas [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
+      [codigoProyectoTab]="codigoProyectoTab">
+    </ngx-politicaspublicas>
+  </nb-card-body>
 </nb-card>
-<!-- ================ Programas | Vision Pais ==================== -->
-<ngx-visionpais [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab" [codigoProyectoTab]="codigoProyectoTab">
-</ngx-visionpais>
-
-<br>
-<!-- ================ Programas | Plan de Nacion ==================== -->
-<ngx-plan-nacion [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab" [codigoProyectoTab]="codigoProyectoTab">
-</ngx-plan-nacion>
-
-<br>
-<!-- ================ Programas | Vida Mejor ==================== -->
-<ngx-vida-mejor [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab" [codigoProyectoTab]="codigoProyectoTab">
-</ngx-vida-mejor>
-
-<br>
-<!-- ================ Programas | Politicas Publicas y Estrategias Nacionales ==================== -->
-<ngx-politicaspublicas [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab" [codigoProyectoTab]="codigoProyectoTab">
-</ngx-politicaspublicas>
