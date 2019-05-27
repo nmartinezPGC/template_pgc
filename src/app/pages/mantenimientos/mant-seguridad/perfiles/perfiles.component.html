@@ -42,7 +42,6 @@
                       <option value="0"  >Seleccione una Opcion</option>
                       <option *ngFor="let item of JsonReceptionTipoPerfiles" [value]="item.idTipo">
                         {{item.descTipo}}
-                      </option>
                     </select>
                   </div>
                 </nb-card-body>
@@ -59,9 +58,7 @@
                       ngControl="descPerfil" [(ngModel)]="_perfilModel.descPerfil" required></textarea>
                   </div>
                   <div class="btn-group">
-                    <button type="button" class="btn btn-primary btn-group-icon btn-group-divider">
-                      <i class="nb-plus-circled"></i>
-                    </button>
+                    
                     <button type="button" (click)="newPerfilService()" class="btn btn-primary">Guardar</button>
                     <button type="button" class="btn btn-warning">Cancelar</button>
                   </div>
@@ -77,7 +74,7 @@
           <div class="col-lg-12">
             <nb-card>
               <nb-card-body>
-                  <input #search class="search" type="text" placeholder="Search..." (keydown.enter)="onSearch(search.value)">
+                
                 <ng2-smart-table [settings]="settings" [source]="data" (editConfirm)="onSaveConfirm1($event)" (deleteConfirm)="onDeleteConfirm($event)">
                 </ng2-smart-table>
               </nb-card-body>

@@ -148,12 +148,11 @@ export class ServicePoliticasPublicasService {
   saveActividadProgramaPoliticasPublicas(jsonSendActividadProgramaPoliticasPublicas: any): Observable<any> {
     // Parametros del EndPoint
     const paramSend = jsonSendActividadProgramaPoliticasPublicas;
-
     // Retorno de la Funcion
     return this._http.post(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 60), paramSend, {
       headers: this.headers,
       params: { 'tokenApi': this.tokenHeader },
-    }).map(response => <TreeNode[]>response);
+    });
   } // FIN | FND-00007
 
 }

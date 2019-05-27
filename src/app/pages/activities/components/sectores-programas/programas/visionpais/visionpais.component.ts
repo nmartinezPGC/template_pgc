@@ -85,7 +85,7 @@ export class VisionPaisComponent implements OnInit, OnChanges {
   public secuenciaDeActividad: any;
 
   // Modelo de la Clase
-  public _activityProgramaVisionPais: ActivityVisionPaisModel;
+  public _activityProgramaVisionPaisModel: ActivityVisionPaisModel;
 
   // Consfiguracion del Notificador
   position = 'toast-bottom-full-width';
@@ -122,13 +122,13 @@ export class VisionPaisComponent implements OnInit, OnChanges {
     // Cargando los Items del TreeView
     this.loading = true;
 
-    // Inicializacion del Modelo
-    this._activityProgramaVisionPais = new ActivityVisionPaisModel(
-      0, null, // Datos Generales
-      null, 0, // Relacionales
-      null, 0, 0,
-      true, null, null, // Auditoria
-    );
+      // Inicializacion del Modelo
+      this._activityProgramaVisionPaisModel = new ActivityVisionPaisModel (
+        0, null, // Datos Generales
+        null, 0, // Relacionales
+        null, 0, 0,
+        true, null, null, // Auditoria
+      );
 
     // Llenado del Treeview de la Tabla
     this._serviceVisionPaisService.getFiles().then(files => this.filesTree4 = files);
@@ -278,10 +278,12 @@ export class VisionPaisComponent implements OnInit, OnChanges {
         this.JsonSendProgramaVisionPaisOpciones.splice(Number(resultado), 1)
         this.JsonSendProgramaVisionPaisOpciones = [...this.JsonSendProgramaVisionPaisOpciones];
       }
+
     } else if (event.node.children !== undefined && event.node.children.length === 0) {
       const itemNodeLabel = event.node.label;
       // Ejecucion del splice del elemento
       const resultado = this.JsonSendProgramaVisionPaisOpciones.findIndex(Programa => Programa.name === itemNodeLabel);
+
       this.JsonSendProgramaVisionPaisOpciones.splice(Number(resultado), 1)
       this.JsonSendProgramaVisionPaisOpciones = [...this.JsonSendProgramaVisionPaisOpciones];
     }

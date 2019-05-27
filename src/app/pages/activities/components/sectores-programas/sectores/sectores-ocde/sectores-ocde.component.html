@@ -28,25 +28,25 @@
               Confirma cuales sectores deben de registrarse...
             </p-header>
           </p-listbox>
-          <p>Sectores a Registrar: <span *ngFor="let c of selectedCities" style="margin-right: 10px">{{c.name}}</span>
+          <p> <span *ngFor="let c of selectedCities" style="margin-right: 10px">{{c.name}}</span>
           </p>
           <hr>
           <div class="icon-button-examples">
-            <!-- Boton de Calcular Porcentajes -->
-            <button type="button" class="btn btn-outline-danger btn-icon" nbPopover="Limpia el listado de Secores OCDE"
+            <!-- Boton de Limpiar Listado -->
+            <button type="button" class="btn btn-outline-danger btn-icon" nbPopover="Limpia el listado de Sectores OCDE/CAD"
               nbPopoverMode="hint" nbPopoverPlacement="top" (click)="cleanSectoresOcdeCad()">
               <i class="ion-trash-a"></i>
             </button>
 
             <!-- Boton para Calcular los Porcentajes Sectores OCDE -->
             <button type="button" class="btn btn-outline-success btn-icon" (click)="calcularPorc()"
-              nbPopover="Calcula el % de participacion de Sectores" nbPopoverMode="hint" nbPopoverPlacement="top">
+              nbPopover="Calcula el % de participacion de Sectores OCDE/CAD" nbPopoverMode="hint" nbPopoverPlacement="top">
               <i class="ion-calculator"></i>
             </button>
 
             <!-- Boton para Grabar Sectores OCDE -->
             <button type="button" class="btn btn-outline-primary btn-icon"
-              nbPopover="Registra el listado de Secores OCDE" nbPopoverMode="hint" nbPopoverPlacement="top"
+              nbPopover="Registra los  Sectores OCDE/CAD" nbPopoverMode="hint" nbPopoverPlacement="top"
               (click)="saveSectoresOcdeCad()">
               <i class="ion-upload"></i>
             </button>
@@ -58,14 +58,6 @@
       <!-- Fila de las Ubicaciones seleccionadas -->
       <div class="row">
         <div class="col-sm-12">
-          <!-- Boton para Calcular los Porcentajes Sectores OCDE -->
-          <button class="btn btn-primary botonSave with-margins"
-            nbPopover="Calcula de igual forma todos los porcentajes para los Sectores OCDE" nbPopoverMode="hint"
-            nbPopoverPlacement="top" (click)="saveSectoresOcdeCad()">Calcular %</button>
-          <button class="btn btn-warning with-margins"
-            nbPopover="Calcula de igual forma todos los porcentajes para las Ubicaciones" nbPopoverMode="hint"
-            nbPopoverPlacement="top" (click)="calcPorcForm()">Limpiar</button>
-          <!-- paginador de la tabla -->
           <pagination-controls autoHide="true" responsive="true" previousLabel="Anterior" nextLabel="Siguiente"
             (pageChange)="page = $event" id="1" directionLinks="true"></pagination-controls>
         </div>

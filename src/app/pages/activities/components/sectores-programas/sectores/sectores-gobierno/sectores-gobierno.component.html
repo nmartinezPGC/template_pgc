@@ -2,7 +2,7 @@
 <!-- Componente para los Mensajes en pantalla -->
 <toaster-container [toasterconfig]="config"></toaster-container>
 
-<!-- Agrupacion de la Informacion de Sectores OCD/CAD NAM -->
+<!-- Agrupacion de la Informacion de Sectores de Gobierno NAM -->
 <p-fieldset legend="Sectores de Gobierno" [toggleable]="true" class="fieldSet">
   <nb-card accent="warning" status="primary">
     <nb-card-body>
@@ -28,25 +28,25 @@
               Confirma cuales sectores deben de registrarse...
             </p-header>
           </p-listbox>
-          <p>Sectores a Registrar: <span *ngFor="let c of selectedCities" style="margin-right: 10px">{{c.name}}</span>
+          <p> <span *ngFor="let c of selectedCities" style="margin-right: 10px">{{c.name}}</span>
           </p>
           <hr>
           <div class="icon-button-examples">
-            <!-- Boton de Calcular Porcentajes -->
+            <!-- Boton de limpiar Listado -->
             <button type="button" class="btn btn-outline-danger btn-icon" nbPopover="Limpia el listado de Sectores de Gobierno"
               nbPopoverMode="hint" nbPopoverPlacement="top" (click)="cleanSectoresGobierno()">
               <i class="ion-trash-a"></i>
             </button>
 
-            <!-- Boton para Calcular los Porcentajes Sectores OCDE -->
+            <!-- Boton para Calcular los Porcentajes Sectores Gobierno -->
             <button type="button" class="btn btn-outline-success btn-icon"
-              nbPopover="Calcula el % de participacion de Sectores" nbPopoverMode="hint" nbPopoverPlacement="top">
+              nbPopover="Calcula el % de participacion de Sectores de Gobierno" nbPopoverMode="hint" nbPopoverPlacement="top">
               <i class="ion-calculator"></i>
             </button>
 
-            <!-- Boton para Grabar Sectores OCDE -->
+            <!-- Boton para Grabar Sectores de Gobierno -->
             <button type="button" class="btn btn-outline-primary btn-icon"
-              nbPopover="Registra el listado de Gobierno" nbPopoverMode="hint" nbPopoverPlacement="top"
+              nbPopover="Registra sector de Gobierno" nbPopoverMode="hint" nbPopoverPlacement="top"
               (click)="saveSectoresGobierno()">
               <i class="ion-upload"></i>
             </button>

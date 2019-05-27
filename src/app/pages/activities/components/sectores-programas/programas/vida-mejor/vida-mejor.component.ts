@@ -298,11 +298,11 @@ export class VidaMejorComponent implements OnInit, OnChanges {
   * Params: { }
   ****************************************************************************/
   private getAllProgramaVidaMejorService() {
-    // Ejecuta el Servicio de invocar todos los Programa de Desarrollo
+    // Ejecuta el Servicio de invocar todos los Programa Vida Mejor
     this._serviceVidaMejorService.getAllProgramasVidaMejor().subscribe(
       result => {
         if (result.status !== 200) {
-          this.showToast('error', 'Error al Obtener la Información de todos los Programa de Desarrollo', result.message);
+          this.showToast('error', 'Error al Obtener la Información de todos los Programa Vida Mejor', result.message);
           this.JsonReceptionAllProgramasVidaMejor = [];
         } else if (result.status === 200) {
           this.JsonReceptionAllProgramasVidaMejor = result.data;
@@ -325,7 +325,7 @@ export class VidaMejorComponent implements OnInit, OnChanges {
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información de todos los Programa de Desarrollo', JSON.stringify(error.message));
+        this.showToast('error', 'Error al Obtener la Información de todos los Programa Vida Mejor', JSON.stringify(error.error.message));
       },
     );
   } // FIN | getAllProgramaVidaMejorService
@@ -346,14 +346,14 @@ export class VidaMejorComponent implements OnInit, OnChanges {
     this._serviceVidaMejorService.getfindByIdPrograma(idPrograma).subscribe(
       result => {
         if (result.status !== 200) {
-          this.showToast('error', 'Error al Obtener la Información del Programa de Desarrollo', result.message);
+          this.showToast('error', 'Error al Obtener la Información del Programa Vida Mejor', result.message);
           this.JsonReceptionProgramaVidaMejor = [];
         } else if (result.status === 200) {
           this.JsonReceptionProgramaVidaMejor = result.data;
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información del Programa de Desarrollo', JSON.stringify(error.message));
+        this.showToast('error', 'Error al Obtener la Información del Programa de Vida Mejor', JSON.stringify(error.error.message));
       },
     );
   } // FIN | getfindByIdProgramaService
@@ -383,7 +383,7 @@ export class VidaMejorComponent implements OnInit, OnChanges {
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información de Secotores de Desarrollo', JSON.stringify(error.message));
+        this.showToast('error', 'Error al Obtener la Información de Secotores Vida Mejor', JSON.stringify(error.error.message));
       },
     );
   } // FIN | getfindByIdNivelProgramaService
@@ -455,12 +455,12 @@ export class VidaMejorComponent implements OnInit, OnChanges {
             }
           },
           error => {
-            this.showToast('error', 'Error al ingresar el Vida Mejor al Proyecto', JSON.stringify(error.message));
+            this.showToast('error', 'Error al ingresar el Vida Mejor al Proyecto', JSON.stringify(error.error.message));
           },
         );
       }
     } else {
-      this.showToast('error', 'Error al ingresar la Información Programa de Gobierno', 'Debes de seleccionar los Programa de Gobierno, para continuar');
+      this.showToast('error', 'Error al ingresar la Información Vida Mejor', 'Debes de seleccionar los Programa de Vida Mejor, para continuar');
       return -1;
     }
   } // FIN | saveProgramaVidaMejor

@@ -1,3 +1,5 @@
+
+
 /**
  * @author Edgar Ramirez
  * @returns mantenimientos de usuario
@@ -21,6 +23,8 @@ import { delay } from 'q';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UsuarioModalComponent } from './usuario.modal.component';
 import { EspacioTrabajoModel } from '../../models/usuario.espacio.model';
+import { subscribeToResult } from 'rxjs/internal-compatibility';
+import {  MessageService } from 'primeng/primeng';
 
 // Varieble Jquey
 declare var jquery: any;
@@ -30,7 +34,7 @@ declare var $: any;
   selector: 'ngx-usuarios',
   templateUrl: './usuarios.component.html',
   styleUrls: ['./usuarios.component.scss'],
-  providers: [UsuarioService, ConfigSmartTableService, ListasComunesService],
+  providers: [UsuarioService, ConfigSmartTableService, ListasComunesService, MessageService],
 })
 export class UsuariosComponent implements OnInit {
   @Input() idUsuario;
@@ -38,6 +42,7 @@ export class UsuariosComponent implements OnInit {
 
   // Variables Tipo JSON, para usarlas en los Servicios Invocados
   public _EspacioTrabajoModel: EspacioTrabajoModel;
+  private messageService: MessageService;
   public JsonReceptionUsuarios: any;
   public JsonReceptionTipoUsuarios: any;
   public JsonReceptionEstados: any;
@@ -86,7 +91,7 @@ export class UsuariosComponent implements OnInit {
   arrayCatOrg: any
   arrayTipoOrganizacion: any
   arrayOrganizacion: any
-  responseStatus: number
+  resultStatus: number
   marked = false;
   theCheckbox = false;
 
@@ -109,7 +114,7 @@ export class UsuariosComponent implements OnInit {
   isDuplicatesPrevented = false;
   isCloseButton = true;
   settings: any;
-  public responsedata: any;
+  public resultdata: any;
   public tipoEspacioTrabajo: number;
 
   /****************************************************************************
@@ -163,12 +168,12 @@ export class UsuariosComponent implements OnInit {
     private _toasterService: ToasterService,
     public _configSmartTableService: ConfigSmartTableService, public _listasComunesService: ListasComunesService) {
     // Llamamos a la Funcion de Configuracion de las Smart Table
-    this._configSmartTableService.configSmartTable('userSmart', 1, null, null, null, null, null, null);
+    this._configSmartTableService.configSmartTable('userSmart', 1, null);
     this.settings = this._configSmartTableService.settings;
     /* Llamado a la Funcion: 007, la cual obtiene el detalle da la Info.
      del Usuario */
     this.usuariosListAllService();
-    this.responsedata = { 'error': false, 'msg': 'error campos solicitado' };
+    this.resultdata = { 'error': false, 'msg': 'error campos solicitado' };
   }
 
   /****************************************************************************
@@ -239,20 +244,18 @@ export class UsuariosComponent implements OnInit {
   ****************************************************************************/
   private usuariosListAllService() {
     this._usuariosService.getAllUsuarios().subscribe(
-      response => {
-        if (response.status !== 200) {
+      result => {
+        if (result.status !== 200) {
 
-          this.showToast('error', 'Error al Obtener la Información del Usuario', response.message);
-        } else if (response.status === 200) {
-
-          this.JsonReceptionUsuarios = response.data;
+          this.showToast('error', 'Error al Obtener la Información del Usuario', JSON.stringify(result.message));
+        } else if (result.status === 200) {
+          this.JsonReceptionUsuarios = result.data;
           this.data = this.JsonReceptionUsuarios;
-
         }
       },
-      error => {
+      result => {
         // Redirecciona al Login
-        alert('Error en la petición de la API ' + <any>error);
+        alert('Error en la petición de la API ' + JSON.stringify(result.message));
 
         // Borramos los datos del LocalStorage
         localStorage.removeItem('auth_app_token');
@@ -286,11 +289,11 @@ export class UsuariosComponent implements OnInit {
 
     this.validateUsuarios(this._usuarioModel);
 
-    const responsedataExt: any = this.responsedata;
+    const result: any = this.resultdata;
 
 
-    if (responsedataExt.error === true) {
-      this.showToast('error', 'Error al ingresar los datos', responsedataExt.msg);
+    if (result.error === true) {
+      this.showToast('error', 'Por favor ingrese todo los datos necesarios', JSON.stringify(result.message));
       return -1;
     }
 
@@ -298,17 +301,15 @@ export class UsuariosComponent implements OnInit {
 
     await delay(100);
 
-    if (this.responseStatus === 200) {
-      this.showToast('error', 'Error ya existe el codigo del usuario', 'Intente con Otro');
+    if (this.resultStatus === 200) {
+      this.showToast('error', 'Error ya existe el codigo del usuario Intente con Otro', JSON.stringify(result.message));
       return -1;
     }
-
-    this.mailValidate();
-
+    this.mailValidate(); subscribeToResult
     await delay(100);
 
-    if (this.responseStatus === 200) {
-      this.showToast('error', 'Error ya existe el email del usuario', 'Intente con Otro');
+    if (this.resultStatus === 200) {
+      this.showToast('error', 'Error ya existe el email del usuario Intente con Otro', JSON.stringify(result.message));
       return -1;
     }
 
@@ -317,11 +318,11 @@ export class UsuariosComponent implements OnInit {
       response => {
         if (response.status !== 200) {
 
-          this.showToast('error', 'Error al Ingresar la Información del Usuario', response.message);
+          this.showToast('error', 'Error al Ingresar la Información del Usuario', JSON.stringify(response.message));
         } else if (response.status === 200) {
           this.idUsuario = response.data.idUsuario;
           // console.log(this.idUsuario + ' id usuario');
-          this.showToast('default', 'La Información del Usuario, se ha ingresado con exito', response.message);
+          this.showToast('default', 'La Información del Usuario, se ha ingresado con exito', JSON.stringify(response.message));
           if (this._usuarioModel.asignarEspacioTrabajo === true) {
             this.showLargeModal(this.idUsuario);
 
@@ -344,12 +345,12 @@ export class UsuariosComponent implements OnInit {
  ****************************************************************************/
   private usuariosTipoService() {
     this._usuariosService.getAllTipoUsuario().subscribe(
-      response => {
-        if (response.status !== 200) {
+      result => {
+        if (result.status !== 200) {
 
-        } else if (response.status === 200) {
+        } else if (result.status === 200) {
 
-          this.JsonReceptionTipoUsuarios = response.data;
+          this.JsonReceptionTipoUsuarios = result.data;
           // instancia data con los tipos de usuarios;
           this.data1 = this.JsonReceptionTipoUsuarios;
 
@@ -395,12 +396,12 @@ export class UsuariosComponent implements OnInit {
   private estadoService() {
     const idGroupSen: number = 1;
     this._listasComunesService.getAllEstados(idGroupSen).subscribe(
-      response => {
-        if (response.status !== 200) {
+      result => {
+        if (result.status !== 200) {
 
-        } else if (response.status === 200) {
+        } else if (result.status === 200) {
 
-          this.JsonReceptionEstados = response.data;
+          this.JsonReceptionEstados = result.data;
           this.data2 = this.JsonReceptionEstados;
           // Carga los Items para el List de la Smart table
           this.arrayEstados = new Array();
@@ -445,7 +446,7 @@ export class UsuariosComponent implements OnInit {
       result => {
         if (result.status !== 200) {
           // console.log(result.status);
-          this.showToast('error', 'Error al Obtener la Información de los Paises', result.message);
+          this.showToast('error', 'Error al Obtener la Información de los Paises', JSON.stringify(result.message));
         } else if (result.status === 200) {
           this.JsonReceptionPaises = result.data;
 
@@ -469,9 +470,9 @@ export class UsuariosComponent implements OnInit {
           })
         }
       },
-      error => {
+      result => {
         // console.log(<any>error);
-        this.showToast('error', 'Error al Obtener la Información de los Paises', error);
+        this.showToast('error', 'Error al Obtener la Información de los Paises', JSON.stringify(result.message));
       },
     );
   } // FIN | paisesAllListService
@@ -506,13 +507,13 @@ export class UsuariosComponent implements OnInit {
   ****************************************************************************/
   private usuariosDatailsService() {
     this._usuariosService.getAllUsuarios().subscribe(
-      response => {
-        if (response.status !== 200) {
+      result => {
+        if (result.status !== 200) {
 
-          this.showToast('error', 'Error al Obtener la Información del Usuario', response.message);
-        } else if (response.status === 200) {
+          this.showToast('error', 'Error al Obtener la Información del Usuario', JSON.stringify(result.message));
+        } else if (result.status === 200) {
 
-          this.JsonReceptionUsuarios = response.data;
+          this.JsonReceptionUsuarios = result.data;
           this.data = this.JsonReceptionUsuarios;
 
         }
@@ -547,27 +548,27 @@ export class UsuariosComponent implements OnInit {
   private updateUsuarioService() {
     // Seteo de las variables del Model al json de Java
     this.validateUsuarios(this._usuarioModel);
-    const responsedataExt: any = this.responsedata;
+    const resultdataExt: any = this.resultdata;
 
-    if (responsedataExt.error === true) {
-      this.showToast('error', 'Error al actualizar los cambios', responsedataExt);
+    if (resultdataExt.error === true) {
+      this.showToast('error', 'Error al actualizar los cambios', JSON.stringify(resultdataExt.message));
       return -1;
     }
     // Ejecutamos el Recurso del EndPoint
     this._usuariosService.usuarioUpdate(this._usuarioModel, this._usuarioModel.idUsuario).subscribe(
-      response => {
-        if (response.status !== 200) {
+      result => {
+        if (result.status !== 200) {
 
-          this.showToast('error', 'Error al actualizar los cambios', response.message);
-        } else if (response.status === 200) {
+          this.showToast('error', 'Error al actualizar los cambios', JSON.stringify(result.message));
+        } else if (result.status === 200) {
 
-          this.showToast('default', 'se actualizaron con exito los datos', response.message);
+          this.showToast('default', 'se actualizaron con exito los datos', JSON.stringify(result.message));
 
           // Carga la tabla Nuevamente
           this.usuariosDatailsService();
         }
       },
-      error => {
+      result => {
       },
     );
   } // FIN | updateUsuarioService
@@ -611,7 +612,7 @@ export class UsuariosComponent implements OnInit {
 
       // validamos campos
 
-      if (this.responsedata.error === true) {
+      if (this.resultdata.error === true) {
 
       }
 
@@ -651,15 +652,15 @@ export class UsuariosComponent implements OnInit {
   private usuariosCodValidate() {
 
     this._usuariosService.usuarioValidate(this._usuarioModel.codUsuario).subscribe(
-      response => {
+      result => {
 
-        if (response.status !== 200) {
+        if (result.status !== 200) {
 
-          this.responseStatus = 0;
+          this.resultStatus = 0;
 
-        } else if (response.status === 200) {
+        } else if (result.status === 200) {
 
-          this.responseStatus = response.status;
+          this.resultStatus = result.status;
 
         }
       },
@@ -668,7 +669,7 @@ export class UsuariosComponent implements OnInit {
         alert('Error en la petición de la API ' + <any>error);
       },
     );
-    return this.responseStatus;
+    return this.resultStatus;
   } // FIN | usuariosCodValidate
 
 
@@ -683,13 +684,13 @@ export class UsuariosComponent implements OnInit {
   private mailValidate() {
 
     this._usuariosService.mailValidate(this._usuarioModel.emailUsuario).subscribe(
-      response => {
+      result => {
 
-        if (response.status !== 200) {
-          this.responseStatus = 0;
+        if (result.status !== 200) {
+          this.resultStatus = 0;
 
-        } else if (response.status === 200) {
-          this.responseStatus = response.status;
+        } else if (result.status === 200) {
+          this.resultStatus = result.status;
         }
       },
       error => {
@@ -697,7 +698,7 @@ export class UsuariosComponent implements OnInit {
         alert('Error en la petición de la API ' + <any>error);
       },
     );
-    return this.responseStatus;
+    return this.resultStatus;
   } // FIN | mailValidate
 
 
@@ -710,54 +711,54 @@ export class UsuariosComponent implements OnInit {
  ****************************************************************************/
   private validateUsuarios(usuarioModelIn: any) {
     // seteo el modelo para que los campos sean verificados
-    this.responsedata.error = false;
+    this.resultdata.error = false;
     if (usuarioModelIn.nombre1Usuario === null || usuarioModelIn.nombre1Usuario === '') {
-      this.responsedata.msg = 'Debes ingresar el primer nombre del usuario';
-      this.responsedata.error = true;
+      this.resultdata.msg = 'Debes ingresar el primer nombre del usuario';
+      this.resultdata.error = true;
     } else if (usuarioModelIn.nombre2Usuario === null || usuarioModelIn.nombre2Usuario === '') {
-      this.responsedata.msg = 'Desbes ingresar el segundo nombre del usuario';
-      this.responsedata = true;
+      this.resultdata.msg = 'Desbes ingresar el segundo nombre del usuario';
+      this.resultdata.error = true;
     } else if (usuarioModelIn.apellido1Usuario === null || usuarioModelIn.apellido1Usuario === '') {
-      this.responsedata.msg = 'Debes ingresar el primer apellido del usuario';
-      this.responsedata = true;
+      this.resultdata.msg = 'Debes ingresar el primer apellido del usuario';
+      this.resultdata.error = true;
     } else if (usuarioModelIn.apellido2Usuario === null || usuarioModelIn.apellido2Usuario === '') {
-      this.responsedata.msg = 'Debes ingresar el segundo apellido del usuario';
-      this.responsedata = true;
+      this.resultdata.msg = 'Debes ingresar el segundo apellido del usuario';
+      this.resultdata.error = true;
     } else if (usuarioModelIn.inicialesUsuario === null || usuarioModelIn.inicialesUsuario === '') {
-      this.responsedata.msg = 'Debes ingresar las iniciales del usuario';
-      this.responsedata = true;
+      this.resultdata.msg = 'Debes ingresar las iniciales del usuario';
+      this.resultdata.error = true;
     } else if (usuarioModelIn.codUsuario === null || usuarioModelIn.codUsuario === '') {
-      this.responsedata.msg = 'Debes ingresar el codigo del usuario';
-      this.responsedata = true;
+      this.resultdata.msg = 'Debes ingresar el codigo del usuario';
+      this.resultdata.error = true;
     } else if (usuarioModelIn.emailUsuario === null || usuarioModelIn.emailUsuario === '') {
-      this.responsedata.msg = 'Debes ingresar el email del usuario';
-      this.responsedata = true;
+      this.resultdata.msg = 'Debes ingresar el email del usuario';
+      this.resultdata.error = true;
     } else if (usuarioModelIn.direccion === null || usuarioModelIn.direccion === '') {
-      this.responsedata.msg = 'Debes ingresar la direccion del usuario';
-      this.responsedata = true;
+      this.resultdata.msg = 'Debes ingresar la direccion del usuario';
+      this.resultdata.error = true;
     } else if (usuarioModelIn.passwordUsuario === null || usuarioModelIn.passwordUsuario === '') {
-      this.responsedata.msg = 'Debes ingresar el segundo apellido del usuario';
-      this.responsedata = true;
+      this.resultdata.msg = 'Debes ingresar el segundo apellido del usuario';
+      this.resultdata.error = true;
     } else if (usuarioModelIn.descPais === null || usuarioModelIn.descPais === '') {
-      this.responsedata.msg = 'Debes ingresar el pais del usuario';
-      this.responsedata = true;
+      this.resultdata.msg = 'Debes ingresar el pais del usuario';
+      this.resultdata.error = true;
     } else if (usuarioModelIn.descEstado === null || usuarioModelIn.descEstado === '') {
-      this.responsedata.msg = 'Debes ingresar el estado del usuario';
-      this.responsedata = true;
+      this.resultdata.msg = 'Debes ingresar el estado del usuario';
+      this.resultdata.error = true;
     } else if (usuarioModelIn.descTipo === null || usuarioModelIn.descTipo === '') {
-      this.responsedata.msg = 'Debes ingresar el tipo de perfil del usuario';
-      this.responsedata = true;
+      this.resultdata.msg = 'Debes ingresar el tipo de perfil del usuario';
+      this.resultdata.error = true;
     } else if (usuarioModelIn.descTipoOrganizacion === null || usuarioModelIn.descTipoOrganizacion === '') {
-      this.responsedata.msg = 'Debes ingresar el tipo de organizacion del usuario';
-      this.responsedata = true;
+      this.resultdata.msg = 'Debes ingresar el tipo de organizacion del usuario';
+      this.resultdata.error = true;
     } else if (usuarioModelIn.descCatOrganizacion === null || usuarioModelIn.descCatOrganizacion === '') {
-      this.responsedata.msg = 'Debes ingresar la categoria de la organizacion del usuario';
-      this.responsedata = true;
-    } else if (usuarioModelIn.descOrganizacion === null || usuarioModelIn.descOrganizacion === '') {
-      this.responsedata.msg = 'Debes ingresar la organizacion del usuario';
-      this.responsedata = true;
+      this.resultdata.msg = 'Debes ingresar la categoria de la organizacion del usuario';
+      this.resultdata.error = true;
+    } else if (usuarioModelIn.nombreOrganizacion === null || usuarioModelIn.nombreOrganizacion === '') {
+      this.resultdata.msg = 'Debes ingresar la organizacion del usuario';
+      this.resultdata.error = true;
     }
-    return this.responsedata;
+    return this.resultdata;
   } // FIN | validateUsuarios
 
 
@@ -773,13 +774,12 @@ export class UsuariosComponent implements OnInit {
 
     // Ejecutamos el Recurso del EndPoint
     this._usuariosService.usuariodelete(this._usuarioModel.idUsuario).subscribe(
-      response => {
-        if (response.status !== 200) {
+      result => {
+        if (result.status !== 200) {
 
-          this.showToast('error', 'Error al actualizar los cambios', response.message);
-        } else if (response.status === 200) {
-
-          this.showToast('default', 'se actualizaron con exito los datos', response.message);
+          this.showToast('error', 'Error al actualizar los cambios', result.message);
+        } else if (result.status === 200) {
+          this.showToast('default', 'se actualizaron con exito los datos', result.message);
 
           // Carga la tabla Nuevamente
           this.usuariosDatailsService();
@@ -802,11 +802,11 @@ export class UsuariosComponent implements OnInit {
  ****************************************************************************/
   private categoriaOrganizacionService() {
     this._usuariosService.listAllCategoria().subscribe(
-      response => {
-        if (response.status !== 200) {
+      result => {
+        if (result.status !== 200) {
 
-        } else if (response.status === 200) {
-          this.JsonReceptionCatOrganizacion = response.data;
+        } else if (result.status === 200) {
+          this.JsonReceptionCatOrganizacion = result.data;
           // instancia data con los tipos de usuarios;
           this.data5 = this.JsonReceptionCatOrganizacion;
           // Carga los Items para el List de la Smart table
@@ -848,11 +848,11 @@ export class UsuariosComponent implements OnInit {
  ****************************************************************************/
   private TipoOrganizacionService() {
     this._usuariosService.listAllTipoOrganizaciones().subscribe(
-      response => {
-        if (response.status !== 200) {
+      result => {
+        if (result.status !== 200) {
 
-        } else if (response.status === 200) {
-          this.JsonReceptionTipoOrganizacion = response.data;
+        } else if (result.status === 200) {
+          this.JsonReceptionTipoOrganizacion = result.data;
           // instancia data con los tipos de usuarios;
           this.data4 = this.JsonReceptionTipoOrganizacion;
           // Carga los Items para el List de la Smart table
@@ -896,18 +896,18 @@ export class UsuariosComponent implements OnInit {
     // Resetea todos los valores previos
     this.JsonReceptionCatOrganizacion = null;
     this._usuariosService.ListAllOrganizaciones().subscribe(
-      response => {
-        if (response.status !== 200) {
+      result => {
+        if (result.status !== 200) {
 
-        } else if (response.status === 200) {
-          this.JsonReceptionOrganizacion = response.data;
+        } else if (result.status === 200) {
+          this.JsonReceptionOrganizacion = result.data;
           // instancia data con los tipos de usuarios;
           this.data6 = this.JsonReceptionOrganizacion;
           // Carga los Items para el List de la Smart table
           this.arrayOrganizacion = new Array();
 
           this.data6.forEach(element => {
-            this.arrayOrganizacion.push({ title: element['descOrganizacion'], value: element['idOrganizacion'] });
+            this.arrayOrganizacion.push({ title: element['nombreOrganizacion'], value: element['idOrganizacion'] });
           });
           this.settings.columns.idOrganizacion.editor.config.list = this.arrayOrganizacion;
           this.settings = Object.assign({}, this.settings);
@@ -999,7 +999,7 @@ export class UsuariosComponent implements OnInit {
           this.dropdownList = this.JsonReceptionPaisOrganizacionesData.map((item) => {
             return {
               id: item.idOrganizacion,
-              itemName: item.descOrganizacion,
+              itemName: item.nombreOrganizacion,
               nombreTipoOrganizacion: item.idTipoOrganizacion.descTipoOrganizacion,
               descPais: item.idPaisOrganizacion.descPais,
               inicialesOrganizacion: item.inicalesOrganizacion,
@@ -1040,7 +1040,7 @@ export class UsuariosComponent implements OnInit {
           this.dropdownList = this.JsonReceptionTipoPaisOrganizacionesData.map((item) => {
             return {
               id: item.idOrganizacion,
-              itemName: item.descOrganizacion,
+              itemName: item.nombreOrganizacion,
               nombreTipoOrganizacion: item.idTipoOrganizacion.descTipoOrganizacion,
               descPais: item.idPaisOrganizacion.descPais,
               inicialesOrganizacion: item.inicalesOrganizacion,
@@ -1081,8 +1081,8 @@ export class UsuariosComponent implements OnInit {
           this.dropdownList = this.JsonReceptionTipoPaisCategoriaOrganizacionesData.map((item) => {
             return {
               id: item.idOrganizacion,
-              itemName: item.descOrganizacion,
-              nombreTipoOrganizacion: item.idTipoOrganizacion.descTipoOrganizacion,
+              itemName: item.nombreOrganizacion,
+              nombreTipoOrganizacion: item.idTipoOrganizacion.nombreOrganizacion,
               descPais: item.idPaisOrganizacion.descPais,
               inicialesOrganizacion: item.inicalesOrganizacion,
             }

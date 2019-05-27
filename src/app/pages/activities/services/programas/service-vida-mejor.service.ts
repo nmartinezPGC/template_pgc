@@ -154,6 +154,6 @@ export class ServiceVidaMejorService {
     return this._http.post(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 42), paramSend, {
       headers: this.headers,
       params: { 'tokenApi': this.tokenHeader },
-    }).map(response => <TreeNode[]>response);
+    });
   } // FIN | FND-00007
 }

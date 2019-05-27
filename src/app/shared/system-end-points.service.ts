@@ -333,8 +333,8 @@ export class SystemEndPointsService extends ListEndPointsService {
           case 31:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActividadSectorCamposTransversales.urlEndPoint;
             break;
-          case 32: // NAM | 2019-04-17 | Mapeo de los EndPoins de Programas
-            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findAllProgramasPlanNacion.urlEndPoint; // Programas Plan de Nacion
+          case 32: // NAM | 2019-04-17 | Mapeo de los EndPoins de Programas Plan de Nacion
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findAllProgramasPlanNacion.urlEndPoint;
             break;
           case 33:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdProgramaPlanNacion.urlEndPoint;
@@ -400,7 +400,7 @@ export class SystemEndPointsService extends ListEndPointsService {
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdNivelProgramaVisionPaisPadre.urlEndPoint;
             break;
           case 54:
-            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.newActividadProgramaVisionPaisPadre.urlEndPoint;
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.newActividadProgramaVisionPais.urlEndPoint;
             break;
           case 55:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActividadProgramaVisionPais.urlEndPoint;
@@ -418,7 +418,7 @@ export class SystemEndPointsService extends ListEndPointsService {
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdNivelProgramaPoliticasPublicasPadre.urlEndPoint;
             break;
           case 60:
-            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.newActividadProgramaPoliticasPublicasPadre.urlEndPoint;
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.newActividadProgramaPoliticasPublicas.urlEndPoint;
             break;
           case 61:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActividadProgramaPoliticasPublicas.urlEndPoint;

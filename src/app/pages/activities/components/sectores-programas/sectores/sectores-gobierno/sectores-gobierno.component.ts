@@ -275,7 +275,7 @@ export class SectoresGobiernoComponent implements OnInit, OnChanges {
   ****************************************************************************/
   nodeUnselect(event) {
     // Condicion de Agregar los Nodos
-    if (event.node.children !== undefined) {
+    if (event.node !== undefined) {
       const itemNodeLabel = event.node.label;
       // Ejecucion del splice del elemento
       const resultado = this.JsonSendSectoresGobiernoOpciones.findIndex(sector => sector.name !== itemNodeLabel);
@@ -295,11 +295,11 @@ export class SectoresGobiernoComponent implements OnInit, OnChanges {
   * Params: { }
   ****************************************************************************/
   private getAllSectoresGobiernoService() {
-    // Ejecuta el Servicio de invocar todos los Sectores de Desarrollo
+    // Ejecuta el Servicio de invocar todos los Sectores de Gobierno
     this._serviceSectoresGobiernoService.getAllSectoresGobierno().subscribe(
       result => {
         if (result.status !== 200) {
-          this.showToast('error', 'Error al Obtener la Información de todos los Sectores de Desarrollo', result.message);
+          this.showToast('error', 'Error al Obtener la Información de todos los Sectores de Gobierno', result.message);
           this.JsonReceptionAllSectoresGobierno = [];
         } else if (result.status === 200) {
           this.JsonReceptionAllSectoresGobierno = result.data;
@@ -322,7 +322,7 @@ export class SectoresGobiernoComponent implements OnInit, OnChanges {
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información de todos los Sectores de Desarrollo', JSON.stringify(error.message));
+        this.showToast('error', 'Error al Obtener la Información de todos los Sectores de Gobierno', JSON.stringify(error.message));
       },
     );
   } // FIN | getAllSectoresGobiernoService
@@ -343,14 +343,14 @@ export class SectoresGobiernoComponent implements OnInit, OnChanges {
     this._serviceSectoresGobiernoService.getfindByIdSector(idSector).subscribe(
       result => {
         if (result.status !== 200) {
-          this.showToast('error', 'Error al Obtener la Información del Sector de Desarrollo', result.message);
+          this.showToast('error', 'Error al Obtener la Información del Sector de Gobierno', result.message);
           this.JsonReceptionSectorGobierno = [];
         } else if (result.status === 200) {
           this.JsonReceptionSectorGobierno = result.data;
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información del Sector de Desarrollo', JSON.stringify(error.message));
+        this.showToast('error', 'Error al Obtener la Información del Sector de Gobierno', JSON.stringify(error.message));
       },
     );
   } // FIN | getfindByIdSectorService
@@ -361,7 +361,7 @@ export class SectoresGobiernoComponent implements OnInit, OnChanges {
   * Object Number: 005
   * Fecha: 25-03-2019
   * Descripcion: Method getfindByIdNivelSectorService of the Class
-  * Objetivo: getfindByIdNivelSectorService detalle del Sector OCDE/CAD, con el
+  * Objetivo: getfindByIdNivelSectorService detalle del Sector Gobierno, con el
   * Id Nivel de Sector
   * Params: { idSNivelector }
   ****************************************************************************/
@@ -380,7 +380,7 @@ export class SectoresGobiernoComponent implements OnInit, OnChanges {
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información de Secotores de Desarrollo', JSON.stringify(error.message));
+        this.showToast('error', 'Error al Obtener la Información de Sectores de Gobierno', JSON.stringify(error.message));
       },
     );
   } // FIN | getfindByIdNivelSectorService
@@ -451,7 +451,7 @@ export class SectoresGobiernoComponent implements OnInit, OnChanges {
             }
           },
           error => {
-            this.showToast('error', 'Error al Obtener la Información de Secotores de Desarrollo', JSON.stringify(error.message));
+            this.showToast('error', 'Error al Obtener la Información de Secotores de Gobierno', JSON.stringify(error.message));
           },
         );
       }, 3000);
