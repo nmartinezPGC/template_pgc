@@ -13,6 +13,8 @@ export * from '../components/auth/auth.component';
 export * from '../components/auth/auth-block/auth-block.component';
 export * from '../components/auth/login/login.component';
 export * from '../components/auth/logout/logout.component';
+export * from '../components/auth/request-password/request-password.component';
+export * from '../components/auth/reset-password/reset-password.component';
 /*export * from './register/register.component';
-export * from './request-password/request-password.component';
+
 export * from './reset-password/reset-password.component'; */

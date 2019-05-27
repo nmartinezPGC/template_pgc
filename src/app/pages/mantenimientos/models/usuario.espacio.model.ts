@@ -10,23 +10,21 @@
 export class EspacioTrabajoModel {
     constructor(
         // mapeo de la tabla tbl_espacios_trabajo
+        // datos generales
         public idEspacioTrabajo: number,
         public codEspacioTrabajo: string,
+        // datos de espacios de trabajo
         public nombreEspacioTrabajo: string,
         public descripcionEspacioTrabajo: string,
         public espacioPadre: boolean = true,
         public vistaPublica: boolean = true,
-        // mapeo de la variables que estan relacionadas con la tabla
+        // mapeo de los datos que estan relacioneado
         public idPaisEspacio: { idPais: number },
         public idPais: number,
-        // mapeo de la variables que estan relacionadas con la tabla
         public idTipoEspacioTrabajo: { idTipoEspacio: number },
         public idTipoEspacio: number,
-
-        // mapeo de la variables que estan relacionadas con la tabla
         public idEstadoEspacioTrabajo: { idEstadoEspacio: number },
         public idEstadoEspacio: number,
-
         public iRolEspacio: { idRol: number },
         public idRol: number,
 

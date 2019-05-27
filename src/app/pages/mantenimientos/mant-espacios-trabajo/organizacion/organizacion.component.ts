@@ -1,5 +1,4 @@
-/**
- * @author David Pavon
+/** @author David Pavon
  * @returns mantenimiento de organizacion.
  * @name OrganizacionComponent
  * @alias OrganizacionComponent
@@ -25,6 +24,7 @@ import { delay } from 'q';
 
 export class OrganizacionComponent implements OnInit {
   @Input() idOrganizacion;
+
 
 
   public _OrganizacionModel: OrganizacionModel;
@@ -77,7 +77,7 @@ export class OrganizacionComponent implements OnInit {
   public responsedata: any;
 
 
-
+   // levanta la modal de mantenimineto de organizacion/consulta
   showLargeModal(idOrganizacion: number) {
     const activeModal = this.modalService.open(OrganizacionModalComponent, { size: 'lg', container: 'nb-layout' });
     activeModal.componentInstance.modalHeader = 'Large Modal Parametro ';
@@ -286,6 +286,7 @@ export class OrganizacionComponent implements OnInit {
   * Autor: Edgar Ramirez
   ****************************************************************************/
   async  newOrganizacion() {
+
     this.getSecuenciaListService('NEW-ORG');
 
     await delay(100);
