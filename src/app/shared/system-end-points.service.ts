@@ -406,7 +406,7 @@ export class SystemEndPointsService extends ListEndPointsService {
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActividadProgramaVisionPais.urlEndPoint;
             break;
           case 56: // AMA | 2019-05-06 | Mapeo de Vision de Politicas Publicas
-            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findAllProgramaPoliticasPublicas.urlEndPoint;
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findAllProgramasPoliticasPublicas.urlEndPoint;
             break;
           case 57:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdProgramaPoliticasPublicas.urlEndPoint;
