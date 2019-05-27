@@ -7,7 +7,7 @@
  *
  */
 
-import { Component, OnInit,Input, ChangeDetectorRef, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef, OnChanges } from '@angular/core';
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster'; // Servicio de Notificaciones
 import { Router } from '@angular/router';
 import {KeyFilterModule} from 'primeng/keyfilter';
@@ -27,7 +27,7 @@ import { CategoriaService } from '../../services/agregar.categoria.service';
   selector: 'ngx-agregar-categoria',
   templateUrl: './agregar-categoria.component.html',
   styleUrls: ['./agregar-categoria.component.scss'],
-  providers: [ConfigSmartTableService, CategoriaService,KeyFilterModule,ToastModule,MessageService],
+  providers: [ConfigSmartTableService, CategoriaService, KeyFilterModule, ToastModule, MessageService],
 })
 export class AgregarCategoriaComponent implements OnInit {
   public _CategoriaModel: AgregarCategoriaModel;
@@ -249,10 +249,10 @@ export class AgregarCategoriaComponent implements OnInit {
     this._categoriaService.CategoriaUpdate(this._CategoriaModel, this._CategoriaModel.idCatOrganizacion).subscribe(
       result => {
         if (result.status !== 200) {
-          this.showToast('error', 'Error al actualizar los cambios',JSON.stringify(result.message))
+          this.showToast('error', 'Error al actualizar los cambios', JSON.stringify(result.message))
         } else if (result.status === 200) {
           // console.log(result.status);
-          this.showToast('success', 'se actualizaron con exito los datos',JSON.stringify(result.message))
+          this.showToast('success', 'se actualizaron con exito los datos', JSON.stringify(result.message))
           // Carga la tabla Nuevamente
            this.updateCategoria
         }
@@ -316,10 +316,10 @@ export class AgregarCategoriaComponent implements OnInit {
     this._categoriaService.categoriaDelete(this._CategoriaModel.idCatOrganizacion).subscribe(
       result => {
         if (result.status !== 200) {
-          this.showToast('error', 'Error al actualizar los cambios',JSON.stringify(result.message))
+          this.showToast('error', 'Error al actualizar los cambios', JSON.stringify(result.message))
         } else if (result.status === 200) {
           // console.log(result.status);
-          this.showToast('success','se inhabilito con éxito',JSON.stringify(result.message))
+          this.showToast('success','se inhabilito con éxito', JSON.stringify(result.message))
           
           // Carga la tabla Nuevamente
           // this.perfilesDatailsService();

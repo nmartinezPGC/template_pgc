@@ -35,8 +35,7 @@ export class ConfigSmartTableService {
           case 1:
             const settings = {
               hideSubHeader: false,
-              refresh:true,
-              
+              refresh: true,
               actions: {
                add: false,
               },

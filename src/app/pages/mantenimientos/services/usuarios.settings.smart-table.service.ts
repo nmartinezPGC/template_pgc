@@ -35,7 +35,6 @@ export class ConfigSmartTableService {
                     case 1:
                         // estructura de la smart table donde mostramos los datos de los usuarios
                         const settings = {
-                            
                             hideSubHeader: false,
 
                             actions: {
@@ -105,7 +104,7 @@ export class ConfigSmartTableService {
                                     },
                                 },
                                 idEstado: {
-                                    //valuePrepareFunction: (cell: any, row: any) => row.idEstadoUsuario.descEstado,
+                                    // valuePrepareFunction: (cell: any, row: any) => row.idEstadoUsuario.descEstado,
                                     title: 'Estado Usuario',
                                     editor: {
                                         type: 'list',
@@ -144,11 +143,9 @@ export class ConfigSmartTableService {
                                         },
                                     },
                                 },
-                                
                             },
-                            
                         };
-                        
+
                         // variable que retorne
                         this.settings = settings;
                         break;

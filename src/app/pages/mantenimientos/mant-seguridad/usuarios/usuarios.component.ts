@@ -34,14 +34,13 @@ declare var $: any;
   selector: 'ngx-usuarios',
   templateUrl: './usuarios.component.html',
   styleUrls: ['./usuarios.component.scss'],
-  providers: [UsuarioService, ConfigSmartTableService, ListasComunesService,MessageService],
+  providers: [UsuarioService, ConfigSmartTableService, ListasComunesService, MessageService],
 })
 export class UsuariosComponent implements OnInit {
   @Input() idUsuario;
   @Input() idPerfil;
 
   // Variables Tipo JSON, para usarlas en los Servicios Invocados
-  
   public _EspacioTrabajoModel: EspacioTrabajoModel;
   private messageService: MessageService;
   public JsonReceptionUsuarios: any;
@@ -248,12 +247,10 @@ export class UsuariosComponent implements OnInit {
       result => {
         if (result.status !== 200) {
 
-          this.showToast('error', 'Error al Obtener la Información del Usuario',JSON.stringify(result.message));
+          this.showToast('error', 'Error al Obtener la Información del Usuario', JSON.stringify(result.message));
         } else if (result.status === 200) {
-
           this.JsonReceptionUsuarios = result.data;
           this.data = this.JsonReceptionUsuarios;
-
         }
       },
       result => {
@@ -305,16 +302,14 @@ export class UsuariosComponent implements OnInit {
     await delay(100);
 
     if (this.resultStatus === 200) {
-      this.showToast('error', 'Error ya existe el codigo del usuario Intente con Otro',JSON.stringify(result.message));
+      this.showToast('error', 'Error ya existe el codigo del usuario Intente con Otro', JSON.stringify(result.message));
       return -1;
     }
-
     this.mailValidate();subscribeToResult
-
     await delay(100);
 
     if (this.resultStatus === 200) {
-      this.showToast('error', 'Error ya existe el email del usuario Intente con Otro',JSON.stringify(result.message));
+      this.showToast('error', 'Error ya existe el email del usuario Intente con Otro', JSON.stringify(result.message));
       return -1;
     }
 
@@ -323,19 +318,16 @@ export class UsuariosComponent implements OnInit {
       result => {
         if (result.status !== 200) {
 
-          this.showToast('error', 'Error al Ingresar la Información del Usuario',JSON.stringify(result.message));
+          this.showToast('error', 'Error al Ingresar la Información del Usuario', JSON.stringify(result.message));
         } else if (result.status === 200) {
           this.idUsuario = result.data.idUsuario;
           // console.log(this.idUsuario + ' id usuario');
-          this.showToast('default', 'La Información del Usuario, se ha ingresado con exito',JSON.stringify(result.message));
+          this.showToast('default', 'La Información del Usuario, se ha ingresado con exito', JSON.stringify(result.message));
           if (this._usuarioModel.asignarEspacioTrabajo === true) {
             this.showLargeModal(this.idUsuario);
 
           }
         }
-      },
-      result => {
-
       },
     );
   } // FIN | newUsuarioService
@@ -451,7 +443,7 @@ export class UsuariosComponent implements OnInit {
       result => {
         if (result.status !== 200) {
           // console.log(result.status);
-          this.showToast('error', 'Error al Obtener la Información de los Paises',JSON.stringify(result.message));
+          this.showToast('error', 'Error al Obtener la Información de los Paises', JSON.stringify(result.message));
         } else if (result.status === 200) {
           this.JsonReceptionPaises = result.data;
 
@@ -477,7 +469,7 @@ export class UsuariosComponent implements OnInit {
       },
       result => {
         // console.log(<any>error);
-        this.showToast('error', 'Error al Obtener la Información de los Paises',JSON.stringify(result.message));
+        this.showToast('error', 'Error al Obtener la Información de los Paises', JSON.stringify(result.message));
       },
     );
   } // FIN | paisesAllListService
@@ -515,7 +507,7 @@ export class UsuariosComponent implements OnInit {
       result => {
         if (result.status !== 200) {
 
-          this.showToast('error', 'Error al Obtener la Información del Usuario',JSON.stringify(result.message));
+          this.showToast('error', 'Error al Obtener la Información del Usuario', JSON.stringify(result.message));
         } else if (result.status === 200) {
 
           this.JsonReceptionUsuarios = result.data;
@@ -556,7 +548,7 @@ export class UsuariosComponent implements OnInit {
     const resultdataExt: any = this.resultdata;
 
     if (resultdataExt.error === true) {
-      this.showToast('error', 'Error al actualizar los cambios',JSON.stringify(resultdataExt.message));
+      this.showToast('error', 'Error al actualizar los cambios', JSON.stringify(resultdataExt.message));
       return -1;
     }
     // Ejecutamos el Recurso del EndPoint
@@ -564,7 +556,7 @@ export class UsuariosComponent implements OnInit {
       result => {
         if (result.status !== 200) {
 
-          this.showToast('error', 'Error al actualizar los cambios',JSON.stringify(result.message));
+          this.showToast('error', 'Error al actualizar los cambios', JSON.stringify(result.message));
         } else if (result.status === 200) {
 
           this.showToast('default', 'se actualizaron con exito los datos', JSON.stringify(result.message));
@@ -784,7 +776,6 @@ export class UsuariosComponent implements OnInit {
 
           this.showToast('error', 'Error al actualizar los cambios', result.message);
         } else if (result.status === 200) {
-
           this.showToast('default', 'se actualizaron con exito los datos', result.message);
 
           // Carga la tabla Nuevamente
