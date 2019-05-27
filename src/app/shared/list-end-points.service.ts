@@ -126,6 +126,34 @@ export class ListEndPointsService {
         groupEndPoint: 'matActGroup',
         descEndPoint: 'Busca la Moneda para el financiamiento',
       },
+      getAllTipoFinanciamiento: { // NAM | 2019-05-27 | Tipo de Financiamiento
+        id: 10,
+        nameEndpoint: 'getAllTipoFinanciamiento',
+        urlEndPoint: '/mant-actividades/tipo-financiamiento',
+        groupEndPoint: 'matActGroup',
+        descEndPoint: 'Busca todas los tipos financiamiento',
+      },
+      getTipoFinanciamiento: {
+        id: 11,
+        nameEndpoint: 'getTipoFinanciamiento',
+        urlEndPoint: '/mant-actividades/tipo-financiamiento/findById/',
+        groupEndPoint: 'matActGroup',
+        descEndPoint: 'Busca el tipo financiamiento',
+      },
+      getAllModalidadAyuda: {
+        id: 12,
+        nameEndpoint: 'getAllModalidadAyuda',
+        urlEndPoint: '/mant-actividades/modalidad-ayuda',
+        groupEndPoint: 'matActGroup',
+        descEndPoint: 'Busca todas las Modalidades de Ayudas',
+      },
+      getModalidadAyuda: {
+        id: 13,
+        nameEndpoint: 'getModalidadAyuda',
+        urlEndPoint: '/mant-actividades/modalidad-ayuda/findById/',
+        groupEndPoint: 'matActGroup',
+        descEndPoint: 'Busca la Modalidad de Ayuda',
+      },
     },
     endPointEspaciosTrabajo: {
       listAllEspaciosTrabajo: {

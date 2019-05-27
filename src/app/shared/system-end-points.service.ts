@@ -93,6 +93,18 @@ export class SystemEndPointsService extends ListEndPointsService {
           case 9:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointMantActividades.getMonedaActividad.urlEndPoint;
             break;
+          case 10: // NAM | 2019-05-27 | Llamado de los EndPoints de Tipo de Financiamiento y Modalidad de Ayuda
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointMantActividades.getAllTipoFinanciamiento.urlEndPoint;
+            break;
+          case 11:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointMantActividades.getTipoFinanciamiento.urlEndPoint;
+            break;
+          case 12:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointMantActividades.getAllModalidadAyuda.urlEndPoint;
+            break;
+          case 13:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointMantActividades.getModalidadAyuda.urlEndPoint;
+            break;
         }
         break;
       case 'espacioTrabajoGroup': // Llamados a los End Point del Espacios de Trabajo
@@ -406,7 +418,7 @@ export class SystemEndPointsService extends ListEndPointsService {
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActividadProgramaVisionPais.urlEndPoint;
             break;
           case 56: // AMA | 2019-05-06 | Mapeo de Vision de Politicas Publicas
-            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findAllProgramaPoliticasPublicas.urlEndPoint;
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findAllProgramasPoliticasPublicas.urlEndPoint;
             break;
           case 57:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdProgramaPoliticasPublicas.urlEndPoint;

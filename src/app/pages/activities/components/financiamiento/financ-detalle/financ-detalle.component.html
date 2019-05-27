@@ -1,5 +1,6 @@
 <!-- Maquetacion del Encabezado del Financiamiento del Proyecto -->
 <!-- Componente para los Mensajes en pantalla -->
+<toaster-container [toasterconfig]="config"></toaster-container>
 <!-- ==================================================================================== -->
 <div class="row">
   <div class="col-md-12">
@@ -16,6 +17,22 @@
           <nb-checkbox>Remember me</nb-checkbox>
           <button type="submit" class="btn btn-primary">Submit</button>
         </form>
+
+        <!-- Agrupacion de la Informacion de Compromisos de Financiamiento -->
+        <p-fieldset legend="Compromisos" [toggleable]="true" class="fieldSet">
+          <nb-card accent="warning" status="primary">
+            <nb-card-body>
+              <div class="row">
+                <div class="col-sm-6">
+                  <!-- ================ Detalle Financiamiento | Compromisos ==================== -->
+                  <ngx-financ-detalle-compromisos>
+                  </ngx-financ-detalle-compromisos>
+                </div>
+              </div>
+            </nb-card-body>
+          </nb-card>
+        </p-fieldset>
+        <br><br>
       </nb-card-body>
     </nb-card>
   </div>
