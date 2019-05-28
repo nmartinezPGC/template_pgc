@@ -19,7 +19,8 @@
         </form>
 
         <!-- Agrupacion de la Informacion de Compromisos de Financiamiento -->
-        <p-fieldset legend="Compromisos" [toggleable]="true" class="fieldSet">
+        <p-fieldset [toggleable]="true">
+          <p-header class="fieldsetEnca">Compromisos</p-header>
           <nb-card accent="warning" status="primary">
             <nb-card-body>
               <div class="row">
@@ -33,6 +34,24 @@
           </nb-card>
         </p-fieldset>
         <br><br>
+
+        <!-- Agrupacion de la Informacion de Desembolsos de Financiamiento -->
+        <p-fieldset [toggleable]="true">
+          <p-header class="fieldsetEnca">Desembolsos</p-header>
+          <nb-card accent="warning" status="primary">
+            <nb-card-body>
+              <div class="row">
+                <div class="col-sm-6">
+                  <!-- ================ Detalle Financiamiento | Compromisos ==================== -->
+                  <ngx-financ-detalle-desembolsos>
+                  </ngx-financ-detalle-desembolsos>
+                </div>
+              </div>
+            </nb-card-body>
+          </nb-card>
+        </p-fieldset>
+        <br><br>
+
       </nb-card-body>
     </nb-card>
   </div>
