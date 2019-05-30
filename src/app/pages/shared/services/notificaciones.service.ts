@@ -86,6 +86,7 @@ export class NotificacionesService {
   public toasterconfig: ToasterConfig =
     new ToasterConfig({
       showCloseButton: { 'warning': true, 'error': true },
+      positionClass: this.position,
     }); // FIN | toasterconfig
 
 }

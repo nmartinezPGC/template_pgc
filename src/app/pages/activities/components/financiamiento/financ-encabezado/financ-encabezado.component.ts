@@ -7,18 +7,18 @@
 * @fecha 16-05-2019
 */
 
-import { Component, OnInit, Input, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 // Datepicker
-import { IMyDpOptions, IMyDateModel } from 'mydatepicker';
+import { IMyDpOptions } from 'mydatepicker';
+import { NotificacionesService } from '../../../../shared/services/notificaciones.service';
 import { ActivityFinanciamientoEncModel } from '../../../models/financiamiento/model-financiamiento-enc';
-import { ToasterConfig, Toast, BodyOutputType, ToasterService } from 'angular2-toaster';
 import { FinanciamientoEncService } from '../../../services/financiamiento/financiamiento-enc.service';
 
 @Component({
   selector: 'ngx-financ-encabezado',
   templateUrl: './financ-encabezado.component.html',
   styleUrls: ['./financ-encabezado.component.scss'],
-  providers: [FinanciamientoEncService, ToasterService],
+  providers: [FinanciamientoEncService, NotificacionesService],
 })
 export class FinancEncabezadoComponent implements OnInit {
   // Variables entre Tabs | Components
@@ -32,21 +32,6 @@ export class FinancEncabezadoComponent implements OnInit {
 
   // Modelo de la Clase
   public _activityFinanciamientoEncModel: ActivityFinanciamientoEncModel;
-
-  // Consfiguracion del Notificador
-  position = 'toast-bottom-full-width';
-  animationType = 'slideDown';
-  title = 'Se ha grabado la Información! ';
-  content = 'los cambios han sido grabados temporalmente, en la PGC!';
-  timeout = 20000;
-  toastsLimit = 5;
-  type = 'default';
-
-  isNewestOnTop = true;
-  isHideOnClick = true;
-  isDuplicatesPrevented = false;
-  isCloseButton = true;
-  config: ToasterConfig;
 
   // Ventana Modal de Fecha
   display: boolean = false;
@@ -65,7 +50,7 @@ export class FinancEncabezadoComponent implements OnInit {
    * Constructor de la Clase
    */
   constructor(private _financiamientoEncService: FinanciamientoEncService,
-    private _toasterService: ToasterService) { }
+    private _notificacionesService: NotificacionesService) { }
 
 
   /**
@@ -120,62 +105,10 @@ export class FinancEncabezadoComponent implements OnInit {
     this.display = false;
     // Asignacion de Fecha de Transaccion
     this._activityFinanciamientoEncModel.fechaTransaccion = this.date6;
-  }
 
-  /****************************************************************************
-  * Funcion: makeToast
-  * Object Number: 002
-  * Fecha: 16-08-2018
-  * Descripcion: Method makeToast of the Class
-  * Objetivo: makeToast in the method header API
-  ****************************************************************************/
-  makeToast() {
-    this.showToast(this.type, this.title, this.content);
-  } // FIN | makeToast
-
-
-  /****************************************************************************
-  * Funcion: showToast
-  * Object Number: 002.1
-  * Fecha: 16-08-2018
-  * Descripcion: Method showToast of the Class
-  * Objetivo: showToast in the method header API
-  ****************************************************************************/
-  private showToast(type: string, title: string, body: string) {
-    this.config = new ToasterConfig({
-      positionClass: this.position,
-      timeout: this.timeout,
-      newestOnTop: this.isNewestOnTop,
-      tapToDismiss: this.isHideOnClick,
-      preventDuplicates: this.isDuplicatesPrevented,
-      animation: this.animationType,
-      limit: this.toastsLimit,
-    });
-    const toast: Toast = {
-      type: type,
-      title: title,
-      body: body,
-      timeout: this.timeout,
-      showCloseButton: this.isCloseButton,
-      bodyOutputType: BodyOutputType.TrustedHtml,
-    };
-    // this._toasterService.popAsync(toast);
-    this._toasterService.pop(toast);
-  } // FIN | showToast
-
-
-  /****************************************************************************
-  * Funcion: toasterconfig
-  * Object Number: 002.2
-  * Fecha: 16-08-2018
-  * Descripcion: Method showToast of the Class
-  * Objetivo: showToast in the method header API
-  ****************************************************************************/
-  public toasterconfig: ToasterConfig =
-    new ToasterConfig({
-      showCloseButton: { 'warning': true, 'error': true },
-    }); // FIN | toasterconfig
-
+    // Guarda la fecha de Transaccion
+    this.saveFinanciamientoEncService();
+  } // Dialog
 
   /**
    * ******************* Funciones Propias **************************************
@@ -194,14 +127,14 @@ export class FinancEncabezadoComponent implements OnInit {
     this._financiamientoEncService.getAllMonedasProyecto().subscribe(
       result => {
         if (result.status !== 200) {
-          this.showToast('error', 'Error al Obtener la Información de todas las Monedas de Proyecto', result.message);
+          this._notificacionesService.showToast('error', 'Error al Obtener la Información de todas las Monedas de Proyecto', result.message);
           this.JsonReceptionAllMonedasProyecto = [];
         } else if (result.status === 200) {
           this.JsonReceptionAllMonedasProyecto = result.data;
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información de todas las Monedas de Proyecto', JSON.stringify(error.message));
+        this._notificacionesService.showToast('error', 'Error al Obtener la Información de todas las Monedas de Proyecto', JSON.stringify(error.message));
       },
     );
   } // FIN | getAllMonedasActividadService
@@ -230,24 +163,24 @@ export class FinancEncabezadoComponent implements OnInit {
         this._financiamientoEncService.newActividadFinanciamientoEnc(this._activityFinanciamientoEncModel).subscribe(
           result => {
             if (result.status !== 200) {
-              this.showToast('error', 'Error al Ingresar la Información de Encabezado de Financiamiento', result.message);
+              this._notificacionesService.showToast('error', 'Error al Ingresar la Información de Encabezado de Financiamiento', result.message);
             } else if (result.status === 200) {
               if (result.findRecord === true) {
-                this.showToast('error', 'Error al Ingresar la Información de Encabezado de Financiamiento', result.message);
+                this._notificacionesService.showToast('error', 'Error al Ingresar la Información de Encabezado de Financiamiento', result.message);
               } else {
-                this.showToast('default', 'Encabezado de Financiamiento', result.message);
+                this._notificacionesService.showToast('default', 'Encabezado de Financiamiento', result.message);
               }
             }
           },
           error => {
-            this.showToast('error', 'Error al Ingresar la Información de Encabezado de Financiamiento', JSON.stringify(error.error.message));
+            this._notificacionesService.showToast('error', 'Error al Ingresar la Información de Encabezado de Financiamiento', JSON.stringify(error.error.message));
           },
         );
       } else {
-        this.showToast('error', 'Error al ingresar la Información de Moneda de Financiamiento', 'Debes de ingresar monenda de Financiamiento del Proyecto, para continuar');
+        this._notificacionesService.showToast('error', 'Error al ingresar la Información de Moneda de Financiamiento', 'Debes de ingresar monenda de Financiamiento del Proyecto, para continuar');
       }
     } else {
-      this.showToast('error', 'Error al ingresar la Información de Encabezado de Financiamiento', 'Debes de ingresar el Costo Total del Proyecto, para continuar');
+      this._notificacionesService.showToast('error', 'Error al ingresar la Información de Encabezado de Financiamiento', 'Debes de ingresar el Costo Total del Proyecto, para continuar');
       this.montoActividadInput.nativeElement.focus();
     }
   } // FIN | saveFinanciamientoEncService
