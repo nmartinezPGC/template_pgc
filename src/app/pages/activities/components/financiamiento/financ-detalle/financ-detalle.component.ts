@@ -34,9 +34,9 @@ export class FinancDetalleComponent implements OnInit {
   display: boolean = false;
 
   public array: any = [
-    { "Id": 1, "name": "AECID", "Desc": "Agencia Española de Cooperacion Internacional para el Desarrollo" },
-    // { "Id": 2, "name": "USAID", "Desc": "Agencia de los Estados Unidos para el Desarrollo"},
-    // { "Id": 3, "name": "PNUD", "Desc": "Programa de la Naciones Unidas para el Desarrollo"},
+    { 'Id': 1, 'name': 'AECID', 'Desc': 'Agencia Española de Cooperacion Internacional para el Desarrollo' },
+    // { 'Id': 2, 'name': 'USAID', 'Desc': 'Agencia de los Estados Unidos para el Desarrollo'},
+    // { 'Id': 3, 'name': 'PNUD', 'Desc': 'Programa de la Naciones Unidas para el Desarrollo'},
   ];
 
   // Json Recptions
@@ -63,7 +63,7 @@ export class FinancDetalleComponent implements OnInit {
       null, 0, null, 0, null, 0, // Relacionales
       null, // Actividad con Detalle
       null, // Transaccion
-      true, null, null // Auditoria
+      true, null, null, // Auditoria
     );
 
     // Inicio de carga de Combos
