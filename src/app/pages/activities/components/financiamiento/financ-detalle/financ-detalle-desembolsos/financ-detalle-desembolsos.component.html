@@ -1,3 +1,63 @@
-<p>
-  financ-detalle-desembolsos works!
-</p>
+<!-- Maquetacion de la seccion de Desembolsos del Detalle de finanaciamiento del Proyecto -->
+<!-- NAM|2019-05-29 -->
+
+<nb-card>
+  <nb-card-body>
+    <div class="details">
+      <div class="title">
+        Desembolsos <img
+          src="../../../../../../assets/icons/forms/verification-of-delivery-list-clipboard-symbol_24.png" alt="">
+      </div>
+
+      <div class="description">
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col" nbPopover="Tipo de Transacción" nbPopoverMode="hint">Tipo</th>
+              <th scope="col" nbPopover="Monto de la Transacción" nbPopoverMode="hint">Monto</th>
+              <th scope="col" nbPopover="Moneda de la Transacción" nbPopoverMode="hint">Mon.</th>
+              <th scope="col" nbPopover="Fecha de Transacción" nbPopoverMode="hint">Fecha</th>
+              <th scope="col">Acción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Real</td>
+              <td>2,500,000.00</td>
+              <td>USD</td>
+              <td>2019-05-29</td>
+              <td style="text-align: center;"> <img class="accButton"
+                  src="../../../../../../assets/icons/forms/rubbish-bin_16.png" nbPopover="Eliminar Compromiso"
+                  nbPopoverMode="hint" alt="Eliminar">
+                <img class="accButton" src="../../../../../../assets/icons/forms/pencil-striped-symbol_16.png"
+                  nbPopover="Editar Compromiso" nbPopoverMode="hint" alt="Editar"> </td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Real</td>
+              <td>2,500,000</td>
+              <td>USD</td>
+              <td>2019-05-29</td>
+              <td style="text-align: center;"> <img class="accButton"
+                  src="../../../../../../assets/icons/forms/rubbish-bin_16.png" nbPopover="Eliminar Desembolso"
+                  nbPopoverMode="hint" alt="Eliminar">
+                <img class="accButton" src="../../../../../../assets/icons/forms/pencil-striped-symbol_16.png"
+                  nbPopover="Editar Desembolso" nbPopoverMode="hint" alt="Editar"> </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </nb-card-body>
+
+  <nb-card-footer>
+    <a nbPopover="Selecciona la Meta del ODS " nbPopoverMode="hint">
+      <i class="ion-flag"></i>
+    </a>
+    <a href="" target="_blanck" nbPopover="Ver Información del ODS " nbPopoverMode="hint">
+      <i class="ion-help"></i>
+    </a>
+  </nb-card-footer>
+</nb-card>

@@ -65,7 +65,6 @@ export class FinancEncabezadoComponent implements OnInit {
    * Constructor de la Clase
    */
   constructor(private _financiamientoEncService: FinanciamientoEncService,
-    private changeDetectorRef: ChangeDetectorRef,
     private _toasterService: ToasterService) { }
 
 
@@ -186,7 +185,7 @@ export class FinancEncabezadoComponent implements OnInit {
   * Funcion: getAllMonedasActividadService
   * Object Number: 003
   * Fecha: 21-05-2019
-  * Descripcion: Method getAllProgramaCampoTransversalService of the Class
+  * Descripcion: Method getAllMonedasActividadService of the Class
   * Objetivo: getAllMonedasActividadService listados de las Monedas de Proyecto
   * Params: { }
   ****************************************************************************/

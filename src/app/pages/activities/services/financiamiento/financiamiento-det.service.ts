@@ -49,4 +49,35 @@ export class FinanciamientoDetService {
       'Authorization': this.tokenHeader, 'Access-Control-Allow-Origin': '*',
     });
   } // FIN | Constructor
+
+
+  /****************************************************************************
+  * Funcion: FND-00002
+  * Fecha: 29-05-2019
+  * Descripcion: Metodo para obtener los Tipos de financiamiento
+  * Objetivo: Tipos de financiamiento
+  * Params: { }
+  ****************************************************************************/
+  getAllTiposFinanciamiento(): Observable<any> {
+    // Retorno de la Funcion
+    return this._http.get(this._systemEndPointsService.getEndPointService('mantActGroup', 10), {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  } // FIN | FND-00002
+
+  /****************************************************************************
+  * Funcion: FND-00003
+  * Fecha: 29-05-2019
+  * Descripcion: Metodo para obtener las Modalidades de Ayuda
+  * Objetivo: Modalidades de Ayuda
+  * Params: { }
+  ****************************************************************************/
+  getAllModalidadAyuda(): Observable<any> {
+    // Retorno de la Funcion
+    return this._http.get(this._systemEndPointsService.getEndPointService('mantActGroup', 12), {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  } // FIN | FND-00003
 }

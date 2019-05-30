@@ -41,7 +41,7 @@ import { MessageModule } from 'primeng/message';
 import { ListboxModule } from 'primeng/listbox';
 import { RecursosProyectoComponent } from './components/recursos-proyecto/recursos-proyecto.component';
 import { FileUploadModule } from 'primeng/fileupload';
-import { DropdownModule, EditorModule, AutoCompleteModule, KeyFilterModule, CalendarModule, DialogModule, InputMaskModule } from 'primeng/primeng';
+import { DropdownModule, EditorModule, AutoCompleteModule, KeyFilterModule, CalendarModule, DialogModule, InputMaskModule, AccordionModule } from 'primeng/primeng';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { FilterPipe } from './pipes/filter.pipe';
@@ -73,6 +73,9 @@ import { FinanciamientoComponent } from './components/financiamiento/financiamie
 
 // Monedas
 import { NgxCurrencyModule } from 'ngx-currency';
+import { FinancDetalleCompromisosFormComponent } from './components/financiamiento/financ-detalle/financ-detalle-compromisos/financ-detalle-compromisos-form/financ-detalle-compromisos-form.component';
+import { FinancDetalleDesembolsosFormComponent } from './components/financiamiento/financ-detalle/financ-detalle-desembolsos/financ-detalle-desembolsos-form/financ-detalle-desembolsos-form.component';
+import { FinancDetalleGastosFormComponent } from './components/financiamiento/financ-detalle/financ-detalle-gastos/financ-detalle-gastos-form/financ-detalle-gastos-form.component';
 
 export const customCurrencyMaskConfig = {
   align: 'right',
@@ -117,6 +120,7 @@ export const customCurrencyMaskConfig = {
     DialogModule,
     InputMaskModule,
     NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
+    AccordionModule, // NAM|2019-05-28
   ],
   declarations: [
     ...routedComponents,
@@ -147,6 +151,9 @@ export const customCurrencyMaskConfig = {
     FinancDetalleDesembolsosComponent,
     FinancDetalleGastosComponent,
     FinanciamientoComponent,
+    FinancDetalleCompromisosFormComponent,
+    FinancDetalleDesembolsosFormComponent,
+    FinancDetalleGastosFormComponent,
   ],
   providers: [
     // SmartTableService, // Defincion del Servicio que provee los Datos de la Tabla: ID's Internas
@@ -155,6 +162,7 @@ export const customCurrencyMaskConfig = {
   ],
   entryComponents: [
     OdsModalMetasComponent,
+    FinancDetalleCompromisosFormComponent,
   ],
 })
 export class ActivitiesPGCModule { }

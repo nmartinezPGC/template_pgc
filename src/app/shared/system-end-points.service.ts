@@ -450,10 +450,16 @@ export class SystemEndPointsService extends ListEndPointsService {
           case 66:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActividadSocioDesarrollo.urlEndPoint;
             break;
-          case 67: // NAM | 2019-05-23 | Mapeo de Financiamiento de Proyectos
+          case 67: // NAM | 2019-05-23 | Mapeo de Financiamiento Encabezado de Proyectos
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.newActividadFinanciamientoEnc.urlEndPoint;
             break;
           case 68:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActividadFinanciamientoEnc.urlEndPoint;
+            break;
+          case 69: // NAM | 2019-05-24 | Mapeo de Financiamiento Detalle de Proyectos
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.newActividadFinanciamientoEnc.urlEndPoint;
+            break;
+          case 70:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActividadFinanciamientoEnc.urlEndPoint;
             break;
         }
