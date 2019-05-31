@@ -139,10 +139,11 @@ export class FinancDetalleComponent implements OnInit {
   ****************************************************************************/
   saveFinanciamientoDetService() {
     // Asignacion de nuevos valores de Modelo
+    this._activityFinanciamientoDetModel.idSocioDesarrolloSend = 1;
     this._activityFinanciamientoDetModel.idActividadFinancEnc = { idActividadFinancEnc: 17 };
     this._activityFinanciamientoDetModel.idTipoFinanciamiento = { idTipoFinanciamiento: this._activityFinanciamientoDetModel.idTipoFinanciamientoSend };
     this._activityFinanciamientoDetModel.idModalidadAyuda = { idModalidadAyuda: this._activityFinanciamientoDetModel.idModalidadAyudaSend };
-    this._activityFinanciamientoDetModel.idSocioDesarrollo = { idSocioDesarrollo: this._activityFinanciamientoDetModel.idSocioDesarrolloSend };
+    this._activityFinanciamientoDetModel.idSocioDesarrollo = { idOrganizacion: this._activityFinanciamientoDetModel.idSocioDesarrolloSend };
     this._activityFinanciamientoDetModel.codigoFinancDet = this.codigoProyectoTab + '-AFD-' + this.idProyectoTab;
 
     // Evaluacion de Datos de Financiamiento Detalle de Proyecto
@@ -169,7 +170,7 @@ export class FinancDetalleComponent implements OnInit {
           },
         );
       } else {
-        this._notificacionesService.showToast('error', 'Error al ingresar la Información de Moneda de Financiamiento', 'Debes de ingresar monenda de Financiamiento del Proyecto, para continuar');
+        this._notificacionesService.showToast('error', 'Error al ingresar la Información de Moneda de Financiamiento', 'Debes de ingresar el Tipo Financiamiento del Proyecto, para continuar');
       }
     } else {
       this._notificacionesService.showToast('error', 'Error al ingresar la Información de Clasificación de Financiamiento', 'Debes de ingresar el Socio al Desarrollo del Proyecto, para continuar');

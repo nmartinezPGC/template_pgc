@@ -19,7 +19,7 @@ export class ActivityFinanciamientoDetModel {
         public idTipoFinanciamientoSend: number,
         public idModalidadAyuda: { idModalidadAyuda: number },
         public idModalidadAyudaSend: number,
-        public idSocioDesarrollo: { idSocioDesarrollo: number },
+        public idSocioDesarrollo: { idOrganizacion: number },
         public idSocioDesarrolloSend: number,
 
         public idActividadFinancEnc: { idActividadFinancEnc: number },
