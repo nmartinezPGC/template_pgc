@@ -5,15 +5,16 @@
       <a routerLink="/pages/dashboard">Dashboard</a>
     </li>
     <li class="breadcrumb-item">
-      <a routerLink="./">Mantenimientos</a>
+      <a routerLink="/pages/mantenimientos/mant-espacios-trabajo">Mantenimientos</a>
     </li>
     <li class="breadcrumb-item">
-      <a routerLink="/pages/mantenimientos/mant-espacios-trabajo">Tipo Organizacion</a>
+      <a routerLink="/pages/mantenimientos/mant-espacios-trabajo/grupo-trabajo">Tipo Organizacion</a>
     </li>
     <li class="breadcrumb-item active" aria-current="page">Crear Tipo Organizacion</li>
   </ol>
 </nav>
 <!-- ==================================================================================== -->
+
 <toaster-container [toasterconfig]="config"></toaster-container>
 <div class="row">
   <div class="col-md-12 col-lg-12">
@@ -57,8 +58,8 @@
                     <button type="button" class="btn btn-primary btn-group-icon btn-group-divider">
                       <i class="nb-plus-circled"></i>
                     </button>
-                    <button type="button" (click)="newTipoOrganizacion()" class="btn btn-primary"  value="refrescar" onclick="javascript:window.location.reload()" >Guardar</button>
-                    <button type="button" class="btn btn-warning">Cancelar</button>
+                      <button type="button" (click)="newTipoOrganizacion()"  class="btn btn-primary"  >Guardar</button>
+                    <button type="button" (click)="cleanTipoOrganizacion()" class="btn btn-warning">Cancelar</button>
                   </div>
                 </nb-card-body>
               </nb-card>

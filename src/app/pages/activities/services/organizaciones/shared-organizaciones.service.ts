@@ -70,4 +70,43 @@ export class SharedOrganizacionesService {
       params: { 'tokenApi': this.tokenHeader },
     });
   } // FIN | FND-00003
+
+  /****************************************************************************
+    * Funcion: FND-00002
+    * Fecha: 17-04-2019
+    * Descripcion: Metodo para obtener los Datos de Admon Financiero
+    * Objetivo: datos de Admon Financiero
+    * Params: { }
+    ****************************************************************************/
+   getAllAdmonFinanciero(caseOrganizacion: number): Observable<any> {
+    const paramsSend: number = caseOrganizacion;
+
+    // Retorno de la Funcion
+    return this._http.get(this._systemEndPointsService.getEndPointService('organizacionesGroup', 23) + paramsSend, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  } // FIN | FND-00002
+
+/****************************************************************************
+    * Funcion: FND-00002
+    * Fecha: 17-04-2019
+    * Descripcion: Metodo para obtener los Datos de agencia beneficiaria
+    * Objetivo: datos de agencia beneficiaria
+    * Params: { }
+    ****************************************************************************/
+    getAllAgenciaBeneficiaria(caseOrganizacion: number): Observable<any> {
+    const paramsSend: number = caseOrganizacion;
+
+    // Retorno de la Funcion
+    return this._http.get(this._systemEndPointsService.getEndPointService('organizacionesGroup', 23) + paramsSend, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  } // FIN | FND-00002
+
+
+
+
+
 }
