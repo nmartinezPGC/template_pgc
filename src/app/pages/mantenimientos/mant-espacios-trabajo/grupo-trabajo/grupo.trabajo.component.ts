@@ -333,7 +333,7 @@ export class GrupoTrabajoComponent implements OnInit {
     return this.responsedata;
   } // FIN | validateTipoOganizacion(_grupoModel: any)
 
-   private cleanTipoOrganizacion(){
+   private cleanTipoOrganizacion() {
      this.ngOnInit();
 
    };

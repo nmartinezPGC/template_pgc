@@ -1,4 +1,4 @@
-	/**
+/**
    * @author Jorge Escamilla
    * @returns Servicio de Admon-Financiero
    * @name ServiceAdmon-FinancieroPublicasService
@@ -14,7 +14,7 @@ import { SystemPropertiesService } from '../../../../shared/system-properties.se
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AdmonFinancieroService {
   // Variables de la Ruta de la API

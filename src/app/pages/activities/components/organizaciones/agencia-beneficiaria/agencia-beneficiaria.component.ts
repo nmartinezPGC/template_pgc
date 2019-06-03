@@ -222,7 +222,7 @@ export class AgenciaBeneficiariaComponent implements OnInit {
   ****************************************************************************/
  saveAgenciaBeneficiaria() {
    this.calcularPercent();
-   
+
   this.JsonSendAgenciaBeneficiaria.forEach(element => {
     // Valida que se registre el % de participacion
     if (element.otro === '') {
@@ -244,9 +244,9 @@ export class AgenciaBeneficiariaComponent implements OnInit {
               this.showToast('error', 'Error al Ingresar la Información de Agencia Beneficiaria', result.message);
             } else {
               this.showToast('default', 'Agencia Beneficiaria', result.message);
-            }if (result.status === 200){
+            }if (result.status === 200) {
               this.UpdateAgenciaBeneficiaria();
-              this.showToast('error','error al actualizar el registro', result.message);
+              this.showToast('error', 'error al actualizar el registro', result.message);
             }
           }
         },
@@ -268,7 +268,7 @@ private UpdateAgenciaBeneficiaria() {
   // Seteo de las variables del Model al json de Java
 
   this._activityOrganizacionAgenciaBeneficiariaModel.idActividadAgenciaBeneficiaria; // = { idActividad: this._activityOrganizacionAgenciaBeneficiariaModel.porcentajePart };
- 
+
   // this.validateUsuarios(this._usuarioModel);
   const responsedataExt: any = this.responsedata;
 

@@ -292,8 +292,8 @@ export class OrganizacionComponent implements OnInit {
     await delay(100);
     this.validateOrganizacion(this._OrganizacionModel);
 
-    //await delay(100);
-    //this.updateSecuenciaService(this.JsonReceptionUserDetail.idUsuarioMod, 1);
+    // await delay(100);
+    // this.updateSecuenciaService(this.JsonReceptionUserDetail.idUsuarioMod, 1);
 
     await delay(100);
     const responsedataExt: any = this.responsedata;
@@ -302,7 +302,7 @@ export class OrganizacionComponent implements OnInit {
       this.showToast('error', 'Error al ingresar los datos', responsedataExt.msg);
       return -1;
     }
-   
+
 
     // Seteo de las variables del Model al json de Java
     this._OrganizacionModel.idCatOrganizacion = { idCatOrganizacion: this._OrganizacionModel.idCatOrganizacion1 };
@@ -506,7 +506,7 @@ export class OrganizacionComponent implements OnInit {
 
           // Componemos la Secuencia a Generar
           const prefixHND: string = 'ORG-';
-          this._OrganizacionModel.codOrganizacion = prefixHND + (Number(this.secuenciaDeActividad.valor +1));
+          this._OrganizacionModel.codOrganizacion = prefixHND + (Number(this.secuenciaDeActividad.valor + 1));
         }
       },
       error => {
@@ -544,7 +544,7 @@ export class OrganizacionComponent implements OnInit {
   );
 } // FIN | FND-00001.1
 
-protected cleanOrganizacione(){
+protected cleanOrganizacione() {
 
 this.ngOnInit();
 }
