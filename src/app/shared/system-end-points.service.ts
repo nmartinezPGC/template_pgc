@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-
-// Importamos la Clase base de variables de Entorno
-import { SystemPropertiesService } from './system-properties.service'
 import { ListEndPointsService } from './list-end-points.service';
+// Importamos la Clase base de variables de Entorno
+import { SystemPropertiesService } from './system-properties.service';
+
 
 // Clase de Propieades Globales de la PGC
 @Injectable()
@@ -461,6 +461,7 @@ export class SystemEndPointsService extends ListEndPointsService {
             break;
           case 70:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActividadFinanciamientoDet.urlEndPoint;
+            break;
           case 71: // AMA | 2019-27-05 | Mapeo de Organización Unidad Ejecutora
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findAllUnidadEjecutora.urlEndPoint;
             break;
@@ -482,34 +483,34 @@ export class SystemEndPointsService extends ListEndPointsService {
           case 76: // Mapeo Admon Financiero
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findAllAdmonFinanciero.urlEndPoint;
             break;
-            case 77:
+          case 77:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdActividadAmonFinanciero.urlEndPoint;
             break;
-            case 78:
+          case 78:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByCodigoActividadAdmonFinanciero.urlEndPoint;
             break;
-            case 79:
+          case 79:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.newActividadAmonFinanciero.urlEndPoint;
             break;
-            case 80:
+          case 80:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActividadAdmonFinanciero.urlEndPoint;
             break;
-            case 81: // Mapeo Agencia beneficiario
+          case 81: // Mapeo Agencia beneficiario
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findAllAgenciaBeneficiaria.urlEndPoint;
             break;
-            case 82:
+          case 82:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdActividadAgenciaBeneficiaria.urlEndPoint;
             break;
-            case 83:
+          case 83:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByCodigoActividadAgenciaBeneficiaria.urlEndPoint;
             break;
-            case 84:
+          case 84:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.newActividadAgenciaBeneficiaria.urlEndPoint;
             break;
-            case 85:
+          case 85:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.editActividadAgenciaBeneficiaria.urlEndPoint;
             break;
-            case 86:
+          case 86:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActividadAgenciaBeneficiaria.urlEndPoint;
             break;
         }
