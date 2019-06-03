@@ -456,6 +456,40 @@ export class SystemEndPointsService extends ListEndPointsService {
           case 68:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActividadFinanciamientoEnc.urlEndPoint;
             break;
+           case 76: // Mapeo Admon Financiero
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findAllAdmonFinanciero.urlEndPoint;
+            break;
+            case 77:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdActividadAmonFinanciero.urlEndPoint;
+            break;
+            case 78:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByCodigoActividadAdmonFinanciero.urlEndPoint;
+            break;
+            case 79:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.newActividadAmonFinanciero.urlEndPoint;
+            break;
+            case 80:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActividadAdmonFinanciero.urlEndPoint;
+            break;
+            case 81: // Mapeo Agencia beneficiario
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findAllAgenciaBeneficiaria.urlEndPoint;
+            break;
+            case 82:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdActividadAgenciaBeneficiaria.urlEndPoint;
+            break;
+            case 83:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByCodigoActividadAgenciaBeneficiaria.urlEndPoint;
+            break;
+            case 84:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.newActividadAgenciaBeneficiaria.urlEndPoint;
+            break;
+            case 85:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.editActividadAgenciaBeneficiaria.urlEndPoint;
+            break;
+            case 86:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActividadAgenciaBeneficiaria.urlEndPoint;
+            break;
+
         }
         break;
       case 'mantGenericosUsuarioGroup': // Llamados a los EndPoint de usuarios

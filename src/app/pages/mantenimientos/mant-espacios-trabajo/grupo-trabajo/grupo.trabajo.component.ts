@@ -31,6 +31,7 @@ export class GrupoTrabajoComponent implements OnInit {
   public JsonReceptionTipoPerfiles: any;
 
 
+
   data: any;
   config: ToasterConfig;
 
@@ -109,7 +110,7 @@ export class GrupoTrabajoComponent implements OnInit {
     );
     // inicializar la lista de tipo de perfiles
     this.listarTipoOrganizacion();
-  }
+   }
   /* **************************************************************************/
   /* ****************** Funciones Propias de la Clase *************************/
 
@@ -172,9 +173,12 @@ export class GrupoTrabajoComponent implements OnInit {
           this.showToast('error', 'Error al Ingresar la Información del Perfil', response.message);
         } else if (response.status === 200) {
           this.showToast('default', 'La Información del Tipo de Organozacion, se ha ingresado con exito', response.message);
-          // Carga la tabla Nuevamente
-          this.listarTipoOrganizacion();
+
         }
+         // Carga la tabla Nuevamente
+        this.listarTipoOrganizacion();
+        this.ngOnInit();
+
       },
       error => {
         // Redirecciona al Login
@@ -210,6 +214,7 @@ export class GrupoTrabajoComponent implements OnInit {
           this.showToast('default', 'se actualizaron con exito los datos', response.message);
           // Carga la tabla Nuevamente
           // this.perfilesDatailsService();
+          this.listarTipoOrganizacion();
         }
       },
       error => {
@@ -272,6 +277,7 @@ export class GrupoTrabajoComponent implements OnInit {
           // Carga la tabla Nuevamente
           // this.perfilesDatailsService();
         }
+        this.listarTipoOrganizacion();
       },
       error => {
         // Redirecciona al Login
@@ -326,4 +332,10 @@ export class GrupoTrabajoComponent implements OnInit {
     }
     return this.responsedata;
   } // FIN | validateTipoOganizacion(_grupoModel: any)
+
+   private cleanTipoOrganizacion(){
+     this.ngOnInit();
+
+   };
+
 }

@@ -9,24 +9,26 @@
       <div class="row">
         <div class="col-sm-6">
           <h4>Selecciona | Agencia Beneficiaria</h4>
-          <angular2-multiselect [data]="dropdownListSocioDesarrollo" [(ngModel)]="selectedItemsSocioDesarrollo"
-            [settings]="dropdownSettings" (onSelect)="OnItemSelectSocioDesarrollo($event)"></angular2-multiselect>
+          <angular2-multiselect [data]="dropdownListAgenciaBeneficiaria" [(ngModel)]="selectedItemsAgenciaBeneficiaria"
+            [settings]="dropdownSettings" (onSelect)="OnItemSelectAgenciaBeneficiaria($event)"></angular2-multiselect>
         </div>
 
         <div class="col-sm-6">
           <h4>Agencia Beneficiaria seleccionados</h4>
-          <p-listbox [options]="JsonSendSociosDesarrollo" [style]="{'width': '100%'}" [(ngModel)]="selectedCities"
+          <p-listbox [options]="JsonSendAgenciaBeneficiaria" [style]="{'width': '100%'}" [(ngModel)]="selectedCities"
             multiple="multiple" filter="filter" optionLabel="name">
             <p-header>
               <i class="fa fa-file"></i>
               Confirma cuales Agencia Beneficiaria deben de registrarse...
             </p-header>
-            <ng-template let-socio pTemplate="item">
+            <ng-template let-Agencia pTemplate="item">
               <div class="ui-helper-clearfix">
-                <span style="float:left">{{socio.label}}</span>
+                <span style="float:left">{{Agencia.label}}</span>
                 <input style="float: right; width: 15%; height: 10px; text-align: center" class="form-control"
                   type="text" severity="error" pInputText pKeyFilter="int" placeholder="%" maxlength="2"
-                  value="{{socio.value.otro}}" (keyup)="validaPercent($event, socio.value.code)">
+                  value="{{Agencia.value.otro}}" (keyup)="validaPercent($event, Agencia.value.code)">
+                  <img style="float: right;" src="../../../../../../assets/icons/forms/rubbish-bin_16.png" alt="Delete"
+                  (click)="cleanAgenciaBeneficiaria(Agencia.value.code)">
               </div>
             </ng-template>
           </p-listbox>
@@ -36,7 +38,7 @@
             <!-- Boton de Calcular Porcentajes -->
             <button type="button" class="btn btn-outline-danger btn-icon"
               nbPopover="Limpia el listado de Agencia Beneficiaria" nbPopoverMode="hint" nbPopoverPlacement="top"
-              (click)="cleanSocioDesarrollo()">
+              (click)="cleanAllAgenciaBeneficiaria()">
               <i class="ion-trash-a"></i>
             </button>
 
@@ -49,7 +51,7 @@
             <!-- Boton para Grabar Organizaciones  -->
             <button type="button" class="btn btn-outline-primary btn-icon"
               nbPopover="Registra el listado Agencia Beneficiaria" nbPopoverMode="hint" nbPopoverPlacement="top"
-              (click)="saveSocioDesarrollo()">
+              (click)="saveAgenciaBeneficiaria()">
               <i class="ion-upload"></i>
             </button>
           </div>

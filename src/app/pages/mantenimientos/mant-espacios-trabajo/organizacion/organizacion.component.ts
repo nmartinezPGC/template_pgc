@@ -292,8 +292,8 @@ export class OrganizacionComponent implements OnInit {
     await delay(100);
     this.validateOrganizacion(this._OrganizacionModel);
 
-    await delay(100);
-    this.updateSecuenciaService(this.JsonReceptionUserDetail.idUsuario, 1);
+    //await delay(100);
+    //this.updateSecuenciaService(this.JsonReceptionUserDetail.idUsuarioMod, 1);
 
     await delay(100);
     const responsedataExt: any = this.responsedata;
@@ -302,6 +302,7 @@ export class OrganizacionComponent implements OnInit {
       this.showToast('error', 'Error al ingresar los datos', responsedataExt.msg);
       return -1;
     }
+   
 
     // Seteo de las variables del Model al json de Java
     this._OrganizacionModel.idCatOrganizacion = { idCatOrganizacion: this._OrganizacionModel.idCatOrganizacion1 };
@@ -319,8 +320,10 @@ export class OrganizacionComponent implements OnInit {
           this.showToast('error', 'Error al Ingresar la Información del Usuario', response.message);
         } else if (response.status === 200) {
           this.showToast('default', 'La Información de la Organizacion, se ha ingresado con exito', response.message);
-          this.ListAllCategoria();
+        //  this.ListAllCategoria();
         }
+        this.ListAllOranizacion();
+        this.ngOnInit();
       },
     );
   } // FIN | newUsuarioService
@@ -440,8 +443,9 @@ export class OrganizacionComponent implements OnInit {
           this.showToast('error', 'Error al desahabilitar la organizacion con exito', response.message);
         } else if (response.status === 200) {
           this.showToast('default', 'se deshabilito la organizacion de forma exitosa', response.message);
-          this.ListAllCategoria();
+         // this.ListAllCategoria();
         }
+        this.ListAllOranizacion();
       },
     );
   } // FIN | newUsuarioService
@@ -502,7 +506,7 @@ export class OrganizacionComponent implements OnInit {
 
           // Componemos la Secuencia a Generar
           const prefixHND: string = 'ORG-';
-          this._OrganizacionModel.codOrganizacion = prefixHND + (Number(this.secuenciaDeActividad.valor2));
+          this._OrganizacionModel.codOrganizacion = prefixHND + (Number(this.secuenciaDeActividad.valor +1));
         }
       },
       error => {
@@ -526,7 +530,7 @@ export class OrganizacionComponent implements OnInit {
     },
   };
 
-  this._OrganizacionService.updateSecuence(jsonSecuencia, idSecuencia).subscribe(
+  this._OrganizacionService.updateSecuence(idSecuencia).subscribe(
     result => {
       if (result.status !== 200) {
         this.showToast('error', 'Error al Actualizar la Información de la Secuencia', JSON.stringify(result.message));
@@ -539,5 +543,11 @@ export class OrganizacionComponent implements OnInit {
     },
   );
 } // FIN | FND-00001.1
+
+protected cleanOrganizacione(){
+
+this.ngOnInit();
+}
+;
 
 }

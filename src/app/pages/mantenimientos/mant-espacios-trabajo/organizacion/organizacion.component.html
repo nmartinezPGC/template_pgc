@@ -157,7 +157,7 @@
                   </div><br>
                   <div class="btn-group">
                     <button type="button" (click)="newOrganizacion()" class="btn btn-primary">Guardar</button>
-                    <button type="button" class="btn btn-warning">Cancelar</button>
+                    <button type="button"(click)="cleanOrganizacione()" class="btn btn-warning">Cancelar</button>
                   </div>
                   <div class="form-group">
                   </div>
@@ -193,7 +193,7 @@
                   </thead>
                   <tbody>
                     <tr
-                    
+
                       *ngFor="let item of JsonReceptionOrganizaciones  | filterdata: queryString : 'nombreOrganizacion' | paginate: { itemsPerPage: 5, currentPage: p };let homeTableIndex = index">
                       <td>{{ homeTableIndex + 1 }}</td>
                       <td>{{item.nombreOrganizacion}}</td>
