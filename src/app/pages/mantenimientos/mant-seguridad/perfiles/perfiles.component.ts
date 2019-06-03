@@ -1,3 +1,6 @@
+
+
+
 /**
  * @author David Pavon
  * @returns mantenimiento de perfiles
@@ -132,9 +135,8 @@ export class PerfilesComponent implements OnInit {
   ngOnInit() {
     // Inicializacion del Modelo de la Clase
     this._perfilModel = new PerfilModel(
-      0, null, null, null,
-      null, 0, '',
-    );
+      0,  null, null, true,
+      null, 0, null );
     // inicializar la lista de tipo de perfiles
     this.perfilesTipoService();
   }
@@ -208,7 +210,7 @@ export class PerfilesComponent implements OnInit {
       this._perfilModel.idTipo = event.newData.idTipoPerfil.idTipo;
       this._perfilModel.codPerfil = event.newData.codPerfil;
       this._perfilModel.descPerfil = event.newData.descPerfil;
-      this._perfilModel.estadoPerfil = event.newData.activado;
+      this._perfilModel.activado = event.newData.activado;
       // this._perfilModel.descripcionTipoPerfil = event.newData.descripcionTipoPerfil;
       this._perfilModel.idTipo = event.newData.descripcionTipoPerfil;
       this._perfilModel.idTipoPerfil = { idTipo: this._perfilModel.idTipo };
@@ -349,22 +351,15 @@ export class PerfilesComponent implements OnInit {
           // console.log(response.data);
           // Carga la tabla Nuevamente
           this.perfilesDatailsService();
+          this.ngOnInit();
         }
       },
       error => {
         // Redirecciona al Login
-        alert('Error en la petición de la API ' + <any>error);
+        // alert('Error en la petición de la API ' + <any>error.message.message);
+        this.showToast('error', 'Error en la petición de la API', <any>error.message.message);
 
         // Borramos los datos del LocalStorage
-        localStorage.removeItem('auth_app_token');
-        localStorage.removeItem('identity');
-
-        const redirect = '/auth/login';
-        setTimeout(() => {
-          // Iniciativa Temporal
-          location.reload();
-          return this._router.navigateByUrl(redirect);
-        }, 2000);
       },
     );
   } // FIN | newPerfilService
@@ -440,4 +435,8 @@ export class PerfilesComponent implements OnInit {
     }
     return this.responsedata;
   } // FIN | perfilesTipoService
+  cleanPerfiles() {
+    this.ngOnInit();
+    } // FIN | cleanPerfiles
 }
+

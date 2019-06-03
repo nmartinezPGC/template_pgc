@@ -11,6 +11,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster';
 import { SharedOrganizacionesService } from '../../../services/organizaciones/shared-organizaciones.service';
 import { UnidadEjecutoraService } from '../../../services/organizaciones/unidad-ejecutora.service';
+import { ActivityOrganizacionUnidadEjecutoraModel } from '../../../models/organizaciones/model-unidad-ejecutora';
 
 @Component({
   selector: 'ngx-unidad-ejecutora',
@@ -23,6 +24,7 @@ export class UnidadEjecutoraComponent implements OnInit {
   @Input() idProyectoTab: number;
   @Input() idUsuarioTab: number;
   @Input() codigoProyectoTab: string;
+  @Input() idActividadUnidadEjecutora;
 
   /**
    * Configuracion del Dropdow List
@@ -45,9 +47,16 @@ export class UnidadEjecutoraComponent implements OnInit {
   isDuplicatesPrevented = false;
   isCloseButton = true;
   config: ToasterConfig;
+  public responsedata: any;
 
   // Json de recpcion de Informacion
   public JsonReceptionAllUnidadEjecutora: any;
+  // Json a enviar
+  public JsonSendUnidadEjecutora: any = [];
+  changeDetectorRef: any;
+
+  // Modelo de la Clase
+  public _activityOrganizacionUnidadEjecutoraModel: ActivityOrganizacionUnidadEjecutoraModel;
 
   /**
    * Constructor de la Clase
@@ -63,8 +72,14 @@ export class UnidadEjecutoraComponent implements OnInit {
    * Funcion Inicial de la clase
    */
   ngOnInit() {
+    // inicializacion del Modelo
+       this._activityOrganizacionUnidadEjecutoraModel = new ActivityOrganizacionUnidadEjecutoraModel(
+      0, '', // datos Generales
+      null, null, 0, // Relacionales
+      true, null, null, // Auditoria
+    );
     // Carga los Datos de Socio al Desarrollo
-    this.getAllUnidadEjecutoraService(2);
+    this.getAllUnidadEjecutoraService(3);
 
     // Inicio de las Configuraciones del DrowDown
     this.dropdownListUnidadEjecutora = [];
@@ -165,7 +180,7 @@ export class UnidadEjecutoraComponent implements OnInit {
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información de todos los Socios al Desarrollo', JSON.stringify(error.message));
+        this.showToast('error', 'Error al Obtener la Información de todas las Unidad Ejecutoras', JSON.stringify(error.message));
       },
     );
   } // FIN | getAllUnidadEjecutoraService
@@ -180,10 +195,170 @@ export class UnidadEjecutoraComponent implements OnInit {
   * Objetivo: enviar al Json de Proyectos el Id del Socio al Desarrollo
   * información que ocupa la API
   ****************************************************************************/
-  OnItemDeSelectEspacioTrabajo(item: any) {
-    // Asignamos el Pais seleccionado
-    // this..idEspacioTrabajo = item.id;
-    // this.tipoEspacioTrabajo = item.tipoEspacioTrabajo;
-  } // FIN | OnItemDeSelectUnidadEjecutora
+ OnItemSelectUnidadEjecutora(item: any) {const foundUnidadEjecutora = this.JsonSendUnidadEjecutora.find(function (element) {
+    return element.name === item.itemName;
+  });
 
+  if (foundUnidadEjecutora !== undefined) {
+    this.showToast('error', 'Error al seleccionar Unidad Ejecutora', 'Ya existe en el listado la Unidad Ejecutora seleccionado');
+  } else {
+    // Asignamos la Unidad Ejecutora seleccionado
+    this.JsonSendUnidadEjecutora = [...this.JsonSendUnidadEjecutora, { name: item.itemName, code: item.id, otro: '' }];
+  }
+  } // FIN | OnItemDeSelectUnidadEjecutora
+  /****************************************************************************
+  * Funcion: saveUnidadEjecutora
+  * Object Number: 004
+  * Fecha: 28-05-2019
+  * Descripcion: Method para Ingresar Items de la Unidad Ejecutora
+  * en la Insercion del Proyecto
+  * Objetivo: enviar al Json de la Unidad Ejecutora
+  * información que ocupa la API
+  ****************************************************************************/
+ saveUnidadEjecutora() {
+   this.calcularPercent();
+  this.JsonSendUnidadEjecutora.forEach(element => {
+    // Valida que se registre el % de participacion
+    if (element.otro === '') {
+      this.showToast('error', 'Error al ingresar la Unidad Ejecutora', 'No tiene el % de participación ingresado');
+      return -1;
+    } else {
+      this._activityOrganizacionUnidadEjecutoraModel.codigoActividad = this.codigoProyectoTab + '-AUE-' + element.code;
+      this._activityOrganizacionUnidadEjecutoraModel.idActividad = { idActividad: this.idProyectoTab };
+      this._activityOrganizacionUnidadEjecutoraModel.idOrganizacion = { idOrganizacion: element.code };
+      this._activityOrganizacionUnidadEjecutoraModel.porcentajePart = Number(element.otro);
+      // Ejecuta el Servicio de invocar el registro de Socio al Desarrollo
+      this._unidadEjecutoraService.newActividadUnidadEjecutora(this._activityOrganizacionUnidadEjecutoraModel).subscribe(
+        result => {
+          if (result.status !== 200) {
+            this.showToast('error', 'Error al Ingresar la Información de la Unidad Ejecutora', result.message);
+          } else if (result.status === 200) {
+            if (result.findRecord === true) {
+              this.showToast('error', 'Error al Ingresar la Información de la Unidad Ejecutora', result.message);
+            } else {
+              this.showToast('default', 'Unidad Ejecutora', result.message);
+            }
+          }
+        },
+        error => {
+          this.showToast('error', 'Error al Ingresar la Información de la Unidad Ejecutora', JSON.stringify(error.error.message));
+        },
+      );
+    }
+  })
+} // FIN | saveUnidadEjecutora
+/****************************************************************************
+  * Funcion: cleanUnidadEjecutora
+  * Object Number: 005
+  * Fecha: 28-05-2019
+  * Descripcion: Method para limpiar Item de la Unidad Ejecutora
+  * en la Insercion del Proyecto
+  * Objetivo: limpiar el Json de los Items seleccionados
+  ****************************************************************************/
+ cleanUnidadEjecutora(event: any) {
+  for (let i = 0; i < this.JsonSendUnidadEjecutora.length; i++) {
+    if (this.JsonSendUnidadEjecutora[i].code === event) {
+      // Ejecuta el Servicio de invocar el registro de Socio al Desarrollo
+      this._unidadEjecutoraService.deleteActividadUnidadEjecutora(this.codigoProyectoTab + '-AUE-' + this.JsonSendUnidadEjecutora[i].code).subscribe(
+        result => {
+          if (result.status !== 200) {
+            this.showToast('error', 'Error al Borrar la Información de Unidad Ejecutora', result.message);
+          } else if (result.status === 200) {
+            if (result.findRecord === true) {
+              this.showToast('error', 'Error al Borrar la Información de Unidad Ejecutora', result.message);
+            } else {
+              this.showToast('default', 'Socio al Desarrollo', result.message);
+            }
+          }
+        },
+        error => {
+          this.showToast('error', 'Error al Borrar la Información de Unidad Ejecutora', JSON.stringify(error.error.message));
+        },
+      );
+      // Borramos el Item del Json
+      this.JsonSendUnidadEjecutora.splice(i, 1);
+      // para el Bucle
+      break;
+    }
+  }
+  this.JsonSendUnidadEjecutora = [...this.JsonSendUnidadEjecutora];
+} // FIN | cleanSocioDesarrollo
+
+
+/****************************************************************************
+* Funcion: cleanSocioDesarrollo
+* Object Number: 005.1
+* Fecha: 13-05-2019
+* Descripcion: Method para limpiar Items del Socio al Desarrollo
+* en la Insercion del Proyecto
+* Objetivo: limpiar el Json de los Items seleccionados
+****************************************************************************/
+cleanAllUnidadEjecutora() {
+  this.JsonSendUnidadEjecutora = [];
+  this.JsonSendUnidadEjecutora = [...this.JsonSendUnidadEjecutora];
+} // FIN | cleanUnidadEjecutora
+/****************************************************************************
+  * Funcion: UpdateUnidadEjecutora
+  * Object Number: 006
+  * Fecha: 30-05-2019
+  * Descripcion: Method para actualizar datos de la  de Unidad Ejecutora
+  * Objetivo: Actualizar datos de la Unidad Ejecutora
+  ****************************************************************************/
+private UpdateUnidadEjecutora() {
+  this._activityOrganizacionUnidadEjecutoraModel.idActividadUnidadEjecutora
+
+  // this.validateUsuarios(this._usuarioModel);
+  const responsedataExt: any = this.responsedata;
+
+  if (responsedataExt.error === true) {
+    this.showToast('error', 'Error al ingresar los datos', responsedataExt.msg);
+    return -1;
+  }
+  // Ejecutamos el Recurso del EndPoint
+  this._unidadEjecutoraService.OrganizacionUpdate(this._activityOrganizacionUnidadEjecutoraModel, this.idActividadUnidadEjecutora).subscribe(
+    response => {
+      if (response.status !== 200) {
+        this.showToast('error', 'Error al Ingresar los datos', response.message);
+      } else if (response.status === 200) {
+        this.showToast('default', 'se actualizo con exito la informacion de la organizacion', response.message);
+      }
+    },
+  );
+}
+/****************************************************************************
+  * Funcion: validaPercent
+  * Object Number: 006
+  * Fecha: 13-05-2019
+  * Descripcion: Method para validar % Items de Unidad Ejecutora
+  * en la Insercion del Proyecto
+  * Objetivo: % el Json de los Items seleccionados
+  ****************************************************************************/
+ validaPercent(event: any, codeIn: number) {
+  const otroIn = event.target.value;
+
+  this.JsonSendUnidadEjecutora.map(function (dato) {
+    if (dato.code === codeIn) {
+      dato.otro = otroIn;
+    }
+    return dato;
+  });
+} // FIN | validaPercent
+
+
+/****************************************************************************
+* Funcion: calcularPercent
+* Object Number: 007
+* Fecha: 28-05-2019
+* Descripcion: Method para calcular % Items de la Unidad Ejecutora
+* en la Insercion del Proyecto
+* Objetivo: calculo de % el Json de los Items seleccionados
+****************************************************************************/
+calcularPercent() {
+  const valorMax = (100 / this.JsonSendUnidadEjecutora.length);
+
+  this.JsonSendUnidadEjecutora.map(function (dato) {
+    dato.otro = valorMax.toFixed(2);
+    return dato;
+  });
+} // FIN | calcularPercent
 }

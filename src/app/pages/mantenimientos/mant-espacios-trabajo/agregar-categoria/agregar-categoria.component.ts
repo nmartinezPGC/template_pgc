@@ -210,22 +210,9 @@ export class AgregarCategoriaComponent implements OnInit {
           this.showToast('default', 'de la categoria se ingreso con exito, se ha ingresado con exito', response.message);
           // console.log(response.data);
           // Carga la tabla Nuevamente
+          this.listarTipoOrganizacion();
+          this.ngOnInit();
         }
-      },
-      error => {
-        // Redirecciona al Login
-        alert('Error en la petición de la API ' + <any>error);
-
-        // Borramos los datos del LocalStorage
-        localStorage.removeItem('auth_app_token');
-        localStorage.removeItem('identity');
-
-        const redirect = '/auth/login';
-        setTimeout(() => {
-          // Iniciativa Temporal
-          location.reload();
-          return this._router.navigateByUrl(redirect);
-        }, 2000);
       },
     );
   } // FIN | newPerfilService
@@ -247,14 +234,14 @@ export class AgregarCategoriaComponent implements OnInit {
     }
     // Ejecutamos el Recurso del EndPoint
     this._categoriaService.CategoriaUpdate(this._CategoriaModel, this._CategoriaModel.idCatOrganizacion).subscribe(
-      result => {
-        if (result.status !== 200) {
-          this.showToast('error', 'Error al actualizar los cambios', JSON.stringify(result.message))
-        } else if (result.status === 200) {
+      response => {
+        if (response.status !== 200) {
+          this.showToast('error', 'Error al actualizar los cambios', JSON.stringify(response.message))
+        } else if (response.status === 200) {
           // console.log(result.status);
-          this.showToast('success', 'se actualizaron con exito los datos', JSON.stringify(result.message))
+          this.showToast('default', 'se actualizaron con exito los datos', JSON.stringify(response.message))
           // Carga la tabla Nuevamente
-           this.updateCategoria
+           this.updateCategoria();
         }
       },
       error => {
@@ -328,7 +315,9 @@ export class AgregarCategoriaComponent implements OnInit {
       },
     );
   } // FIN | ondelete
-
+  cleanCategoria() {
+    this.ngOnInit();
+    } // FIN | cleanCategoria
   /**
      * onDeleteConfirm
      * @param event

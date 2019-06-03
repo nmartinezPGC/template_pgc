@@ -308,7 +308,7 @@ result => {
  }
 },
 error => {
- this.showToast('error', 'Error al Obtener la Información de todos los Programa de Politicas Publicas', JSON.stringify(error.message));
+ this.showToast('error', 'Error al Obtener la Info de todos los Programa de Politicas Publicas', JSON.stringify(error.message));
 },
 );
 } // FIN | getAllProgramaPolitica PublicaService
@@ -487,7 +487,7 @@ for (let index = 0; index < this.JsonSendProgramaPoliticasPublicasOpciones.lengt
        if (result.findRecord === false) {
          this.showToast('error', 'Error al Ingresar la Información de Politica Publica asociado al Proyecto', JSON.stringify(result.message));
        } else {
-         this.showToast('success', 'Programa de Politica Publica asociado al Proyecto', JSON.stringify(result.message));
+         this.showToast('success', 'Programa de Politica Publica se ha asociado al Proyecto', JSON.stringify(result.message));
        }
      }
    },

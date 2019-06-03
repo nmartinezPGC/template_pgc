@@ -5,10 +5,10 @@
       <a routerLink="/pages/dashboard">Dashboard</a>
     </li>
     <li class="breadcrumb-item">
-      <a routerLink="./">Mantenimientos</a>
+      <a routerLink="/pages/mantenimientos/mant-espacios-trabajo/">Mantenimientos</a>
     </li>
     <li class="breadcrumb-item">
-      <a routerLink="/pages/mantenimientos/mant-espacios-trabajo">Agregar Categoria</a>
+      <a routerLink="./">Agregar Categoria</a>
     </li>
     <li class="breadcrumb-item active" aria-current="page">Agregar Categoria de Organizacion</li>
   </ol>
@@ -33,7 +33,7 @@
                   </div>
                   <label>Codigo de Categoria</label>
                   <div class="form-group">
-                    <input #codCatOrganizacion="ngModel" class="form-control" type="text" pKeyFilter="num" placeholder="Codigo de Categoria"
+                    <input #codCatOrganizacion="ngModel" class="form-control" type="text"  placeholder="Codigo de Categoria"
                       name="codCatOrganizacion" id="codCatOrganizacion" ngControl="codCatOrganizacion" [(ngModel)]="_CategoriaModel.codCatOrganizacion"
                       required />
                   </div>
@@ -65,9 +65,8 @@
                     </div>
                   </div>
                   <div class="btn-group">
-                   
                     <button type="button" (click)="newCategoria()" class="btn btn-primary"  >Guardar</button>
-                    <button type="button" class="btn btn-warning">Cancelar</button>
+                    <button type="button" (click)="cleanCategoria()" class="btn btn-warning">Cancelar</button>
                   </div>
                 </nb-card-body>
               </nb-card>

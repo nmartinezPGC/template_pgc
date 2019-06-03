@@ -12,7 +12,7 @@ export class PerfilModel {
         public idPerfil: number,
         public codPerfil: string,
         public descPerfil: string,
-        public estadoPerfil: boolean = true,
+        public activado: boolean = true,
         // mapeo de relacion tipo de perfil
         public idTipoPerfil: { idTipo: number },
         public idTipo: number,

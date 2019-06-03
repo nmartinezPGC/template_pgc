@@ -1,0 +1,43 @@
+@import '../../../../../../../@theme/styles/themes';
+
+$color-loader: #9aa0a5;
+
+/deep/ nb-card.popover-card {
+  margin-bottom: 0;
+  width: 300px;
+  box-shadow: none;
+}
+
+@include nb-install-component() {
+  nb-card-body {
+    padding: 0;
+  }
+
+  /deep/ .leaflet-container {
+    width: 100%;
+    height: nb-theme(card-height-large);
+  }
+
+  nb-card-header {
+    background-color: #204f85;
+    color: rgb(255, 255, 255);
+    font-size: 17px;
+  }
+
+  @media screen and (min-width: 992px) {
+    .modal-content {
+      width: 120% !important;
+      margin-left: -10%;
+    }
+  }
+
+  .botonSave {
+    background-color: #204f85;
+    cursor: pointer;
+  }
+
+  .botonSave:hover {
+    background-color: #1f6abe;
+    cursor: pointer;
+  }
+}

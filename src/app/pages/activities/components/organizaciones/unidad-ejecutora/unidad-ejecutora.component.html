@@ -10,40 +10,47 @@
         <div class="col-sm-6">
           <h4>Selecciona | Unidad Ejecutora</h4>
           <angular2-multiselect [data]="dropdownListUnidadEjecutora" [(ngModel)]="selectedItemsUnidadEjecutora"
-            [settings]="dropdownSettings" (onSelect)="OnItemDeSelectUnidadEjecutora($event)"></angular2-multiselect>
+            [settings]="dropdownSettings" (onSelect)="OnItemSelectUnidadEjecutora($event)"></angular2-multiselect>
         </div>
 
         <div class="col-sm-6">
           <h4>Unidad Ejecutora seleccionados</h4>
-          <p-listbox [options]="JsonSendProgramaPlanNacionOpciones" [style]="{'width': '100%'}"
+          <p-listbox [options]="JsonSendUnidadEjecutora" [style]="{'width': '100%'}"
             [(ngModel)]="selectedCities" multiple="multiple" filter="filter" optionLabel="name">
             <p-header>
               <i class="fa fa-file"></i>
               Confirma cuales Unidad Ejecutora deben de registrarse...
             </p-header>
+            <ng-template let-Unidad pTemplate="item">
+              <div class="ui-helper-clearfix">
+                <span style="float:left">{{Unidad.label}}</span>
+                <input style="float: right; width: 15%; height: 10px; text-align: center" class="form-control"
+                  type="text" severity="error" pInputText pKeyFilter="int" placeholder="%" maxlength="2"
+                  value="{{Unidad.value.otro}}" (keyup)="validaPercent($event, Unidad.value.code)">
+                <img style="float: right;" src="../../../../../../assets/icons/forms/rubbish-bin_16.png" alt="Delete"
+                  (click)="cleanUnidadEjecutora(Unidad.value.code)">
+              </div>
+            </ng-template>
           </p-listbox>
-          <p>Unidad Ejecutora a Registrar: <span *ngFor="let c of selectedCities"
-              style="margin-right: 10px">{{c.name}}</span>
-          </p>
           <hr>
           <div class="icon-button-examples">
             <!-- Boton de Calcular Porcentajes -->
             <button type="button" class="btn btn-outline-danger btn-icon"
-              nbPopover="Limpia el listado de Sectores de Gobierno" nbPopoverMode="hint" nbPopoverPlacement="top"
-              (click)="cleanProgramaPlanNacion()">
+              nbPopover="Limpia el listado de Unidad Ejecutora" nbPopoverMode="hint" nbPopoverPlacement="top"
+              (click)="cleanAllUnidadEjecutora()">
               <i class="ion-trash-a"></i>
             </button>
 
-            <!-- Boton para Calcular los Porcentajes Sectores OCDE -->
-            <button type="button" class="btn btn-outline-success btn-icon"
-              nbPopover="Calcula el % de participacion de Sectores" nbPopoverMode="hint" nbPopoverPlacement="top">
+            <!-- Boton para Calcular los Porcentajes de Unidad Ejecutora -->
+            <button type="button" class="btn btn-outline-success btn-icon" (click)="calcularPercent()"
+              nbPopover="Calcula el % de participacion de Unidad Ejecutora" nbPopoverMode="hint" nbPopoverPlacement="top">
               <i class="ion-calculator"></i>
             </button>
 
-            <!-- Boton para Grabar Sectores OCDE -->
+            <!-- Boton para Grabar Unidad Ejecutora -->
             <button type="button" class="btn btn-outline-primary btn-icon"
-              nbPopover="Registra el listado Plan de Nacion" nbPopoverMode="hint" nbPopoverPlacement="top"
-              (click)="saveProgramaVidaMejor()">
+              nbPopover="Registra la actividad de Unidad Ejecutora" nbPopoverMode="hint" nbPopoverPlacement="top"
+              (click)="saveUnidadEjecutora()">
               <i class="ion-upload"></i>
             </button>
           </div>
