@@ -958,7 +958,7 @@ export class ListEndPointsService {
       findByIdActividad: {
         id: 63,
         nameEndpoint: 'findByIdActividad',
-        urlEndPoint: '/mant-actividades/organizaciones/socio-desarrollo/findByIdActividad',
+        urlEndPoint: '/mant-actividades/organizaciones/socio-desarrollo/findByIdActividad/',
         params: '{ idActividad }',
         groupEndPoint: 'actividadesCRUDGroup',
         descEndPoint: 'Listar el dato de Socios al Desarrollo consultado',
@@ -966,7 +966,7 @@ export class ListEndPointsService {
       findByCodigoActividad: {
         id: 64,
         nameEndpoint: 'findByCodigoActividad',
-        urlEndPoint: '/mant-actividades/organizaciones/socio-desarrollo/findByCodigoActividad',
+        urlEndPoint: '/mant-actividades/organizaciones/socio-desarrollo/findByCodigoActividad/',
         params: '{ codigoActividad }',
         groupEndPoint: 'actividadesCRUDGroup',
         descEndPoint: 'Listar el dato de Socios al Desarrollo consultado',

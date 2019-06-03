@@ -41,27 +41,6 @@
               </p-calendar>
             </div>
           </div>
-
-          <!-- <div class="col-sm-3 col-md-2">
-            <br><br>
-            <div class="btn-group">
-              <button type="button" class="btn btn-primary btn-group-icon btn-group-divider botonSave">
-                <i class="ion-archive"></i>
-              </button>
-              <button type="button" class="btn btn-primary botonSave"
-                (click)="saveFinanciamientoEncService()">Guardar</button>
-            </div>
-          </div>
-
-          <div class="col-sm-3 col-md-2">
-            <br><br>
-            <div class="btn-group">
-              <button type="button" class="btn btn-warning btn-group-icon btn-group-divider">
-                <i class="ion-trash-a"></i>
-              </button>
-              <button type="button" class="btn btn-warning" (click)="cleanForm()">Limpiar</button>
-            </div>
-          </div> -->
         </div>
       </nb-card-body>
     </nb-card>
@@ -71,8 +50,13 @@
 <!-- Ventana Modal de la fecha de Transacción -->
 <p-dialog header="Fecha de Transacción" [(visible)]="display" [modal]="true">
   <div class="col-md-2">
-    <!-- <h3>Navigators</h3> -->
     <p-calendar [inline]="true" [showIcon]="false" [(ngModel)]="date6" [monthNavigator]="true" [yearNavigator]="true"
       yearRange="2000:2030" (dblclick)="closeDialog()" dateFormat="dd/mm/yy" [locale]="es"></p-calendar>
   </div>
 </p-dialog>
+
+<!-- ============================================================================================================== -->
+<!-- ======================================== Detalle | Financiamiento ============================================ -->
+<ngx-financ-detalle [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
+  [codigoProyectoTab]="codigoProyectoTab" [idActividadFinancEnc]="idActividadFinancEnc">
+</ngx-financ-detalle>
