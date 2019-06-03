@@ -17,8 +17,9 @@
             (onNodeUnselect)="nodeUnselect($event)"  (onNodeSelect)="nodeSelect($event)"
             dynamic="true"></p-tree>
         <br>
-          <div>Políticas Publicas y Estrategias Nacionales Seleccionados:<span *ngFor="let file of _servicePoliticasPublicasService| filterdata: queryString"> </span> </div>
+        
         </div>
+        <div><span *ngFor="let file of JsonSendProgramaPoliticasPublicasOpciones">{{file.parent.data}} </span> </div>
 
         <div class="col-sm-6">
           <h4>Políticas Publicas y Estrategias Nacionales seleccionados</h4>

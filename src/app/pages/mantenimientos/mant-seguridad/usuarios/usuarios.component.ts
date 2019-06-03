@@ -51,8 +51,6 @@ export class UsuariosComponent implements OnInit {
   public JsonReceptionTipoOrganizacion: any;
   public JsonReceptionOrganizacion: any;
   public JsonReceptionEspaciosTrabajoUsuario: any;
-
-
   public JsonReceptionCategoriasOrganizacion: any;
   protected JsonReceptionPaisOrganizacionesData: any;
   protected JsonReceptionTipoPaisOrganizacionesData: any;
@@ -291,12 +289,6 @@ export class UsuariosComponent implements OnInit {
 
     const result: any = this.resultdata;
 
-
-    if (result.error === true) {
-      this.showToast('error', 'Por favor ingrese todo los datos necesarios', JSON.stringify(result.message));
-      return -1;
-    }
-
     this.usuariosCodValidate();
 
     await delay(100);
@@ -327,6 +319,8 @@ export class UsuariosComponent implements OnInit {
             this.showLargeModal(this.idUsuario);
 
           }
+          this.ngOnInit();
+          this.usuariosListAllService();
         }
       },
       error => {
@@ -1012,6 +1006,9 @@ export class UsuariosComponent implements OnInit {
       },
     );
   } // FIN | organizacionesIdTipoListService
+  cleanUsuario() {
+    this.ngOnInit();
+    } // FIN | cleanUsuario
 
 
   /****************************************************************************

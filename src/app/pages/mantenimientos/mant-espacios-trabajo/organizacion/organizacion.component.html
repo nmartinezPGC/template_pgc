@@ -193,7 +193,6 @@
                   </thead>
                   <tbody>
                     <tr
-                    
                       *ngFor="let item of JsonReceptionOrganizaciones  | filterdata: queryString : 'nombreOrganizacion' | paginate: { itemsPerPage: 5, currentPage: p };let homeTableIndex = index">
                       <td>{{ homeTableIndex + 1 }}</td>
                       <td>{{item.nombreOrganizacion}}</td>

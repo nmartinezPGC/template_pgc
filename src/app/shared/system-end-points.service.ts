@@ -456,6 +456,24 @@ export class SystemEndPointsService extends ListEndPointsService {
           case 68:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActividadFinanciamientoEnc.urlEndPoint;
             break;
+            case 71: // AMA | 2019-27-05 | Mapeo de Organización Unidad Ejecutora
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findAllUnidadEjecutora.urlEndPoint;
+            break;
+          case 72:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdActividadUnidadEjecutora.urlEndPoint;
+            break;
+          case 73:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByCodigoActividadUnidadEjecutora.urlEndPoint;
+            break;
+          case 74:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.newActividadUnidadEjecutora.urlEndPoint;
+            break;
+          case 75:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActividadUnidadEjecutora.urlEndPoint;
+            break;
+            case 75.1:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.editActividadUnidadEjecutora.urlEndPoint;
+            break;
         }
         break;
       case 'mantGenericosUsuarioGroup': // Llamados a los EndPoint de usuarios

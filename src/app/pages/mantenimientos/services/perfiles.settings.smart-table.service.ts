@@ -61,19 +61,19 @@ export class ConfigSmartTableService {
                 // Json anidado para lograr capturar el valor de una entidad     ///https://github.com/akveo/ngx-admin/issues/1827
                 // bibliografia : https://github.com/akveo/ng2-smart-table/issues/375
                 descripcionTipoPerfil: {
-                  valuePrepareFunction: (cell: any, row: any) => row.idTipoPerfil.descTipo,
+                 // valuePrepareFunction: (cell: any, row: any) => row.idTipoPerfil.descTipo,
                   title: 'Tipo',
                   editor: {
                     type: 'list',
                     config: {
-                      list: arrayperfil,
+                      list: [{value: '2', title: 'Administrador'}, {value: '3', title: 'Usuario'}, {value: '4', title: 'Consultas'}]
                     },
                   },
                 },
-                activo: {
+                activado: {
                   title: 'Habilitado',
                   type: 'list',
-                valuePrepareFunction: (cell: any, row: any) => row.activado,
+                //valuePrepareFunction: (cell, row) =>  row.activado,
                   editor: {
                     type: 'list',
                     config: {
