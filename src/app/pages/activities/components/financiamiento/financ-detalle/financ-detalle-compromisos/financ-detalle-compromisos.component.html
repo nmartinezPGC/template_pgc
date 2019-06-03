@@ -5,7 +5,7 @@
   <nb-card-body>
     <div class="details">
       <div class="title">
-        Compromisos <img src="../../../../../../assets/icons/forms/contract_24.png" alt="">
+        Compromisos {{ idActividadFinancDet }} <img src="../../../../../../assets/icons/forms/contract_24.png" alt="">
       </div>
 
       <div class="description">
@@ -82,10 +82,11 @@
   </nb-card-body>
 
   <nb-card-footer>
-    <a (click)="showCompromisoModal('Hola', 'Mundo', 'Bueno' )" nbPopover="Ingresar Compromiso" nbPopoverMode="hint">
+    <a (click)="showCompromisoModal()" nbPopover="Ingresar Compromiso" nbPopoverMode="hint"
+      style="cursor: pointer">
       <i class="ion-plus-round"></i>
     </a>
-    <a href="" target="_blanck" nbPopover="Ver Información" nbPopoverMode="hint">
+    <a href="#/" target="_blanck" nbPopover="Ver Información" nbPopoverMode="hint">
       <i class="ion-help"></i>
     </a>
   </nb-card-footer>

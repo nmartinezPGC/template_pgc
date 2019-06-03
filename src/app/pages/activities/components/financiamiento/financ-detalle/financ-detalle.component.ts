@@ -23,6 +23,8 @@ export class FinancDetalleComponent implements OnInit {
   @Input() idProyectoTab: number;
   @Input() idUsuarioTab: number;
   @Input() codigoProyectoTab: string;
+  @Input() idActividadFinancEnc: number;
+  @Input() idActividadFinancDet: number;
 
   // variable del Json
   @Input() JsonPassData: any;
@@ -140,7 +142,7 @@ export class FinancDetalleComponent implements OnInit {
   saveFinanciamientoDetService() {
     // Asignacion de nuevos valores de Modelo
     this._activityFinanciamientoDetModel.idSocioDesarrolloSend = 1;
-    this._activityFinanciamientoDetModel.idActividadFinancEnc = { idActividadFinancEnc: 17 };
+    this._activityFinanciamientoDetModel.idActividadFinancEnc = { idActividadFinancEnc: this.idActividadFinancEnc };
     this._activityFinanciamientoDetModel.idTipoFinanciamiento = { idTipoFinanciamiento: this._activityFinanciamientoDetModel.idTipoFinanciamientoSend };
     this._activityFinanciamientoDetModel.idModalidadAyuda = { idModalidadAyuda: this._activityFinanciamientoDetModel.idModalidadAyudaSend };
     this._activityFinanciamientoDetModel.idSocioDesarrollo = { idOrganizacion: this._activityFinanciamientoDetModel.idSocioDesarrolloSend };
@@ -148,8 +150,6 @@ export class FinancDetalleComponent implements OnInit {
 
     // Evaluacion de Datos de Financiamiento Detalle de Proyecto
     if (this._activityFinanciamientoDetModel.idSocioDesarrolloSend !== 0) {
-      // console.log(this._activityFinanciamientoDetModel);
-
       if (this._activityFinanciamientoDetModel.idTipoFinanciamientoSend !== 0) {
         // Ejecuta el Servicio de invocar el registro de Detalle de Financiamiento | Clasificacion
         this._financiamientoDetService.newActividadFinanciamientoDet(this._activityFinanciamientoDetModel).subscribe(
@@ -162,6 +162,7 @@ export class FinancDetalleComponent implements OnInit {
               } else {
                 this._notificacionesService.showToast('default', 'Clasificación de Financiamiento', result.message);
                 this._activityFinanciamientoDetModel.idActividadFinancDet = result.data.idActividadFinancDet;
+                this.idActividadFinancDet = this._activityFinanciamientoDetModel.idActividadFinancDet;
               }
             }
           },

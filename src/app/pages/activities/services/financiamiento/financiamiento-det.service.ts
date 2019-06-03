@@ -116,4 +116,21 @@ export class FinanciamientoDetService {
       params: { 'tokenApi': this.tokenHeader },
     });
   } // FIN | FND-00005
+
+
+  /****************************************************************************
+  * Funcion: FND-00006
+  * Fecha: 03-06-2019
+  * Descripcion: Metodo para obtener los Socios al Desarrollo del Proyecto
+  * Objetivo: Socios al Desarrollo del Proyecto
+  * Params: { idActividad }
+  ****************************************************************************/
+  getAllSociosDesarrolloActividad(idActividad: number): Observable<any> {
+    const paramsSend: number = idActividad;
+    // Retorno de la Funcion
+    return this._http.get(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 63) + paramsSend, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  } // FIN | FND-00006
 }

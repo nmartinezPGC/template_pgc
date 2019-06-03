@@ -7,11 +7,10 @@
 * @fecha 16-05-2019
 */
 
-import { Component, OnInit, ChangeDetectorRef, Input } from '@angular/core';
-import { MessageService, ConfirmationService } from 'primeng/api';
-import { ToasterService } from 'angular2-toaster';
+import { Component, Input, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Form } from '@angular/forms';
+import { ToasterService } from 'angular2-toaster';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { FinancDetalleCompromisosFormComponent } from './financ-detalle-compromisos-form/financ-detalle-compromisos-form.component';
 
 @Component({
@@ -25,6 +24,7 @@ export class FinancDetalleCompromisosComponent implements OnInit {
   @Input() idProyectoTab: number;
   @Input() idUsuarioTab: number;
   @Input() codigoProyectoTab: string;
+  @Input() idActividadFinancDet: number;
 
   /**
    * Constructor de la Clase
@@ -47,10 +47,10 @@ export class FinancDetalleCompromisosComponent implements OnInit {
   /**
    * Funcion de mostrar el Modal con Parametros enviados
    * Autor: Nahum Martinez
-   * Fecha: 2019-04-22
+   * Fecha: 2019-05-03
    * Formulario de Compromisos
    */
-  showCompromisoModal(nombreSector: string, idSector: number, imagenSector: string) {
+  showCompromisoModal() {
     const activeModal = this.modalService.open(FinancDetalleCompromisosFormComponent, {
       size: 'lg',
       backdrop: 'static',
@@ -58,11 +58,9 @@ export class FinancDetalleCompromisosComponent implements OnInit {
     });
 
     // Valores de parametros a enviar
-    activeModal.componentInstance.modalHeader = nombreSector;
-    activeModal.componentInstance.modalHeaderId = idSector;
+    activeModal.componentInstance.modalHeaderIdActividadFinancDet = this.idActividadFinancDet;
     activeModal.componentInstance.modalHeaderCodigoActividad = this.codigoProyectoTab;
     activeModal.componentInstance.modalHeaderIdActividad = this.idProyectoTab;
-    activeModal.componentInstance.modalHeaderImagenSector = imagenSector;
   } // FIN | showStaticModal
 
 }

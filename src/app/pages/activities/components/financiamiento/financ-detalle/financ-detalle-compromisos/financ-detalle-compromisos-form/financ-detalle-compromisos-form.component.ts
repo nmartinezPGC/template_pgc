@@ -8,9 +8,10 @@
 */
 
 import { Component, OnInit } from '@angular/core';
-import { ConfirmationService } from 'primeng/api';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToasterService } from 'angular2-toaster';
+import { ConfirmationService } from 'primeng/api';
+import { ActivityFinanciamientoDetCompromisosModel } from '../../../../../models/financiamiento/model-financiamiento-det-compromisos';
 
 @Component({
   selector: 'ngx-financ-detalle-compromisos-form',
@@ -20,11 +21,12 @@ import { ToasterService } from 'angular2-toaster';
 })
 export class FinancDetalleCompromisosFormComponent implements OnInit {
   // Variables primitivas
-  modalHeader: string;
-  modalHeaderId: number;
+  modalHeaderIdActividadFinancDet: number;
   modalHeaderCodigoActividad: string;
   modalHeaderIdActividad: number;
-  modalHeaderImagenSector: string;
+
+  // Modelo de la Clase
+  public _activityFinanciamientoDetCompromisosModel: ActivityFinanciamientoDetCompromisosModel;
 
   // JsonReceptions
   public JsonReceptionFinancDetCompromisos: any = [];
@@ -46,7 +48,20 @@ export class FinancDetalleCompromisosFormComponent implements OnInit {
     private _toasterService: ToasterService,
     private confirmationService: ConfirmationService) { }
 
+
+  /**
+   * Metodo de inizalizacion de la Clase
+   */
   ngOnInit() {
+    // Valor de Detalle del Financiamiento del Proyecto
+    const idActividadFinancDetSend = { idActividadFinancDet: this.modalHeaderIdActividadFinancDet };
+    // Inicializacion del Modelo de la Clase
+    this._activityFinanciamientoDetCompromisosModel = new ActivityFinanciamientoDetCompromisosModel(
+      0, null, // Generales de tabla
+      null, 0, null, 0, idActividadFinancDetSend, // Relacionales
+      0, null, 0, // Transaccion
+      true, null, null, // Auditoria
+    );
   }
 
 

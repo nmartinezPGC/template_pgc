@@ -25,6 +25,7 @@ export class FinancEncabezadoComponent implements OnInit {
   @Input() idProyectoTab: number;
   @Input() idUsuarioTab: number;
   @Input() codigoProyectoTab: string;
+  @Input() idActividadFinancEnc: string;
   @ViewChild('montoActividad') montoActividadInput: ElementRef;
 
   // Variables de Recepcion de Información
@@ -169,6 +170,7 @@ export class FinancEncabezadoComponent implements OnInit {
                 this._notificacionesService.showToast('error', 'Error al Ingresar la Información de Encabezado de Financiamiento', result.message);
               } else {
                 this._notificacionesService.showToast('default', 'Encabezado de Financiamiento', result.message);
+                this.idActividadFinancEnc = result.data.idActividadFinancEnc;
               }
             }
           },
