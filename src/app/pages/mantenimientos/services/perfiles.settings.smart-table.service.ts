@@ -66,14 +66,14 @@ export class ConfigSmartTableService {
                   editor: {
                     type: 'list',
                     config: {
-                      list: [{value: '2', title: 'Administrador'}, {value: '3', title: 'Usuario'}, {value: '4', title: 'Consultas'}]
+                      list: [{value: '2', title: 'Administrador'}, {value: '3', title: 'Usuario'}, {value: '4', title: 'Consultas'}],
                     },
                   },
                 },
                 activado: {
                   title: 'Habilitado',
                   type: 'list',
-                //valuePrepareFunction: (cell, row) =>  row.activado,
+                // valuePrepareFunction: (cell, row) =>  row.activado,
                   editor: {
                     type: 'list',
                     config: {

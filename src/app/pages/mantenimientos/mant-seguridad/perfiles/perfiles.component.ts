@@ -356,8 +356,8 @@ export class PerfilesComponent implements OnInit {
       },
       error => {
         // Redirecciona al Login
-        //alert('Error en la petición de la API ' + <any>error.message.message);
-        this.showToast('error','Error en la petición de la API',<any>error.message.message);
+        // alert('Error en la petición de la API ' + <any>error.message.message);
+        this.showToast('error', 'Error en la petición de la API', <any>error.message.message);
 
         // Borramos los datos del LocalStorage
       },
