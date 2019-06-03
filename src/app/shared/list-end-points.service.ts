@@ -1019,6 +1019,55 @@ export class ListEndPointsService {
         groupEndPoint: 'actividadesCRUDGroup',
         descEndPoint: 'Eliminar el dato de Detalle de Financiamiento enviado y asociarlo al Proyecto',
       },
+      // Organizaciones de Proyectos | Unidad Ejecutora
+      findAllUnidadEjecutora: {
+        id: 71,
+        nameEndpoint: 'findAllUnidadEjecutora',
+        urlEndPoint: '/mant-actividades/organizaciones/unidad-ejecutora',
+        params: '{ }',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Listar todos datos de Unidad Ejecutora registrados en la BD',
+      },
+      findByIdActividadUnidadEjecutora: {
+        id: 72,
+        nameEndpoint: 'findByIdActividadIdUnidadEjecutora',
+        urlEndPoint: '/mant-actividades/organizaciones/unidad-ejecutora/findByIdActividad',
+        params: '{ idActividad }',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Listar el dato de Unidad Ejecutora consultado',
+      },
+      findByCodigoActividadUnidadEjecutora: {
+        id: 73,
+        nameEndpoint: 'findByCodigoActividadUnidadEjecutora',
+        urlEndPoint: '/mant-actividades/organizaciones/unidad-ejecutora/findByCodigoActividad',
+        params: '{ codigoActividad }',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Listar el dato de Unidad Ejecutora consultado',
+      },
+      newActividadUnidadEjecutora: {
+        id: 74,
+        nameEndpoint: 'newActividadUnidadEjecutora',
+        urlEndPoint: '/mant-actividades/organizaciones/unidad-ejecutora/new',
+        params: '{ jsonSendActividadUnidadEjecutora }',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Ingresar el dato Unidad Ejecutora enviado y asociarlo al Proyecto',
+      },
+      deleteActividadUnidadEjecutora: {
+        id: 75,
+        nameEndpoint: 'deleteActividadUnidadEjecutora',
+        urlEndPoint: '/mant-actividades/organizaciones/unidad-ejecutora/delete/',
+        params: '{ codigoActividad }',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Eliminar el dato de Unidad Ejecutora enviado y asociarlo al Proyecto',
+    },
+    editActividadUnidadEjecutora: {
+      id: 75.1,
+      nameEndpoint: 'editActividadUnidadEjecutora',
+      urlEndPoint: '/mant-actividades/organizaciones/unidad-ejecutora/edit/',
+      params: '{ idActividadUnidadEjecutora }',
+      groupEndPoint: 'actividadesCRUDGroup',
+      descEndPoint: 'Edita el dato de Unidad Ejecutora enviado y asociarlo al Proyecto',
+  },
     }, // modulo de mantenimientos generico de usuarios
     endPointMantGenericosUsuario: {
       listAllUsuarios: {
