@@ -450,13 +450,18 @@ export class SystemEndPointsService extends ListEndPointsService {
           case 66:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActividadSocioDesarrollo.urlEndPoint;
             break;
-          case 67: // NAM | 2019-05-23 | Mapeo de Financiamiento de Proyectos
+          case 67: // NAM | 2019-05-23 | Mapeo de Financiamiento Encabezado de Proyectos
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.newActividadFinanciamientoEnc.urlEndPoint;
             break;
           case 68:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActividadFinanciamientoEnc.urlEndPoint;
             break;
-            case 71: // AMA | 2019-27-05 | Mapeo de Organización Unidad Ejecutora
+          case 69: // NAM | 2019-05-24 | Mapeo de Financiamiento Detalle de Proyectos
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.newActividadFinanciamientoDet.urlEndPoint;
+            break;
+          case 70:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActividadFinanciamientoDet.urlEndPoint;
+          case 71: // AMA | 2019-27-05 | Mapeo de Organización Unidad Ejecutora
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findAllUnidadEjecutora.urlEndPoint;
             break;
           case 72:
@@ -471,7 +476,7 @@ export class SystemEndPointsService extends ListEndPointsService {
           case 75:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActividadUnidadEjecutora.urlEndPoint;
             break;
-            case 75.1:
+          case 75.1:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.editActividadUnidadEjecutora.urlEndPoint;
             break;
         }

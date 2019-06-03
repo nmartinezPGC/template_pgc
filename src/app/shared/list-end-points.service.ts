@@ -1002,6 +1002,22 @@ export class ListEndPointsService {
         params: '{ codigoActividad }',
         groupEndPoint: 'actividadesCRUDGroup',
         descEndPoint: 'Eliminar el dato de Encabezado de Financiamiento enviado y asociarlo al Proyecto',
+      }, // Modulo de Financiamiento de Proyectos | Detalle
+      newActividadFinanciamientoDet: {
+        id: 69,
+        nameEndpoint: 'newActividadFinanciamientoDet',
+        urlEndPoint: '/mant-actividades/financiamiento/detalle/new',
+        params: '{ jsonSendActividadFinanciamientoEnc }',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Ingresar el dato de Detalle de Financiamiento enviado y asociarlo al Proyecto',
+      },
+      deleteActividadFinanciamientoDet: {
+        id: 70,
+        nameEndpoint: 'deleteActividadFinanciamientoDet',
+        urlEndPoint: '/mant-actividades/financiamiento/detalle/delete/',
+        params: '{ codigoActividad }',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Eliminar el dato de Detalle de Financiamiento enviado y asociarlo al Proyecto',
       },
       // Organizaciones de Proyectos | Unidad Ejecutora
       findAllUnidadEjecutora: {

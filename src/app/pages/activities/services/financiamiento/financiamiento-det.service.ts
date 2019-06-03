@@ -49,4 +49,71 @@ export class FinanciamientoDetService {
       'Authorization': this.tokenHeader, 'Access-Control-Allow-Origin': '*',
     });
   } // FIN | Constructor
+
+
+  /****************************************************************************
+  * Funcion: FND-00002
+  * Fecha: 29-05-2019
+  * Descripcion: Metodo para obtener los Tipos de financiamiento
+  * Objetivo: Tipos de financiamiento
+  * Params: { }
+  ****************************************************************************/
+  getAllTiposFinanciamiento(): Observable<any> {
+    // Retorno de la Funcion
+    return this._http.get(this._systemEndPointsService.getEndPointService('mantActGroup', 10), {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  } // FIN | FND-00002
+
+  /****************************************************************************
+  * Funcion: FND-00003
+  * Fecha: 29-05-2019
+  * Descripcion: Metodo para obtener las Modalidades de Ayuda
+  * Objetivo: Modalidades de Ayuda
+  * Params: { }
+  ****************************************************************************/
+  getAllModalidadAyuda(): Observable<any> {
+    // Retorno de la Funcion
+    return this._http.get(this._systemEndPointsService.getEndPointService('mantActGroup', 12), {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  } // FIN | FND-00003
+
+
+  /****************************************************************************
+    * Funcion: FND-00004
+    * Fecha: 29-05-2019
+    * Descripcion: Metodo para ingresar datos de Financiamiento Detalle
+    * Objetivo: Ingresar Financiamiento Detalle al Proyecto
+    * Params: { jsonSendActividadFinanciamientoDet }
+    ****************************************************************************/
+  newActividadFinanciamientoDet(jsonSendActividadFinanciamientoDet: any): Observable<any> {
+    const paramsSend: number = jsonSendActividadFinanciamientoDet;
+
+    // Retorno de la Funcion
+    return this._http.post(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 69), paramsSend, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  } // FIN | FND-00004
+
+
+  /****************************************************************************
+    * Funcion: FND-00005
+    * Fecha: 29-05-2019
+    * Descripcion: Metodo para eliminar datos de Financiamiento Detalle
+    * Objetivo: Eliminar Financiamiento Detalle al Proyecto
+    * Params: { codigoFinancDet }
+    ****************************************************************************/
+  deleteActividadFinanciamientoDet(codigoFinancDet: string): Observable<any> {
+    const paramsSend: string = codigoFinancDet;
+
+    // Retorno de la Funcion
+    return this._http.delete(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 70) + paramsSend, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  } // FIN | FND-00005
 }
