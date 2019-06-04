@@ -125,7 +125,7 @@ export class FinanciamientoDetService {
   * Objetivo: Socios al Desarrollo del Proyecto
   * Params: { idActividad }
   ****************************************************************************/
-  getAllSociosDesarrolloActividad(idActividad: number): Observable<any> {
+  getAllSociosDesarrolloByIdActividad(idActividad: number): Observable<any> {
     const paramsSend: number = idActividad;
     // Retorno de la Funcion
     return this._http.get(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 63) + paramsSend, {

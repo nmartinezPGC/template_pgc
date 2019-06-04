@@ -49,6 +49,7 @@ export class SocioDesarrolloComponent implements OnInit {
 
   // Json de recpcion de Informacion
   public JsonReceptionAllSocioDesarrollo: any;
+  public JsonReceptionAllSocioDesarrolloByActividad: any;
 
   // Json a enviar
   public JsonSendSociosDesarrollo: any = [];
@@ -79,6 +80,9 @@ export class SocioDesarrolloComponent implements OnInit {
     );
     // Carga los Datos de Socio al Desarrollo
     this.getAllSocioDesarrolloService(1);
+
+    // Carga de Socios al Desarrollo Registrados
+    this.getAllSociosDesarrolloByActividadService(65);
 
     // Inicio de las Configuraciones del DrowDown
     this.dropdownListSocioDesarrollo = [];
@@ -339,4 +343,31 @@ export class SocioDesarrolloComponent implements OnInit {
       return dato;
     });
   } // FIN | calcularPercent
+
+
+  /****************************************************************************
+  * Funcion: getAllSociosDesarrolloByActividadService
+  * Object Number: 003
+  * Fecha: 03-06-2019
+  * Descripcion: Method getAllSociosDesarrolloByActividadService of the Class
+  * Objetivo: getAllSociosDesarrolloByActividadService listados todos los Socios al Desarrollo
+  * Params: { idActividad }
+  ****************************************************************************/
+  private getAllSociosDesarrolloByActividadService(idActividad: number) {
+    // Ejecuta el Servicio de invocar todos los Socios al Desarrollo
+    this._socioDesarrolloService.getAllSociosDesarrolloByIdActividad(idActividad).subscribe(
+      result => {
+        if (result.status !== 200) {
+          this.showToast('error', 'Error al Obtener la Información de todos Socios al Desarrollo', result.message);
+          this.JsonReceptionAllSocioDesarrolloByActividad = [];
+        } else if (result.status === 200) {
+          this.JsonReceptionAllSocioDesarrolloByActividad = result.data;
+          console.log(this.JsonReceptionAllSocioDesarrolloByActividad);
+        }
+      },
+      error => {
+        this.showToast('error', 'Error al Obtener la Información de todos Socios al Desarrollo', JSON.stringify(error.error.message));
+      },
+    );
+  } // FIN | getAllSociosDesarrolloByActividadService
 }

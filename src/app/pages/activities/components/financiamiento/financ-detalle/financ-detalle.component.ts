@@ -44,6 +44,7 @@ export class FinancDetalleComponent implements OnInit {
   // Json Recptions
   JsonReceptionAllTipoFinanciamiento: any[];
   JsonReceptionAllModalidadAyuda: any[];
+  JsonReceptionAllSocioDesarrollo: any[];
 
 
   /**
@@ -73,7 +74,10 @@ export class FinancDetalleComponent implements OnInit {
     this.getAllTipoFinanciamientoService();
 
     // Modalidades de Ayuda
-    this.getAllModalidadAyuda();
+    this.getAllModalidadAyudaService();
+
+    // Socios al Desarrollo del Proyecto
+    this.getAllSociosDesarrolloService(65);
   }
 
   /**
@@ -99,7 +103,7 @@ export class FinancDetalleComponent implements OnInit {
         }
       },
       error => {
-        this._notificacionesService.showToast('error', 'Error al Obtener la Información de todas los Tipos de Financiamiento', JSON.stringify(error.message));
+        this._notificacionesService.showToast('error', 'Error al Obtener la Información de todas los Tipos de Financiamiento', JSON.stringify(error.error.message));
       },
     );
   } // FIN | getAllTipoFinanciamientoService
@@ -113,7 +117,7 @@ export class FinancDetalleComponent implements OnInit {
   * Objetivo: getAllModalidadAyudaService listados de las Modalidades de Ayuda
   * Params: { }
   ****************************************************************************/
-  private getAllModalidadAyuda() {
+  private getAllModalidadAyudaService() {
     // Ejecuta el Servicio de invocar todos las Modalidades de Ayuda
     this._financiamientoDetService.getAllModalidadAyuda().subscribe(
       result => {
@@ -125,10 +129,10 @@ export class FinancDetalleComponent implements OnInit {
         }
       },
       error => {
-        this._notificacionesService.showToast('error', 'Error al Obtener la Información de todas las  Modalidades de Ayuda', JSON.stringify(error.message));
+        this._notificacionesService.showToast('error', 'Error al Obtener la Información de todas las  Modalidades de Ayuda', JSON.stringify(error.error.message));
       },
     );
-  } // FIN | getAllModalidadAyuda
+  } // FIN | getAllModalidadAyudaService
 
 
   /****************************************************************************
@@ -178,4 +182,30 @@ export class FinancDetalleComponent implements OnInit {
       // this.montoActividadInput.nativeElement.focus();
     }
   } // FIN | saveFinanciamientoDetService
+
+
+  /****************************************************************************
+  * Funcion: getAllSociosDesarrolloService
+  * Object Number: 003
+  * Fecha: 03-06-2019
+  * Descripcion: Method getAllSociosDesarrolloService of the Class
+  * Objetivo: getAllSociosDesarrolloService listados todos los Socios al Desarrollo
+  * Params: { idActividad }
+  ****************************************************************************/
+  private getAllSociosDesarrolloService(idActividad: number) {
+    // Ejecuta el Servicio de invocar todos los Socios al Desarrollo
+    this._financiamientoDetService.getAllSociosDesarrolloByIdActividad(idActividad).subscribe(
+      result => {
+        if (result.status !== 200) {
+          this._notificacionesService.showToast('error', 'Error al Obtener la Información de todos Socios al Desarrollo', result.message);
+          this.JsonReceptionAllSocioDesarrollo = [];
+        } else if (result.status === 200) {
+          this.JsonReceptionAllSocioDesarrollo = result.data;
+        }
+      },
+      error => {
+        this._notificacionesService.showToast('error', 'Error al Obtener la Información de todos Socios al Desarrollo', JSON.stringify(error.error.message));
+      },
+    );
+  } // FIN | getAllSociosDesarrolloService
 }

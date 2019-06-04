@@ -11,8 +11,8 @@
         <!-- Acordeones formados por el numero de Socios al Desarrollo -->
         <nb-card>
           <nb-card-body>
-            <p-accordion *ngFor="let item of array">
-              <p-accordionTab header="{{ item.Desc }}: {{ item.name }}" [selected]="true">
+            <p-accordion *ngFor="let item of JsonReceptionAllSocioDesarrollo">
+              <p-accordionTab header="{{ item.idOrganizacion.descOrganizacion }}: {{ item.idOrganizacion.nombreOrganizacion }}" [selected]="true">
                 <!-- Socio al Desarrollo: {{ item.name }} -->
 
                 <nb-card>
