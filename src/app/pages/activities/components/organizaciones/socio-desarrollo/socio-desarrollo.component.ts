@@ -362,7 +362,7 @@ export class SocioDesarrolloComponent implements OnInit {
           this.JsonReceptionAllSocioDesarrolloByActividad = [];
         } else if (result.status === 200) {
           this.JsonReceptionAllSocioDesarrolloByActividad = result.data;
-          console.log(this.JsonReceptionAllSocioDesarrolloByActividad);
+          // console.log(this.JsonReceptionAllSocioDesarrolloByActividad);
         }
       },
       error => {
