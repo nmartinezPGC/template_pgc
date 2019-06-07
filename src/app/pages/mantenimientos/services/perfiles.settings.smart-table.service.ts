@@ -28,7 +28,7 @@ export class ConfigSmartTableService {
 * Objetivo: Establecer las configuraciones para la Smart Table
 ****************************************************************************/
 
-  configSmartTable(smartTable: string, smartNormal:  any, arrayperfil:  any) {
+  configSmartTable(smartTable: string, smartNormal:  any, array:  any) {
     switch (smartTable) {
       case 'userSmart':
         switch (smartNormal) {
@@ -61,18 +61,18 @@ export class ConfigSmartTableService {
                 // Json anidado para lograr capturar el valor de una entidad     ///https://github.com/akveo/ngx-admin/issues/1827
                 // bibliografia : https://github.com/akveo/ng2-smart-table/issues/375
                 descripcionTipoPerfil: {
-                 // valuePrepareFunction: (cell: any, row: any) => row.idTipoPerfil.descTipo,
+                  valuePrepareFunction: (cell: any, row: any) => row.idTipoPerfil.descTipo,
                   title: 'Tipo',
                   editor: {
                     type: 'list',
                     config: {
-                      list: [{value: '2', title: 'Administrador'}, {value: '3', title: 'Usuario'}, {value: '4', title: 'Consultas'}],
+                      list: array,
                     },
                   },
                 },
                 activado: {
                   title: 'Habilitado',
-                  type: 'list',
+                  type: 'html',
                 // valuePrepareFunction: (cell, row) =>  row.activado,
                   editor: {
                     type: 'list',
