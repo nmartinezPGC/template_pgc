@@ -58,7 +58,7 @@ export class FinancDetalleCompromisosFormComponent implements OnInit {
   constructor(private _notificacionesService: NotificacionesService,
     private confirmationService: ConfirmationService,
     private _financiamientoEncService: FinanciamientoEncService,
-    private _financiamientoDetService: FinanciamientoDetService, ) { }
+    private _financiamientoDetService: FinanciamientoDetService) { }
 
 
   /**

@@ -364,7 +364,7 @@ export class SocioDesarrolloComponent implements OnInit {
           this.JsonReceptionAllSocioDesarrolloByActividad = result.data;
 
           // Mapear los datos de los Socios al Desarrollo Registrados
-          console.log(this.JsonReceptionAllSocioDesarrolloByActividad);
+          // console.log(this.JsonReceptionAllSocioDesarrolloByActividad);
           this.JsonSendSociosDesarrollo = this.JsonReceptionAllSocioDesarrolloByActividad.map((item) => {
             return {
               code: item.idOrganizacion.idOrganizacion,
