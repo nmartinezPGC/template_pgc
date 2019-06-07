@@ -362,18 +362,7 @@ export class UsuariosComponent implements OnInit {
       },
       error => {
         // Redirecciona al Login
-        alert('Error en la petición de la API ' + <any>error);
-
-        // Borramos los datos del LocalStorage
-        localStorage.removeItem('auth_app_token');
-        localStorage.removeItem('identity');
-
-        const redirect = '/auth/login';
-        setTimeout(() => {
-          // Iniciativa Temporal
-          location.reload();
-          return this._router.navigateByUrl(redirect);
-        }, 2000);
+        this.showToast('error','Error en la petición de la API',<any>error.message.message);
       },
     );
   } // FIN | usuariosTipoService
@@ -409,18 +398,7 @@ export class UsuariosComponent implements OnInit {
       },
       error => {
         // Redirecciona al Login
-        alert('Error en la petición de la API ' + <any>error);
-
-        // Borramos los datos del LocalStorage
-        localStorage.removeItem('auth_app_token');
-        localStorage.removeItem('identity');
-
-        const redirect = '/auth/login';
-        setTimeout(() => {
-          // Iniciativa Temporal
-          location.reload();
-          return this._router.navigateByUrl(redirect);
-        }, 2000);
+        this.showToast('error','Error en la petición de la API',<any>error.message.message);
       },
     );
   } // FIN | estadoService
@@ -514,18 +492,7 @@ export class UsuariosComponent implements OnInit {
       },
       error => {
         // Redirecciona al Login
-        alert('Error en la petición de la API ' + <any>error);
-
-        // Borramos los datos del LocalStorage
-        localStorage.removeItem('auth_app_token');
-        localStorage.removeItem('identity');
-
-        const redirect = '/auth/login';
-        setTimeout(() => {
-          // Iniciativa Temporal
-          location.reload();
-          return this._router.navigateByUrl(redirect);
-        }, 2000);
+        this.showToast('error','Error en la petición de la API',<any>error.message.message);
       },
     );
   } // FIN | usuariosDatailsService
@@ -541,7 +508,6 @@ export class UsuariosComponent implements OnInit {
  ****************************************************************************/
   private updateUsuarioService() {
     // Seteo de las variables del Model al json de Java
-    this.validateUsuarios(this._usuarioModel);
     const resultdataExt: any = this.resultdata;
 
     if (resultdataExt.error === true) {
@@ -556,7 +522,7 @@ export class UsuariosComponent implements OnInit {
           this.showToast('error', 'Error al actualizar los cambios', JSON.stringify(result.message));
         } else if (result.status === 200) {
 
-          this.showToast('default', 'se actualizaron con exito los datos', JSON.stringify(result.message));
+          this.showToast('default', 'Se actualizaron con exito los datos', JSON.stringify(result.message));
 
           // Carga la tabla Nuevamente
           this.usuariosDatailsService();
@@ -660,7 +626,7 @@ export class UsuariosComponent implements OnInit {
       },
       error => {
         // Redirecciona al Login
-        alert('Error en la petición de la API ' + <any>error);
+        this.showToast('error','Error en la petición de la API',<any>error.message.message);
       },
     );
     return this.resultStatus;
@@ -689,7 +655,7 @@ export class UsuariosComponent implements OnInit {
       },
       error => {
         // Redirecciona al Login
-        alert('Error en la petición de la API ' + <any>error);
+        this.showToast('error','Error en la petición de la API',<any>error.message.message);
       },
     );
     return this.resultStatus;
@@ -781,7 +747,7 @@ export class UsuariosComponent implements OnInit {
       },
       error => {
         // Redirecciona al Login
-        alert('Error en la petición de la API ' + <any>error);
+        this.showToast('error','Error en la petición de la API',<any>error.message.message);
       },
     );
   } // FIN | deleteUsuario
@@ -815,7 +781,7 @@ export class UsuariosComponent implements OnInit {
       },
       error => {
         // Redirecciona al Login
-        alert('Error en la petición de la API ' + <any>error);
+        this.showToast('error','Error en la petición de la API',<any>error.message.message);
 
         // Borramos los datos del LocalStorage
         localStorage.removeItem('auth_app_token');
@@ -861,7 +827,7 @@ export class UsuariosComponent implements OnInit {
       },
       error => {
         // Redirecciona al Login
-        alert('Error en la petición de la API ' + <any>error);
+        this.showToast('error','Error en la petición de la API',<any>error.message.message);
 
         // Borramos los datos del LocalStorage
         localStorage.removeItem('auth_app_token');
@@ -909,18 +875,7 @@ export class UsuariosComponent implements OnInit {
       },
       error => {
         // Redirecciona al Login
-        alert('Error en la petición de la API ' + <any>error);
-
-        // Borramos los datos del LocalStorage
-        localStorage.removeItem('auth_app_token');
-        localStorage.removeItem('identity');
-
-        const redirect = '/auth/login';
-        setTimeout(() => {
-          // Iniciativa Temporal
-          location.reload();
-          return this._router.navigateByUrl(redirect);
-        }, 2000);
+        this.showToast('error','Error en la petición de la API',<any>error.message.message);
       },
     );
   } // FIN | OrganizacionService
