@@ -154,6 +154,20 @@ export class ListEndPointsService {
         groupEndPoint: 'matActGroup',
         descEndPoint: 'Busca la Modalidad de Ayuda',
       },
+      getAllTipoTransaccion: {
+        id: 14,
+        nameEndpoint: 'getAllTipoTransaccion',
+        urlEndPoint: '/mant-actividades/tipo-transaccion',
+        groupEndPoint: 'matActGroup',
+        descEndPoint: 'Busca todas los Tipos de Transaccion',
+      },
+      getTipoTransaccion: {
+        id: 15,
+        nameEndpoint: 'getTipoTransaccion',
+        urlEndPoint: '/mant-actividades/tipo-transaccion/findById/',
+        groupEndPoint: 'matActGroup',
+        descEndPoint: 'Busca el Tipo de Transaccion',
+      },
     },
     endPointEspaciosTrabajo: {
       listAllEspaciosTrabajo: {
@@ -1019,6 +1033,22 @@ export class ListEndPointsService {
         groupEndPoint: 'actividadesCRUDGroup',
         descEndPoint: 'Eliminar el dato de Detalle de Financiamiento enviado y asociarlo al Proyecto',
       },
+      newActividadFinanciamientoDetCompromiso: {
+        id: 70.1,
+        nameEndpoint: 'newActividadFinanciamientoDetCompromiso',
+        urlEndPoint: '/mant-actividades/financiamiento/detalle-compromiso/new',
+        params: '{ jsonSendActividadFinanciamientoDetCompromiso }',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Ingresar el dato de Detalle de Financiamiento Compromiso enviado y asociarlo al Proyecto',
+      },
+      deleteActividadFinanciamientoCompromiso: {
+        id: 70.2,
+        nameEndpoint: 'deleteActividadFinanciamientoCompromiso',
+        urlEndPoint: '/mant-actividades/financiamiento/detalle-compromiso/delete/',
+        params: '{ codigoFinancCompromiso }',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Eliminar el dato de Detalle de Financiamiento Compromiso enviado y asociarlo al Proyecto',
+      },
       // Organizaciones de Proyectos | Unidad Ejecutora
       findAllUnidadEjecutora: {
         id: 71,
@@ -1059,16 +1089,16 @@ export class ListEndPointsService {
         params: '{ codigoActividad }',
         groupEndPoint: 'actividadesCRUDGroup',
         descEndPoint: 'Eliminar el dato de Unidad Ejecutora enviado y asociarlo al Proyecto',
-    },
-    editActividadUnidadEjecutora: {
-      id: 75.1,
-      nameEndpoint: 'editActividadUnidadEjecutora',
-      urlEndPoint: '/mant-actividades/organizaciones/unidad-ejecutora/edit/',
-      params: '{ idActividadUnidadEjecutora }',
-      groupEndPoint: 'actividadesCRUDGroup',
-      descEndPoint: 'Edita el dato de Unidad Ejecutora enviado y asociarlo al Proyecto',
-  },
-       // Organizaciones de Proyectos | Admon Financiero
+      },
+      editActividadUnidadEjecutora: {
+        id: 75.1,
+        nameEndpoint: 'editActividadUnidadEjecutora',
+        urlEndPoint: '/mant-actividades/organizaciones/unidad-ejecutora/edit/',
+        params: '{ idActividadUnidadEjecutora }',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Edita el dato de Unidad Ejecutora enviado y asociarlo al Proyecto',
+      },
+      // Organizaciones de Proyectos | Admon Financiero
       findAllAdmonFinanciero: {
         id: 76,
         nameEndpoint: 'findAllAdmonFinanciero',
@@ -1109,8 +1139,8 @@ export class ListEndPointsService {
         groupEndPoint: 'actividadesCRUDGroup',
         descEndPoint: 'Eliminar el dato de Admon Financiero enviado y asociarlo al Proyecto',
       },
-       // Organizaciones de Proyectos | Agencia Beneficiaria
-       findAllAgenciaBeneficiaria: {
+      // Organizaciones de Proyectos | Agencia Beneficiaria
+      findAllAgenciaBeneficiaria: {
         id: 81,
         nameEndpoint: 'findAllAgenciaBeneficiaria',
         urlEndPoint: '/mant-actividades/organizaciones/agencia-beneficiaria',

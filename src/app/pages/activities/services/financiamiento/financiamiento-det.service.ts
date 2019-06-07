@@ -7,11 +7,11 @@
 * @fecha 21-05-2019
 */
 
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { SystemEndPointsService } from '../../../../shared/system-end-points.service';
 import { SystemPropertiesService } from '../../../../shared/system-properties.service';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -90,7 +90,7 @@ export class FinanciamientoDetService {
     * Params: { jsonSendActividadFinanciamientoDet }
     ****************************************************************************/
   newActividadFinanciamientoDet(jsonSendActividadFinanciamientoDet: any): Observable<any> {
-    const paramsSend: number = jsonSendActividadFinanciamientoDet;
+    const paramsSend: any = jsonSendActividadFinanciamientoDet;
 
     // Retorno de la Funcion
     return this._http.post(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 69), paramsSend, {
@@ -133,4 +133,69 @@ export class FinanciamientoDetService {
       params: { 'tokenApi': this.tokenHeader },
     });
   } // FIN | FND-00006
+
+
+  /****************************************************************************
+  * Funcion: FND-00007
+  * Fecha: 06-06-2019
+  * Descripcion: Metodo para obtener los Tipos de Transacción
+  * Objetivo: Tipos de Transacción
+  * Params: { }
+  ****************************************************************************/
+  getAllTipoTransaccion(): Observable<any> {
+    // Retorno de la Funcion
+    return this._http.get(this._systemEndPointsService.getEndPointService('mantActGroup', 14), {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  } // FIN | FND-00007
+
+
+  /**
+   * Seccion de Compromisos ***************************************************
+   */
+  /****************************************************************************
+  * Funcion: FND-00008
+  * Fecha: 06-06-2019
+  * Descripcion: Metodo para Ingresar Compromisos de Socio al Desarrollo
+  * Objetivo: Ingresar Compromisos de Socio al Desarrollo
+  * Params: { jsonSendActividadFinanciamientoDetCompromiso }
+  ****************************************************************************/
+  newActividadFinanciamientoDetCompromiso(jsonSendActividadFinanciamientoDetCompromiso: any): Observable<any> {
+    const paramsSend: any = jsonSendActividadFinanciamientoDetCompromiso;
+
+    // Retorno de la Funcion
+    return this._http.post(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 70.1), paramsSend, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  } // FIN | FND-00008
+
+
+  /****************************************************************************
+    * Funcion: FND-00009
+    * Fecha: 06-06-2019
+    * Descripcion: Metodo para eliminar datos de Financiamiento Detalle
+    * Objetivo: Eliminar Financiamiento Detalle al Proyecto
+    * Params: { codigoFinancCompromiso }
+    ****************************************************************************/
+  deleteActividadFinanciamientoDetCompromiso(codigoFinancCompromiso: string): Observable<any> {
+    const paramsSend: string = codigoFinancCompromiso;
+
+    // Retorno de la Funcion
+    return this._http.delete(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 70.2) + paramsSend, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  } // FIN | FND-00009
+
+
+  /**
+   * Seccion de Desembolsos ******************************************************
+   */
+
+
+   /**
+    * Seccion de Gastos **********************************************************
+    */
 }

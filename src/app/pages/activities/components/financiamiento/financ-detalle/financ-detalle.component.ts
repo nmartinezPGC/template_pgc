@@ -53,6 +53,8 @@ export class FinancDetalleComponent implements OnInit {
    */
   constructor(public _financiamientoDetService: FinanciamientoDetService,
     private _notificacionesService: NotificacionesService) {
+    // Socios al Desarrollo del Proyecto
+    this.getAllSociosDesarrolloService(65);
   }
 
 
@@ -75,9 +77,6 @@ export class FinancDetalleComponent implements OnInit {
 
     // Modalidades de Ayuda
     this.getAllModalidadAyudaService();
-
-    // Socios al Desarrollo del Proyecto
-    this.getAllSociosDesarrolloService(65);
   }
 
   /**
@@ -136,6 +135,26 @@ export class FinancDetalleComponent implements OnInit {
 
 
   /****************************************************************************
+  * Funcion: validDataFinanciamientoDet
+  * Object Number: 003
+  * Fecha: 29-05-2019
+  * Descripcion: Method validDataFinanciamientoDet of the Class
+  * Objetivo: validDataFinanciamientoDet valida la informacion que ingresa el
+  * Detalle del Proyecto
+  * Params: { _activityFinanciamientoDetModel }
+  ****************************************************************************/
+  validDataFinanciamientoDet() {
+    // Valida la Informacion ingresada del Deatlle de Financiamiento
+    if (this.idActividadFinancEnc === 0) {
+      this._notificacionesService.showToast('error', 'Error al Ingresar la Información de Clasificación de Financiamiento', 'Debes ingresar el Costo Total del proyecto para continuar');
+      return -1;
+    } else {
+
+    }
+
+  } // FIN validDataFinanciamientoDet
+
+  /****************************************************************************
   * Funcion: saveFinanciamientoDetService
   * Object Number: 003
   * Fecha: 29-05-2019
@@ -153,32 +172,36 @@ export class FinancDetalleComponent implements OnInit {
     this._activityFinanciamientoDetModel.codigoFinancDet = this.codigoProyectoTab + '-AFD-' + this.idProyectoTab;
 
     // Evaluacion de Datos de Financiamiento Detalle de Proyecto
-    if (this._activityFinanciamientoDetModel.idSocioDesarrolloSend !== 0) {
-      if (this._activityFinanciamientoDetModel.idTipoFinanciamientoSend !== 0) {
-        // Ejecuta el Servicio de invocar el registro de Detalle de Financiamiento | Clasificacion
-        this._financiamientoDetService.newActividadFinanciamientoDet(this._activityFinanciamientoDetModel).subscribe(
-          result => {
-            if (result.status !== 200) {
-              this._notificacionesService.showToast('error', 'Error al Ingresar la Información de Clasificación de Financiamiento', result.message);
-            } else if (result.status === 200) {
-              if (result.findRecord === true) {
+    if (this.idActividadFinancEnc !== 0) {
+      if (this._activityFinanciamientoDetModel.idSocioDesarrolloSend !== 0) {
+        if (this._activityFinanciamientoDetModel.idTipoFinanciamientoSend !== 0) {
+          // Ejecuta el Servicio de invocar el registro de Detalle de Financiamiento | Clasificacion
+          this._financiamientoDetService.newActividadFinanciamientoDet(this._activityFinanciamientoDetModel).subscribe(
+            result => {
+              if (result.status !== 200) {
                 this._notificacionesService.showToast('error', 'Error al Ingresar la Información de Clasificación de Financiamiento', result.message);
-              } else {
-                this._notificacionesService.showToast('default', 'Clasificación de Financiamiento', result.message);
-                this._activityFinanciamientoDetModel.idActividadFinancDet = result.data.idActividadFinancDet;
-                this.idActividadFinancDet = this._activityFinanciamientoDetModel.idActividadFinancDet;
+              } else if (result.status === 200) {
+                if (result.findRecord === true) {
+                  this._notificacionesService.showToast('error', 'Error al Ingresar la Información de Clasificación de Financiamiento', result.message);
+                } else {
+                  this._notificacionesService.showToast('default', 'Clasificación de Financiamiento', result.message);
+                  this._activityFinanciamientoDetModel.idActividadFinancDet = result.data.idActividadFinancDet;
+                  this.idActividadFinancDet = this._activityFinanciamientoDetModel.idActividadFinancDet;
+                }
               }
-            }
-          },
-          error => {
-            this._notificacionesService.showToast('error', 'Error al Ingresar la Información de Clasificación de Financiamiento', JSON.stringify(error.error.message));
-          },
-        );
+            },
+            error => {
+              this._notificacionesService.showToast('error', 'Error al Ingresar la Información de Clasificación de Financiamiento', JSON.stringify(error.error.message));
+            },
+          );
+        } else {
+          this._notificacionesService.showToast('error', 'Error al ingresar la Información de Clasificación de Financiamiento', 'Debes de ingresar el Tipo Financiamiento del Proyecto, para continuar');
+        }
       } else {
-        this._notificacionesService.showToast('error', 'Error al ingresar la Información de Moneda de Financiamiento', 'Debes de ingresar el Tipo Financiamiento del Proyecto, para continuar');
+        this._notificacionesService.showToast('error', 'Error al ingresar la Información de Clasificación de Financiamiento', 'Debes de ingresar el Socio al Desarrollo del Proyecto, para continuar');
       }
     } else {
-      this._notificacionesService.showToast('error', 'Error al ingresar la Información de Clasificación de Financiamiento', 'Debes de ingresar el Socio al Desarrollo del Proyecto, para continuar');
+      this._notificacionesService.showToast('error', 'Error al ingresar la Información de Clasificación de Financiamiento', 'Debes de ingresar el Costo Total del Proyecto, para continuar');
       // this.montoActividadInput.nativeElement.focus();
     }
   } // FIN | saveFinanciamientoDetService

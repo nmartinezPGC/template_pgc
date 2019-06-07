@@ -362,7 +362,16 @@ export class SocioDesarrolloComponent implements OnInit {
           this.JsonReceptionAllSocioDesarrolloByActividad = [];
         } else if (result.status === 200) {
           this.JsonReceptionAllSocioDesarrolloByActividad = result.data;
+
+          // Mapear los datos de los Socios al Desarrollo Registrados
           // console.log(this.JsonReceptionAllSocioDesarrolloByActividad);
+          this.JsonSendSociosDesarrollo = this.JsonReceptionAllSocioDesarrolloByActividad.map((item) => {
+            return {
+              code: item.idOrganizacion.idOrganizacion,
+              name: item.idOrganizacion.descOrganizacion,
+              otro: item.porcentajePart,
+            }
+          });
         }
       },
       error => {

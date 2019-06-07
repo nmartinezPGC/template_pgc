@@ -82,8 +82,7 @@
   </nb-card-body>
 
   <nb-card-footer>
-    <a (click)="showCompromisoModal()" nbPopover="Ingresar Compromiso" nbPopoverMode="hint"
-      style="cursor: pointer">
+    <a (click)="showDialog()" nbPopover="Ingresar Compromiso" nbPopoverMode="hint" style="cursor: pointer">
       <i class="ion-plus-round"></i>
     </a>
     <a href="#/" target="_blanck" nbPopover="Ver Información" nbPopoverMode="hint">
@@ -91,3 +90,11 @@
     </a>
   </nb-card-footer>
 </nb-card>
+
+<!-- Formulario Modal de Registro de Compromisos -->
+<p-dialog [(visible)]="display" [modal]="true" [responsive]="true">
+  <p-header>
+    Registro de Compromiso
+  </p-header>
+  <ngx-financ-detalle-compromisos-form></ngx-financ-detalle-compromisos-form>
+</p-dialog>

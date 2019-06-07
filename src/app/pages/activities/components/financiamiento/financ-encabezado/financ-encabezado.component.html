@@ -9,7 +9,7 @@
       <nb-card-header>Costo Total del Proyecto</nb-card-header>
       <nb-card-body>
         <div class="row">
-          <div class="col-sm-6 col-md-3">
+          <div class="col-sm-6 col-md-4">
             <div class="form-group">
               <strong> <label>Monto de Proyecto</label> </strong>
               <input class="form-control" currencyMask required [options]="{ prefix: '', thousands: ',', decimal: '.' }"
@@ -34,7 +34,7 @@
           <div class="col-sm-6 col-md-3">
             <div class="form-group">
               <strong> <label>Fecha de Transacción</label> </strong>
-              <p-calendar [inline]="false" class="form-control" [inputStyle]="{'width':'80%'}" [showIcon]="true"
+              <p-calendar [inline]="false" class="form-control" [inputStyle]="{'width':'100%'}" [showIcon]="true"
                 [(ngModel)]="date6" dateFormat="dd/mm/yy" (click)="showDialog()" [locale]="es" required
                 [(ngModel)]="_activityFinanciamientoEncModel.fechaTransaccion" #fechaTransaccion="ngModel"
                 name="fechaTransaccion">

@@ -8,16 +8,16 @@
 */
 
 import { Component, Input, OnInit } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ToasterService } from 'angular2-toaster';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { FinancDetalleCompromisosFormComponent } from './financ-detalle-compromisos-form/financ-detalle-compromisos-form.component';
+import { NotificacionesService } from '../../../../../shared/services/notificaciones.service';
+import { ActivityFinanciamientoDetCompromisosModel } from '../../../../models/financiamiento/model-financiamiento-det-compromisos';
+import { FinanciamientoEncService } from '../../../../services/financiamiento/financiamiento-enc.service';
 
 @Component({
   selector: 'ngx-financ-detalle-compromisos',
   templateUrl: './financ-detalle-compromisos.component.html',
   styleUrls: ['./financ-detalle-compromisos.component.scss'],
-  providers: [MessageService, ConfirmationService],
+  providers: [MessageService, ConfirmationService, FinanciamientoEncService, NotificacionesService],
 })
 export class FinancDetalleCompromisosComponent implements OnInit {
   // Variables entre Tabs | Components
@@ -26,41 +26,40 @@ export class FinancDetalleCompromisosComponent implements OnInit {
   @Input() codigoProyectoTab: string;
   @Input() idActividadFinancDet: number;
 
+  // Variables de recepcion de Json
+  public JsonReceptionAllMonedasProyecto: any;
+
+  // variables de la modal window
+  public display: boolean = false;
+
+  // Modelo de la clase
+  public _activityFinanciamientoDetCompromisosModel: ActivityFinanciamientoDetCompromisosModel;
+
+
+
   /**
    * Constructor de la Clase
-   * @param messageService
-   * @param changeDetectorRef
-   * @param _toasterService
-   * @param modalService
+   * @param _notificacionesService
    * @param confirmationService
-   * Fecha: 2019-05-29
+   * @author Nahum Martinez
    */
-  constructor(private _messageService: MessageService,
-    private _toasterService: ToasterService,
-    private modalService: NgbModal,
+  constructor(private _notificacionesService: NotificacionesService,
     private confirmationService: ConfirmationService) { }
 
+
+  /**
+   * Clase Inicializadora
+   */
   ngOnInit() {
+    //
   }
 
 
   /**
-   * Funcion de mostrar el Modal con Parametros enviados
-   * Autor: Nahum Martinez
-   * Fecha: 2019-05-03
-   * Formulario de Compromisos
+   * Mostrar el Modal window
    */
-  showCompromisoModal() {
-    const activeModal = this.modalService.open(FinancDetalleCompromisosFormComponent, {
-      size: 'lg',
-      backdrop: 'static',
-      container: 'nb-layout',
-    });
-
-    // Valores de parametros a enviar
-    activeModal.componentInstance.modalHeaderIdActividadFinancDet = this.idActividadFinancDet;
-    activeModal.componentInstance.modalHeaderCodigoActividad = this.codigoProyectoTab;
-    activeModal.componentInstance.modalHeaderIdActividad = this.idProyectoTab;
-  } // FIN | showStaticModal
+  showDialog() {
+    this.display = true;
+  }
 
 }
