@@ -22,7 +22,8 @@ import { NgxAuthBlockComponent } from './@theme/components/auth/auth-block/auth-
 import { NgxLoginComponent } from './@theme/components/auth/login/login.component';
 import { NgxLogoutComponent } from './@theme/components/auth/logout/logout.component';
 import { RequestPasswordComponent} from './@theme/components/auth/request-password/request-password.component';
-import { EspacioModalTrabajoComponent } from './src/app/pages/mantenimientos/espacios-trabajo/espacio-modal-trabajo/espacio-modal-trabajo.component';
+
+
 
 
 @NgModule({
@@ -31,8 +32,8 @@ import { EspacioModalTrabajoComponent } from './src/app/pages/mantenimientos/esp
     NgxAuthBlockComponent,
     NgxLoginComponent,
     NgxLogoutComponent,
-    EspacioModalTrabajoComponent,
-   
+
+
    // RecursosProyectoComponent,
 
 

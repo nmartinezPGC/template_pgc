@@ -21,7 +21,7 @@ import { OrganizacionModalComponent } from './mant-espacios-trabajo/organizacion
 import { UsuarioModalComponent } from './mant-seguridad/usuarios/usuario.modal.component';
 import { NgxPaginationModule } from 'ngx-pagination'; // <-- import the module
 import { FilterdataPipe } from '../mantenimientos/pipes/filterdata.pipe';
-//import { EspaciosTrabajoModalComponent } from './mant-espacios-trabajo/espacios-trabajo/espacios-trabajo-modal/espacios-trabajo-modal.component';
+// import { EspaciosTrabajoModalComponent } from './mant-espacios-trabajo/espacios-trabajo/espacios-trabajo-modal/espacios-trabajo-modal.component';
 
 
 // Imports de Libreria de PrimeNg
@@ -57,7 +57,7 @@ import { MessageModule } from 'primeng/message';
     OrganizacionModalComponent,
     UsuarioModalComponent,
     FilterdataPipe,
-    //EspaciosTrabajoModalComponent,
+    // EspaciosTrabajoModalComponent,
 
   ],
   entryComponents: [

@@ -310,7 +310,7 @@ onItemSlectPais(item: any) {
         this.showToast('error', 'Error al Ingresar la Información del Perfil', response.message);
       } else if (response.status === 200) {
         this.showToast('default', 'La Información del espacio trabajo, se ha ingresado con exito', response.message);
-      
+
       }
            // Carga la tabla Nuevamente
            this.ListAllEspaciosTrabajo();
