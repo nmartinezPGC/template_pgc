@@ -1,5 +1,13 @@
 import { NbMenuItem } from '@nebular/theme';
 
+import * as _ from 'lodash';
+
+const roles = [1, 2, 3, 4, 5, 6, 7];
+const token = localStorage.getItem('auth_app_token');
+const identity = localStorage.getItem('identity');
+
+// decode the token to get its payload
+
 export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Dashboard',
@@ -12,13 +20,18 @@ export const MENU_ITEMS: NbMenuItem[] = [
     group: true,
   },
   {
-    title: 'Actividades',
-    icon: 'ion-clipboard',
+    title: 'Proyectos',
+    icon: 'ion-folder',
     // link: '/pages/activities',
     children: [
       {
-        title:  'Ingreso de Actividad',
+        title: 'Ingreso de Proyecto',
         link: '/pages/activities/new-activity',
+      },
+      {
+        title: 'Editar de Proyecto',
+        link: '/pages/activities/new-activity',
+        hidden: true,
       },
     ],
   },
@@ -36,6 +49,82 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Seguridad',
         // icon: 'fa fa-users',
         link: '/pages/mantenimientos/mant-seguridad',
+      },
+    ],
+  },
+  {
+    title: 'Reportes',
+    icon: 'ion-clipboard',
+    children: [
+      {
+        title: 'Sectores y ODS',
+        link: '/pages/forms/inputs',
+      },
+      {
+        title: 'Ubicación',
+        link: '/pages/forms/layouts',
+      },
+    ],
+  },
+  {
+    title: 'Mapas',
+    icon: 'nb-location',
+    children: [
+      {
+        title: 'Google Maps',
+        link: '/pages/maps/gmaps',
+      },
+      {
+        title: 'Leaflet Maps',
+        link: '/pages/maps/leaflet',
+      },
+      {
+        title: 'Bubble Maps',
+        link: '/pages/maps/bubble',
+      },
+      {
+        title: 'Search Maps',
+        link: '/pages/maps/searchmap',
+      },
+    ],
+  },
+  {
+    title: 'Gráficos',
+    icon: 'nb-bar-chart',
+    children: [
+      {
+        title: 'Echarts',
+        link: '/pages/charts/echarts',
+      },
+      {
+        title: 'Charts.js',
+        link: '/pages/charts/chartjs',
+      },
+      {
+        title: 'D3',
+        link: '/pages/charts/d3',
+      },
+    ],
+  },
+  {
+    title: 'Auth',
+    icon: 'nb-locked',
+    children: [
+      {
+        title: 'Login',
+        link: '/auth/login',
+      },
+      {
+        title: 'Register',
+        link: '/auth/register',
+      },
+      {
+        title: 'Request Password',
+        link: '/auth/request-password',
+      },
+      {
+        title: 'Reset Password',
+        link: '/auth/reset-password',
       },
     ],
   },
@@ -106,46 +195,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
     ],
   },
   {
-    title: 'Maps',
-    icon: 'nb-location',
-    children: [
-      {
-        title: 'Google Maps',
-        link: '/pages/maps/gmaps',
-      },
-      {
-        title: 'Leaflet Maps',
-        link: '/pages/maps/leaflet',
-      },
-      {
-        title: 'Bubble Maps',
-        link: '/pages/maps/bubble',
-      },
-      {
-        title: 'Search Maps',
-        link: '/pages/maps/searchmap',
-      },
-    ],
-  },
-  {
-    title: 'Charts',
-    icon: 'nb-bar-chart',
-    children: [
-      {
-        title: 'Echarts',
-        link: '/pages/charts/echarts',
-      },
-      {
-        title: 'Charts.js',
-        link: '/pages/charts/chartjs',
-      },
-      {
-        title: 'D3',
-        link: '/pages/charts/d3',
-      },
-    ],
-  },
-  {
     title: 'Editors',
     icon: 'nb-title',
     children: [
@@ -179,26 +228,21 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
     ],
   },
-  {
-    title: 'Auth',
-    icon: 'nb-locked',
-    children: [
-      {
-        title: 'Login',
-        link: '/auth/login',
-      },
-      {
-        title: 'Register',
-        link: '/auth/register',
-      },
-      {
-        title: 'Request Password',
-        link: '/auth/request-password',
-      },
-      {
-        title: 'Reset Password',
-        link: '/auth/reset-password',
-      },
-    ],
-  },
 ];
+
+/**
+ * @name findRole
+ * @param allowedRoles
+ * @param userRole
+ */
+function findRole(allowedRoles, userRole) {
+  if (Number.isNaN(userRole)) {
+    return false;
+  }
+  console.log('testing -- ' + userRole);
+  return (_.find(allowedRoles, function (
+    item: any
+  ) {
+    return item == userRole;
+  })) ? true : false;
+}
