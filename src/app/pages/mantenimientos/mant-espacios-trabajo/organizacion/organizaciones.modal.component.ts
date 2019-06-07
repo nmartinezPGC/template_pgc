@@ -273,16 +273,6 @@ export class OrganizacionModalComponent implements OnInit {
         // Redirecciona al Login
         alert('Error en la petición de la API ' + <any>error);
 
-        // Borramos los datos del LocalStorage
-        localStorage.removeItem('auth_app_token');
-        localStorage.removeItem('identity');
-
-        const redirect = '/auth/login';
-        setTimeout(() => {
-          // Iniciativa Temporal
-          location.reload();
-          return this._router.navigateByUrl(redirect);
-        }, 2000);
       },
     );
   } // FIN | perfilesTipoService
@@ -351,9 +341,10 @@ export class OrganizacionModalComponent implements OnInit {
           this.showToast('error', 'Error al Ingresar la Información del Usuario', response.message);
         } else if (response.status === 200) {
           this.showToast('default', 'se actualizo con exito la informacion de la organizacion', response.message);
-          this.ListAllCategoria();
+         this.activeModal.close(this.ngOnInit());
         }
       },
+
     );
   } // FIN | newUsuarioService
 

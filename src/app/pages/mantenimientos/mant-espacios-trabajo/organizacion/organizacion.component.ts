@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 import { OrganizacionModel } from '../../models/organizacion.model';
 import { OrganizacionService } from '../../services/organizaciones.service';
 import { delay } from 'q';
+import { templateJitUrl } from '@angular/compiler';
 @Component({
   selector: 'ngx-organizacion',
   templateUrl: './organizacion.component.html',
@@ -88,6 +89,7 @@ export class OrganizacionComponent implements OnInit {
 
     this.data3 = this.JsonReceptionOrganizaciones;
     this.arrayOrganizacion = new Array();
+
   }
 
 
