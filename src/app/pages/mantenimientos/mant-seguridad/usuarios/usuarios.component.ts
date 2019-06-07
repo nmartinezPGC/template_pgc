@@ -362,7 +362,7 @@ export class UsuariosComponent implements OnInit {
       },
       error => {
         // Redirecciona al Login
-        this.showToast('error','Error en la petición de la API',<any>error.message.message);
+        this.showToast('error' , 'Error en la petición de la API' , <any>error.message.message);
       },
     );
   } // FIN | usuariosTipoService
@@ -398,7 +398,7 @@ export class UsuariosComponent implements OnInit {
       },
       error => {
         // Redirecciona al Login
-        this.showToast('error','Error en la petición de la API',<any>error.message.message);
+        this.showToast('error' , 'Error en la petición de la API' , <any>error.message.message);
       },
     );
   } // FIN | estadoService
@@ -492,7 +492,7 @@ export class UsuariosComponent implements OnInit {
       },
       error => {
         // Redirecciona al Login
-        this.showToast('error','Error en la petición de la API',<any>error.message.message);
+        this.showToast('error' , 'Error en la petición de la API' , <any>error.message.message);
       },
     );
   } // FIN | usuariosDatailsService
@@ -626,7 +626,7 @@ export class UsuariosComponent implements OnInit {
       },
       error => {
         // Redirecciona al Login
-        this.showToast('error','Error en la petición de la API',<any>error.message.message);
+        this.showToast('error' , 'Error en la petición de la API ', <any>error.message.message);
       },
     );
     return this.resultStatus;
@@ -655,7 +655,7 @@ export class UsuariosComponent implements OnInit {
       },
       error => {
         // Redirecciona al Login
-        this.showToast('error','Error en la petición de la API',<any>error.message.message);
+        this.showToast('error', 'Error en la petición de la API ' ,<any>error.message.message);
       },
     );
     return this.resultStatus;
@@ -747,7 +747,7 @@ export class UsuariosComponent implements OnInit {
       },
       error => {
         // Redirecciona al Login
-        this.showToast('error','Error en la petición de la API',<any>error.message.message);
+        this.showToast('error' , 'Error en la petición de la API ', <any>error.message.message);
       },
     );
   } // FIN | deleteUsuario
@@ -781,7 +781,7 @@ export class UsuariosComponent implements OnInit {
       },
       error => {
         // Redirecciona al Login
-        this.showToast('error','Error en la petición de la API',<any>error.message.message);
+        this.showToast('error' , 'Error en la petición de la API' , <any>error.message.message);
 
         // Borramos los datos del LocalStorage
         localStorage.removeItem('auth_app_token');
@@ -827,7 +827,7 @@ export class UsuariosComponent implements OnInit {
       },
       error => {
         // Redirecciona al Login
-        this.showToast('error','Error en la petición de la API',<any>error.message.message);
+        this.showToast('error' , 'Error en la petición de la API ' ,<any>error.message.message);
 
         // Borramos los datos del LocalStorage
         localStorage.removeItem('auth_app_token');
@@ -875,7 +875,7 @@ export class UsuariosComponent implements OnInit {
       },
       error => {
         // Redirecciona al Login
-        this.showToast('error','Error en la petición de la API',<any>error.message.message);
+        this.showToast('error' , 'Error en la petición de la API' , <any>error.message.message);
       },
     );
   } // FIN | OrganizacionService

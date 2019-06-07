@@ -73,7 +73,7 @@ export class ConfigSmartTableService {
                 activado: {
                   title: 'Habilitado',
                   type: 'html',
-                //valuePrepareFunction: (cell, row) =>  row.activado,
+                // valuePrepareFunction: (cell, row) =>  row.activado,
                   editor: {
                     type: 'list',
                     config: {

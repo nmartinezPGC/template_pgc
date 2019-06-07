@@ -129,7 +129,7 @@ export class AgregarCategoriaComponent implements OnInit {
       },
       error => {
         // Redirecciona al Login
-        this.showToast('error','Error en la petición de la API',<any>error.message.message);
+        this.showToast('error' , 'Error en la petición de la API' , <any>error.message.message);
       },
     );
   } // FIN | listarTipoOrganizacion();
@@ -155,7 +155,7 @@ export class AgregarCategoriaComponent implements OnInit {
       },
       error => {
         // Redirecciona al Login
-        this.showToast('error','Error en la petición de la API',<any>error.message.message);
+        this.showToast('error' , 'Error en la petición de la API' , <any>error.message.message);
       },
     );
   } // FIN | perfilesTipoService
@@ -224,7 +224,7 @@ export class AgregarCategoriaComponent implements OnInit {
       },
       error => {
         // Redirecciona al Login
-         this.showToast('error','Error en la petición de la API',<any>error.message.message);
+         this.showToast('error' , 'Error en la petición de la API' , <any>error.message.message);
       },
     );
   } // FIN | upTipoOrganzacion()
