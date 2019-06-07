@@ -239,10 +239,10 @@ function findRole(allowedRoles, userRole) {
   if (Number.isNaN(userRole)) {
     return false;
   }
-  console.log('testing -- ' + userRole);
+  // console.log('testing -- ' + userRole);
   return (_.find(allowedRoles, function (
-    item: any
+    item: any,
   ) {
-    return item == userRole;
+    return item === userRole;
   })) ? true : false;
 }
