@@ -135,8 +135,8 @@ export class PerfilesComponent implements OnInit {
   ngOnInit() {
     // Inicializacion del Modelo de la Clase
     this._perfilModel = new PerfilModel(
-      0,  null, null, true,
-      null, 0, null );
+      0,  null, null, null,
+      null, 0, '' );
     // inicializar la lista de tipo de perfiles
     this.perfilesTipoService();
   }
@@ -169,18 +169,7 @@ export class PerfilesComponent implements OnInit {
       },
       error => {
         // Redirecciona al Login
-        alert('Error en la petición de la API ' + <any>error);
-
-        // Borramos los datos del LocalStorage
-        localStorage.removeItem('auth_app_token');
-        localStorage.removeItem('identity');
-
-        const redirect = '/auth/login';
-        setTimeout(() => {
-          // Iniciativa Temporal
-          location.reload();
-          return this._router.navigateByUrl(redirect);
-        }, 2000);
+        this.showToast('error' , 'Error en la petición de la API ', <any>error.message.message);
       },
     );
   } // FIN | perfilesDatailsService
@@ -262,18 +251,7 @@ export class PerfilesComponent implements OnInit {
       },
       error => {
         // Redirecciona al Login
-        alert('Error en la petición de la API ' + <any>error);
-
-        // Borramos los datos del LocalStorage
-        /*localStorage.removeItem('auth_app_token');
-        localStorage.removeItem('identity');
-
-        const redirect = '/auth/login';
-        setTimeout(() => {
-          // Iniciativa Temporal
-          location.reload();
-          return this._router.navigateByUrl(redirect);
-        }, 2000);*/
+        this.showToast('error' , 'Error en la petición de la API' , <any>error.message.message);
       },
     );
   } // FIN | newPerfilService
@@ -305,18 +283,7 @@ export class PerfilesComponent implements OnInit {
       },
       error => {
         // Redirecciona al Login
-        alert('Error en la petición de la API ' + <any>error);
-
-        // Borramos los datos del LocalStorage
-        /*localStorage.removeItem('auth_app_token');
-        localStorage.removeItem('identity');
-
-        const redirect = '/auth/login';
-        setTimeout(() => {
-          // Iniciativa Temporal
-          location.reload();
-          return this._router.navigateByUrl(redirect);
-        }, 2000);*/
+        this.showToast('error' , 'Error en la petición de la API ' , <any>error.message.message);
       },
     );
   } // FIN | newPerfilService
@@ -356,10 +323,7 @@ export class PerfilesComponent implements OnInit {
       },
       error => {
         // Redirecciona al Login
-        // alert('Error en la petición de la API ' + <any>error.message.message);
-        this.showToast('error', 'Error en la petición de la API', <any>error.message.message);
-
-        // Borramos los datos del LocalStorage
+        this.showToast('error' , 'Error en la petición de la API' , <any>error.message.message);
       },
     );
   } // FIN | newPerfilService
@@ -399,18 +363,7 @@ export class PerfilesComponent implements OnInit {
       },
       error => {
         // Redirecciona al Login
-        alert('Error en la petición de la API ' + <any>error);
-
-        // Borramos los datos del LocalStorage
-        localStorage.removeItem('auth_app_token');
-        localStorage.removeItem('identity');
-
-        const redirect = '/auth/login';
-        setTimeout(() => {
-          // Iniciativa Temporal
-          location.reload();
-          return this._router.navigateByUrl(redirect);
-        }, 2000);
+        this.showToast('error' , 'Error en la petición de la API' , <any>error.message.message);
       },
     );
   } // FIN | perfilesTipoService

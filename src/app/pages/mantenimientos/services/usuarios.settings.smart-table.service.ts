@@ -104,12 +104,12 @@ export class ConfigSmartTableService {
                                     },
                                 },
                                 idEstado: {
-                                    // valuePrepareFunction: (cell: any, row: any) => row.idEstadoUsuario.descEstado,
+                                     valuePrepareFunction: (cell: any, row: any) => row.idEstadoUsuario.descEstado,
                                     title: 'Estado Usuario',
                                     editor: {
                                         type: 'list',
                                         config: {
-                                            list: [{ value: '1', title: 'Activo' }, { value: '2', title: 'Inactivo' }],
+                                            list: array,
                                         },
                                     },
                                 },

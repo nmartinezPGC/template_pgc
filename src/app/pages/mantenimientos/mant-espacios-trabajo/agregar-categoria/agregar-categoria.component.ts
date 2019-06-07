@@ -129,18 +129,7 @@ export class AgregarCategoriaComponent implements OnInit {
       },
       error => {
         // Redirecciona al Login
-        alert('Error en la petición de la API ' + <any>error);
-
-        // Borramos los datos del LocalStorage
-        localStorage.removeItem('auth_app_token');
-        localStorage.removeItem('identity');
-
-        const redirect = '/auth/login';
-        setTimeout(() => {
-          // Iniciativa Temporal
-          location.reload();
-          return this._router.navigateByUrl(redirect);
-        }, 2000);
+        this.showToast('error' , 'Error en la petición de la API' , <any>error.message.message);
       },
     );
   } // FIN | listarTipoOrganizacion();
@@ -166,18 +155,7 @@ export class AgregarCategoriaComponent implements OnInit {
       },
       error => {
         // Redirecciona al Login
-        alert('Error en la petición de la API ' + <any>error);
-
-        // Borramos los datos del LocalStorage
-        localStorage.removeItem('auth_app_token');
-        localStorage.removeItem('identity');
-
-        const redirect = '/auth/login';
-        setTimeout(() => {
-          // Iniciativa Temporal
-          location.reload();
-          return this._router.navigateByUrl(redirect);
-        }, 2000);
+        this.showToast('error' , 'Error en la petición de la API' , <any>error.message.message);
       },
     );
   } // FIN | perfilesTipoService
@@ -246,18 +224,7 @@ export class AgregarCategoriaComponent implements OnInit {
       },
       error => {
         // Redirecciona al Login
-        // alert('Error en la petición de la API ' + <any>error);
-
-        // Borramos los datos del LocalStorage
-        /*localStorage.removeItem('auth_app_token');
-        localStorage.removeItem('identity');
-
-        const redirect = '/auth/login';
-        setTimeout(() => {
-          // Iniciativa Temporal
-          location.reload();
-          return this._router.navigateByUrl(redirect);
-        }, 2000);*/
+         this.showToast('error' , 'Error en la petición de la API' , <any>error.message.message);
       },
     );
   } // FIN | upTipoOrganzacion()
