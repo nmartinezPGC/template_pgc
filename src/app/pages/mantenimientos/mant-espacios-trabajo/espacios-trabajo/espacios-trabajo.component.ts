@@ -14,9 +14,9 @@ import { EspaciosTrabajoModel} from '../../models/espacio.trabajo.model';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { delay } from 'q';
 import { LoginService } from '../../../../@theme/components/auth/services/login.service';
-import { EspaciosTrabajoModalComponent } from './espacios-trabajo-modal/espacios-trabajo-modal.component';
 import { OrganizacionModalComponent } from '../organizacion/organizaciones.modal.component';
 import { OrganizacionComponent } from '../organizacion/organizacion.component';
+import { OrganizacionesComponent } from '../../../activities/components/organizaciones/organizaciones.component';
 
 
 
@@ -40,7 +40,7 @@ export class EspaciosTrabajoComponent implements OnInit {
   public JsonReceptionPaises: any;
   public JsonReceptionF
   private _toasterService: ToasterService;
-  private JsonReceptionEspaciosTrabajoModal: EspaciosTrabajoModalComponent;
+
 
 
   data2: any;
@@ -81,10 +81,10 @@ export class EspaciosTrabajoComponent implements OnInit {
   settings: any;
   public responsedata: any;
 
- // levanta la modal de mantenimineto de organizacion/consulta
+ // levanta la modal de mantenimineto de espacios de trabjo/consulta
  showLargeModal(FindByIdEspacioTrabajo: number) {
 
-  const activeModal = this.modalService.open(OrganizacionComponent, { size: 'lg', container: 'nb-layout' });
+  const activeModal = this.modalService.open(OrganizacionModalComponent, { size: 'lg', container: 'nb-layout' });
   // console.log("paso por aqui 2");
 
  activeModal.componentInstance.modalHeader = 'Large Modal Parametro';
@@ -310,9 +310,12 @@ onItemSlectPais(item: any) {
         this.showToast('error', 'Error al Ingresar la Información del Perfil', response.message);
       } else if (response.status === 200) {
         this.showToast('default', 'La Información del espacio trabajo, se ha ingresado con exito', response.message);
-        // Carga la tabla Nuevamente
-        this.ListAllEspaciosTrabajo();
+
       }
+           // Carga la tabla Nuevamente
+           this.ListAllEspaciosTrabajo();
+           this.ngOnInit();
+
     },
     error => {
       // Redirecciona al Login
@@ -398,6 +401,10 @@ onItemSlectPais(item: any) {
     // Return
   } // FIN | deleteActividadIdInterna
 
+  private cleanEspaciosTrabajos() {
+    this.ngOnInit();
+
+  };
 
 
 

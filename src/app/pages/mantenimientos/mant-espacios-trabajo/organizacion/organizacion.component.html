@@ -5,7 +5,7 @@
       <a routerLink="/pages/dashboard">Dashboard</a>
     </li>
     <li class="breadcrumb-item">
-      <a routerLink="./">Mantenimientos</a>
+      <a routerLink="/pages/mantenimientos/mant-espacios-trabajo">Mantenimientos</a>
     </li>
     <li class="breadcrumb-item">
       <a routerLink="/pages/mantenimientos/mant-espacios-trabajo">Espacios de trabajo</a>
@@ -143,7 +143,7 @@
                     </select>
                   </div>
                   <strong> <label>País Organización</label> </strong>
-                  
+
                   <angular2-multiselect [data]="dropdownListPais" [(ngModel)]="selectedItemsPais"
                     [settings]="dropdownSettings" (onSelect)="onItemSlectPais($event)" required></angular2-multiselect>
 
@@ -174,7 +174,7 @@
                 <table class="table table-hover table-striped table-bordered" id="tableIdInterna">
                   <thead>
                     <tr class="tHeadSearch">
-                      <th scope="col" colspan="2">
+                      <th scope="col" colspan="5">
                         <input type="text" class="form-control" [(ngModel)]="queryString"
                           placeholder="Buscar nombre de la Organizacion :">
                       </th>
