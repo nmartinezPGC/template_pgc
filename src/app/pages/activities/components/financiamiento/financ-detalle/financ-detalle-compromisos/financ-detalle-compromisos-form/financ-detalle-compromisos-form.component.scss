@@ -40,4 +40,23 @@ $color-loader: #9aa0a5;
     background-color: #1f6abe;
     cursor: pointer;
   }
+
+  // Acciones
+  .accButton {
+    cursor: pointer;
+  }
+
+  // Clase de los Botones
+  .icon-button-examples {
+    display: flex;
+    justify-content: space-between;
+
+    button {
+      min-width: 4rem;
+    }
+  }
+
+  .icon-button-examples:not(:last-child) {
+    margin-bottom: 1rem;
+  }
 }
