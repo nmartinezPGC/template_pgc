@@ -15,8 +15,12 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { delay } from 'q';
 import { LoginService } from '../../../../@theme/components/auth/services/login.service';
 import { OrganizacionModalComponent } from '../organizacion/organizaciones.modal.component';
-import { OrganizacionComponent } from '../organizacion/organizacion.component';
+//import { OrganizacionComponent } from '../organizacion/organizacion.component';
 import { OrganizacionesComponent } from '../../../activities/components/organizaciones/organizaciones.component';
+import { EspacioModalTrabajoComponent } from './espacio-modal-trabajo.component';
+import { OrganizacionComponent } from '../organizacion/organizacion.component';
+import {AgregarCategoriaComponent} from '../agregar-categoria/agregar-categoria.component';
+
 
 
 
@@ -84,7 +88,7 @@ export class EspaciosTrabajoComponent implements OnInit {
  // levanta la modal de mantenimineto de espacios de trabjo/consulta
  showLargeModal(FindByIdEspacioTrabajo: number) {
 
-  const activeModal = this.modalService.open(OrganizacionModalComponent, { size: 'lg', container: 'nb-layout' });
+  const activeModal = this.modalService.open(EspacioModalTrabajoComponent, { size: 'lg', container: 'nb-layout' });
   // console.log("paso por aqui 2");
 
  activeModal.componentInstance.modalHeader = 'Large Modal Parametro';
@@ -310,11 +314,12 @@ onItemSlectPais(item: any) {
         this.showToast('error', 'Error al Ingresar la Información del Perfil', response.message);
       } else if (response.status === 200) {
         this.showToast('default', 'La Información del espacio trabajo, se ha ingresado con exito', response.message);
+        this.ListAllEspaciosTrabajo();
+        this.ngOnInit();
 
       }
            // Carga la tabla Nuevamente
-           this.ListAllEspaciosTrabajo();
-           this.ngOnInit();
+
 
     },
     error => {
