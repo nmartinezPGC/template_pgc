@@ -15,7 +15,7 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { delay } from 'q';
 import { LoginService } from '../../../../@theme/components/auth/services/login.service';
 import { OrganizacionModalComponent } from '../organizacion/organizaciones.modal.component';
-//import { OrganizacionComponent } from '../organizacion/organizacion.component';
+// import { OrganizacionComponent } from '../organizacion/organizacion.component';
 import { OrganizacionesComponent } from '../../../activities/components/organizaciones/organizaciones.component';
 import { EspacioModalTrabajoComponent } from './espacio-modal-trabajo.component';
 import { OrganizacionComponent } from '../organizacion/organizacion.component';
