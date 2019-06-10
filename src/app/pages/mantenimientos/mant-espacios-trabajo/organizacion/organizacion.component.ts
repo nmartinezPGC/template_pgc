@@ -15,6 +15,7 @@ import { OrganizacionModel } from '../../models/organizacion.model';
 import { OrganizacionService } from '../../services/organizaciones.service';
 import { delay } from 'q';
 import { templateJitUrl } from '@angular/compiler';
+import { UserService } from '../../../../@core/data/users.service';
 @Component({
   selector: 'ngx-organizacion',
   templateUrl: './organizacion.component.html',
@@ -76,6 +77,12 @@ export class OrganizacionComponent implements OnInit {
   isCloseButton = true;
   settings: any;
   public responsedata: any;
+  public JsonPassData: any[] = [
+    {
+      idProyectoTab: '',
+      idUsuarioTab: '',
+    },
+  ];
 
 
    // levanta la modal de mantenimineto de organizacion/consulta
@@ -94,7 +101,7 @@ export class OrganizacionComponent implements OnInit {
 
 
   constructor(private modalService: NgbModal, protected _router: Router,
-    private _toasterService: ToasterService, public _OrganizacionService: OrganizacionService) {
+    private _toasterService: ToasterService, public _OrganizacionService: OrganizacionService, public _userService: UserService) {
     this.responsedata = { 'error': false, 'msg': 'error campos solicitado' };
   }
 
@@ -165,6 +172,7 @@ export class OrganizacionComponent implements OnInit {
       null, 1, // relaciones de tipo de organizacion
       null, 1, // pais de la organiacion
       null, 1, // categoria de la organizacion
+      null, 1, // id grupo organizacion
     );
     this.TipoOrganizacion();
     this.ListAllCategoria();
@@ -294,10 +302,8 @@ export class OrganizacionComponent implements OnInit {
     await delay(100);
     this.validateOrganizacion(this._OrganizacionModel);
 
-    // await delay(100);
-    // this.updateSecuenciaService(this.JsonReceptionUserDetail.idUsuarioMod, 1);
+   this.updateSecuenciaService(this.JsonReceptionUserDetail.idUsuario, 2);
 
-    await delay(100);
     const responsedataExt: any = this.responsedata;
 
     if (responsedataExt.error === true) {
@@ -310,6 +316,7 @@ export class OrganizacionComponent implements OnInit {
     this._OrganizacionModel.idCatOrganizacion = { idCatOrganizacion: this._OrganizacionModel.idCatOrganizacion1 };
     this._OrganizacionModel.idPaisOrganizacion = { idPais: this._OrganizacionModel.idPais };
     this._OrganizacionModel.idTipoOrganizacion = { idTipoOrganizacion: this._OrganizacionModel.idTipoOrganizacion1 };
+    this._OrganizacionModel.idGrupoOrganizacion = { idGrupoOrganizacion: this._OrganizacionModel.idGrupoOrganizacion1 };
 
     if (responsedataExt.error === true) {
       this.showToast('error', 'Error al ingresar los datos', responsedataExt.msg);
@@ -508,7 +515,7 @@ export class OrganizacionComponent implements OnInit {
 
           // Componemos la Secuencia a Generar
           const prefixHND: string = 'ORG-';
-          this._OrganizacionModel.codOrganizacion = prefixHND + (Number(this.secuenciaDeActividad.valor + 1));
+          this._OrganizacionModel.codOrganizacion = prefixHND + (Number(this.secuenciaDeActividad.valor2));
         }
       },
       error => {
@@ -551,5 +558,46 @@ protected cleanOrganizacione() {
 this.ngOnInit();
 }
 ;
+/* **************************************************************************/
+  /* ****************** Funciones Propias de la Clase *************************/
+
+  /****************************************************************************
+  * Funcion: userDatailsService
+  * Object Number: 007
+  * Fecha: 16-08-2018
+  * Descripcion: Method userDatailsService of the Class
+  * Objetivo: userDatailsService detalle del Usuario llamando a la API
+  ****************************************************************************/
+ private userDatailsService() {
+  this._userService.getUserDetails(this._userService.usernameHeader).subscribe(
+    result => {
+
+      if (result.status !== 200) {
+        this.showToast('error', 'Error al Obtener la Información del Usuario', result.message);
+      } else {
+        this.JsonReceptionUserDetail = result.data;
+
+
+
+      }
+    },
+    error => {
+      // Redirecciona al Login
+      alert('Error en la petición de la API ' + <any>error);
+
+      // Borramos los datos del LocalStorage
+      localStorage.removeItem('auth_app_token');
+      localStorage.removeItem('identity');
+
+      const redirect = '/auth/login';
+      setTimeout(() => {
+        // Iniciativa Temporal
+        location.reload();
+        return this._router.navigateByUrl(redirect);
+      }, 200);
+    },
+  );
+} // FIN | userDatailsService
+
 
 }
