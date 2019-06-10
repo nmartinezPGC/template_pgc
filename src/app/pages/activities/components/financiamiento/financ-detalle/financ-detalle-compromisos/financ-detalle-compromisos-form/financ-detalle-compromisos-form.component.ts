@@ -7,24 +7,33 @@
 * @date 2019-05-29
 */
 
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { ConfirmationService } from 'primeng/api';
 import { NotificacionesService } from '../../../../../../shared/services/notificaciones.service';
 import { ActivityFinanciamientoDetCompromisosModel } from '../../../../../models/financiamiento/model-financiamiento-det-compromisos';
 import { FinanciamientoDetService } from '../../../../../services/financiamiento/financiamiento-det.service';
 import { FinanciamientoEncService } from '../../../../../services/financiamiento/financiamiento-enc.service';
+import { ListasComunesService } from '../../../../../../common-list/services/listas-comunes.service';
+import { delay } from 'q';
 
 @Component({
   selector: 'ngx-financ-detalle-compromisos-form',
   templateUrl: './financ-detalle-compromisos-form.component.html',
   styleUrls: ['./financ-detalle-compromisos-form.component.scss'],
-  providers: [ConfirmationService, FinanciamientoEncService, FinanciamientoDetService],
+  providers: [ConfirmationService, FinanciamientoEncService, FinanciamientoDetService, ListasComunesService],
 })
 export class FinancDetalleCompromisosFormComponent implements OnInit {
   // Variables primitivas
   modalHeaderIdActividadFinancDet: number;
   modalHeaderCodigoActividad: string;
   modalHeaderIdActividad: number;
+
+  // Variables entre Tabs | Components
+  @Input() idProyectoTab: number;
+  @Input() idUsuarioTab: number;
+  @Input() codigoProyectoTab: string;
+  @Input() idActividadFinancEnc: number;
+  @Input() idActividadFinancDet: number;
 
   // Variables de DOM de la clase
   @ViewChild('montoCompromiso') montoCompromiso: ElementRef;
@@ -42,10 +51,14 @@ export class FinancDetalleCompromisosFormComponent implements OnInit {
 
   // Ventana Modal de Fecha
   display: boolean = false;
+  display2: boolean = false;
 
   // Variables de fecha
   date6: Date;
   es: any;
+
+  // Variables de Auditoria
+  public secuenciaDeCompromiso: any;
 
   /**
    * Constructor de la Clase
@@ -58,7 +71,8 @@ export class FinancDetalleCompromisosFormComponent implements OnInit {
   constructor(private _notificacionesService: NotificacionesService,
     private confirmationService: ConfirmationService,
     private _financiamientoEncService: FinanciamientoEncService,
-    private _financiamientoDetService: FinanciamientoDetService) { }
+    private _financiamientoDetService: FinanciamientoDetService,
+    private _listasComunesService: ListasComunesService) { }
 
 
   /**
@@ -71,7 +85,7 @@ export class FinancDetalleCompromisosFormComponent implements OnInit {
     this._activityFinanciamientoDetCompromisosModel = new ActivityFinanciamientoDetCompromisosModel(
       0, null, // Generales de tabla
       null, 0, null, 0, null, 0, // Relacionales
-      0, null, 0, // Transaccion
+      null, null, 0, // Transaccion
       true, null, null, // Auditoria
     );
 
@@ -91,6 +105,7 @@ export class FinancDetalleCompromisosFormComponent implements OnInit {
    * Params: { }
    ****************************************************************************/
   closeModal() {
+    this.display2 = false;
     // this.activeModal.close();
   } // FIN | closeModal
 
@@ -112,9 +127,6 @@ export class FinancDetalleCompromisosFormComponent implements OnInit {
     this.display = false;
     // Asignacion de Fecha de Transaccion
     this._activityFinanciamientoDetCompromisosModel.fechaTransaccion = this.date6;
-
-    // Guarda la fecha de Transaccion
-    // this.saveFinanciamientoEncService();
   } // FIN | Dialog
 
 
@@ -178,52 +190,121 @@ export class FinancDetalleCompromisosFormComponent implements OnInit {
   * Objetivo: saveFinanciamientoDetCompromisoService listados de las Monedas de Proyecto
   * Params: { _activityFinanciamientoEncModel }
   ****************************************************************************/
-  saveFinanciamientoDetCompromisoService() {
+  async saveFinanciamientoDetCompromisoService() {
+    // Creacion del Codigo del Compromiso | 4 = NEW-ADC Nuevo Compromiso
+    this.getSecuenciaListService('NEW-ADC');
+
+    await delay(100);
+
     // Asignacion de nuevos valores de Modelo
-    this._activityFinanciamientoDetCompromisosModel.idActividadFinancDetSend = 14;
+    this._activityFinanciamientoDetCompromisosModel.idActividadFinancDetSend = this.idActividadFinancDet;
     this._activityFinanciamientoDetCompromisosModel.idActividadFinancDet = { idActividadFinancDet: this._activityFinanciamientoDetCompromisosModel.idActividadFinancDetSend };
-    this._activityFinanciamientoDetCompromisosModel.codigoFinancCompromiso = this.modalHeaderCodigoActividad + '-ADC-' + this.modalHeaderIdActividadFinancDet;
 
     // Evaluacion de Datos de Financiamiento de Compromiso para Proyecto
-    if (this._activityFinanciamientoDetCompromisosModel.idTipoTransaccionSend !== 0) {
-      this._activityFinanciamientoDetCompromisosModel.idTipoTransaccion = { idTipoTransaccion: this._activityFinanciamientoDetCompromisosModel.idTipoTransaccionSend };
-      // console.log(this._activityFinanciamientoEncModel);
+    if (this.idActividadFinancDet !== undefined) {
+      if (this._activityFinanciamientoDetCompromisosModel.idTipoTransaccionSend !== 0) {
+        this._activityFinanciamientoDetCompromisosModel.idTipoTransaccion = { idTipoTransaccion: this._activityFinanciamientoDetCompromisosModel.idTipoTransaccionSend };
 
-      if (this._activityFinanciamientoDetCompromisosModel.montoCompromiso !== 0) {
+        if (this._activityFinanciamientoDetCompromisosModel.montoCompromiso !== 0) {
 
-        if (this._activityFinanciamientoDetCompromisosModel.idMonedaActividadSend !== 0) {
-          this._activityFinanciamientoDetCompromisosModel.idMonedaActividad = { idMonedaActividad: this._activityFinanciamientoDetCompromisosModel.idMonedaActividadSend };
-          // console.log(this._activityFinanciamientoDetCompromisosModel);
+          if (this._activityFinanciamientoDetCompromisosModel.idMonedaActividadSend !== 0) {
+            this._activityFinanciamientoDetCompromisosModel.idMonedaActividad = { idMonedaActividad: this._activityFinanciamientoDetCompromisosModel.idMonedaActividadSend };
 
-
-          // Ejecuta el Servicio de invocar el registro de Compromiso de Socio al Desarrollo
-          this._financiamientoDetService.newActividadFinanciamientoDetCompromiso(this._activityFinanciamientoDetCompromisosModel).subscribe(
-            result => {
-              if (result.status !== 200) {
-                this._notificacionesService.showToast('error', 'Error al Ingresar la Información de Compromisos', result.message);
-              } else if (result.status === 200) {
-                if (result.findRecord === true) {
+            // Ejecuta el Servicio de invocar el registro de Compromiso de Socio al Desarrollo
+            this._financiamientoDetService.newActividadFinanciamientoDetCompromiso(this._activityFinanciamientoDetCompromisosModel).subscribe(
+              result => {
+                if (result.status !== 200) {
                   this._notificacionesService.showToast('error', 'Error al Ingresar la Información de Compromisos', result.message);
-                } else {
-                  this._notificacionesService.showToast('default', 'Encabezado de Financiamiento', result.message);
-                  // this.idActividadFinancDetSend = result.data.idActividadFinancEnc;
+                } else if (result.status === 200) {
+                  if (result.findRecord === true) {
+                    this._notificacionesService.showToast('error', 'Error al Ingresar la Información de Compromisos', result.message);
+                  } else {
+                    this._notificacionesService.showToast('default', 'Registro de compromiso de Proyecto', result.message);
+                    // this.idActividadFinancDetSend = result.data.idActividadFinancEnc;
+
+                    // Actualizamos la Siguiente Secuencia
+                    this.updateSecuenciaService(this.idUsuarioTab, 4);
+
+                    this.closeModal();
+                  }
                 }
-              }
-            },
-            error => {
-              this._notificacionesService.showToast('error', 'Error al Ingresar la Información de Compromisos', JSON.stringify(error.error.message));
-            },
-          );
+              },
+              error => {
+                this._notificacionesService.showToast('error', 'Error al Ingresar la Información de Compromisos', JSON.stringify(error.error.message));
+              },
+            );
+          } else {
+            this._notificacionesService.showToast('error', 'Error al ingresar la Información de Compromisos', 'Debes de ingresar Moneda de Compromiso, para continuar');
+          }
         } else {
-          this._notificacionesService.showToast('error', 'Error al ingresar la Información de Compromisos', 'Debes de ingresar Moneda de Compromiso, para continuar');
+          this._notificacionesService.showToast('error', 'Error al ingresar la Información de de Compromisos', 'Debes de ingresar el monto de Compromiso, para continuar');
+          this.montoCompromiso.nativeElement.focus();
         }
       } else {
-        this._notificacionesService.showToast('error', 'Error al ingresar la Información de de Compromisos', 'Debes de ingresar el monto de Compromiso, para continuar');
-        this.montoCompromiso.nativeElement.focus();
+        this._notificacionesService.showToast('error', 'Error al ingresar la Información de Compromisos', 'Debes de ingresar el Tipo de Transacción, para continuar');
+        // this.montoActividadInput.nativeElement.focus();
       }
     } else {
-      this._notificacionesService.showToast('error', 'Error al ingresar la Información de Compromisos', 'Debes de ingresar el Tipo de Transacción, para continuar');
-      // this.montoActividadInput.nativeElement.focus();
+      this._notificacionesService.showToast('error', 'Error al ingresar la Información de Compromisos', 'Debes Ingresar el Detalle de Financiamiento, para continuar');
     }
   } // FIN | saveFinanciamientoDetCompromisoService
+
+
+  /*****************************************************
+  * Object Number: FND-005
+  * Fecha: 09-06-2019
+  * Descripcion: Funcion que Obtiene la Secuencia del
+  * Proyecto o Actividad
+  * Params: codSecuencia
+  ******************************************************/
+  protected getSecuenciaListService(codSecuencia: string) {
+    // Envia la Secuencia a Buscar
+    this._listasComunesService.getSecuenciaActividad(codSecuencia).subscribe(
+      result => {
+        if (result.status !== 200) {
+          this._notificacionesService.showToast('error', 'Error al Obtener la Información de la Secuencia', JSON.stringify(result.message));
+        } else if (result.status === 200) {
+          this.secuenciaDeCompromiso = result.data;
+
+          // Componemos la Secuencia a Generar
+          const prefixHND: string = '-ADC-';
+          // this._activityFinanciamientoDetCompromisosModel.codigoFinancCompromiso = this.codigoProyectoTab + '-ADC-' + this.idActividadFinancDet;
+          this._activityFinanciamientoDetCompromisosModel.codigoFinancCompromiso = this.codigoProyectoTab + prefixHND + (Number(this.secuenciaDeCompromiso.valor2));
+        }
+      },
+      error => {
+        this._notificacionesService.showToast('error', 'Error al Obtener la Información de la Secuencia', JSON.stringify(error.error.message));
+      },
+    );
+  } // FIN | FND-005
+
+
+  /*****************************************************
+  * Funcion: FND-005
+  * Fecha: 09-06-2019
+  * Descripcion: Funcion que Actuaiza la Secuencia del
+  * Proyecto o Actividad
+  * Params: { jsonSecuencia, idSecuencia }
+  ******************************************************/
+  protected updateSecuenciaService(idUsuarioMod: number, idSecuencia: number) {
+    // Envia la Secuencia a Buscar
+    const jsonSecuencia = {
+      'idUsuarioMod': {
+        'idUsuario': idUsuarioMod,
+      },
+    };
+
+    this._financiamientoDetService.updateSecuence(jsonSecuencia, idSecuencia).subscribe(
+      result => {
+        if (result.status !== 200) {
+          this._notificacionesService.showToast('error', 'Error al Actualizar la Información de la Secuencia', JSON.stringify(result.message));
+        } else if (result.status === 200) {
+          // Result success
+        }
+      },
+      error => {
+        this._notificacionesService.showToast('error', 'Error al Actualizar la Información de la Secuencia', JSON.stringify(error.error.message));
+      },
+    );
+  } // FIN | FND-005
 }

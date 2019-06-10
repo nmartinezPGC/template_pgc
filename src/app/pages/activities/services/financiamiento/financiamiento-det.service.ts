@@ -151,6 +151,24 @@ export class FinanciamientoDetService {
   } // FIN | FND-00007
 
 
+  /****************************************************************************
+  * Funcion: FND-00008
+  * Fecha: 09-06-2019
+  * Descripcion: Metodo para obtener el Detalle de Financimiento
+  * Objetivo: Detalle de Financiamiento
+  * Params: { idActividad }
+  ****************************************************************************/
+  getFindByIdActividadDetalle(idActividad: number): Observable<any> {
+    const paramsSend: number = idActividad;
+
+    // Retorno de la Funcion
+    return this._http.get(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 70.100) + paramsSend, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  } // FIN | FND-00008
+
+
   /**
    * Seccion de Compromisos ***************************************************
    */
@@ -165,7 +183,7 @@ export class FinanciamientoDetService {
     const paramsSend: any = jsonSendActividadFinanciamientoDetCompromiso;
 
     // Retorno de la Funcion
-    return this._http.post(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 70.1), paramsSend, {
+    return this._http.post(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 70.200), paramsSend, {
       headers: this.headers,
       params: { 'tokenApi': this.tokenHeader },
     });
@@ -183,11 +201,47 @@ export class FinanciamientoDetService {
     const paramsSend: string = codigoFinancCompromiso;
 
     // Retorno de la Funcion
-    return this._http.delete(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 70.2) + paramsSend, {
+    return this._http.delete(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 70.201) + paramsSend, {
       headers: this.headers,
       params: { 'tokenApi': this.tokenHeader },
     });
   } // FIN | FND-00009
+
+
+  /****************************************************************************
+  * Funcion: FND-00010
+  * Fecha: 08-06-2019
+  * Descripcion: Metodo para obtener los todos los Compromisos
+  * Objetivo: Listar todos los Compromisos
+  * Params: { idActividadFinancEnc }
+  ****************************************************************************/
+  getAllActividadFinanciamientoDetCompromiso(idActividadFinancEnc: number): Observable<any> {
+    const paramsSend: number = idActividadFinancEnc;
+
+    // Retorno de la Funcion
+    return this._http.get(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 70.202) + paramsSend, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  } // FIN | FND-00010
+
+
+  /****************************************************************************
+    * Funcion: FND-00004
+    * Fecha: 21-01-2019
+    * Descripcion: Metodo para Actualizar el Valor de la Secuencia
+    * Objetivo: Actualizar el valor de la Secuencia
+    * Params: { jsonSecuencia, idSecuencia }
+    ****************************************************************************/
+  updateSecuence(jsonSecuencia, idSecuencia: number): Observable<any> {
+    // Valores Constantes
+    const idSecuenciaSend: number = idSecuencia;
+    // Retorno de la Funcion
+    return this._http.put(this._systemEndPointsService.getEndPointService('userGroup', 4) + idSecuenciaSend, jsonSecuencia, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  } // FIN | FND-00004
 
 
   /**
@@ -195,7 +249,7 @@ export class FinanciamientoDetService {
    */
 
 
-   /**
-    * Seccion de Gastos **********************************************************
-    */
+  /**
+   * Seccion de Gastos **********************************************************
+   */
 }

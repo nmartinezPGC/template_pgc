@@ -25,6 +25,7 @@ export class FinancDetalleComponent implements OnInit {
   @Input() codigoProyectoTab: string;
   @Input() idActividadFinancEnc: number;
   @Input() idActividadFinancDet: number;
+  @Input() idSocioDesarrolloTab: number;
 
   // variable del Json
   @Input() JsonPassData: any;
@@ -45,6 +46,7 @@ export class FinancDetalleComponent implements OnInit {
   JsonReceptionAllTipoFinanciamiento: any[];
   JsonReceptionAllModalidadAyuda: any[];
   JsonReceptionAllSocioDesarrollo: any[];
+  JsonReceptionDetalleFinanciamiento: any[];
 
 
   /**
@@ -62,6 +64,9 @@ export class FinancDetalleComponent implements OnInit {
    * Inicializacion de la Clase
    */
   ngOnInit() {
+    // Carga Detalle de financimiento
+    this.getFindByIdActividadDetalleService(30);
+
     // Inicializacion del Modelo de la Clase
     this._activityFinanciamientoDetModel = new ActivityFinanciamientoDetModel(
       0, null, // Datos Generales
@@ -160,11 +165,11 @@ export class FinancDetalleComponent implements OnInit {
   * Fecha: 29-05-2019
   * Descripcion: Method saveFinanciamientoDetService of the Class
   * Objetivo: saveFinanciamientoDetService Ingresa el Detalle del Proyecto
-  * Params: { activityFinanciamientoDetModel }
+  * Params: { activityFinanciamientoDetModel, idOrganizacion }
   ****************************************************************************/
-  saveFinanciamientoDetService() {
+  saveFinanciamientoDetService(idOrganizacion: number) {
     // Asignacion de nuevos valores de Modelo
-    this._activityFinanciamientoDetModel.idSocioDesarrolloSend = 1;
+    this._activityFinanciamientoDetModel.idSocioDesarrolloSend = idOrganizacion;
     this._activityFinanciamientoDetModel.idActividadFinancEnc = { idActividadFinancEnc: this.idActividadFinancEnc };
     this._activityFinanciamientoDetModel.idTipoFinanciamiento = { idTipoFinanciamiento: this._activityFinanciamientoDetModel.idTipoFinanciamientoSend };
     this._activityFinanciamientoDetModel.idModalidadAyuda = { idModalidadAyuda: this._activityFinanciamientoDetModel.idModalidadAyudaSend };
@@ -209,7 +214,7 @@ export class FinancDetalleComponent implements OnInit {
 
   /****************************************************************************
   * Funcion: getAllSociosDesarrolloService
-  * Object Number: 003
+  * Object Number: 004
   * Fecha: 03-06-2019
   * Descripcion: Method getAllSociosDesarrolloService of the Class
   * Objetivo: getAllSociosDesarrolloService listados todos los Socios al Desarrollo
@@ -231,4 +236,37 @@ export class FinancDetalleComponent implements OnInit {
       },
     );
   } // FIN | getAllSociosDesarrolloService
+
+
+  /****************************************************************************
+  * Funcion: getFindByIdActividadDetalleService
+  * Object Number: 005
+  * Fecha: 03-06-2019
+  * Descripcion: Method getFindByIdActividadDetalleService of the Class
+  * Objetivo: getFindByIdActividadDetalleService detalle del Financiamiento
+  * Params: { idActividadFinancEnc }
+  ****************************************************************************/
+  private getFindByIdActividadDetalleService(idActividadFinancEnc: number) {
+    // Ejecuta el Servicio de invocar todos los Socios al Desarrollo
+    this._financiamientoDetService.getFindByIdActividadDetalle(idActividadFinancEnc).subscribe(
+      result => {
+        if (result.status !== 200) {
+          this._notificacionesService.showToast('error', 'Error al Obtener la Información de detalle de financiamiento', result.message);
+          this.JsonReceptionDetalleFinanciamiento = [];
+        } else if (result.status === 200) {
+          this.JsonReceptionDetalleFinanciamiento = result.data;
+          this._activityFinanciamientoDetModel.idModalidadAyudaSend = this.JsonReceptionDetalleFinanciamiento[0].idModalidadAyuda.idModalidadAyuda;
+          this._activityFinanciamientoDetModel.idTipoFinanciamientoSend = this.JsonReceptionDetalleFinanciamiento[0].idTipoFinanciamiento.idTipoFinanciamiento;
+          this._activityFinanciamientoDetModel.idOrganizacionFinanciera = this.JsonReceptionDetalleFinanciamiento[0].idOrganizacionFinanciera;
+          this._activityFinanciamientoDetModel.idActividadFinancDet = this.JsonReceptionDetalleFinanciamiento[0].idActividadFinancDet;
+
+          // Carga la variable de traslado a componente de Compromisos
+          this.idActividadFinancDet = this._activityFinanciamientoDetModel.idActividadFinancDet;
+        }
+      },
+      error => {
+        this._notificacionesService.showToast('error', 'Error al Obtener la Información de detalle de financiamiento', JSON.stringify(error.error.message));
+      },
+    );
+  } // FIN | getFindByIdActividadDetalleService
 }

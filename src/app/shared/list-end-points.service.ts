@@ -1033,21 +1033,37 @@ export class ListEndPointsService {
         groupEndPoint: 'actividadesCRUDGroup',
         descEndPoint: 'Eliminar el dato de Detalle de Financiamiento enviado y asociarlo al Proyecto',
       },
+      findByIdActividadFinancEncDetalle: {
+        id: 70.100,
+        nameEndpoint: 'findByIdActividadFinancEncDetalle',
+        urlEndPoint: '/mant-actividades/financiamiento/detalle/findByIdActividadFinancEnc/',
+        params: '{ idActividadFinancEnc }',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Listar el Detalle de financiamiento del Proyecto',
+      },
       newActividadFinanciamientoDetCompromiso: {
-        id: 70.1,
+        id: 70.200,
         nameEndpoint: 'newActividadFinanciamientoDetCompromiso',
         urlEndPoint: '/mant-actividades/financiamiento/detalle-compromiso/new',
         params: '{ jsonSendActividadFinanciamientoDetCompromiso }',
         groupEndPoint: 'actividadesCRUDGroup',
         descEndPoint: 'Ingresar el dato de Detalle de Financiamiento Compromiso enviado y asociarlo al Proyecto',
       },
-      deleteActividadFinanciamientoCompromiso: {
-        id: 70.2,
-        nameEndpoint: 'deleteActividadFinanciamientoCompromiso',
+      deleteActividadFinanciamientoDetCompromiso: {
+        id: 70.201,
+        nameEndpoint: 'deleteActividadFinanciamientoDetCompromiso',
         urlEndPoint: '/mant-actividades/financiamiento/detalle-compromiso/delete/',
         params: '{ codigoFinancCompromiso }',
         groupEndPoint: 'actividadesCRUDGroup',
         descEndPoint: 'Eliminar el dato de Detalle de Financiamiento Compromiso enviado y asociarlo al Proyecto',
+      },
+      findByIdActividadDetComprisos: {
+        id: 70.202,
+        nameEndpoint: 'findByIdActividadDetComprisos',
+        urlEndPoint: '/mant-actividades/financiamiento/detalle-compromiso/findByIdActividadDet/',
+        params: '{ idActividadDet }',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Listar todos los Compromisos del Proyecto',
       },
       // Organizaciones de Proyectos | Unidad Ejecutora
       findAllUnidadEjecutora: {

@@ -14,7 +14,7 @@
           <nb-card-body> -->
     <p-accordion *ngFor="let item of JsonReceptionAllSocioDesarrollo" [multiple]="true">
       <p-accordionTab header="{{ item.idOrganizacion.descOrganizacion }}: {{ item.idOrganizacion.nombreOrganizacion }}">
-        <!-- Socio al Desarrollo: {{ item.name }} -->
+        <!-- Socio al Desarrollo: {{ item.idOrganizacion.idOrganizacion }} -->
 
         <nb-card>
           <nb-card-header>
@@ -74,7 +74,7 @@
                   <!-- Boton para Grabar Organizaciones  -->
                   <button type="button" class="btn btn-outline-primary btn-icon"
                     nbPopover="Registra la Clasificación de Financiamiento" nbPopoverMode="hint"
-                    nbPopoverPlacement="top" (click)="saveFinanciamientoDetService()">
+                    nbPopoverPlacement="top" (click)="saveFinanciamientoDetService(item.idOrganizacion.idOrganizacion)">
                     <i class="ion-upload"></i>
                   </button>
                 </div>
