@@ -13,12 +13,13 @@ import { ToasterConfig, ToasterService, Toast, BodyOutputType } from 'angular2-t
 import { ListasComunesService } from '../../../../../common-list/services/listas-comunes.service';
 import { ServicePlanNacionService } from '../../../../services/programas/service-plan-nacion.service';
 import { ActivityProgramaPlanNacionModel } from '../../../../models/programas/model-programa-plan-nacion';
+import { NotificacionesService } from '../../../../../shared/services/notificaciones.service';
 
 @Component({
   selector: 'ngx-plan-nacion',
   templateUrl: './plan-nacion.component.html',
   styleUrls: ['./plan-nacion.component.scss'],
-  providers: [ServicePlanNacionService, MessageService, ToasterService, ListasComunesService],
+  providers: [ServicePlanNacionService, MessageService, NotificacionesService, ListasComunesService],
 })
 export class PlanNacionComponent implements OnInit, OnChanges {
   // Variables entre Tabs | Components
@@ -111,7 +112,7 @@ export class PlanNacionComponent implements OnInit, OnChanges {
   constructor(private _servicePlanNacionService: ServicePlanNacionService,
     private messageService: MessageService,
     private changeDetectorRef: ChangeDetectorRef,
-    private _toasterService: ToasterService) {
+    private _notificacionesService: NotificacionesService) {
     // Codigo del Constructor
   }
 
@@ -145,7 +146,7 @@ export class PlanNacionComponent implements OnInit, OnChanges {
   * Objetivo: makeToast in the method header API
   ****************************************************************************/
   makeToast() {
-    this.showToast(this.type, this.title, this.content);
+    this._notificacionesService.showToast(this.type, this.title, this.content);
   } // FIN | makeToast
 
 
@@ -174,8 +175,7 @@ export class PlanNacionComponent implements OnInit, OnChanges {
       showCloseButton: this.isCloseButton,
       bodyOutputType: BodyOutputType.TrustedHtml,
     };
-    // this._toasterService.popAsync(toast);
-    this._toasterService.pop(toast);
+
   } // FIN | showToast
 
 
@@ -301,7 +301,7 @@ export class PlanNacionComponent implements OnInit, OnChanges {
     this._servicePlanNacionService.getAllProgramasPlanNacion().subscribe(
       result => {
         if (result.status !== 200) {
-          this.showToast('error', 'Error al Obtener la Información de todos los Programa de Plan Nacion', result.message);
+          this._notificacionesService.showToast('error', 'Error al Obtener la Información de todos los Programa de Plan Nacion', result.message);
           this.JsonReceptionAllProgramasPlanNacion = [];
         } else if (result.status === 200) {
           this.JsonReceptionAllProgramasPlanNacion = result.data;
@@ -324,7 +324,7 @@ export class PlanNacionComponent implements OnInit, OnChanges {
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información de todos los Programa de Plan Nacion', JSON.stringify(error.error.message));
+        this._notificacionesService.showToast('error', 'Error al Obtener la Información de todos los Programa de Plan Nacion', JSON.stringify(error.error.message));
       },
     );
   } // FIN | getAllProgramaPlanNacionlService
@@ -345,14 +345,14 @@ export class PlanNacionComponent implements OnInit, OnChanges {
     this._servicePlanNacionService.getfindByIdPrograma(idPrograma).subscribe(
       result => {
         if (result.status !== 200) {
-          this.showToast('error', 'Error al Obtener la Información del Programa de Plan Nacion', result.message);
+          this._notificacionesService.showToast('error', 'Error al Obtener la Información del Programa de Plan Nacion', result.message);
           this.JsonReceptionProgramaPlanNacion = [];
         } else if (result.status === 200) {
           this.JsonReceptionProgramaPlanNacion = result.data;
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información del Programa de Plan Nacion', JSON.stringify(error.error.message));
+        this._notificacionesService.showToast('error', 'Error al Obtener la Información del Programa de Plan Nacion', JSON.stringify(error.error.message));
       },
     );
   } // FIN | getfindByIdProgramaService
@@ -373,7 +373,7 @@ export class PlanNacionComponent implements OnInit, OnChanges {
     this._servicePlanNacionService.getfindByIdNivelPrograma(idSNivelector).subscribe(
       result => {
         if (result.status !== 200) {
-          this.showToast('error', 'Error al Obtener la Información de Programa Nivel 1', result.message);
+          this._notificacionesService.showToast('error', 'Error al Obtener la Información de Programa Nivel 1', result.message);
           this.JsonReceptionProgramaByNivelPlanNacion = [];
           this.nodes = [];
         } else if (result.status === 200) {
@@ -382,7 +382,7 @@ export class PlanNacionComponent implements OnInit, OnChanges {
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información de Plan de Nacion', JSON.stringify(error.error.message));
+        this._notificacionesService.showToast('error', 'Error al Obtener la Información de Plan de Nacion', JSON.stringify(error.error.message));
       },
     );
   } // FIN | getfindByIdNivelProgramaService
@@ -413,7 +413,7 @@ export class PlanNacionComponent implements OnInit, OnChanges {
         this._servicePlanNacionService.getfindByIdNivelProgramaAndProgramaPadreId(2, element.idPrograma).subscribe(
           result => {
             if (result.status !== 200) {
-              this.showToast('error', 'Error al Obtener la Información de los Programa Nivel 2', result.message);
+              this._notificacionesService.showToast('error', 'Error al Obtener la Información de los Programa Nivel 2', result.message);
               this.JsonReceptionProgramaByNivelPlanNacion2 = [];
               this.arrayPush = [];
               this.loading = false;
@@ -462,7 +462,7 @@ export class PlanNacionComponent implements OnInit, OnChanges {
             }
           },
           error => {
-            this.showToast('error', 'Error al Obtener la Información de Plan Nacion', JSON.stringify(error.error.message));
+            this._notificacionesService.showToast('error', 'Error al Obtener la Información de Plan Nacion', JSON.stringify(error.error.message));
           },
         );
       }, 1000);
@@ -497,23 +497,23 @@ export class PlanNacionComponent implements OnInit, OnChanges {
         this._servicePlanNacionService.saveActividadProgramaPlanNacion(this._activityProgramaPlanNacion).subscribe(
           result => {
             if (result.status !== 200) {
-              this.showToast('error', 'Error al Ingresar la Información del Campo Transversal asociado al Proyecto', JSON.stringify(result.message));
+              this._notificacionesService.showToast('error', 'Error al Ingresar la Información del Campo Transversal asociado al Proyecto', JSON.stringify(result.message));
             } else if (result.status === 200) {
               // Evalua los resultados de la query
               if (result.findRecord === false) {
-                this.showToast('error', 'Error al Ingresar la Información del Campo Transversal asociado al Proyecto', JSON.stringify(result.message));
+                this._notificacionesService.showToast('error', 'Error al Ingresar la Información del Campo Transversal asociado al Proyecto', JSON.stringify(result.message));
               } else {
-                this.showToast('success', 'Campo Transversal asociado al Proyecto', JSON.stringify(result.message));
+                this._notificacionesService.showToast('success', 'Campo Transversal asociado al Proyecto', JSON.stringify(result.message));
               }
             }
           },
           error => {
-            this.showToast('error', 'Error al ingresar el Campo Transversal al Proyecto', JSON.stringify(error.error.message));
+            this._notificacionesService.showToast('error', 'Error al ingresar el Campo Transversal al Proyecto', JSON.stringify(error.error.message));
           },
         );
       }
     } else {
-      this.showToast('error', 'Error al ingresar la Información Programa de Gobierno', 'Debes de seleccionar los Programa de Gobierno, para continuar');
+      this._notificacionesService.showToast('error', 'Error al ingresar la Información Programa de Gobierno', 'Debes de seleccionar los Programa de Gobierno, para continuar');
       return -1;
     }
   } // FIN | saveProgramaPlanNacion
