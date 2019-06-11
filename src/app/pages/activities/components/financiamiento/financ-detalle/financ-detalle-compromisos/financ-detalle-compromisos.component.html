@@ -1,7 +1,8 @@
 <!-- Maquetacion de la seccion de Compromisos del Detalle de finanaciamiento del Proyecto -->
 <!-- NAM|2019-05-29 -->
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle" width="425"></p-confirmDialog>
 
-<nb-card fullWidth >
+<nb-card fullWidth>
   <nb-card-body>
     <div class="details">
       <div class="title">
@@ -27,11 +28,12 @@
               <td>{{ itemCompromisos.nombreMoneda }}</td>
               <td>{{ itemCompromisos.montoCompromiso | number: '3.2-2' }}</td>
               <td>{{ itemCompromisos.fechaTransaccion }}</td>
-              <td style="text-align: center;"> <img class="accButton"
-                  src="../../../../../../assets/icons/forms/rubbish-bin_16.png" nbPopover="Eliminar Compromiso"
-                  nbPopoverMode="hint" alt="Eliminar">
+              <td style="text-align: center;">
                 <img class="accButton" src="../../../../../../assets/icons/forms/pencil-striped-symbol_16.png"
-                  nbPopover="Editar Compromiso" nbPopoverMode="hint" alt="Editar"> </td>
+                  nbPopover="Editar Compromiso" nbPopoverMode="hint" alt="Editar" (click)="showDialog()">
+                <img class="accButton" src="../../../../../../assets/icons/forms/rubbish-bin_16.png"
+                  nbPopover="Eliminar Compromiso" nbPopoverMode="hint" alt="Eliminar"
+                  (click)="confirm(itemCompromisos.codigoFinancCompromiso)"></td>
             </tr>
           </tbody>
           <tfoot>
@@ -56,10 +58,12 @@
 </nb-card>
 
 <!-- Formulario Modal de Registro de Compromisos -->
-<p-dialog [(visible)]="display" [modal]="true" [responsive]="true" [draggable]="false">
+<p-dialog [(visible)]="display" [modal]="true" [responsive]="true" [draggable]="false" (onHide)="closeModal()">
   <p-header>
     Registro de Compromiso
   </p-header>
   <ngx-financ-detalle-compromisos-form [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
-    [codigoProyectoTab]="codigoProyectoTab" [idActividadFinancDet]="idActividadFinancDet" ></ngx-financ-detalle-compromisos-form>
+    [codigoProyectoTab]="codigoProyectoTab" [idActividadFinancDet]="idActividadFinancDet"
+    [JsonCompromisosSelect]="JsonCompromisosSelect">
+  </ngx-financ-detalle-compromisos-form>
 </p-dialog>

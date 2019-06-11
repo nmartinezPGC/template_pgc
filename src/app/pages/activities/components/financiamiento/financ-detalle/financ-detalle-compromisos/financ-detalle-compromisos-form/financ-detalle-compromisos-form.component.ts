@@ -34,6 +34,7 @@ export class FinancDetalleCompromisosFormComponent implements OnInit {
   @Input() codigoProyectoTab: string;
   @Input() idActividadFinancEnc: number;
   @Input() idActividadFinancDet: number;
+  @Input() JsonCompromisosSelect: any;
 
   // Variables de DOM de la clase
   @ViewChild('montoCompromiso') montoCompromiso: ElementRef;
@@ -80,7 +81,7 @@ export class FinancDetalleCompromisosFormComponent implements OnInit {
    */
   ngOnInit() {
     // Valor de Detalle del Financiamiento del Proyecto
-    const idActividadFinancDetSend = { idActividadFinancDet: this.modalHeaderIdActividadFinancDet };
+    const idActividadFinancDetSend = { idActividadFinancDet: this.idActividadFinancDet };
     // Inicializacion del Modelo
     this._activityFinanciamientoDetCompromisosModel = new ActivityFinanciamientoDetCompromisosModel(
       0, null, // Generales de tabla
@@ -132,10 +133,10 @@ export class FinancDetalleCompromisosFormComponent implements OnInit {
 
   /****************************************************************************
   * Funcion: getAllMonedasActividadService
-  * Object Number: 001
+  * Object Number: FND-001
   * Fecha: 06-06-2019
   * Descripcion: Method getAllMonedasActividadService of the Class
-  * Objetivo: getAllMonedasActividadService listados de las Monedas de Proyecto
+  * Objetivo: listados de las Monedas de Proyecto
   * Params: { }
   ****************************************************************************/
   private getAllMonedasActividadService() {
@@ -153,15 +154,15 @@ export class FinancDetalleCompromisosFormComponent implements OnInit {
         this._notificacionesService.showToast('error', 'Error al Obtener la Información de todas las Monedas de Proyecto', JSON.stringify(error.error.message));
       },
     );
-  } // FIN | getAllMonedasActividadService
+  } // FIN | FND-001
 
 
   /****************************************************************************
   * Funcion: getAllTipoTransaccionService
-  * Object Number: 002
+  * Object Number: FND-002
   * Fecha: 06-06-2019
   * Descripcion: Method getAllTipoTransaccionService of the Class
-  * Objetivo: getAllTipoTransaccionService listados de los Tipos de Transaccion
+  * Objetivo: listados de los Tipos de Transaccion
   * Params: { }
   ****************************************************************************/
   private getAllTipoTransaccionService() {
@@ -179,19 +180,20 @@ export class FinancDetalleCompromisosFormComponent implements OnInit {
         this._notificacionesService.showToast('error', 'Error al Obtener la Información de los Tipos de Transacción', JSON.stringify(error.error.message));
       },
     );
-  } // FIN | getAllTipoTransaccionService
+  } // FIN | FND-002
 
 
   /****************************************************************************
   * Funcion: saveFinanciamientoDetCompromisoService
-  * Object Number: 004
+  * Object Number: FND-003
   * Fecha: 21-05-2019
   * Descripcion: Method saveFinanciamientoDetCompromisoService of the Class
-  * Objetivo: saveFinanciamientoDetCompromisoService listados de las Monedas de Proyecto
+  * Objetivo: Registrar Compromisos del Proyecto
   * Params: { _activityFinanciamientoEncModel }
   ****************************************************************************/
   async saveFinanciamientoDetCompromisoService() {
-    // Creacion del Codigo del Compromiso | 4 = NEW-ADC Nuevo Compromiso
+    // Creacion del Codigo del Compromiso | 4 = NEW-ADC (Nuevo Compromiso)
+    // console.log(this.JsonCompromisosSelect);
     this.getSecuenciaListService('NEW-ADC');
 
     await delay(100);
@@ -205,7 +207,7 @@ export class FinancDetalleCompromisosFormComponent implements OnInit {
       if (this._activityFinanciamientoDetCompromisosModel.idTipoTransaccionSend !== 0) {
         this._activityFinanciamientoDetCompromisosModel.idTipoTransaccion = { idTipoTransaccion: this._activityFinanciamientoDetCompromisosModel.idTipoTransaccionSend };
 
-        if (this._activityFinanciamientoDetCompromisosModel.montoCompromiso !== 0) {
+        if (this._activityFinanciamientoDetCompromisosModel.montoCompromiso !== null) {
 
           if (this._activityFinanciamientoDetCompromisosModel.idMonedaActividadSend !== 0) {
             this._activityFinanciamientoDetCompromisosModel.idMonedaActividad = { idMonedaActividad: this._activityFinanciamientoDetCompromisosModel.idMonedaActividadSend };
@@ -220,12 +222,12 @@ export class FinancDetalleCompromisosFormComponent implements OnInit {
                     this._notificacionesService.showToast('error', 'Error al Ingresar la Información de Compromisos', result.message);
                   } else {
                     this._notificacionesService.showToast('default', 'Registro de compromiso de Proyecto', result.message);
-                    // this.idActividadFinancDetSend = result.data.idActividadFinancEnc;
 
                     // Actualizamos la Siguiente Secuencia
                     this.updateSecuenciaService(this.idUsuarioTab, 4);
 
-                    this.closeModal();
+                    // this.closeModal();
+                    this.ngOnInit();
                   }
                 }
               },
@@ -247,11 +249,11 @@ export class FinancDetalleCompromisosFormComponent implements OnInit {
     } else {
       this._notificacionesService.showToast('error', 'Error al ingresar la Información de Compromisos', 'Debes Ingresar el Detalle de Financiamiento, para continuar');
     }
-  } // FIN | saveFinanciamientoDetCompromisoService
+  } // FIN | FND-003
 
 
   /*****************************************************
-  * Object Number: FND-005
+  * Object Number: FND-004
   * Fecha: 09-06-2019
   * Descripcion: Funcion que Obtiene la Secuencia del
   * Proyecto o Actividad
@@ -268,7 +270,6 @@ export class FinancDetalleCompromisosFormComponent implements OnInit {
 
           // Componemos la Secuencia a Generar
           const prefixHND: string = '-ADC-';
-          // this._activityFinanciamientoDetCompromisosModel.codigoFinancCompromiso = this.codigoProyectoTab + '-ADC-' + this.idActividadFinancDet;
           this._activityFinanciamientoDetCompromisosModel.codigoFinancCompromiso = this.codigoProyectoTab + prefixHND + (Number(this.secuenciaDeCompromiso.valor2));
         }
       },
@@ -276,7 +277,7 @@ export class FinancDetalleCompromisosFormComponent implements OnInit {
         this._notificacionesService.showToast('error', 'Error al Obtener la Información de la Secuencia', JSON.stringify(error.error.message));
       },
     );
-  } // FIN | FND-005
+  } // FIN | FND-004
 
 
   /*****************************************************
@@ -307,4 +308,23 @@ export class FinancDetalleCompromisosFormComponent implements OnInit {
       },
     );
   } // FIN | FND-005
+
+
+  /****************************************************************************
+  * Funcion: confirm
+  * Object Number: FND-006
+  * Fecha: 11-06-2019
+  * Descripcion: Method confirm of the Class
+  * Objetivo: Eliminar el Compromiso seleccionado
+  * Params: { }
+  ****************************************************************************/
+  confirm() {
+    this.confirmationService.confirm({
+      message: 'Estas seguro de Registrar el Compromiso?',
+      accept: () => {
+        // Ejecuta la funcion de Registrar el Compromiso
+        this.saveFinanciamientoDetCompromisoService();
+      }
+    });
+  } // FIN | FND-006
 }
