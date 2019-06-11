@@ -12,12 +12,12 @@ import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-t
 import { SharedOrganizacionesService } from '../../../services/organizaciones/shared-organizaciones.service';
 import { UnidadEjecutoraService } from '../../../services/organizaciones/unidad-ejecutora.service';
 import { ActivityOrganizacionUnidadEjecutoraModel } from '../../../models/organizaciones/model-unidad-ejecutora';
-
+import { NotificacionesService } from '../../../../shared/services/notificaciones.service';
 @Component({
   selector: 'ngx-unidad-ejecutora',
   templateUrl: './unidad-ejecutora.component.html',
   styleUrls: ['./unidad-ejecutora.component.scss'],
-  providers: [ToasterService, UnidadEjecutoraService],
+  providers: [NotificacionesService, UnidadEjecutoraService],
 })
 export class UnidadEjecutoraComponent implements OnInit {
   // Variables entre Tabs | Components
@@ -61,7 +61,7 @@ export class UnidadEjecutoraComponent implements OnInit {
   /**
    * Constructor de la Clase
    */
-  constructor(private _toasterService: ToasterService,
+  constructor(private _notificacionesService: NotificacionesService,
     private _unidadEjecutoraService: UnidadEjecutoraService,
     private _sharedOrganizacionesService: SharedOrganizacionesService ) {
     // Codigo del Constructor
@@ -104,7 +104,7 @@ export class UnidadEjecutoraComponent implements OnInit {
   * Objetivo: makeToast in the method header API
   ****************************************************************************/
   makeToast() {
-    this.showToast(this.type, this.title, this.content);
+     this._notificacionesService.showToast(this.type, this.title, this.content);
   } // FIN | makeToast
 
 
@@ -134,7 +134,6 @@ export class UnidadEjecutoraComponent implements OnInit {
       bodyOutputType: BodyOutputType.TrustedHtml,
     };
     // this._toasterService.popAsync(toast);
-    this._toasterService.pop(toast);
   } // FIN | showToast
 
 
@@ -165,7 +164,7 @@ export class UnidadEjecutoraComponent implements OnInit {
     this._sharedOrganizacionesService.getAllSociosDesarrollo(caseOrg).subscribe(
       result => {
         if (result.status !== 200) {
-          this.showToast('error', 'Error al Obtener la Información de todos los Socios al Desarrollo', result.message);
+          this._notificacionesService.showToast('error', 'Error al Obtener la Información de todos los Socios al Desarrollo', result.message);
           this.JsonReceptionAllUnidadEjecutora = [];
         } else if (result.status === 200) {
           this.JsonReceptionAllUnidadEjecutora = result.data;
@@ -180,7 +179,7 @@ export class UnidadEjecutoraComponent implements OnInit {
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información de todas las Unidad Ejecutoras', JSON.stringify(error.message));
+        this._notificacionesService.showToast('error', 'Error al Obtener la Información de todas las Unidad Ejecutoras', JSON.stringify(error.message));
       },
     );
   } // FIN | getAllUnidadEjecutoraService
@@ -200,7 +199,7 @@ export class UnidadEjecutoraComponent implements OnInit {
   });
 
   if (foundUnidadEjecutora !== undefined) {
-    this.showToast('error', 'Error al seleccionar Unidad Ejecutora', 'Ya existe en el listado la Unidad Ejecutora seleccionado');
+    this._notificacionesService.showToast('error', 'Error al seleccionar Unidad Ejecutora', 'Ya existe en el listado la Unidad Ejecutora seleccionado');
   } else {
     // Asignamos la Unidad Ejecutora seleccionado
     this.JsonSendUnidadEjecutora = [...this.JsonSendUnidadEjecutora, { name: item.itemName, code: item.id, otro: '' }];
@@ -220,7 +219,7 @@ export class UnidadEjecutoraComponent implements OnInit {
   this.JsonSendUnidadEjecutora.forEach(element => {
     // Valida que se registre el % de participacion
     if (element.otro === '') {
-      this.showToast('error', 'Error al ingresar la Unidad Ejecutora', 'No tiene el % de participación ingresado');
+      this._notificacionesService.showToast('error', 'Error al ingresar la Unidad Ejecutora', 'No tiene el % de participación ingresado');
       return -1;
     } else {
       this._activityOrganizacionUnidadEjecutoraModel.codigoActividad = this.codigoProyectoTab + '-AUE-' + element.code;
@@ -231,17 +230,17 @@ export class UnidadEjecutoraComponent implements OnInit {
       this._unidadEjecutoraService.newActividadUnidadEjecutora(this._activityOrganizacionUnidadEjecutoraModel).subscribe(
         result => {
           if (result.status !== 200) {
-            this.showToast('error', 'Error al Ingresar la Información de la Unidad Ejecutora', result.message);
+            this._notificacionesService.showToast('error', 'Error al Ingresar la Información de la Unidad Ejecutora', result.message);
           } else if (result.status === 200) {
             if (result.findRecord === true) {
-              this.showToast('error', 'Error al Ingresar la Información de la Unidad Ejecutora', result.message);
+              this._notificacionesService.showToast('error', 'Error al Ingresar la Información de la Unidad Ejecutora', result.message);
             } else {
-              this.showToast('default', 'Unidad Ejecutora', result.message);
+              this._notificacionesService.showToast('default', 'Unidad Ejecutora', result.message);
             }
           }
         },
         error => {
-          this.showToast('error', 'Error al Ingresar la Información de la Unidad Ejecutora', JSON.stringify(error.error.message));
+          this._notificacionesService.showToast('error', 'Error al Ingresar la Información de la Unidad Ejecutora', JSON.stringify(error.error.message));
         },
       );
     }
@@ -262,17 +261,18 @@ export class UnidadEjecutoraComponent implements OnInit {
       this._unidadEjecutoraService.deleteActividadUnidadEjecutora(this.codigoProyectoTab + '-AUE-' + this.JsonSendUnidadEjecutora[i].code).subscribe(
         result => {
           if (result.status !== 200) {
-            this.showToast('error', 'Error al Borrar la Información de Unidad Ejecutora', result.message);
+            this._notificacionesService.showToast('error', 'Error al Borrar la Información de Unidad Ejecutora', result.message);
           } else if (result.status === 200) {
             if (result.findRecord === true) {
-              this.showToast('error', 'Error al Borrar la Información de Unidad Ejecutora', result.message);
+              this._notificacionesService.showToast('error', 'Error al Borrar la Información de Unidad Ejecutora', result.message);
             } else {
-              this.showToast('default', 'Socio al Desarrollo', result.message);
+              this._notificacionesService.showToast('default', 'Unidad Ejecutora', result.message);
+              this.ngOnInit();
             }
           }
         },
         error => {
-          this.showToast('error', 'Error al Borrar la Información de Unidad Ejecutora', JSON.stringify(error.error.message));
+          this._notificacionesService.showToast('error', 'Error al Borrar la Información de Unidad Ejecutora', JSON.stringify(error.error.message));
         },
       );
       // Borramos el Item del Json
@@ -311,16 +311,16 @@ private UpdateUnidadEjecutora() {
   const responsedataExt: any = this.responsedata;
 
   if (responsedataExt.error === true) {
-    this.showToast('error', 'Error al ingresar los datos', responsedataExt.msg);
+    this._notificacionesService.showToast('error', 'Error al ingresar los datos', responsedataExt.msg);
     return -1;
   }
   // Ejecutamos el Recurso del EndPoint
   this._unidadEjecutoraService.OrganizacionUpdate(this._activityOrganizacionUnidadEjecutoraModel, this.idActividadUnidadEjecutora).subscribe(
     response => {
       if (response.status !== 200) {
-        this.showToast('error', 'Error al Ingresar los datos', response.message);
+        this._notificacionesService.showToast('error', 'Error al Ingresar los datos', response.message);
       } else if (response.status === 200) {
-        this.showToast('default', 'se actualizo con exito la informacion de la organizacion', response.message);
+        this._notificacionesService.showToast('default', 'se actualizo con exito la informacion de la organizacion', response.message);
       }
     },
   );
