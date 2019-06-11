@@ -7,27 +7,26 @@
  *
  */
 
-import { Component, OnInit, Input, ChangeDetectorRef, OnChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster'; // Servicio de Notificaciones
+
+
+// Servicios de la clase
 import { Router } from '@angular/router';
-import {KeyFilterModule} from 'primeng/keyfilter';
-import {ToastModule} from 'primeng/toast';
-import { TreeNode, MessageService, MenuItem } from 'primeng/primeng';
+import { CategoriaService } from '../../services/agregar.categoria.service';
 
-
-
-// model class
 // Model of Class
 import { AgregarCategoriaModel } from '../../models/agregar.categoria.model';
+import { NotificacionesService } from '../../../shared/services/notificaciones.service';
 import { ConfigSmartTableService } from '../../services/agregar-categoria.settings.smart-table.service';
-import { CategoriaService } from '../../services/agregar.categoria.service';
+
 
 
 @Component({
   selector: 'ngx-agregar-categoria',
   templateUrl: './agregar-categoria.component.html',
   styleUrls: ['./agregar-categoria.component.scss'],
-  providers: [ConfigSmartTableService, CategoriaService, KeyFilterModule, ToastModule, MessageService],
+  providers: [ConfigSmartTableService, CategoriaService,  NotificacionesService],
 })
 export class AgregarCategoriaComponent implements OnInit {
   public _CategoriaModel: AgregarCategoriaModel;
@@ -53,8 +52,8 @@ export class AgregarCategoriaComponent implements OnInit {
   settings: any;
   public responsedata: any;
 
-  constructor(protected _router: Router, private _toasterService: ToasterService,
-    private messageService: MessageService,
+  constructor(protected _router: Router,
+    private _notificacionesService: NotificacionesService,
     public _configSmartTableService: ConfigSmartTableService,
     public _categoriaService: CategoriaService) {
     this._configSmartTableService.configSmartTable('userSmart', 1, null);
@@ -97,7 +96,6 @@ export class AgregarCategoriaComponent implements OnInit {
       showCloseButton: this.isCloseButton,
       bodyOutputType: BodyOutputType.TrustedHtml,
     };
-    this._toasterService.pop(toast);
   } // FIN | showToast
 
   ngOnInit() {
@@ -121,15 +119,14 @@ export class AgregarCategoriaComponent implements OnInit {
     this._categoriaService.listAllCategoria().subscribe(
       response => {
         if (response.status !== 200) {
-          this.showToast('error', 'Error al Obtener la Información del Perfil', response.message);
+          this._notificacionesService.showToast('error', 'Error al Obtener la Información del Perfil', response.message);
         } else if (response.status === 200) {
           this.JsonReceptionPrefiles = response.data;
           this.data = this.JsonReceptionPrefiles;
         }
       },
       error => {
-        // Redirecciona al Login
-        this.showToast('error' , 'Error en la petición de la API' , <any>error.message.message);
+        this._notificacionesService.showToast('error' , 'Error en la petición de la API' , <any>error.message.message);
       },
     );
   } // FIN | listarTipoOrganizacion();
@@ -155,7 +152,7 @@ export class AgregarCategoriaComponent implements OnInit {
       },
       error => {
         // Redirecciona al Login
-        this.showToast('error' , 'Error en la petición de la API' , <any>error.message.message);
+        this._notificacionesService.showToast('error' , 'Error en la petición de la API' , <any>error.message.message);
       },
     );
   } // FIN | perfilesTipoService
@@ -175,22 +172,26 @@ export class AgregarCategoriaComponent implements OnInit {
     const responsedataExt: any = this.responsedata;
 
     if (responsedataExt.error === true) {
-      this.showToast('error', 'Error al ingresar los datos', responsedataExt.msg);
+      this._notificacionesService.showToast('error', 'Error al ingresar los datos', responsedataExt.msg);
       return -1;
     }
     // Ejecutamos el Recurso del EndPoint
     this._categoriaService.newCategegoria(this._CategoriaModel).subscribe(
       response => {
         if (response.status !== 200) {
-          this.showToast('error', 'Error al Ingresar la Información del Perfil', response.message);
-        } else if (response.tatus === 200) {
+          this._notificacionesService.showToast('error', 'Error al Ingresar la Información del Perfil' , response.message);
+        } else if (response.status === 200) {
           // console.log(result.status);
-          this.showToast('default', 'de la categoria se ingreso con exito, se ha ingresado con exito', response.message);
+          this._notificacionesService.showToast('default', 'La categoria se ha creado con éxito' , response.message);
           // console.log(response.data);
           // Carga la tabla Nuevamente
           this.listarTipoOrganizacion();
           this.ngOnInit();
         }
+      },
+      error => {
+        // Redirecciona al Login
+        this._notificacionesService.showToast('error' , 'Error en la petición de la API' , <any>error.message.message);
       },
     );
   } // FIN | newPerfilService
@@ -204,27 +205,28 @@ export class AgregarCategoriaComponent implements OnInit {
    ****************************************************************************/
   private updateCategoria() {
     // Seteo de las variables del Model al json de Java
+    this.validateCtegoria(this._CategoriaModel);
     const responsedataExt: any = this.responsedata;
 
     if (responsedataExt === true) {
-      this.showToast('error', 'Error al actualizar los cambios', responsedataExt);
+      this._notificacionesService.showToast('error', 'Error al actualizar los cambios', responsedataExt);
       return -1;
     }
     // Ejecutamos el Recurso del EndPoint
     this._categoriaService.CategoriaUpdate(this._CategoriaModel, this._CategoriaModel.idCatOrganizacion).subscribe(
       response => {
         if (response.status !== 200) {
-          this.showToast('error', 'Error al actualizar los cambios', JSON.stringify(response.message))
+          this._notificacionesService.showToast('error', 'Error al actualizar los cambios', (response.message))
         } else if (response.status === 200) {
           // console.log(result.status);
-          this.showToast('default', 'se actualizaron con exito los datos', JSON.stringify(response.message))
+          this._notificacionesService.showToast('default', 'Se actualizaron con exito los datos', (response.message))
           // Carga la tabla Nuevamente
-           this.updateCategoria();
+           this.ngOnInit();
         }
       },
       error => {
         // Redirecciona al Login
-         this.showToast('error' , 'Error en la petición de la API' , <any>error.message.message);
+        this._notificacionesService.showToast('error' , 'Error en la petición de la API' , <any>error.message.message);
       },
     );
   } // FIN | upTipoOrganzacion()
@@ -253,7 +255,7 @@ export class AgregarCategoriaComponent implements OnInit {
   }
 
   /****************************************************************************
-* Funcion: deleteTipoOrganizacion();
+* Funcion: deleteCategoria();
 * Object Number: 0004
 * Fecha: 07-01-2019
 * Descripcion: inhabilitar los tipo de organizacion
@@ -263,16 +265,16 @@ export class AgregarCategoriaComponent implements OnInit {
     // Seteo de las variables del Model al json de Java
     const responsedataExt: any = this.responsedata;
     if (responsedataExt === true) {
-      this.showToast('error', 'Error al actualizar los cambios', responsedataExt);
+      this._notificacionesService.showToast('error', 'Error al actualizar los cambios', responsedataExt);
     }
     // Ejecutamos el Recurso del EndPoint
     this._categoriaService.categoriaDelete(this._CategoriaModel.idCatOrganizacion).subscribe(
       result => {
         if (result.status !== 200) {
-          this.showToast('error', 'Error al actualizar los cambios', JSON.stringify(result.message))
+          this._notificacionesService.showToast('error', 'Error al actualizar los cambios', JSON.stringify(result.message))
         } else if (result.status === 200) {
           // console.log(result.status);
-          this.showToast('success', 'se inhabilito con éxito', JSON.stringify(result.message))
+          this._notificacionesService.showToast('success', 'Se inhabilito con éxito la Categoria', JSON.stringify(result.message))
           // Carga la tabla Nuevamente
           // this.perfilesDatailsService();
           this.listarTipoOrganizacion();
@@ -282,15 +284,12 @@ export class AgregarCategoriaComponent implements OnInit {
       },
     );
   } // FIN | ondelete
-  cleanCategoria() {
-    this.ngOnInit();
-    } // FIN | cleanCategoria
   /**
      * onDeleteConfirm
      * @param event
      */
   onDeleteConfirm1(event) {
-    if (window.confirm('Esta seguro en Inhabilitar este tipo de organizacion?')) {
+    if (window.confirm('Esta seguro en Inhabilitar esta Categoria?')) {
       this._CategoriaModel.idCatOrganizacion = event.data.idCatOrganizacion;
       // this._perfilModel.idTipo = event.data.idTipoPerfil.idTipo;
       this.deleteCategoria();
@@ -322,4 +321,7 @@ export class AgregarCategoriaComponent implements OnInit {
     }
     return this.responsedata;
   } // FIN | validateTipoOganizacion(_grupoModel: any)
+  cleanCategoria() {
+    this.ngOnInit();
+    } // FIN | cleanPerfiles
 }

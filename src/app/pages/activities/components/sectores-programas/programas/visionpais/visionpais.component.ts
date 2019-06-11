@@ -12,12 +12,13 @@ import { ToasterConfig, ToasterService, Toast, BodyOutputType } from 'angular2-t
 import { ListasComunesService } from '../../../../../common-list/services/listas-comunes.service';
 import { ServiceVisionPaisService } from '../../../../services/programas/service-vision-pais.service';
 import { ActivityVisionPaisModel } from '../../../../models/programas/model-programa-vision-pais';
+import { NotificacionesService } from '../../../../../shared/services/notificaciones.service';
 
 @Component({
   selector: 'ngx-visionpais',
   templateUrl: './visionpais.component.html',
   styleUrls: ['./visionpais.component.scss'],
-  providers: [ServiceVisionPaisService, MessageService, ToasterService, ListasComunesService],
+  providers: [ServiceVisionPaisService, MessageService, NotificacionesService, ListasComunesService],
 })
 export class VisionPaisComponent implements OnInit, OnChanges {
        // Variables entre Tabs | Components
@@ -110,7 +111,7 @@ export class VisionPaisComponent implements OnInit, OnChanges {
   constructor(private _serviceVisionPaisService: ServiceVisionPaisService,
     private messageService: MessageService,
     private changeDetectorRef: ChangeDetectorRef,
-    private _toasterService: ToasterService,
+    private _notificacionesService: NotificacionesService,
     private _listasComunesService: ListasComunesService) {
       // Codigo del Constructor
      }
@@ -143,7 +144,7 @@ export class VisionPaisComponent implements OnInit, OnChanges {
   * Objetivo: makeToast in the method header API
   ****************************************************************************/
  makeToast() {
-  this.showToast(this.type, this.title, this.content);
+  this._notificacionesService.showToast(this.type, this.title, this.content);
 } // FIN | makeToast
 
 
@@ -173,8 +174,6 @@ private showToast(type: string, title: string, body: string) {
     showCloseButton: this.isCloseButton,
     bodyOutputType: BodyOutputType.TrustedHtml,
   };
-  // this._toasterService.popAsync(toast);
-  this._toasterService.pop(toast);
 } // FIN | showToast
 
 
@@ -301,7 +300,7 @@ private getAllProgramasVisionPaisService() {
   this._serviceVisionPaisService.getAllProgramasVisionPais().subscribe(
     result => {
       if (result.status !== 200) {
-        this.showToast('error', 'Error al Obtener la Información ', result.message);
+        this._notificacionesService.showToast('error', 'Error al Obtener la Información ', result.message);
         this.JsonReceptionAllProgramasVisionPais = [];
       } else if (result.status === 200) {
         this.JsonReceptionAllProgramasVisionPais = result.data;
@@ -324,7 +323,7 @@ private getAllProgramasVisionPaisService() {
       }
     },
     error => {
-      this.showToast('error', 'Error al Obtener la Información de todos los Programa de Desarrollo', JSON.stringify(error.error.message));
+      this._notificacionesService.showToast('error', 'Error al Obtener la Información de todos los Programa de Desarrollo', JSON.stringify(error.error.message));
     },
   );
 } // FIN | getAllProgramaVisionPaisService
@@ -345,14 +344,14 @@ private getfindByIdProgramaService(idPrograma: number) {
   this._serviceVisionPaisService.getfindByIdPrograma(idPrograma).subscribe(
     result => {
       if (result.status !== 200) {
-        this.showToast('error', 'Error al Obtener la Información del objetivo ', result.message);
+        this._notificacionesService.showToast('error', 'Error al Obtener la Información del objetivo ', result.message);
         this.JsonReceptionProgramaVisionPais = [];
       } else if (result.status === 200) {
         this.JsonReceptionProgramaVisionPais = result.data;
       }
     },
     error => {
-      this.showToast('error', 'Error al Obtener la Información del Objetivo de Vision Pais', JSON.stringify(error.error.message));
+      this._notificacionesService.showToast('error', 'Error al Obtener la Información del Objetivo de Vision Pais', JSON.stringify(error.error.message));
     },
   );
 } // FIN | getfindByIdProgramaService
@@ -373,7 +372,7 @@ private getfindByIdNivelProgramaService(idSNivelector: number) {
   this._serviceVisionPaisService.getfindByIdNivelPrograma(idSNivelector).subscribe(
     result => {
       if (result.status !== 200) {
-        this.showToast('error', 'Error al Obtener la Información de Vision Pais del nivel 1 ', result.message);
+        this._notificacionesService.showToast('error', 'Error al Obtener la Información de Vision Pais del nivel 1 ', result.message);
         this.JsonReceptionProgramaByNivelVisionPais = [];
         this.nodes = [];
       } else if (result.status === 200) {
@@ -382,7 +381,7 @@ private getfindByIdNivelProgramaService(idSNivelector: number) {
       }
     },
     error => {
-      this.showToast('error', 'Error al Obtener la Información de Vision Pais', JSON.stringify(error.error.message));
+      this._notificacionesService.showToast('error', 'Error al Obtener la Información de Vision Pais', JSON.stringify(error.error.message));
     },
   );
 } // FIN | getfindByIdNivelProgramaService
@@ -413,7 +412,7 @@ getProgramaVisionPaisNivel2(array: any) {
       this._serviceVisionPaisService.getfindByIdNivelProgramaAndProgramaPadreId(2, element.idPrograma).subscribe(
         result => {
           if (result.status !== 200) {
-            this.showToast('error', 'Error al Obtener la Información de los Programa Nivel 2', result.message);
+            this._notificacionesService.showToast('error', 'Error al Obtener la Información de los Programa Nivel 2', result.message);
             this.JsonReceptionProgramaByNivelVisionPais2 = [];
             this.arrayPush = [];
             this.loading = false;
@@ -462,7 +461,7 @@ getProgramaVisionPaisNivel2(array: any) {
           }
         },
         error => {
-          this.showToast('error', 'Error al Obtener la Información de objetivos de Vision Pais', JSON.stringify(error.error.message));
+          this._notificacionesService.showToast('error', 'Error al Obtener la Información de objetivos de Vision Pais', JSON.stringify(error.error.message));
         },
       );
     }, 1000);
@@ -497,23 +496,23 @@ saveProgramaVisionPais() {
       this._serviceVisionPaisService.saveActividadProgramaVisionPais(this._activityProgramaVisionPaisModel).subscribe(
         result => {
           if (result.status !== 200) {
-            this.showToast('error', 'Error al Ingresar la Información Vision Pais asociado al Proyecto', JSON.stringify(result.message));
+            this._notificacionesService.showToast('error', 'Error al Ingresar la Información Vision Pais asociado al Proyecto', JSON.stringify(result.message));
           } else if (result.status === 200) {
             // Evalua los resultados de la query
             if (result.findRecord === false) {
-              this.showToast('error', 'Error al Ingresar la Información Vision Pais asociado al Proyecto', JSON.stringify(result.message));
+              this._notificacionesService.showToast('error', 'Error al Ingresar la Información Vision Pais asociado al Proyecto', JSON.stringify(result.message));
             } else {
-              this.showToast('success', 'Vision Pais asociado al Proyecto', JSON.stringify(result.message));
+              this._notificacionesService.showToast('success', 'Vision Pais asociado al Proyecto', JSON.stringify(result.message));
             }
           }
         },
         error => {
-          this.showToast('error', 'Error al ingresar el Objetivo de Vision Pais', JSON.stringify(error.error.message));
+          this._notificacionesService.showToast('error', 'Error al ingresar el Objetivo de Vision Pais', JSON.stringify(error.error.message));
         },
       );
     }
   } else {
-    this.showToast('error', 'Error al ingresar la Información Objetivo de Vision Pais', 'Debes de seleccionar los Objetivos de Vision Pais, para continuar');
+    this._notificacionesService.showToast('error', 'Error al ingresar la Información Objetivo de Vision Pais', 'Debes de seleccionar los Objetivos de Vision Pais, para continuar');
     return -1;
   }
 } // FIN | saveProgramaVisionPais

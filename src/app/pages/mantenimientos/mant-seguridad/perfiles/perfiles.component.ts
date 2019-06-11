@@ -14,11 +14,13 @@ import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-t
 
 // Services uses of thw Class
 import { PerfilService } from '../../services/perfiles.service';
-import { Router } from '@angular/router';
+
 
 // Model of Class
 import { PerfilModel } from '../../models/perfiles.model';
 import { ConfigSmartTableService } from '../../services/perfiles.settings.smart-table.service';
+import {NotificacionesService} from '../../../shared/services/notificaciones.service';
+
 
 
 /**
@@ -29,7 +31,7 @@ import { ConfigSmartTableService } from '../../services/perfiles.settings.smart-
   templateUrl: './perfiles.component.html',
   styleUrls: ['./perfiles.component.scss'],
 
-  providers: [PerfilService, ConfigSmartTableService],
+  providers: [PerfilService, ConfigSmartTableService, NotificacionesService],
 })
 export class PerfilesComponent implements OnInit {
   // Variables Tipo JSON, para usarlas en los Servicios Invocados
@@ -46,21 +48,18 @@ export class PerfilesComponent implements OnInit {
   listArrayData3: any
   data1: any;
   arrayTipoPerfiles: any
-
-  config: ToasterConfig;
-
   position = 'toast-bottom-full-width';
   animationType = 'slideDown';
   title = 'Se ha grabado la Información! ';
   content = 'los cambios han sido grabados temporalmente, en la PGC!';
-  timeout = 10000;
+  timeout = 20000;
   toastsLimit = 5;
   type = 'default';
-
   isNewestOnTop = true;
   isHideOnClick = true;
   isDuplicatesPrevented = false;
   isCloseButton = true;
+  config: ToasterConfig;
   settings: any;
   public responsedata: any;
 
@@ -70,9 +69,9 @@ export class PerfilesComponent implements OnInit {
    * @param _router
    * @param _perfilesService
    */
-  constructor(protected _router: Router,
+  constructor(
     public _perfilesService: PerfilService, // Inicializa el ToasterService
-    private _toasterService: ToasterService,
+    private _notificacionesService: NotificacionesService,
     public _configSmartTableService: ConfigSmartTableService) {
     // Llamamos a la Funcion de Configuracion de las Smart Table
     this._configSmartTableService.configSmartTable('userSmart', 1, null);
@@ -83,47 +82,6 @@ export class PerfilesComponent implements OnInit {
     this.responsedata = { 'error': false, 'msg': 'error campos solicitado' };
   }
 
-
-  /****************************************************************************
-  * Funcion: makeToast
-  * Object Number: 003
-  * Fecha: 16-08-2018
-  * Descripcion: Method makeToast of the Class
-  * Objetivo: makeToast in the method header API
-  ****************************************************************************/
-  makeToast() {
-    this.showToast(this.type, this.title, this.content);
-    // console.log('Opcion de Toaster 1.3 ' + JSON.stringify(this.content));
-  } // FIN | makeToast
-
-  /****************************************************************************
-  * Funcion: showToast
-  * Object Number: 004
-  * Fecha: 16-08-2018
-  * Descripcion: Method showToast of the Class
-  * Objetivo: showToast in the method header API
-  ****************************************************************************/
-  private showToast(type: string, title: string, body: string) {
-    this.config = new ToasterConfig({
-      positionClass: this.position,
-      timeout: this.timeout,
-      newestOnTop: this.isNewestOnTop,
-      tapToDismiss: this.isHideOnClick,
-      preventDuplicates: this.isDuplicatesPrevented,
-      animation: this.animationType,
-      limit: this.toastsLimit,
-    });
-    const toast: Toast = {
-      type: type,
-      title: title,
-      body: body,
-      timeout: this.timeout,
-      showCloseButton: this.isCloseButton,
-      bodyOutputType: BodyOutputType.TrustedHtml,
-    };
-    // this._toasterService.popAsync(toast);
-    this._toasterService.pop(toast);
-  } // FIN | showToast
 
   /****************************************************************************
   * Funcion: ngOnInit
@@ -158,7 +116,7 @@ export class PerfilesComponent implements OnInit {
         if (response.status !== 200) {
           // console.log(response.status);
           // console.log(response.message);
-          this.showToast('error', 'Error al Obtener la Información del Perfil', response.message);
+          this._notificacionesService.showToast('error', 'Error al Obtener la Información del Perfil', response.message);
         } else if (response.status === 200) {
           // this.productos = result.data;
           // console.log(result.status);
@@ -169,7 +127,7 @@ export class PerfilesComponent implements OnInit {
       },
       error => {
         // Redirecciona al Login
-        this.showToast('error' , 'Error en la petición de la API ', <any>error.message.message);
+        this._notificacionesService.showToast('error' , 'Error en la petición de la API ', <any>error.message.message);
       },
     );
   } // FIN | perfilesDatailsService
@@ -231,7 +189,7 @@ export class PerfilesComponent implements OnInit {
     const responsedataExt: any = this.responsedata;
 
     if (responsedataExt.error === true) {
-      this.showToast('error', 'Error al actualizar los cambios', responsedataExt);
+      this._notificacionesService.showToast('error', 'Error al actualizar los cambios', responsedataExt);
       return -1;
     }
     // Ejecutamos el Recurso del EndPoint
@@ -240,18 +198,19 @@ export class PerfilesComponent implements OnInit {
         if (response.status !== 200) {
           // console.log(response.status);
           // console.log(response.message);
-          this.showToast('error', 'Error al actualizar los cambios', response.message);
+          this._notificacionesService.showToast('error', 'Error al actualizar los cambios', response.message);
         } else if (response.status === 200) {
           // console.log(result.status);
-          this.showToast('default', 'se actualizaron con exito los datos', response.message);
+          this._notificacionesService.showToast('default', 'se actualizaron con exito los datos', response.message);
           // console.log(response.data);
           // Carga la tabla Nuevamente
           this.perfilesDatailsService();
+          this.ngOnInit();
         }
       },
       error => {
         // Redirecciona al Login
-        this.showToast('error' , 'Error en la petición de la API' , <any>error.message.message);
+        this._notificacionesService.showToast('error' , 'Error en la petición de la API' , <any>error.message.message);
       },
     );
   } // FIN | newPerfilService
@@ -272,10 +231,10 @@ export class PerfilesComponent implements OnInit {
         if (response.status !== 200) {
           // console.log(response.status);
           // console.log(response.message);
-          this.showToast('error', 'Error al actualizar los cambios', response.message);
+          this._notificacionesService.showToast('error', 'Error al actualizar los cambios', response.message);
         } else if (response.status === 200) {
           // console.log(result.status);
-          this.showToast('default', 'se actualizaron con exito los datos', response.message);
+          this._notificacionesService.showToast('default', 'Se inhabilito con éxito el Perfil', response.message);
           // console.log(response.data);
           // Carga la tabla Nuevamente
           this.perfilesDatailsService();
@@ -283,7 +242,7 @@ export class PerfilesComponent implements OnInit {
       },
       error => {
         // Redirecciona al Login
-        this.showToast('error' , 'Error en la petición de la API ' , <any>error.message.message);
+        this._notificacionesService.showToast('error' , 'Error en la petición de la API ' , <any>error.message.message);
       },
     );
   } // FIN | newPerfilService
@@ -302,7 +261,7 @@ export class PerfilesComponent implements OnInit {
     const responsedataExt: any = this.responsedata;
 
     if (responsedataExt.error === true) {
-      this.showToast('error', 'Error al ingresar los datos', responsedataExt.msg);
+      this._notificacionesService.showToast('error', 'Error al ingresar los datos', responsedataExt.msg);
       return -1;
     }
     // Ejecutamos el Recurso del EndPoint
@@ -311,10 +270,10 @@ export class PerfilesComponent implements OnInit {
         if (response.status !== 200) {
           // console.log(response.status);
           // console.log(response.message);
-          this.showToast('error', 'Error al Ingresar la Información del Perfil', response.message);
+          this._notificacionesService.showToast('error', 'Error al Ingresar la Información del Perfil', response.message);
         } else if (response.status === 200) {
           // console.log(result.status);
-          this.showToast('default', 'La Información del Perfil, se ha ingresado con exito', response.message);
+          this._notificacionesService.showToast('default', 'La Información del Perfil, se ha ingresado con exito', response.message);
           // console.log(response.data);
           // Carga la tabla Nuevamente
           this.perfilesDatailsService();
@@ -323,7 +282,7 @@ export class PerfilesComponent implements OnInit {
       },
       error => {
         // Redirecciona al Login
-        this.showToast('error' , 'Error en la petición de la API' , <any>error.message.message);
+        this._notificacionesService.showToast('error' , 'Error en la petición de la API' , <any>error.message.message);
       },
     );
   } // FIN | newPerfilService
@@ -363,7 +322,7 @@ export class PerfilesComponent implements OnInit {
       },
       error => {
         // Redirecciona al Login
-        this.showToast('error' , 'Error en la petición de la API' , <any>error.message.message);
+        this._notificacionesService.showToast('error' , 'Error en la petición de la API' , <any>error.message.message);
       },
     );
   } // FIN | perfilesTipoService

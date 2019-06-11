@@ -13,12 +13,13 @@ import { ToasterConfig, ToasterService, Toast, BodyOutputType } from 'angular2-t
 import { ServiceSectoresService } from '../../../../services/service-sectores.service';
 import { ServiceSectoresOcdeService } from '../../../../services/sectores/service-sectores-ocde.service';
 import { ActivitySectoresOcdeModel } from '../../../../models/sectores/model-sectores-ocde';
+import { NotificacionesService } from '../../../../../shared/services/notificaciones.service';
 
 @Component({
   selector: 'ngx-sectores-ocde',
   templateUrl: './sectores-ocde.component.html',
   styleUrls: ['./sectores-ocde.component.scss'],
-  providers: [ServiceSectoresService, MessageService, ToasterService],
+  providers: [ServiceSectoresService, MessageService, NotificacionesService],
 })
 export class SectoresOcdeComponent implements OnInit, OnChanges {
   // Variables entre Tabs | Components
@@ -120,7 +121,7 @@ export class SectoresOcdeComponent implements OnInit, OnChanges {
   constructor(private _serviceSectoresService: ServiceSectoresOcdeService,
     private messageService: MessageService,
     private changeDetectorRef: ChangeDetectorRef,
-    private _toasterService: ToasterService) {
+    private _notificacionesService: NotificacionesService) {
     // Codigo del Constructor
   }
 
@@ -157,7 +158,7 @@ export class SectoresOcdeComponent implements OnInit, OnChanges {
   * Objetivo: makeToast in the method header API
   ****************************************************************************/
   makeToast() {
-    this.showToast(this.type, this.title, this.content);
+    this._notificacionesService.showToast(this.type, this.title, this.content);
   } // FIN | makeToast
 
 
@@ -186,8 +187,6 @@ export class SectoresOcdeComponent implements OnInit, OnChanges {
       showCloseButton: this.isCloseButton,
       bodyOutputType: BodyOutputType.TrustedHtml,
     };
-    // this._toasterService.popAsync(toast);
-    this._toasterService.pop(toast);
   } // FIN | showToast
 
 
@@ -316,7 +315,7 @@ export class SectoresOcdeComponent implements OnInit, OnChanges {
     this._serviceSectoresService.getAllSectoresOcdeCad().subscribe(
       result => {
         if (result.status !== 200) {
-          this.showToast('error', 'Error al Obtener la Información de todos los Sectores de Desarrollo', result.message);
+          this._notificacionesService.showToast('error', 'Error al Obtener la Información de todos los Sectores de Desarrollo', result.message);
           this.JsonReceptionAllSectoresOcdeCad = [];
         } else if (result.status === 200) {
           this.JsonReceptionAllSectoresOcdeCad = result.data;
@@ -339,7 +338,7 @@ export class SectoresOcdeComponent implements OnInit, OnChanges {
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información de todos los Sectores de Desarrollo', JSON.stringify(error.message));
+        this._notificacionesService.showToast('error', 'Error al Obtener la Información de todos los Sectores de Desarrollo', JSON.stringify(error.message));
       },
     );
   } // FIN | getListUbicacionService
@@ -360,14 +359,14 @@ export class SectoresOcdeComponent implements OnInit, OnChanges {
     this._serviceSectoresService.getfindByIdSector(idSector).subscribe(
       result => {
         if (result.status !== 200) {
-          this.showToast('error', 'Error al Obtener la Información del Sector de Desarrollo', result.message);
+          this._notificacionesService.showToast('error', 'Error al Obtener la Información del Sector de Desarrollo', result.message);
           this.JsonReceptionSectorOcdeCad = [];
         } else if (result.status === 200) {
           this.JsonReceptionSectorOcdeCad = result.data;
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información del Sector de Desarrollo', JSON.stringify(error.message));
+        this._notificacionesService.showToast('error', 'Error al Obtener la Información del Sector de Desarrollo', JSON.stringify(error.message));
       },
     );
   } // FIN | getfindByIdSectorService
@@ -388,7 +387,7 @@ export class SectoresOcdeComponent implements OnInit, OnChanges {
     this._serviceSectoresService.getfindByIdNivelSector(idSNivelector).subscribe(
       result => {
         if (result.status !== 200) {
-          this.showToast('error', 'Error al Obtener la Información de Sector Nivel 1', result.message);
+          this._notificacionesService.showToast('error', 'Error al Obtener la Información de Sector Nivel 1', result.message);
           this.JsonReceptionSectorByNivelOcdeCad = [];
           this.nodes = [];
         } else if (result.status === 200) {
@@ -397,7 +396,7 @@ export class SectoresOcdeComponent implements OnInit, OnChanges {
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información de Secotores de Desarrollo', JSON.stringify(error.message));
+        this._notificacionesService.showToast('error', 'Error al Obtener la Información de Secotores de Desarrollo', JSON.stringify(error.message));
       },
     );
   } // FIN | getfindByIdNivelSectorService
@@ -428,7 +427,7 @@ export class SectoresOcdeComponent implements OnInit, OnChanges {
         this._serviceSectoresService.getfindByIdNivelSectorAndSectorPadreId(2, element.idSector).subscribe(
           result => {
             if (result.status !== 200) {
-              this.showToast('error', 'Error al Obtener la Información de los Sectores Nivel 2', result.message);
+              this._notificacionesService.showToast('error', 'Error al Obtener la Información de los Sectores Nivel 2', result.message);
               this.JsonReceptionSectorByNivelOcdeCad2 = [];
               this.arrayPush = [];
             } else if (result.status === 200) {
@@ -453,7 +452,7 @@ export class SectoresOcdeComponent implements OnInit, OnChanges {
                     this._serviceSectoresService.getfindByIdNivelSectorAndSectorPadreId(3, element2[0]).subscribe(
                       result2 => {
                         if (result2.status !== 200) {
-                          this.showToast('error', 'Error al Obtener la Información del Sector Nivel 3', result2.message);
+                          this._notificacionesService.showToast('error', 'Error al Obtener la Información del Sector Nivel 3', result2.message);
                           this.JsonReceptionSectorByNivelOcdeCad3 = [];
                         } else if (result2.status === 200 && result2.find === true) {
                           this.JsonReceptionSectorByNivelOcdeCad3 = result2.data;
@@ -470,7 +469,7 @@ export class SectoresOcdeComponent implements OnInit, OnChanges {
                               this._serviceSectoresService.getfindByIdNivelSectorAndSectorPadreId(4, element3[0]).subscribe(
                                 result3 => {
                                   if (result3.status !== 200) {
-                                    this.showToast('error', 'Error al Obtener la Información del Sector Nivel 4', result3.message);
+                                    this._notificacionesService.showToast('error', 'Error al Obtener la Información del Sector Nivel 4', result3.message);
                                     this.JsonReceptionSectorByNivelOcdeCad4 = [];
                                   } else if (result3.status === 200 && result3.find === true) {
                                     this.JsonReceptionSectorByNivelOcdeCad4 = result3.data;
@@ -492,7 +491,7 @@ export class SectoresOcdeComponent implements OnInit, OnChanges {
                                   }
                                 },
                                 error => {
-                                  this.showToast('error', 'Error al Obtener la Información de Sectores de Desarrollo', JSON.stringify(error.message));
+                                  this._notificacionesService.showToast('error', 'Error al Obtener la Información de Sectores de Desarrollo', JSON.stringify(error.message));
                                 },
                               );
 
@@ -511,7 +510,7 @@ export class SectoresOcdeComponent implements OnInit, OnChanges {
                         }
                       },
                       error => {
-                        this.showToast('error', 'Error al Obtener la Información de Sectores de Desarrollo', JSON.stringify(error.message));
+                        this._notificacionesService.showToast('error', 'Error al Obtener la Información de Sectores de Desarrollo', JSON.stringify(error.message));
                       },
                     );
                   }, 100);
@@ -541,7 +540,7 @@ export class SectoresOcdeComponent implements OnInit, OnChanges {
             }
           },
           error => {
-            this.showToast('error', 'Error al Obtener la Información de Secotores de Desarrollo', JSON.stringify(error.message));
+            this._notificacionesService.showToast('error', 'Error al Obtener la Información de Secotores de Desarrollo', JSON.stringify(error.message));
           },
         );
       }, 1000);
@@ -579,26 +578,26 @@ export class SectoresOcdeComponent implements OnInit, OnChanges {
         this._serviceSectoresService.saveActividadSectorOcde(this._activitySectoresOcdeModel).subscribe(
           result => {
             if (result.status !== 200) {
-              this.showToast('error', 'Error al Ingresar la Información del Sector Ocde/Cad asociado al Proyecto', JSON.stringify(result.message));
+              this._notificacionesService.showToast('error', 'Error al Ingresar la Información del Sector Ocde/Cad asociado al Proyecto', JSON.stringify(result.message));
             } else if (result.status === 200) {
               // Evalua los resuktados de la query
               if (result.findRecord === false) {
-                this.showToast('error', 'Error al Ingresar la Información del Sector Ocde/Cad asociado al Proyecto', JSON.stringify(result.message));
+                this._notificacionesService.showToast('error', 'Error al Ingresar la Información del Sector Ocde/Cad asociado al Proyecto', JSON.stringify(result.message));
               } else {
-                this.showToast('success', 'Sector Ocde/Cad asociado al Proyecto', JSON.stringify(result.message));
+                this._notificacionesService.showToast('success', 'Sector Ocde/Cad asociado al Proyecto', JSON.stringify(result.message));
               }
               // this.updateSecuenciaService(9, 3);
             }
           },
           error => {
-            this.showToast('error', 'Error al ingresar el Sector Ocde/Cad al Proyecto', JSON.stringify(error.message));
+            this._notificacionesService.showToast('error', 'Error al ingresar el Sector Ocde/Cad al Proyecto', JSON.stringify(error.message));
           },
         );
 
         // this.updateSecuenciaService(9, 3);
       }
     } else {
-      this.showToast('error', 'Error al ingresar la Información Sectores OCDE/CAD', 'Debes de seleccionar los sectores OCDE/CAD, para continuar');
+      this._notificacionesService.showToast('error', 'Error al ingresar la Información Sectores OCDE/CAD', 'Debes de seleccionar los sectores OCDE/CAD, para continuar');
       return -1;
     }
   } // FIN | saveSectoresOcdeCad
