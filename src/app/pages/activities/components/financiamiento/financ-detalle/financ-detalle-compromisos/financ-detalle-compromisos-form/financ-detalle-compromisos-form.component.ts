@@ -324,7 +324,7 @@ export class FinancDetalleCompromisosFormComponent implements OnInit {
       accept: () => {
         // Ejecuta la funcion de Registrar el Compromiso
         this.saveFinanciamientoDetCompromisoService();
-      }
+      },
     });
   } // FIN | FND-006
 }

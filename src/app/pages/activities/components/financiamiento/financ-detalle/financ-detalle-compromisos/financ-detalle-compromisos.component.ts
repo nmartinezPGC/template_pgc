@@ -158,7 +158,7 @@ export class FinancDetalleCompromisosComponent implements OnInit {
       accept: () => {
         // Ejecuta la funcion de Eliminar el Compromiso
         this.deleteFinanciamientoDetCompromisoService(codigoFinancCompromiso);
-      }
+      },
     });
   } // FIN | FND-002
 
