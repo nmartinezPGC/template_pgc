@@ -193,7 +193,6 @@ export class FinancDetalleCompromisosFormComponent implements OnInit {
   ****************************************************************************/
   async saveFinanciamientoDetCompromisoService() {
     // Creacion del Codigo del Compromiso | 4 = NEW-ADC (Nuevo Compromiso)
-    // console.log(this.JsonCompromisosSelect);
     this.getSecuenciaListService('NEW-ADC');
 
     await delay(100);

@@ -64,8 +64,9 @@ export class FinancDetalleCompromisosComponent implements OnInit {
     this.getAllFinanciamientoDetCompromisoService();
 
     this.JsonCompromisosSelect = {
-      'id': 1,
-      'cod': 'COD-01',
+      'id': 0,
+      'cod': '',
+      'cod2': 0,
     }
   }
 
@@ -73,7 +74,7 @@ export class FinancDetalleCompromisosComponent implements OnInit {
   /**
    * Mostrar el Modal window
    */
-  showDialog() {
+  showDialog(idTipoTransaccion: number, montoCompromiso: number, idMoneda: number, fechaTransaccion: any) {
     // Evalua que se aha ingresado el Detalle del Financiamiento
     if (this.idActividadFinancDet === undefined) {
       this._notificacionesService.showToast('error', 'Error al ingresar la Información de Compromisos', 'Debes Ingresar la Clasificación de Financiamiento, para continuar');
@@ -82,10 +83,16 @@ export class FinancDetalleCompromisosComponent implements OnInit {
       this.display = true;
 
       this.JsonCompromisosSelect = {
-        'id': 1,
-        'cod': 'COD-01',
+        'idTipoTransaccion': idTipoTransaccion,
+        'montoCompromiso': montoCompromiso,
+        'idMoneda': idMoneda,
+        'fechaTransaccion': fechaTransaccion,
       }
     }
+  }
+
+  openModal() {
+    // console.log('Hola Mundo ' + this.JsonCompromisosSelect);
   }
 
   closeModal() {
@@ -127,7 +134,9 @@ export class FinancDetalleCompromisosComponent implements OnInit {
               fechaTransaccion: item[3],
               idActividadFinancDet: item[4],
               descTipoTransaccion: item[5],
-              nombreMoneda: item[6],
+              idTipoTransaccion: item[6],
+              nombreMoneda: item[7],
+              idMoneda: item[8],
             }
           });
 
