@@ -227,7 +227,7 @@ export class FinanciamientoDetService {
 
 
   /****************************************************************************
-    * Funcion: FND-00004
+    * Funcion: FND-00011
     * Fecha: 21-01-2019
     * Descripcion: Metodo para Actualizar el Valor de la Secuencia
     * Objetivo: Actualizar el valor de la Secuencia
@@ -241,7 +241,26 @@ export class FinanciamientoDetService {
       headers: this.headers,
       params: { 'tokenApi': this.tokenHeader },
     });
-  } // FIN | FND-00004
+  } // FIN | FND-00011
+
+
+  /****************************************************************************
+  * Funcion: FND-00012
+  * Fecha: 13-06-2019
+  * Descripcion: Metodo para Actualizar Compromisos de Socio al Desarrollo
+  * Objetivo: Actualizar Compromisos de Socio al Desarrollo
+  * Params: { idActividadFinancDetCompromiso, jsonSendActividadFinanciamientoDetCompromiso }
+  ****************************************************************************/
+  editActividadFinanciamientoDetCompromiso(idActividadFinancDetCompromiso: number, jsonSendActividadFinanciamientoDetCompromiso: any): Observable<any> {
+    const paramsSend1: number = idActividadFinancDetCompromiso;
+    const paramsSend2: any = jsonSendActividadFinanciamientoDetCompromiso;
+
+    // Retorno de la Funcion
+    return this._http.put(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 70.203) + paramsSend1, paramsSend2, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  } // FIN | FND-00012
 
 
   /**

@@ -462,6 +462,12 @@ export class SystemEndPointsService extends ListEndPointsService {
           case 68:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActividadFinanciamientoEnc.urlEndPoint;
             break;
+          case 68.100:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.editActividadFinanciamientoEnc.urlEndPoint;
+            break;
+          case 68.101:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdActividadFinancEnc.urlEndPoint;
+            break;
           case 69: // NAM | 2019-05-24 | Mapeo de Financiamiento Detalle de Proyectos
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.newActividadFinanciamientoDet.urlEndPoint;
             break;
@@ -479,6 +485,9 @@ export class SystemEndPointsService extends ListEndPointsService {
             break;
           case 70.202:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdActividadDetComprisos.urlEndPoint;
+            break;
+          case 70.203:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.editActividadFinanciamientoDetCompromiso.urlEndPoint;
             break;
           case 71: // AMA | 2019-27-05 | Mapeo de Organización Unidad Ejecutora
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findAllUnidadEjecutora.urlEndPoint;

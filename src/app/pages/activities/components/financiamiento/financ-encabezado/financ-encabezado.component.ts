@@ -7,7 +7,7 @@
 * @fecha 16-05-2019
 */
 
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild, OnChanges } from '@angular/core';
 // Datepicker
 import { IMyDpOptions } from 'mydatepicker';
 import { NotificacionesService } from '../../../../shared/services/notificaciones.service';
@@ -20,7 +20,7 @@ import { FinanciamientoEncService } from '../../../services/financiamiento/finan
   styleUrls: ['./financ-encabezado.component.scss'],
   providers: [FinanciamientoEncService, NotificacionesService],
 })
-export class FinancEncabezadoComponent implements OnInit {
+export class FinancEncabezadoComponent implements OnInit, OnChanges {
   // Variables entre Tabs | Components
   @Input() idProyectoTab: number;
   @Input() idUsuarioTab: number;
@@ -29,6 +29,7 @@ export class FinancEncabezadoComponent implements OnInit {
   @ViewChild('montoActividad') montoActividadInput: ElementRef;
 
   // Variables de Recepcion de Información
+  public JsonReceptionFinancimientoEncProyecto: any;
   public JsonReceptionAllMonedasProyecto: any;
 
   // Modelo de la Clase
@@ -87,7 +88,42 @@ export class FinancEncabezadoComponent implements OnInit {
 
     // Recepcion de Información
     this.getAllMonedasActividadService();
-  }
+
+    this.getActividadFinanciamientoEncByIdActividadService(this.idProyectoTab);
+  } // FIN | ngOnInit
+
+
+   /**
+   * Metodo que recibe los cambios de vairables
+   */
+  ngOnChanges() {
+    // Verificacion de informacion de Compromiso
+    // if (this.JsonReceptionFinancimientoEncProyecto.idActividadFinancEnc !== 0) {
+      // Carga el Model con los datos enviados
+      // this._activityFinanciamientoEncModel.idActividadFinancEnc = this.JsonReceptionFinancimientoEncProyecto.idActividadFinancEnc;
+      // this._activityFinanciamientoEncModel.idTipoTransaccionSend = this.JsonCompromisosSelect.idTipoTransaccion;
+      // this._activityFinanciamientoEncModel.idTipoTransaccion = { idTipoTransaccion: this._activityFinanciamientoDetCompromisosModel.idTipoTransaccionSend };
+      // this._activityFinanciamientoEncModel.montoActividad = this.JsonReceptionFinancimientoEncProyecto.montoActividad;
+      // this._activityFinanciamientoEncModel.idMonedaActividadSend = this.JsonCompromisosSelect.idMonedaActividad;
+      // this._activityFinanciamientoEncModel.idMonedaActividad = { idMonedaActividad: this._activityFinanciamientoDetCompromisosModel.idMonedaActividadSend };
+      // this._activityFinanciamientoEncModel.codigoFinancCompromiso = this.JsonCompromisosSelect.codigoFinancCompromiso;
+      // this.date6 = new Date(this.JsonCompromisosSelect.fechaTransaccion);
+      // this._activityFinanciamientoEncModel.fechaTransaccion = this.date6;
+    // } else {
+      // Inicializacion del Modelo
+      // Inicializacion del Modelo
+      // this._activityFinanciamientoEncModel = new ActivityFinanciamientoEncModel(
+      //   0, null, // Datos Generales
+      //   null, 0, null, // Relacionales
+      //   null, null, // Transaccion
+      //   true, null, null, // Auditoria
+      // );
+
+      // Fecha
+      // this.date6 = null;
+    // }
+  } // FIN | ngOnChanges
+
 
   /****************************************************************************
   * Funcion: showDialog y closeDialog
@@ -117,7 +153,7 @@ export class FinancEncabezadoComponent implements OnInit {
 
   /****************************************************************************
   * Funcion: getAllMonedasActividadService
-  * Object Number: 003
+  * Object Number: FND-002
   * Fecha: 21-05-2019
   * Descripcion: Method getAllMonedasActividadService of the Class
   * Objetivo: getAllMonedasActividadService listados de las Monedas de Proyecto
@@ -138,16 +174,16 @@ export class FinancEncabezadoComponent implements OnInit {
         this._notificacionesService.showToast('error', 'Error al Obtener la Información de todas las Monedas de Proyecto', JSON.stringify(error.message));
       },
     );
-  } // FIN | getAllMonedasActividadService
+  } // FIN | FND-002
 
 
   /****************************************************************************
   * Funcion: saveFinanciamientoEncService
-  * Object Number: 004
+  * Object Number: FND-003
   * Fecha: 21-05-2019
   * Descripcion: Method saveFinanciamientoEncService of the Class
-  * Objetivo: saveFinanciamientoEncService listados de las Monedas de Proyecto
-  * Params: { this._activityFinanciamientoEncModel }
+  * Objetivo: Registrar el Encabezado del Financiamiento
+  * Params: { _activityFinanciamientoEncModel }
   ****************************************************************************/
   saveFinanciamientoEncService() {
     // Asignacion de nuevos valores de Modelo
@@ -157,7 +193,6 @@ export class FinancEncabezadoComponent implements OnInit {
 
     // Evaluacion de Datos de Financiamiento de Proyecto
     if (this._activityFinanciamientoEncModel.montoActividad !== 0) {
-      // console.log(this._activityFinanciamientoEncModel);
 
       if (this._activityFinanciamientoEncModel.idMoneda) {
         // Ejecuta el Servicio de invocar el registro de Socio al Desarrollo
@@ -185,12 +220,12 @@ export class FinancEncabezadoComponent implements OnInit {
       this._notificacionesService.showToast('error', 'Error al ingresar la Información de Encabezado de Financiamiento', 'Debes de ingresar el Costo Total del Proyecto, para continuar');
       this.montoActividadInput.nativeElement.focus();
     }
-  } // FIN | saveFinanciamientoEncService
+  } // FIN | FND-003
 
 
   /****************************************************************************
   * Funcion: cleanForm
-  * Object Number: 005
+  * Object Number: FND-004
   * Fecha: 21-05-2019
   * Descripcion: Method cleanForm of the Class
   * Objetivo: cleanForm listados de las Monedas de Proyecto
@@ -199,5 +234,34 @@ export class FinancEncabezadoComponent implements OnInit {
   cleanForm() {
     this.ngOnInit();
     this.date6 = null;
-  } // FIN | cleanForm
+  } // FIN | FND-004
+
+
+  /****************************************************************************
+  * Funcion: getActividadFinanciamientoEncByIdActividadService
+  * Object Number: FND-005
+  * Fecha: 14-06-2019
+  * Descripcion: Method getActividadFinanciamientoEncByIdActividadService of the Class
+  * Objetivo: Listados de las Monedas de Proyecto
+  * Params: { idActividad }
+  ****************************************************************************/
+  private getActividadFinanciamientoEncByIdActividadService(idActividad: number) {
+    // Ejecuta el Servicio de invocar todos los Objetivos Vision Pais
+    this._financiamientoEncService.getActividadFinanciamientoEncByIdActividad(idActividad).subscribe(
+      result => {
+        if (result.status !== 200) {
+          this._notificacionesService.showToast('error', 'Error al Obtener la Información de Encabezado del Financiamiento del Proyecto', result.message);
+          this.JsonReceptionFinancimientoEncProyecto = [];
+        } else if (result.status === 200) {
+          this.JsonReceptionFinancimientoEncProyecto = result.data;
+          console.log(this.JsonReceptionFinancimientoEncProyecto);
+
+          this._activityFinanciamientoEncModel.montoActividad =  1000;
+        }
+      },
+      error => {
+        this._notificacionesService.showToast('error', 'Error al Obtener la Información de Encabezado del Financiamiento de Proyecto', JSON.stringify(error.error.message));
+      },
+    );
+  } // FIN | FND-005
 }
