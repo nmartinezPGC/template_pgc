@@ -34,12 +34,12 @@ export class EspaciosTrabajoComponent implements OnInit {
   // Json reception
   public JsonReceptionEstados: any;
   public JsonReceptionTipo: any;
-  public JsonReceptionListEspaciostrabajo: any;
+  public JsonReceptionListEspacioTrabajo: any;
   public JsonReceptionPaises: any;
   public JsonReceptionF
   private _toasterService: ToasterService;
-  public JsonReceptionEspaciotrabajo: any;
-  public JsonReceptionFyByEspaciotrabajo: any;
+  public JsonReceptionEspacioTrabajo: any;
+  public JsonReceptionFyByEspacioTrabajo: any;
 
 
 
@@ -79,19 +79,19 @@ export class EspaciosTrabajoComponent implements OnInit {
   isDuplicatesPrevented = false;
   isCloseButton = true;
   settings: any;
-  arrayEspaciostrabajo: any;
+  arrayEspacioTrabajo: any;
   public responsedata: any;
 
  // levanta la modal de mantenimineto de espacios de trabjo/consulta
  showLargeModal(idEspacioTrabajo: number) {
   const activeModal = this.modalService.open(EspacioModalTrabajoComponent, { size: 'lg', container: 'nb-layout' });
   activeModal.componentInstance.modalHeader = 'Large Modal Parametro ';
-  activeModal.componentInstance.idEspacioTrabajo = idEspacioTrabajo;
+   activeModal.componentInstance.idEspacioTrabajo = idEspacioTrabajo;
   // console.log(idEspacioTrabajo);
-  activeModal.componentInstance.JsonReceptionFyByEspaciostrabajo = this.JsonReceptionFyByEspaciotrabajo;
+  activeModal.componentInstance.JsonReceptionFyByEspacioTrabajo = this.JsonReceptionFyByEspacioTrabajo;
 
-  this.data3 = this.JsonReceptionEspaciotrabajo;
-  this.arrayEspaciostrabajo = new Array();
+  this.data3 = this.JsonReceptionEspacioTrabajo;
+  this.arrayEspacioTrabajo = new Array();
 
 }
 
@@ -331,9 +331,9 @@ onItemSlectPais(item: any) {
      response => {
        if (response.status !== 200) {
        } else if (response.status === 200) {
-         this.JsonReceptionListEspaciostrabajo = response.data;
+         this.JsonReceptionListEspacioTrabajo = response.data;
          // instancia data con los perfiles;
-         this.data3 = this.JsonReceptionListEspaciostrabajo;
+         this.data3 = this.JsonReceptionListEspacioTrabajo;
          // Carga los Items para el List de la Smart table
          this.arrayOrganizacion = new Array();
        }
@@ -379,9 +379,9 @@ onItemSlectPais(item: any) {
         if (response.status !== 200) {
           this.showToast('error', 'Error al Eliminar la Id Interna de la Planificacion del Proyecto', response.message);
         } else if (response.status === 200) {
-          this.JsonReceptionListEspaciostrabajo = response.data;
+          this.JsonReceptionListEspacioTrabajo = response.data;
           // instancia data con los perfiles;
-          this.data4 = this.JsonReceptionListEspaciostrabajo;
+          this.data4 = this.JsonReceptionListEspacioTrabajo;
           // Verificamos que la Actividad no Exista en la BD
         }
       },

@@ -15,9 +15,9 @@ import { EspaciosTrabajoModel } from '../../models/espacio.trabajo.model';
 })
 export class EspacioModalTrabajoComponent implements OnInit {
 
-  @Input() idEspaciotrabajo;
+  @Input() idEspacioTrabajo;
 
-  public JsonReceptionFyByEspaciostrabajo: any;
+  public JsonReceptionFyByEspacioTrabajo: any;
   public _Espaciotrabajomodal1: EspaciosTrabajoModel;
   data4: any;
   public JsonReceptionTipoPerfiles: any;
@@ -134,6 +134,7 @@ closeModal() {
     null, 0, null, 0, null, 0, // datos relacionados con la tabla principal
 
   );
+  this._Espaciotrabajomodal1.idEspacioTrabajo;
   this._Espaciotrabajomodal1.codEspacioTrabajo;
   this._Espaciotrabajomodal1.nombreEspacioTrabajo;
   this._Espaciotrabajomodal1.descripcionEspacioTrabajo;
@@ -150,19 +151,19 @@ closeModal() {
   this.paisesAllListService();
   this.UpdateEspaciostrabajo();
   this.onItemSlectPais(this.selectedItemsPais);
-  this.fyByIdEspaciostrabajo(this.idEspaciotrabajo);
+  this.fyByIdEspaciostrabajo(this.idEspacioTrabajo);
 
   }
-  fyByIdEspaciostrabajo(idEspaciotrabajo: number) {
+  fyByIdEspaciostrabajo(idEspacioTrabajo: number) {
     // Ejecutamos el Recurso del EndPoint
-    this._EspaciotrabajoService.FindByIdEspacioTrabajo(idEspaciotrabajo).subscribe(
+    this._EspaciotrabajoService.FindByIdEspacioTrabajo(idEspacioTrabajo).subscribe(
       response => {// console.log("id espacios"+ this.fyByIdEspaciostrabajo);
         if (response.status !== 200) {
           this.showToast('error', 'Error al Eliminar la Id Interna de la Planificacion del Proyecto', response.message);
         } else if (response.status === 200) {
-          this.JsonReceptionFyByEspaciostrabajo = response.data;
+          this.JsonReceptionFyByEspacioTrabajo = response.data;
           // instancia data con los perfiles;
-          this.data4 = this.JsonReceptionFyByEspaciostrabajo;
+          this.data4 = this.JsonReceptionFyByEspacioTrabajo;
           this._Espaciotrabajomodal1.codEspacioTrabajo = this.data4.codEspacioTrabajo;
           this._Espaciotrabajomodal1.nombreEspacioTrabajo = this.data4.nombreEspacioTrabajo;
           this._Espaciotrabajomodal1.descripcionEspacioTrabajo = this.data4.descripcionEspacioTrabajo;
@@ -277,7 +278,7 @@ onItemSlectPais(item: any) {
 ****************************************************************************/
 private estadoService() {
   const idGroupSen: number = 4;
-  this._EspaciotrabajoService.getAllEspaciostrabajo().subscribe(
+  this._EspaciotrabajoService.getAllEstados(idGroupSen).subscribe(
     response => {
       if (response.status !== 200) {
 
@@ -304,7 +305,7 @@ private estadoService() {
 ****************************************************************************/
 private tipoService() {
   const idTipoSen: number = 4;
-  this._EspaciotrabajoService.getAllEspaciostrabajo().subscribe(
+  this._EspaciotrabajoService.getAllTipo(idTipoSen).subscribe(
     response => {
       // console.log(this.data3)
       if (response.status !== 200) {
@@ -346,7 +347,7 @@ private tipoService() {
       return -1;
     }
     // Ejecutamos el Recurso del EndPoint
-    this._EspaciotrabajoService.EspaciostrabajoUpdate(this._Espaciotrabajomodal1, this.idEspaciotrabajo).subscribe(
+    this._EspaciotrabajoService.EspaciostrabajoUpdate(this._Espaciotrabajomodal1, this.idEspacioTrabajo).subscribe(
       response => {
         if (response.status !== 200) {
           this.showToast('error', 'Error al Ingresar la Información del Usuario', response.message);
