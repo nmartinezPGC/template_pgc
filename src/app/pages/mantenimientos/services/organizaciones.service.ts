@@ -210,11 +210,11 @@ export class OrganizacionService {
     * Objetivo: Actualizar el valor de la Secuencia
     * Params: { jsonSecuencia, idSecuencia }
     ****************************************************************************/
-  updateSecuence( idSecuencia: number): Observable<any> {
+  updateSecuence( jsonSecuencia, idSecuencia: number): Observable<any> {
     // Valores Constantes
     const idSecuenciaSend: number = idSecuencia;
     // Retorno de la Funcion
-    return this._http.put(this._systemEndPointsService.getEndPointService('userGroup', 4) + idSecuenciaSend, {
+    return this._http.put(this._systemEndPointsService.getEndPointService('userGroup', 4) + idSecuenciaSend, jsonSecuencia, {
       headers: this.headers,
       params: { 'tokenApi': this.tokenHeader },
     });

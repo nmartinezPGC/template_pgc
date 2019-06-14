@@ -341,7 +341,7 @@ export class OrganizacionModalComponent implements OnInit {
           this.showToast('error', 'Error al Ingresar la Información del Usuario', response.message);
         } else if (response.status === 200) {
           this.showToast('default', 'se actualizo con exito la informacion de la organizacion', response.message);
-         this.activeModal.close(this.ngOnInit());
+        this.activeModal.close(this.ngOnInit());
         }
       },
 
