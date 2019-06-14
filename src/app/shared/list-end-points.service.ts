@@ -1016,6 +1016,22 @@ export class ListEndPointsService {
         params: '{ codigoActividad }',
         groupEndPoint: 'actividadesCRUDGroup',
         descEndPoint: 'Eliminar el dato de Encabezado de Financiamiento enviado y asociarlo al Proyecto',
+      },
+      editActividadFinanciamientoEnc: {
+        id: 68.100,
+        nameEndpoint: 'editActividadFinanciamientoEnc',
+        urlEndPoint: '/mant-actividades/financiamiento/encabezado/edit/',
+        params: '{ idActividadFinacEnc }',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Listar el Encabezado de financiamiento del Proyecto',
+      },
+      findByIdActividadFinancEnc: {
+        id: 68.101,
+        nameEndpoint: 'findByIdActividadFinancEnc',
+        urlEndPoint: '/mant-actividades/financiamiento/encabezado/findByIdActividad/',
+        params: '{ idActividad }',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Listar el Encabezado de financiamiento del Proyecto',
       }, // Modulo de Financiamiento de Proyectos | Detalle
       newActividadFinanciamientoDet: {
         id: 69,
@@ -1064,6 +1080,14 @@ export class ListEndPointsService {
         params: '{ idActividadDet }',
         groupEndPoint: 'actividadesCRUDGroup',
         descEndPoint: 'Listar todos los Compromisos del Proyecto',
+      },
+      editActividadFinanciamientoDetCompromiso: {
+        id: 70.203,
+        nameEndpoint: 'editActividadFinanciamientoDetCompromiso',
+        urlEndPoint: '/mant-actividades/financiamiento/detalle-compromiso/edit/',
+        params: '{ idActividadFinancDetCompromiso }',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Actualizar Información de Compromisos del Proyecto',
       },
       // Organizaciones de Proyectos | Unidad Ejecutora
       findAllUnidadEjecutora: {

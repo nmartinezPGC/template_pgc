@@ -63,9 +63,8 @@ export class FinancDetalleCompromisosComponent implements OnInit {
     // Carga los items de Compromisos registrados
     this.getAllFinanciamientoDetCompromisoService();
 
+    // Inicializacion del Json que manda los Parametros de Compromiso
     this.JsonCompromisosSelect = {
-      'id': 1,
-      'cod': 'COD-01',
     }
   }
 
@@ -73,8 +72,11 @@ export class FinancDetalleCompromisosComponent implements OnInit {
   /**
    * Mostrar el Modal window
    */
-  showDialog() {
+  showDialog(idActividadFinancDetCompromiso: number, idTipoTransaccion: number,
+    montoCompromiso: number, idMonedaActividad: number, fechaTransaccion: any, codigoFinancCompromiso: string) {
     // Evalua que se aha ingresado el Detalle del Financiamiento
+    this.JsonCompromisosSelect = null;
+
     if (this.idActividadFinancDet === undefined) {
       this._notificacionesService.showToast('error', 'Error al ingresar la Información de Compromisos', 'Debes Ingresar la Clasificación de Financiamiento, para continuar');
       this.closeModal();
@@ -82,8 +84,12 @@ export class FinancDetalleCompromisosComponent implements OnInit {
       this.display = true;
 
       this.JsonCompromisosSelect = {
-        'id': 1,
-        'cod': 'COD-01',
+        'idActividadFinancDetCompromiso': idActividadFinancDetCompromiso,
+        'idTipoTransaccion': idTipoTransaccion,
+        'montoCompromiso': montoCompromiso,
+        'idMonedaActividad': idMonedaActividad,
+        'fechaTransaccion': fechaTransaccion,
+        'codigoFinancCompromiso': codigoFinancCompromiso,
       }
     }
   }
@@ -127,7 +133,9 @@ export class FinancDetalleCompromisosComponent implements OnInit {
               fechaTransaccion: item[3],
               idActividadFinancDet: item[4],
               descTipoTransaccion: item[5],
-              nombreMoneda: item[6],
+              idTipoTransaccion: item[6],
+              nombreMoneda: item[7],
+              idMoneda: item[8],
             }
           });
 

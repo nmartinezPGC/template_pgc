@@ -25,7 +25,7 @@
                 [(ngModel)]="_activityFinanciamientoEncModel.idMoneda">
                 <option value="0">**** Selecciona la Moneda ****</option>
                 <option *ngFor="let item of JsonReceptionAllMonedasProyecto" [value]="item.idMonedaActividad">
-                  {{item.nombreMoneda}}
+                  {{item.descMoneda}}
                 </option>
               </select>
             </div>

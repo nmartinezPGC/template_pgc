@@ -30,7 +30,9 @@
               <td>{{ itemCompromisos.fechaTransaccion }}</td>
               <td style="text-align: center;">
                 <img class="accButton" src="../../../../../../assets/icons/forms/pencil-striped-symbol_16.png"
-                  nbPopover="Editar Compromiso" nbPopoverMode="hint" alt="Editar" (click)="showDialog()">
+                  nbPopover="Editar Compromiso" nbPopoverMode="hint" alt="Editar" (click)="showDialog(itemCompromisos.idActividadFinancDetCompromiso, itemCompromisos.idTipoTransaccion,
+                  itemCompromisos.montoCompromiso, itemCompromisos.idMoneda, itemCompromisos.fechaTransaccion,
+                  itemCompromisos.codigoFinancCompromiso)">
                 <img class="accButton" src="../../../../../../assets/icons/forms/rubbish-bin_16.png"
                   nbPopover="Eliminar Compromiso" nbPopoverMode="hint" alt="Eliminar"
                   (click)="confirm(itemCompromisos.codigoFinancCompromiso)"></td>
