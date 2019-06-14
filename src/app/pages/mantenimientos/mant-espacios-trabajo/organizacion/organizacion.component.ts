@@ -168,7 +168,7 @@ export class OrganizacionComponent implements OnInit {
       null, 1, // relaciones de tipo de organizacion
       null, 1, // pais de la organiacion
       null, 1, // categoria de la organizacion
-      //null, 1, // id grupo organizacion
+      // null, 1, // id grupo organizacion
     );
     this.TipoOrganizacion();
     this.ListAllCategoria();
@@ -326,7 +326,7 @@ export class OrganizacionComponent implements OnInit {
       response => {
 
         if (response.status !== 200) {
-          console.log('antes de---NEW')
+          // console.log('antes de---NEW')
           this.showToast('error', 'Error al Ingresar la Información del Usuario', response.message);
         } else if (response.status === 200) {
           this.showToast('default', 'La Información de la Organizacion, se ha ingresado con exito', response.message);
@@ -545,7 +545,7 @@ export class OrganizacionComponent implements OnInit {
 
     this._OrganizacionService.updateSecuence(jsonSecuencia, idSecuencia).subscribe(
       result => {
-        console.log(this._OrganizacionService.updateSecuence,'paso por aqui')
+        // console.log(this._OrganizacionService.updateSecuence,'paso por aqui')
         if (result.status !== 200) {
           this.showToast('error', 'Error al Actualizar la Información de la Secuencia', JSON.stringify(result.message));
         } else if (result.status === 200) {

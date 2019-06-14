@@ -87,7 +87,7 @@ export class EspaciosTrabajoComponent implements OnInit {
   const activeModal = this.modalService.open(EspacioModalTrabajoComponent, { size: 'lg', container: 'nb-layout' });
   activeModal.componentInstance.modalHeader = 'Large Modal Parametro ';
   activeModal.componentInstance.idEspacioTrabajo = idEspacioTrabajo;
-  console.log(idEspacioTrabajo);
+  // console.log(idEspacioTrabajo);
   activeModal.componentInstance.JsonReceptionFyByEspaciostrabajo = this.JsonReceptionFyByEspaciotrabajo;
 
   this.data3 = this.JsonReceptionEspaciotrabajo;
@@ -375,7 +375,7 @@ onItemSlectPais(item: any) {
     // Ejecutamos el Recurso del EndPoint
     this._espacioTrabajoService.FindByIdEspacioTrabajo(idEspacioTrabajo).subscribe(
       response => {
-        console.log("paso por aqui"+ idEspacioTrabajo);
+        // console.log("paso por aqui"+ idEspacioTrabajo);
         if (response.status !== 200) {
           this.showToast('error', 'Error al Eliminar la Id Interna de la Planificacion del Proyecto', response.message);
         } else if (response.status === 200) {

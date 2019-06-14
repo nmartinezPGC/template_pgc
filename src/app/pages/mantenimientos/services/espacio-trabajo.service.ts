@@ -193,9 +193,9 @@ getAllEspaciostrabajo(): Observable<any> {
       headers: this.headers,
       params: { 'tokenApi': this.tokenHeader },
 
-   
-   
-   
+
+
+
     });
 
 

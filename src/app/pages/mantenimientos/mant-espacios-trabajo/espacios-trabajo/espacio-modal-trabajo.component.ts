@@ -27,8 +27,8 @@ export class EspacioModalTrabajoComponent implements OnInit {
   data2: any;
   arrayCategoria: any;
   public JsonReceptionPaises: any;
-  public JsonReceptionEstados:any;
-  public JsonReceptionTipo:any
+  public JsonReceptionEstados: any;
+  public JsonReceptionTipo: any
   marked = false;
   theCheckbox = false;
 
@@ -156,7 +156,7 @@ closeModal() {
   fyByIdEspaciostrabajo(idEspaciotrabajo: number) {
     // Ejecutamos el Recurso del EndPoint
     this._EspaciotrabajoService.FindByIdEspacioTrabajo(idEspaciotrabajo).subscribe(
-      response => { console.log("id espacios"+ this.fyByIdEspaciostrabajo);
+      response => {// console.log("id espacios"+ this.fyByIdEspaciostrabajo);
         if (response.status !== 200) {
           this.showToast('error', 'Error al Eliminar la Id Interna de la Planificacion del Proyecto', response.message);
         } else if (response.status === 200) {
@@ -168,7 +168,7 @@ closeModal() {
           this._Espaciotrabajomodal1.descripcionEspacioTrabajo = this.data4.descripcionEspacioTrabajo;
           this._Espaciotrabajomodal1.idEstadoEspacioTrabajo = this.data4.idEstadoEspacioTrabajo.idEstadoIN;
           this._Espaciotrabajomodal1.idPais = this.data4.idPais.idPaisIN;
-          this._Espaciotrabajomodal1.idTipoEspacioTrabajo= this.data4.idTipoEspacioTrabajo.idTipoIN;
+          this._Espaciotrabajomodal1.idTipoEspacioTrabajo = this.data4.idTipoEspacioTrabajo.idTipoIN;
 
 
           this.selectedItemsPais = [

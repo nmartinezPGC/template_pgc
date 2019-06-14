@@ -57,13 +57,13 @@ import { MessageModule } from 'primeng/message';
     OrganizacionModalComponent,
     UsuarioModalComponent,
     FilterdataPipe,
-    EspacioModalTrabajoComponent
+    EspacioModalTrabajoComponent,
 
   ],
   entryComponents: [
     OrganizacionModalComponent,
     UsuarioModalComponent,
-    EspacioModalTrabajoComponent
+    EspacioModalTrabajoComponent,
   ],
   providers: [
     ListasComunesService,
