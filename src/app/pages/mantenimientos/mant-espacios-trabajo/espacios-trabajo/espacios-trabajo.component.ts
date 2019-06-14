@@ -82,7 +82,7 @@ export class EspaciosTrabajoComponent implements OnInit {
   arrayEspacioTrabajo: any;
   public responsedata: any;
 
- // levanta la modal de mantenimineto de espacios de trabjo/consulta
+ // levanta la modal de mantenimineto de espacios de trabajo
  showLargeModal(idEspacioTrabajo: number) {
   const activeModal = this.modalService.open(EspacioModalTrabajoComponent, { size: 'lg', container: 'nb-layout' });
   activeModal.componentInstance.modalHeader = 'Large Modal Parametro ';
