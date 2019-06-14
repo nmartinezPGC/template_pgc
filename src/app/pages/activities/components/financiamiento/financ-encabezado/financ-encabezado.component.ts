@@ -254,7 +254,6 @@ export class FinancEncabezadoComponent implements OnInit, OnChanges {
           this.JsonReceptionFinancimientoEncProyecto = [];
         } else if (result.status === 200) {
           this.JsonReceptionFinancimientoEncProyecto = result.data;
-          console.log(this.JsonReceptionFinancimientoEncProyecto);
 
           this._activityFinanciamientoEncModel.montoActividad =  1000;
         }
