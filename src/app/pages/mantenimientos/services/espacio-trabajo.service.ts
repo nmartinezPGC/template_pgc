@@ -74,6 +74,76 @@ export class EspaciosTrabajoService {
 
 
 
+   /****************************************************************************
+       * Funcion: FND-00003
+       * Fecha: 21-01-2019
+       * Descripcion: Metodo que sirve para poder ingresar un nuevo Espacio de trabajo
+       * Params: { jsonPerfil }
+       ****************************************************************************/
+      newEspaciosTrabajo(jsonPerfil): Observable<any> {
+        // Parametros del EndPoint
+        const paramsSend = jsonPerfil;
+        // Retorno de la Funcion
+        return this._http.post(this._systemEndPointsService.getEndPointService('espacioTrabajoGroup', 3), paramsSend, {
+            headers: this.headers,
+            params: { 'tokenApi': this.tokenHeader },
+        });
+    }// FIN | FND-00003
+
+     /****************************************************************************
+ * Funcion: FND-00009
+ * Fecha: 13-10-2018
+ * Descripcion: Metodo para obtener los Datos de los Paises
+ * Objetivo: datos de los Tipos de Paises
+ * Params: { }
+ ****************************************************************************/
+  FindByIdEspacioTrabajo(idEspacioTrabajo: number): Observable<any> {
+    // Retorno de la Funcion
+
+    const idEspaciosTrabajo: number = idEspacioTrabajo;
+     return this._http.get(this._systemEndPointsService.getEndPointService('espacioTrabajoGroup', 2) + idEspaciosTrabajo, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  }// FIN | FND-00009
+
+
+    /****************************************************************************
+      * Funcion: FND-00004
+      * Fecha: 21-01-201
+      * Descripcion: Metodo que sirve para actualizar los Tipo de organizacion que utilizara el usuario
+      * Params: { jsonTipoOrganizacio, idTipoOrganizacion }
+      ****************************************************************************/
+     EspaciostrabajoUpdate(jsonEspacios, idEspacioTrabajo: number): Observable<any> {
+        // Parametros del EndPoint
+        const paramsSend = jsonEspacios;
+        const idOrg: number = idEspacioTrabajo;
+        // Retorno de la Funcion
+        return this._http.put(this._systemEndPointsService.getEndPointService('organizacionesGroup', 21) + idOrg, paramsSend, {
+          headers: this.headers,
+          params: { 'tokenApi': this.tokenHeader },
+        }); // FIN | FND-00004
+      }
+
+      /****************************************************************************
+          * Funcion: FND-00004
+          * Fecha: 21-01-2019
+          * Descripcion: Metodo que sirve para actualizar los Tipo de organizacion que utilizara el usuario
+          * Params: { jsonTipoOrganizacio, idTipoOrganizacion }
+          ****************************************************************************/
+      EspaciostrabajoDelete(idEspacioTrabajo: number): Observable<any> {
+        // Parametros del EndPoint
+        const idOrg: number = idEspacioTrabajo;
+        // console.log('Parametros de Servicio ' + ' Modelo ' + JSON.stringify(paramsSend) + ' Where ' + idPerfil );
+        // Retorno de la Funcion
+        return this._http.delete(this._systemEndPointsService.getEndPointService('organizacionesGroup', 22) + idOrg, {
+          headers: this.headers,
+          params: { 'tokenApi': this.tokenHeader },
+        });
+      }// FIN | FND-00006
+
+
+
     /****************************************************************************
     * Funcion: FND-00001
     * Fecha: 21-08-2018
@@ -123,43 +193,15 @@ getAllEspaciostrabajo(): Observable<any> {
       headers: this.headers,
       params: { 'tokenApi': this.tokenHeader },
 
+   
+   
+   
     });
+
+
+
   }// FIN | FND-00009
+    }
 
-
-
-   /****************************************************************************
-       * Funcion: FND-00003
-       * Fecha: 21-01-2019
-       * Descripcion: Metodo que sirve para poder ingresar un nuevo Espacio de trabajo
-       * Params: { jsonPerfil }
-       ****************************************************************************/
-      newEspaciosTrabajo(jsonPerfil): Observable<any> {
-        // Parametros del EndPoint
-        const paramsSend = jsonPerfil;
-        // Retorno de la Funcion
-        return this._http.post(this._systemEndPointsService.getEndPointService('espacioTrabajoGroup', 3), paramsSend, {
-            headers: this.headers,
-            params: { 'tokenApi': this.tokenHeader },
-        });
-    }// FIN | FND-00003
-
-     /****************************************************************************
- * Funcion: FND-00009
- * Fecha: 13-10-2018
- * Descripcion: Metodo para obtener los Datos de los Paises
- * Objetivo: datos de los Tipos de Paises
- * Params: { }
- ****************************************************************************/
-  FindByIdEspacioTrabajo(idEspacioTrabajoIn: number): Observable<any> {
-    // Retorno de la Funcion
-    const idEspacioTrabajo: number = idEspacioTrabajoIn;
-    return this._http.get(this._systemEndPointsService.getEndPointService('espacioTrabajoGroup', 2) + idEspacioTrabajo, {
-      headers: this.headers,
-      params: { 'tokenApi': this.tokenHeader },
-    });
-  }// FIN | FND-00009
-
-}
 
 

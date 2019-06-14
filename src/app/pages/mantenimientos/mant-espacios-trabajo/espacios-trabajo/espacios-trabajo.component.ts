@@ -14,16 +14,10 @@ import { EspaciosTrabajoModel} from '../../models/espacio.trabajo.model';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { delay } from 'q';
 import { LoginService } from '../../../../@theme/components/auth/services/login.service';
-import { OrganizacionModalComponent } from '../organizacion/organizaciones.modal.component';
-// import { OrganizacionComponent } from '../organizacion/organizacion.component';
-import { OrganizacionesComponent } from '../../../activities/components/organizaciones/organizaciones.component';
 import { EspacioModalTrabajoComponent } from './espacio-modal-trabajo.component';
+import { templateJitUrl } from '@angular/compiler';
+import { UserService } from '../../../../@core/data/users.service';
 import { OrganizacionComponent } from '../organizacion/organizacion.component';
-import {AgregarCategoriaComponent} from '../agregar-categoria/agregar-categoria.component';
-
-
-
-
 
 @Component({
   selector: 'ngx-espacios-trabajo',
@@ -44,6 +38,8 @@ export class EspaciosTrabajoComponent implements OnInit {
   public JsonReceptionPaises: any;
   public JsonReceptionF
   private _toasterService: ToasterService;
+  public JsonReceptionEspaciotrabajo: any;
+  public JsonReceptionFyByEspaciotrabajo: any;
 
 
 
@@ -83,28 +79,23 @@ export class EspaciosTrabajoComponent implements OnInit {
   isDuplicatesPrevented = false;
   isCloseButton = true;
   settings: any;
+  arrayEspaciostrabajo: any;
   public responsedata: any;
 
  // levanta la modal de mantenimineto de espacios de trabjo/consulta
- showLargeModal(FindByIdEspacioTrabajo: number) {
-
+ showLargeModal(idEspacioTrabajo: number) {
   const activeModal = this.modalService.open(EspacioModalTrabajoComponent, { size: 'lg', container: 'nb-layout' });
-  // console.log("paso por aqui 2");
+  activeModal.componentInstance.modalHeader = 'Large Modal Parametro ';
+  activeModal.componentInstance.idEspacioTrabajo = idEspacioTrabajo;
+  console.log(idEspacioTrabajo);
+  activeModal.componentInstance.JsonReceptionFyByEspaciostrabajo = this.JsonReceptionFyByEspaciotrabajo;
 
- activeModal.componentInstance.modalHeader = 'Large Modal Parametro';
- // console.log("paso por aqui 3");
+  this.data3 = this.JsonReceptionEspaciotrabajo;
+  this.arrayEspaciostrabajo = new Array();
 
-  activeModal.componentInstance.idEspacioTrabajo = this.idEspacioTrabajo;
-  // console.log("paso por aqui 4");
-
-
- // activeModal.componentInstance.JsonReceptionListEspaciostrabajo = this.JsonReceptionListEspaciostrabajo;
-
-  this.data3 = this.JsonReceptionListEspaciostrabajo;
-  this.arrayOrganizacion = new Array();
 }
 
-  constructor(public _espaciosTrabajoService: EspaciosTrabajoService,
+  constructor(public _espacioTrabajoService: EspaciosTrabajoService,
     protected _router: Router, private modalService: NgbModal ) {
       this.responsedata = { 'error': false, 'msg': 'error campos solicitado' };
      }
@@ -183,6 +174,7 @@ ngOnInit() {
   this.paisesAllListService();
   this.ListAllEspaciosTrabajo();
 
+
 }
 
 
@@ -198,7 +190,7 @@ ngOnInit() {
 
  private paisesAllListService() {
 
-  this._espaciosTrabajoService.getAllPaises2().subscribe(
+  this._espacioTrabajoService.getAllPaises2().subscribe(
     result => {
       if (result.status !== 200) {
 
@@ -239,7 +231,7 @@ onItemSlectPais(item: any) {
 ****************************************************************************/
   private estadoService() {
     const idGroupSen: number = 4;
-    this._espaciosTrabajoService.getAllEstados(idGroupSen).subscribe(
+    this._espacioTrabajoService.getAllEstados(idGroupSen).subscribe(
       response => {
         if (response.status !== 200) {
 
@@ -267,7 +259,7 @@ onItemSlectPais(item: any) {
   private tipoService() {
     const idTipoSen: number = 4;
     //  console.log(this.data3);
-    this._espaciosTrabajoService.getAllTipo(idTipoSen).subscribe(
+    this._espacioTrabajoService.getAllTipo(idTipoSen).subscribe(
       response => {
         // console.log(this.data3)
         if (response.status !== 200) {
@@ -295,19 +287,14 @@ onItemSlectPais(item: any) {
   * Objetivo: crear nuevos Espacios de trabajo
   ****************************************************************************/
  private newEspacioTrabajo() {
-
-
-
   this.validateEspaciotrabajo(this._espaciostrabajoModel);
   // Seteo de las variables del Model al json de Java
     this._espaciostrabajoModel.idEstadoEspacioTrabajo = { idEstado: this._espaciostrabajoModel.idEstadoIN };
-    // console.log("pasa por aqui el tipo");
-
     this._espaciostrabajoModel.idTipoEspacioTrabajo = { idTipo: this._espaciostrabajoModel.idTipoIN };
     this._espaciostrabajoModel.idPais = { idPais: this._espaciostrabajoModel.idPaisIN };
 
   // Ejecutamos el Recurso del EndPoint
-  this._espaciosTrabajoService.newEspaciosTrabajo(this._espaciostrabajoModel).subscribe(
+  this._espacioTrabajoService.newEspaciosTrabajo(this._espaciostrabajoModel).subscribe(
     response => {
       if (response.status !== 200) {
        // console.log("no paso el recurso 3");
@@ -340,7 +327,7 @@ onItemSlectPais(item: any) {
 
  private ListAllEspaciosTrabajo() {
 
-   this._espaciosTrabajoService.getAllEspaciostrabajo().subscribe(
+   this._espacioTrabajoService.getAllEspaciostrabajo().subscribe(
      response => {
        if (response.status !== 200) {
        } else if (response.status === 200) {
@@ -384,10 +371,11 @@ onItemSlectPais(item: any) {
   } // FIN | validateTipoOganizacion(_grupoModel: any)
 
 
-  fyByIdEspaciosTrabaj(idEspacioTrabajo: number) {
+  fyByIdEspaciosTrabajo(idEspacioTrabajo: number) {
     // Ejecutamos el Recurso del EndPoint
-    this._espaciosTrabajoService.FindByIdEspacioTrabajo(idEspacioTrabajo).subscribe(
+    this._espacioTrabajoService.FindByIdEspacioTrabajo(idEspacioTrabajo).subscribe(
       response => {
+        console.log("paso por aqui"+ idEspacioTrabajo);
         if (response.status !== 200) {
           this.showToast('error', 'Error al Eliminar la Id Interna de la Planificacion del Proyecto', response.message);
         } else if (response.status === 200) {
