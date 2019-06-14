@@ -106,10 +106,8 @@ export class FinancDetalleCompromisosFormComponent implements OnInit, OnChanges 
       // Carga el Model con los datos enviados
       this._activityFinanciamientoDetCompromisosModel.idActividadFinancDetCompromiso = this.JsonCompromisosSelect.idActividadFinancDetCompromiso;
       this._activityFinanciamientoDetCompromisosModel.idTipoTransaccionSend = this.JsonCompromisosSelect.idTipoTransaccion;
-      this._activityFinanciamientoDetCompromisosModel.idTipoTransaccion = { idTipoTransaccion: this._activityFinanciamientoDetCompromisosModel.idTipoTransaccionSend };
       this._activityFinanciamientoDetCompromisosModel.montoCompromiso = this.JsonCompromisosSelect.montoCompromiso;
       this._activityFinanciamientoDetCompromisosModel.idMonedaActividadSend = this.JsonCompromisosSelect.idMonedaActividad;
-      this._activityFinanciamientoDetCompromisosModel.idMonedaActividad = { idMonedaActividad: this._activityFinanciamientoDetCompromisosModel.idMonedaActividadSend };
       this._activityFinanciamientoDetCompromisosModel.codigoFinancCompromiso = this.JsonCompromisosSelect.codigoFinancCompromiso;
       this.date6 = new Date(this.JsonCompromisosSelect.fechaTransaccion);
       this._activityFinanciamientoDetCompromisosModel.fechaTransaccion = this.date6;
@@ -432,6 +430,5 @@ export class FinancDetalleCompromisosFormComponent implements OnInit, OnChanges 
     } else {
       this.newFinanciamientoDetCompromisoService();
     }
-
   } // FIN | FND-008
 }
