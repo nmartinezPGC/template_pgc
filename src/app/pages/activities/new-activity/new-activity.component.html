@@ -25,12 +25,11 @@
 <div class="row">
   <div class="col-12 col-sm-12 col-md-12 col-lg-12">
     <nb-card>
-      <nb-tabset>
-        <!-- Tab #1 de Datos Generales del Proyecto/Programa -->
-        <nb-tab tabTitle="Paso #1 | Datos Generales">
-          <!-- <nb-card-header>Ingresa los datos generales del Proyecto/Programa</nb-card-header><br> -->
-          <nb-card-body>
-            <!-- ==================================================================================== -->
+      <p-toast [style]="{marginTop: '80px'}"></p-toast>
+      <p-tabView (onChange)="onTabChange($event)">
+        <p-tabPanel header="Paso #1 | Datos Generales" [selected]="true" leftIcon="pi pi-home"
+          tooltip="Datos Generales del Proyecto">
+          <!-- <nb-card-body> -->
             <!-- Definición de los Datos Generales -->
             <nb-flip-card>
               <nb-card-front>
@@ -317,6 +316,7 @@
               </nb-card-back>
             </nb-flip-card>
 
+
             <!-- ==================================================================================== -->
             <!-- Definición de los Resultados de la Actividad -->
             <nb-card accent="warning" status="primary">
@@ -587,64 +587,76 @@
                 </div>
               </nb-card-body>
             </nb-card>
-
-
-          </nb-card-body>
-        </nb-tab>
+          <!-- </nb-card-body> -->
+        </p-tabPanel>
         <!-- Fin de Datos Generales -->
         <!-- ==================================================================================== -->
 
         <!-- Tab #2 de Ubicacion Proyecto/Programa -->
-        <nb-tab tabTitle="Paso #2 | Datos de Ubicación">
-          <!-- <span id="sectorPrograms">Content #2</span> -->
-          <ngx-ubicacion [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
-            [codigoProyectoTab]="codigoProyectoTab" [JsonPassData]="JsonPassData">
-          </ngx-ubicacion>
-        </nb-tab>
+        <p-tabPanel header="Paso #2 | Ubicación" leftIcon="pi pi-globe" [cache]="false" tooltip="Datos de Ubicación">
+          <ng-template pTemplate="content">
+            <ngx-ubicacion [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
+              [codigoProyectoTab]="codigoProyectoTab" [JsonPassData]="JsonPassData"></ngx-ubicacion>
+          </ng-template>
+        </p-tabPanel>
         <!-- Fin de Datos de Ubicacion Proyecto/Programa -->
         <!-- ==================================================================================== -->
 
         <!-- Tab #3 de Sectores y ODS -->
-        <nb-tab tabTitle="Paso #3 | Sectores y ODS">
-          <ngx-sectores-programas-ods [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
-            [codigoProyectoTab]="codigoProyectoTab"></ngx-sectores-programas-ods>
-        </nb-tab>
+        <p-tabPanel header="Paso #3 | Sectores y ODS" leftIcon="pi pi-user" leftIcon="pi pi-align-left"
+          tooltip="Sectores y ODS" [cache]="false">
+          <ng-template pTemplate="content">
+            <ngx-sectores-programas-ods [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
+              [codigoProyectoTab]="codigoProyectoTab"></ngx-sectores-programas-ods>
+          </ng-template>
+        </p-tabPanel>
         <!-- Fin de Datos de Sectores y ODS -->
         <!-- ==================================================================================== -->
 
         <!-- Tab #4 de Programas -->
-        <nb-tab tabTitle="Paso #4 | Programas de Nación">
-          <ngx-programas [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
-            [codigoProyectoTab]="codigoProyectoTab"></ngx-programas>
-        </nb-tab>
+        <p-tabPanel header="Paso #4 | Programas de Nación" leftIcon="pi pi-align-right" [cache]="false"
+          tooltip="Programas de Nación">
+          <ng-template pTemplate="content">
+            <ngx-programas [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
+              [codigoProyectoTab]="codigoProyectoTab"></ngx-programas>
+          </ng-template>
+        </p-tabPanel>
         <!-- Fin de Datos de Programas -->
         <!-- ==================================================================================== -->
 
         <!-- Tab #5 de Información de Organizaciones -->
-        <nb-tab tabTitle="Paso #5 | Datos de Organizaciones">
-          <ngx-organizaciones [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
-            [codigoProyectoTab]="codigoProyectoTab">
-          </ngx-organizaciones>
-        </nb-tab>
+        <p-tabPanel header="Paso #5 | Organizaciones" leftIcon="pi pi-users" [cache]="false"
+          tooltip="Organizaciones del Proyecto">
+          <ng-template pTemplate="content">
+            <ngx-organizaciones [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
+              [codigoProyectoTab]="codigoProyectoTab"></ngx-organizaciones>
+          </ng-template>
+        </p-tabPanel>
         <!-- Fin de Datos de Información Organizaciones -->
         <!-- ==================================================================================== -->
 
-        <!-- Tab #5 de Información Financiera -->
-        <nb-tab tabTitle="Paso #6 | Información Financiera">
-          <ngx-financiamiento [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
-            [codigoProyectoTab]="codigoProyectoTab">
-          </ngx-financiamiento>
-        </nb-tab>
+        <!-- Tab #6 de Información Financiera -->
+        <p-tabPanel header="Paso #6 | Financiamiento" leftIcon="pi pi-calendar"
+          tooltip="Información Financiera" [cache]="false" >
+          <ng-template pTemplate="content">
+            <ngx-financiamiento [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
+              [codigoProyectoTab]="codigoProyectoTab"></ngx-financiamiento>
+          </ng-template>
+        </p-tabPanel>
         <!-- Fin de Datos de Información Financiera -->
         <!-- ==================================================================================== -->
 
-        <!-- Tab #6 Recursos de soporte -->
-        <nb-tab tabTitle="Paso #7 | Recursos de Soporte">
-          <ngx-recursos-proyecto></ngx-recursos-proyecto>
-        </nb-tab>
+        <!-- Tab #7 Recursos de soporte -->
+        <!-- <p-tabPanel header="Paso #7 | Recursos" [disabled]="true" leftIcon="pi pi-copy"
+          tooltip="Recursos de Soporte">
+          <ng-template pTemplate="content">
+            <ngx-recursos-proyecto></ngx-recursos-proyecto>
+          </ng-template>
+        </p-tabPanel> -->
         <!-- Fin de Datos de Documentos de Soporte -->
         <!-- ==================================================================================== -->
-      </nb-tabset>
+      </p-tabView>
     </nb-card>
+
   </div>
 </div>

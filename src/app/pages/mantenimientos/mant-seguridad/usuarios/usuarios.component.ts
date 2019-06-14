@@ -25,6 +25,7 @@ import { UsuarioModalComponent } from './usuario.modal.component';
 import { EspacioTrabajoModel } from '../../models/usuario.espacio.model';
 import { subscribeToResult } from 'rxjs/internal-compatibility';
 import {  MessageService } from 'primeng/primeng';
+import { NotificacionesService } from '../../../shared/services/notificaciones.service';
 
 // Varieble Jquey
 declare var jquery: any;
@@ -34,7 +35,7 @@ declare var $: any;
   selector: 'ngx-usuarios',
   templateUrl: './usuarios.component.html',
   styleUrls: ['./usuarios.component.scss'],
-  providers: [UsuarioService, ConfigSmartTableService, ListasComunesService, MessageService],
+  providers: [UsuarioService, ConfigSmartTableService, ListasComunesService, MessageService, NotificacionesService],
 })
 export class UsuariosComponent implements OnInit {
   @Input() idUsuario;
@@ -123,7 +124,7 @@ export class UsuariosComponent implements OnInit {
  * Objetivo: makeToast in the method header API
  ****************************************************************************/
   makeToast() {
-    this.showToast(this.type, this.title, this.content);
+    this._notificacionesService.showToast(this.type, this.title, this.content);
     // console.log('Opcion de Toaster 1.3 ' + JSON.stringify(this.content));
   } // FIN | makeToast
 
@@ -152,8 +153,7 @@ export class UsuariosComponent implements OnInit {
       showCloseButton: this.isCloseButton,
       bodyOutputType: BodyOutputType.TrustedHtml,
     };
-    // this._toasterService.popAsync(toast);
-    this._toasterService.pop(toast);
+
   } // FIN | showToast
 
   /**
@@ -163,7 +163,7 @@ export class UsuariosComponent implements OnInit {
    */
   constructor(private modalService: NgbModal, protected _router: Router,
     public _usuariosService: UsuarioService, // Inicializa el ToasterService
-    private _toasterService: ToasterService,
+    private _notificacionesService: NotificacionesService,
     public _configSmartTableService: ConfigSmartTableService, public _listasComunesService: ListasComunesService) {
     // Llamamos a la Funcion de Configuracion de las Smart Table
     this._configSmartTableService.configSmartTable('userSmart', 1, null);
@@ -245,7 +245,7 @@ export class UsuariosComponent implements OnInit {
       result => {
         if (result.status !== 200) {
 
-          this.showToast('error', 'Error al Obtener la Información del Usuario', JSON.stringify(result.message));
+          this._notificacionesService.showToast('error', 'Error al Obtener la Información del Usuario', JSON.stringify(result.message));
         } else if (result.status === 200) {
           this.JsonReceptionUsuarios = result.data;
           this.data = this.JsonReceptionUsuarios;
@@ -294,14 +294,14 @@ export class UsuariosComponent implements OnInit {
     await delay(100);
 
     if (this.resultStatus === 200) {
-      this.showToast('error', 'Error ya existe el codigo del usuario Intente con Otro', JSON.stringify(result.message));
+      this._notificacionesService.showToast('error', 'Error ya existe el codigo del usuario Intente con Otro', JSON.stringify(result.message));
       return -1;
     }
     this.mailValidate(); subscribeToResult
     await delay(100);
 
     if (this.resultStatus === 200) {
-      this.showToast('error', 'Error ya existe el email del usuario Intente con Otro', JSON.stringify(result.message));
+      this._notificacionesService.showToast('error', 'Error ya existe el email del usuario Intente con Otro', JSON.stringify(result.message));
       return -1;
     }
 
@@ -310,11 +310,11 @@ export class UsuariosComponent implements OnInit {
       response => {
         if (response.status !== 200) {
 
-          this.showToast('error', 'Error al Ingresar la Información del Usuario', JSON.stringify(response.message));
+          this._notificacionesService.showToast('error', 'Error al Ingresar la Información del Usuario', JSON.stringify(response.message));
         } else if (response.status === 200) {
           this.idUsuario = response.data.idUsuario;
           // console.log(this.idUsuario + ' id usuario');
-          this.showToast('default', 'La Información del Usuario, se ha ingresado con exito', JSON.stringify(response.message));
+          this._notificacionesService.showToast('default', 'La Información del Usuario, se ha ingresado con exito', JSON.stringify(response.message));
           if (this._usuarioModel.asignarEspacioTrabajo === true) {
             this.showLargeModal(this.idUsuario);
 
@@ -362,7 +362,7 @@ export class UsuariosComponent implements OnInit {
       },
       error => {
         // Redirecciona al Login
-        this.showToast('error' , 'Error en la petición de la API' , <any>error.message.message);
+        this._notificacionesService.showToast('error' , 'Error en la petición de la API' , <any>error.message.message);
       },
     );
   } // FIN | usuariosTipoService
@@ -398,7 +398,7 @@ export class UsuariosComponent implements OnInit {
       },
       error => {
         // Redirecciona al Login
-        this.showToast('error' , 'Error en la petición de la API' , <any>error.message.message);
+        this._notificacionesService.showToast('error' , 'Error en la petición de la API' , <any>error.message.message);
       },
     );
   } // FIN | estadoService
@@ -418,7 +418,7 @@ export class UsuariosComponent implements OnInit {
       result => {
         if (result.status !== 200) {
           // console.log(result.status);
-          this.showToast('error', 'Error al Obtener la Información de los Paises', JSON.stringify(result.message));
+          this._notificacionesService.showToast('error', 'Error al Obtener la Información de los Paises', JSON.stringify(result.message));
         } else if (result.status === 200) {
           this.JsonReceptionPaises = result.data;
 
@@ -444,7 +444,7 @@ export class UsuariosComponent implements OnInit {
       },
       result => {
         // console.log(<any>error);
-        this.showToast('error', 'Error al Obtener la Información de los Paises', JSON.stringify(result.message));
+        this._notificacionesService.showToast('error', 'Error al Obtener la Información de los Paises', JSON.stringify(result.message));
       },
     );
   } // FIN | paisesAllListService
@@ -482,7 +482,7 @@ export class UsuariosComponent implements OnInit {
       result => {
         if (result.status !== 200) {
 
-          this.showToast('error', 'Error al Obtener la Información del Usuario', JSON.stringify(result.message));
+          this._notificacionesService.showToast('error', 'Error al Obtener la Información del Usuario', JSON.stringify(result.message));
         } else if (result.status === 200) {
 
           this.JsonReceptionUsuarios = result.data;
@@ -492,7 +492,7 @@ export class UsuariosComponent implements OnInit {
       },
       error => {
         // Redirecciona al Login
-        this.showToast('error' , 'Error en la petición de la API' , <any>error.message.message);
+        this._notificacionesService.showToast('error' , 'Error en la petición de la API' , <any>error.message.message);
       },
     );
   } // FIN | usuariosDatailsService
@@ -511,7 +511,7 @@ export class UsuariosComponent implements OnInit {
     const resultdataExt: any = this.resultdata;
 
     if (resultdataExt.error === true) {
-      this.showToast('error', 'Error al actualizar los cambios', JSON.stringify(resultdataExt.message));
+      this._notificacionesService.showToast('error', 'Error al actualizar los cambios', JSON.stringify(resultdataExt.message));
       return -1;
     }
     // Ejecutamos el Recurso del EndPoint
@@ -519,10 +519,10 @@ export class UsuariosComponent implements OnInit {
       result => {
         if (result.status !== 200) {
 
-          this.showToast('error', 'Error al actualizar los cambios', JSON.stringify(result.message));
+          this._notificacionesService.showToast('error', 'Error al actualizar los cambios', JSON.stringify(result.message));
         } else if (result.status === 200) {
 
-          this.showToast('default', 'Se actualizaron con exito los datos', JSON.stringify(result.message));
+          this._notificacionesService.showToast('default', 'Se actualizaron con exito los datos', JSON.stringify(result.message));
 
           // Carga la tabla Nuevamente
           this.usuariosDatailsService();
@@ -626,7 +626,7 @@ export class UsuariosComponent implements OnInit {
       },
       error => {
         // Redirecciona al Login
-        this.showToast('error' , 'Error en la petición de la API ', <any>error.message.message);
+        this._notificacionesService.showToast('error' , 'Error en la petición de la API ', <any>error.message.message);
       },
     );
     return this.resultStatus;
@@ -655,7 +655,7 @@ export class UsuariosComponent implements OnInit {
       },
       error => {
         // Redirecciona al Login
-        this.showToast('error' , 'Error en la petición de la API ' , <any>error.message.message);
+        this._notificacionesService.showToast('error' , 'Error en la petición de la API ' , <any>error.message.message);
       },
     );
     return this.resultStatus;
@@ -737,9 +737,9 @@ export class UsuariosComponent implements OnInit {
       result => {
         if (result.status !== 200) {
 
-          this.showToast('error', 'Error al actualizar los cambios', result.message);
+          this._notificacionesService.showToast('error', 'Error al actualizar los cambios', result.message);
         } else if (result.status === 200) {
-          this.showToast('default', 'se actualizaron con exito los datos', result.message);
+          this._notificacionesService.showToast('default', 'se actualizaron con exito los datos', result.message);
 
           // Carga la tabla Nuevamente
           this.usuariosDatailsService();
@@ -747,7 +747,7 @@ export class UsuariosComponent implements OnInit {
       },
       error => {
         // Redirecciona al Login
-        this.showToast('error' , 'Error en la petición de la API ', <any>error.message.message);
+        this._notificacionesService.showToast('error' , 'Error en la petición de la API ', <any>error.message.message);
       },
     );
   } // FIN | deleteUsuario
@@ -781,7 +781,7 @@ export class UsuariosComponent implements OnInit {
       },
       error => {
         // Redirecciona al Login
-        this.showToast('error' , 'Error en la petición de la API' , <any>error.message.message);
+        this._notificacionesService.showToast('error' , 'Error en la petición de la API' , <any>error.message.message);
 
         // Borramos los datos del LocalStorage
         localStorage.removeItem('auth_app_token');
@@ -827,7 +827,7 @@ export class UsuariosComponent implements OnInit {
       },
       error => {
         // Redirecciona al Login
-        this.showToast('error' , 'Error en la petición de la API ' , <any>error.message.message);
+        this._notificacionesService.showToast('error' , 'Error en la petición de la API ' , <any>error.message.message);
 
         // Borramos los datos del LocalStorage
         localStorage.removeItem('auth_app_token');
@@ -875,7 +875,7 @@ export class UsuariosComponent implements OnInit {
       },
       error => {
         // Redirecciona al Login
-        this.showToast('error' , 'Error en la petición de la API' , <any>error.message.message);
+        this._notificacionesService.showToast('error' , 'Error en la petición de la API' , <any>error.message.message);
       },
     );
   } // FIN | OrganizacionService
@@ -896,7 +896,7 @@ export class UsuariosComponent implements OnInit {
         if (result.status !== 200) {
           // Respuesta del Error
           this.JsonReceptionCatOrganizacion = null;
-          this.showToast('error', 'Error al Obtener la Información de las Categorias de Organizacion', result.message);
+          this._notificacionesService.showToast('error', 'Error al Obtener la Información de las Categorias de Organizacion', result.message);
         } else if (result.status === 200) {
           this.JsonReceptionCatOrganizacion = result.data;
 
@@ -911,7 +911,7 @@ export class UsuariosComponent implements OnInit {
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información de las Categorias de Organizacion', JSON.stringify(error.message));
+        this._notificacionesService.showToast('error', 'Error al Obtener la Información de las Categorias de Organizacion', JSON.stringify(error.message));
       },
     );
   } // FIN | tiposOrganizacionListService
@@ -940,7 +940,7 @@ export class UsuariosComponent implements OnInit {
           this.dropdownList = [];
           this.selectedItems = [];
 
-          this.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', result.message);
+          this._notificacionesService.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', result.message);
         } else if (result.status === 200) {
           this.JsonReceptionPaisOrganizacionesData = result.data;
 
@@ -957,7 +957,7 @@ export class UsuariosComponent implements OnInit {
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', JSON.stringify(error));
+        this._notificacionesService.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', JSON.stringify(error));
       },
     );
   } // FIN | organizacionesIdTipoListService
@@ -984,7 +984,7 @@ export class UsuariosComponent implements OnInit {
           this.dropdownList = [];
           this.selectedItems = [];
 
-          this.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', result.message);
+          this._notificacionesService.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', result.message);
         } else if (result.status === 200) {
           this.JsonReceptionTipoPaisOrganizacionesData = result.data;
 
@@ -1001,7 +1001,7 @@ export class UsuariosComponent implements OnInit {
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', JSON.stringify(error.message));
+        this._notificacionesService.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', JSON.stringify(error.message));
       },
     );
   } // FIN | organizacionesIdTipoIdPaisListService
@@ -1026,7 +1026,7 @@ export class UsuariosComponent implements OnInit {
           this.selectedItems = [];
           this.JsonReceptionTipoPaisCategoriaOrganizacionesData = null;
 
-          this.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', result.message);
+          this._notificacionesService.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', result.message);
         } else if (result.status === 200) {
           this.JsonReceptionTipoPaisCategoriaOrganizacionesData = result.data;
           // Asignacion de los Valores del Json al Select
@@ -1042,7 +1042,7 @@ export class UsuariosComponent implements OnInit {
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', JSON.stringify(error));
+        this._notificacionesService.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', JSON.stringify(error));
       },
     );
   } // FIN | organizacionesIdTipoIdPaisIdCategoriaListService
@@ -1087,7 +1087,7 @@ export class UsuariosComponent implements OnInit {
     this._listasComunesService.getAllEspaciosTrabajoUsuario(9).subscribe(
       result => {
         if (result.status !== 200) {
-          this.showToast('error', 'Error al Obtener la Información de los Espacios de Trabajo', result.message);
+          this._notificacionesService.showToast('error', 'Error al Obtener la Información de los Espacios de Trabajo', result.message);
         } else if (result.status === 200) {
           this.JsonReceptionEspaciosTrabajoUsuario = result.data;
 
@@ -1104,7 +1104,7 @@ export class UsuariosComponent implements OnInit {
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información de los Espacios de Trabajo', JSON.stringify(error.message));
+        this._notificacionesService.showToast('error', 'Error al Obtener la Información de los Espacios de Trabajo', JSON.stringify(error.message));
       },
     );
   } // FIN | espaciosTrabajoUsuarioListService

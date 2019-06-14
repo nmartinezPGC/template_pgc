@@ -32,6 +32,7 @@ import { delay } from 'q';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ActivityIdInternaModel } from '../models/model-idinterna-activity';
 import { FilterdataPipe } from '../pipes/filterdata.pipe';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'ngx-new-activity',
@@ -45,7 +46,7 @@ import { FilterdataPipe } from '../pipes/filterdata.pipe';
   templateUrl: './new-activity.component.html',
   styleUrls: ['./new-activity.component.scss', '../../components/notifications/notifications.component.scss'],
   // changeDetection: ChangeDetectionStrategy.OnPush, // Se usa para Actualizar la Informacion con otro evento
-  providers: [ToasterService, ActivityConfigSmartTableService, ActivityService, ActivityValidateFormService],
+  providers: [ToasterService, ActivityConfigSmartTableService, ActivityService, ActivityValidateFormService, MessageService],
 })
 export class NewActivityComponent implements OnInit {
   /****************************************************************************
@@ -71,6 +72,10 @@ export class NewActivityComponent implements OnInit {
     },
   ];
 
+  selectTab(event) {
+    // console.log(event);
+  }
+
   datos: string;
 
   dato(dato) {
@@ -82,6 +87,12 @@ export class NewActivityComponent implements OnInit {
       title: 'Users',
       icon: 'nb-person',
       route: './pages/activities/datos-generales',
+    },
+    {
+      title: 'Geo',
+      icon: 'nb-file',
+      route: './pages/activities/ubicacion',
+      disabled: true,
     },
   ];
 
@@ -222,7 +233,8 @@ export class NewActivityComponent implements OnInit {
     public _activityConfigSmartTableService: ActivityConfigSmartTableService,
     public _activityService: ActivityService,
     public _activityValidateFormService: ActivityValidateFormService,
-    private _spinner: NgxSpinnerService) {
+    private _spinner: NgxSpinnerService,
+    private messageService: MessageService) {
     // Llamamos a la Funcion de Configuracion de las Smart Table
     this._activityConfigSmartTableService.configSmartTableIdInternas(null, null, null);
     this.settings = this._activityConfigSmartTableService.settings;
@@ -234,6 +246,10 @@ export class NewActivityComponent implements OnInit {
     // this.source = new LocalDataSource(this.data); // create the source
 
   } // FIN | constructor
+
+  onTabChange(event) {
+    this.messageService.add({ severity: 'info', summary: 'Tab Expanded', detail: 'Index: ' + event.index });
+  }
 
 
   /****************************************************************************
