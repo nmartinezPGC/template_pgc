@@ -13,12 +13,13 @@ import { ToasterConfig, ToasterService, Toast, BodyOutputType } from 'angular2-t
 import { ListasComunesService } from '../../../../../common-list/services/listas-comunes.service';
 import { ActivitySectoresCampoTransversalModel } from '../../../../models/sectores/model-sectores-campo-transversal';
 import { ServiceSectoresCampoTransversalService } from '../../../../services/sectores/service-sectores-campo-transversal.service';
+import { NotificacionesService } from '../../../../../shared/services/notificaciones.service';
 
 @Component({
   selector: 'ngx-sectores-campos-transversales',
   templateUrl: './sectores-campos-transversales.component.html',
   styleUrls: ['./sectores-campos-transversales.component.scss'],
-  providers: [ServiceSectoresCampoTransversalService, MessageService, ToasterService, ListasComunesService],
+  providers: [ServiceSectoresCampoTransversalService, MessageService, NotificacionesService, ListasComunesService],
 })
 export class SectoresCamposTransversalesComponent implements OnInit, OnChanges {
   // Variables entre Tabs | Components
@@ -120,7 +121,7 @@ export class SectoresCamposTransversalesComponent implements OnInit, OnChanges {
   constructor(private _serviceSectoresCampoTransversalService: ServiceSectoresCampoTransversalService,
     private messageService: MessageService,
     private changeDetectorRef: ChangeDetectorRef,
-    private _toasterService: ToasterService,
+    private _notificacionesService: NotificacionesService,
     private _listasComunesService: ListasComunesService) {
     // Codigo del Constructor
   }
@@ -155,7 +156,7 @@ export class SectoresCamposTransversalesComponent implements OnInit, OnChanges {
   * Objetivo: makeToast in the method header API
   ****************************************************************************/
   makeToast() {
-    this.showToast(this.type, this.title, this.content);
+    this._notificacionesService.showToast(this.type, this.title, this.content);
   } // FIN | makeToast
 
 
@@ -184,8 +185,6 @@ export class SectoresCamposTransversalesComponent implements OnInit, OnChanges {
       showCloseButton: this.isCloseButton,
       bodyOutputType: BodyOutputType.TrustedHtml,
     };
-    // this._toasterService.popAsync(toast);
-    this._toasterService.pop(toast);
   } // FIN | showToast
 
 
@@ -313,7 +312,7 @@ export class SectoresCamposTransversalesComponent implements OnInit, OnChanges {
     this._serviceSectoresCampoTransversalService.getAllSectoresCamposTransversales().subscribe(
       result => {
         if (result.status !== 200) {
-          this.showToast('error', 'Error al Obtener la Información de todos los Sectores de Desarrollo', result.message);
+          this._notificacionesService.showToast('error', 'Error al Obtener la Información de todos los Sectores de Desarrollo', result.message);
           this.JsonReceptionAllSectoresCampoTransversal = [];
         } else if (result.status === 200) {
           this.JsonReceptionAllSectoresCampoTransversal = result.data;
@@ -336,7 +335,7 @@ export class SectoresCamposTransversalesComponent implements OnInit, OnChanges {
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información de todos los Sectores de Desarrollo', JSON.stringify(error.message));
+        this._notificacionesService.showToast('error', 'Error al Obtener la Información de todos los Sectores de Desarrollo', JSON.stringify(error.message));
       },
     );
   } // FIN | getAllSectoresCampoTransversalService
@@ -357,14 +356,14 @@ export class SectoresCamposTransversalesComponent implements OnInit, OnChanges {
     this._serviceSectoresCampoTransversalService.getfindByIdSector(idSector).subscribe(
       result => {
         if (result.status !== 200) {
-          this.showToast('error', 'Error al Obtener la Información del Sector de Desarrollo', result.message);
+          this._notificacionesService.showToast('error', 'Error al Obtener la Información del Sector de Desarrollo', result.message);
           this.JsonReceptionSectorCampoTransversal = [];
         } else if (result.status === 200) {
           this.JsonReceptionSectorCampoTransversal = result.data;
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información del Sector de Desarrollo', JSON.stringify(error.message));
+        this._notificacionesService.showToast('error', 'Error al Obtener la Información del Sector de Desarrollo', JSON.stringify(error.message));
       },
     );
   } // FIN | getfindByIdSectorService
@@ -385,7 +384,7 @@ export class SectoresCamposTransversalesComponent implements OnInit, OnChanges {
     this._serviceSectoresCampoTransversalService.getfindByIdNivelSector(idSNivelector).subscribe(
       result => {
         if (result.status !== 200) {
-          this.showToast('error', 'Error al Obtener la Información de Sector Nivel 1', result.message);
+          this._notificacionesService.showToast('error', 'Error al Obtener la Información de Sector Nivel 1', result.message);
           this.JsonReceptionSectorByNivelCampoTransversal = [];
           this.nodes = [];
         } else if (result.status === 200) {
@@ -394,7 +393,7 @@ export class SectoresCamposTransversalesComponent implements OnInit, OnChanges {
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información de Secotores de Desarrollo', JSON.stringify(error.message));
+        this._notificacionesService.showToast('error', 'Error al Obtener la Información de Secotores de Desarrollo', JSON.stringify(error.message));
       },
     );
   } // FIN | getfindByIdNivelSectorService
@@ -460,23 +459,23 @@ export class SectoresCamposTransversalesComponent implements OnInit, OnChanges {
         this._serviceSectoresCampoTransversalService.saveActividadSectorCampoTransversal(this._activitySectoresCampoTransversal).subscribe(
           result => {
             if (result.status !== 200) {
-              this.showToast('error', 'Error al Ingresar la Información del Campo Transversal asociado al Proyecto', JSON.stringify(result.message));
+              this._notificacionesService.showToast('error', 'Error al Ingresar la Información del Campo Transversal asociado al Proyecto', JSON.stringify(result.message));
             } else if (result.status === 200) {
               // Evalua los resultados de la query
               if (result.findRecord === false) {
-                this.showToast('error', 'Error al Ingresar la Información del Campo Transversal asociado al Proyecto', JSON.stringify(result.message));
+                this._notificacionesService.showToast('error', 'Error al Ingresar la Información del Campo Transversal asociado al Proyecto', JSON.stringify(result.message));
               } else {
-                this.showToast('success', 'Campo Transversal asociado al Proyecto', JSON.stringify(result.message));
+                this._notificacionesService.showToast('success', 'Campo Transversal asociado al Proyecto', JSON.stringify(result.message));
               }
             }
           },
           error => {
-            this.showToast('error', 'Error al ingresar el Campo Transversal al Proyecto', JSON.stringify(error.message));
+            this._notificacionesService.showToast('error', 'Error al ingresar el Campo Transversal al Proyecto', JSON.stringify(error.message));
           },
         );
       }
     } else {
-      this.showToast('error', 'Error al ingresar la Información Campos Transversales', 'Debes de seleccionar los Campos Transversales, para continuar');
+      this._notificacionesService.showToast('error', 'Error al ingresar la Información Campos Transversales', 'Debes de seleccionar los Campos Transversales, para continuar');
       return -1;
     }
   } // FIN | saveSectoresCampoTransversal

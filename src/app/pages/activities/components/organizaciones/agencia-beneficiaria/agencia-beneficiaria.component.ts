@@ -12,13 +12,14 @@ import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-t
 import { SharedOrganizacionesService } from '../../../services/organizaciones/shared-organizaciones.service';
 import { AgenciaBeneficiariaService } from '../../../services/organizaciones/agencia-beneficiaria.service';
 import { ActivityOrganizacionAgenciaBeneficiariaModel } from '../../../models/organizaciones/model-agencia-beneficiaria';
+import { NotificacionesService } from '../../../../shared/services/notificaciones.service';
 
 
 @Component({
   selector: 'ngx-agencia-beneficiaria',
   templateUrl: './agencia-beneficiaria.component.html',
   styleUrls: ['./agencia-beneficiaria.component.scss'],
-  providers: [ToasterService],
+  providers: [NotificacionesService],
 })
 export class AgenciaBeneficiariaComponent implements OnInit {
   // Variables entre Tabs | Components
@@ -61,7 +62,7 @@ export class AgenciaBeneficiariaComponent implements OnInit {
   /**
    * Constructor de la Clase
    */
-  constructor(private _toasterService: ToasterService,
+  constructor(private _notificacionesService: NotificacionesService,
     private _agenciaBeneficiariaService: AgenciaBeneficiariaService,
     private _sharedOrganizacionesService: SharedOrganizacionesService) {
     // Codigo del Constructor
@@ -106,7 +107,7 @@ export class AgenciaBeneficiariaComponent implements OnInit {
   * Objetivo: makeToast in the method header API
   ****************************************************************************/
   makeToast() {
-    this.showToast(this.type, this.title, this.content);
+    this._notificacionesService.showToast(this.type, this.title, this.content);
   } // FIN | makeToast
 
 
@@ -135,8 +136,6 @@ export class AgenciaBeneficiariaComponent implements OnInit {
       showCloseButton: this.isCloseButton,
       bodyOutputType: BodyOutputType.TrustedHtml,
     };
-    // this._toasterService.popAsync(toast);
-    this._toasterService.pop(toast);
   } // FIN | showToast
 
 
@@ -167,7 +166,7 @@ export class AgenciaBeneficiariaComponent implements OnInit {
     this._sharedOrganizacionesService.getAllSociosDesarrollo(caseOrg).subscribe(
       result => {
         if (result.status !== 200) {
-          this.showToast('error', 'Error al Obtener la Información de todos los Socios al Desarrollo', result.message);
+          this._notificacionesService.showToast('error', 'Error al Obtener la Información de todos los Socios al Desarrollo', result.message);
           this.JsonReceptionAllAgenciaBeneficiaria = [];
         } else if (result.status === 200) {
           this.JsonReceptionAllAgenciaBeneficiaria = result.data;
@@ -182,7 +181,7 @@ export class AgenciaBeneficiariaComponent implements OnInit {
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información de todos los Socios al Desarrollo', JSON.stringify(error.message));
+        this._notificacionesService.showToast('error', 'Error al Obtener la Información de todos los Socios al Desarrollo', JSON.stringify(error.message));
       },
     );
   } // FIN | getAllAgenciaBeneficiariaService
@@ -203,7 +202,7 @@ export class AgenciaBeneficiariaComponent implements OnInit {
     });
 
     if (foundAgenciaBeneficiaria !== undefined) {
-      this.showToast('error', 'Error al seleccionar Socio al Desarrollo', 'Ya existe en el listado el Socio al Desarrollo seleccionado');
+      this._notificacionesService.showToast('error', 'Error al seleccionar Socio al Desarrollo', 'Ya existe en el listado el Socio al Desarrollo seleccionado');
     } else {
       // Asignamos la Agencia Beneficiaria seleccionado
       this.JsonSendAgenciaBeneficiaria = [...this.JsonSendAgenciaBeneficiaria, { name: item.itemName, code: item.id, otro: '' }];
@@ -226,7 +225,7 @@ export class AgenciaBeneficiariaComponent implements OnInit {
   this.JsonSendAgenciaBeneficiaria.forEach(element => {
     // Valida que se registre el % de participacion
     if (element.otro === '') {
-      this.showToast('error', 'Error al ingresar Agencia Beneficiaria', 'No tiene el % de participación ingresado');
+      this._notificacionesService.showToast('error', 'Error al ingresar Agencia Beneficiaria', 'No tiene el % de participación ingresado');
       return -1;
     } else {
       this._activityOrganizacionAgenciaBeneficiariaModel.codigoActividad = this.codigoProyectoTab + '-AAB-' + element.code;
@@ -238,20 +237,20 @@ export class AgenciaBeneficiariaComponent implements OnInit {
       this._agenciaBeneficiariaService.newActividadAgenciaBeneficiaria(this._activityOrganizacionAgenciaBeneficiariaModel).subscribe(
         result => {
           if (result.status !== 200) {
-            this.showToast('error', 'Error al Ingresar la Información de Agencia Beneficiaria', result.message);
+            this._notificacionesService.showToast('error', 'Error al Ingresar la Información de Agencia Beneficiaria', result.message);
           } else if (result.status === 200) {
             if (result.findRecord === true) {
-              this.showToast('error', 'Error al Ingresar la Información de Agencia Beneficiaria', result.message);
+              this._notificacionesService.showToast('error', 'Error al Ingresar la Información de Agencia Beneficiaria', result.message);
             } else {
-              this.showToast('default', 'Agencia Beneficiaria', result.message);
+              this._notificacionesService.showToast('default', 'Agencia Beneficiaria', result.message);
             }if (result.status === 200) {
               this.UpdateAgenciaBeneficiaria();
-              this.showToast('error', 'error al actualizar el registro', result.message);
+              this._notificacionesService.showToast('error', 'error al actualizar el registro', result.message);
             }
           }
         },
         error => {
-          this.showToast('error', 'Error al Ingresar la Información de Agencia Beneficiaria', JSON.stringify(error.error.message));
+          this._notificacionesService.showToast('error', 'Error al Ingresar la Información de Agencia Beneficiaria', JSON.stringify(error.error.message));
         },
       );
     }
@@ -273,16 +272,16 @@ private UpdateAgenciaBeneficiaria() {
   const responsedataExt: any = this.responsedata;
 
   if (responsedataExt.error === true) {
-    this.showToast('error', 'Error al ingresar los datos', responsedataExt.msg);
+    this._notificacionesService.showToast('error', 'Error al ingresar los datos', responsedataExt.msg);
     return -1;
   }
   // Ejecutamos el Recurso del EndPoint
   this._agenciaBeneficiariaService.AgenciaBeneficiariaUpdate(this._activityOrganizacionAgenciaBeneficiariaModel.idActividadAgenciaBeneficiaria).subscribe(
     response => {
       if (response.status !== 200) {
-        this.showToast('error', 'Error al Ingresar la Información del Usuario', response.message);
+        this._notificacionesService.showToast('error', 'Error al Ingresar la Información del Usuario', response.message);
       } else if (response.status === 200) {
-        this.showToast('default', 'se actualizo con exito la informacion de la organizacion', response.message);
+        this._notificacionesService.showToast('default', 'se actualizo con exito la informacion de la organizacion', response.message);
 
       }
     },
@@ -306,17 +305,18 @@ private UpdateAgenciaBeneficiaria() {
       this._agenciaBeneficiariaService.deleteActividadAgenciaBeneficiaria(this.codigoProyectoTab + '-AAB-' + this.JsonSendAgenciaBeneficiaria[i].code).subscribe(
         result => {
           if (result.status !== 200) {
-            this.showToast('error', 'Error al Borrar la Información de Agencia Beneficiaria', result.message);
+            this._notificacionesService.showToast('error', 'Error al Borrar la Información de Agencia Beneficiaria', result.message);
           } else if (result.status === 200) {
             if (result.findRecord === true) {
-              this.showToast('error', 'Error al Borrar la Información de Agencia Beneficiaria', result.message);
+              this._notificacionesService.showToast('error', 'Error al Borrar la Información de Agencia Beneficiaria', result.message);
             } else {
-              this.showToast('default', 'Agencia Beneficiaria', result.message);
+              this._notificacionesService.showToast('default', 'Agencia Beneficiaria', result.message);
+              this.ngOnInit();
             }
           }
         },
         error => {
-          this.showToast('error', 'Error al Borrar la Información de Socios al Desarrollo', JSON.stringify(error.error.message));
+          this._notificacionesService.showToast('error', 'Error al Borrar la Información de Socios al Desarrollo', JSON.stringify(error.error.message));
         },
       );
       // Borramos el Item del Json

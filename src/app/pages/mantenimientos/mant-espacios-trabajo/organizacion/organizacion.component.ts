@@ -15,6 +15,7 @@ import { OrganizacionModel } from '../../models/organizacion.model';
 import { OrganizacionService } from '../../services/organizaciones.service';
 import { delay } from 'q';
 import { templateJitUrl } from '@angular/compiler';
+import { UserService } from '../../../../@core/data/users.service';
 @Component({
   selector: 'ngx-organizacion',
   templateUrl: './organizacion.component.html',
@@ -36,8 +37,9 @@ export class OrganizacionComponent implements OnInit {
   public JsonReceptionOrganizaciones: any;
   public JsonReceptionFyByOrganizaciones: any;
   public secuenciaDeActividad: any;
-   // Audotoria
-   public JsonReceptionUserDetail: any;
+  // Audotoria
+  public JsonReceptionUserDetail: any;
+  public idUsuarioSed: number;
 
   data2: any;
   data: any;
@@ -78,7 +80,8 @@ export class OrganizacionComponent implements OnInit {
   public responsedata: any;
 
 
-   // levanta la modal de mantenimineto de organizacion/consulta
+
+  // levanta la modal de mantenimineto de organizacion/consulta
   showLargeModal(idOrganizacion: number) {
     const activeModal = this.modalService.open(OrganizacionModalComponent, { size: 'lg', container: 'nb-layout' });
     activeModal.componentInstance.modalHeader = 'Large Modal Parametro ';
@@ -94,17 +97,17 @@ export class OrganizacionComponent implements OnInit {
 
 
   constructor(private modalService: NgbModal, protected _router: Router,
-    private _toasterService: ToasterService, public _OrganizacionService: OrganizacionService) {
+    private _toasterService: ToasterService, public _OrganizacionService: OrganizacionService, public _userService: UserService) {
     this.responsedata = { 'error': false, 'msg': 'error campos solicitado' };
   }
 
-/****************************************************************************
-* Funcion: makeToast
-* Object Number: 003
-* Fecha: 16-08-2018
-* Descripcion: Method makeToast of the Class
-* Objetivo: makeToast in the method header API
-****************************************************************************/
+  /****************************************************************************
+  * Funcion: makeToast
+  * Object Number: 003
+  * Fecha: 16-08-2018
+  * Descripcion: Method makeToast of the Class
+  * Objetivo: makeToast in the method header API
+  ****************************************************************************/
   makeToast() {
     this.showToast(this.type, this.title, this.content);
   } // FIN | makeToast
@@ -165,11 +168,14 @@ export class OrganizacionComponent implements OnInit {
       null, 1, // relaciones de tipo de organizacion
       null, 1, // pais de la organiacion
       null, 1, // categoria de la organizacion
+      // null, 1, // id grupo organizacion
     );
     this.TipoOrganizacion();
     this.ListAllCategoria();
     this.paisesAllListService();
     this.ListAllOranizacion();
+    this.userDatailsService();
+
   }
   /****************************************************************************
 * Funcion: TipoOrganizacion()
@@ -289,15 +295,13 @@ export class OrganizacionComponent implements OnInit {
   ****************************************************************************/
   async  newOrganizacion() {
 
+
     this.getSecuenciaListService('NEW-ORG');
+
 
     await delay(100);
     this.validateOrganizacion(this._OrganizacionModel);
 
-    // await delay(100);
-    // this.updateSecuenciaService(this.JsonReceptionUserDetail.idUsuarioMod, 1);
-
-    await delay(100);
     const responsedataExt: any = this.responsedata;
 
     if (responsedataExt.error === true) {
@@ -307,9 +311,11 @@ export class OrganizacionComponent implements OnInit {
 
 
     // Seteo de las variables del Model al json de Java
+
     this._OrganizacionModel.idCatOrganizacion = { idCatOrganizacion: this._OrganizacionModel.idCatOrganizacion1 };
     this._OrganizacionModel.idPaisOrganizacion = { idPais: this._OrganizacionModel.idPais };
     this._OrganizacionModel.idTipoOrganizacion = { idTipoOrganizacion: this._OrganizacionModel.idTipoOrganizacion1 };
+
 
     if (responsedataExt.error === true) {
       this.showToast('error', 'Error al ingresar los datos', responsedataExt.msg);
@@ -318,13 +324,17 @@ export class OrganizacionComponent implements OnInit {
     // Ejecutamos el Recurso del EndPoint
     this._OrganizacionService.newOrganizacion(this._OrganizacionModel).subscribe(
       response => {
+
         if (response.status !== 200) {
+          // console.log('antes de---NEW')
           this.showToast('error', 'Error al Ingresar la Información del Usuario', response.message);
         } else if (response.status === 200) {
           this.showToast('default', 'La Información de la Organizacion, se ha ingresado con exito', response.message);
-        //  this.ListAllCategoria();
+          //  this.ListAllCategoria();
+
         }
         this.ListAllOranizacion();
+        this.updateSecuenciaService(this.idUsuarioSed, 2);
         this.ngOnInit();
       },
     );
@@ -445,7 +455,7 @@ export class OrganizacionComponent implements OnInit {
           this.showToast('error', 'Error al desahabilitar la organizacion con exito', response.message);
         } else if (response.status === 200) {
           this.showToast('default', 'se deshabilito la organizacion de forma exitosa', response.message);
-         // this.ListAllCategoria();
+          // this.ListAllCategoria();
         }
         this.ListAllOranizacion();
       },
@@ -508,7 +518,7 @@ export class OrganizacionComponent implements OnInit {
 
           // Componemos la Secuencia a Generar
           const prefixHND: string = 'ORG-';
-          this._OrganizacionModel.codOrganizacion = prefixHND + (Number(this.secuenciaDeActividad.valor + 1));
+          this._OrganizacionModel.codOrganizacion = prefixHND + (Number(this.secuenciaDeActividad.valor2));
         }
       },
       error => {
@@ -524,32 +534,76 @@ export class OrganizacionComponent implements OnInit {
   * Proyecto o Actividad
   * Params: { jsonSecuencia, idSecuencia }
   ******************************************************/
- protected updateSecuenciaService(idUsuarioMod: number, idSecuencia: number) {
-  // Envia la Secuencia a Buscar
-  const jsonSecuencia = {
-    'idUsuarioMod': {
-      'idUsuario': idUsuarioMod,
-    },
-  };
+  protected updateSecuenciaService(idUsuarioMod: number, idSecuencia: number) {
+    // Envia la Secuencia a Buscar
+    const jsonSecuencia = {
+      'idUsuarioMod': {
+        'idUsuario': idUsuarioMod,
+      },
+    };
+    // console.log('ID Usuario ' + this.idOrganizacion);
 
-  this._OrganizacionService.updateSecuence(idSecuencia).subscribe(
-    result => {
-      if (result.status !== 200) {
-        this.showToast('error', 'Error al Actualizar la Información de la Secuencia', JSON.stringify(result.message));
-      } else if (result.status === 200) {
-        // Result success
-      }
-    },
-    error => {
-      this.showToast('error', 'Error al Actualizar la Información de la Secuencia', JSON.stringify(error.message));
-    },
-  );
-} // FIN | FND-00001.1
+    this._OrganizacionService.updateSecuence(jsonSecuencia, idSecuencia).subscribe(
+      result => {
+        // console.log(this._OrganizacionService.updateSecuence,'paso por aqui')
+        if (result.status !== 200) {
+          this.showToast('error', 'Error al Actualizar la Información de la Secuencia', JSON.stringify(result.message));
+        } else if (result.status === 200) {
+          // Result success
+        }
+      },
+      error => {
+        this.showToast('error', 'Error al Actualizar la Información de la Secuencia', JSON.stringify(error.message));
+      },
+    );
+  } // FIN | FND-00001.1
 
-protected cleanOrganizacione() {
+  protected cleanOrganizacione() {
 
-this.ngOnInit();
-}
-;
+    this.ngOnInit();
+  }
+  ;
+  /* **************************************************************************/
+  /* ****************** Funciones Propias de la Clase *************************/
+
+  /****************************************************************************
+  * Funcion: userDatailsService
+  * Object Number: 007
+  * Fecha: 16-08-2018
+  * Descripcion: Method userDatailsService of the Class
+  * Objetivo: userDatailsService detalle del Usuario llamando a la API
+  ****************************************************************************/
+  private userDatailsService() {
+    this._userService.getUserDetails(this._userService.usernameHeader).subscribe(
+      result => {
+
+        if (result.status !== 200) {
+          this.showToast('error', 'Error al Obtener la Información del Usuario', result.message);
+        } else {
+          this.JsonReceptionUserDetail = result.data;
+          this.idUsuarioSed = this.JsonReceptionUserDetail.idUsuario;
+         // console.log( 'Datos de Usaurio' + this.idUsuarioSed);
+
+
+        }
+      },
+      error => {
+        // Redirecciona al Login
+        alert('Error en la petición de la API ' + <any>error);
+
+        // Borramos los datos del LocalStorage
+        localStorage.removeItem('auth_app_token');
+        localStorage.removeItem('identity');
+
+        const redirect = '/auth/login';
+        setTimeout(() => {
+          // Iniciativa Temporal
+          location.reload();
+          return this._router.navigateByUrl(redirect);
+        }, 200);
+      },
+    );
+  } // FIN | userDatailsService
+
 
 }

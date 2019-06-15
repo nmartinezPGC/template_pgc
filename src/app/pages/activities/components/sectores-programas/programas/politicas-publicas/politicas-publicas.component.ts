@@ -12,11 +12,12 @@ import { ToasterConfig, ToasterService, Toast, BodyOutputType } from 'angular2-t
 import { ListasComunesService } from '../../../../../common-list/services/listas-comunes.service';
 import { ServicePoliticasPublicasService } from '../../../../services/programas/service-politicas-publicas.service';
 import { ActivityPoliticasPublicasModel } from '../../../../models/programas/model-programa-politicas-publicas';
+import { NotificacionesService } from '../../../../../shared/services/notificaciones.service';
 @Component({
   selector: 'ngx-politicaspublicas',
   templateUrl: './politicas-publicas.component.html',
   styleUrls: ['./politicas-publicas.component.scss'],
-  providers: [ServicePoliticasPublicasService, MessageService, ToasterService, ListasComunesService],
+  providers: [ServicePoliticasPublicasService, MessageService, NotificacionesService, ListasComunesService],
 })
 export class PoliticasPublicasComponent implements OnInit, OnChanges {
   // Variables entre Tabs | Components
@@ -109,7 +110,7 @@ config: ToasterConfig;
 constructor(private _servicePoliticasPublicasService: ServicePoliticasPublicasService,
 private messageService: MessageService,
 private changeDetectorRef: ChangeDetectorRef,
-private _toasterService: ToasterService,
+private _notificacionesService: NotificacionesService,
 private _listasComunesService: ListasComunesService) {
  // Codigo del Constructor
 }
@@ -142,7 +143,7 @@ ngOnInit() {
 * Objetivo: makeToast in the method header API
 ****************************************************************************/
 makeToast() {
-this.showToast(this.type, this.title, this.content);
+this._notificacionesService.showToast(this.type, this.title, this.content);
 } // FIN | makeToast
 
 
@@ -171,8 +172,6 @@ timeout: this.timeout,
 showCloseButton: this.isCloseButton,
 bodyOutputType: BodyOutputType.TrustedHtml,
 };
-// this._toasterService.popAsync(toast);
-this._toasterService.pop(toast);
 } // FIN | showToast
 
 
@@ -285,7 +284,7 @@ private getAllProgramasPoliticasPublicasService() {
 this._servicePoliticasPublicasService.getAllProgramasPoliticasPublicas().subscribe(
 result => {
  if (result.status !== 200) {
-   this.showToast('error', 'Error al Obtener la Información ', result.message);
+   this._notificacionesService.showToast('error', 'Error al Obtener la Información ', result.message);
    this.JsonReceptionAllProgramasPoliticasPublicas = [];
  } else if (result.status === 200) {
    this.JsonReceptionAllProgramasPoliticasPublicas = result.data;
@@ -308,7 +307,7 @@ result => {
  }
 },
 error => {
- this.showToast('error', 'Error al Obtener la Info de todos los Programa de Politicas Publicas', JSON.stringify(error.message));
+ this._notificacionesService.showToast('error', 'Error al Obtener la Info de todos los Programa de Politicas Publicas', JSON.stringify(error.message));
 },
 );
 } // FIN | getAllProgramaPolitica PublicaService
@@ -329,14 +328,14 @@ private getfindByIdProgramaService(idPrograma: number) {
 this._servicePoliticasPublicasService.getfindByIdPrograma(idPrograma).subscribe(
 result => {
  if (result.status !== 200) {
-   this.showToast('error', 'Error al Obtener la Información del objetivo ', result.message);
+   this._notificacionesService.showToast('error', 'Error al Obtener la Información del objetivo ', result.message);
    this.JsonReceptionProgramaPoliticasPublicas = [];
  } else if (result.status === 200) {
    this.JsonSendProgramaPoliticasPublicas = result.data;
  }
 },
 error => {
- this.showToast('error', 'Error al Obtener la Información del Objetivo de Politica Publica', JSON.stringify(error.message));
+ this._notificacionesService.showToast('error', 'Error al Obtener la Información del Objetivo de Politica Publica', JSON.stringify(error.message));
 },
 );
 } // FIN | getfindByIdProgramaService
@@ -357,7 +356,7 @@ private getfindByIdNivelProgramaService(idSNivelector: number) {
 this._servicePoliticasPublicasService.getfindByIdNivelPrograma(idSNivelector).subscribe(
 result => {
  if (result.status !== 200) {
-   this.showToast('error', 'Error al Obtener la Información de Politica Publica del nivel 1 ', result.message);
+   this._notificacionesService.showToast('error', 'Error al Obtener la Información de Politica Publica del nivel 1 ', result.message);
    this.JsonReceptionProgramaByNivelPoliticasPublicas = [];
    this.nodes = [];
  } else if (result.status === 200) {
@@ -366,7 +365,7 @@ result => {
  }
 },
 error => {
- this.showToast('error', 'Error al Obtener la Información de Politicas Publicas', JSON.stringify(error.message));
+ this._notificacionesService.showToast('error', 'Error al Obtener la Información de Politicas Publicas', JSON.stringify(error.message));
 },
 );
 } // FIN | getfindByIdNivelProgramaService
@@ -397,7 +396,7 @@ setTimeout(() => {
  this._servicePoliticasPublicasService.getfindByIdNivelProgramaAndProgramaPadreId(2, element.idPrograma).subscribe(
    result => {
      if (result.status !== 200) {
-       this.showToast('error', 'Error al Obtener la Información de los Programa Nivel 2', result.message);
+       this._notificacionesService.showToast('error', 'Error al Obtener la Información de los Programa Nivel 2', result.message);
        this.JsonReceptionProgramaByNivelPoliticasPublicas2 = [];
        this.arrayPush = [];
        this.loading = false;
@@ -446,7 +445,7 @@ setTimeout(() => {
      }
    },
    error => {
-     this.showToast('error', 'Error al Obtener la Información de objetivos de Politicas Publicas', JSON.stringify(error.error.message));
+     this._notificacionesService.showToast('error', 'Error al Obtener la Información de objetivos de Politicas Publicas', JSON.stringify(error.error.message));
    },
  );
 }, 1000);
@@ -481,23 +480,23 @@ for (let index = 0; index < this.JsonSendProgramaPoliticasPublicasOpciones.lengt
  this._servicePoliticasPublicasService.saveActividadProgramaPoliticasPublicas(this._activityProgramaPoliticasPublicasModel).subscribe(
    result => {
      if (result.status !== 200) {
-       this.showToast('error', 'Error al Ingresar la Información Politica Publica asociado al Proyecto', JSON.stringify(result.message));
+       this._notificacionesService.showToast('error', 'Error al Ingresar la Información Politica Publica asociado al Proyecto', JSON.stringify(result.message));
      } else if (result.status === 200) {
        // Evalua los resultados de la query
        if (result.findRecord === false) {
-         this.showToast('error', 'Error al Ingresar la Información de Politica Publica asociado al Proyecto', JSON.stringify(result.message));
+         this._notificacionesService.showToast('error', 'Error al Ingresar la Información de Politica Publica asociado al Proyecto', JSON.stringify(result.message));
        } else {
-         this.showToast('success', 'Programa de Politica Publica se ha asociado al Proyecto', JSON.stringify(result.message));
+         this._notificacionesService.showToast('success', 'Programa de Politica Publica se ha asociado al Proyecto', JSON.stringify(result.message));
        }
      }
    },
    error => {
-     this.showToast('error', 'Error al ingresar la Información de Politicas Publicas', JSON.stringify(error.error.message));
+     this._notificacionesService.showToast('error', 'Error al ingresar la Información de Politicas Publicas', JSON.stringify(error.error.message));
    },
  );
 }
 } else {
-this.showToast('error', 'Error al ingresar la Información  de Politicas Publicas', 'Debes de seleccionar los datos Politicas Publicas, para continuar');
+this._notificacionesService.showToast('error', 'Error al ingresar la Información  de Politicas Publicas', 'Debes de seleccionar los datos Politicas Publicas, para continuar');
 return -1;
 }
 } // FIN | saveProgramaPoliticasPublicas

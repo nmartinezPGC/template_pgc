@@ -12,12 +12,13 @@ import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-t
 import { SharedOrganizacionesService } from '../../../services/organizaciones/shared-organizaciones.service';
 import { AdmonFinancieroService} from '../../../services/organizaciones/admon-financiero.service';
 import { ActivityOrganizacionAdmonFinancieroModel } from '../../../models/organizaciones/model-Admon-Financiero';
+import { NotificacionesService } from '../../../../shared/services/notificaciones.service';
 
 @Component({
   selector: 'ngx-admon-financiero',
   templateUrl: './admon-financiero.component.html',
   styleUrls: ['./admon-financiero.component.scss'],
-  providers: [ToasterService, AdmonFinancieroService],
+  providers: [AdmonFinancieroService, NotificacionesService],
 })
 export class AdmonFinancieroComponent implements OnInit {
   // Variables entre Tabs | Components
@@ -61,7 +62,7 @@ export class AdmonFinancieroComponent implements OnInit {
   /**
    * Constructor de la Clase
    */
-  constructor( private _toasterService: ToasterService,
+  constructor( private _notificacionesService: NotificacionesService,
     private _sharedOrganizacionesService: SharedOrganizacionesService,
     private _admonFinancieroService: AdmonFinancieroService ) {
     // Codigo del Constructor
@@ -106,7 +107,7 @@ export class AdmonFinancieroComponent implements OnInit {
   * Objetivo: makeToast in the method header API
   ****************************************************************************/
   makeToast() {
-    this.showToast(this.type, this.title, this.content);
+    this._notificacionesService.showToast(this.type, this.title, this.content);
   } // FIN | makeToast
 
 
@@ -135,8 +136,7 @@ export class AdmonFinancieroComponent implements OnInit {
       showCloseButton: this.isCloseButton,
       bodyOutputType: BodyOutputType.TrustedHtml,
     };
-    // this._toasterService.popAsync(toast);
-    this._toasterService.pop(toast);
+
   } // FIN | showToast
 
 
@@ -167,7 +167,7 @@ export class AdmonFinancieroComponent implements OnInit {
     this._sharedOrganizacionesService.getAllAdmonFinanciero(caseOrg).subscribe(
       result => {
         if (result.status !== 200) {
-          this.showToast('error', 'Error al Obtener la Información de todos los datos de Admon Financiero', result.message);
+          this._notificacionesService.showToast('error', 'Error al Obtener la Información de todos los datos de Admon Financiero', result.message);
           this.JsonReceptionAllAdmonFinanciero = [];
         } else if (result.status === 200) {
           this.JsonReceptionAllAdmonFinanciero = result.data;
@@ -182,7 +182,7 @@ export class AdmonFinancieroComponent implements OnInit {
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información de todos los datos de Admon Financiero', JSON.stringify(error.message));
+        this._notificacionesService.showToast('error', 'Error al Obtener la Información de todos los datos de Admon Financiero', JSON.stringify(error.message));
       },
     );
   } // FIN | getAllAdmonFinancieroService
@@ -203,7 +203,7 @@ export class AdmonFinancieroComponent implements OnInit {
     });
 
     if (foundAdmonFinanciero !== undefined) {
-      this.showToast('error', 'Error al seleccionar Admon Financiero', 'Ya existe en el listado de Admon Financiero seleccionado');
+      this._notificacionesService.showToast('error', 'Error al seleccionar Admon Financiero', 'Ya existe en el listado de Admon Financiero seleccionado');
     } else {
       // Asignamos el Socio al Desarrollo seleccionado
       this.JsonSendAdmonFinanciero = [...this.JsonSendAdmonFinanciero, { name: item.itemName, code: item.id, otro: '' }];
@@ -221,10 +221,11 @@ export class AdmonFinancieroComponent implements OnInit {
   * información que ocupa la API
   ****************************************************************************/
  saveAdmonFinanciero() {
+   this.calcularPercent();
   this.JsonSendAdmonFinanciero.forEach(element => {
     // Valida que se registre el % de participacion
     if (element.otro === '') {
-      this.showToast('error', 'Error al ingresar Socio al Desarrollo', 'No tiene el % de participación ingresado');
+      this._notificacionesService.showToast('error', 'Error al ingresar Socio al Desarrollo', 'No tiene el % de participación ingresado');
       return -1;
     } else {
       this._activityOrganizacionAdmonFinancieroModel.codigoActividad = this.codigoProyectoTab + '-AAF-' + element.code;
@@ -236,17 +237,17 @@ export class AdmonFinancieroComponent implements OnInit {
       this._admonFinancieroService.newActividadAdmonFinanciero(this._activityOrganizacionAdmonFinancieroModel).subscribe(
         result => {
           if (result.status !== 200) {
-            this.showToast('error', 'Error al Ingresar la Información de Admon Financiero', result.message);
+            this._notificacionesService.showToast('error', 'Error al Ingresar la Información de Admon Financiero', result.message);
           } else if (result.status === 200) {
             if (result.findRecord === true) {
-              this.showToast('error', 'Error al Ingresar la Información de Admon Financiero', result.message);
+              this._notificacionesService.showToast('error', 'Error al Ingresar la Información de Admon Financiero', result.message);
             } else {
-              this.showToast('default', 'Admon Financiero', result.message);
+              this._notificacionesService.showToast('default', 'Admon Financiero', result.message);
             }
           }
         },
         error => {
-          this.showToast('error', 'Error al Ingresar la Informacións de Admon Financiero', JSON.stringify(error.error.message));
+          this._notificacionesService.showToast('error', 'Error al Ingresar la Informacións de Admon Financiero', JSON.stringify(error.error.message));
         },
       );
     }
@@ -270,17 +271,18 @@ export class AdmonFinancieroComponent implements OnInit {
       this._admonFinancieroService.deleteActividadAdmonFinanciero(this.codigoProyectoTab + '-AAF-' + this.JsonSendAdmonFinanciero[i].code).subscribe(
         result => {
           if (result.status !== 200) {
-            this.showToast('error', 'Error al Borrar la Información de Admon Financiero', result.message);
+            this._notificacionesService.showToast('error', 'Error al Borrar la Información de Admon Financiero', result.message);
           } else if (result.status === 200) {
             if (result.findRecord === true) {
-              this.showToast('error', 'Error al Borrar la Información de Admon Financiero', result.message);
+              this._notificacionesService.showToast('error', 'Error al Borrar la Información de Admon Financiero', result.message);
             } else {
-              this.showToast('default', 'Admon Financiero', result.message);
+              this._notificacionesService.showToast('default', 'Admon Financiero', result.message);
+              this.ngOnInit();
             }
           }
         },
         error => {
-          this.showToast('error', 'Error al Borrar la Información de Admon financiero', JSON.stringify(error.error.message));
+          this._notificacionesService.showToast('error', 'Error al Borrar la Información de Admon financiero', JSON.stringify(error.error.message));
         },
       );
       // Borramos el Item del Json

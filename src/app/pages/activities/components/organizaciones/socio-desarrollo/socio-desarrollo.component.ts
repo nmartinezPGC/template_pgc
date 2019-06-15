@@ -12,12 +12,13 @@ import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-t
 import { SocioDesarrolloService } from '../../../services/organizaciones/socio-desarrollo.service';
 import { SharedOrganizacionesService } from '../../../services/organizaciones/shared-organizaciones.service';
 import { ActivityOrganizacionSocioDesarrolloModel } from '../../../models/organizaciones/model-socio-desarrollo';
+import { NotificacionesService } from '../../../../shared/services/notificaciones.service';
 
 @Component({
   selector: 'ngx-socio-desarrollo',
   templateUrl: './socio-desarrollo.component.html',
   styleUrls: ['./socio-desarrollo.component.scss'],
-  providers: [ToasterService, SocioDesarrolloService],
+  providers: [NotificacionesService, SocioDesarrolloService],
 })
 export class SocioDesarrolloComponent implements OnInit {
   // Variables entre Tabs | Components
@@ -49,6 +50,7 @@ export class SocioDesarrolloComponent implements OnInit {
 
   // Json de recpcion de Informacion
   public JsonReceptionAllSocioDesarrollo: any;
+  public JsonReceptionAllSocioDesarrolloByActividad: any;
 
   // Json a enviar
   public JsonSendSociosDesarrollo: any = [];
@@ -60,7 +62,7 @@ export class SocioDesarrolloComponent implements OnInit {
   /**
    * Constructor de la Clase
    */
-  constructor(private _toasterService: ToasterService,
+  constructor(private _notificacionesService: NotificacionesService,
     private _socioDesarrolloService: SocioDesarrolloService,
     private _sharedOrganizacionesService: SharedOrganizacionesService) {
     // Codigo del Constructor
@@ -79,6 +81,9 @@ export class SocioDesarrolloComponent implements OnInit {
     );
     // Carga los Datos de Socio al Desarrollo
     this.getAllSocioDesarrolloService(1);
+
+    // Carga de Socios al Desarrollo Registrados
+    this.getAllSociosDesarrolloByActividadService(65);
 
     // Inicio de las Configuraciones del DrowDown
     this.dropdownListSocioDesarrollo = [];
@@ -103,7 +108,7 @@ export class SocioDesarrolloComponent implements OnInit {
   * Objetivo: makeToast in the method header API
   ****************************************************************************/
   makeToast() {
-    this.showToast(this.type, this.title, this.content);
+    this._notificacionesService.showToast(this.type, this.title, this.content);
   } // FIN | makeToast
 
 
@@ -132,8 +137,6 @@ export class SocioDesarrolloComponent implements OnInit {
       showCloseButton: this.isCloseButton,
       bodyOutputType: BodyOutputType.TrustedHtml,
     };
-    // this._toasterService.popAsync(toast);
-    this._toasterService.pop(toast);
   } // FIN | showToast
 
 
@@ -164,7 +167,7 @@ export class SocioDesarrolloComponent implements OnInit {
     this._sharedOrganizacionesService.getAllSociosDesarrollo(caseOrg).subscribe(
       result => {
         if (result.status !== 200) {
-          this.showToast('error', 'Error al Obtener la Información de todos los Socios al Desarrollo', result.message);
+          this._notificacionesService.showToast('error', 'Error al Obtener la Información de todos los Socios al Desarrollo', result.message);
           this.JsonReceptionAllSocioDesarrollo = [];
         } else if (result.status === 200) {
           this.JsonReceptionAllSocioDesarrollo = result.data;
@@ -179,7 +182,7 @@ export class SocioDesarrolloComponent implements OnInit {
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información de todos los Socios al Desarrollo', JSON.stringify(error.error.message));
+        this._notificacionesService.showToast('error', 'Error al Obtener la Información de todos los Socios al Desarrollo', JSON.stringify(error.error.message));
       },
     );
   } // FIN | getAllSocioDesarrolloService
@@ -200,7 +203,7 @@ export class SocioDesarrolloComponent implements OnInit {
     });
 
     if (foundSocioDesarrollo !== undefined) {
-      this.showToast('error', 'Error al seleccionar Socio al Desarrollo', 'Ya existe en el listado el Socio al Desarrollo seleccionado');
+      this._notificacionesService.showToast('error', 'Error al seleccionar Socio al Desarrollo', 'Ya existe en el listado el Socio al Desarrollo seleccionado');
     } else {
       // Asignamos el Socio al Desarrollo seleccionado
       this.JsonSendSociosDesarrollo = [...this.JsonSendSociosDesarrollo, { name: item.itemName, code: item.id, otro: '' }];
@@ -218,10 +221,11 @@ export class SocioDesarrolloComponent implements OnInit {
   * información que ocupa la API
   ****************************************************************************/
   saveSocioDesarrollo() {
+    this.calcularPercent();
     this.JsonSendSociosDesarrollo.forEach(element => {
       // Valida que se registre el % de participacion
       if (element.otro === '') {
-        this.showToast('error', 'Error al ingresar Socio al Desarrollo', 'No tiene el % de participación ingresado');
+        this._notificacionesService.showToast('error', 'Error al ingresar Socio al Desarrollo', 'No tiene el % de participación ingresado');
         return -1;
       } else {
         this._activityOrganizacionSocioDesarrolloModel.codigoActividad = this.codigoProyectoTab + '-ASD-' + element.code;
@@ -233,17 +237,17 @@ export class SocioDesarrolloComponent implements OnInit {
         this._socioDesarrolloService.newActividadSociosDesarrollo(this._activityOrganizacionSocioDesarrolloModel).subscribe(
           result => {
             if (result.status !== 200) {
-              this.showToast('error', 'Error al Ingresar la Información de Socios al Desarrollo', result.message);
+              this._notificacionesService.showToast('error', 'Error al Ingresar la Información de Socios al Desarrollo', result.message);
             } else if (result.status === 200) {
               if (result.findRecord === true) {
-                this.showToast('error', 'Error al Ingresar la Información de Socios al Desarrollo', result.message);
+                this._notificacionesService.showToast('error', 'Error al Ingresar la Información de Socios al Desarrollo', result.message);
               } else {
-                this.showToast('default', 'Socio al Desarrollo', result.message);
+                this._notificacionesService.showToast('default', 'Socio al Desarrollo', result.message);
               }
             }
           },
           error => {
-            this.showToast('error', 'Error al Ingresar la Información de Socios al Desarrollo', JSON.stringify(error.error.message));
+            this._notificacionesService.showToast('error', 'Error al Ingresar la Información de Socios al Desarrollo', JSON.stringify(error.error.message));
           },
         );
       }
@@ -266,17 +270,18 @@ export class SocioDesarrolloComponent implements OnInit {
         this._socioDesarrolloService.deleteActividadSociosDesarrollo(this.codigoProyectoTab + '-ASD-' + this.JsonSendSociosDesarrollo[i].code).subscribe(
           result => {
             if (result.status !== 200) {
-              this.showToast('error', 'Error al Borrar la Información de Socios al Desarrollo', result.message);
+              this._notificacionesService.showToast('error', 'Error al Borrar la Información de Socios al Desarrollo', result.message);
             } else if (result.status === 200) {
               if (result.findRecord === true) {
-                this.showToast('error', 'Error al Borrar la Información de Socios al Desarrollo', result.message);
+                this._notificacionesService.showToast('error', 'Error al Borrar la Información de Socios al Desarrollo', result.message);
               } else {
-                this.showToast('default', 'Socio al Desarrollo', result.message);
+                this._notificacionesService.showToast('default', 'Socio al Desarrollo', result.message);
+                this.ngOnInit();
               }
             }
           },
           error => {
-            this.showToast('error', 'Error al Borrar la Información de Socios al Desarrollo', JSON.stringify(error.error.message));
+            this._notificacionesService.showToast('error', 'Error al Borrar la Información de Socios al Desarrollo', JSON.stringify(error.error.message));
           },
         );
         // Borramos el Item del Json
@@ -339,4 +344,40 @@ export class SocioDesarrolloComponent implements OnInit {
       return dato;
     });
   } // FIN | calcularPercent
+
+
+  /****************************************************************************
+  * Funcion: getAllSociosDesarrolloByActividadService
+  * Object Number: 003
+  * Fecha: 03-06-2019
+  * Descripcion: Method getAllSociosDesarrolloByActividadService of the Class
+  * Objetivo: getAllSociosDesarrolloByActividadService listados todos los Socios al Desarrollo
+  * Params: { idActividad }
+  ****************************************************************************/
+  private getAllSociosDesarrolloByActividadService(idActividad: number) {
+    // Ejecuta el Servicio de invocar todos los Socios al Desarrollo
+    this._socioDesarrolloService.getAllSociosDesarrolloByIdActividad(idActividad).subscribe(
+      result => {
+        if (result.status !== 200) {
+          this.showToast('error', 'Error al Obtener la Información de todos Socios al Desarrollo', result.message);
+          this.JsonReceptionAllSocioDesarrolloByActividad = [];
+        } else if (result.status === 200) {
+          this.JsonReceptionAllSocioDesarrolloByActividad = result.data;
+
+          // Mapear los datos de los Socios al Desarrollo Registrados
+          // console.log(this.JsonReceptionAllSocioDesarrolloByActividad);
+          this.JsonSendSociosDesarrollo = this.JsonReceptionAllSocioDesarrolloByActividad.map((item) => {
+            return {
+              code: item.idOrganizacion.idOrganizacion,
+              name: item.idOrganizacion.descOrganizacion,
+              otro: item.porcentajePart,
+            }
+          });
+        }
+      },
+      error => {
+        this.showToast('error', 'Error al Obtener la Información de todos Socios al Desarrollo', JSON.stringify(error.error.message));
+      },
+    );
+  } // FIN | getAllSociosDesarrolloByActividadService
 }

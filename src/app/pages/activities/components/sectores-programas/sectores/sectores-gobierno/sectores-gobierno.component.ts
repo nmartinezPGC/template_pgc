@@ -11,15 +11,15 @@ import { Component, OnInit, Input, ChangeDetectorRef, OnChanges } from '@angular
 import { Tree, TreeNode, MessageService, MenuItem } from 'primeng/primeng';
 import { ToasterConfig, ToasterService, Toast, BodyOutputType } from 'angular2-toaster';
 import { ListasComunesService } from '../../../../../common-list/services/listas-comunes.service';
-import { ActivitySectoresOcdeModel } from '../../../../models/sectores/model-sectores-ocde';
 import { ActivitySectoresGobiernoModel } from '../../../../models/sectores/model-sectores-gobierno';
 import { ServiceSectoresGobiernoService } from '../../../../services/sectores/service-sectores-gobierno.service';
+import { NotificacionesService } from '../../../../../shared/services/notificaciones.service';
 
 @Component({
   selector: 'ngx-sectores-gobierno',
   templateUrl: './sectores-gobierno.component.html',
   styleUrls: ['./sectores-gobierno.component.scss'],
-  providers: [ServiceSectoresGobiernoService, MessageService, ToasterService, ListasComunesService],
+  providers: [ServiceSectoresGobiernoService, MessageService, NotificacionesService, ListasComunesService],
 })
 export class SectoresGobiernoComponent implements OnInit, OnChanges {
   // Variables entre Tabs | Components
@@ -121,7 +121,7 @@ export class SectoresGobiernoComponent implements OnInit, OnChanges {
   constructor(private _serviceSectoresGobiernoService: ServiceSectoresGobiernoService,
     private messageService: MessageService,
     private changeDetectorRef: ChangeDetectorRef,
-    private _toasterService: ToasterService,
+    private _notificacionesService: NotificacionesService,
     private _listasComunesService: ListasComunesService) {
     // Codigo del Constructor
   }
@@ -157,7 +157,7 @@ export class SectoresGobiernoComponent implements OnInit, OnChanges {
   * Objetivo: makeToast in the method header API
   ****************************************************************************/
   makeToast() {
-    this.showToast(this.type, this.title, this.content);
+    this._notificacionesService.showToast(this.type, this.title, this.content);
   } // FIN | makeToast
 
 
@@ -186,8 +186,6 @@ export class SectoresGobiernoComponent implements OnInit, OnChanges {
       showCloseButton: this.isCloseButton,
       bodyOutputType: BodyOutputType.TrustedHtml,
     };
-    // this._toasterService.popAsync(toast);
-    this._toasterService.pop(toast);
   } // FIN | showToast
 
 
@@ -299,7 +297,7 @@ export class SectoresGobiernoComponent implements OnInit, OnChanges {
     this._serviceSectoresGobiernoService.getAllSectoresGobierno().subscribe(
       result => {
         if (result.status !== 200) {
-          this.showToast('error', 'Error al Obtener la Información de todos los Sectores de Gobierno', result.message);
+          this._notificacionesService.showToast('error', 'Error al Obtener la Información de todos los Sectores de Gobierno', result.message);
           this.JsonReceptionAllSectoresGobierno = [];
         } else if (result.status === 200) {
           this.JsonReceptionAllSectoresGobierno = result.data;
@@ -322,7 +320,7 @@ export class SectoresGobiernoComponent implements OnInit, OnChanges {
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información de todos los Sectores de Gobierno', JSON.stringify(error.message));
+        this._notificacionesService.showToast('error', 'Error al Obtener la Información de todos los Sectores de Gobierno', JSON.stringify(error.message));
       },
     );
   } // FIN | getAllSectoresGobiernoService
@@ -343,14 +341,14 @@ export class SectoresGobiernoComponent implements OnInit, OnChanges {
     this._serviceSectoresGobiernoService.getfindByIdSector(idSector).subscribe(
       result => {
         if (result.status !== 200) {
-          this.showToast('error', 'Error al Obtener la Información del Sector de Gobierno', result.message);
+          this._notificacionesService.showToast('error', 'Error al Obtener la Información del Sector de Gobierno', result.message);
           this.JsonReceptionSectorGobierno = [];
         } else if (result.status === 200) {
           this.JsonReceptionSectorGobierno = result.data;
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información del Sector de Gobierno', JSON.stringify(error.message));
+        this._notificacionesService.showToast('error', 'Error al Obtener la Información del Sector de Gobierno', JSON.stringify(error.message));
       },
     );
   } // FIN | getfindByIdSectorService
@@ -371,7 +369,7 @@ export class SectoresGobiernoComponent implements OnInit, OnChanges {
     this._serviceSectoresGobiernoService.getfindByIdNivelSector(idSNivelector).subscribe(
       result => {
         if (result.status !== 200) {
-          this.showToast('error', 'Error al Obtener la Información de Sector Nivel 1', result.message);
+          this._notificacionesService.showToast('error', 'Error al Obtener la Información de Sector Nivel 1', result.message);
           this.JsonReceptionSectorByNivelGobierno = [];
           this.nodes = [];
         } else if (result.status === 200) {
@@ -380,7 +378,7 @@ export class SectoresGobiernoComponent implements OnInit, OnChanges {
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información de Sectores de Gobierno', JSON.stringify(error.message));
+        this._notificacionesService.showToast('error', 'Error al Obtener la Información de Sectores de Gobierno', JSON.stringify(error.message));
       },
     );
   } // FIN | getfindByIdNivelSectorService
@@ -409,7 +407,7 @@ export class SectoresGobiernoComponent implements OnInit, OnChanges {
         this._serviceSectoresGobiernoService.getfindByIdNivelSectorAndSectorPadreId(2, element.idSector).subscribe(
           result => {
             if (result.status !== 200) {
-              this.showToast('error', 'Error al Obtener la Información de los Sectores Nivel 2', result.message);
+              this._notificacionesService.showToast('error', 'Error al Obtener la Información de los Sectores Nivel 2', result.message);
               this.JsonReceptionSectorByNivelGobierno2 = [];
               this.arrayPush = [];
             } else if (result.status === 200) {
@@ -451,7 +449,7 @@ export class SectoresGobiernoComponent implements OnInit, OnChanges {
             }
           },
           error => {
-            this.showToast('error', 'Error al Obtener la Información de Secotores de Gobierno', JSON.stringify(error.message));
+            this._notificacionesService.showToast('error', 'Error al Obtener la Información de Secotores de Gobierno', JSON.stringify(error.message));
           },
         );
       }, 3000);
@@ -486,23 +484,23 @@ export class SectoresGobiernoComponent implements OnInit, OnChanges {
         this._serviceSectoresGobiernoService.saveActividadSectorGobierno(this._activitySectoresGobiernoModel).subscribe(
           result => {
             if (result.status !== 200) {
-              this.showToast('error', 'Error al Ingresar la Información del Sector de Gobierno asociado al Proyecto', JSON.stringify(result.message));
+              this._notificacionesService.showToast('error', 'Error al Ingresar la Información del Sector de Gobierno asociado al Proyecto', JSON.stringify(result.message));
             } else if (result.status === 200) {
               // Evalua los resultados de la query
               if (result.findRecord === false) {
-                this.showToast('error', 'Error al Ingresar la Información del Sector de Gobierno asociado al Proyecto', JSON.stringify(result.message));
+                this._notificacionesService.showToast('error', 'Error al Ingresar la Información del Sector de Gobierno asociado al Proyecto', JSON.stringify(result.message));
               } else {
-                this.showToast('success', 'Sector de Gobierno asociado al Proyecto', JSON.stringify(result.message));
+                this._notificacionesService.showToast('success', 'Sector de Gobierno asociado al Proyecto', JSON.stringify(result.message));
               }
             }
           },
           error => {
-            this.showToast('error', 'Error al ingresar el Sector de Gobierno al Proyecto', JSON.stringify(error.message));
+            this._notificacionesService.showToast('error', 'Error al ingresar el Sector de Gobierno al Proyecto', JSON.stringify(error.message));
           },
         );
       }
     } else {
-      this.showToast('error', 'Error al ingresar la Información Sectores de Gobierno', 'Debes de seleccionar los sectores de Gobierno, para continuar');
+      this._notificacionesService.showToast('error', 'Error al ingresar la Información Sectores de Gobierno', 'Debes de seleccionar los sectores de Gobierno, para continuar');
       return -1;
     }
   } // FIN | saveSectoresGobierno

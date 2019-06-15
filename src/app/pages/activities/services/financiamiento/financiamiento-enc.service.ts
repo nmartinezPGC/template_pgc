@@ -7,11 +7,11 @@
 * @fecha 21-05-2019
 */
 
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { SystemEndPointsService } from '../../../../shared/system-end-points.service';
 import { SystemPropertiesService } from '../../../../shared/system-properties.service';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -117,4 +117,41 @@ export class FinanciamientoEncService {
       params: { 'tokenApi': this.tokenHeader },
     });
   } // FIN | FND-00004
+
+
+  /****************************************************************************
+    * Funcion: FND-00005
+    * Fecha: 14-06-2019
+    * Descripcion: Metodo para Editar datos de Financiamiento Encabezado
+    * Objetivo: Editar Financiamiento Encabezado al Proyecto
+    * Params: { idActividadFinancEnc, jsonSendActividadFinanciamientoEnc }
+    ****************************************************************************/
+  editActividadFinanciamientoEnc(idActividadFinancEnc: number, jsonSendActividadFinanciamientoEnc: any): Observable<any> {
+    const paramsSendId: number = idActividadFinancEnc;
+    const paramsSendBody: any = jsonSendActividadFinanciamientoEnc;
+
+    // Retorno de la Funcion
+    return this._http.put(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 68.100) + paramsSendId, paramsSendBody, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  } // FIN | FND-00005
+
+
+  /****************************************************************************
+    * Funcion: FND-00006
+    * Fecha: 14-06-2019
+    * Descripcion: Metodo para Listar datos de Financiamiento Encabezado
+    * Objetivo: Listar Financiamiento Encabezado al Proyecto
+    * Params: { idActividad }
+    ****************************************************************************/
+  getActividadFinanciamientoEncByIdActividad(idActividadFinancEnc: number): Observable<any> {
+    const paramsSendId: number = idActividadFinancEnc;
+
+    // Retorno de la Funcion
+    return this._http.get(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 68.101) + paramsSendId, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  } // FIN | FND-00006
 }
