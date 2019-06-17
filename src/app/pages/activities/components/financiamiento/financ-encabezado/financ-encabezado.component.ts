@@ -25,7 +25,7 @@ export class FinancEncabezadoComponent implements OnInit, OnChanges {
   @Input() idProyectoTab: number;
   @Input() idUsuarioTab: number;
   @Input() codigoProyectoTab: string;
-  @Input() idActividadFinancEnc: string;
+  @Input() idActividadFinancEnc: number;
   @ViewChild('montoActividad') montoActividadInput: ElementRef;
 
   // Variables de Recepcion de Información
@@ -88,40 +88,44 @@ export class FinancEncabezadoComponent implements OnInit, OnChanges {
 
     // Recepcion de Información
     this.getAllMonedasActividadService();
-
-    this.getActividadFinanciamientoEncByIdActividadService(this.idProyectoTab);
   } // FIN | ngOnInit
 
 
-   /**
-   * Metodo que recibe los cambios de vairables
-   */
+  /**
+  * Metodo que recibe los cambios de vairables
+  */
   ngOnChanges() {
     // Verificacion de informacion de Compromiso
     // if (this.JsonReceptionFinancimientoEncProyecto.idActividadFinancEnc !== 0) {
-      // Carga el Model con los datos enviados
-      // this._activityFinanciamientoEncModel.idActividadFinancEnc = this.JsonReceptionFinancimientoEncProyecto.idActividadFinancEnc;
-      // this._activityFinanciamientoEncModel.idTipoTransaccionSend = this.JsonCompromisosSelect.idTipoTransaccion;
-      // this._activityFinanciamientoEncModel.idTipoTransaccion = { idTipoTransaccion: this._activityFinanciamientoDetCompromisosModel.idTipoTransaccionSend };
-      // this._activityFinanciamientoEncModel.montoActividad = this.JsonReceptionFinancimientoEncProyecto.montoActividad;
-      // this._activityFinanciamientoEncModel.idMonedaActividadSend = this.JsonCompromisosSelect.idMonedaActividad;
-      // this._activityFinanciamientoEncModel.idMonedaActividad = { idMonedaActividad: this._activityFinanciamientoDetCompromisosModel.idMonedaActividadSend };
-      // this._activityFinanciamientoEncModel.codigoFinancCompromiso = this.JsonCompromisosSelect.codigoFinancCompromiso;
-      // this.date6 = new Date(this.JsonCompromisosSelect.fechaTransaccion);
-      // this._activityFinanciamientoEncModel.fechaTransaccion = this.date6;
+    // Carga el Model con los datos enviados
+    // this._activityFinanciamientoEncModel.idActividadFinancEnc = this.JsonReceptionFinancimientoEncProyecto.idActividadFinancEnc;
+    // this._activityFinanciamientoEncModel.idTipoTransaccionSend = this.JsonCompromisosSelect.idTipoTransaccion;
+    // this._activityFinanciamientoEncModel.idTipoTransaccion = { idTipoTransaccion: this._activityFinanciamientoDetCompromisosModel.idTipoTransaccionSend };
+    // this._activityFinanciamientoEncModel.montoActividad = this.JsonReceptionFinancimientoEncProyecto.montoActividad;
+    // this._activityFinanciamientoEncModel.idMonedaActividadSend = this.JsonCompromisosSelect.idMonedaActividad;
+    // this._activityFinanciamientoEncModel.idMonedaActividad = { idMonedaActividad: this._activityFinanciamientoDetCompromisosModel.idMonedaActividadSend };
+    // this._activityFinanciamientoEncModel.codigoFinancCompromiso = this.JsonCompromisosSelect.codigoFinancCompromiso;
+    // this.date6 = new Date(this.JsonCompromisosSelect.fechaTransaccion);
+    // this._activityFinanciamientoEncModel.fechaTransaccion = this.date6;
     // } else {
-      // Inicializacion del Modelo
-      // Inicializacion del Modelo
-      // this._activityFinanciamientoEncModel = new ActivityFinanciamientoEncModel(
-      //   0, null, // Datos Generales
-      //   null, 0, null, // Relacionales
-      //   null, null, // Transaccion
-      //   true, null, null, // Auditoria
-      // );
+    // Inicializacion del Modelo
+    // Inicializacion del Modelo
+    // this._activityFinanciamientoEncModel = new ActivityFinanciamientoEncModel(
+    //   0, null, // Datos Generales
+    //   null, 0, null, // Relacionales
+    //   null, null, // Transaccion
+    //   true, null, null, // Auditoria
+    // );
 
-      // Fecha
-      // this.date6 = null;
+    // Fecha
+    // this.date6 = null;
     // }
+    // this.idActividadFinancEnc = 30;
+    // console.log('En change Encabezado ' + this.idProyectoTab);
+    if (this.idProyectoTab !== undefined) {
+      this.getActividadFinanciamientoEncByIdActividadService(this.idProyectoTab);
+    }
+
   } // FIN | ngOnChanges
 
 
@@ -178,14 +182,14 @@ export class FinancEncabezadoComponent implements OnInit, OnChanges {
 
 
   /****************************************************************************
-  * Funcion: saveFinanciamientoEncService
+  * Funcion: newFinanciamientoEncService
   * Object Number: FND-003
   * Fecha: 21-05-2019
-  * Descripcion: Method saveFinanciamientoEncService of the Class
+  * Descripcion: Method newFinanciamientoEncService of the Class
   * Objetivo: Registrar el Encabezado del Financiamiento
   * Params: { _activityFinanciamientoEncModel }
   ****************************************************************************/
-  saveFinanciamientoEncService() {
+  newFinanciamientoEncService() {
     // Asignacion de nuevos valores de Modelo
     this._activityFinanciamientoEncModel.idMonedaActividad = { idMonedaActividad: this._activityFinanciamientoEncModel.idMoneda };
     this._activityFinanciamientoEncModel.idActividad = { idActividad: this.idProyectoTab };
@@ -254,8 +258,17 @@ export class FinancEncabezadoComponent implements OnInit, OnChanges {
           this.JsonReceptionFinancimientoEncProyecto = [];
         } else if (result.status === 200) {
           this.JsonReceptionFinancimientoEncProyecto = result.data;
+          // Carga de Generales
+          this._activityFinanciamientoEncModel.idActividadFinancEnc = this.JsonReceptionFinancimientoEncProyecto[0].idActividadFinancEnc;
+          this._activityFinanciamientoEncModel.idActividad = this.JsonReceptionFinancimientoEncProyecto[0].idActividad;
+          this._activityFinanciamientoEncModel.montoActividad = this.JsonReceptionFinancimientoEncProyecto[0].montoActividad;
+          this._activityFinanciamientoEncModel.codigoFinancEnc = this.JsonReceptionFinancimientoEncProyecto[0].codigoFinancEnc;
+          this.idActividadFinancEnc = Number(this.JsonReceptionFinancimientoEncProyecto[0].idActividadFinancEnc);
 
-          this._activityFinanciamientoEncModel.montoActividad =  1000;
+          // Carga de Relaciones
+          this._activityFinanciamientoEncModel.idMoneda = this.JsonReceptionFinancimientoEncProyecto[0].idMonedaActividad.idMonedaActividad;
+          this.date6 = new Date(this.JsonReceptionFinancimientoEncProyecto[0].fechaTransaccion);
+          this._activityFinanciamientoEncModel.fechaTransaccion = this.date6;
         }
       },
       error => {
@@ -263,4 +276,69 @@ export class FinancEncabezadoComponent implements OnInit, OnChanges {
       },
     );
   } // FIN | FND-005
+
+
+  /****************************************************************************
+  * Funcion: saveFinanciamientoEncService
+  * Object Number: FND-006
+  * Fecha: 13-06-2019
+  * Descripcion: Method saveFinanciamientoEncService of the Class
+  * Objetivo: Ejecuta la funcion del CRUD analizada
+  * Params: { }
+  ****************************************************************************/
+  saveFinanciamientoEncService() {
+    // Evalua que el ID de Financiamiento Encabezado sea distinto a 0
+    if (this._activityFinanciamientoEncModel.idActividadFinancEnc !== 0) {
+      // Edita la información de Encabezado
+      this.editFinanciamientoEncService(this._activityFinanciamientoEncModel.idActividadFinancEnc, this._activityFinanciamientoEncModel);
+    } else {
+      // Ingresa la información de Encabezado
+      this.newFinanciamientoEncService();
+    }
+  } // FIN | FND-006
+
+
+  /****************************************************************************
+  * Funcion: editFinanciamientoEncService
+  * Object Number: FND-007
+  * Fecha: 14-06-2019
+  * Descripcion: Method editFinanciamientoEncService of the Class
+  * Objetivo: Actualizar el Encabezado del Financiamiento
+  * Params: { idActividadFinancEnc, _activityFinanciamientoEncModel }
+  ****************************************************************************/
+  editFinanciamientoEncService(idActividadFinancEnc: number, _activityFinanciamientoEncModel: any) {
+    // Asignacion de nuevos valores de Modelo
+    this._activityFinanciamientoEncModel.idMonedaActividad = { idMonedaActividad: this._activityFinanciamientoEncModel.idMoneda };
+    this._activityFinanciamientoEncModel.idActividad = { idActividad: this.idProyectoTab };
+
+    // Evaluacion de Datos de Financiamiento de Proyecto
+    if (this._activityFinanciamientoEncModel.montoActividad !== 0) {
+
+      if (this._activityFinanciamientoEncModel.idMoneda) {
+        // Ejecuta el Servicio de invocar la actualizacion de Encabezado de Financiamiento
+        this._financiamientoEncService.editActividadFinanciamientoEnc(idActividadFinancEnc, this._activityFinanciamientoEncModel).subscribe(
+          result => {
+            if (result.status !== 200) {
+              this._notificacionesService.showToast('error', 'Error al Actualizar la Información de Encabezado de Financiamiento', result.message);
+            } else if (result.status === 200) {
+              if (result.findRecord === true) {
+                this._notificacionesService.showToast('default', 'Encabezado de Financiamiento', result.message);
+                this.idActividadFinancEnc = result.data.idActividadFinancEnc;
+              } else {
+                this._notificacionesService.showToast('error', 'Error al Actualizar la Información de Encabezado de Financiamiento', result.message);
+              }
+            }
+          },
+          error => {
+            this._notificacionesService.showToast('error', 'Error al Actualizar la Información de Encabezado de Financiamiento', JSON.stringify(error.error.message));
+          },
+        );
+      } else {
+        this._notificacionesService.showToast('error', 'Error al Actualizar la Información de Moneda de Financiamiento', 'Debes de ingresar monenda de Financiamiento del Proyecto, para continuar');
+      }
+    } else {
+      this._notificacionesService.showToast('error', 'Error al Actualizar la Información de Encabezado de Financiamiento', 'Debes de ingresar el Costo Total del Proyecto, para continuar');
+      this.montoActividadInput.nativeElement.focus();
+    }
+  } // FIN | FND-007
 }

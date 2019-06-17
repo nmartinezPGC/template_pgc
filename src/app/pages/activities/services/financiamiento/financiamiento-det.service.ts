@@ -156,10 +156,10 @@ export class FinanciamientoDetService {
   * Fecha: 09-06-2019
   * Descripcion: Metodo para obtener el Detalle de Financimiento
   * Objetivo: Detalle de Financiamiento
-  * Params: { idActividad }
+  * Params: { idActividadFinancEnc }
   ****************************************************************************/
-  getFindByIdActividadDetalle(idActividad: number): Observable<any> {
-    const paramsSend: number = idActividad;
+  getFindByIdActividadDetalle(idActividadFinancEnc: number): Observable<any> {
+    const paramsSend: number = idActividadFinancEnc;
 
     // Retorno de la Funcion
     return this._http.get(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 70.100) + paramsSend, {
@@ -167,6 +167,64 @@ export class FinanciamientoDetService {
       params: { 'tokenApi': this.tokenHeader },
     });
   } // FIN | FND-00008
+
+
+  /****************************************************************************
+  * Funcion: FND-00009
+  * Fecha: 09-06-2019
+  * Descripcion: Metodo para obtener el Detalle de Financimiento
+  * Objetivo: Detalle de Financiamiento
+  * Params: { codigoFinancDet }
+  ****************************************************************************/
+  getFindByCodigoFinancDet(codigoFinancDet: string): Observable<any> {
+    const paramsSend: string = codigoFinancDet;
+
+    // Retorno de la Funcion
+    return this._http.get(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 70.101) + paramsSend, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  } // FIN | FND-00009
+
+
+  /****************************************************************************
+  * Funcion: FND-00010
+  * Fecha: 29-05-2019
+  * Descripcion: Metodo para ingresar datos de Financiamiento Detalle
+  * Objetivo: Ingresar Financiamiento Detalle al Proyecto
+  * Params: { idActividadFinancDet, jsonSendActividadFinanciamientoDet }
+  ****************************************************************************/
+  editActividadFinanciamientoDet(idActividadFinancDet: number, jsonSendActividadFinanciamientoDet: any): Observable<any> {
+    const paramsSend1: number = idActividadFinancDet;
+    const paramsSend2: any = jsonSendActividadFinanciamientoDet;
+
+    // Retorno de la Funcion
+    return this._http.put(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 70.102) + paramsSend1, paramsSend2, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  } // FIN | FND-00010
+
+
+  /****************************************************************************
+  * Funcion: FND-00011
+  * Fecha: 16-06-2019
+  * Descripcion: Metodo para obtener el Detalle de Financimiento
+  * Objetivo: Detalle de Financiamiento, con Socio al Desarrollo
+  * Params: { idActividadFinancEnc, idSocioDesarrollo }
+  ****************************************************************************/
+  getFindByIdActividadEncAndSocioDesarrollo(idActividadFinancEnc: number, idSocioDesarrollo: number): Observable<any> {
+    const paramsSend1: number = idActividadFinancEnc;
+    const paramsSend2: number = idSocioDesarrollo;
+
+    const concatUri: any = paramsSend1 + '/idSocioDesarrollo/' + paramsSend2;
+
+    // Retorno de la Funcion
+    return this._http.get(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 70.103) + concatUri, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  } // FIN | FND-00011
 
 
   /**

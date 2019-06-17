@@ -8,9 +8,10 @@
       <div class="title">
         Compromisos <img src="../../../../../../assets/icons/forms/contract_24.png" alt="">
       </div>
-
       <div class="description">
-        <table class="table table-striped table-hover">
+        <img src="../../../../../../../assets/images/loading.gif" *ngIf="showLoader == true"
+          style="width: 20%; margin-left: 40%" alt="Cargando...">
+        <table class="table table-striped table-hover" *ngIf="showLoader == false">
           <thead>
             <tr>
               <th scope="col">#</th>

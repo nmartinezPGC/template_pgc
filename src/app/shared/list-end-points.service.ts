@@ -1049,7 +1049,7 @@ export class ListEndPointsService {
         groupEndPoint: 'actividadesCRUDGroup',
         descEndPoint: 'Eliminar el dato de Detalle de Financiamiento enviado y asociarlo al Proyecto',
       },
-      findByIdActividadFinancEncDetalle: {
+      findByIdActividadFinancEncDet: {
         id: 70.100,
         nameEndpoint: 'findByIdActividadFinancEncDetalle',
         urlEndPoint: '/mant-actividades/financiamiento/detalle/findByIdActividadFinancEnc/',
@@ -1057,6 +1057,30 @@ export class ListEndPointsService {
         groupEndPoint: 'actividadesCRUDGroup',
         descEndPoint: 'Listar el Detalle de financiamiento del Proyecto',
       },
+      findByByCodigoFinancDet: {
+        id: 70.101,
+        nameEndpoint: 'findByIdActividadFinancEncDetalle',
+        urlEndPoint: '/mant-actividades/financiamiento/detalle/findByCodigoFinancDet/',
+        params: '{ codigoFinancDet }',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Listar el Detalle de financiamiento del Proyecto',
+      },
+      editActividadFinanciamientoDet: {
+        id: 70.102,
+        nameEndpoint: 'editActividadFinanciamientoDet',
+        urlEndPoint: '/mant-actividades/financiamiento/detalle/edit/',
+        params: '{ idActividadFinancDet }',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Actualiza el Detalle de financiamiento del Proyecto',
+      },
+      findByIdActividadFinancEncDetAndIdSocioDesarrollo: {
+        id: 70.103,
+        nameEndpoint: 'findByIdActividadFinancEncDetalle',
+        urlEndPoint: '/mant-actividades/financiamiento/detalle/findByIdActividadFinancEncAndIdSocioDesarollo/',
+        params: '{ idActividadFinancEnc, idSocioDesarrollo }',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Listar el Detalle de financiamiento del Proyecto, con el Socio al Desarrollo',
+      }, // Modulo de Financiamiento de Proyectos | Compromisos
       newActividadFinanciamientoDetCompromiso: {
         id: 70.200,
         nameEndpoint: 'newActividadFinanciamientoDetCompromiso',

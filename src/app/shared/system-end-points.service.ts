@@ -475,7 +475,16 @@ export class SystemEndPointsService extends ListEndPointsService {
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActividadFinanciamientoDet.urlEndPoint;
             break;
           case 70.100:
-            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdActividadFinancEncDetalle.urlEndPoint;
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdActividadFinancEncDet.urlEndPoint;
+            break;
+          case 70.101:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByByCodigoFinancDet.urlEndPoint;
+            break;
+          case 70.102:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.editActividadFinanciamientoDet.urlEndPoint;
+            break;
+          case 70.103:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdActividadFinancEncDetAndIdSocioDesarrollo.urlEndPoint;
             break;
           case 70.200: // NAM | 2019-06-06 | Mapeo de Compromisos, Desembolsos y gastos
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.newActividadFinanciamientoDetCompromiso.urlEndPoint;
