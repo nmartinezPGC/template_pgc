@@ -69,8 +69,8 @@ export class FinancDetalleCompromisosComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
-    //Add '${implements OnChanges}' to the class.
+    // Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
+    // Add '${implements OnChanges}' to the class.
     // Carga los items de Compromisos registrados
     if (this.idActividadFinancDet !== undefined) {
       this.getAllFinanciamientoDetCompromisoService(this.idActividadFinancDet);
