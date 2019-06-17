@@ -16,6 +16,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FinancDetalleDesembolsosComponent implements OnInit {
 
+  // Variables de loader
+  public showLoader: boolean = true;
+
   constructor() { }
 
   ngOnInit() {

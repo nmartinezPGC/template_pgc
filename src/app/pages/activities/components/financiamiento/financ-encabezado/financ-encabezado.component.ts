@@ -25,7 +25,7 @@ export class FinancEncabezadoComponent implements OnInit, OnChanges {
   @Input() idProyectoTab: number;
   @Input() idUsuarioTab: number;
   @Input() codigoProyectoTab: string;
-  @Input() idActividadFinancEnc: string;
+  @Input() idActividadFinancEnc: number;
   @ViewChild('montoActividad') montoActividadInput: ElementRef;
 
   // Variables de Recepcion de Información
@@ -88,8 +88,6 @@ export class FinancEncabezadoComponent implements OnInit, OnChanges {
 
     // Recepcion de Información
     this.getAllMonedasActividadService();
-
-    this.getActividadFinanciamientoEncByIdActividadService(this.idProyectoTab);
   } // FIN | ngOnInit
 
 
@@ -122,6 +120,12 @@ export class FinancEncabezadoComponent implements OnInit, OnChanges {
     // Fecha
     // this.date6 = null;
     // }
+    // this.idActividadFinancEnc = 30;
+    // console.log('En change Encabezado ' + this.idProyectoTab);
+    if (this.idProyectoTab !== undefined) {
+      this.getActividadFinanciamientoEncByIdActividadService(this.idProyectoTab);
+    }
+
   } // FIN | ngOnChanges
 
 
@@ -259,6 +263,7 @@ export class FinancEncabezadoComponent implements OnInit, OnChanges {
           this._activityFinanciamientoEncModel.idActividad = this.JsonReceptionFinancimientoEncProyecto[0].idActividad;
           this._activityFinanciamientoEncModel.montoActividad = this.JsonReceptionFinancimientoEncProyecto[0].montoActividad;
           this._activityFinanciamientoEncModel.codigoFinancEnc = this.JsonReceptionFinancimientoEncProyecto[0].codigoFinancEnc;
+          this.idActividadFinancEnc = Number(this.JsonReceptionFinancimientoEncProyecto[0].idActividadFinancEnc);
 
           // Carga de Relaciones
           this._activityFinanciamientoEncModel.idMoneda = this.JsonReceptionFinancimientoEncProyecto[0].idMonedaActividad.idMonedaActividad;
@@ -284,10 +289,10 @@ export class FinancEncabezadoComponent implements OnInit, OnChanges {
   saveFinanciamientoEncService() {
     // Evalua que el ID de Financiamiento Encabezado sea distinto a 0
     if (this._activityFinanciamientoEncModel.idActividadFinancEnc !== 0) {
-      // console.log('Esta Editando');
+      // Edita la información de Encabezado
       this.editFinanciamientoEncService(this._activityFinanciamientoEncModel.idActividadFinancEnc, this._activityFinanciamientoEncModel);
     } else {
-      // console.log('Esta Ingresando');
+      // Ingresa la información de Encabezado
       this.newFinanciamientoEncService();
     }
   } // FIN | FND-006

@@ -102,6 +102,8 @@ export class FinancDetalleCompromisosFormComponent implements OnInit, OnChanges 
    */
   ngOnChanges() {
     // Verificacion de informacion de Compromiso
+    // console.log('En Modal de Compromisos ' + JSON.stringify(this.JsonCompromisosSelect));
+
     if (this.JsonCompromisosSelect.idActividadFinancDetCompromiso !== undefined) {
       // Carga el Model con los datos enviados
       this._activityFinanciamientoDetCompromisosModel.idActividadFinancDetCompromiso = this.JsonCompromisosSelect.idActividadFinancDetCompromiso;
@@ -213,10 +215,10 @@ export class FinancDetalleCompromisosFormComponent implements OnInit, OnChanges 
 
 
   /****************************************************************************
-  * Funcion: saveFinanciamientoDetCompromisoService
+  * Funcion: newFinanciamientoDetCompromisoService
   * Object Number: FND-003
   * Fecha: 21-05-2019
-  * Descripcion: Method saveFinanciamientoDetCompromisoService of the Class
+  * Descripcion: Method newFinanciamientoDetCompromisoService of the Class
   * Objetivo: Registrar Compromisos del Proyecto
   * Params: { _activityFinanciamientoEncModel }
   ****************************************************************************/
