@@ -27,6 +27,19 @@
     }
   }
 
+  nb-card-header {
+    background-color: #204f85;
+    color: rgb(255, 255, 255);
+    font-size: 17px;
+  }
+
+  @media screen and (min-width: 992px) {
+    .modal-content {
+      width: 120% !important;
+      margin-left: -10%;
+    }
+  }
+
   /*
 Seccion de formularios
   */
