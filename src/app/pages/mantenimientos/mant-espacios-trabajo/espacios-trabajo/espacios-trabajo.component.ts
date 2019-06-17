@@ -355,7 +355,7 @@ export class EspaciosTrabajoComponent implements OnInit {
   /****************************************************************************
   * Funcion: validateTipoOganizacion(_grupoModel: any)
   * Object Number: 0005
-  * Fecha: 22-01-2019
+  * Feca: 22-01-2019
   * Descripcion: Method para validar que los campos esten llenos
   * Objetivo: validatePerfiles  procurar que llegue a la base de datos toda la informacion de tipo de organizacion.
   ****************************************************************************/
