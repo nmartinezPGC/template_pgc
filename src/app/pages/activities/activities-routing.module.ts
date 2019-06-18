@@ -5,6 +5,7 @@ import { ActivitiesComponent } from './activities.component';
 import { NewActivityComponent } from './new-activity/new-activity.component';
 import { DatosGeneralesComponent } from './components/datos-generales/datos-generales.component';
 import { GeolocalizacionComponent } from './components/geolocalizacion/geolocalizacion.component';
+import { UbicacionComponent } from './components/ubicacion/ubicacion.component';
 
 const routes: Routes = [{
   path: '',
@@ -21,6 +22,10 @@ const routes: Routes = [{
     {
       path: 'geolocalizacion',
       component: GeolocalizacionComponent,
+    },
+    {
+      path: 'ubicacion',
+      component: UbicacionComponent,
     },
   ],
 }];

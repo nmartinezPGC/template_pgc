@@ -21,6 +21,7 @@ export class ActivityFinanciamientoDetCompromisosModel {
         public idMonedaActividadSend: number,
 
         public idActividadFinancDet: { idActividadFinancDet: number },
+        public idActividadFinancDetSend: number,
 
         // Transaccion
         public montoCompromiso: number,

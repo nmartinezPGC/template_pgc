@@ -41,7 +41,7 @@ import { MessageModule } from 'primeng/message';
 import { ListboxModule } from 'primeng/listbox';
 import { RecursosProyectoComponent } from './components/recursos-proyecto/recursos-proyecto.component';
 import { FileUploadModule } from 'primeng/fileupload';
-import { DropdownModule, EditorModule, AutoCompleteModule, KeyFilterModule, CalendarModule, DialogModule, InputMaskModule, AccordionModule } from 'primeng/primeng';
+import { DropdownModule, EditorModule, AutoCompleteModule, KeyFilterModule, CalendarModule, DialogModule, InputMaskModule, AccordionModule, TabViewModule } from 'primeng/primeng';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { FilterPipe } from './pipes/filter.pipe';
@@ -76,8 +76,12 @@ import { NgxCurrencyModule } from 'ngx-currency';
 import { FinancDetalleCompromisosFormComponent } from './components/financiamiento/financ-detalle/financ-detalle-compromisos/financ-detalle-compromisos-form/financ-detalle-compromisos-form.component';
 import { FinancDetalleDesembolsosFormComponent } from './components/financiamiento/financ-detalle/financ-detalle-desembolsos/financ-detalle-desembolsos-form/financ-detalle-desembolsos-form.component';
 import { FinancDetalleGastosFormComponent } from './components/financiamiento/financ-detalle/financ-detalle-gastos/financ-detalle-gastos-form/financ-detalle-gastos-form.component';
+
 import { DocumentosComponent } from './components/recursos-proyecto/documentos/documentos.component';
 import { LinkComponent } from './components/recursos-proyecto/link/link.component';
+
+import { ToastModule } from 'primeng/toast';
+
 
 export const customCurrencyMaskConfig = {
   align: 'right',
@@ -123,6 +127,8 @@ export const customCurrencyMaskConfig = {
     InputMaskModule,
     NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
     AccordionModule, // NAM|2019-05-28
+    TabViewModule, // NAM|2019-06-03
+    ToastModule, // NAM|2019-06-03
   ],
   declarations: [
     ...routedComponents,

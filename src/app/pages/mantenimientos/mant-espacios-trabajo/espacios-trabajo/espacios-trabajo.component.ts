@@ -10,16 +10,14 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster';
 import { Router } from '@angular/router';
 import { EspaciosTrabajoService } from '../../services/espacio-trabajo.service';
-import { EspaciosTrabajoModel} from '../../models/espacio.trabajo.model';
+import { EspaciosTrabajoModel } from '../../models/espacio.trabajo.model';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { delay } from 'q';
 import { LoginService } from '../../../../@theme/components/auth/services/login.service';
-import { OrganizacionModalComponent } from '../organizacion/organizaciones.modal.component';
+import { EspacioModalTrabajoComponent } from './espacio-modal-trabajo.component';
+import { templateJitUrl } from '@angular/compiler';
+import { UserService } from '../../../../@core/data/users.service';
 import { OrganizacionComponent } from '../organizacion/organizacion.component';
-import { OrganizacionesComponent } from '../../../activities/components/organizaciones/organizaciones.component';
-
-
-
 
 @Component({
   selector: 'ngx-espacios-trabajo',
@@ -29,17 +27,21 @@ import { OrganizacionesComponent } from '../../../activities/components/organiza
 
 })
 export class EspaciosTrabajoComponent implements OnInit {
-  @Input() idEspacioTrabajo;
+  // Se comenta; ya que la variable input solo carga en la Modal
+  // @Input() idEspacioTrabajo;
 
   public _espaciostrabajoModel: EspaciosTrabajoModel;
 
   // Json reception
   public JsonReceptionEstados: any;
   public JsonReceptionTipo: any;
-  public JsonReceptionListEspaciostrabajo: any;
+  public JsonReceptionListEspacioTrabajo: any;
   public JsonReceptionPaises: any;
   public JsonReceptionF
   private _toasterService: ToasterService;
+  public JsonReceptionEspacioTrabajo: any;
+  public JsonReceptionFyByEspacioTrabajo: any;
+  public JsonReceptionListEspaciostrabajo: any;
 
 
 
@@ -79,151 +81,150 @@ export class EspaciosTrabajoComponent implements OnInit {
   isDuplicatesPrevented = false;
   isCloseButton = true;
   settings: any;
+  arrayEspacioTrabajo: any;
   public responsedata: any;
 
- // levanta la modal de mantenimineto de espacios de trabjo/consulta
- showLargeModal(FindByIdEspacioTrabajo: number) {
+  // levanta la modal de mantenimineto de espacios de trabjo/consulta
+  showLargeModal(idEspacioTrabajo: number) {
+    const activeModal = this.modalService.open(EspacioModalTrabajoComponent, {
+      size: 'lg',
+      backdrop: 'static',
+      container: 'nb-layout',
+    });
 
-  const activeModal = this.modalService.open(OrganizacionModalComponent, { size: 'lg', container: 'nb-layout' });
-  // console.log("paso por aqui 2");
+    activeModal.componentInstance.modalHeader = 'Large Modal Parametro ';
+    // Se cambia a un nombre que hace mencion de los parametros enviados por la Modal
+    activeModal.componentInstance.modalidEspacioTrabajo = idEspacioTrabajo;
+    // activeModal.componentInstance.idEspacioTrabajo = idEspacioTrabajo;
+    // activeModal.componentInstance.JsonReceptionFyByEspaciostrabajo = this.JsonReceptionFyByEspaciotrabajo;
 
- activeModal.componentInstance.modalHeader = 'Large Modal Parametro';
- // console.log("paso por aqui 3");
+    // this.data3 = this.JsonReceptionEspaciotrabajo;
+    // this.arrayEspaciostrabajo = new Array();
 
-  activeModal.componentInstance.idEspacioTrabajo = this.idEspacioTrabajo;
-  // console.log("paso por aqui 4");
+  }
 
+  constructor(public _espacioTrabajoService: EspaciosTrabajoService,
+    protected _router: Router, private modalService: NgbModal) {
+    this.responsedata = { 'error': false, 'msg': 'error campos solicitado' };
+  }
 
- // activeModal.componentInstance.JsonReceptionListEspaciostrabajo = this.JsonReceptionListEspaciostrabajo;
-
-  this.data3 = this.JsonReceptionListEspaciostrabajo;
-  this.arrayOrganizacion = new Array();
-}
-
-  constructor(public _espaciosTrabajoService: EspaciosTrabajoService,
-    protected _router: Router, private modalService: NgbModal ) {
-      this.responsedata = { 'error': false, 'msg': 'error campos solicitado' };
-     }
-
-/****************************************************************************
-* Funcion: makeToast
-* Object Number: 003
-* Fecha: 16-08-2018
-* Descripcion: Method makeToast of the Class
-* Objetivo: makeToast in the method header API
-****************************************************************************/
-makeToast() {
-  this.showToast(this.type, this.title, this.content);
-} // FIN | makeToast
-
-/****************************************************************************
-  * Funcion: showToast
-  * Object Number: 004
+  /****************************************************************************
+  * Funcion: makeToast
+  * Object Number: 003
   * Fecha: 16-08-2018
-  * Descripcion: Method showToast of the Class
-  * Objetivo: showToast in the method header API
+  * Descripcion: Method makeToast of the Class
+  * Objetivo: makeToast in the method header API
   ****************************************************************************/
-private showToast(type: string, title: string, body: string) {
-  this.config = new ToasterConfig({
-    positionClass: this.position,
-    timeout: this.timeout,
-    newestOnTop: this.isNewestOnTop,
-    tapToDismiss: this.isHideOnClick,
-    preventDuplicates: this.isDuplicatesPrevented,
-    animation: this.animationType,
-    limit: this.toastsLimit,
-  });
-  const toast: Toast = {
-    type: type,
-    title: title,
-    body: body,
-    timeout: this.timeout,
-    showCloseButton: this.isCloseButton,
-    bodyOutputType: BodyOutputType.TrustedHtml,
-  };
-  this._toasterService.pop(toast);
-} // FIN | showToast
+  makeToast() {
+    this.showToast(this.type, this.title, this.content);
+  } // FIN | makeToast
+
+  /****************************************************************************
+    * Funcion: showToast
+    * Object Number: 004
+    * Fecha: 16-08-2018
+    * Descripcion: Method showToast of the Class
+    * Objetivo: showToast in the method header API
+    ****************************************************************************/
+  private showToast(type: string, title: string, body: string) {
+    this.config = new ToasterConfig({
+      positionClass: this.position,
+      timeout: this.timeout,
+      newestOnTop: this.isNewestOnTop,
+      tapToDismiss: this.isHideOnClick,
+      preventDuplicates: this.isDuplicatesPrevented,
+      animation: this.animationType,
+      limit: this.toastsLimit,
+    });
+    const toast: Toast = {
+      type: type,
+      title: title,
+      body: body,
+      timeout: this.timeout,
+      showCloseButton: this.isCloseButton,
+      bodyOutputType: BodyOutputType.TrustedHtml,
+    };
+    this._toasterService.pop(toast);
+  } // FIN | showToast
+
+  ngOnInit() {
+    /**
+    * Configuracion Inicial del Dropdown List
+    * Autor: Edgar RAmirez
+    * Fecha: 23/01/2019
+    */
+    this.selectedItems = [
+    ];
+
+    this.selectedItemsPais = [
+    ];
+
+    this.dropdownSettings = {
+      singleSelection: true,
+      text: 'Seleccione una Opción',
+      enableSearchFilter: true,
+      searchPlaceholderText: 'Buscar Elemento',
+      classes: 'comboSea',
+      showCheckbox: false,
+      lazyLoading: false,
+    };
+
+    this._espaciostrabajoModel = new EspaciosTrabajoModel(
+      0, null, // datos generales
+      null, null, null, null, // datos de la tabla
+      null, 0, null, 0, null, 0, // datos relacionados con la tabla principal
+
+    );
+
+    this.estadoService();
+    this.tipoService();
+    this.paisesAllListService();
+    this.ListAllEspaciosTrabajo();
+  }
 
 
-ngOnInit() {
-  /**
-  * Configuracion Inicial del Dropdown List
-  * Autor: Edgar RAmirez
-  * Fecha: 23/01/2019
-  */
-  this.selectedItems = [
-  ];
+  /****************************************************************************
+ * Funcion: paisesAllListService
+ * Object Number: 008
+ * Fecha: 23-01-2019
+ * Descripcion: Method paisesAllListService of the Class
+ * Objetivo: paisesAllListService listados de los Paises
+ * del Formulario de Actividad llamando a la API
+ * Autor: Edgar Ramirez
+ ****************************************************************************/
 
-  this.selectedItemsPais = [
-  ];
+  private paisesAllListService() {
 
-  this.dropdownSettings = {
-    singleSelection: true,
-    text: 'Seleccione una Opción',
-    enableSearchFilter: true,
-    searchPlaceholderText: 'Buscar Elemento',
-    classes: 'comboSea',
-    showCheckbox: false,
-    lazyLoading: false,
-  };
+    this._espacioTrabajoService.getAllPaises2().subscribe(
+      result => {
+        if (result.status !== 200) {
 
-  this._espaciostrabajoModel = new EspaciosTrabajoModel(
-    0, null, // datos generales
-    null, null, null, null, // datos de la tabla
-    null, 0, null, 0, null, 0, // datos relacionados con la tabla principal
-
-  );
-
-  this.estadoService();
-  this.tipoService();
-  this.paisesAllListService();
-  this.ListAllEspaciosTrabajo();
-
-}
+          this.showToast('error', 'Error al Obtener la Información de los Paises', result.message);
+        } else if (result.status === 200) {
+          // console.log("paso por aqui 3");
+          this.JsonReceptionPaises = result.data;
 
 
-   /****************************************************************************
-  * Funcion: paisesAllListService
-  * Object Number: 008
-  * Fecha: 23-01-2019
-  * Descripcion: Method paisesAllListService of the Class
-  * Objetivo: paisesAllListService listados de los Paises
-  * del Formulario de Actividad llamando a la API
-  * Autor: Edgar Ramirez
-  ****************************************************************************/
-
- private paisesAllListService() {
-
-  this._espaciosTrabajoService.getAllPaises2().subscribe(
-    result => {
-      if (result.status !== 200) {
-
-        this.showToast('error', 'Error al Obtener la Información de los Paises', result.message);
-      } else if (result.status === 200) {
-       // console.log("paso por aqui 3");
-        this.JsonReceptionPaises = result.data;
-
-
-        // Setea la Lista del Dropdown List
-        this.dropdownListPais = this.JsonReceptionPaises.map((item) => {
-          return {
-            id: item.idPais,
-            itemName: item.descPais,
-            iniciales: item.inicialesPais,
-          }
-        })
-      }
-    },
-    error => {
-     // console.log("paso por aqui 4");
-      this.showToast('error', 'Error al Obtener la Información de los Paises', error);
-    },
-  );
-} // FIN | paisesAllListService
- // selector de paises
-onItemSlectPais(item: any) {
-  this._espaciostrabajoModel.idPaisIN = item.id;
-}
+          // Setea la Lista del Dropdown List
+          this.dropdownListPais = this.JsonReceptionPaises.map((item) => {
+            return {
+              id: item.idPais,
+              itemName: item.descPais,
+              iniciales: item.inicialesPais,
+            }
+          })
+        }
+      },
+      error => {
+        // console.log("paso por aqui 4");
+        this.showToast('error', 'Error al Obtener la Información de los Paises', error);
+      },
+    );
+  } // FIN | paisesAllListService
+  // selector de paises
+  onItemSlectPais(item: any) {
+    this._espaciostrabajoModel.idPaisIN = item.id;
+  }
 
   /****************************************************************************
 * Funcion: estadoService
@@ -235,7 +236,7 @@ onItemSlectPais(item: any) {
 ****************************************************************************/
   private estadoService() {
     const idGroupSen: number = 4;
-    this._espaciosTrabajoService.getAllEstados(idGroupSen).subscribe(
+    this._espacioTrabajoService.getAllEstados(idGroupSen).subscribe(
       response => {
         if (response.status !== 200) {
 
@@ -263,7 +264,7 @@ onItemSlectPais(item: any) {
   private tipoService() {
     const idTipoSen: number = 4;
     //  console.log(this.data3);
-    this._espaciosTrabajoService.getAllTipo(idTipoSen).subscribe(
+    this._espacioTrabajoService.getAllTipo(idTipoSen).subscribe(
       response => {
         // console.log(this.data3)
         if (response.status !== 200) {
@@ -290,78 +291,74 @@ onItemSlectPais(item: any) {
   * Descripcion: Method newEspacio de trabajo
   * Objetivo: crear nuevos Espacios de trabajo
   ****************************************************************************/
- private newEspacioTrabajo() {
-
-
-
-  this.validateEspaciotrabajo(this._espaciostrabajoModel);
-  // Seteo de las variables del Model al json de Java
+  private newEspacioTrabajo() {
+    this.validateEspaciotrabajo(this._espaciostrabajoModel);
+    // Seteo de las variables del Model al json de Java
     this._espaciostrabajoModel.idEstadoEspacioTrabajo = { idEstado: this._espaciostrabajoModel.idEstadoIN };
-    // console.log("pasa por aqui el tipo");
-
     this._espaciostrabajoModel.idTipoEspacioTrabajo = { idTipo: this._espaciostrabajoModel.idTipoIN };
     this._espaciostrabajoModel.idPais = { idPais: this._espaciostrabajoModel.idPaisIN };
 
-  // Ejecutamos el Recurso del EndPoint
-  this._espaciosTrabajoService.newEspaciosTrabajo(this._espaciostrabajoModel).subscribe(
-    response => {
-      if (response.status !== 200) {
-       // console.log("no paso el recurso 3");
-        this.showToast('error', 'Error al Ingresar la Información del Perfil', response.message);
-      } else if (response.status === 200) {
-        this.showToast('default', 'La Información del espacio trabajo, se ha ingresado con exito', response.message);
+    // Ejecutamos el Recurso del EndPoint
+    this._espacioTrabajoService.newEspaciosTrabajo(this._espaciostrabajoModel).subscribe(
+      response => {
+        if (response.status !== 200) {
+          // console.log("no paso el recurso 3");
+          this.showToast('error', 'Error al Ingresar la Información del Perfil', response.message);
+        } else if (response.status === 200) {
+          this.showToast('default', 'La Información del espacio trabajo, se ha ingresado con exito', response.message);
+          this.ListAllEspaciosTrabajo();
+          this.ngOnInit();
 
-      }
-           // Carga la tabla Nuevamente
-           this.ListAllEspaciosTrabajo();
-           this.ngOnInit();
-
-    },
-    error => {
-      // Redirecciona al Login
-      alert('Error en la petición de la API ' + <any>error);
-
-    },
-  );
-} // FIN | newPerfilService
+        }
+        // Carga la tabla Nuevamente
 
 
- // * Funcion: perfilesTipoService
- // * Object Number: 004
+      },
+      error => {
+        // Redirecciona al Login
+        alert('Error en la petición de la API ' + <any>error);
+
+      },
+    );
+  } // FIN | newPerfilService
+
+
+  // * Funcion: perfilesTipoService
+  // * Object Number: 004
   // * Fecha: 08-01-2019
   // * Descripcion: Method perfilesTipoService of the Class
- // * Objetivo: perfilesTipoService detalle de los Tipos de Perfil llamando a la API
+  // * Objetivo: perfilesTipoService detalle de los Tipos de Perfil llamando a la API
   // ****************************************************************************//
 
- private ListAllEspaciosTrabajo() {
+  private ListAllEspaciosTrabajo() {
 
-   this._espaciosTrabajoService.getAllEspaciostrabajo().subscribe(
-     response => {
-       if (response.status !== 200) {
-       } else if (response.status === 200) {
-         this.JsonReceptionListEspaciostrabajo = response.data;
-         // instancia data con los perfiles;
-         this.data3 = this.JsonReceptionListEspaciostrabajo;
-         // Carga los Items para el List de la Smart table
-         this.arrayOrganizacion = new Array();
-       }
-     },
-     error => {
-       // Redirecciona al Login
-       alert('Error en la petición de la API ' + <any>error);
+    this._espacioTrabajoService.getAllEspaciostrabajo().subscribe(
+      response => {
+        if (response.status !== 200) {
+        } else if (response.status === 200) {
+          this.JsonReceptionListEspaciostrabajo = response.data;
+          // instancia data con los perfiles;
+          this.data3 = this.JsonReceptionListEspaciostrabajo;
+          // Carga los Items para el List de la Smart table
+          this.arrayOrganizacion = new Array();
+        }
+      },
+      error => {
+        // Redirecciona al Login
+        alert('Error en la petición de la API ' + <any>error);
 
 
-     },
-   );
- }// FIN | perfilesTipoService
+      },
+    );
+  }// FIN | perfilesTipoService
 
-   /****************************************************************************
-   * Funcion: validateTipoOganizacion(_grupoModel: any)
-   * Object Number: 0005
-   * Fecha: 22-01-2019
-   * Descripcion: Method para validar que los campos esten llenos
-   * Objetivo: validatePerfiles  procurar que llegue a la base de datos toda la informacion de tipo de organizacion.
-   ****************************************************************************/
+  /****************************************************************************
+  * Funcion: validateTipoOganizacion(_grupoModel: any)
+  * Object Number: 0005
+  * Feca: 22-01-2019
+  * Descripcion: Method para validar que los campos esten llenos
+  * Objetivo: validatePerfiles  procurar que llegue a la base de datos toda la informacion de tipo de organizacion.
+  ****************************************************************************/
   private validateEspaciotrabajo(_espaciostrabajoModel: any) {
     // seteo el modelo para que los campos sean verificados
     // this.responsedata.error = false;
@@ -379,16 +376,17 @@ onItemSlectPais(item: any) {
   } // FIN | validateTipoOganizacion(_grupoModel: any)
 
 
-  fyByIdEspaciosTrabaj(idEspacioTrabajo: number) {
+  fyByIdEspaciosTrabajo(idEspacioTrabajo: number) {
     // Ejecutamos el Recurso del EndPoint
-    this._espaciosTrabajoService.FindByIdEspacioTrabajo(idEspacioTrabajo).subscribe(
+    this._espacioTrabajoService.FindByIdEspacioTrabajo(idEspacioTrabajo).subscribe(
       response => {
+        // console.log("paso por aqui"+ idEspacioTrabajo);
         if (response.status !== 200) {
           this.showToast('error', 'Error al Eliminar la Id Interna de la Planificacion del Proyecto', response.message);
         } else if (response.status === 200) {
-          this.JsonReceptionListEspaciostrabajo = response.data;
+          this.JsonReceptionListEspacioTrabajo = response.data;
           // instancia data con los perfiles;
-          this.data4 = this.JsonReceptionListEspaciostrabajo;
+          this.data4 = this.JsonReceptionListEspacioTrabajo;
           // Verificamos que la Actividad no Exista en la BD
         }
       },
@@ -408,7 +406,7 @@ onItemSlectPais(item: any) {
 
 
 
- }
+}
 
 
 

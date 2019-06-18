@@ -33,6 +33,9 @@ export class OrganizacionModel {
         // mapeo de la variables que estan relacionadas con la tabla
         public idTipoOrganizacion: { idTipoOrganizacion: number },
         public idTipoOrganizacion1: number,
+        // mapeo de la variables que estan relacionadas con la tabla
+       // public idGrupoOrganizacion: { idGrupoOrganizacion: number },
+        // public idGrupoOrganizacion1: number,
 
         // mapeo de la variables que estan relacionadas con la tabla
         public idCatOrganizacion: { idCatOrganizacion: number },
