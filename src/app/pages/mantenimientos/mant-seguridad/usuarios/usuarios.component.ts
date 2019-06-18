@@ -26,6 +26,7 @@ import { EspacioTrabajoModel } from '../../models/usuario.espacio.model';
 import { subscribeToResult } from 'rxjs/internal-compatibility';
 import {  MessageService } from 'primeng/primeng';
 import { NotificacionesService } from '../../../shared/services/notificaciones.service';
+import { ModalVistaComponent } from './modal-vista/modal-vista.component';
 
 // Varieble Jquey
 declare var jquery: any;
@@ -125,7 +126,6 @@ export class UsuariosComponent implements OnInit {
  ****************************************************************************/
   makeToast() {
     this._notificacionesService.showToast(this.type, this.title, this.content);
-    // console.log('Opcion de Toaster 1.3 ' + JSON.stringify(this.content));
   } // FIN | makeToast
 
   /****************************************************************************
@@ -203,7 +203,7 @@ export class UsuariosComponent implements OnInit {
     this.espaciosTrabajoUsuarioListService();
 
 
-    this.marked = false;
+    this.marked = true;
 
 
     /**
@@ -1071,6 +1071,12 @@ export class UsuariosComponent implements OnInit {
     const activeModal = this.modalService.open(UsuarioModalComponent, { size: 'lg', container: 'nb-layout' });
     activeModal.componentInstance.modalHeader = 'Asignar Espacio de Trabajo';
     activeModal.componentInstance.idUsuario = idUsuario1;
+    // console.log(idUsuario1);
+  }
+  showLargeModal1(idUsuario1: number) {
+    const activeModal = this.modalService.open(ModalVistaComponent, { size: 'lg', container: 'nb-layout' });
+    activeModal.componentInstance.modalHeader = 'Espacio de Trabajo asignado';
+    activeModal.componentInstance.idUsuario1 = idUsuario1;
     // console.log(idUsuario1);
   }
 

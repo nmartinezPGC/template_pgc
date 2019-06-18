@@ -1,0 +1,41 @@
+<div class="modal-header" data-keyboard="false" data-backdrop="static" >
+  <span>{{ modalHeader }}</span>
+  <button class="close" aria-label="Close" (click)="closeModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<!-- ==================================================================================== -->
+<!-- Componente para los Mensajes en pantalla -->
+<toaster-container [toasterconfig]="config"></toaster-container>
+<div class="modal-body" data-keyboard="false" data-backdrop="static">
+  <div class="col-lg-12" data-keyboard="false" data-backdrop="static">
+    <nb-card>
+      <nb-card-body>
+        <table class="table table-hover table-striped table-bordered" id="tableIdInterna">
+          <thead>
+            <tr class="tHeadSearch">
+            </tr>
+            <tr class="tHeadTable">
+              <th scope="col" style="width: 10%;">No</th>
+              <th scope="col" style="width: 20%;">Nombre Espacio Trabajo</th>
+              <th scope="col" style="width: 30%;">Usuario</th>
+              <th scope="col" style="width: 35%;">Rol</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of JsonReceptionEspaciosTrabajoUsuario let homeTableIndex = index">
+              <td>{{ homeTableIndex + 1 }}</td>
+              <td>{{item. idEspacioTrabajo.nombreEspacioTrabajo}} </td>
+              <td> {{item.idUsuario.nombre1Usuario}}</td>
+              <td>  {{item.idRol.descRol}}</td>
+            </tr>
+          </tbody>
+        </table>
+
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-md btn-danger"  (click)="closeModal()">Cerrar</button>
+</div>

@@ -1,0 +1,78 @@
+<!-- Maquetacion de Documentos -->
+<!-- Componente para los Mensajes en pantalla -->
+<toaster-container [toasterconfig]="config"></toaster-container>
+<!-- Agrupacion de la Informacion de Documentos-->
+<p-fieldset legend="Agregar Documento" [toggleable]="true">
+  <div class="row">
+    <div class="col-md-6">
+      <fieldset class="fieldCheck">
+        <strong><label>Titulo</label></strong>
+        <div class="form-group">
+          <input class="form-control" type="text" placeholder="Titulo" required />
+        </div>
+        <strong><label>Descripcion</label></strong>
+        <div class="form-group">
+          <textarea rows="5" placeholder="Descripcion" class="form-control" required></textarea>
+        </div>
+      </fieldset>
+    </div>
+    <div class="col-md-6">
+      <fieldset class="fieldCheck">
+        <div class="form-group">
+          <label>Tipo</label>
+          <select class="form-control" [(ngModel)]="_recursosproyectoModel.id_TipoRecursos" ngControl="id_TipoRecursos" required>
+            <option value="0">Seleccione una Opcion</option>
+            <option *ngFor="let item of JsonReceptionTipo" [value]="id_TipoRecursos">
+              {{item.descripcionTipoRecurso}}
+            </option>
+          </select>
+        </div>
+        <strong><label>nota</label></strong>
+        <div class="form-group">
+          <input class="form-control" type="text" placeholder="Agregar una nota" required />
+        </div>
+        <strong><label>Subir Recurso</label></strong>
+        <p-fileUpload (change)="upload($event)" name="myfile[]" url="./upload.php"
+          maxFileSize="1000000"></p-fileUpload>
+        <br>
+         <button type="button" class="btn btn-warning">Agregar</button>
+      </fieldset>
+    </div>
+  </div>
+  <hr/>
+  <table class="table table-hover table-striped table-bordered" id="tableIdInterna">
+      <thead>
+        <tr class="tHeadSearch">
+          <th scope="col" colspan="2">
+            <input type="text" class="form-control" [(ngModel)]="queryString"
+              placeholder="Buscar nombre de la Organizacion :">
+          </th>
+        </tr>
+        <tr class="tHeadTable">
+          <th scope="col" style="width: 5%;">No</th>
+          <th scope="col" style="width: 20%;">Titulo</th>
+          <th scope="col" style="width: 20%;">Descripcion</th>
+          <th scope="col" style="width: 15%;">Tipo</th>
+          <th scope="col" style="width: 15%;">Nota</th>
+          <th scope="col" style="width: 15%;">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>PNUD</td>
+          <td>actividad por realizar en olancho</td>
+          <td>Work</td>
+          <td>Ninguna</td>
+          <td>
+            <img><img (click)="showLargeModal(item.idOrganizacion)" class="pointerMouse"
+              src="../../../../assets/icons/forms/pencil-striped-symbol_24.png" alt="">
+            <img (click)="deleteOrganizacion(item.idOrganizacion)" class="pointerMouse"
+              src="../../../../assets/icons/forms/rubbish-bin_24x.png" alt=""><img alt="">
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button type="button" class="btn btn-primary">Guardar Datos</button>
+</p-fieldset>
+

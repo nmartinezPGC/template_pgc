@@ -1,20 +1,20 @@
 /**
- * @author Edgar Ramirez
+ * @author Allan Madrid
  * @returns mapeo de la variables
- * @name EspacioTrabajoModel
- * @alias _EspacioTrabajoModel
+ * @name VistaModalModel
+ * @alias _VistaModalModel
  * @version 1.0.0
- * @fecha 27/02/2019
+ * @fecha 17/06/2019
  *
  */
-export class EspacioTrabajoUsuarioModel {
+export class VistaModalModel {
     constructor(
         // mapeo de la tabla tbl_espacios_trabajo
-        public idEspacioTrabajoUsuario: number,
+        public idEspaciosTrabajoUsuarios: number,
         public codEspacioTrabajoUsuario: string,
 
         // mapeo de la variables que estan relacionadas con la tabla
-        public idEspacioTrabajo: { idEspacioTrabajo: number },
+        public idEspacioTrabajo: { idEspacioTrabajo: string },
          public idEspacio: number,
         // mapeo de la variables que estan relacionadas con la tabla
         public idUsuarioEspacioTrabajo: { idUsuario: number },

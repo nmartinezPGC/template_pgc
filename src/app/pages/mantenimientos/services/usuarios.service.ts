@@ -69,6 +69,21 @@ export class UsuarioService {
     }// FIN | FND-00002
 
     /****************************************************************************
+      * Funcion: FND-00002
+      * Fecha: 17-01-2019
+      * Descripcion: Metodo para obtener los Datos de todos los usuarios
+      * Objetivo: datos generales de los usuarios
+      * Params: { }
+      ****************************************************************************/
+     getAllEspacioUsuarios(): Observable<any> {
+        // Retorno de la Funcion
+        return this._http.get(this._systemEndPointsService.getEndPointService('espacioTrabajoUsuarioGroup', 1), {
+            headers: this.headers,
+            params: { 'tokenApi': this.tokenHeader },
+        });
+    }// FIN | FND-00002
+
+    /****************************************************************************
 * Funcion: FND-00003
 * Fecha: 21-01-2019
 * Descripcion: Metodo que sirve para poder ingresar un nuevo Usuario
@@ -258,6 +273,15 @@ export class UsuarioService {
             params: { 'tokenApi': this.tokenHeader },
         });
     }// FIN | FND-00013
+    fyByIdEspacioTrabajoUsuario(idEspacioTrabajoUsuarioIn: number): Observable<any> {
+        // Retorno de la Funcion
+        // console.log("hola");
+        const idEspaciosTrabajoUsuarios: number = idEspacioTrabajoUsuarioIn;
+        return this._http.get(this._systemEndPointsService.getEndPointService('espacioTrabajoUsuarioGroup', 2) + idEspaciosTrabajoUsuarios, {
+            headers: this.headers,
+            params: { 'tokenApi': this.tokenHeader },
+        });
+    }
 
 
     /****************************************************************************
@@ -308,7 +332,7 @@ newEspacioTrabajoUsuario(jsonEspacioTrabajoUsuario): Observable<any> {
     const paramsSend = jsonEspacioTrabajoUsuario;
     // console.log(paramsSend);
     // Retorno de la Funcion
-    return this._http.post(this._systemEndPointsService.getEndPointService('mantGenericosGroup', 3), paramsSend, {
+    return this._http.post(this._systemEndPointsService.getEndPointService('espacioTrabajoUsuarioGroup', 3), paramsSend, {
         headers: this.headers,
         params: { 'tokenApi': this.tokenHeader },
     });

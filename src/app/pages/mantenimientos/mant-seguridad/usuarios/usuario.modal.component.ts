@@ -4,13 +4,15 @@ import { UsuarioService } from '../../services/usuarios.service';
 import { Router } from '@angular/router';
 import { EspacioTrabajoModel } from '../../models/usuario.espacio.model';
 import { EspacioTrabajoUsuarioModel } from '../../models/espacio.trabajo.usuario.model';
+import { NotificacionesService } from '../../../shared/services/notificaciones.service';
+import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster'; // Servicio de Notificaciones
 import { delay } from 'q';
 
 @Component({
     selector: 'ngx-usuarios',
     templateUrl: './usuario.modal.component.html',
     styleUrls: ['./usuario.modal.component.scss'],
-    providers: [UsuarioService],
+    providers: [UsuarioService, NotificacionesService],
 })
 
 export class UsuarioModalComponent implements OnInit {
@@ -39,25 +41,42 @@ export class UsuarioModalComponent implements OnInit {
     arrayEspaciosTrabajo: any
     marked = false;
 
-    constructor(private activeModal: NgbActiveModal, public _usuariosService: UsuarioService, protected _router: Router, private changeDetectorRef: ChangeDetectorRef) {
+    constructor(private activeModal: NgbActiveModal, public _usuariosService: UsuarioService,
+        protected _router: Router, private _notificacionesService: NotificacionesService,
+        private changeDetectorRef: ChangeDetectorRef) {
         this.datos = this.data2
     }
 
-    closeModal() {
-        this.activeModal.close();
-    }
 
     ngOnInit() {
         // Inicializacion del Modelo de la Clase
         this._espacioTrabajoUsuarioModel = new EspacioTrabajoUsuarioModel(
-            0, null,
-            null, null, null, 0,
-            true);
+            0, null, null,  0, null, 0, null, 0, true);
 
         this.ListAllEspaciosTrabajo();
         this.rolEspacioService();
     }
+    config: ToasterConfig;
 
+    position = 'toast-bottom-full-width';
+    animationType = 'slideDown';
+    title = 'Se ha grabado la Información! ';
+    content = 'los cambios han sido grabados temporalmente, en la PGC!';
+    timeout = 10000;
+    toastsLimit = 5;
+    type = 'default';
+    isNewestOnTop = true;
+    isHideOnClick = true;
+    isDuplicatesPrevented = false;
+    isCloseButton = true;
+    settings: any;
+    escapeClose: false;
+    clickClose: false;
+    public resultdata: any;
+    public tipoEspacioTrabajo: number;
+    makeToast() {
+        this._notificacionesService.showToast(this.type, this.title, this.content);
+      } // FIN | makeToast
     /****************************************************************************
   * Funcion: ListAllEspaciosTrabajo
   * Object Number: 001
@@ -123,7 +142,7 @@ export class UsuarioModalComponent implements OnInit {
             },
             error => {
                 // Informacion del Error que se capturo de la Secuencia
-                // this.showToast('error', 'Ha ocurrido un Error al cargar de orgnizacion, por favor verifica que todo este bien!!', JSON.stringify(error.error.message));
+                this._notificacionesService.showToast('error', 'Ha ocurrido un Error al cargar de orgnizacion, por favor verifica que todo este bien!!', JSON.stringify(error.error.message));
                 // Ocultamos el Loader la Funcion
             },
         );
@@ -273,7 +292,7 @@ export class UsuarioModalComponent implements OnInit {
 * Descripcion: Method Save Ubicaciones, en BD por llamado a la API
 * Objetivo: Salvar Ubicaciones de Proyectos, en BD por llamado a EndPoint de
 * la API | /mant-actividades/ubicaciones/new
-* @param jsonUbicacionActivity
+
 ****************************************************************************/
     async  saveEspaciosTrabajoUsuario() {
         this.getSecuenciaListService('NEW-ACT');
@@ -283,39 +302,35 @@ export class UsuarioModalComponent implements OnInit {
         // Actualizamos la Siguiente Secuencia
         // this.updateSecuenciaService(this.JsonReceptionUserDetail.idUsuario, 1);
 
-        /** spinner starts on Start Function */
+        /* spinner starts on Start Function */
 
 
         // Seteo de los Campo Relacionales
-        // this._espacioTrabajoUsuarioModel.idRolEspacioTrabajo = { idRol: this.idRol };
-        // this._espacioTrabajoUsuarioModel.idEspacioTrabajo =  this.idEspacioTrabajo;
+         this._espacioTrabajoUsuarioModel.idRolEspacioTrabajo = { idRol: this.idRol };
+         this._espacioTrabajoUsuarioModel.idEspacioTrabajo =  this.idEspacioTrabajo;
         this._espacioTrabajoUsuarioModel.idUsuarioEspacioTrabajo = { idUsuario: this.idUsuario };
         this._espacioTrabajoUsuarioModel.codEspacioTrabajoUsuario = this.codSec;
 
         this.JsonIdEspacioUsuario.forEach(element => {
-            this._espacioTrabajoUsuarioModel.idRol = element.idRol;
-            this._espacioTrabajoUsuarioModel.idRolEspacioTrabajo = { idRol: this._espacioTrabajoUsuarioModel.idRol };
-            // this._espacioTrabajoUsuarioModel.idEspacio = element.idEspacio;
-            this.idEspacioTrabajo = element.idEspacioTrabajo;
-            this._espacioTrabajoUsuarioModel.idEspacioTrabajo = { idEspacioTrabajo: this.idEspacioTrabajo };
+        this._espacioTrabajoUsuarioModel.idRol = element.idRol;
+        this._espacioTrabajoUsuarioModel.idRolEspacioTrabajo = { idRol: this._espacioTrabajoUsuarioModel.idRol };
+       this._espacioTrabajoUsuarioModel.idEspacio = element.idEspacio;
+       this.idEspacioTrabajo = element.idEspacioTrabajo;
+        this._espacioTrabajoUsuarioModel.idEspacioTrabajo = { idEspacioTrabajo: this.idEspacioTrabajo };
+             this._espacioTrabajoUsuarioModel.idEspacioTrabajo = element.idEspacioTrabajo;
+             (this._espacioTrabajoUsuarioModel);
 
-            // this._espacioTrabajoUsuarioModel.idEspacioTrabajo = element.idEspacioTrabajo;
-            // console.log(this._espacioTrabajoUsuarioModel);
-
-            // console.log('paso 1');
             this._usuariosService.newEspacioTrabajoUsuario(this._espacioTrabajoUsuarioModel).subscribe(
                 response => {
-                    // console.log('paso 2');
-                    // console.log(this._espacioTrabajoModel);
+                    (this._espacioTrabajoModel);
                     if (response.status !== 200) {
 
                         // console.log('error al ingresar el espacio de trabajo de usuario');
-                        // this.showToast('error', 'Error al Ingresar la Información del Usuario', response.message);
+                        this._notificacionesService.showToast('error', 'Error al Ingresar la Información del Usuario', response.message);
                     } else if (response.status === 200) {
                         // console.log('ingreso con exito el espacio de trabajo de usuario');
-                        // console.log(this.idUsuario + ' id usuario');
-                        // this.showToast('default', 'La Información del Usuario, se ha ingresado con exito', response.message);
-
+                       // (this.idUsuario + ' id usuario');
+                        this._notificacionesService.showToast('default', 'La Información del Usuario, se ha ingresado con exito', response.message);
                     }
                 },
             );
@@ -336,7 +351,7 @@ export class UsuarioModalComponent implements OnInit {
         this._usuariosService.getSecuenciaActividad(codSecuencia).subscribe(
             result => {
                 if (result.status !== 200) {
-                    //   this.showToast('error', 'Error al Obtener la Información de la Secuencia', JSON.stringify(result.message));
+                    this._notificacionesService.showToast('error', 'Error al Obtener la Información de la Secuencia', JSON.stringify(result.message));
                 } else if (result.status === 200) {
                     this.secuenciaDeActividad = result.data;
 
@@ -347,11 +362,14 @@ export class UsuarioModalComponent implements OnInit {
                 }
             },
             error => {
-                // this.showToast('error', 'Error al Obtener la Información de la Secuencia', JSON.stringify(error.message));
+                this._notificacionesService.showToast('error', 'Error al Obtener la Información de la Secuencia', JSON.stringify(error.message));
             },
         );
     } // FIN | FND-00008
 
+    closeModal() {
+        this.activeModal.close();
+    }
 
 
 }

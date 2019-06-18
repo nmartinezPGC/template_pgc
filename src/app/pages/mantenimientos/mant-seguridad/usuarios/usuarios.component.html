@@ -159,9 +159,6 @@
                           </option>
                         </select>
                       </div>
-                  
-                  
-                  
                 </nb-card-body>
               </nb-card>
             </div>
@@ -173,7 +170,7 @@
                           name="direccion" id="direccion" ngControl="direccion" [(ngModel)]="_usuarioModel.direccion"
                           required />
                       </div>
-                  
+
                     <div class="form-group">
                         <strong> <label>Seleccione un Perfil</label> </strong>
                         <select class="form-control" name="idTipo" id="idTipo" ngControl="idTipo"
@@ -200,12 +197,16 @@
                       [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" required>
                     </angular2-multiselect>
                   </div> -->
-                      <!-- <div class="demo-checkboxes col-sm-6"> -->
-                        <div class="form-group">
-                      <button type="button"  (click)="showLargeModal()" (change)="toggleVisibilit($event)" #asignarEspacioTrabajo="ngModel" class="btn btn-md btn-danger"
-                        [(ngModel)]="_usuarioModel.asignarEspacioTrabajo" name="asignarEspacioTrabajo"
-                        id="asignarEspacioTrabajo">Asignar Espacio de Trabajo</button>
-                      </div>
+                      <!-- <div class="demo-checkboxes col-sm-6"0> -->
+                        <div class="form-control">
+                          <div class="row demo-checkboxes-radio">
+                            <!-- <div class="demo-checkboxes col-sm-6"> -->
+                            <nb-checkbox (change)="toggleVisibilit($event)" #asignarEspacioTrabajo="ngModel" type="checkbox"
+                              [(ngModel)]="_usuarioModel.asignarEspacioTrabajo" name="asignarEspacioTrabajo"
+                              id="asignarEspacioTrabajo">Asignar Espacio de Trabajo</nb-checkbox>
+                            <!-- </div> -->
+                          </div>
+                        </div>
                       <!-- </div> -->
                   <div class="form-group">
                       <br>
@@ -246,9 +247,10 @@
                     <tr class="tHeadTable">
                       <th scope="col" style="width: 10%;">Codigo</th>
                       <th scope="col" style="width: 10%;">Nombre Usuario</th>
-                      <th scope="col" style="width: 20%;">Correo</th>
-                      <th scope="col" style="width: 5%;">Activo</th>
-                      <th scope="col" style="width: 5%;">Acción</th>
+                      <th scope="col" style="width: 15%;">Correo</th>
+                      <th scope="col" style="width: 4%;">Activo</th>
+                      <th scope="col" style="width: 2%;">Acción</th>
+                      <th scope="col" style="width: 2%;"></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -259,8 +261,11 @@
                       <td>{{item.emailUsuario}}</td>
                       <td>{{item.activo}}</td>
                       <td>
-                        <img (click)="showLargeModal()"  class="pointerMouse"
+                        <img (click)="showLargeModal1(item.idUsuario1)"  class="pointerMouse"
                           src="../../../../assets/icons/forms/eye-24.png" alt="">
+                          </td>
+                          <td><img (click)="showLargeModal()" class="pointerMouse"
+                              src="../../../../assets/icons/forms/pencil-striped-symbol_24.png" alt="">
                       </td>
                     </tr>
                   </tbody>

@@ -1,4 +1,4 @@
-@import '../../../../@theme/styles/themes';
+@import '../../../../../@theme/styles/themes';
 @import '~bootstrap/scss/mixins/breakpoints';
 @import '~@nebular/theme/styles/global/bootstrap/breakpoints';
 
@@ -233,5 +233,36 @@ $color-loader: #9aa0a5;
     &::after {
       bottom: 0;
     }
+  }
+
+  .fieldsetHand {
+    cursor: pointer;
+  }
+
+  .txtSearch {
+    width: 100%;
+  }
+
+  .fieldSet {
+    background: #204f85;
+  }
+
+  // Clase de los Botones
+  .icon-button-examples {
+    display: flex;
+    justify-content: space-between;
+
+    button {
+      min-width: 4rem;
+    }
+  }
+
+  .icon-button-examples:not(:last-child) {
+    margin-bottom: 1rem;
+  }
+
+  // Boton de eventos
+  .btnEvent {
+    border: 3px solid;
   }
 }
