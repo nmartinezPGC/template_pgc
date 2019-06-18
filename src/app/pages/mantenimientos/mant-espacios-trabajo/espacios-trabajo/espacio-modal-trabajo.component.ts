@@ -284,7 +284,7 @@ export class EspacioModalTrabajoComponent implements OnInit {
 ****************************************************************************/
   private estadoService() {
     const idGroupSen: number = 4;
-    this._EspaciotrabajoService.getAllEspaciostrabajo().subscribe(
+    this._EspaciotrabajoService.getAllEstados(idGroupSen).subscribe(
       response => {
         if (response.status !== 200) {
 
@@ -311,7 +311,7 @@ export class EspacioModalTrabajoComponent implements OnInit {
   ****************************************************************************/
   private tipoService() {
     const idTipoSen: number = 4;
-    this._EspaciotrabajoService.getAllEspaciostrabajo().subscribe(
+    this._EspaciotrabajoService.getAllTipo(idTipoSen).subscribe(
       response => {
         // console.log(this.data3)
         if (response.status !== 200) {
