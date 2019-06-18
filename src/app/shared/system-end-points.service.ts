@@ -513,6 +513,27 @@ export class SystemEndPointsService extends ListEndPointsService {
           case 86:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActividadAgenciaBeneficiaria.urlEndPoint;
             break;
+         case 87: // Mapeo de Recursos Proyecto
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findAllrecursosproyecto.urlEndPoint;
+            break;
+         case 88:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.downloadfilerecursosproyecto.urlEndPoint;
+            break;
+         case 89:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByCodActividadRecurso.urlEndPoint;
+            break;
+        case 90:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.finAllTipoRecursos.urlEndPoint;
+            break;
+        case 91:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdTipoRecursos.urlEndPoint;
+            break;
+        case 92:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.uploadfilerecursosproyecto.urlEndPoint;
+            break;
+        case 93:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.uploadMuLtiplefilerecursosproyecto.urlEndPoint;
+            break;
         }
         break;
       case 'mantGenericosUsuarioGroup': // Llamados a los EndPoint de usuarios

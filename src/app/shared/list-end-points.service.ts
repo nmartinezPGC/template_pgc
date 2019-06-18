@@ -1158,6 +1158,63 @@ export class ListEndPointsService {
         groupEndPoint: 'actividadesCRUDGroup',
         descEndPoint: 'Eliminar el dato de Agencia Beneficiaria enviado y asociarlo al Proyecto',
       },
+      // Recursos de Proyecto (Documentos y links)
+      findAllrecursosproyecto: {
+        id: 87,
+        nameEndpoint: 'findAllrecursosproyecto',
+        urlEndPoint: '/mant-actividades/recursos-proyecto',
+        params: '{ }',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Listar todos los Recursos de una Actividad de la BD',
+      },
+      downloadfilerecursosproyecto: {
+        id: 88,
+        nameEndpoint: 'downloadfilerecursosproyecto',
+        urlEndPoint: '/mant-actividades/recursos-proyecto/downloadfile',
+        params: '{filename}',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Descarga el documento solicitado',
+      },
+      findByCodActividadRecurso: {
+        id: 89,
+        nameEndpoint: 'findByCodActividadRecurso',
+        urlEndPoint: '/mant-actividades/recursos-proyecto/findByCodActividadRecurso',
+        params: '{codActividadRecurso}',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Descarga el documento solicitado',
+      },
+      finAllTipoRecursos: {
+        id: 90,
+        nameEndpoint: 'finAllTipoRecursos',
+        urlEndPoint: '/mant-actividades/recursos-proyecto/tipos',
+        params: '{}',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Retorna el listado de todos los tipos de recursos de la bd',
+      },
+      findByIdTipoRecursos: {
+        id: 91,
+        nameEndpoint: 'findByIdTipoRecursos',
+        urlEndPoint: '/mant-actividades/recursos-proyecto/tipos',
+        params: '{idTipoRecursos}',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Retorna el listado de todos los tipos de recursos por id de la bd',
+      },
+      uploadfilerecursosproyecto: {
+        id: 92,
+        nameEndpoint: 'uploadfilerecursosproyecto',
+        urlEndPoint: '/mant-actividades/recursos-proyecto/uploadFile',
+        params: '{uploadFile}',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Retorna el listado de todos los tipos de recursos por id de la bd',
+      },
+      uploadMuLtiplefilerecursosproyecto: {
+        id: 93,
+        nameEndpoint: 'uploadMuLtiplefilerecursosproyecto',
+        urlEndPoint: '/mant-actividades/recursos-proyecto/uploadMultipleFiles',
+        params: '{uploadMultipleFile}',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Retorna el listado de todos los tipos de recursos por id de la bd',
+      },
     }, // modulo de mantenimientos generico de usuarios
     endPointMantGenericosUsuario: {
       listAllUsuarios: {

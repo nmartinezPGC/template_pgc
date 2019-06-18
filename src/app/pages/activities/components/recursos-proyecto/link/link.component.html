@@ -1,0 +1,81 @@
+<!-- Maquetacion de link -->
+<!-- Componente para los Mensajes en pantalla -->
+<toaster-container [toasterconfig]="config"></toaster-container>
+
+<!-- Agrupacion de la Informacion de link -->
+<p-fieldset legend="Agregar Link" [toggleable]="true">
+  <div class="row">
+    <div class="col-md-6">
+      <fieldset class="fieldCheck">
+        <strong><label>Titulo</label></strong>
+        <div class="form-group">
+          <input class="form-control" type="text" placeholder="Titulo" required />
+        </div>
+        <strong><label>Descripcion</label></strong>
+        <div class="form-group">
+          <textarea rows="5" placeholder="Descripcion" class="form-control" required></textarea>
+        </div>
+      </fieldset>
+    </div>
+    <div class="col-md-6">
+      <fieldset class="fieldCheck">
+        <div class="form-group">
+          <label>Tipo</label>
+          <select class="form-control" [(ngModel)]="_recursosproyectoModel.id_TipoRecursos" ngControl="id_TipoRecursos" required>
+            <option value="0">Seleccione una Opcion</option>
+            <option *ngFor="let item of JsonReceptionTipo" [value]="id_TipoRecursos">
+              {{item.descripcionTipoRecurso}}
+            </option>
+          </select>
+        </div>
+        <strong><label>nota</label></strong>
+        <div class="form-group">
+          <input class="form-control" type="text" placeholder="Agregar una nota" required />
+        </div>
+        <strong><label>Web Link</label></strong>
+        <div class="form-group">
+          <input class="form-control" type="text" placeholder="Web link" required />
+        </div>
+        <br>
+        <button type="button" class="btn btn-primary">Guardar</button>
+      </fieldset>
+    </div>
+  </div>
+  <hr/>
+  <table class="table table-hover table-striped table-bordered" id="tableIdInterna">
+      <tr class="tHeadSearch">
+        <th scope="col" colspan="2">
+          <input type="text" class="form-control" [(ngModel)]="queryString"
+            placeholder="Buscar nombre de la Organizacion :">
+        </th>
+      </tr>
+      <thead>
+      <tr class="tHeadTable">
+        <th scope="col" style="width: 5%;">No</th>
+        <th scope="col" style="width: 10%;">Nombre del Recurso</th>
+        <th scope="col" style="width: 5%;">Fecha</th>
+        <th scope="col" style="width: 5%;">Año</th>
+        <th scope="col" style="width: 5%;">Tamaño</th>
+        <th scope="col" style="width: 10%;">Web Link</th>
+        <th scope="col" style="width: 8%;">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>PNUD</td>
+        <td>03/04/2019</td>
+        <td>2019</td>
+        <td>300000</td>
+        <td>www.pgc.com</td>
+        <td>
+          <img><img (click)="showLargeModal(item.idOrganizacion)" class="pointerMouse"
+            src="../../../../assets/icons/forms/pencil-striped-symbol_24.png" alt="">
+          <img (click)="deleteOrganizacion(item.idOrganizacion)" class="pointerMouse"
+            src="../../../../assets/icons/forms/rubbish-bin_24x.png" alt=""><img alt="">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button type="button" class="btn btn-primary">Guardar Datos</button>
+</p-fieldset>

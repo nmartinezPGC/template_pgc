@@ -76,6 +76,8 @@ import { NgxCurrencyModule } from 'ngx-currency';
 import { FinancDetalleCompromisosFormComponent } from './components/financiamiento/financ-detalle/financ-detalle-compromisos/financ-detalle-compromisos-form/financ-detalle-compromisos-form.component';
 import { FinancDetalleDesembolsosFormComponent } from './components/financiamiento/financ-detalle/financ-detalle-desembolsos/financ-detalle-desembolsos-form/financ-detalle-desembolsos-form.component';
 import { FinancDetalleGastosFormComponent } from './components/financiamiento/financ-detalle/financ-detalle-gastos/financ-detalle-gastos-form/financ-detalle-gastos-form.component';
+import { DocumentosComponent } from './components/recursos-proyecto/documentos/documentos.component';
+import { LinkComponent } from './components/recursos-proyecto/link/link.component';
 
 export const customCurrencyMaskConfig = {
   align: 'right',
@@ -154,6 +156,8 @@ export const customCurrencyMaskConfig = {
     FinancDetalleCompromisosFormComponent,
     FinancDetalleDesembolsosFormComponent,
     FinancDetalleGastosFormComponent,
+    DocumentosComponent,
+    LinkComponent,
   ],
   providers: [
     // SmartTableService, // Defincion del Servicio que provee los Datos de la Tabla: ID's Internas
