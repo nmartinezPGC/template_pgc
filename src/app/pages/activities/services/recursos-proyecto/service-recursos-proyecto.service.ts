@@ -14,7 +14,7 @@ import { SystemPropertiesService } from '../../../../shared/system-properties.se
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs';
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ServicerecursosproyectoService {
    // Variables de la Ruta de la API

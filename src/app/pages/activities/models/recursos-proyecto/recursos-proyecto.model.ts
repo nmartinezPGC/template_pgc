@@ -11,6 +11,6 @@ export class RecursosProyectoModel {
     constructor(
         // mapeo de relacion tipo de perfil
         public idTipoRecursos: number,
-        public descripcionTipoRecurso : string
+        public descripcionTipoRecurso: string,
     ) { }
 }

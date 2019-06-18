@@ -15,7 +15,7 @@ import { RecursosProyectoModel  } from '../../../models/recursos-proyecto/recurs
 @Component({
   selector: 'ngx-link',
   templateUrl: './link.component.html',
-  styleUrls: ['./link.component.scss']
+  styleUrls: ['./link.component.scss'],
 })
 export class LinkComponent implements OnInit, OnChanges {
    // Variables entre Tabs | Components
@@ -69,9 +69,7 @@ export class LinkComponent implements OnInit, OnChanges {
 private tipoService() {
   this._servicerecursosproyectoService.getAllTipo().subscribe(
     response => {
-      // console.log(this.data3)
       if (response.status !== 200) {
-        // console.log(response.status);
       } else if (response.status === 200) {
         this.JsonReceptionTipo = response.data;
         this.data1 = this.JsonReceptionTipo;

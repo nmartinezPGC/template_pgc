@@ -320,10 +320,8 @@ export class UsuarioModalComponent implements OnInit {
              this._espacioTrabajoUsuarioModel.idEspacioTrabajo = element.idEspacioTrabajo;
              (this._espacioTrabajoUsuarioModel);
 
-             console.log('paso 1');
             this._usuariosService.newEspacioTrabajoUsuario(this._espacioTrabajoUsuarioModel).subscribe(
                 response => {
-                     console.log('paso 2');
                     (this._espacioTrabajoModel);
                     if (response.status !== 200) {
 
@@ -333,7 +331,6 @@ export class UsuarioModalComponent implements OnInit {
                         // console.log('ingreso con exito el espacio de trabajo de usuario');
                        // (this.idUsuario + ' id usuario');
                         this._notificacionesService.showToast('default', 'La Información del Usuario, se ha ingresado con exito', response.message);
-                        console.log('pasa por aqui');
                     }
                 },
             );

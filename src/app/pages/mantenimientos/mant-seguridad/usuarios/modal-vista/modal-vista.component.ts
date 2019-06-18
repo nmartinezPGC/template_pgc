@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { EspacioTrabajoModel } from '../../../models/usuario.espacio.model';
 import { VistaModalModel } from '../../../models/vista.modal.model';
 import { NotificacionesService } from '../../../../shared/services/notificaciones.service';
-import {  ToasterConfig,  } from 'angular2-toaster'; // Servicio de Notificaciones
+import {  ToasterConfig  } from 'angular2-toaster'; // Servicio de Notificaciones
 
 
 @Component({
