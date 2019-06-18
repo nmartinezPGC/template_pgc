@@ -121,7 +121,7 @@
                   </thead>
                   <tbody>
                    <tr
-                        *ngFor="let item of JsonReceptionListEspacioTrabajo | filterdata: queryString : 'nombreEspacioTrabajo'  | paginate: { itemsPerPage: 6, currentPage: p };let homeTableIndex = index">
+                        *ngFor="let item of JsonReceptionListEspaciostrabajo | filterdata: queryString : 'nombreEspacioTrabajo'  | paginate: { itemsPerPage: 6, currentPage: p };let homeTableIndex = index">
                         <td>{{ homeTableIndex + 1 }}</td>
                         <td>{{item.codEspacioTrabajo}}</td>
                         <td>{{item.nombreEspacioTrabajo}}</td>
