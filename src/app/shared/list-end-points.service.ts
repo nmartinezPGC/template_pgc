@@ -179,8 +179,8 @@ export class ListEndPointsService {
       },
       findByIdEspacioTrabajo: {
         id: 2,
-        nameEndpoint: 'findByIdEspacio',
-        urlEndPoint: '/espacios-trabajo/findByIdEspacio/',
+        nameEndpoint: 'findByIdEspaciotrabajo',
+        urlEndPoint: '/espacios-trabajo/findByIdEspaciotrabajo/',
         groupEndPoint: 'espacioTrabajoGroup',
         descEndPoint: 'Busca los espacios de trabajo con el IdEspacioTrabajo, de parametro',
       },

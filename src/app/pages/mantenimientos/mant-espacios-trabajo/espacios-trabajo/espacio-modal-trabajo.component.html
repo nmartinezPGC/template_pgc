@@ -42,7 +42,7 @@
                 <select class="form-control" [(ngModel)]="_Espaciotrabajomodal1.idTipoIN" ngControl="idTipoIN" required>
                   <option value="0">Seleccione una Opcion</option>
                   <option *ngFor="let item of JsonReceptionTipo" [value]="item.idTipo">
-                    {{item.descTipoIN}}
+                    {{item.descTipo}}
                   </option>
                 </select>
               </div>
