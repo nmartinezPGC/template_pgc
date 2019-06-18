@@ -15,7 +15,7 @@ import { RecursosProyectoModel  } from '../../../models/recursos-proyecto/recurs
 @Component({
   selector: 'ngx-documentos',
   templateUrl: './documentos.component.html',
-  styleUrls: ['./documentos.component.scss']
+  styleUrls: ['./documentos.component.scss'],
 })
 export class DocumentosComponent implements OnInit, OnChanges {
    // Variables entre Tabs | Components
