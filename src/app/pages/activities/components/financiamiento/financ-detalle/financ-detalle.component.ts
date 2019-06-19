@@ -263,7 +263,7 @@ export class FinancDetalleComponent implements OnInit, OnChanges {
   * Params: { idActividadFinancEnc }
   ****************************************************************************/
   private getFindByIdActividadDetalleService(idActividadFinancEnc: number) {
-    // Ejecuta el Servicio de invocar todos los Socios al Desarrollo
+    // Ejecuta el Servicio de invocar todos los Detalles de Financiamiento
     this._financiamientoDetService.getFindByIdActividadDetalle(idActividadFinancEnc).subscribe(
       result => {
         if (result.status !== 200) {
@@ -273,7 +273,6 @@ export class FinancDetalleComponent implements OnInit, OnChanges {
           this.JsonReceptionDetalleFinanciamiento = result.data;
 
           // console.log(this.JsonReceptionDetalleFinanciamiento);
-
 
           this._activityFinanciamientoDetModel.idModalidadAyudaSend = this.JsonReceptionDetalleFinanciamiento[0].idModalidadAyuda.idModalidadAyuda;
           this._activityFinanciamientoDetModel.idTipoFinanciamientoSend = this.JsonReceptionDetalleFinanciamiento[0].idTipoFinanciamiento.idTipoFinanciamiento;
@@ -312,14 +311,16 @@ export class FinancDetalleComponent implements OnInit, OnChanges {
 
           // console.log(this.JsonReceptionDetalleFinanciamientoBySocioDesarrollo);
 
-          // this._activityFinanciamientoDetModel.idModalidadAyudaSend = this.JsonReceptionDetalleFinanciamientoBySocioDesarrollo[0].idModalidadAyuda.idModalidadAyuda;
-          // this._activityFinanciamientoDetModel.idTipoFinanciamientoSend = this.JsonReceptionDetalleFinanciamientoBySocioDesarrollo[0].idTipoFinanciamiento.idTipoFinanciamiento;
-          // this._activityFinanciamientoDetModel.idOrganizacionFinanciera = this.JsonReceptionDetalleFinanciamientoBySocioDesarrollo[0].idOrganizacionFinanciera;
-          // this._activityFinanciamientoDetModel.idActividadFinancDet = this.JsonReceptionDetalleFinanciamientoBySocioDesarrollo[0].idActividadFinancDet;
-          // this._activityFinanciamientoDetModel.codigoFinancDet = this.JsonReceptionDetalleFinanciamiento[0].codigoFinancDet;
+          if (this.JsonReceptionDetalleFinanciamientoBySocioDesarrollo.length !== 0) {
+            this._activityFinanciamientoDetModel.idModalidadAyudaSend = this.JsonReceptionDetalleFinanciamientoBySocioDesarrollo[0].idModalidadAyuda.idModalidadAyuda;
+            this._activityFinanciamientoDetModel.idTipoFinanciamientoSend = this.JsonReceptionDetalleFinanciamientoBySocioDesarrollo[0].idTipoFinanciamiento.idTipoFinanciamiento;
+            this._activityFinanciamientoDetModel.idOrganizacionFinanciera = this.JsonReceptionDetalleFinanciamientoBySocioDesarrollo[0].idOrganizacionFinanciera;
+            this._activityFinanciamientoDetModel.idActividadFinancDet = this.JsonReceptionDetalleFinanciamientoBySocioDesarrollo[0].idActividadFinancDet;
+            this._activityFinanciamientoDetModel.codigoFinancDet = this.JsonReceptionDetalleFinanciamientoBySocioDesarrollo[0].codigoFinancDet;
 
-          // Carga la variable de traslado a componente de Compromisos
-          // this.idActividadFinancDet = this._activityFinanciamientoDetModel.idActividadFinancDet;
+            // Carga la variable de traslado a componente de Compromisos
+            this.idActividadFinancDet = this._activityFinanciamientoDetModel.idActividadFinancDet;
+          }
         }
       },
       error => {

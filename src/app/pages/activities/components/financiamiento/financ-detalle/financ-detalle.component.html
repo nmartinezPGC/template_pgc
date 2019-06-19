@@ -2,16 +2,11 @@
 <!-- Componente para los Mensajes en pantalla -->
 <toaster-container [toasterconfig]="config"></toaster-container>
 
-
 <!-- ==================================================================================== -->
-<!-- <div class="row">
-  <div class="col-md-12"> -->
 <nb-card>
   <nb-card-header>Detalle del Financiamiento del Proyecto</nb-card-header>
   <nb-card-body>
     <!-- Acordeones formados por el numero de Socios al Desarrollo -->
-    <!-- <nb-card>
-          <nb-card-body> -->
     <p-accordion *ngFor="let item of JsonReceptionAllSocioDesarrollo" [multiple]="true">
       <p-accordionTab header="{{ item.idOrganizacion.descOrganizacion }}: {{ item.idOrganizacion.nombreOrganizacion }}">
         <!-- Socio al Desarrollo: {{ item.idOrganizacion.idOrganizacion }} -->
@@ -21,6 +16,38 @@
             Clasificación de Financiamiento
           </nb-card-header>
           <nb-card-body>
+
+            <div class="row" style=" width: 100%; padding-left: 20px">
+              <table class="table table-striped table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col" nbPopover="Tipo de Transacción" nbPopoverMode="hint">Tipo de Financiamiento</th>
+                    <th scope="col" nbPopover="Moneda de la Transacción" nbPopoverMode="hint">Modalidad de Ayuda</th>
+                    <th scope="col" nbPopover="Monto de la Transacción" nbPopoverMode="hint">Organización Financiaera
+                    </th>
+                    <th scope="col">Acción</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Tipo de Financiamiento</td>
+                    <td>Modalidad de Ayuda</td>
+                    <td>Organización Financiaera</td>
+                    <td style="text-align: center;">
+                      <img class="accButton" src="../../../../../../assets/icons/forms/pencil-striped-symbol_16.png"
+                        nbPopover="Editar Compromiso" nbPopoverMode="hint" alt="Editar" (click)="showDialog(itemCompromisos.idActividadFinancDetCompromiso, itemCompromisos.idTipoTransaccion,
+                              itemCompromisos.montoCompromiso, itemCompromisos.idMoneda, itemCompromisos.fechaTransaccion,
+                              itemCompromisos.codigoFinancCompromiso)">
+                      <img class="accButton" src="../../../../../../assets/icons/forms/rubbish-bin_16.png"
+                        nbPopover="Eliminar Compromiso" nbPopoverMode="hint" alt="Eliminar"
+                        (click)="confirm(itemCompromisos.codigoFinancCompromiso)"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
             <br>
             <div class="row" style=" width: 100%; padding-left: 20px">
               <div class="col-sm-6 col-md-3">
@@ -106,10 +133,5 @@
       </p-accordionTab>
       <hr style="width: 90%; background-color:#ccc">
     </p-accordion>
-    <!-- </nb-card-body>
-        </nb-card> -->
-
   </nb-card-body>
 </nb-card>
-<!-- </div>
-</div> -->
