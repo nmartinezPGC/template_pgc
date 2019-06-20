@@ -10,14 +10,18 @@
     <p-accordion *ngFor="let item of JsonReceptionAllSocioDesarrollo" [multiple]="true">
       <p-accordionTab header="{{ item.idOrganizacion.descOrganizacion }}: {{ item.idOrganizacion.nombreOrganizacion }}">
         <!-- Socio al Desarrollo: {{ item.idOrganizacion.idOrganizacion }} -->
+        <div style="text-align:left">
+          <button type="button" pButton icon="fa fa-plus" (click)="showDialogToAdd()"
+            label="Agregar Financiamiento"></button>
+        </div>
+        <br>
 
         <nb-card>
           <nb-card-header>
-            Clasificación de Financiamiento
+            Clasificación de Financiamiento:
           </nb-card-header>
           <nb-card-body>
-
-            <div class="row" style=" width: 100%; padding-left: 20px">
+            <!-- <div class="row" style=" width: 100%; padding-left: 20px">
               <table class="table table-striped table-hover">
                 <thead>
                   <tr>
@@ -46,10 +50,9 @@
                   </tr>
                 </tbody>
               </table>
-            </div>
-
+            </div> -->
             <br>
-            <div class="row" style=" width: 100%; padding-left: 20px">
+            <div class="row" style=" width: 100%; padding-left: 10px">
               <div class="col-sm-6 col-md-3">
                 <div class="form-group">
                   <strong> <label>Tipo de Financiamiento</label> </strong>
@@ -106,30 +109,30 @@
                   </button>
                 </div>
               </div>
-
             </div>
+
+
+            <div class="row" style=" width: 100%; padding-left: 10px">
+              <!-- Tarjeta para los Comprimisos -->
+              <div class="col-sm-4 col-md-4">
+                <ngx-financ-detalle-compromisos [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
+                  [codigoProyectoTab]="codigoProyectoTab" [idActividadFinancDet]="idActividadFinancDet">
+                </ngx-financ-detalle-compromisos>
+              </div>
+
+              <!-- Tarjeta para los Desembolsos -->
+              <div class="col-sm-4 col-md-4">
+                <ngx-financ-detalle-desembolsos></ngx-financ-detalle-desembolsos>
+              </div>
+
+              <!-- Tarjeta para los Gastos -->
+              <div class="col-sm-4 col-md-4">
+                <ngx-financ-detalle-gastos></ngx-financ-detalle-gastos>
+              </div>
+            </div>
+
           </nb-card-body>
         </nb-card>
-
-
-        <div class="row">
-          <!-- Tarjeta para los Comprimisos -->
-          <div class="col-sm-4 col-md-4">
-            <ngx-financ-detalle-compromisos [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
-              [codigoProyectoTab]="codigoProyectoTab" [idActividadFinancDet]="idActividadFinancDet">
-            </ngx-financ-detalle-compromisos>
-          </div>
-
-          <!-- Tarjeta para los Desembolsos -->
-          <div class="col-sm-4 col-md-4">
-            <ngx-financ-detalle-desembolsos></ngx-financ-detalle-desembolsos>
-          </div>
-
-          <!-- Tarjeta para los Gastos -->
-          <div class="col-sm-4 col-md-4">
-            <ngx-financ-detalle-gastos></ngx-financ-detalle-gastos>
-          </div>
-        </div>
       </p-accordionTab>
       <hr style="width: 90%; background-color:#ccc">
     </p-accordion>
