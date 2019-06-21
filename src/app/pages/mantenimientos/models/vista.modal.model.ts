@@ -14,7 +14,7 @@ export class VistaModalModel {
         public codEspacioTrabajoUsuario: string,
 
         // mapeo de la variables que estan relacionadas con la tabla
-        public idEspacioTrabajo: { idEspacioTrabajo: string },
+        public idEspacioTrabajo: { idEspacioTrabajo: number },
          public idEspacio: number,
         // mapeo de la variables que estan relacionadas con la tabla
         public idUsuarioEspacioTrabajo: { idUsuario: number },
@@ -22,7 +22,7 @@ export class VistaModalModel {
 
         // mapeo de la variables que estan relacionadas con la tabla
         public idRolEspacioTrabajo: { idRol: number },
-        public idRol: number,
+        public idRolIN: number,
         public activo: boolean = true,
 
         // mapeo de la variables que estan relacionadas con la tabla
