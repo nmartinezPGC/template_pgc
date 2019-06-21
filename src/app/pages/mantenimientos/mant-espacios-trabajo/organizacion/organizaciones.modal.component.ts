@@ -11,7 +11,7 @@ import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-t
   templateUrl: './organizaciones.modal.component.html',
   styleUrls: ['./organizaciones.modal.component.scss'],
 
-  providers: [OrganizacionService],
+  providers: [OrganizacionService, ToasterService],
 })
 export class OrganizacionModalComponent implements OnInit {
 

@@ -16,6 +16,8 @@ import { OrganizacionService } from '../../services/organizaciones.service';
 import { delay } from 'q';
 import { templateJitUrl } from '@angular/compiler';
 import { UserService } from '../../../../@core/data/users.service';
+import {KeyFilterModule} from 'primeng/keyfilter';
+
 @Component({
   selector: 'ngx-organizacion',
   templateUrl: './organizacion.component.html',

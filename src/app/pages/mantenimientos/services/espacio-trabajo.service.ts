@@ -117,9 +117,11 @@ export class EspaciosTrabajoService {
      EspaciostrabajoUpdate(jsonEspacios, idEspacioTrabajo: number): Observable<any> {
         // Parametros del EndPoint
         const paramsSend = jsonEspacios;
-        const idOrg: number = idEspacioTrabajo;
+        const idET: number = idEspacioTrabajo;
         // Retorno de la Funcion
-        return this._http.put(this._systemEndPointsService.getEndPointService('organizacionesGroup', 21) + idOrg, paramsSend, {
+// tslint:disable-next-line: no-console
+        console.log('id' + idEspacioTrabajo)
+        return this._http.put(this._systemEndPointsService.getEndPointService('espacioTrabajoGroup', 4) + idET, paramsSend, {
           headers: this.headers,
           params: { 'tokenApi': this.tokenHeader },
         }); // FIN | FND-00004
@@ -136,7 +138,7 @@ export class EspaciosTrabajoService {
         const idOrg: number = idEspacioTrabajo;
         // console.log('Parametros de Servicio ' + ' Modelo ' + JSON.stringify(paramsSend) + ' Where ' + idPerfil );
         // Retorno de la Funcion
-        return this._http.delete(this._systemEndPointsService.getEndPointService('organizacionesGroup', 22) + idOrg, {
+        return this._http.delete(this._systemEndPointsService.getEndPointService('espacioTrabajoGroup', 5) + idOrg, {
           headers: this.headers,
           params: { 'tokenApi': this.tokenHeader },
         });

@@ -11,12 +11,13 @@ import { EspaciosTrabajoModel } from '../../models/espacio.trabajo.model';
   selector: 'ngx-espacio-modal-trabajo',
   templateUrl: './espacio-modal-trabajo.component.html',
   styleUrls: ['./espacio-modal-trabajo.component.scss'],
-  providers: [EspaciosTrabajoService],
+  providers: [EspaciosTrabajoService, ToasterService],
 })
 export class EspacioModalTrabajoComponent implements OnInit {
   @Input() modalHeader;
   // se crea la variable receptora de la Informacion
   @Input() modalidEspacioTrabajo;
+
 
   public JsonReceptionFyByEspacioTrabajo: any;
   public _Espaciotrabajomodal1: EspaciosTrabajoModel;
@@ -136,9 +137,9 @@ export class EspacioModalTrabajoComponent implements OnInit {
     };
 
     this._Espaciotrabajomodal1 = new EspaciosTrabajoModel(
-      0, null, // datos generales
-      null, null, null, null, // datos de la tabla
-      null, 0, null, 0, null, 0, // datos relacionados con la tabla principal
+      true, 0, null, // datos generales
+      null, null, null, null, false, false, // datos de la tabla
+      null, 0, null, 0, null, null, 0,   // datos relacionados con la tabla principal
 
     );
     this._Espaciotrabajomodal1.codEspacioTrabajo;
@@ -147,6 +148,10 @@ export class EspacioModalTrabajoComponent implements OnInit {
     this._Espaciotrabajomodal1.idTipoIN;
     this._Espaciotrabajomodal1.idEstadoIN;
     this._Espaciotrabajomodal1.idPaisIN;
+    this._Espaciotrabajomodal1.vistaPublica;
+    this._Espaciotrabajomodal1.espacioPadre;
+    this._Espaciotrabajomodal1.horaCreacion;
+    this._Espaciotrabajomodal1.fechaCreacion;
 
     this.selectedItemsPais = [
     ];
@@ -155,7 +160,7 @@ export class EspacioModalTrabajoComponent implements OnInit {
     this.estadoService();
     this.tipoService();
     this.paisesAllListService();
-    this.UpdateEspaciostrabajo();
+
     this.onItemSlectPais(this.selectedItemsPais);
     this.fyByIdEspaciostrabajo(this.modalidEspacioTrabajo);
 
@@ -173,13 +178,17 @@ export class EspacioModalTrabajoComponent implements OnInit {
           this._Espaciotrabajomodal1.codEspacioTrabajo = this.data4.codEspacioTrabajo;
           this._Espaciotrabajomodal1.nombreEspacioTrabajo = this.data4.nombreEspacioTrabajo;
           this._Espaciotrabajomodal1.descripcionEspacioTrabajo = this.data4.descripcionEspacioTrabajo;
-          this._Espaciotrabajomodal1.idEstadoEspacioTrabajo = this.data4.idEstadoEspacioTrabajo.idEstadoIN;
-          this._Espaciotrabajomodal1.idPais = this.data4.idPais.idPaisIN;
-          this._Espaciotrabajomodal1.idTipoEspacioTrabajo = this.data4.idTipoEspacioTrabajo.idTipoIN;
+          this._Espaciotrabajomodal1.vistaPublica = this.data4.vistaPublica;
+          this._Espaciotrabajomodal1.espacioPadre = this.data4.espacioPadre;
+          // carga de los datos relacionales
+          this._Espaciotrabajomodal1.idEstadoIN = this.data4.idEstadoEspacioTrabajo.idEstado;
+          this._Espaciotrabajomodal1.idPaisIN = this.data4.idPais.idPais;
+          this._Espaciotrabajomodal1.descPais = this.data4.idPais.descPais;
+          this._Espaciotrabajomodal1.idTipoIN = this.data4.idTipoEspacioTrabajo.idTipo;
 
 
           this.selectedItemsPais = [
-            { 'id': this._Espaciotrabajomodal1.idPaisIN, 'itemName': this._Espaciotrabajomodal1.idPaisIN },
+            { 'id': this._Espaciotrabajomodal1.descPais, 'itemName': this._Espaciotrabajomodal1.descPais },
           ];
           // Verificamos que la Actividad no Exista en la BD
         }
@@ -193,42 +202,6 @@ export class EspacioModalTrabajoComponent implements OnInit {
     // Return
   } // FIN | deleteActividadIdInterna
 
-  /****************************************************************************
- * Funcion: perfilesTipoService
- * Object Number: 004
- * Fecha: 08-01-2019
- * Descripcion: Method perfilesTipoService of the Class
- * Objetivo: perfilesTipoService detalle de los Tipos de Perfil llamando a la API
- ****************************************************************************/
-  private Espaciostrabajo() {
-    this._EspaciotrabajoService.getAllEspaciostrabajo().subscribe(
-      response => {
-        if (response.status !== 200) {
-        } else if (response.status === 200) {
-          this.JsonReceptionTipoPerfiles = response.data;
-          // instancia data con los perfiles;
-          this.data1 = this.JsonReceptionTipoPerfiles;
-          // Carga los Items para el List de la Smart table
-          this.arrayTipoPerfiles = new Array();
-        }
-      },
-      error => {
-        // Redirecciona al Login
-        alert('Error en la petición de la API ' + <any>error);
-
-        // Borramos los datos del LocalStorage
-        localStorage.removeItem('auth_app_token');
-        localStorage.removeItem('identity');
-
-        const redirect = '/auth/login';
-        setTimeout(() => {
-          // Iniciativa Temporal
-          location.reload();
-          return this._router.navigateByUrl(redirect);
-        }, 2000);
-      },
-    );
-  } // FIN | perfilesTipoService
 
 
   /****************************************************************************
@@ -347,7 +320,6 @@ export class EspacioModalTrabajoComponent implements OnInit {
 
     // this.validateUsuarios(this._usuarioModel);
     const responsedataExt: any = this.responsedata;
-
     if (responsedataExt.error === true) {
       this.showToast('error', 'Error al ingresar los datos', responsedataExt.msg);
       return -1;
@@ -390,4 +362,26 @@ export class EspacioModalTrabajoComponent implements OnInit {
     return this.responsedata;
   } // FIN | validateTipoOganizacion(_grupoModel: any)
 
+  /* Funcion: toggleVisibility1
+  * Object Number: 004
+  * Fecha:13-02-2019
+  * Descripcion: Method tIPO DE ORGANIZACION
+  * Objetivo:asignar si es alguna unidad ejecutora en los chekcbox
+  * Autor: David Ricardo Pavon
+  ****************************************************************************/
+ toggleVisibility1(e) {
+
+  if (this.marked = e.target.checked) {
+    this._Espaciotrabajomodal1.vistaPublica = true;
+  } else {
+    this._Espaciotrabajomodal1.vistaPublica = false;
+  }
+}
+toggleVisibility2(e) {
+  if (this.marked = e.target.checked) {
+    this._Espaciotrabajomodal1.espacioPadre = true;
+  } else {
+    this._Espaciotrabajomodal1.espacioPadre = false;
+  }
+}
 }
