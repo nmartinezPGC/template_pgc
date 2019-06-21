@@ -13,27 +13,35 @@
       <nb-card-body>
         <table class="table table-hover table-striped table-bordered" id="tableIdInterna">
           <thead>
-
             <tr class="tHeadTable">
               <th scope="col" style="width: 10%;">No</th>
               <th scope="col" style="width: 20%;">Nombre Espacio Trabajo</th>
               <th scope="col" style="width: 25%;">Usuario</th>
-              <th scope="col" style="width: 35%;">Rol</th>
+              <th scope="col" style="width: 35%;"> Rol</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let item of JsonReceptionEspaciosTrabajoUsuario let homeTableIndex = index">
+            <tr *ngFor="let item of JsonReceptionEspaciosTrabajo let homeTableIndex = index">
               <td>{{ homeTableIndex + 1 }}</td>
               <td>{{item. idEspacioTrabajo.nombreEspacioTrabajo}} </td>
-              <td> {{item.idUsuarioEspacioTrabajo.nombre1Usuario}}</td>
-              <td> {{item.idRolEspacioTrabajo.descRol}}</td>
+              <td>{{item.idUsuarioEspacioTrabajo.nombre1Usuario}}</td>
+              <td>
+                <select class="form-control"  ngControl=" idRol1" [(ngModel)]="_espacioTrabajoUsuarioModel. idRol1" required>
+                <option value="0">Seleccione una Opcion</option>
+                <option *ngFor="let item of JsonReceptionRolEspacio" [value]="item.idRol">
+                  {{item.descRol}}
+                </option>
+              </select>
+              </td>
             </tr>
           </tbody>
         </table>
+
       </nb-card-body>
     </nb-card>
   </div>
 </div>
 <div class="modal-footer">
+  <button class="btn btn-md btn-primary" (click)="saveEspaciosTrabajoUsuario(idUsuario)">Guardar Cambios</button>
   <button class="btn btn-md btn-danger"  (click)="closeModal()">Cerrar</button>
 </div>

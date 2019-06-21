@@ -273,15 +273,14 @@ export class UsuarioService {
             params: { 'tokenApi': this.tokenHeader },
         });
     }// FIN | FND-00013
-    fyByIdEspacioTrabajoUsuario(idEspacioTrabajoUsuarioIn: number): Observable<any> {
-        // Retorno de la Funcion
-        // console.log("hola");
-        const idEspaciosTrabajoUsuarios: number = idEspacioTrabajoUsuarioIn;
-        return this._http.get(this._systemEndPointsService.getEndPointService('espacioTrabajoUsuarioGroup', 2) + idEspaciosTrabajoUsuarios, {
+    fyByIdEspacioTrabajoUsuario(idUsuarioEspacioTrabajo1: number): Observable<any> {
+        const idUsuarioEspacioTrabajo: number = idUsuarioEspacioTrabajo1;
+        return this._http.get(this._systemEndPointsService.getEndPointService('espacioTrabajoUsuarioGroup', 2) + idUsuarioEspacioTrabajo, {
             headers: this.headers,
             params: { 'tokenApi': this.tokenHeader },
         });
     }
+ 
 
 
     /****************************************************************************

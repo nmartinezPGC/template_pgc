@@ -10,7 +10,7 @@
 export class EspacioTrabajoUsuarioModel {
     constructor(
         // mapeo de la tabla tbl_espacios_trabajo
-        public idEspacioTrabajoUsuario: number,
+        public idEspaciosTrabajoUsuarios: number,
         public codEspacioTrabajoUsuario: string,
 
         // mapeo de la variables que estan relacionadas con la tabla
@@ -22,7 +22,7 @@ export class EspacioTrabajoUsuarioModel {
 
         // mapeo de la variables que estan relacionadas con la tabla
         public idRolEspacioTrabajo: { idRol: number },
-        public idRol: number,
+        public idRol1: number,
         public activo: boolean = true,
 
         // mapeo de la variables que estan relacionadas con la tabla

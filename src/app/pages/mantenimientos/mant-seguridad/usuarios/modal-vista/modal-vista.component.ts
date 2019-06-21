@@ -2,7 +2,6 @@ import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { UsuarioService } from '../../../services/usuarios.service';
 import { Router } from '@angular/router';
-import { EspacioTrabajoModel } from '../../../models/usuario.espacio.model';
 import { VistaModalModel } from '../../../models/vista.modal.model';
 import { NotificacionesService } from '../../../../shared/services/notificaciones.service';
 import {  ToasterConfig  } from 'angular2-toaster'; // Servicio de Notificaciones
@@ -20,15 +19,8 @@ export class ModalVistaComponent implements OnInit {
     @Input() idEspacioTrabajo;
     @Input() idRol;
     public JsonReceptionEspaciosTrabajoUsuario: any;
-    public _espacioTrabajoModel: EspacioTrabajoModel;
     public _espacioTrabajoUsuarioModel: VistaModalModel;
     public JsonReceptionRolEspacio: any;
-    public opcionSeleccionado: any;
-    public secuenciaDeActividad: any;
-    public rol1: any;
-    public JsonIdEspacioUsuario = [];
-    public JsonReceptionUserDetail: any;
-    public findData: boolean;
     public codSec: any;
     verSeleccion: string = '';
     datos;
@@ -38,7 +30,6 @@ export class ModalVistaComponent implements OnInit {
     data1: any;
     data2: any;
     arrayEspaciosTrabajoUsuario: any
-    marked = false;
 
     constructor(private activeModal: NgbActiveModal, public _usuariosService: UsuarioService,
         protected _router: Router, private _notificacionesService: NotificacionesService,
@@ -51,6 +42,8 @@ export class ModalVistaComponent implements OnInit {
         // Inicializacion del Modelo de la Clase
         this._espacioTrabajoUsuarioModel = new VistaModalModel(
             0, null, null,  0, null, 0, null, 0, true);
+            this._espacioTrabajoUsuarioModel.idRolIN;
+
 
         this.ListAllEspaciosTrabajoUsuario();
 
@@ -89,11 +82,9 @@ export class ModalVistaComponent implements OnInit {
                 if (response.status !== 200) {
                 } else if (response.status === 200) {
                     this.JsonReceptionEspaciosTrabajoUsuario = response.data;
-                    // instancia data con los espacios de trabajo;
                     this.data = this.JsonReceptionEspaciosTrabajoUsuario;
                     // Carga los Items para el List de la Smart table
                     this.arrayEspaciosTrabajoUsuario = new Array();
-
                 }
             },
             error => {
@@ -115,6 +106,8 @@ export class ModalVistaComponent implements OnInit {
     } // FIN | ListAllEspaciosTrabajo
 
 
+
+
     /****************************************************************************
 * Funcion: getIdEspacioTrabajo
 * Object Number: 002
@@ -123,30 +116,6 @@ export class ModalVistaComponent implements OnInit {
 * Objetivo: getIdEspacioTrabajo detalle de los espacios de trabajo por id llamando a la API
 * Autor: Edgar Ramirez
 ****************************************************************************/
-    getIdEspacioTrabajoUsuarios(idEspacioTrabajoUsuarios: number) {
-        // Ejecutamos el Recurso del EndPoint
-        this._usuariosService.fyByIdEspacioTrabajoUsuario(idEspacioTrabajoUsuarios).subscribe(
-            response => {
-
-                if (response.status !== 200) {
-
-                } else if (response.status === 200) {
-                    this.JsonReceptionEspaciosTrabajoUsuario = response.data;
-
-                    // instancia data con los perfiles;
-                    this.data1 = this.JsonReceptionEspaciosTrabajoUsuario;
-
-                    // Verificamos que la Actividad no Exista en la BD
-                }
-            },
-            error => {
-                // Informacion del Error que se capturo de la Secuencia
-                this._notificacionesService.showToast('error', 'Ha ocurrido un Error al cargar de orgnizacion, por favor verifica que todo este bien!!', JSON.stringify(error.error.message));
-                // Ocultamos el Loader la Funcion
-            },
-        );
-        // Return
-    } // FIN | getIdEspacioTrabajo
 
 
 

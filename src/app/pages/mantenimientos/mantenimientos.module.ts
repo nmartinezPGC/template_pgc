@@ -30,6 +30,7 @@ import {ToastModule} from 'primeng/toast';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import { ModalVistaComponent } from './mant-seguridad/usuarios/modal-vista/modal-vista.component';
+import { ModalModificarComponent } from './mant-seguridad/usuarios/modal-modificar/modal-modificar.component';
 
 
 
@@ -61,11 +62,13 @@ import { ModalVistaComponent } from './mant-seguridad/usuarios/modal-vista/modal
     ModalVistaComponent,
     // EspaciosTrabajoModalComponent,
     EspacioModalTrabajoComponent,
+    ModalModificarComponent,
   ],
   entryComponents: [
     OrganizacionModalComponent,
     UsuarioModalComponent,
     ModalVistaComponent,
+    ModalModificarComponent,
     EspacioModalTrabajoComponent,
   ],
   providers: [

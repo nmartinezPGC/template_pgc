@@ -1,26 +1,29 @@
 import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { UsuarioService } from '../../services/usuarios.service';
+import { UsuarioService } from '../../../services/usuarios.service';
 import { Router } from '@angular/router';
-import { EspacioTrabajoModel } from '../../models/usuario.espacio.model';
-import { EspacioTrabajoUsuarioModel } from '../../models/espacio.trabajo.usuario.model';
-import { NotificacionesService } from '../../../shared/services/notificaciones.service';
+import { EspacioTrabajoModel } from '../../../models/usuario.espacio.model';
+import { EspacioTrabajoUsuarioModel } from '../../../models/espacio.trabajo.usuario.model';
+import { NotificacionesService } from '../../../../shared/services/notificaciones.service';
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster'; // Servicio de Notificaciones
 import { delay } from 'q';
+import { VistaModalModel } from '../../../models/vista.modal.model';
 
 @Component({
     selector: 'ngx-usuarios',
-    templateUrl: './usuario.modal.component.html',
-    styleUrls: ['./usuario.modal.component.scss'],
+    templateUrl: './modal-modificar.component.html',
+    styleUrls: ['./modal-modificar.component.scss'],
     providers: [UsuarioService, NotificacionesService],
 })
 
-export class UsuarioModalComponent implements OnInit {
+export class ModalModificarComponent implements OnInit {
+    @Input() modalidEspacioTrabajoUsuario;
     @Input() idUsuario;
     @Input() idEspacioTrabajo;
     @Input() idRol;
     public JsonReceptionEspaciosTrabajo: any;
     public JsonReceptionFyByEspacioTrabajo: any;
+    public JsonReceptionFyByEspacioTrabajoUsuario: any;
     public _espacioTrabajoModel: EspacioTrabajoModel;
     public _espacioTrabajoUsuarioModel: EspacioTrabajoUsuarioModel;
     public JsonReceptionRolEspacio: any;
@@ -38,6 +41,7 @@ export class UsuarioModalComponent implements OnInit {
     data: any;
     data1: any;
     data2: any;
+    data3: any;
     arrayEspaciosTrabajo: any
     marked = false;
 
@@ -51,10 +55,14 @@ export class UsuarioModalComponent implements OnInit {
     ngOnInit() {
         // Inicializacion del Modelo de la Clase
         this._espacioTrabajoUsuarioModel = new EspacioTrabajoUsuarioModel(
-            0, null, null,  0, null, 0, null, 0, true);
+            0, null, null,  null, null, null, null, null, true);
+            this._espacioTrabajoUsuarioModel.idRol1;
+            this._espacioTrabajoUsuarioModel.idEspacio;
+            this._espacioTrabajoUsuarioModel.idUsuario;
 
         this.ListAllEspaciosTrabajo();
         this.rolEspacioService();
+        this.fyByIdEspacioUsuario(this.modalidEspacioTrabajoUsuario);
     }
     config: ToasterConfig;
 
@@ -85,7 +93,7 @@ export class UsuarioModalComponent implements OnInit {
   * Objetivo: ListAllEspaciosTrabajo detalle de los espacios de trabajo llamando a la API
   ****************************************************************************/
     private ListAllEspaciosTrabajo() {
-        this._usuariosService.getAllEspaciosTrabajo().subscribe(
+        this._usuariosService.getAllEspacioUsuarios().subscribe(
             response => {
                 if (response.status !== 200) {
                 } else if (response.status === 200) {
@@ -116,64 +124,9 @@ export class UsuarioModalComponent implements OnInit {
     } // FIN | ListAllEspaciosTrabajo
 
 
-    /****************************************************************************
-* Funcion: getIdEspacioTrabajo
-* Object Number: 002
-* Fecha: 22-03-2019
-* Descripcion: Method getIdEspacioTrabajo of the Class
-* Objetivo: getIdEspacioTrabajo detalle de los espacios de trabajo por id llamando a la API
-* Autor: Edgar Ramirez
-****************************************************************************/
-    getIdEspacioTrabajo(idEspacioTrabajo1: number) {
-        // Ejecutamos el Recurso del EndPoint
-        this._usuariosService.fyByIdEspacioTrabajo(idEspacioTrabajo1).subscribe(
-            response => {
-
-                if (response.status !== 200) {
-
-                } else if (response.status === 200) {
-                    this.JsonReceptionFyByEspacioTrabajo = response.data;
-
-                    // instancia data con los perfiles;
-                    this.data1 = this.JsonReceptionFyByEspacioTrabajo;
-
-                    // Verificamos que la Actividad no Exista en la BD
-                }
-            },
-            error => {
-                // Informacion del Error que se capturo de la Secuencia
-                this._notificacionesService.showToast('error', 'Ha ocurrido un Error al cargar de orgnizacion, por favor verifica que todo este bien!!', JSON.stringify(error.error.message));
-                // Ocultamos el Loader la Funcion
-            },
-        );
-        // Return
-    } // FIN | getIdEspacioTrabajo
 
 
-    /****************************************************************************
-  * Funcion: toggleVisibility
-  * Object Number: 003
-  * Fecha:26-02-2019
-  * Descripcion: Method Asiganar espacio de trabajo
-  * Objetivo:asignar si es alguna unidad ejecutora en los chekcbox
-  * Autor: Edgar Ramirez
-  ****************************************************************************/
-    toggleVisibilit(e, idEspacioTrabajo) {
-
-        if (this.marked = e.target.checked) {
-            this.idEspacioTrabajo = idEspacioTrabajo;
-            // console.log(idEspacioTrabajo + ' id Espacio');
-            this.pushJsonIdEspacioUsuario();
-            // console.log(this._usuarioModel.asignarEspacioTrabajo);
-            // this.showLargeModal(this.idUsuario)
-        } else {
-            this.deleteRowHomeForm(0, idEspacioTrabajo)
-            // this.deleteJson();
-            // this._usuarioModel.asignarEspacioTrabajo = false
-            // console.log(this._usuarioModel.asignarEspacioTrabajo);
-
-        }
-    }
+ 
 
 
     /****************************************************************************
@@ -185,8 +138,8 @@ export class UsuarioModalComponent implements OnInit {
  * Autor: Edgar Ramirez
  ****************************************************************************/
     private rolEspacioService() {
-        const idGroupSen: number = 4;
-        this._usuariosService.fyByIdRolEspacio(idGroupSen).subscribe(
+        const idGrupoSen: number = 4;
+        this._usuariosService.fyByIdRolEspacio(idGrupoSen).subscribe(
             response => {
                 if (response.status !== 200) {
 
@@ -218,71 +171,6 @@ export class UsuarioModalComponent implements OnInit {
         );
     } // FIN | rolEspacioService
 
-
-    capturar(idRol) {
-        // Pasamos el valor seleccionado a la variable verSeleccion
-        this.verSeleccion = idRol;
-        this.idRol = this.verSeleccion;
-        // console.log(idRol + ' id rol');
-    }
-
-
-    /****************************************************************************
-* Funcion: pushJsonIdEspacioUsuario
-* Object Number: 005
-* Fecha: 15-03-2019
-* Descripcion: Method que valida si un Codigo de Organizacion para Id Interna
-* Existe, y no permitir su ingreso nuevamente
-* Objetivo: Validacion de Id Interna por Codigo
-* Autor: Edgar Ramirez
-****************************************************************************/
-    private pushJsonIdEspacioUsuario() {
-        // Condicion para evaluar que opcion se pulsa
-
-        // Ingresa el primer Item del json
-        this.JsonIdEspacioUsuario.push({
-            'idUsuario': this.idUsuario,
-            'idEspacioTrabajo': this.idEspacioTrabajo,
-            'idRol': this.idRol,
-
-        });
-
-        // console.log(this.JsonIdEspacioUsuario)
-
-
-
-    } // FIN | pushJsonIdEspacioUsuario
-
-
-    /****************************************************************************
-* Funcion: deleteRowHomeForm
-* Object Number: 006
-* Fecha: 20-03-2019
-* Descripcion: Method que valida si un Codigo de Organizacion para Id Interna
-* Existe, y no permitir su ingreso nuevamente
-* Objetivo: Validacion de Id Interna por Codigo
-****************************************************************************/
-    deleteRowHomeForm(homeFormIndex: number, idEspacioTrabajo: number) {
-
-        const deletedItem = confirm('Esta seguro de borrar el Item');
-
-        if (deletedItem === true) {
-            // console.log('hola');
-            this.JsonIdEspacioUsuario.forEach(function (element, index) {
-                // console.log('hola 2');
-
-                if (element.idEspacioTrabajo === idEspacioTrabajo) {
-                    homeFormIndex = index
-                }
-            });
-            this.JsonIdEspacioUsuario.splice(homeFormIndex, 1);
-            // console.log(this.JsonIdEspacioUsuario);
-
-
-            this.changeDetectorRef.detectChanges();
-        }
-
-    }
 
 
     /****************************************************************************
@@ -370,6 +258,29 @@ export class UsuarioModalComponent implements OnInit {
     closeModal() {
         this.activeModal.close();
     }
+    fyByIdEspacioUsuario(idUsuarioEspacioTrabajo: number) {
+        // Ejecutamos el Recurso del EndPoint
+        this._usuariosService.fyByIdEspacioTrabajoUsuario(idUsuarioEspacioTrabajo).subscribe(
+          response => {// console.log("id espacios"+ this.fyByIdEspaciostrabajo);
+            if (response.status !== 200) {
+                this._notificacionesService.showToast('error', 'Error al Eliminar la Id Interna de la Planificacion del Proyecto', response.message);
+            } else if (response.status === 200) {
+              this.JsonReceptionFyByEspacioTrabajoUsuario = response.data;
+              // instancia data con los perfiles;
+              this.data3 = this.JsonReceptionFyByEspacioTrabajoUsuario;
+              this._espacioTrabajoUsuarioModel.idEspacioTrabajo = this.data3.idEspacioTrabajo.idEspacio;
+              this._espacioTrabajoUsuarioModel.idUsuarioEspacioTrabajo = this.data3.idUsuarioEspacioTrabajo.idUsuario;
+              this._espacioTrabajoUsuarioModel.idRolEspacioTrabajo = this.data3.idRolEspacioTrabajo.idRol1;
+            }
+          },
+          error => {
+            // Informacion del Error que se capturo de la Secuencia
+            this._notificacionesService.showToast('error', 'Ha ocurrido un Error al cargar un dato, por favor verifica que todo este bien!!', JSON.stringify(error.error.message));
+            // Ocultamos el Loader la Funcion
+          },
+        );
+        // Return
+      } // FIN | deleteActividadIdInterna
 
 
 }
