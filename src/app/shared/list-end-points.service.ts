@@ -191,6 +191,20 @@ export class ListEndPointsService {
         groupEndPoint: 'espacioTrabajoGroup',
         descEndPoint: 'Ingresa un nuevo Espacio de Trabajo en la BD',
       },
+      editEspacioTrabajo: {
+        id: 4,
+        nameEndpoint: 'editEspacioTrabajo',
+        urlEndPoint: '/espacios-trabajo/edit/',
+        groupEndPoint: 'espacioTrabajoGroup',
+        descEndPoint: 'Actualiza un Espacio de Trabajo en la BD',
+      },
+      deleteEspacioTrabajo: {
+        id: 5,
+        nameEndpoint: 'deleteEspacioTrabajo',
+        urlEndPoint: '/espacios-trabajo/delete/',
+        groupEndPoint: 'espacioTrabajoGroup',
+        descEndPoint: 'Elimina un Espacio de Trabajo en la BD',
+      },
     },
     endPointEspaciosTrabajoUsuarios: {
       listAllEspaciosTrabajoUsuarios: {

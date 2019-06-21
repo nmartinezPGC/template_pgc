@@ -19,7 +19,7 @@
 
 <!-- ==================================================================================== -->
 <!-- Componente para los Mensajes en pantalla -->
-<!-- <toaster-container [toasterconfig]="config"></toaster-container>-->
+ <toaster-container [toasterconfig]="config"></toaster-container>
 
 <div class="row">
   <div class="col-md-12 col-lg-12">
@@ -70,14 +70,20 @@
               <nb-card>
                 <nb-card-body>
                   <div class="form-control">
-                    <div class="row demo-checkboxes-radio">
+                      <fieldset class="fieldCheck">
+                      <div class="row demo-checkboxes-radio">
                       <div class="demo-checkboxes col-sm-6">
-                        <nb-checkbox [value]="false">Vista Publica</nb-checkbox>
+                        <nb-checkbox (change)="toggleVisibilit1($event)" #espacioPadre="ngModel" type="checkbox"
+                        [(ngModel)]="_espaciostrabajoModel.vistaPublica" name="vistaPublica"
+                        id="vistaPublica" [value]="true">Vista Publica</nb-checkbox>
                       </div>
                       <div class="demo-checkboxes col-sm-6">
-                        <nb-checkbox>Espacio Padre</nb-checkbox>
+                        <nb-checkbox (change)="toggleVisibilit2($event)" #espacioPadre="ngModel" type="checkbox"
+                        [(ngModel)]="_espaciostrabajoModel.espacioPadre" name="espacioPadre"
+                        id="espacioPadre"  [value]="false">Espacio Padre</nb-checkbox>
                       </div>
                     </div>
+                  </fieldset>
                   </div>
                   <div class="form-control">
                     <div class="form-group">
@@ -132,7 +138,7 @@
                         <td>
                           <img (click)="showLargeModal(item.idEspacioTrabajo)" class="pointerMouse"
                               src="../../../../assets/icons/forms/pencil-striped-symbol_24.png" alt="">
-                              <img (click)="deleteOrganizacion(item.idEspacioTrabajo)" class="pointerMouse"
+                              <img (click)="deleteEspacioTrabajo(item.idEspacioTrabajo)" class="pointerMouse"
                               src="../../../../assets/icons/forms/rubbish-bin_24x.png" alt=""><img alt="">
                           </td>
                      </tr>

@@ -124,6 +124,12 @@ export class SystemEndPointsService extends ListEndPointsService {
           case 3:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointEspaciosTrabajo.newEspacioTrabajo.urlEndPoint;
             break;
+            case 4:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointEspaciosTrabajo.editEspacioTrabajo.urlEndPoint;
+            break;
+            case 5:
+              endPointResult = this.urlBaseAPI + this.getEndPoint.endPointEspaciosTrabajo.deleteEspacioTrabajo.urlEndPoint;
+              break;
         }
         break;
       case 'espacioTrabajoUsuarioGroup': // Llamados a los EndPoint del Espacios de Trabajo Asignados a los Usuarios

@@ -18,6 +18,8 @@ import { EspacioModalTrabajoComponent } from './espacio-modal-trabajo.component'
 import { templateJitUrl } from '@angular/compiler';
 import { UserService } from '../../../../@core/data/users.service';
 import { OrganizacionComponent } from '../organizacion/organizacion.component';
+import { checkAndUpdateDirectiveDynamic } from '@angular/core/src/view/provider';
+import { stringify } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'ngx-espacios-trabajo',
@@ -28,7 +30,7 @@ import { OrganizacionComponent } from '../organizacion/organizacion.component';
 })
 export class EspaciosTrabajoComponent implements OnInit {
   // Se comenta; ya que la variable input solo carga en la Modal
-  // @Input() idEspacioTrabajo;
+   @Input() idEspacioTrabajo;
 
   public _espaciostrabajoModel: EspaciosTrabajoModel;
 
@@ -38,7 +40,6 @@ export class EspaciosTrabajoComponent implements OnInit {
   public JsonReceptionListEspacioTrabajo: any;
   public JsonReceptionPaises: any;
   public JsonReceptionF
-  private _toasterService: ToasterService;
   public JsonReceptionEspacioTrabajo: any;
   public JsonReceptionFyByEspacioTrabajo: any;
   public JsonReceptionListEspaciostrabajo: any;
@@ -103,8 +104,8 @@ export class EspaciosTrabajoComponent implements OnInit {
 
   }
 
-  constructor(public _espacioTrabajoService: EspaciosTrabajoService,
-    protected _router: Router, private modalService: NgbModal) {
+  constructor(public _espacioTrabajoService: EspaciosTrabajoService, protected _router: Router, private modalService: NgbModal,
+     private _toasterService: ToasterService ) {
     this.responsedata = { 'error': false, 'msg': 'error campos solicitado' };
   }
 
@@ -170,9 +171,9 @@ export class EspaciosTrabajoComponent implements OnInit {
     };
 
     this._espaciostrabajoModel = new EspaciosTrabajoModel(
-      0, null, // datos generales
-      null, null, null, null, // datos de la tabla
-      null, 0, null, 0, null, 0, // datos relacionados con la tabla principal
+      true, 0, null, // datos generales
+      null, null, null, null, false, false, // datos de la tabla
+      null, 0, null, 0, null, null, 0, // datos relacionados con la tabla principal
 
     );
 
@@ -180,7 +181,7 @@ export class EspaciosTrabajoComponent implements OnInit {
     this.tipoService();
     this.paisesAllListService();
     this.ListAllEspaciosTrabajo();
-  }
+ }
 
 
   /****************************************************************************
@@ -306,7 +307,6 @@ export class EspaciosTrabajoComponent implements OnInit {
           this.showToast('error', 'Error al Ingresar la Información del Perfil', response.message);
         } else if (response.status === 200) {
           this.showToast('default', 'La Información del espacio trabajo, se ha ingresado con exito', response.message);
-          this.ListAllEspaciosTrabajo();
           this.ngOnInit();
 
         }
@@ -403,8 +403,60 @@ export class EspaciosTrabajoComponent implements OnInit {
     this.ngOnInit();
 
   };
+/****************************************************************************
+  * Funcion: toggleVisibility1
+  * Object Number: 004
+  * Fecha:13-02-2019
+  * Descripcion: Method tIPO DE ORGANIZACION
+  * Objetivo:asignar si es alguna unidad ejecutora en los chekcbox
+  * Autor: David Ricardo Pavon
+  ****************************************************************************/
+ toggleVisibility1(e) {
 
+  if (this.marked = e.target.checked) {
+    this._espaciostrabajoModel.vistaPublica = true;
+  } else {
+    this._espaciostrabajoModel.vistaPublica = false;
+  }
+}
+toggleVisibility2(e) {
+  if (this.marked = e.target.checked) {
+    this._espaciostrabajoModel.espacioPadre = true;
+  } else {
+    this._espaciostrabajoModel.espacioPadre = false;
+  }
+}
 
+/*
+* Funcion: deleteEspacioTrabajo
+  * Object Number: 006
+  * Fecha:19-06-2019
+  * Descripcion: Method tIPO DE Espacio Trabajo
+  * Objetivo:desabilitar un espacio de trabajo
+  * Autor: jorge Rene Escamilla
+*/
+private deleteEspacioTrabajo(idEspacioTrabajo: number) {
+
+  const responsedataExt: any = this.responsedata;
+
+  if (responsedataExt.error === true) {
+    this.showToast('error', 'Error al ingresar los datos', responsedataExt.msg);
+    return -1;
+  }
+  // Ejecutamos el Recurso del EndPoint
+  this._espacioTrabajoService.EspaciostrabajoDelete(idEspacioTrabajo).subscribe(
+    response => {
+      if (response.status !== 200) {
+        this.showToast('error', 'Error al desahabilitar la organizacion con exito', response.message);
+      } else if (response.status === 200) {
+        this.showToast('default', 'se deshabilito la organizacion de forma exitosa', response.message);
+        // this.ListAllCategoria();
+      }
+      this.ngOnInit();
+      this.ListAllEspaciosTrabajo();
+    },
+  );
+} // FIN | deleteEspacioTrabajo
 
 }
 

@@ -61,8 +61,8 @@
                   <div class="form-group">
                     <input #telefonoOrganizacion="ngModel" class="form-control" type="text" placeholder="Telefono"
                       name="telefonoOrganizacion" id="telefonoOrganizacion" ngControl="telefonoOrganizacion"
-                      [(ngModel)]="_OrganizacionModel.telefonoOrganizacion" required maxlength="8" />
-                  </div>
+                      [(ngModel)]="_OrganizacionModel.telefonoOrganizacion" pKeyFilter="int" required maxlength="8"/>
+                </div>
                   <div class="form-group">
                   </div>
                 </nb-card-body>
@@ -79,7 +79,15 @@
                     <div class="form-group">
                       <input #emailOrganizacion="ngModel" class="form-control" type="text" placeholder="Email"
                         name="emailOrganizacion" id="emailOrganizacion" ngControl="emailOrganizacion"
-                        [(ngModel)]="_OrganizacionModel.emailOrganizacion" required />
+                        [(ngModel)]="_OrganizacionModel.emailOrganizacion" pattern=".+@.+\..+" required/>
+                        <small class="form-text error" *ngIf="emailOrganizacion.invalid && emailOrganizacion.touched &&
+                        emailOrganizacion.errors?.required">
+                        Email es requerido!
+                      </small>
+                      <small class="form-text error"
+                             *ngIf="emailOrganizacion.invalid && emailOrganizacion.touched && emailOrganizacion.errors?.pattern">
+                        Ingresa un Email real!
+                      </small>
                     </div>
                     <strong><label>Departamento de la Organizacion</label></strong>
                     <div class="form-group">

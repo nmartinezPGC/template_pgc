@@ -1,5 +1,8 @@
 <!-- Diseño de la Ventana de Espacio de Trabajo -->
 <!-- ==================================================================================== -->
+<!-- Componente para los Mensajes en pantalla -->
+<toaster-container [toasterconfig]="config"></toaster-container>
+
 <div class="modal-content">
   <nb-card accent="warning" status="primary">
     <nb-card-header>Editar Espacio de Trabajo
@@ -55,10 +58,14 @@
               <div class="form-control">
                 <div class="row demo-checkboxes-radio">
                   <div class="demo-checkboxes col-sm-6">
-                    <nb-checkbox [value]="false">Vista Publica</nb-checkbox>
-                  </div>
+                    <nb-checkbox (change)="toggleVisibilit1($event)" #espacioPadre="ngModel" type="checkbox"
+                        [(ngModel)]="_Espaciotrabajomodal1.vistaPublica" name="vistaPublica"
+                        id="vistaPublica"  >Vista Publica</nb-checkbox>
+                      </div>
                   <div class="demo-checkboxes col-sm-6">
-                    <nb-checkbox>Espacio Padre</nb-checkbox>
+                    <nb-checkbox (change)="toggleVisibilit2($event)" #espacioPadre="ngModel" type="checkbox"
+                    [(ngModel)]="_Espaciotrabajomodal1.espacioPadre" name="espacioPadre"
+                    id="espacioPadre"  [value]="false">Espacio Padre</nb-checkbox>
                   </div>
                 </div>
               </div>
@@ -78,7 +85,7 @@
   </nb-card>
 
   <div class="modal-footer">
-    <button type="button" (click)="editEspacioTrabajo()" class="btn btn-primary">Guardar
+    <button type="button" (click)="UpdateEspaciostrabajo()" class="btn btn-primary">Guardar
       Cambios</button>
     <button type="button" (Click)="closeModal()" class="btn btn-danger">Cerrar</button>
   </div>
