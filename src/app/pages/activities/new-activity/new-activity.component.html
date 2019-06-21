@@ -650,7 +650,8 @@
          <p-tabPanel header="Paso #7 | Recursos"  leftIcon="pi pi-copy"
           tooltip="Recursos de Soporte">
           <ng-template pTemplate="content">
-            <ngx-recursos-proyecto></ngx-recursos-proyecto>
+            <ngx-recursos-proyecto [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
+            [codigoProyectoTab]="codigoProyectoTab"></ngx-recursos-proyecto>
           </ng-template>
         </p-tabPanel>
         <!-- Fin de Datos de Documentos de Soporte -->

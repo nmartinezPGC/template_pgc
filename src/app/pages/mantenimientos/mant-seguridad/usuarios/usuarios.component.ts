@@ -27,6 +27,7 @@ import { subscribeToResult } from 'rxjs/internal-compatibility';
 import {  MessageService } from 'primeng/primeng';
 import { NotificacionesService } from '../../../shared/services/notificaciones.service';
 import { ModalVistaComponent } from './modal-vista/modal-vista.component';
+import { ModalModificarComponent } from './modal-modificar/modal-modificar.component';
 
 // Varieble Jquey
 declare var jquery: any;
@@ -52,7 +53,7 @@ export class UsuariosComponent implements OnInit {
   public JsonReceptionCatOrganizacion: any;
   public JsonReceptionTipoOrganizacion: any;
   public JsonReceptionOrganizacion: any;
-  public JsonReceptionEspaciosTrabajoUsuario: any;
+  public JsonReceptionEspacioTrabajoUsuario: any;
   public JsonReceptionCategoriasOrganizacion: any;
   protected JsonReceptionPaisOrganizacionesData: any;
   protected JsonReceptionTipoPaisOrganizacionesData: any;
@@ -1073,11 +1074,13 @@ export class UsuariosComponent implements OnInit {
     activeModal.componentInstance.idUsuario = idUsuario1;
     // console.log(idUsuario1);
   }
-  showLargeModal1(idUsuario1: number) {
+  showLargeModal1() {
     const activeModal = this.modalService.open(ModalVistaComponent, { size: 'lg', container: 'nb-layout' });
     activeModal.componentInstance.modalHeader = 'Espacio de Trabajo asignado';
-    activeModal.componentInstance.idUsuario1 = idUsuario1;
-    // console.log(idUsuario1);
+  }
+  showLargeModal2() {
+    const activeModal = this.modalService.open(ModalModificarComponent, { size: 'lg', container: 'nb-layout' });
+    activeModal.componentInstance.modalHeader = 'Modificar Espacio de Trabajo asignado';
   }
 
 
@@ -1095,10 +1098,10 @@ export class UsuariosComponent implements OnInit {
         if (result.status !== 200) {
           this._notificacionesService.showToast('error', 'Error al Obtener la Información de los Espacios de Trabajo', result.message);
         } else if (result.status === 200) {
-          this.JsonReceptionEspaciosTrabajoUsuario = result.data;
+          this.JsonReceptionEspacioTrabajoUsuario = result.data;
 
           // Setea la Lista del Dropdown List
-          this.dropdownListEspacioTrabajo = this.JsonReceptionEspaciosTrabajoUsuario.map((item) => {
+          this.dropdownListEspacioTrabajo = this.JsonReceptionEspacioTrabajoUsuario.map((item) => {
             return {
               id: item.idEspacioTrabajo.idEspacioTrabajo,
               itemName: item.idEspacioTrabajo.descripcionEspacioTrabajo,
