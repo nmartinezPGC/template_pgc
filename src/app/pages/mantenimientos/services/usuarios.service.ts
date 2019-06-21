@@ -280,7 +280,7 @@ export class UsuarioService {
             params: { 'tokenApi': this.tokenHeader },
         });
     }
- 
+
 
 
     /****************************************************************************
