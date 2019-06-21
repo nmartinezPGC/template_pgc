@@ -124,11 +124,6 @@ export class ModalModificarComponent implements OnInit {
     } // FIN | ListAllEspaciosTrabajo
 
 
-
-
- 
-
-
     /****************************************************************************
  * Funcion: rolEspacioService
  * Object Number: 004
