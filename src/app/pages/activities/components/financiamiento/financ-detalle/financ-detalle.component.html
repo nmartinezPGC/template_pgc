@@ -7,11 +7,11 @@
   <nb-card-header>Detalle del Financiamiento del Proyecto</nb-card-header>
   <nb-card-body>
     <!-- Acordeones formados por el numero de Socios al Desarrollo -->
-    <p-accordion *ngFor="let item of JsonReceptionNew; let i = index" [multiple]="true">
+    <p-accordion *ngFor="let itemSocioDesarrollo of JsonReceptionNew; let i = index" [multiple]="true">
       <hr style="width: 90%; background-color:#ccc">
 
-      <p-accordionTab header="No. {{ i + 1 }} | {{ item.descOrganizacion }}: {{ item.nombreOrganizacion }}">
-        <!-- Socio al Desarrollo: {{ item.idOrganizacion.idOrganizacion }} -->
+      <p-accordionTab header="No. {{ i + 1 }} | {{ itemSocioDesarrollo.descOrganizacion }}: {{ itemSocioDesarrollo.nombreOrganizacion }}">
+        <!-- Socio al Desarrollo: {{ itemSocioDesarrollo.idOrganizacion.idOrganizacion }} -->
         <div style="text-align:left">
           <button type="button" pButton icon="fa fa-plus" (click)="showDialogAddTo()"
             label="Agregar Financiamiento"></button>
@@ -20,7 +20,7 @@
 
         <!-- INI | Visualizacion de Clasificación de Financiamiento -->
         <!-- =============================================================================== -->
-        <nb-card *ngFor="let itemClassFinanc of JsonReceptionNew.financiamientoDet; let j = index">
+        <nb-card *ngFor="let itemClassFinanc of itemSocioDesarrollo.financiamientoDet; let j = index">
           <nb-card-header>
               {{ j + 1 }} - Clasificación de Financiamiento: {{ itemClassFinanc.codigoFinancDet }}
           </nb-card-header>
