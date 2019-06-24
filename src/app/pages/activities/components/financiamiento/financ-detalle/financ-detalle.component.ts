@@ -37,6 +37,7 @@ export class FinancDetalleComponent implements OnInit, OnChanges {
 
   // Ventana Modal de Fecha
   public displayDialog: boolean = false;
+  public idSocioDesarrolloSave: number;
 
   // Secciones de Compromisos, Desembolsos y Gastos
   public finanClasFlag: boolean = false;
@@ -256,6 +257,8 @@ export class FinancDetalleComponent implements OnInit, OnChanges {
   ****************************************************************************/
   private getAllSociosDesarrolloService(idActividad: number) {
     // Ejecuta el Servicio de invocar todos los Socios al Desarrollo
+    this.JsonReceptionAllSocioDesarrollo = [];
+
     this._financiamientoDetService.getAllSociosDesarrolloByIdActividad(idActividad).subscribe(
       result => {
         if (result.status !== 200) {
@@ -264,13 +267,8 @@ export class FinancDetalleComponent implements OnInit, OnChanges {
         } else if (result.status === 200) {
           this.JsonReceptionAllSocioDesarrollo = result.data;
 
-          // Mapeo de los Socios al Desarrollo
-          // this.JsonReceptionAllSocioDesarrollo.forEach((element, index) => {
-          //   this.contadorSociosDessarrollo += this.contadorSociosDessarrollo + 1;
-
-          //   // console.log('Socio # :' + index + ' ID: ' + element.idOrganizacion.idOrganizacion + ' Actividad Enc ' + this.idActividadFinancEnc);
-          //   this.getFindByIdActividadEncAndSocioDesarrolloService(this.idActividadFinancEnc, element.idOrganizacion.idOrganizacion);
-          // });
+          // Ejecuta la Funcion que llama al Servicio de Clasificacion de Financiamiento
+          // console.log('1 ----- Actividad Enc ' + this.idActividadFinancEnc);
           this.getFindByIdActividadEncAndSocioDesarrolloService(this.idActividadFinancEnc);
         }
       },
@@ -324,60 +322,57 @@ export class FinancDetalleComponent implements OnInit, OnChanges {
   * Fecha: 03-06-2019
   * Descripcion: Method getFindByIdActividadEncAndSocioDesarrolloService of the Class
   * Objetivo: Detalle del Financiamiento, con el Socio al Desarrollo
-  * Params: { idActividadFinancEnc, idSocioDesarrollo }
+  * Params: { idActividadFinancEnc }
   ****************************************************************************/
-  private element1; element2;
-  private getFindByIdActividadEncAndSocioDesarrolloService(idActividadFinancEnc: number) {
-    // Ejecuta el Servicio de invocar todos los Socios al Desarrollo
+  private async getFindByIdActividadEncAndSocioDesarrolloService(idActividadFinancEnc: number) {
+    // Ejecuta el Servicio de invocar todas las Clasificacion de Financiamiento de todos los Socios al Desarrollo
+    this.JsonReceptionDetalleFinanciamientoBySocioDesarrollo0 = [];
+    this.JsonReceptionNew = [];
 
     for (let index = 0; index < this.JsonReceptionAllSocioDesarrollo.length; index++) {
-      this.element1 = this.JsonReceptionAllSocioDesarrollo[index];
-      // console.log('Socio # ' + index + ' ' + this.element1.idOrganizacion.idOrganizacion);
+      const element1 = this.JsonReceptionAllSocioDesarrollo[index];
+      // console.log('  2 INI FOR ******* Paso 2 Class # ' + index + ' Act ' + idActividadFinancEnc + ' Soc ' + element1.idOrganizacion.nombreOrganizacion);
 
-
-      this._financiamientoDetService.getFindByIdActividadEncAndSocioDesarrollo(idActividadFinancEnc, this.element1.idOrganizacion.idOrganizacion).subscribe(
-        async result => {
+      // Ejecuta la llamada al servicio que provee el detalle de Clasificacion de Financiamiento del Socio al Desarrollo
+      this._financiamientoDetService.getFindByIdActividadEncAndSocioDesarrollo(idActividadFinancEnc, element1.idOrganizacion.idOrganizacion).subscribe(
+        result => {
           if (result.status !== 200) {
-            // this._notificacionesService.showToast('error', 'Error al Obtener la Información de detalle de financiamiento del Socio al Desarrollo', result.message);
-            // this.JsonReceptionDetalleFinanciamientoBySocioDesarrollo0 = [];
+            this.JsonReceptionDetalleFinanciamientoBySocioDesarrollo0 = [];
           } else if (result.status === 200) {
-            // console.log('Con datos Socio ' + this.element1.idOrganizacion.idOrganizacion);
             // Evalua si obtiene datos de response
             if (result.findRecord === true) {
               this.JsonReceptionDetalleFinanciamientoBySocioDesarrollo0 = result.data;
-              // console.log(this.JsonReceptionDetalleFinanciamientoBySocioDesarrollo0);
-              this.JsonReceptionNewDet = [];
+              // Array para el Segundo Ciclo, Clasificacion del Socio al Desarrollo | Nivel 2
+              const financiamientoDet = [];
 
-              // console.log(this.JsonReceptionDetalleFinanciamientoBySocioDesarrollo0.length);
-
-
-              // Recorre los items del Array
-
-              await delay(100);
-
+              // Ciclo para encontrar hacer Push de los items del Financiamiento de Detalle del Socio al Desarrollo
               for (let index2 = 0; index2 < this.JsonReceptionDetalleFinanciamientoBySocioDesarrollo0.length; index2++) {
-                this.element2 = this.JsonReceptionDetalleFinanciamientoBySocioDesarrollo0[index2];
-                // console.log('Socio # ' + index2 + ' ' + this.element1.idOrganizacion.idOrganizacion + ' Financiamiento # ' + index2 + ' ' + this.element2.codigoFinancDet);
-                this.JsonReceptionNewDet.push({
-                  financiamientoDet: {
-                    idActividadFinancDet: this.element2.idActividadFinancDet,
-                    codigoFinancDet: this.element2.codigoFinancDet,
-                    idOrganizacionFinanciera: this.element2.idOrganizacionFinanciera,
-                    idModalidadAyuda: this.element2.idModalidadAyuda.idModalidadAyuda,
-                    descripcionModalidadAyuda: this.element2.idModalidadAyuda.descripcionModalidadAyuda,
-                    idTipoFinanciamiento: this.element2.idTipoFinanciamiento.idTipoFinanciamiento,
-                    descripcionTipoFinanciamiento: this.element2.idTipoFinanciamiento.descripcionTipoFinanciamiento,
-                  },
+                const element2 = this.JsonReceptionDetalleFinanciamientoBySocioDesarrollo0[index2];
+                // console.log('    3 /////// Paso 2 Class # ' + index + ' Act ' + idActividadFinancEnc + ' Soc ' + element2.idSocioDesarrollo.nombreOrganizacion);
+
+                // Empuja el nuevo item encontrado de Clasificacion de Financimiento
+                financiamientoDet.push({
+                  idActividadFinancDet: element2.idActividadFinancDet,
+                  codigoFinancDet: element2.codigoFinancDet,
+                  idOrganizacionFinanciera: element2.idOrganizacionFinanciera,
+                  idModalidadAyuda: element2.idModalidadAyuda.idModalidadAyuda,
+                  descripcionModalidadAyuda: element2.idModalidadAyuda.descripcionModalidadAyuda,
+                  idTipoFinanciamiento: element2.idTipoFinanciamiento.idTipoFinanciamiento,
+                  descripcionTipoFinanciamiento: element2.idTipoFinanciamiento.descripcionTipoFinanciamiento,
                 });
               }
-
+              this.JsonReceptionNew.push({
+                idSocioDesarrollo: element1.idOrganizacion.idOrganizacion,
+                descOrganizacion: element1.idOrganizacion.descOrganizacion,
+                nombreOrganizacion: element1.idOrganizacion.nombreOrganizacion,
+                financiamientoDet: financiamientoDet,
+              });
             } else {
-              this.JsonReceptionDetalleFinanciamientoBySocioDesarrollo0 = [];
+              // Push del Array de Detalle si no encuentra datos
               this.JsonReceptionNewDet.push({
                 financiamientoDet: {},
               });
-              // this._notificacionesService.showToast('error', 'Error al Obtener la Información de detalle de financiamiento del Socio al Desarrollo', result.message);
-              // console.log('Sin datos Socio ' + this.element1.idOrganizacion.idOrganizacion);
+              // console.log(' No hay Datos ' + this.JsonReceptionNewDet);
             }
           }
         },
@@ -385,14 +380,8 @@ export class FinancDetalleComponent implements OnInit, OnChanges {
           this._notificacionesService.showToast('error', 'Error al Obtener la Información de detalle de financiamiento, del Socio al Desarrollo', JSON.stringify(error.error.message));
         },
       );
-      // console.log(this.JsonReceptionNewDet);
-      this.JsonReceptionNew.push({
-        idSocioDesarrollo: this.element1.idOrganizacion.idOrganizacion,
-        descOrganizacion: this.element1.idOrganizacion.descOrganizacion,
-        nombreOrganizacion: this.element1.idOrganizacion.nombreOrganizacion,
-        financiamientoDet: this.JsonReceptionNewDet,
-      });
-
+      // Delay para ejecutar de forma Asincrona la siguiente peticion
+      await delay(100);
     }
     // console.log(this.JsonReceptionNew);
   } // FIN | FND-006
@@ -414,7 +403,7 @@ export class FinancDetalleComponent implements OnInit, OnChanges {
       this.editFinanciamientoDetService(this._activityFinanciamientoDetModel.idActividadFinancDet, this._activityFinanciamientoDetModel);
     } else {
       // Ingresa la información de Encabezado
-      this.newFinanciamientoDetService(idOrganizacion);
+      this.newFinanciamientoDetService(this.idSocioDesarrolloSave);
       // Socios al Desarrollo del Proyecto
       this.getAllSociosDesarrolloService(this.idProyectoTab);
     }
@@ -472,9 +461,11 @@ export class FinancDetalleComponent implements OnInit, OnChanges {
   * Fecha: 20-06-2019
   * Descripcion: Method Modal Class of the Class
   * Objetivo: Ventana Modal del Detalle del Financiamiento
-  * Params: {  }
+  * Params: { idSocioDesarrollo }
   ****************************************************************************/
-  private showDialogAddTo() {
+  private showDialogAddTo(idSocioDesarrollo: number) {
+    this.idSocioDesarrolloSave = idSocioDesarrollo;
+
     // Evalua que se aha ingresado el Detalle del Financiamiento
     // this.JsonCompromisosSelect = null;
 

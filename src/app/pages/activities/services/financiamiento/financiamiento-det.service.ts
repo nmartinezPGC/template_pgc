@@ -12,6 +12,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { SystemEndPointsService } from '../../../../shared/system-end-points.service';
 import { SystemPropertiesService } from '../../../../shared/system-properties.service';
+import 'rxjs/add/observable/forkJoin';
 
 @Injectable({
   providedIn: 'root',
@@ -116,6 +117,35 @@ export class FinanciamientoDetService {
       params: { 'tokenApi': this.tokenHeader },
     });
   } // FIN | FND-00005
+
+
+  /* FIXME: Documetntacion de Unir servicios
+    cAMBIOA PARA*/
+
+  /*getM() {
+    return Observable.forkJoin(
+      this.getAllTiposFinanciamiento(),
+      this.getAllModalidadAyuda()
+    )
+      .map(res => this.join(res[0], res[1]))
+  }
+
+  join(events, speakers) {
+    return events.map(event => {
+      return speakers
+        .filter(speaker => speaker.id == event.speaker_id)
+        .map(speaker => {
+          return {
+            id: event.id,
+            title: event.title,
+            date: event.date,
+            speaker_id: event.speaker_id,
+            speaker: speaker
+          }
+        })
+    }).reduce((a, b) => {
+      return a.concat(b);
+    }, []);*/
 
 
   /****************************************************************************

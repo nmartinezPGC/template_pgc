@@ -5,79 +5,87 @@
 
 <!-- <p-confirmDialog></p-confirmDialog> -->
 
-<nb-card accent="warning" status="primary">
+<!-- <nb-card accent="warning" status="primary">
   <nb-card-body>
-    <br>
-    <div class="row" style=" width: 100%; padding-left: 20px">
-      <div class="col-sm-6 col-md-3">
-        <div class="form-group">
-          <strong> <label>Tipo de Transacción</label> </strong>
-          <select class="form-control" #idTipoTransaccionSend="ngModel" name="idTipoTransaccionSend"
-            id="idTipoTransaccionSend" required
-            [(ngModel)]="_activityFinanciamientoDetCompromisosModel.idTipoTransaccionSend">
-            <option value="0">**** Selecciona Tipo de Transacción ****</option>
-            <option *ngFor="let item of JsonReceptionAllTipoTransaccion" [value]="item.idTipoTransaccion">
-              {{item.descTipoTransaccion}}
-            </option>
-          </select>
-        </div>
-      </div>
-
-      <div class="col-sm-6 col-md-3">
-        <div class="form-group">
-          <strong> <label>Monto de Compromiso</label> </strong>
-          <input class="form-control" currencyMask required [options]="{ prefix: '', thousands: ',', decimal: '.' }"
-            name="montoCompromiso" #montoCompromiso="ngModel" id="montoCompromiso"
-            [(ngModel)]="_activityFinanciamientoDetCompromisosModel.montoCompromiso" placeholder="0.00" required />
-        </div>
-      </div>
-
-      <div class="col-sm-6 col-md-3">
-        <div class="form-group">
-          <strong> <label>Moneda</label> </strong>
-          <select class="form-control" #idMonedaActividadSend="ngModel" name="idMonedaActividadSend"
-            id="idMonedaActividadSend" required
-            [(ngModel)]="_activityFinanciamientoDetCompromisosModel.idMonedaActividadSend">
-            <option value="0">**** Selecciona la Moneda ****</option>
-            <option *ngFor="let item of JsonReceptionAllMonedasProyecto" [value]="item.idMonedaActividad">
-              {{item.descMoneda}}
-            </option>
-          </select>
-        </div>
-      </div>
-
-      <div class="col-sm-6 col-md-3">
-        <div class="form-group">
-          <strong> <label>Fecha Transacción</label> </strong>
-          <p-calendar [inline]="false" class="form-control" [inputStyle]="{'width':'100%'}" [showIcon]="true"
-            [(ngModel)]="date6" dateFormat="dd/mm/yy" (click)="showDialog()" required
-            [(ngModel)]="_activityFinanciamientoDetCompromisosModel.fechaTransaccion" #fechaTransaccion="ngModel"
-            name="fechaTransaccion">
-          </p-calendar>
-        </div>
-      </div>
+    <br> -->
+<div class="ui-g ui-fluid">
+  <div class="col-sm-12 col-md-12">
+    <div class="form-group">
+      <strong> <label>Tipo de Transacción</label> </strong>
+      <select class="form-control" #idTipoTransaccionSend="ngModel" name="idTipoTransaccionSend"
+        id="idTipoTransaccionSend" required
+        [(ngModel)]="_activityFinanciamientoDetCompromisosModel.idTipoTransaccionSend">
+        <option value="0">**** Selecciona Tipo de Transacción ****</option>
+        <option *ngFor="let item of JsonReceptionAllTipoTransaccion" [value]="item.idTipoTransaccion">
+          {{item.descTipoTransaccion}}
+        </option>
+      </select>
     </div>
-  </nb-card-body>
-</nb-card>
+  </div>
 
-<div class="modal-footer">
-  <div class="col-sm-6 col-md-2">
-    <div class="icon-button-examples">
-      <!-- Boton de limpiar Formulario -->
-      <button type="button" class="btn btn-outline-danger btn-icon"
-        nbPopover="Limpia la Clasificación de Financiamiento" nbPopoverMode="hint" nbPopoverPlacement="top"
-        (click)="cleanForm()">
-        <i class="ion-trash-a"></i>
-      </button>
+  <div class="col-sm-12 col-md-12">
+    <div class="form-group">
+      <strong> <label>Monto de Compromiso</label> </strong>
+      <input class="form-control" currencyMask required [options]="{ prefix: '', thousands: ',', decimal: '.' }"
+        name="montoCompromiso" #montoCompromiso="ngModel" id="montoCompromiso"
+        [(ngModel)]="_activityFinanciamientoDetCompromisosModel.montoCompromiso" placeholder="0.00" required />
+    </div>
+  </div>
 
-      <!-- Boton para Grabar Compromiso  -->
-      <button type="button" class="btn btn-outline-primary btn-icon" nbPopover="Registra Compromiso para el Proyecto"
-        nbPopoverMode="hint" nbPopoverPlacement="top" (click)="saveFinanciamientoDetCompromisoService()">
-        <i class="ion-upload"></i>
-      </button>
+  <div class="col-sm-12 col-md-12">
+    <div class="form-group">
+      <strong> <label>Moneda</label> </strong>
+      <select class="form-control" #idMonedaActividadSend="ngModel" name="idMonedaActividadSend"
+        id="idMonedaActividadSend" required
+        [(ngModel)]="_activityFinanciamientoDetCompromisosModel.idMonedaActividadSend">
+        <option value="0">**** Selecciona la Moneda ****</option>
+        <option *ngFor="let item of JsonReceptionAllMonedasProyecto" [value]="item.idMonedaActividad">
+          {{item.descMoneda}}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <div class="col-sm-12 col-md-12">
+    <div class="form-group">
+      <strong> <label>Fecha Transacción</label> </strong>
+      <p-calendar [inline]="false" class="form-control" [inputStyle]="{'width':'85%'}" [showIcon]="true"
+        [(ngModel)]="date6" dateFormat="dd/mm/yy" (click)="showDialog()" required
+        [(ngModel)]="_activityFinanciamientoDetCompromisosModel.fechaTransaccion" #fechaTransaccion="ngModel"
+        name="fechaTransaccion">
+      </p-calendar>
     </div>
   </div>
 </div>
+<!-- </nb-card-body>
+</nb-card> -->
+
+<!-- <div class="modal-footer"> -->
+<hr>
+<div class="ui-dialog-buttonpane ui-helper-clearfix">
+  <button type="button" pButton icon="fa fa-close" class="ui-button-warning" (click)="cleanForm()"
+    label="Limpiar"></button>
+  <button type="button" pButton icon="fa fa-check" (click)="saveFinanciamientoDetCompromisoService()"
+    label="Guardar"></button>
+</div>
+
+<!-- <div class="col-sm-12 col-md-12">
+    <div class="icon-button-examples"> -->
+<!-- Boton de limpiar Formulario -->
+<!-- <button type="button" class="btn btn-outline-danger btn-icon"
+        nbPopover="Limpia la Clasificación de Financiamiento" nbPopoverMode="hint" nbPopoverPlacement="top"
+        (click)="cleanForm()">
+        <i class="ion-trash-a"></i>
+      </button> -->
+
+<!-- Boton para Grabar Compromiso  -->
+<!-- <button type="button" class="btn btn-outline-primary btn-icon" nbPopover="Registra Compromiso para el Proyecto"
+        nbPopoverMode="hint" nbPopoverPlacement="top" (click)="saveFinanciamientoDetCompromisoService()">
+        <i class="ion-upload"></i>
+      </button>
+    </div> -->
+<!-- </div> -->
+<!-- </div> -->
 
 <!-- Ventana Modal de la fecha de Transacción -->
 <p-dialog header="Fecha de Transacción" [(visible)]="display" [modal]="false">

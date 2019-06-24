@@ -10,19 +10,21 @@
     <p-accordion *ngFor="let itemSocioDesarrollo of JsonReceptionNew; let i = index" [multiple]="true">
       <hr style="width: 90%; background-color:#ccc">
 
-      <p-accordionTab header="No. {{ i + 1 }} | {{ itemSocioDesarrollo.descOrganizacion }}: {{ itemSocioDesarrollo.nombreOrganizacion }}">
+      <p-accordionTab
+        header="No. {{ i + 1 }} | {{ itemSocioDesarrollo.descOrganizacion }}: {{ itemSocioDesarrollo.nombreOrganizacion }}">
         <!-- Socio al Desarrollo: {{ itemSocioDesarrollo.idOrganizacion.idOrganizacion }} -->
         <div style="text-align:left">
-          <button type="button" pButton icon="fa fa-plus" (click)="showDialogAddTo()"
+          <button type="button" pButton icon="fa fa-plus" (click)="showDialogAddTo(itemSocioDesarrollo.idSocioDesarrollo)"
             label="Agregar Financiamiento"></button>
         </div>
         <br>
 
+        <!-- <pre> {{JsonReceptionNew | json}} </pre> -->
         <!-- INI | Visualizacion de Clasificación de Financiamiento -->
         <!-- =============================================================================== -->
         <nb-card *ngFor="let itemClassFinanc of itemSocioDesarrollo.financiamientoDet; let j = index">
           <nb-card-header>
-              {{ j + 1 }} - Clasificación de Financiamiento: {{ itemClassFinanc.codigoFinancDet }}
+            {{ j + 1 }} - Clasificación de Financiamiento: {{ itemClassFinanc.codigoFinancDet }}
           </nb-card-header>
           <nb-card-body>
             <br>
@@ -41,8 +43,7 @@
                 <div class="form-group">
                   <strong> <label>Modalidad de Ayuda</label> </strong>
                   <input type="text" class="form-control" pInputText disabled pKeyFilter="hex"
-                    placeholder="Modalidad de Ayuda"
-                    value="{{ itemClassFinanc.descripcionTipoFinanciamiento }}">
+                    placeholder="Modalidad de Ayuda" value="{{ itemClassFinanc.descripcionTipoFinanciamiento }}">
                 </div>
               </div>
 
@@ -68,7 +69,8 @@
                   <!-- Boton para Grabar Organizaciones  -->
                   <button type="button" class="btn btn-outline-primary btn-icon"
                     nbPopover="Registra la Clasificación de Financiamiento" nbPopoverMode="hint"
-                    nbPopoverPlacement="top" (click)="saveFinanciamientoDetService(item.idOrganizacion.idOrganizacion)">
+                    nbPopoverPlacement="top"
+                    (click)="saveFinanciamientoDetService(itemSocioDesarrollo.idOrganizacion.idOrganizacion)">
                     <i class="ion-upload"></i>
                   </button>
                 </div>
@@ -81,9 +83,9 @@
               <!-- *ngIf="JsonReceptionDetalleFinanciamientoBySocioDesarrollo0.length !== 0"> -->
               <!-- Tarjeta para los Comprimisos -->
               <div class="col-sm-4 col-md-4">
-                <ngx-financ-detalle-compromisos [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
-                  [codigoProyectoTab]="codigoProyectoTab" [idActividadFinancDet]="idActividadFinancDet">
-                </ngx-financ-detalle-compromisos>
+                <!-- <ngx-financ-detalle-compromisos [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
+                  [codigoProyectoTab]="codigoProyectoTab" [idActividadFinancDet]="itemClassFinanc.idActividadFinancDet">
+                </ngx-financ-detalle-compromisos> -->
               </div>
 
               <!-- Tarjeta para los Desembolsos -->
@@ -109,7 +111,7 @@
       <!-- INI | Formulario Modal de Clasificacion de Financiamiento -->
       <p-dialog [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [width]="300">
         <p-header>
-          Clasificación de Financiamiento
+          Clasificación de Financiamiento {{ idSocioDesarrolloSave }}
         </p-header>
         <div class="ui-g ui-fluid">
           <div class="col-sm-12 col-md-12">
@@ -154,7 +156,7 @@
             <button type="button" pButton icon="fa fa-close" class="ui-button-danger" (click)="delete()"
               label="Borrar"></button>
             <button type="button" pButton icon="fa fa-check"
-              (click)="saveFinanciamientoDetService(item.idOrganizacion.idOrganizacion)" label="Guardar"></button>
+              (click)="saveFinanciamientoDetService(itemSocioDesarrollo.idSocioDesarrollo)" label="Guardar"></button>
           </div>
         </p-footer>
       </p-dialog>
