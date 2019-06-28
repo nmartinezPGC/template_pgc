@@ -1,20 +1,36 @@
 <!-- Maquetacion de la seccion de Compromisos del Detalle de finanaciamiento del Proyecto -->
 <!-- NAM|2019-05-29 -->
-<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle" width="425"></p-confirmDialog>
+<!-- ==================================================================================== -->
 
+<!-- INI | Servicio de confirmacion de Accion -->
+<p-confirmDialog header="Eliminar Compromiso" icon="pi pi-exclamation-triangle" width="425"></p-confirmDialog>
+
+
+<!-- ==================================================================================== -->
+<!-- INI | Ventana de listado de Compromisos -->
 <nb-card fullWidth>
   <nb-card-body>
     <div class="details">
-      <div class="title">
-        Compromisos <img src="../../../../../../assets/icons/forms/contract_24.png" alt="">
+      <div class="title" style="margin-left: 5%">
+        Compromisos <img src="../../../../../../assets/icons/forms/contract_24.png" alt="Compromisos">
       </div>
+
       <div class="description">
+        <!-- No data Found image -->
+        <div class="container6">
+          <img src="../../../../../../../assets/icons/forms/no-search-result_teaser.png"
+            alt="No se encotraron datos de Compromisos" *ngIf="showNoData == true">
+        </div>
+
+        <!-- Loader de carga de datos -->
         <img src="../../../../../../../assets/images/loading.gif" *ngIf="showLoader == true"
           style="width: 20%; margin-left: 40%" alt="Cargando...">
-        <table class="table table-striped table-hover" *ngIf="showLoader == false">
+
+        <!-- Listado de datos de Compromisos de Socio al Desarrollo -->
+        <table class="table table-striped table-hover" *ngIf="showLoader == false && showNoData == false">
           <thead>
             <tr>
-              <th scope="col">#</th>
+              <th scope="col">No</th>
               <th scope="col" nbPopover="Tipo de Transacción" nbPopoverMode="hint">Tipo</th>
               <th scope="col" nbPopover="Moneda de la Transacción" nbPopoverMode="hint">Mon.</th>
               <th scope="col" nbPopover="Monto de la Transacción" nbPopoverMode="hint">Monto</th>
@@ -54,20 +70,26 @@
     <a (click)="showDialog()" nbPopover="Ingresar Compromiso" nbPopoverMode="hint" style="cursor: pointer">
       <i class="ion-plus-round"></i>
     </a>
-    <a href="#/" target="_blanck" nbPopover="Ver Información" nbPopoverMode="hint">
+    <a nbPopover="Registra la información del compromiso de parte del Socio al Desarrollo." nbPopoverMode="hint">
       <i class="ion-help"></i>
     </a>
   </nb-card-footer>
 </nb-card>
+<!-- FIN | Ventana de listado de Compromisos -->
+<!-- ==================================================================================== -->
 
-<!-- Formulario Modal de Registro de Compromisos -->
+
+<!-- ==================================================================================== -->
+<!-- INI | Formulario Modal de Registro de Compromisos -->
 <p-dialog [(visible)]="display" [modal]="true" showEffect="fade" [draggable]="false" (onHide)="closeModal()"
   [width]="300">
   <p-header>
-    Registro de Compromiso {{ idActividadFinancDet }}
+    Registro de Compromiso
   </p-header>
   <ngx-financ-detalle-compromisos-form [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
     [codigoProyectoTab]="codigoProyectoTab" [idActividadFinancDet]="idActividadFinancDet"
     [JsonCompromisosSelect]="JsonCompromisosSelect">
   </ngx-financ-detalle-compromisos-form>
 </p-dialog>
+<!-- FIN | Formulario Modal de Registro de Compromisos -->
+<!-- ==================================================================================== -->

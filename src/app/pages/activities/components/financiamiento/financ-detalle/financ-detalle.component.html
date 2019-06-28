@@ -1,6 +1,8 @@
 <!-- Maquetacion del Encabezado del Financiamiento del Proyecto -->
 <!-- Componente para los Mensajes en pantalla -->
 <toaster-container [toasterconfig]="config"></toaster-container>
+<p-confirmDialog header="Eliminar Clasificación de Financiamiento" icon="pi pi-exclamation-triangle" width="425">
+</p-confirmDialog>
 
 <!-- ==================================================================================== -->
 <nb-card>
@@ -14,8 +16,8 @@
         header="No. {{ i + 1 }} | {{ itemSocioDesarrollo.descOrganizacion }}: {{ itemSocioDesarrollo.nombreOrganizacion }}">
         <!-- Socio al Desarrollo: {{ itemSocioDesarrollo.idOrganizacion.idOrganizacion }} -->
         <div style="text-align:left">
-          <button type="button" pButton icon="fa fa-plus" (click)="showDialogAddTo(itemSocioDesarrollo.idSocioDesarrollo)"
-            label="Agregar Financiamiento"></button>
+          <button type="button" pButton icon="fa fa-plus"
+            (click)="showDialogAddTo(itemSocioDesarrollo.idSocioDesarrollo)" label="Agregar Financiamiento"></button>
         </div>
         <br>
 
@@ -61,17 +63,17 @@
                 <div class="icon-button-examples">
                   <!-- Boton de Calcular Porcentajes -->
                   <button type="button" class="btn btn-outline-danger btn-icon"
-                    nbPopover="Limpia la Clasificación de Financiamiento" nbPopoverMode="hint" nbPopoverPlacement="top"
-                    (click)="cleanForm()">
+                    nbPopover="Elimina la Clasificación de Financiamiento" nbPopoverMode="hint" nbPopoverPlacement="top"
+                    (click)="confirm(itemClassFinanc.codigoFinancDet)">
                     <i class="ion-trash-a"></i>
                   </button>
 
                   <!-- Boton para Grabar Organizaciones  -->
                   <button type="button" class="btn btn-outline-primary btn-icon"
-                    nbPopover="Registra la Clasificación de Financiamiento" nbPopoverMode="hint"
-                    nbPopoverPlacement="top"
-                    (click)="saveFinanciamientoDetService(itemSocioDesarrollo.idOrganizacion.idOrganizacion)">
-                    <i class="ion-upload"></i>
+                    nbPopover="Actualiza la información de Clasificación de Financiamiento" nbPopoverMode="hint"
+                    nbPopoverPlacement="top" (click)="showDialogEditTo(itemClassFinanc.idActividadFinancDet, itemClassFinanc.codigoFinancDet, itemClassFinanc.idTipoFinanciamiento,
+                    itemClassFinanc.idModalidadAyuda, itemClassFinanc.idOrganizacionFinanciera )">
+                    <i class="ion-edit"></i>
                   </button>
                 </div>
               </div>
@@ -83,9 +85,9 @@
               <!-- *ngIf="JsonReceptionDetalleFinanciamientoBySocioDesarrollo0.length !== 0"> -->
               <!-- Tarjeta para los Comprimisos -->
               <div class="col-sm-4 col-md-4">
-                <!-- <ngx-financ-detalle-compromisos [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
+                <ngx-financ-detalle-compromisos [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
                   [codigoProyectoTab]="codigoProyectoTab" [idActividadFinancDet]="itemClassFinanc.idActividadFinancDet">
-                </ngx-financ-detalle-compromisos> -->
+                </ngx-financ-detalle-compromisos>
               </div>
 
               <!-- Tarjeta para los Desembolsos -->
@@ -111,7 +113,7 @@
       <!-- INI | Formulario Modal de Clasificacion de Financiamiento -->
       <p-dialog [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [width]="300">
         <p-header>
-          Clasificación de Financiamiento {{ idSocioDesarrolloSave }}
+          Clasificación de Financiamiento | {{ itemSocioDesarrollo.nombreOrganizacion }}
         </p-header>
         <div class="ui-g ui-fluid">
           <div class="col-sm-12 col-md-12">
@@ -153,8 +155,8 @@
         </div>
         <p-footer>
           <div class="ui-dialog-buttonpane ui-helper-clearfix">
-            <button type="button" pButton icon="fa fa-close" class="ui-button-danger" (click)="delete()"
-              label="Borrar"></button>
+            <button type="button" pButton icon="fa fa-close" class="ui-button-warning" (click)="clearForm()"
+              label="Limpiar"></button>
             <button type="button" pButton icon="fa fa-check"
               (click)="saveFinanciamientoDetService(itemSocioDesarrollo.idSocioDesarrollo)" label="Guardar"></button>
           </div>

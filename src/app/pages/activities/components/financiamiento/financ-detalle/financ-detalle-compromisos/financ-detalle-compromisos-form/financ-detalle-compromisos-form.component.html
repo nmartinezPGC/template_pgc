@@ -1,13 +1,8 @@
 <!-- Diseño de la Ventana de Compromisos -->
 <!-- ==================================================================================== -->
+
 <!-- ==================================================================================== -->
-<!-- <toaster-container [toasterconfig]="config"></toaster-container> -->
-
-<!-- <p-confirmDialog></p-confirmDialog> -->
-
-<!-- <nb-card accent="warning" status="primary">
-  <nb-card-body>
-    <br> -->
+<!-- INI | Formulario de la ventana Modal -->
 <div class="ui-g ui-fluid">
   <div class="col-sm-12 col-md-12">
     <div class="form-group">
@@ -27,7 +22,7 @@
     <div class="form-group">
       <strong> <label>Monto de Compromiso</label> </strong>
       <input class="form-control" currencyMask required [options]="{ prefix: '', thousands: ',', decimal: '.' }"
-        name="montoCompromiso" #montoCompromiso="ngModel" id="montoCompromiso"
+        name="montoCompromiso" #montoCompromiso="ngModel" id="montoCompromiso" autocomplete="off"
         [(ngModel)]="_activityFinanciamientoDetCompromisosModel.montoCompromiso" placeholder="0.00" required />
     </div>
   </div>
@@ -57,10 +52,10 @@
     </div>
   </div>
 </div>
-<!-- </nb-card-body>
-</nb-card> -->
+<!-- FIN | Formulario de la ventana Modal -->
+<!-- ==================================================================================== -->
 
-<!-- <div class="modal-footer"> -->
+<!-- Botones de Acción -->
 <hr>
 <div class="ui-dialog-buttonpane ui-helper-clearfix">
   <button type="button" pButton icon="fa fa-close" class="ui-button-warning" (click)="cleanForm()"
@@ -69,28 +64,14 @@
     label="Guardar"></button>
 </div>
 
-<!-- <div class="col-sm-12 col-md-12">
-    <div class="icon-button-examples"> -->
-<!-- Boton de limpiar Formulario -->
-<!-- <button type="button" class="btn btn-outline-danger btn-icon"
-        nbPopover="Limpia la Clasificación de Financiamiento" nbPopoverMode="hint" nbPopoverPlacement="top"
-        (click)="cleanForm()">
-        <i class="ion-trash-a"></i>
-      </button> -->
 
-<!-- Boton para Grabar Compromiso  -->
-<!-- <button type="button" class="btn btn-outline-primary btn-icon" nbPopover="Registra Compromiso para el Proyecto"
-        nbPopoverMode="hint" nbPopoverPlacement="top" (click)="saveFinanciamientoDetCompromisoService()">
-        <i class="ion-upload"></i>
-      </button>
-    </div> -->
-<!-- </div> -->
-<!-- </div> -->
-
-<!-- Ventana Modal de la fecha de Transacción -->
+<!-- ==================================================================================== -->
+<!-- INI | Ventana Modal de la fecha de Transacción -->
 <p-dialog header="Fecha de Transacción" [(visible)]="display" [modal]="false">
   <div class="col-md-2">
     <p-calendar [inline]="true" [showIcon]="false" [(ngModel)]="date6" [monthNavigator]="true" [yearNavigator]="true"
       yearRange="2000:2030" (dblclick)="closeDialog()" dateFormat="dd/mm/yy"></p-calendar>
   </div>
 </p-dialog>
+<!-- FIN | Ventana Modal de la fecha de Transacción -->
+<!-- ==================================================================================== -->

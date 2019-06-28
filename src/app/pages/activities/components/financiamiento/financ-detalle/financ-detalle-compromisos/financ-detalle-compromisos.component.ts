@@ -46,6 +46,7 @@ export class FinancDetalleCompromisosComponent implements OnInit, OnChanges {
 
   // Variables loaders
   public showLoader: boolean = false;
+  public showNoData: boolean = false;
 
 
   /**
@@ -135,8 +136,9 @@ export class FinancDetalleCompromisosComponent implements OnInit, OnChanges {
           // this._notificacionesService.showToast('error', 'Error al Obtener la Información de todas los Compromisos', result.message);
           this.JsonReceptionAllFinanciamientoDetCompromiso = [];
           // Oculta el loader
-          this.showLoader = true;
-        } else if (result.status === 200) {
+          this.showLoader = false;
+          this.showNoData = true;
+        } else if (result.status === 200 && result.findRecord === true) {
           this.JsonReceptionAllFinanciamientoDetCompromiso = result.data;
 
           // Mapeo del Json de Compromisos
@@ -161,6 +163,11 @@ export class FinancDetalleCompromisosComponent implements OnInit, OnChanges {
 
           // Oculta el loader
           this.showLoader = false;
+          this.showNoData = false;
+        } else {
+          // Oculta el loader
+          this.showLoader = false;
+          this.showNoData = true;
         }
       },
       error => {

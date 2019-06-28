@@ -6,16 +6,23 @@
     <div class="details">
       <div class="title">
         Desembolsos <img
-          src="../../../../../../assets/icons/forms/verification-of-delivery-list-clipboard-symbol_24.png" alt="">
+          src="../../../../../../assets/icons/forms/verification-of-delivery-list-clipboard-symbol_24.png"
+          alt="Desembolsos">
       </div>
 
       <div class="description">
+        <!-- No data Found image -->
+        <div class="container6">
+          <img src="../../../../../../../assets/icons/forms/no-search-result_teaser.png"
+            alt="No se encotraron datos de Compromisos" *ngIf="showNoData == true">
+        </div>
+
         <img src="../../../../../../../assets/images/loading.gif" *ngIf="showLoader == true"
           style="width: 20%; margin-left: 40%" alt="Cargando...">
-        <table class="table table-striped table-hover" *ngIf="showLoader == false">
+        <table class="table table-striped table-hover" *ngIf="showLoader == false && showNoData == false">
           <thead>
             <tr>
-              <th scope="col">#</th>
+              <th scope="col">No</th>
               <th scope="col" nbPopover="Tipo de Transacción" nbPopoverMode="hint">Tipo</th>
               <th scope="col" nbPopover="Monto de la Transacción" nbPopoverMode="hint">Monto</th>
               <th scope="col" nbPopover="Moneda de la Transacción" nbPopoverMode="hint">Mon.</th>
@@ -32,10 +39,10 @@
   </nb-card-body>
 
   <nb-card-footer>
-    <a nbPopover="Selecciona la Meta del ODS " nbPopoverMode="hint">
-      <i class="ion-flag"></i>
+    <a (click)="showDialog()" nbPopover="Ingresar Compromiso" nbPopoverMode="hint" style="cursor: pointer">
+      <i class="ion-plus-round"></i>
     </a>
-    <a href="" target="_blanck" nbPopover="Ver Información del ODS " nbPopoverMode="hint">
+    <a nbPopover="Registra la información del compromiso de parte del Socio al Desarrollo." nbPopoverMode="hint">
       <i class="ion-help"></i>
     </a>
   </nb-card-footer>

@@ -119,35 +119,6 @@ export class FinanciamientoDetService {
   } // FIN | FND-00005
 
 
-  /* FIXME: Documetntacion de Unir servicios
-    cAMBIOA PARA*/
-
-  /*getM() {
-    return Observable.forkJoin(
-      this.getAllTiposFinanciamiento(),
-      this.getAllModalidadAyuda()
-    )
-      .map(res => this.join(res[0], res[1]))
-  }
-
-  join(events, speakers) {
-    return events.map(event => {
-      return speakers
-        .filter(speaker => speaker.id == event.speaker_id)
-        .map(speaker => {
-          return {
-            id: event.id,
-            title: event.title,
-            date: event.date,
-            speaker_id: event.speaker_id,
-            speaker: speaker
-          }
-        })
-    }).reduce((a, b) => {
-      return a.concat(b);
-    }, []);*/
-
-
   /****************************************************************************
   * Funcion: FND-00006
   * Fecha: 03-06-2019

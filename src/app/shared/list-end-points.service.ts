@@ -1059,7 +1059,7 @@ export class ListEndPointsService {
         id: 70,
         nameEndpoint: 'deleteActividadFinanciamientoDet',
         urlEndPoint: '/mant-actividades/financiamiento/detalle/delete/',
-        params: '{ codigoActividad }',
+        params: '{ codigoFinancDet }',
         groupEndPoint: 'actividadesCRUDGroup',
         descEndPoint: 'Eliminar el dato de Detalle de Financiamiento enviado y asociarlo al Proyecto',
       },
