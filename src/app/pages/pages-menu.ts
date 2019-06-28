@@ -32,7 +32,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'MENU PGC',
     group: true,
-    hidden: !findRole([1, 2, 7], Number(rolUser)),
+    hidden: !findRole([1, 2, 3, 4, 5], Number(rolUser)),
   },
   {
     title: 'Proyectos',
@@ -80,7 +80,43 @@ export const MENU_ITEMS: NbMenuItem[] = [
         hidden: !findRole([1, 2, 3, 4, 5], Number(rolUser)),
       },
       {
+        title: 'Programas de Nación',
+        link: '/pages/forms/layouts',
+        hidden: !findRole([1, 2, 3, 4, 5], Number(rolUser)),
+      },
+      {
         title: 'Ubicación',
+        link: '/pages/forms/layouts',
+        hidden: !findRole([1, 2, 3, 4, 5], Number(rolUser)),
+      },
+      {
+        title: 'Resumen Financiero',
+        link: '/pages/forms/layouts',
+        hidden: !findRole([1, 2, 3, 4, 5], Number(rolUser)),
+      },
+    ],
+  },
+  {
+    title: 'Gráficos',
+    icon: 'nb-bar-chart',
+    children: [
+      {
+        title: 'Sectores y ODS',
+        link: '/pages/charts/echarts',
+        hidden: !findRole([1, 2, 3, 4, 5], Number(rolUser)),
+      },
+      {
+        title: 'Programas de Nación',
+        link: '/pages/charts/chartjs',
+        hidden: !findRole([1, 2, 3, 4, 5], Number(rolUser)),
+      },
+      {
+        title: 'Ubicación',
+        link: '/pages/charts/d3',
+        hidden: !findRole([1, 2, 3, 4, 5], Number(rolUser)),
+      },
+      {
+        title: 'Resumen Financiero',
         link: '/pages/forms/layouts',
         hidden: !findRole([1, 2, 3, 4, 5], Number(rolUser)),
       },
@@ -91,44 +127,23 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'nb-location',
     children: [
       {
-        title: 'Google Maps',
+        title: 'Ubicación Geográfica',
         link: '/pages/maps/gmaps',
         hidden: !findRole([1, 2, 3, 4, 5], Number(rolUser)),
       },
       {
-        title: 'Leaflet Maps',
+        title: 'Ubicación Poblacional',
         link: '/pages/maps/leaflet',
         hidden: !findRole([1, 2, 3, 4, 5], Number(rolUser)),
       },
       {
-        title: 'Bubble Maps',
+        title: 'Mapa 3',
         link: '/pages/maps/bubble',
         hidden: !findRole([1, 2, 3, 4, 5], Number(rolUser)),
       },
       {
-        title: 'Search Maps',
+        title: 'Geolocalización',
         link: '/pages/maps/searchmap',
-        hidden: !findRole([1, 2, 3, 4, 5], Number(rolUser)),
-      },
-    ],
-  },
-  {
-    title: 'Gráficos',
-    icon: 'nb-bar-chart',
-    children: [
-      {
-        title: 'Echarts',
-        link: '/pages/charts/echarts',
-        hidden: !findRole([1, 2, 3, 4, 5], Number(rolUser)),
-      },
-      {
-        title: 'Charts.js',
-        link: '/pages/charts/chartjs',
-        hidden: !findRole([1, 2, 3, 4, 5], Number(rolUser)),
-      },
-      {
-        title: 'D3',
-        link: '/pages/charts/d3',
         hidden: !findRole([1, 2, 3, 4, 5], Number(rolUser)),
       },
     ],
@@ -144,6 +159,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Register',
         link: '/auth/register',
+        hidden: !findRole([1], Number(rolUser)),
       },
       {
         title: 'Request Password',
@@ -159,6 +175,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     title: 'UI Features',
     icon: 'nb-keypad',
     link: '/pages/ui-features',
+    hidden: !findRole([1], Number(rolUser)),
     children: [
       {
         title: 'Buttons',
@@ -197,6 +214,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Forms',
     icon: 'nb-compose',
+    hidden: !findRole([1], Number(rolUser)),
     children: [
       {
         title: 'Form Inputs',
@@ -211,6 +229,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Components',
     icon: 'nb-gear',
+    hidden: !findRole([1], Number(rolUser)),
     children: [
       {
         title: 'Tree',
@@ -224,6 +243,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Editors',
     icon: 'nb-title',
+    hidden: !findRole([1], Number(rolUser)),
     children: [
       {
         title: 'TinyMCE',
@@ -238,6 +258,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Tables',
     icon: 'nb-tables',
+    hidden: !findRole([1], Number(rolUser)),
     children: [
       {
         title: 'Smart Table',
@@ -248,6 +269,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Miscellaneous',
     icon: 'nb-shuffle',
+    hidden: !findRole([1], Number(rolUser)),
     children: [
       {
         title: '404',
