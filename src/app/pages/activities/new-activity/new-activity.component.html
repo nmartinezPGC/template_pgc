@@ -594,8 +594,8 @@
         <p-tabPanel header="Paso #2 | Ubicación" leftIcon="pi pi-globe" [cache]="false" tooltip="Datos de Ubicación"
           [disabled]="false">
           <ng-template pTemplate="content">
-            <ngx-ubicacion [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
-              [codigoProyectoTab]="codigoProyectoTab" [JsonPassData]="JsonPassData"></ngx-ubicacion>
+            <ngx-ubicacion-proyecto [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
+              [codigoProyectoTab]="codigoProyectoTab" [JsonPassData]="JsonPassData"></ngx-ubicacion-proyecto>
           </ng-template>
         </p-tabPanel>
         <!-- Fin de Datos de Ubicacion Proyecto/Programa -->
@@ -636,7 +636,11 @@
 
         <!-- Tab #6 de Información Financiera -->
         <p-tabPanel header="Paso #6 | Financiamiento" leftIcon="pi pi-calendar" tooltip="Información Financiera"
+<<<<<<< HEAD
           [cache]="false" [disabled]="false">
+=======
+          [cache]="false">
+>>>>>>> ubicacion
           <ng-template pTemplate="content">
             <ngx-financiamiento [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
               [codigoProyectoTab]="codigoProyectoTab"></ngx-financiamiento>
@@ -646,8 +650,12 @@
         <!-- ==================================================================================== -->
 
         <!-- Tab #7 Recursos de soporte -->
+<<<<<<< HEAD
         <p-tabPanel header="Paso #7 | Recursos" leftIcon="pi pi-copy" tooltip="Recursos de Soporte" [cache]="false"
           [disabled]="false">
+=======
+        <p-tabPanel header="Paso #7 | Recursos" leftIcon="pi pi-copy" tooltip="Recursos de Soporte">
+>>>>>>> ubicacion
           <ng-template pTemplate="content">
             <ngx-recursos-proyecto [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
               [codigoProyectoTab]="codigoProyectoTab"></ngx-recursos-proyecto>
