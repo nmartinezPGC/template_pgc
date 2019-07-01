@@ -27,8 +27,9 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { NbRouteTabsetModule } from '@nebular/theme/components/route-tabset/route-tabset.module';
 
 // Modulo de Mapas
-import { LeafletModule } from '@asymmetrik/ngx-leaflet';
-import { UbicacionComponent } from './components/ubicacion/ubicacion.component';
+import { UbicacionModule } from './components/ubicacion/ubicacion.module'; // NAM|2019-06-29|Modulo de Mapas
+// import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+
 import { OdsComponent } from './components/sectores-programas/sectores/ods/ods.component';
 import { ProgramasComponent } from './components/sectores-programas/programas/programas.component';
 import { SectoresProgramasOdsComponent } from './components/sectores-programas/sectores/sectores-ods.component';
@@ -82,7 +83,6 @@ import { LinkComponent } from './components/recursos-proyecto/link/link.componen
 
 import { ToastModule } from 'primeng/toast';
 
-
 export const customCurrencyMaskConfig = {
   align: 'right',
   allowNegative: true,
@@ -110,7 +110,7 @@ export const customCurrencyMaskConfig = {
     MyDatePickerModule, // Modulo de Fechas
     NgxSpinnerModule, // Modulo de Spinner
     NbRouteTabsetModule, // Modulo de Rutas para los tabs,
-    LeafletModule.forRoot(),
+    // LeafletModule.forRoot(),
     FieldsetModule,
     TreeModule,
     DropdownModule,
@@ -129,11 +129,11 @@ export const customCurrencyMaskConfig = {
     AccordionModule, // NAM|2019-05-28
     TabViewModule, // NAM|2019-06-03
     ToastModule, // NAM|2019-06-03
+    UbicacionModule, // NAM|2019-06-29
   ],
   declarations: [
     ...routedComponents,
     FilterdataPipe,
-    UbicacionComponent,
     OdsComponent,
     ProgramasComponent,
     SectoresProgramasOdsComponent,

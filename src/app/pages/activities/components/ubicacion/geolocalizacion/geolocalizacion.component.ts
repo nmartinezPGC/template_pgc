@@ -9,8 +9,6 @@ import 'leaflet/dist/leaflet.css';
 
 import { icon, latLng, marker, polyline, tileLayer } from 'leaflet';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { AlertPromise } from 'selenium-webdriver';
-import { LeafletComponent } from '../../../maps/leaflet/leaflet.component';
 
 @Component({
   selector: 'ngx-geolocalizacion',
