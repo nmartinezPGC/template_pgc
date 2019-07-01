@@ -217,9 +217,9 @@ export class ListEndPointsService {
       findByIdEspacioTrabajoUsuarios: {
         id: 2,
         nameEndpoint: 'FindByIdEspacioTrabajoUsuarios',
-        urlEndPoint: '/espacios-trabajo-usuario/findByIdUsuario/',
+        urlEndPoint: '/espacios-trabajo-usuario/findByIdEspaciotrabajousuario/',
         groupEndPoint: 'espacioTrabajoUsuarioGroup',
-        descEndPoint: 'Busca los espacios de trabajo asignados al Usuario con el IdUsuario, de parametro',
+        descEndPoint: 'Busca el Espacio de Trabajo con el ID Espacio de Trab/User, de parametro',
       },
       newEspacioTrabajoUsuarios: {
         id: 3,
@@ -227,6 +227,13 @@ export class ListEndPointsService {
         urlEndPoint: '/espacios-trabajo-usuario/new',
         groupEndPoint: 'espacioTrabajoUsuarioGroup',
         descEndPoint: 'Ingresa un nuevo Espacio de Trabajo en la BD asignandolo a un Usuario',
+      },
+      findByIdUsuarioEspacioTrabajo: {
+        id: 4,
+        nameEndpoint: 'FindByIdUsuarioEspacioTrabajo',
+        urlEndPoint: '/espacios-trabajo-usuario/findByIdUsuarioEspacioTrabajo/',
+        groupEndPoint: 'espacioTrabajoUsuarioGroup',
+        descEndPoint: 'Busca los espacios de trabajo asignados al Usuario con el IdUsuario, de parametro',
       },
     }, // Modulo de Organizaciones
     endPointOrganizaciones: { // DRP NUEVO TIPO DE ORGANIZACION

@@ -623,7 +623,7 @@ export class FinancDetalleComponent implements OnInit, OnChanges {
   ****************************************************************************/
   confirm(codigoFinancDet: string) {
     this.confirmationService.confirm({
-      message: 'Estas seguro de Eliminar el Detalle de Financiamiento, con sus Compromisos, Desembolsos y Gastos?',
+      message: 'Estas seguro de Eliminar el Detalle de Financiamiento, puede que contenga Compromisos, Desembolsos y Gastos?',
       accept: () => {
         // Ejecuta la funcion de Eliminar el Detalle de Financiamiento
         this.deleteFinanciamientoDetService(codigoFinancDet);

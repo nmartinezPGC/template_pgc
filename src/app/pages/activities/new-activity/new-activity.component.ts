@@ -248,6 +248,11 @@ export class NewActivityComponent implements OnInit {
   } // FIN | constructor
 
   onTabChange(event) {
+    // Valida que el Identificaoor del Proyecto Exista
+    if (this.idProyectoTab === 0) {
+      this.messageService.add({ severity: 'info', summary: 'Error de Ingreso de Información', detail: 'Debes Ingresar los Datos Generales del Proyecto' });
+    }
+
     this.messageService.add({ severity: 'info', summary: 'Tab Expanded', detail: 'Index: ' + event.index });
   }
 

@@ -157,7 +157,7 @@ export class ListasComunesService {
     const paramSend: number = idUsuarioEspacioTrabajoIn;
 
     // Retorno de la Funcion
-    return this._http.get(this._systemEndPointsService.getEndPointService('espacioTrabajoUsuarioGroup', 2) + paramSend, {
+    return this._http.get(this._systemEndPointsService.getEndPointService('espacioTrabajoUsuarioGroup', 4) + paramSend, {
       headers: this.headers,
       params: { 'tokenApi': this.tokenHeader },
     });

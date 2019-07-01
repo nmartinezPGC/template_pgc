@@ -13,12 +13,13 @@ import { SocioDesarrolloService } from '../../../services/organizaciones/socio-d
 import { SharedOrganizacionesService } from '../../../services/organizaciones/shared-organizaciones.service';
 import { ActivityOrganizacionSocioDesarrolloModel } from '../../../models/organizaciones/model-socio-desarrollo';
 import { NotificacionesService } from '../../../../shared/services/notificaciones.service';
+import { ConfirmationService } from 'primeng/primeng';
 
 @Component({
   selector: 'ngx-socio-desarrollo',
   templateUrl: './socio-desarrollo.component.html',
   styleUrls: ['./socio-desarrollo.component.scss'],
-  providers: [NotificacionesService, SocioDesarrolloService],
+  providers: [NotificacionesService, SocioDesarrolloService, ConfirmationService],
 })
 export class SocioDesarrolloComponent implements OnInit {
   // Variables entre Tabs | Components
@@ -64,7 +65,8 @@ export class SocioDesarrolloComponent implements OnInit {
    */
   constructor(private _notificacionesService: NotificacionesService,
     private _socioDesarrolloService: SocioDesarrolloService,
-    private _sharedOrganizacionesService: SharedOrganizacionesService) {
+    private _sharedOrganizacionesService: SharedOrganizacionesService,
+    private confirmationService: ConfirmationService) {
     // Codigo del Constructor
   }
 
@@ -101,64 +103,11 @@ export class SocioDesarrolloComponent implements OnInit {
 
 
   /****************************************************************************
-  * Funcion: makeToast
-  * Object Number: 001
-  * Fecha: 16-08-2018
-  * Descripcion: Method makeToast of the Class
-  * Objetivo: makeToast in the method header API
-  ****************************************************************************/
-  makeToast() {
-    this._notificacionesService.showToast(this.type, this.title, this.content);
-  } // FIN | makeToast
-
-
-  /****************************************************************************
-  * Funcion: showToast
-  * Object Number: 001.1
-  * Fecha: 16-08-2018
-  * Descripcion: Method showToast of the Class
-  * Objetivo: showToast in the method header API
-  ****************************************************************************/
-  private showToast(type: string, title: string, body: string) {
-    this.config = new ToasterConfig({
-      positionClass: this.position,
-      timeout: this.timeout,
-      newestOnTop: this.isNewestOnTop,
-      tapToDismiss: this.isHideOnClick,
-      preventDuplicates: this.isDuplicatesPrevented,
-      animation: this.animationType,
-      limit: this.toastsLimit,
-    });
-    const toast: Toast = {
-      type: type,
-      title: title,
-      body: body,
-      timeout: this.timeout,
-      showCloseButton: this.isCloseButton,
-      bodyOutputType: BodyOutputType.TrustedHtml,
-    };
-  } // FIN | showToast
-
-
-  /****************************************************************************
-  * Funcion: toasterconfig
-  * Object Number: 001.2
-  * Fecha: 16-08-2018
-  * Descripcion: Method showToast of the Class
-  * Objetivo: showToast in the method header API
-  ****************************************************************************/
-  public toasterconfig: ToasterConfig =
-    new ToasterConfig({
-      showCloseButton: { 'warning': true, 'error': true },
-    }); // FIN | toasterconfig
-
-
-  /****************************************************************************
   * Funcion: getAllSocioDesarrolloService
-  * Object Number: 002
+  * Object Number: FND-002
   * Fecha: 05-05-2019
   * Descripcion: Method getAllSocioDesarrolloService of the Class
-  * Objetivo: getAllSocioDesarrolloService listados de los Socios al Desarrollo
+  * Objetivo: Listados de los Socios al Desarrollo
   * del Formulario de Actividad llamando a la API
   * Params: { caseBoolean }
   ****************************************************************************/
@@ -185,12 +134,12 @@ export class SocioDesarrolloComponent implements OnInit {
         this._notificacionesService.showToast('error', 'Error al Obtener la Información de todos los Socios al Desarrollo', JSON.stringify(error.error.message));
       },
     );
-  } // FIN | getAllSocioDesarrolloService
+  } // FIN | FND-002
 
 
   /****************************************************************************
   * Funcion: OnItemDeSelectSocioDesarrollo
-  * Object Number: 003
+  * Object Number: FND-003
   * Fecha: 03-05-2019
   * Descripcion: Method para Seleccionar Items del Socio al Desarrollo
   * en la Insercion del Proyecto
@@ -208,12 +157,12 @@ export class SocioDesarrolloComponent implements OnInit {
       // Asignamos el Socio al Desarrollo seleccionado
       this.JsonSendSociosDesarrollo = [...this.JsonSendSociosDesarrollo, { name: item.itemName, code: item.id, otro: '' }];
     }
-  } // FIN | OnItemDeSelectSocioDesarrollo
+  } // FIN | FND-003
 
 
   /****************************************************************************
   * Funcion: saveSocioDesarrollo
-  * Object Number: 004
+  * Object Number: FND-004
   * Fecha: 03-05-2019
   * Descripcion: Method para Ingresar Items del Socio al Desarrollo
   * en la Insercion del Proyecto
@@ -252,15 +201,14 @@ export class SocioDesarrolloComponent implements OnInit {
         );
       }
     });
-  } // FIN | saveSocioDesarrollo
+  } // FIN | FND-004
 
 
   /****************************************************************************
   * Funcion: cleanSocioDesarrollo
-  * Object Number: 005
+  * Object Number: FND-005
   * Fecha: 13-05-2019
-  * Descripcion: Method para limpiar Item del Socio al Desarrollo
-  * en la Insercion del Proyecto
+  * Descripcion: Method para Eliminar Item del Socio al Desarrollo
   * Objetivo: limpiar el Json de los Items seleccionados
   ****************************************************************************/
   cleanSocioDesarrollo(event: any) {
@@ -273,10 +221,10 @@ export class SocioDesarrolloComponent implements OnInit {
               this._notificacionesService.showToast('error', 'Error al Borrar la Información de Socios al Desarrollo', result.message);
             } else if (result.status === 200) {
               if (result.findRecord === true) {
-                this._notificacionesService.showToast('error', 'Error al Borrar la Información de Socios al Desarrollo', result.message);
-              } else {
                 this._notificacionesService.showToast('default', 'Socio al Desarrollo', result.message);
                 this.ngOnInit();
+              } else {
+                this._notificacionesService.showToast('error', 'Error al Borrar la Información de Socios al Desarrollo', result.message);
               }
             }
           },
@@ -291,12 +239,12 @@ export class SocioDesarrolloComponent implements OnInit {
       }
     }
     this.JsonSendSociosDesarrollo = [...this.JsonSendSociosDesarrollo];
-  } // FIN | cleanSocioDesarrollo
+  } // FIN | FND-005
 
 
   /****************************************************************************
-  * Funcion: cleanSocioDesarrollo
-  * Object Number: 005.1
+  * Funcion: cleanAllSocioDesarrollo
+  * Object Number: FND-005.1
   * Fecha: 13-05-2019
   * Descripcion: Method para limpiar Items del Socio al Desarrollo
   * en la Insercion del Proyecto
@@ -305,12 +253,12 @@ export class SocioDesarrolloComponent implements OnInit {
   cleanAllSocioDesarrollo() {
     this.JsonSendSociosDesarrollo = [];
     this.JsonSendSociosDesarrollo = [...this.JsonSendSociosDesarrollo];
-  } // FIN | cleanSocioDesarrollo
+  } // FIN | FND-005.1
 
 
   /****************************************************************************
   * Funcion: validaPercent
-  * Object Number: 006
+  * Object Number: FND-006
   * Fecha: 13-05-2019
   * Descripcion: Method para validar % Items del Socio al Desarrollo
   * en la Insercion del Proyecto
@@ -325,12 +273,12 @@ export class SocioDesarrolloComponent implements OnInit {
       }
       return dato;
     });
-  } // FIN | validaPercent
+  } // FIN | FND-006
 
 
   /****************************************************************************
   * Funcion: calcularPercent
-  * Object Number: 007
+  * Object Number: FND-007
   * Fecha: 13-05-2019
   * Descripcion: Method para calcular % Items del Socio al Desarrollo
   * en la Insercion del Proyecto
@@ -343,12 +291,12 @@ export class SocioDesarrolloComponent implements OnInit {
       dato.otro = valorMax.toFixed(2);
       return dato;
     });
-  } // FIN | calcularPercent
+  } // FIN | FND-007
 
 
   /****************************************************************************
   * Funcion: getAllSociosDesarrolloByActividadService
-  * Object Number: 003
+  * Object Number: FND-008
   * Fecha: 03-06-2019
   * Descripcion: Method getAllSociosDesarrolloByActividadService of the Class
   * Objetivo: getAllSociosDesarrolloByActividadService listados todos los Socios al Desarrollo
@@ -359,7 +307,7 @@ export class SocioDesarrolloComponent implements OnInit {
     this._socioDesarrolloService.getAllSociosDesarrolloByIdActividad(idActividad).subscribe(
       result => {
         if (result.status !== 200) {
-          this.showToast('error', 'Error al Obtener la Información de todos Socios al Desarrollo', result.message);
+          this._notificacionesService.showToast('error', 'Error al Obtener la Información de todos Socios al Desarrollo', result.message);
           this.JsonReceptionAllSocioDesarrolloByActividad = [];
         } else if (result.status === 200) {
           this.JsonReceptionAllSocioDesarrolloByActividad = result.data;
@@ -376,8 +324,27 @@ export class SocioDesarrolloComponent implements OnInit {
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información de todos Socios al Desarrollo', JSON.stringify(error.error.message));
+        this._notificacionesService.showToast('error', 'Error al Obtener la Información de todos Socios al Desarrollo', JSON.stringify(error.error.message));
       },
     );
-  } // FIN | getAllSociosDesarrolloByActividadService
+  } // FIN | FND-008
+
+
+  /****************************************************************************
+  * Funcion: confirm
+  * Object Number: FND-009
+  * Fecha: 01-07-2019
+  * Descripcion: Method confirm of the Class
+  * Objetivo: Eliminar el Detalle de Financiamiento seleccionado
+  * Params: { event }
+  ****************************************************************************/
+  confirm(event: any) {
+    this.confirmationService.confirm({
+      message: 'Estas seguro de Eliminar el Socio al Desarrollo, asegurate que no contenga relación con Financiamiento Detalle?',
+      accept: () => {
+        // Ejecuta la funcion de Eliminar el Socio al Desarrollo con Elementos relacionados
+        this.cleanSocioDesarrollo(event);
+      },
+    });
+  } // FIN | FND-009
 }

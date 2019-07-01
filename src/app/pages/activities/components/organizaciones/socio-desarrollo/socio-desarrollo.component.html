@@ -1,6 +1,9 @@
 <!-- Maquetacion de las Organizaciones de Socio al Desarrollo -->
 <!-- Componente para los Mensajes en pantalla -->
-<toaster-container [toasterconfig]="config"></toaster-container>
+<toaster-container></toaster-container>
+
+<p-confirmDialog header="Eliminar Socio al Desarrollo" icon="pi pi-exclamation-triangle" width="425">
+</p-confirmDialog>
 
 <!-- Agrupacion de la Informacion de Socio al Desarrollo -->
 <p-fieldset legend="Socio al Desarrollo" [toggleable]="true" class="fieldSet">
@@ -28,7 +31,7 @@
                   type="text" severity="error" pInputText pKeyFilter="int" placeholder="%" maxlength="2"
                   value="{{socio.value.otro}}" (keyup)="validaPercent($event, socio.value.code)">
                 <img style="float: right;" src="../../../../../../assets/icons/forms/rubbish-bin_24x.png" alt="Delete"
-                  (click)="cleanSocioDesarrollo(socio.value.code)">
+                  (click)="confirm(socio.value.code)">
               </div>
             </ng-template>
           </p-listbox>
