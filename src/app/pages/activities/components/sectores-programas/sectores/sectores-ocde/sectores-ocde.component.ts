@@ -96,22 +96,7 @@ export class SectoresOcdeComponent implements OnInit, OnChanges {
   public secuenciaDeActividad: any;
 
   // Modelo de la Clase
-  public _activitySectoresOcdeModel: ActivitySectoresOcdeModel
-
-  // Consfiguracion del Notificador
-  position = 'toast-bottom-full-width';
-  animationType = 'slideDown';
-  title = 'Se ha grabado la Información! ';
-  content = 'los cambios han sido grabados temporalmente, en la PGC!';
-  timeout = 20000;
-  toastsLimit = 5;
-  type = 'default';
-
-  isNewestOnTop = true;
-  isHideOnClick = true;
-  isDuplicatesPrevented = false;
-  isCloseButton = true;
-  config: ToasterConfig;
+  public _activitySectoresOcdeModel: ActivitySectoresOcdeModel;
 
   /**
    * constructor
@@ -148,59 +133,6 @@ export class SectoresOcdeComponent implements OnInit, OnChanges {
 
     // this.getfindByIdNivelSectorService(1);
   }
-
-
-  /****************************************************************************
-  * Funcion: makeToast
-  * Object Number: 003
-  * Fecha: 16-08-2018
-  * Descripcion: Method makeToast of the Class
-  * Objetivo: makeToast in the method header API
-  ****************************************************************************/
-  makeToast() {
-    this._notificacionesService.showToast(this.type, this.title, this.content);
-  } // FIN | makeToast
-
-
-  /****************************************************************************
-  * Funcion: showToast
-  * Object Number: 004
-  * Fecha: 16-08-2018
-  * Descripcion: Method showToast of the Class
-  * Objetivo: showToast in the method header API
-  ****************************************************************************/
-  private showToast(type: string, title: string, body: string) {
-    this.config = new ToasterConfig({
-      positionClass: this.position,
-      timeout: this.timeout,
-      newestOnTop: this.isNewestOnTop,
-      tapToDismiss: this.isHideOnClick,
-      preventDuplicates: this.isDuplicatesPrevented,
-      animation: this.animationType,
-      limit: this.toastsLimit,
-    });
-    const toast: Toast = {
-      type: type,
-      title: title,
-      body: body,
-      timeout: this.timeout,
-      showCloseButton: this.isCloseButton,
-      bodyOutputType: BodyOutputType.TrustedHtml,
-    };
-  } // FIN | showToast
-
-
-  /****************************************************************************
-  * Funcion: toasterconfig
-  * Object Number: 004.1
-  * Fecha: 16-08-2018
-  * Descripcion: Method showToast of the Class
-  * Objetivo: showToast in the method header API
-  ****************************************************************************/
-  public toasterconfig: ToasterConfig =
-    new ToasterConfig({
-      showCloseButton: { 'warning': true, 'error': true },
-    }); // FIN | toasterconfig
 
   /****************************************************************************
   * Funcion: viewFile

@@ -88,6 +88,8 @@ export class FinancEncabezadoComponent implements OnInit, OnChanges {
 
     // Recepcion de Información
     this.getAllMonedasActividadService();
+
+    this.getActividadFinanciamientoEncByIdActividadService(this.idProyectoTab);
   } // FIN | ngOnInit
 
 
@@ -96,35 +98,10 @@ export class FinancEncabezadoComponent implements OnInit, OnChanges {
   */
   ngOnChanges() {
     // Verificacion de informacion de Compromiso
-    // if (this.JsonReceptionFinancimientoEncProyecto.idActividadFinancEnc !== 0) {
-    // Carga el Model con los datos enviados
-    // this._activityFinanciamientoEncModel.idActividadFinancEnc = this.JsonReceptionFinancimientoEncProyecto.idActividadFinancEnc;
-    // this._activityFinanciamientoEncModel.idTipoTransaccionSend = this.JsonCompromisosSelect.idTipoTransaccion;
-    // this._activityFinanciamientoEncModel.idTipoTransaccion = { idTipoTransaccion: this._activityFinanciamientoDetCompromisosModel.idTipoTransaccionSend };
-    // this._activityFinanciamientoEncModel.montoActividad = this.JsonReceptionFinancimientoEncProyecto.montoActividad;
-    // this._activityFinanciamientoEncModel.idMonedaActividadSend = this.JsonCompromisosSelect.idMonedaActividad;
-    // this._activityFinanciamientoEncModel.idMonedaActividad = { idMonedaActividad: this._activityFinanciamientoDetCompromisosModel.idMonedaActividadSend };
-    // this._activityFinanciamientoEncModel.codigoFinancCompromiso = this.JsonCompromisosSelect.codigoFinancCompromiso;
-    // this.date6 = new Date(this.JsonCompromisosSelect.fechaTransaccion);
-    // this._activityFinanciamientoEncModel.fechaTransaccion = this.date6;
-    // } else {
-    // Inicializacion del Modelo
-    // Inicializacion del Modelo
-    // this._activityFinanciamientoEncModel = new ActivityFinanciamientoEncModel(
-    //   0, null, // Datos Generales
-    //   null, 0, null, // Relacionales
-    //   null, null, // Transaccion
-    //   true, null, null, // Auditoria
-    // );
-
-    // Fecha
-    // this.date6 = null;
-    // }
-    // this.idActividadFinancEnc = 30;
     // console.log('En change Encabezado ' + this.idProyectoTab);
-    if (this.idProyectoTab !== undefined) {
-      this.getActividadFinanciamientoEncByIdActividadService(this.idProyectoTab);
-    }
+    // if (this.idProyectoTab !== undefined) {
+    //   this.getActividadFinanciamientoEncByIdActividadService(this.idProyectoTab);
+    // }
 
   } // FIN | ngOnChanges
 
