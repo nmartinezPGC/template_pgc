@@ -642,6 +642,14 @@ export class ListEndPointsService {
         groupEndPoint: 'actividadesCRUDGroup',
         descEndPoint: 'Eliminar el Sector OCDE/CAD enviado y asociarlo al Proyecto',
       },
+      findAllActividadSectoresOcdeCad: { // NAM|2016-07-03|Mapeo de nuevos EndPoints de Sectores Ocde/Cad
+        id: 19.100,
+        nameEndpoint: 'findAllActividadSectoresOcdeCad',
+        urlEndPoint: '/mant-actividades/sectores/ocde-cad-proyecto/findByIdActividad/',
+        params: '{ idActividad }',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Listar todos los Sectores OCDE/CAD, de una Actividad registrados en la BD',
+      },
       findAllSectoresGobierno: { // Modulo de Sectores de Gobierno
         id: 20,
         nameEndpoint: 'findAllSectoresGobierno',

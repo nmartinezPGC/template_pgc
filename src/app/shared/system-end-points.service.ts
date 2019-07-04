@@ -324,6 +324,9 @@ export class SystemEndPointsService extends ListEndPointsService {
           case 19:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActividadSectorOcdeCad.urlEndPoint;
             break;
+          case 19.100:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findAllActividadSectoresOcdeCad.urlEndPoint;
+            break;
           case 20: // NAM | 2019-04-15 | Mapeo de los EndPoins de Sectores de Gobierno
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findAllSectoresGobierno.urlEndPoint;
             break;
