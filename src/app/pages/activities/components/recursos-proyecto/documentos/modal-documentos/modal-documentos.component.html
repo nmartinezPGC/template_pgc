@@ -1,0 +1,65 @@
+<!-- Diseño de la Ventana de Espacio de Trabajo -->
+<!-- ==================================================================================== -->
+<!-- Componente para los Mensajes en pantalla -->
+<toaster-container [toasterconfig]="config"></toaster-container>
+
+<div class="modal-content">
+    <nb-card accent="warning" status="primary">
+        <nb-card-header>Editar Recurso de Proyecto
+          <button class="close" aria-label="Close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </nb-card-header>
+
+        <nb-card-body>
+    <div class="row">
+        <div class="col-md-6">
+          <fieldset class="fieldCheck">
+            <strong><label>Titulo </label></strong>
+            <div class="form-group">
+              <input class="form-control" name="titulo" type="text" placeholder="Titulo"  id="titulo"
+               [(ngModel)]="_linkmodal1.titulo" required />
+            </div>
+            <strong><label>Descripcion</label></strong>
+            <div class="form-group">
+              <textarea rows="5" placeholder="Descripcion" class="form-control" id="descripcion"
+              [(ngModel)]="_linkmodal1.descripcion"
+               required></textarea>
+            </div>
+            <button type="button" (click)="UpdateLink()" class="btn btn-primary">Actualizar</button>
+            <button type="button" (Click)="closeModal()" class="btn btn-danger">Cerrar</button>
+          </fieldset>
+        </div>
+        <div class="col-md-6">
+          <fieldset class="fieldCheck">
+            <div class="form-group">
+              <label>Tipo de Recurso</label>
+              <select class="form-control" [(ngModel)]="_linkmodal1.TipoRecursos" ngControl="TipoRecursos" required>
+                <option value="0">Seleccione una Opcion</option>
+                <option *ngFor="let item of JsonReceptionTipo" [value]="item.idTipoRecursos">
+                  {{item.descripcionTipoRecurso}}
+                </option>
+              </select>
+            </div>
+            <strong><label>nota</label></strong>
+            <div class="form-group">
+              <input class="form-control" type="text" placeholder="Agregar una nota" id="nota"
+              [(ngModel)]="_linkmodal1.nota" required />
+            </div>
+            <strong><label>Nombre del Documento</label></strong>
+            <div class="form-group">
+              <input class="form-control" type="text" placeholder="Nombre del Documento" id="urlActividadRecursoDocumento"
+              [(ngModel)]="_linkmodal1.urlActividadRecursoDocumento" required />
+            </div>
+            <label>Elija un Tipo</label>
+            <select class="form-control" [(ngModel)]="_linkmodal1.Tipo" ngControl="Tipo" required>
+              <option value="0">Seleccione una Opcion</option>
+              <option *ngFor="let item of JsonReceptionTipos" [value]="item.idTipo" >
+                {{item.descTipo}}
+              </option>
+            </select>
+            <br>
+          </fieldset>
+        </div>
+      </div>
+    </nb-card-body>

@@ -1320,7 +1320,7 @@ export class ListEndPointsService {
         urlEndPoint: '/mant-actividades/recursos-proyecto/uploadFile',
         params: '{uploadFile}',
         groupEndPoint: 'actividadesCRUDGroup',
-        descEndPoint: 'Retorna el listado de todos los tipos de recursos por id de la bd',
+        descEndPoint: 'Carga un nuevo documento de recurso de proyecto a la bd',
       },
       uploadMuLtiplefilerecursosproyecto: {
         id: 93,
@@ -1328,7 +1328,38 @@ export class ListEndPointsService {
         urlEndPoint: '/mant-actividades/recursos-proyecto/uploadMultipleFiles',
         params: '{uploadMultipleFile}',
         groupEndPoint: 'actividadesCRUDGroup',
-        descEndPoint: 'Retorna el listado de todos los tipos de recursos por id de la bd',
+        descEndPoint: 'Carga multiples documento de recursos de proyecto a la bd',
+      },
+      newrecursosproyecto: {
+        id: 94,
+        nameEndpoint: 'newrecursosproyecto',
+        urlEndPoint: '/mant-actividades/recursos-proyecto/new',
+        params: '{actividadRecursoJson}',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Ingresa un nuevo Recurso de Proyecto a la  bd',
+      },
+      editrecursosproyecto: {
+        id: 95,
+        nameEndpoint: 'editrecursosproyecto',
+        urlEndPoint: '/mant-actividades/recursos-proyecto/edit/',
+        params: '{idActividadRecurso}',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Edita un Recurso de Proyecto de la bd',
+      },
+      findByIdActividadRecurso: {
+        id: 95.1,
+        nameEndpoint: 'findByIdActividadRecurso',
+        urlEndPoint: '/mant-actividades/recursos-proyecto/findByIdActividadRecurso/',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Busque un Recurso de Proyecto de la bd con el parametro id Recurso',
+      },
+      deleterecursosproyecto: {
+        id: 95.2,
+        nameEndpoint: 'deleterecursosproyecto',
+        urlEndPoint: '/mant-actividades/recursos-proyecto/delete/',
+        params: '{idActividadRecurso}',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Inhabilita un Recurso de Proyecto de la bd',
       },
     }, // modulo de mantenimientos generico de usuarios
     endPointMantGenericosUsuario: {
