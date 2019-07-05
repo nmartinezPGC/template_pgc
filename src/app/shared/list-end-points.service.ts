@@ -217,9 +217,9 @@ export class ListEndPointsService {
       findByIdEspacioTrabajoUsuarios: {
         id: 2,
         nameEndpoint: 'FindByIdEspacioTrabajoUsuarios',
-        urlEndPoint: '/espacios-trabajo-usuario/findByIdUsuario/',
+        urlEndPoint: '/espacios-trabajo-usuario/findByIdEspaciotrabajousuario/',
         groupEndPoint: 'espacioTrabajoUsuarioGroup',
-        descEndPoint: 'Busca los espacios de trabajo asignados al Usuario con el IdUsuario, de parametro',
+        descEndPoint: 'Busca el Espacio de Trabajo con el ID Espacio de Trab/User, de parametro',
       },
       newEspacioTrabajoUsuarios: {
         id: 3,
@@ -227,6 +227,13 @@ export class ListEndPointsService {
         urlEndPoint: '/espacios-trabajo-usuario/new',
         groupEndPoint: 'espacioTrabajoUsuarioGroup',
         descEndPoint: 'Ingresa un nuevo Espacio de Trabajo en la BD asignandolo a un Usuario',
+      },
+      findByIdUsuarioEspacioTrabajo: {
+        id: 4,
+        nameEndpoint: 'FindByIdUsuarioEspacioTrabajo',
+        urlEndPoint: '/espacios-trabajo-usuario/findByIdUsuarioEspacioTrabajo/',
+        groupEndPoint: 'espacioTrabajoUsuarioGroup',
+        descEndPoint: 'Busca los espacios de trabajo asignados al Usuario con el IdUsuario, de parametro',
       },
     }, // Modulo de Organizaciones
     endPointOrganizaciones: { // DRP NUEVO TIPO DE ORGANIZACION
@@ -557,7 +564,7 @@ export class ListEndPointsService {
       // NAM | 2019-02-28 | Mapping Ubicaciones de Actividades
       newActivityUbicacion: {
         id: 10,
-        nameEndpoint: 'Agregar Ubicacion a Proyecto',
+        nameEndpoint: 'newActivityUbicacion',
         urlEndPoint: '/mant-actividades/ubicaciones/new',
         params: '{ jsonUbicacionActivity }',
         groupEndPoint: 'actividadesCRUDGroup',
@@ -565,17 +572,17 @@ export class ListEndPointsService {
       },
       listAllActivityUbicaciones: {
         id: 11,
-        nameEndpoint: 'Listar todas las Ubicaciones de los Proyecto',
+        nameEndpoint: 'listAllActivityUbicaciones',
         urlEndPoint: '/mant-actividades/ubicaciones',
         params: '{}',
         groupEndPoint: 'actividadesCRUDGroup',
         descEndPoint: 'Listar todas las Ubicaciones de los proyectos',
       },
-      findByIdActivity: {
+      findByIdActividadUbicacion: {
         id: 12,
-        nameEndpoint: 'Listar todas las Ubicaciones de un Proyecto',
+        nameEndpoint: 'findByIdActividadUbicacion',
         urlEndPoint: '/mant-actividades/ubicaciones/findByIdActividadUbicacion/',
-        params: '{ idActividadUbicacion }',
+        params: '{ idActividad }',
         groupEndPoint: 'actividadesCRUDGroup',
         descEndPoint: 'Listar todas las Ubicaciones del proyecto a consultado',
       },
@@ -1059,7 +1066,7 @@ export class ListEndPointsService {
         id: 70,
         nameEndpoint: 'deleteActividadFinanciamientoDet',
         urlEndPoint: '/mant-actividades/financiamiento/detalle/delete/',
-        params: '{ codigoActividad }',
+        params: '{ codigoFinancDet }',
         groupEndPoint: 'actividadesCRUDGroup',
         descEndPoint: 'Eliminar el dato de Detalle de Financiamiento enviado y asociarlo al Proyecto',
       },
@@ -1313,7 +1320,7 @@ export class ListEndPointsService {
         urlEndPoint: '/mant-actividades/recursos-proyecto/uploadFile',
         params: '{uploadFile}',
         groupEndPoint: 'actividadesCRUDGroup',
-        descEndPoint: 'Retorna el listado de todos los tipos de recursos por id de la bd',
+        descEndPoint: 'Carga un nuevo documento de recurso de proyecto a la bd',
       },
       uploadMuLtiplefilerecursosproyecto: {
         id: 93,
@@ -1321,7 +1328,38 @@ export class ListEndPointsService {
         urlEndPoint: '/mant-actividades/recursos-proyecto/uploadMultipleFiles',
         params: '{uploadMultipleFile}',
         groupEndPoint: 'actividadesCRUDGroup',
-        descEndPoint: 'Retorna el listado de todos los tipos de recursos por id de la bd',
+        descEndPoint: 'Carga multiples documento de recursos de proyecto a la bd',
+      },
+      newrecursosproyecto: {
+        id: 94,
+        nameEndpoint: 'newrecursosproyecto',
+        urlEndPoint: '/mant-actividades/recursos-proyecto/new',
+        params: '{actividadRecursoJson}',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Ingresa un nuevo Recurso de Proyecto a la  bd',
+      },
+      editrecursosproyecto: {
+        id: 95,
+        nameEndpoint: 'editrecursosproyecto',
+        urlEndPoint: '/mant-actividades/recursos-proyecto/edit/',
+        params: '{idActividadRecurso}',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Edita un Recurso de Proyecto de la bd',
+      },
+      findByIdActividadRecurso: {
+        id: 95.1,
+        nameEndpoint: 'findByIdActividadRecurso',
+        urlEndPoint: '/mant-actividades/recursos-proyecto/findByIdActividadRecurso/',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Busque un Recurso de Proyecto de la bd con el parametro id Recurso',
+      },
+      deleterecursosproyecto: {
+        id: 95.2,
+        nameEndpoint: 'deleterecursosproyecto',
+        urlEndPoint: '/mant-actividades/recursos-proyecto/delete/',
+        params: '{idActividadRecurso}',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Inhabilita un Recurso de Proyecto de la bd',
       },
       // modulo de contactos
       listAllContactos: {

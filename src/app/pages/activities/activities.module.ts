@@ -1,4 +1,7 @@
 import { NgModule } from '@angular/core';
+import {FileUploadModule} from 'primeng/fileupload';
+
+import { HttpClientModule} from '@angular/common/http';
 
 // Imports de Tabla Smart de Angular
 import { Ng2SmartTableModule } from 'ng2-smart-table';
@@ -27,8 +30,9 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { NbRouteTabsetModule } from '@nebular/theme/components/route-tabset/route-tabset.module';
 
 // Modulo de Mapas
-import { LeafletModule } from '@asymmetrik/ngx-leaflet';
-import { UbicacionComponent } from './components/ubicacion/ubicacion.component';
+import { UbicacionModule } from './components/ubicacion/ubicacion.module'; // NAM|2019-06-29|Modulo de Mapas
+// import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+
 import { OdsComponent } from './components/sectores-programas/sectores/ods/ods.component';
 import { ProgramasComponent } from './components/sectores-programas/programas/programas.component';
 import { SectoresProgramasOdsComponent } from './components/sectores-programas/sectores/sectores-ods.component';
@@ -40,7 +44,6 @@ import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import { ListboxModule } from 'primeng/listbox';
 import { RecursosProyectoComponent } from './components/recursos-proyecto/recursos-proyecto.component';
-import { FileUploadModule } from 'primeng/fileupload';
 import { DropdownModule, EditorModule, AutoCompleteModule, KeyFilterModule, CalendarModule, DialogModule, InputMaskModule, AccordionModule, TabViewModule } from 'primeng/primeng';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
@@ -85,6 +88,9 @@ import { ContactosComponent } from './components/recursos-proyecto/contactos/con
 import { ModalUpdateContactoComponent } from './components/recursos-proyecto/contactos/modal-update-contacto/modal-update-contacto.component';
 import { ModalNewContactoComponent } from './components/recursos-proyecto/contactos/modal-new-contacto/modal-new-contacto.component';
 
+// Recursos de Proyecto
+import { ModalDocumentosComponent } from './components/recursos-proyecto/documentos/modal-documentos/modal-documentos.component';
+import { ModalLinkComponent } from './components/recursos-proyecto/link/modal-link/modal-link.component';
 
 export const customCurrencyMaskConfig = {
   align: 'right',
@@ -101,6 +107,8 @@ export const customCurrencyMaskConfig = {
 @NgModule({
   imports: [
     ThemeModule,
+    FileUploadModule,
+    HttpClientModule,
     ActivitiesRoutingModule,
     Ng2SmartTableModule, // Modulo Base del pluguin de TableSmart
     ToasterModule.forRoot(), // Modulo de Toaster-Notification
@@ -113,7 +121,7 @@ export const customCurrencyMaskConfig = {
     MyDatePickerModule, // Modulo de Fechas
     NgxSpinnerModule, // Modulo de Spinner
     NbRouteTabsetModule, // Modulo de Rutas para los tabs,
-    LeafletModule.forRoot(),
+    // LeafletModule.forRoot(),
     FieldsetModule,
     TreeModule,
     DropdownModule,
@@ -132,11 +140,11 @@ export const customCurrencyMaskConfig = {
     AccordionModule, // NAM|2019-05-28
     TabViewModule, // NAM|2019-06-03
     ToastModule, // NAM|2019-06-03
+    UbicacionModule, // NAM|2019-06-29
   ],
   declarations: [
     ...routedComponents,
     FilterdataPipe,
-    UbicacionComponent,
     OdsComponent,
     ProgramasComponent,
     SectoresProgramasOdsComponent,
@@ -170,7 +178,8 @@ export const customCurrencyMaskConfig = {
     ContactosComponent,
     ModalUpdateContactoComponent,
     ModalNewContactoComponent,
-   // ContactoModeloComponent,
+    ModalDocumentosComponent,
+    ModalLinkComponent,
   ],
   providers: [
     // SmartTableService, // Defincion del Servicio que provee los Datos de la Tabla: ID's Internas
@@ -182,6 +191,8 @@ export const customCurrencyMaskConfig = {
     FinancDetalleCompromisosFormComponent,
     ModalUpdateContactoComponent, // JOE 01-07-2019
     ModalNewContactoComponent, // JOE 01-07-2019
+    ModalLinkComponent,
+    ModalDocumentosComponent,
   ],
 })
 export class ActivitiesPGCModule { }

@@ -1,53 +1,51 @@
 <!-- Maquetacion del Encabezado del Financiamiento del Proyecto -->
 <!-- Componente para los Mensajes en pantalla -->
 <toaster-container [toasterconfig]="config"></toaster-container>
-
+<p-confirmDialog header="Eliminar Clasificación de Financiamiento" icon="pi pi-exclamation-triangle" width="425">
+</p-confirmDialog>
 
 <!-- ==================================================================================== -->
-<!-- <div class="row">
-  <div class="col-md-12"> -->
 <nb-card>
   <nb-card-header>Detalle del Financiamiento del Proyecto</nb-card-header>
   <nb-card-body>
     <!-- Acordeones formados por el numero de Socios al Desarrollo -->
-    <!-- <nb-card>
-          <nb-card-body> -->
-    <p-accordion *ngFor="let item of JsonReceptionAllSocioDesarrollo" [multiple]="true">
-      <p-accordionTab header="{{ item.idOrganizacion.descOrganizacion }}: {{ item.idOrganizacion.nombreOrganizacion }}">
-        <!-- Socio al Desarrollo: {{ item.idOrganizacion.idOrganizacion }} -->
+    <p-accordion *ngFor="let itemSocioDesarrollo of JsonReceptionNew; let i = index" [multiple]="true">
+      <hr style="width: 90%; background-color:#ccc">
 
-        <nb-card>
+      <p-accordionTab
+        header="No. {{ i + 1 }} | {{ itemSocioDesarrollo.descOrganizacion }}: {{ itemSocioDesarrollo.nombreOrganizacion }}">
+        <!-- Socio al Desarrollo: {{ itemSocioDesarrollo.idOrganizacion.idOrganizacion }} -->
+        <div style="text-align:left">
+          <button type="button" pButton icon="fa fa-plus"
+            (click)="showDialogAddTo(itemSocioDesarrollo.idSocioDesarrollo)" label="Agregar Financiamiento"></button>
+        </div>
+        <br>
+
+        <!-- <pre> {{JsonReceptionNew | json}} </pre> -->
+        <!-- INI | Visualizacion de Clasificación de Financiamiento -->
+        <!-- =============================================================================== -->
+        <nb-card *ngFor="let itemClassFinanc of itemSocioDesarrollo.financiamientoDet; let j = index">
           <nb-card-header>
-            Clasificación de Financiamiento
+            {{ j + 1 }} - Clasificación de Financiamiento: {{ itemClassFinanc.codigoFinancDet }}
           </nb-card-header>
           <nb-card-body>
             <br>
-            <div class="row" style=" width: 100%; padding-left: 20px">
+
+            <div class="row" style=" width: 100%; padding-left: 10px">
               <div class="col-sm-6 col-md-3">
                 <div class="form-group">
                   <strong> <label>Tipo de Financiamiento</label> </strong>
-                  <select class="form-control" #idTipoFinanciamientoSend="ngModel" name="idTipoFinanciamientoSend"
-                    id="idTipoFinanciamientoSend" required
-                    [(ngModel)]="_activityFinanciamientoDetModel.idTipoFinanciamientoSend">
-                    <option value="0">**** Selecciona el Tipo Financiamiento ****</option>
-                    <option *ngFor="let item of JsonReceptionAllTipoFinanciamiento" [value]="item.idTipoFinanciamiento">
-                      {{item.nombreTipoFinanciamiento}}
-                    </option>
-                  </select>
+                  <input type="text" class="form-control" pInputText pKeyFilter="hex"
+                    placeholder="Tipo de Financiamiento" disabled
+                    value="{{ itemClassFinanc.descripcionModalidadAyuda }}">
                 </div>
               </div>
 
               <div class="col-sm-6 col-md-4">
                 <div class="form-group">
                   <strong> <label>Modalidad de Ayuda</label> </strong>
-                  <select class="form-control" #idModalidadAyudaSend="ngModel" name="idModalidadAyudaSend"
-                    id="idModalidadAyudaSend" required
-                    [(ngModel)]="_activityFinanciamientoDetModel.idModalidadAyudaSend">
-                    <option value="0">**** Selecciona la Modalidad de Ayuda ****</option>
-                    <option *ngFor="let item of JsonReceptionAllModalidadAyuda" [value]="item.idModalidadAyuda">
-                      {{item.nombreModalidadAyuda}}
-                    </option>
-                  </select>
+                  <input type="text" class="form-control" pInputText disabled pKeyFilter="hex"
+                    placeholder="Modalidad de Ayuda" value="{{ itemClassFinanc.descripcionTipoFinanciamiento }}">
                 </div>
               </div>
 
@@ -55,9 +53,8 @@
                 <div class="form-group">
                   <strong> <label>Id Organización Financiera</label> </strong>
                   <input type="text" class="form-control" pInputText pKeyFilter="hex"
-                    placeholder="Id Organización Financiera"
-                    [(ngModel)]="_activityFinanciamientoDetModel.idOrganizacionFinanciera"
-                    #idOrganizacionFinanciera="ngModel">
+                    placeholder="Id Organización Financiera" disabled
+                    value="{{ itemClassFinanc.idOrganizacionFinanciera }}">
                 </div>
               </div>
 
@@ -66,50 +63,107 @@
                 <div class="icon-button-examples">
                   <!-- Boton de Calcular Porcentajes -->
                   <button type="button" class="btn btn-outline-danger btn-icon"
-                    nbPopover="Limpia la Clasificación de Financiamiento" nbPopoverMode="hint" nbPopoverPlacement="top"
-                    (click)="cleanForm()">
+                    nbPopover="Elimina la Clasificación de Financiamiento" nbPopoverMode="hint" nbPopoverPlacement="top"
+                    (click)="confirm(itemClassFinanc.codigoFinancDet)">
                     <i class="ion-trash-a"></i>
                   </button>
 
                   <!-- Boton para Grabar Organizaciones  -->
                   <button type="button" class="btn btn-outline-primary btn-icon"
-                    nbPopover="Registra la Clasificación de Financiamiento" nbPopoverMode="hint"
-                    nbPopoverPlacement="top" (click)="saveFinanciamientoDetService(item.idOrganizacion.idOrganizacion)">
-                    <i class="ion-upload"></i>
+                    nbPopover="Actualiza la información de Clasificación de Financiamiento" nbPopoverMode="hint"
+                    nbPopoverPlacement="top" (click)="showDialogEditTo(itemClassFinanc.idActividadFinancDet, itemClassFinanc.codigoFinancDet, itemClassFinanc.idTipoFinanciamiento,
+                    itemClassFinanc.idModalidadAyuda, itemClassFinanc.idOrganizacionFinanciera )">
+                    <i class="ion-edit"></i>
                   </button>
                 </div>
               </div>
-
             </div>
+
+            <!-- =============================================================================== -->
+            <!-- INI | Visualizacion de los Comprimisos, Desembolsos y Gastos del Financiamiento -->
+            <div class="row" style=" width: 100%; padding-left: 10px">
+              <!-- *ngIf="JsonReceptionDetalleFinanciamientoBySocioDesarrollo0.length !== 0"> -->
+              <!-- Tarjeta para los Comprimisos -->
+              <div class="col-sm-4 col-md-4">
+                <ngx-financ-detalle-compromisos [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
+                  [codigoProyectoTab]="codigoProyectoTab" [idActividadFinancDet]="itemClassFinanc.idActividadFinancDet">
+                </ngx-financ-detalle-compromisos>
+              </div>
+
+              <!-- Tarjeta para los Desembolsos -->
+              <div class="col-sm-4 col-md-4">
+                <ngx-financ-detalle-desembolsos></ngx-financ-detalle-desembolsos>
+              </div>
+
+              <!-- Tarjeta para los Gastos -->
+              <div class="col-sm-4 col-md-4">
+                <ngx-financ-detalle-gastos></ngx-financ-detalle-gastos>
+              </div>
+            </div>
+            <!-- FIN | Visualizacion de los Comprimisos, Desembolsos y Gastos del Financiamiento -->
+            <!-- =============================================================================== -->
+
           </nb-card-body>
         </nb-card>
+        <!-- FIN | Visualizacion de Clasificación de Financiamiento -->
+        <!-- =============================================================================== -->
+      </p-accordionTab>
 
-
-        <div class="row">
-          <!-- Tarjeta para los Comprimisos -->
-          <div class="col-sm-4 col-md-4">
-            <ngx-financ-detalle-compromisos [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
-              [codigoProyectoTab]="codigoProyectoTab" [idActividadFinancDet]="idActividadFinancDet">
-            </ngx-financ-detalle-compromisos>
+      <!-- ====================================================================================================== -->
+      <!-- INI | Formulario Modal de Clasificacion de Financiamiento -->
+      <p-dialog [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [width]="300">
+        <p-header>
+          Clasificación de Financiamiento | {{ itemSocioDesarrollo.nombreOrganizacion }}
+        </p-header>
+        <div class="ui-g ui-fluid">
+          <div class="col-sm-12 col-md-12">
+            <div class="form-group">
+              <strong> <label>Tipo de Financiamiento</label> </strong>
+              <select class="form-control" #idTipoFinanciamientoSend="ngModel" name="idTipoFinanciamientoSend"
+                id="idTipoFinanciamientoSend" required
+                [(ngModel)]="_activityFinanciamientoDetModel.idTipoFinanciamientoSend">
+                <option value="0">**** Selecciona el Tipo Financiamiento ****</option>
+                <option *ngFor="let item of JsonReceptionAllTipoFinanciamiento" [value]="item.idTipoFinanciamiento">
+                  {{item.nombreTipoFinanciamiento}}
+                </option>
+              </select>
+            </div>
           </div>
 
-          <!-- Tarjeta para los Desembolsos -->
-          <div class="col-sm-4 col-md-4">
-            <ngx-financ-detalle-desembolsos></ngx-financ-detalle-desembolsos>
+          <div class="col-sm-12 col-md-12">
+            <div class="form-group">
+              <strong> <label>Modalidad de Ayuda</label> </strong>
+              <select class="form-control" #idModalidadAyudaSend="ngModel" name="idModalidadAyudaSend"
+                id="idModalidadAyudaSend" required [(ngModel)]="_activityFinanciamientoDetModel.idModalidadAyudaSend">
+                <option value="0">**** Selecciona la Modalidad de Ayuda ****</option>
+                <option *ngFor="let item of JsonReceptionAllModalidadAyuda" [value]="item.idModalidadAyuda">
+                  {{item.nombreModalidadAyuda}}
+                </option>
+              </select>
+            </div>
           </div>
 
-          <!-- Tarjeta para los Gastos -->
-          <div class="col-sm-4 col-md-4">
-            <ngx-financ-detalle-gastos></ngx-financ-detalle-gastos>
+          <div class="col-sm-12 col-md-12">
+            <div class="form-group">
+              <strong> <label>Id Organización Financiera</label> </strong>
+              <input type="text" class="form-control" pInputText pKeyFilter="hex"
+                placeholder="Id Organización Financiera"
+                [(ngModel)]="_activityFinanciamientoDetModel.idOrganizacionFinanciera"
+                #idOrganizacionFinanciera="ngModel">
+            </div>
           </div>
         </div>
-      </p-accordionTab>
-      <hr style="width: 90%; background-color:#ccc">
+        <p-footer>
+          <div class="ui-dialog-buttonpane ui-helper-clearfix">
+            <button type="button" pButton icon="fa fa-close" class="ui-button-warning" (click)="clearForm()"
+              label="Limpiar"></button>
+            <button type="button" pButton icon="fa fa-check"
+              (click)="saveFinanciamientoDetService(itemSocioDesarrollo.idSocioDesarrollo)" label="Guardar"></button>
+          </div>
+        </p-footer>
+      </p-dialog>
+      <!-- FIN | Formulario Modal de Clasificacion de Financiamiento -->
+      <!-- ====================================================================================================== -->
     </p-accordion>
-    <!-- </nb-card-body>
-        </nb-card> -->
-
   </nb-card-body>
 </nb-card>
-<!-- </div>
-</div> -->

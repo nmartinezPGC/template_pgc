@@ -1,0 +1,102 @@
+<!-- <p-gmap [options]="options" [style]="{'width':'100%','height':'320px'}" ></p-gmap> -->
+<!-- Maquetacion de Ubicacion del Proyecto -->
+<toaster-container></toaster-container>
+
+<!-- INI | Servicio de confirmacion de Accion -->
+<p-confirmDialog header="Eliminar Compromiso" icon="pi pi-exclamation-triangle" width="425"></p-confirmDialog>
+
+<nb-card accent="warning" status="primary">
+  <nb-card-header>Ingreso de Ubicación del Proyecto
+    <button class="close" aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </nb-card-header>
+  <nb-card-body>
+    <div class="row">
+      <!-- Columna de Filtros -->
+      <div class="col-sm-3">
+        <!-- Columna de Nivel de Implementación -->
+        <div class="form-group">
+          <strong> <label>Nivel de Implementación</label> </strong>
+          <select #idNivel class="form-control" id="idNivel" name="idNivel"
+            [(ngModel)]="_activityUbicacionModel.idNivel"
+            (change)="getListNivelUbicacionByIdNivelImplementacionService(_activityUbicacionModel.idNivel)">
+            <option value="0">Nivel de Implementación</option>
+            <option *ngFor="let item of JsonReceptionNivelImplementacion" [value]="item.idNivel">
+              {{item.nombreNivelImpl}}
+            </option>
+          </select>
+        </div>
+
+        <!-- Columna de Nivel Unicacion de Implementación -->
+        <div class="form-group">
+          <strong> <label>Nivel de Ubicación</label> </strong>
+          <select #idNivelUbicacion class="form-control" id="idNivelUbicacion" name="idNivelUbicacion"
+            ngControl="idNivelUbicacion" [(ngModel)]="_activityUbicacionModel.idNivelUbicacion"
+            (change)="getListUbicacionService(_activityUbicacionModel.idNivelUbicacion)">
+            <option value="0">Nivel de Ubicación</option>
+            <option *ngFor="let item of JsonReceptionNivelUbicacionImplementacion" [value]="item.idNivelUbicacion">
+              {{item.nombreNivelUbicacion}}
+            </option>
+          </select>
+        </div>
+
+        <!-- Columna de Nivel Unicacion de Implementación -->
+        <div class="form-group">
+          <strong> <label>Ubicación de Implementación</label> </strong>
+          <angular2-multiselect [data]="dropdownList" [(ngModel)]="selectedItems" [settings]="dropdownSettings"
+            (onSelect)="onItemSelect($event)"></angular2-multiselect>
+        </div>
+
+        <hr>
+        <p-scrollPanel [style]="{width: '100%', height: '200px'}" styleClass="custombar1">
+          <!-- <div style="padding:1em;line-height:1.5"> -->
+          <!-- Loader de carga de datos -->
+          <img src="../../../../../../../assets/images/loaderBlack.gif" *ngIf="loadingdata == true"
+            style="width: 20%; margin-left: 40%" alt="Cargando...">
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col" nbPopover="Ubicación de Implementación" nbPopoverMode="hint">Ubicación</th>
+                <th scope="col" nbPopover="Eliminar Ubicación de Implementación" nbPopoverMode="hint">Acc.</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Datos de gastos -->
+              <tr *ngFor="let itemMaps of selectedItemsUbicacion; let homeTableIndex = index">
+                <th scope="row">{{ homeTableIndex + 1 }}</th>
+                <td>{{ itemMaps.nombreUbicacionImpl }}</td>
+                <td style="text-align: center;">
+                  <!-- <img class="accButton" src="../../../../../../assets/icons/forms/pencil-striped-symbol_16.png"
+                      nbPopover="Editar Compromiso" nbPopoverMode="hint" alt="Editar" (click)="showDialog(itemCompromisos.idActividadFinancDetCompromiso, itemCompromisos.idTipoTransaccion,
+                    itemCompromisos.montoCompromiso, itemCompromisos.idMoneda, itemCompromisos.fechaTransaccion,
+                    itemCompromisos.codigoFinancCompromiso)"> -->
+                  <img class="accButton" src="../../../../../../assets/icons/forms/rubbish-bin_16.png"
+                    nbPopover="Eliminar Ubicación" nbPopoverMode="hint" alt="Eliminar" style="cursor: pointer"
+                    (click)="confirm(homeTableIndex, itemMaps.nombreUbicacionImpl, itemMaps.idUbicacionImplementacion, itemMaps.idActividad)">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- </div> -->
+        </p-scrollPanel>
+      </div>
+
+      <!-- Columna de Mapa -->
+      <div class="col-sm-9">
+        <div style="height: 400px;" leaflet [leafletCenter]="mapCenter" [leafletOptions]="options"
+          [leafletLayersControl]="layersControl" [leafletLayers]="layers" (leafletMapReady)="onMapReady($event)">
+        </div>
+
+        <hr>
+        <!-- Botones de Accion -->
+        <button pButton type="button" icon="pi pi-check" iconPos="right" label="Agregar" class="ui-button-raised"
+          (click)="saveUbicaciones()"></button>
+
+        <button pButton type="button" icon="pi pi-trash" iconPos="right" label="Limpiar"
+          class="ui-button-raised ui-button-danger"></button>
+      </div>
+    </div>
+  </nb-card-body>
+</nb-card>

@@ -30,8 +30,8 @@ export class ActivityUbicacionModel {
         public idDepartamento: number,
         public idMunicipioUbicacion: { idMunicipio: number },
         public idMunicipio: number,
-        public idUbicacionImpl: { idUbicacionImplementacion: number },
-        public idUbicacionImplementacion: number,
+        public idUbicacionImplementacion: { idUbicacionImplementacion: number },
+        public idUbicacionImplementacionSend: number,
 
         // Datos de Actividad con Ubicaciones
         public idActividadUbicacion: number,
