@@ -25,13 +25,13 @@ import { RequestPasswordComponent} from './@theme/components/auth/request-passwo
 
 
 
-
 @NgModule({
   declarations: [AppComponent, // Auth Module
     NgxAuthComponent,
     NgxAuthBlockComponent,
     NgxLoginComponent,
     NgxLogoutComponent,
+   // ContactoModeloComponent,
 
 
    // RecursosProyectoComponent,

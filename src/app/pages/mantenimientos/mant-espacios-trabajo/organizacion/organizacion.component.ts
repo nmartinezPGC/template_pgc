@@ -593,16 +593,6 @@ export class OrganizacionComponent implements OnInit {
         // Redirecciona al Login
         alert('Error en la petición de la API ' + <any>error);
 
-        // Borramos los datos del LocalStorage
-        localStorage.removeItem('auth_app_token');
-        localStorage.removeItem('identity');
-
-        const redirect = '/auth/login';
-        setTimeout(() => {
-          // Iniciativa Temporal
-          location.reload();
-          return this._router.navigateByUrl(redirect);
-        }, 200);
       },
     );
   } // FIN | userDatailsService

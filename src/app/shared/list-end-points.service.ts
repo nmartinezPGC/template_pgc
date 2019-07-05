@@ -1361,6 +1361,56 @@ export class ListEndPointsService {
         groupEndPoint: 'actividadesCRUDGroup',
         descEndPoint: 'Inhabilita un Recurso de Proyecto de la bd',
       },
+      // modulo de contactos
+      listAllContactos: {
+        id: 96,
+        nameEndpoint: 'listAllContactos',
+        urlEndPoint: '/actividades_contactos',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Retorna el listado de todos los contactos de recursos por id de la bd',
+      },
+      findByIdContacto: {
+        id: 97,
+        nameEndpoint: 'findByIdContacto',
+        urlEndPoint: '/actividades_contactos/findByIdContacto/',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Busca los contactos con el IdContacto, de parametro',
+      },
+      newContacto: {
+        id: 98,
+        nameEndpoint: 'newContacto',
+        urlEndPoint: '/actividades_contactos/new',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Ingresa un nuevo Contacto en la BD',
+      },
+      editContacto: {
+        id: 99,
+        nameEndpoint: 'editContacto',
+        urlEndPoint: '/actividades_contactos/edit/',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Actualiza un contacto en la BD',
+      },
+      deleteContacto: {
+        id: 100,
+        nameEndpoint: 'deleteContacto',
+        urlEndPoint: '/actividades_contactos/delete/',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'desabilita un contacto en la BD',
+      },
+      listAllTratos: {
+        id: 101,
+        nameEndpoint: 'listAllTratos',
+        urlEndPoint: '/tratos_contacto',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Retorna el listado de todos los tratos del contacto',
+      },
+      findByIdTratos: {
+        id: 102,
+        nameEndpoint: 'findByIdTratos',
+        urlEndPoint: '/tratos_contacto/findById/',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Busca los contactos con el IdTrato, de parametro',
+      },
     }, // modulo de mantenimientos generico de usuarios
     endPointMantGenericosUsuario: {
       listAllUsuarios: {

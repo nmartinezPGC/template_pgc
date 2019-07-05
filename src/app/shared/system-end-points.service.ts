@@ -591,6 +591,27 @@ export class SystemEndPointsService extends ListEndPointsService {
         case 95.2:
               endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleterecursosproyecto.urlEndPoint;
               break;
+        case 96:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.listAllContactos.urlEndPoint;
+            break;
+        case 97:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdContacto.urlEndPoint;
+            break;
+        case 98:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.newContacto.urlEndPoint;
+            break;
+        case 99:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.editContacto.urlEndPoint;
+            break;
+        case 100:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteContacto.urlEndPoint;
+            break;
+       case 101:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.listAllTratos.urlEndPoint;
+            break;
+       case 102:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdTratos.urlEndPoint;
+            break;
         }
         break;
       case 'mantGenericosUsuarioGroup': // Llamados a los EndPoint de usuarios
