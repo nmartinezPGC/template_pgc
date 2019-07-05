@@ -81,7 +81,7 @@ export class LinkComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this._recursosproyectoModel = new RecursosProyectoModel(
-      0, null, null, null, null, null, null, null, null, null, null, null, null, null, null, true
+      0, null, null, null, null, null, null, null, null, null, null, null, null, null, null, true,
     );
     this.tipoService();
     this.tiposService();

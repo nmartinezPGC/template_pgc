@@ -21,7 +21,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./modal-documentos.component.scss'],
   providers: [ServicerecursosproyectoService, NotificacionesService],
 })
-export class ModalDocumentosComponent implements OnInit {
+export class ModalDocumentosComponent implements OnInit, OnChanges {
   @Input() idProyectoTab: number;
   @Input() idUsuarioTab: number;
   @Input() codigoProyectoTab: string;
@@ -79,7 +79,7 @@ export class ModalDocumentosComponent implements OnInit {
     ngOnInit() {
 
       this._linkmodal1 = new RecursosProyectoModel(
-        0, null, null, null, null, null, null, null, null, null, null, null, null, null, null, true
+        0, null, null, null, null, null, null, null, null, null, null, null, null, null, null, true,
       );
       this._linkmodal1.idActividadRecurso;
       this._linkmodal1.codigoActividadRecurso;
@@ -136,7 +136,6 @@ export class ModalDocumentosComponent implements OnInit {
             this._linkmodal1.Usuario = this.data4.idUsuario.idUsuario;
             this._linkmodal1.Tipo = this.data4.idTipo.idTipo;
             this._linkmodal1.activo = this.data4.activo;
-  
             // Verificamos que la Actividad Exista en la BD
           }
         },
@@ -195,7 +194,6 @@ export class ModalDocumentosComponent implements OnInit {
       error => {
         // Redirecciona al Login
         alert('Error en la petición de la API ' + <any>error);
-  
       },
     );
   } // FIN | tipoService

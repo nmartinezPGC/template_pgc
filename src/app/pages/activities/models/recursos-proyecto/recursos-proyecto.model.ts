@@ -9,7 +9,7 @@
  */
 export class RecursosProyectoModel {
     constructor(
-        public idActividadRecurso : number,
+        public idActividadRecurso: number,
         public codigoActividadRecurso: string,
         public descripcion: string,
         public titulo: string,
@@ -18,16 +18,16 @@ export class RecursosProyectoModel {
         public urlActividadRecursoDocumento: string,
 
         // mapeo de relación con actividades
-        public idActividad : { idActividad: number },
+        public idActividad: { idActividad: number },
          public Actividad: number,
          // mapeo de Tipo Recursos
-         public idTipoRecursos :{idTipoRecursos: number},
+         public idTipoRecursos: {idTipoRecursos: number},
          public TipoRecursos: number,
         // mapeo de relación con Usuarios
-        public idUsuario : { idUsuario: number },
+        public idUsuario: { idUsuario: number },
         public Usuario: number,
         // mapeo de Tipos de la tabla Tipos
-        public idTipo :{idTipo: number},
+        public idTipo: {idTipo: number},
         public Tipo: number,
         // mapeo de relacion tipo de perfil
          public activo: boolean = true,

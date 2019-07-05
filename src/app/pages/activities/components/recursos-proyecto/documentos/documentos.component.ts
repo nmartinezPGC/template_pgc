@@ -80,7 +80,7 @@ constructor(public _servicerecursosproyectoService: ServicerecursosproyectoServi
 
   ngOnInit() {
     this._recursosproyectoModel = new RecursosProyectoModel(
-      0, null, null, null, null, null, null, null, null, null, null, null, null, null, null, true
+      0, null, null, null, null, null, null, null, null, null, null, null, null, null, null, true,
     );
     this.tiposService();
     this.tipoService();
@@ -114,7 +114,6 @@ private tipoService() {
   );
 } // FIN | estadoService
  /****************************************************************************
-  
 * Funcion: ListAllRecursoProyecto
   * Object Number: 001
   * Fecha: 25-06-2019

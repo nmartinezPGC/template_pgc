@@ -82,7 +82,7 @@ export class ModalLinkComponent implements OnInit, OnChanges {
   ngOnInit() {
 
     this._linkmodal1 = new RecursosProyectoModel(
-      0, null, null, null, null, null, null, null, null, null, null, null, null, null, null, true
+      0, null, null, null, null, null, null, null, null, null, null, null, null, null, null, true,
 
     );
     this._linkmodal1.idActividadRecurso;
