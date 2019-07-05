@@ -301,7 +301,7 @@ export class SystemEndPointsService extends ListEndPointsService {
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.listAllActivityUbicaciones.urlEndPoint;
             break;
           case 12:
-            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdActivity.urlEndPoint;
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdActividadUbicacion.urlEndPoint;
             break;
           case 13:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActivityUbicacion.urlEndPoint;

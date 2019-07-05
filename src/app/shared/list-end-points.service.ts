@@ -564,7 +564,7 @@ export class ListEndPointsService {
       // NAM | 2019-02-28 | Mapping Ubicaciones de Actividades
       newActivityUbicacion: {
         id: 10,
-        nameEndpoint: 'Agregar Ubicacion a Proyecto',
+        nameEndpoint: 'newActivityUbicacion',
         urlEndPoint: '/mant-actividades/ubicaciones/new',
         params: '{ jsonUbicacionActivity }',
         groupEndPoint: 'actividadesCRUDGroup',
@@ -572,17 +572,17 @@ export class ListEndPointsService {
       },
       listAllActivityUbicaciones: {
         id: 11,
-        nameEndpoint: 'Listar todas las Ubicaciones de los Proyecto',
+        nameEndpoint: 'listAllActivityUbicaciones',
         urlEndPoint: '/mant-actividades/ubicaciones',
         params: '{}',
         groupEndPoint: 'actividadesCRUDGroup',
         descEndPoint: 'Listar todas las Ubicaciones de los proyectos',
       },
-      findByIdActivity: {
+      findByIdActividadUbicacion: {
         id: 12,
-        nameEndpoint: 'Listar todas las Ubicaciones de un Proyecto',
+        nameEndpoint: 'findByIdActividadUbicacion',
         urlEndPoint: '/mant-actividades/ubicaciones/findByIdActividadUbicacion/',
-        params: '{ idActividadUbicacion }',
+        params: '{ idActividad }',
         groupEndPoint: 'actividadesCRUDGroup',
         descEndPoint: 'Listar todas las Ubicaciones del proyecto a consultado',
       },
