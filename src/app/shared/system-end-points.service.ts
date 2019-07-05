@@ -143,6 +143,9 @@ export class SystemEndPointsService extends ListEndPointsService {
           case 3:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointEspaciosTrabajoUsuarios.newEspacioTrabajoUsuarios.urlEndPoint;
             break;
+          case 4:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointEspaciosTrabajoUsuarios.findByIdEspacioTrabajoUsuario.urlEndPoint;
+            break;
         }
         break;
       case 'organizacionesGroup': // Llamados a los EndPoint de Organizaciones
@@ -576,6 +579,18 @@ export class SystemEndPointsService extends ListEndPointsService {
         case 93:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.uploadMuLtiplefilerecursosproyecto.urlEndPoint;
             break;
+        case 94:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.newrecursosproyecto.urlEndPoint;
+            break;
+        case 95:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.editrecursosproyecto.urlEndPoint;
+            break;
+        case 95.1:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdActividadRecurso.urlEndPoint;
+            break;
+        case 95.2:
+              endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleterecursosproyecto.urlEndPoint;
+              break;
         }
         break;
       case 'mantGenericosUsuarioGroup': // Llamados a los EndPoint de usuarios

@@ -272,6 +272,13 @@ export class UsuarioService {
             headers: this.headers,
             params: { 'tokenApi': this.tokenHeader },
         });
+    /****************************************************************************
+* Funcion: FND-00013
+* Fecha: 05-03-2019
+* Descripcion: Metodo que sirve para poder optener los espacios de trabajo por
+* Params: { idUsuario }
+* Autor: Edgar Ramirez
+****************************************************************************/
     }// FIN | FND-00013
     fyByIdEspacioTrabajoUsuario(idUsuarioEspacioTrabajo1: number): Observable<any> {
         const idUsuarioEspacioTrabajo: number = idUsuarioEspacioTrabajo1;
@@ -373,4 +380,19 @@ newEspacioTrabajoUsuario(jsonEspacioTrabajoUsuario): Observable<any> {
     });
   } // FIN | FND-00018
 
+    /****************************************************************************
+* Funcion: FND-00019
+* Fecha: 20-06-2019
+* Descripcion: Metodo que sirve para poder optener los espacios de trabajo por
+* Params: { idEspacioTrabajoUsuario }
+* Autor: Allan Madrid
+****************************************************************************/
+findByIdEspacioTrabajoUsuario(idEspacioTrabajoUsuarioIn: number): Observable<any> {
+    const idEspaciosTrabajoUsuarios: number = idEspacioTrabajoUsuarioIn;
+    return this._http.get(this._systemEndPointsService.getEndPointService('espacioTrabajoGroup', 4) + idEspaciosTrabajoUsuarios, {
+        headers: this.headers,
+        params: { 'tokenApi': this.tokenHeader },
+    });
+
+} // FIN | FND-00019
 }

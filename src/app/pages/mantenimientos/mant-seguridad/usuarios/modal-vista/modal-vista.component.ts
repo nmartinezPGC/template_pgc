@@ -15,10 +15,9 @@ import {  ToasterConfig  } from 'angular2-toaster'; // Servicio de Notificacione
 })
 
 export class ModalVistaComponent implements OnInit {
-    @Input() idUsuario;
-    @Input() idEspacioTrabajo;
-    @Input() idRol;
+    @Input() modalidEspacioTrabajoUsuario;
     public JsonReceptionEspaciosTrabajoUsuario: any;
+    public JsonReceptionfindByIdEspacioTrabajoUsuario: any;
     public _espacioTrabajoUsuarioModel: VistaModalModel;
     public JsonReceptionRolEspacio: any;
     public codSec: any;
@@ -29,6 +28,7 @@ export class ModalVistaComponent implements OnInit {
     data: any;
     data1: any;
     data2: any;
+    data3: any;
     arrayEspaciosTrabajoUsuario: any
 
     constructor(private activeModal: NgbActiveModal, public _usuariosService: UsuarioService,
@@ -42,10 +42,13 @@ export class ModalVistaComponent implements OnInit {
         // Inicializacion del Modelo de la Clase
         this._espacioTrabajoUsuarioModel = new VistaModalModel(
             0, null, null,  0, null, 0, null, 0, true);
+            this._espacioTrabajoUsuarioModel.idEspacio;
+            this._espacioTrabajoUsuarioModel.idUsuario;
             this._espacioTrabajoUsuarioModel.idRolIN;
 
 
         this.ListAllEspaciosTrabajoUsuario();
+        this.findByIdEspacioTrabajoUsuario(this.modalidEspacioTrabajoUsuario);
 
     }
     config: ToasterConfig;
@@ -105,17 +108,27 @@ export class ModalVistaComponent implements OnInit {
         );
     } // FIN | ListAllEspaciosTrabajo
 
-
-
-
-    /****************************************************************************
-* Funcion: getIdEspacioTrabajo
-* Object Number: 002
-* Fecha: 22-03-2019
-* Descripcion: Method getIdEspacioTrabajo of the Class
-* Objetivo: getIdEspacioTrabajo detalle de los espacios de trabajo por id llamando a la API
-* Autor: Edgar Ramirez
-****************************************************************************/
+     findByIdEspacioTrabajoUsuario(idEspaciosTrabajoUsuarios: number) {
+        // Ejecutamos el Recurso del EndPoint
+        this._usuariosService.findByIdEspacioTrabajoUsuario(idEspaciosTrabajoUsuarios).subscribe(
+          response => {
+            if (response.status !== 200) {
+                this._notificacionesService.showToast('error', 'Error al Eliminar la Id Interna de la Planificacion del Proyecto', response.message);
+            } else if (response.status === 200) {
+              this.JsonReceptionfindByIdEspacioTrabajoUsuario = response.data;
+              this.data3 = this.JsonReceptionfindByIdEspacioTrabajoUsuario;
+              this._espacioTrabajoUsuarioModel.idEspacioTrabajo = this.data3.idEspacioTrabajo.idEspacio;
+              this._espacioTrabajoUsuarioModel.idRolEspacioTrabajo = this.data3.idRolEspacioTrabajo.idRol1;
+            }
+          },
+          error => {
+            // Informacion del Error que se capturo de la Secuencia
+            this._notificacionesService.showToast('error', 'Ha ocurrido un Error al cargar un dato, por favor verifica que todo este bien!!', JSON.stringify(error.error.message));
+            // Ocultamos el Loader la Funcion
+          },
+        );
+        // Return
+      } // FIN | findByIdEspacioTrabajoUsuario
 
 
 

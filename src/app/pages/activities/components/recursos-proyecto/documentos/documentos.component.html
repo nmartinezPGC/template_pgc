@@ -6,36 +6,53 @@
   <div class="row">
     <div class="col-md-6">
       <fieldset class="fieldCheck">
-        <strong><label>Titulo</label></strong>
+        <strong><label>Titulo </label></strong>
         <div class="form-group">
-          <input class="form-control" type="text" placeholder="Titulo" required />
+          <input class="form-control" type="text" placeholder="Titulo"  id="titulo" ngControl="titulo"
+           [(ngModel)]="_recursosproyectoModel.titulo" required />
         </div>
         <strong><label>Descripcion</label></strong>
         <div class="form-group">
-          <textarea rows="5" placeholder="Descripcion" class="form-control" required></textarea>
+          <textarea rows="5" placeholder="Descripcion" class="form-control" id="descripcion" ngControl="descripcion"
+          [(ngModel)]="_recursosproyectoModel.descripcion"
+           required></textarea>
         </div>
+        <label>Elija un Tipo</label>
+        <select class="form-control" [(ngModel)]="_recursosproyectoModel.Tipo" ngControl="Tipo" required>
+          <option value="0">Seleccione una Opcion</option>
+          <option *ngFor="let item of JsonReceptionTipos" [value]="item.idTipo" >
+            {{item.descTipo}}
+          </option>
+        </select>
+        <br>
+        <button type="button" (click)="newDocService()" class="btn btn-primary">Guardar Datos</button>
+        <button type="button" (click)="cleandoc()" class="btn btn-danger">Cancelar</button>
       </fieldset>
     </div>
     <div class="col-md-6">
       <fieldset class="fieldCheck">
         <div class="form-group">
           <label>Tipo</label>
-          <select class="form-control" [(ngModel)]="_recursosproyectoModel.id_TipoRecursos" ngControl="id_TipoRecursos" required>
+          <select class="form-control" [(ngModel)]="_recursosproyectoModel.TipoRecursos" ngControl="TipoRecursos" required>
             <option value="0">Seleccione una Opcion</option>
-            <option *ngFor="let item of JsonReceptionTipo" [value]="id_TipoRecursos">
+            <option *ngFor="let item of JsonReceptionTipo" [value]="item.idTipoRecursos">
               {{item.descripcionTipoRecurso}}
             </option>
           </select>
         </div>
         <strong><label>nota</label></strong>
         <div class="form-group">
-          <input class="form-control" type="text" placeholder="Agregar una nota" required />
+          <input class="form-control" type="text" placeholder="Agregar una nota" id="nota" ngControl="nota"
+          [(ngModel)]="_recursosproyectoModel.nota" required />
+        </div>
+        <strong><label>Nombre del Documento</label></strong>
+        <div class="form-group">
+          <input class="form-control" type="text" placeholder="Ingrese Nombre del Documento" id="urlActividadRecursoDocumento" ngControl="urlActividadRecursoDocumento"
+          [(ngModel)]="_recursosproyectoModel.urlActividadRecursoDocumento" required />
         </div>
         <strong><label>Subir Recurso</label></strong>
         <p-fileUpload (change)="upload($event)" name="myfile[]" url="./upload.php"
           maxFileSize="1000000"></p-fileUpload>
-        <br>
-         <button type="button" class="btn btn-warning">Agregar</button>
       </fieldset>
     </div>
   </div>
@@ -45,34 +62,38 @@
         <tr class="tHeadSearch">
           <th scope="col" colspan="2">
             <input type="text" class="form-control" [(ngModel)]="queryString"
-              placeholder="Buscar nombre de la Organizacion :">
+              placeholder="Buscar Nombre del Recurso:">
           </th>
         </tr>
-        <tr class="tHeadTable">
+        <tr >
           <th scope="col" style="width: 5%;">No</th>
-          <th scope="col" style="width: 20%;">Titulo</th>
-          <th scope="col" style="width: 20%;">Descripcion</th>
-          <th scope="col" style="width: 15%;">Tipo</th>
-          <th scope="col" style="width: 15%;">Nota</th>
-          <th scope="col" style="width: 15%;">Acciones</th>
+          <th scope="col" style="width: 5%;">Cod_Actividad</th>
+          <th scope="col" style="width: 10%;">Nombre Recurso</th>
+          <th scope="col" style="width: 10%;">Tipo de Recurso</th>
+          <th scope="col" style="width: 10%;">Recursos</th>
+          <th scope="col" style="width: 10%;">Nombre_Doc_Cargado</th>
+          <th scope="col" style="width: 10%;">Acciones</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>PNUD</td>
-          <td>actividad por realizar en olancho</td>
-          <td>Work</td>
-          <td>Ninguna</td>
+        <tr *ngFor="let item of JsonReceptionActividadRecurso | filterdata: queryString : 'titulo'  | paginate: { itemsPerPage: 5, currentPage: p };let homeTableIndex = index">
+          <td>{{ homeTableIndex + 1 }}</td>
+          <td>{{item.codigoActividadRecurso}}</td>
+          <td>{{item.titulo}}</td>
+          <td>{{item.idTipo.descTipo}}</td>
+          <td>{{item.idTipoRecursos.descripcionTipoRecurso}}</td>
+          <td>{{item.urlActividadRecursoDocumento}}</td>
           <td>
-            <img><img (click)="showLargeModal(item.idOrganizacion)" class="pointerMouse"
+            <img><img (click)="showLargeModal1(item.idActividadRecurso)" class="pointerMouse"
               src="../../../../assets/icons/forms/pencil-striped-symbol_24.png" alt="">
-            <img (click)="deleteOrganizacion(item.idOrganizacion)" class="pointerMouse"
+            <img (click)="deleteActividadRecurso(item.idActividadRecurso)" class="pointerMouse"
               src="../../../../assets/icons/forms/rubbish-bin_24x.png" alt=""><img alt="">
           </td>
         </tr>
       </tbody>
     </table>
-    <button type="button" class="btn btn-primary">Guardar Datos</button>
+     <!-- paginador de la tabla -->
+     <pagination-controls autoHide="true" responsive="true" previousLabel="Anterior" nextLabel="Siguiente"
+     (pageChange)="p = $event"></pagination-controls>
 </p-fieldset>
 
