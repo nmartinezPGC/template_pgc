@@ -12,20 +12,14 @@ import { Router } from '@angular/router';
 import { EspaciosTrabajoService } from '../../services/espacio-trabajo.service';
 import { EspaciosTrabajoModel } from '../../models/espacio.trabajo.model';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { delay } from 'q';
-import { LoginService } from '../../../../@theme/components/auth/services/login.service';
 import { EspacioModalTrabajoComponent } from './espacio-modal-trabajo.component';
-import { templateJitUrl } from '@angular/compiler';
-import { UserService } from '../../../../@core/data/users.service';
-import { OrganizacionComponent } from '../organizacion/organizacion.component';
-import { checkAndUpdateDirectiveDynamic } from '@angular/core/src/view/provider';
-import { stringify } from '@angular/compiler/src/util';
+import { NotificacionesService } from '../../../shared/services/notificaciones.service';
 
 @Component({
   selector: 'ngx-espacios-trabajo',
   templateUrl: './espacios-trabajo.component.html',
   styleUrls: ['./espacios-trabajo.component.scss'],
-  providers: [EspaciosTrabajoService, ToasterService],
+  providers: [EspaciosTrabajoService, NotificacionesService],
 
 })
 export class EspaciosTrabajoComponent implements OnInit {
@@ -105,7 +99,7 @@ export class EspaciosTrabajoComponent implements OnInit {
   }
 
   constructor(public _espacioTrabajoService: EspaciosTrabajoService, protected _router: Router, private modalService: NgbModal,
-     private _toasterService: ToasterService ) {
+    private _notificacionesService: NotificacionesService) {
     this.responsedata = { 'error': false, 'msg': 'error campos solicitado' };
   }
 
@@ -117,7 +111,7 @@ export class EspaciosTrabajoComponent implements OnInit {
   * Objetivo: makeToast in the method header API
   ****************************************************************************/
   makeToast() {
-    this.showToast(this.type, this.title, this.content);
+    this._notificacionesService.showToast(this.type, this.title, this.content);
   } // FIN | makeToast
 
   /****************************************************************************
@@ -145,7 +139,7 @@ export class EspaciosTrabajoComponent implements OnInit {
       showCloseButton: this.isCloseButton,
       bodyOutputType: BodyOutputType.TrustedHtml,
     };
-    this._toasterService.pop(toast);
+
   } // FIN | showToast
 
   ngOnInit() {
@@ -200,7 +194,7 @@ export class EspaciosTrabajoComponent implements OnInit {
       result => {
         if (result.status !== 200) {
 
-          this.showToast('error', 'Error al Obtener la Información de los Paises', result.message);
+          this._notificacionesService.showToast('error', 'Error al Obtener la Información de los Paises', result.message);
         } else if (result.status === 200) {
           // console.log("paso por aqui 3");
           this.JsonReceptionPaises = result.data;
@@ -218,7 +212,7 @@ export class EspaciosTrabajoComponent implements OnInit {
       },
       error => {
         // console.log("paso por aqui 4");
-        this.showToast('error', 'Error al Obtener la Información de los Paises', error);
+        this._notificacionesService.showToast('error', 'Error al Obtener la Información de los Paises', error);
       },
     );
   } // FIN | paisesAllListService
@@ -303,10 +297,9 @@ export class EspaciosTrabajoComponent implements OnInit {
     this._espacioTrabajoService.newEspaciosTrabajo(this._espaciostrabajoModel).subscribe(
       response => {
         if (response.status !== 200) {
-          // console.log("no paso el recurso 3");
-          this.showToast('error', 'Error al Ingresar la Información del Perfil', response.message);
+          this._notificacionesService.showToast('error', 'Error al Ingresar la Información del Perfil', response.message);
         } else if (response.status === 200) {
-          this.showToast('default', 'La Información del espacio trabajo, se ha ingresado con exito', response.message);
+          this._notificacionesService.showToast('default', 'La Información del espacio trabajo, se ha ingresado con exito', response.message);
           this.ngOnInit();
 
         }
@@ -382,7 +375,7 @@ export class EspaciosTrabajoComponent implements OnInit {
       response => {
         // console.log("paso por aqui"+ idEspacioTrabajo);
         if (response.status !== 200) {
-          this.showToast('error', 'Error al Eliminar la Id Interna de la Planificacion del Proyecto', response.message);
+          this._notificacionesService.showToast('error', 'Error al Eliminar la Id Interna de la Planificacion del Proyecto', response.message);
         } else if (response.status === 200) {
           this.JsonReceptionListEspacioTrabajo = response.data;
           // instancia data con los perfiles;
@@ -392,7 +385,7 @@ export class EspaciosTrabajoComponent implements OnInit {
       },
       error => {
         // Informacion del Error que se capturo de la Secuencia
-        this.showToast('error', 'Ha ocurrido un Error al cargar de orgnizacion, por favor verifica que todo este bien!!', JSON.stringify(error.error.message));
+        this._notificacionesService.showToast('error', 'Ha ocurrido un Error al cargar el espacio de trabajo, por favor verifica que todo este bien!!', JSON.stringify(error.error.message));
         // Ocultamos el Loader la Funcion
       },
     );
@@ -440,16 +433,16 @@ private deleteEspacioTrabajo(idEspacioTrabajo: number) {
   const responsedataExt: any = this.responsedata;
 
   if (responsedataExt.error === true) {
-    this.showToast('error', 'Error al ingresar los datos', responsedataExt.msg);
+    this._notificacionesService.showToast('error', 'Error al ingresar los datos', responsedataExt.msg);
     return -1;
   }
   // Ejecutamos el Recurso del EndPoint
   this._espacioTrabajoService.EspaciostrabajoDelete(idEspacioTrabajo).subscribe(
-    response => {
-      if (response.status !== 200) {
-        this.showToast('error', 'Error al desahabilitar la organizacion con exito', response.message);
-      } else if (response.status === 200) {
-        this.showToast('default', 'se deshabilito la organizacion de forma exitosa', response.message);
+    result => {
+      if (result.status !== 200) {
+        this._notificacionesService.showToast('error', 'Error al desahabilitar el espacio de trabajo con exito', JSON.stringify(result.message));
+      } else if (result.status === 200) {
+        this._notificacionesService.showToast('default', 'se deshabilito el espacio de trabajo de forma exitosa', result.message);
         // this.ListAllCategoria();
       }
       this.ngOnInit();

@@ -81,6 +81,9 @@ import { DocumentosComponent } from './components/recursos-proyecto/documentos/d
 import { LinkComponent } from './components/recursos-proyecto/link/link.component';
 
 import { ToastModule } from 'primeng/toast';
+import { ContactosComponent } from './components/recursos-proyecto/contactos/contactos.component';
+import { ModalUpdateContactoComponent } from './components/recursos-proyecto/contactos/modal-update-contacto/modal-update-contacto.component';
+import { ModalNewContactoComponent } from './components/recursos-proyecto/contactos/modal-new-contacto/modal-new-contacto.component';
 
 
 export const customCurrencyMaskConfig = {
@@ -164,6 +167,10 @@ export const customCurrencyMaskConfig = {
     FinancDetalleGastosFormComponent,
     DocumentosComponent,
     LinkComponent,
+    ContactosComponent,
+    ModalUpdateContactoComponent,
+    ModalNewContactoComponent,
+   // ContactoModeloComponent,
   ],
   providers: [
     // SmartTableService, // Defincion del Servicio que provee los Datos de la Tabla: ID's Internas
@@ -173,6 +180,8 @@ export const customCurrencyMaskConfig = {
   entryComponents: [
     OdsModalMetasComponent,
     FinancDetalleCompromisosFormComponent,
+    ModalUpdateContactoComponent, // JOE 01-07-2019
+    ModalNewContactoComponent, // JOE 01-07-2019
   ],
 })
 export class ActivitiesPGCModule { }
