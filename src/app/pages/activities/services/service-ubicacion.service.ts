@@ -162,4 +162,23 @@ export class ServiceUbicacionService {
       params: { 'tokenApi': this.tokenHeader },
     });
   } // FIN | FND-00007
+
+
+  /****************************************************************************
+    * Funcion: FND-00005
+    * Fecha: 25-02-2019
+    * Descripcion: Metodo para obtener los Datos de todos las Ubicaciones
+    * Objetivo: datos de las Ubicaciones
+    * Params: { idActividad }
+    ****************************************************************************/
+  getUbicacionesByIdActividad(idActividadIn: number): Observable<any> {
+    // Parametros
+    const paramSend: number = idActividadIn;
+
+    // Retorno de la Funcion
+    return this._http.get(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 12) + paramSend, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  } // FIN | FND-00005
 }

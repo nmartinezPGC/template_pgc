@@ -263,7 +263,8 @@ export class FinancEncabezadoComponent implements OnInit, OnChanges {
           this._activityFinanciamientoEncModel.idActividad = this.JsonReceptionFinancimientoEncProyecto[0].idActividad;
           this._activityFinanciamientoEncModel.montoActividad = this.JsonReceptionFinancimientoEncProyecto[0].montoActividad;
           this._activityFinanciamientoEncModel.codigoFinancEnc = this.JsonReceptionFinancimientoEncProyecto[0].codigoFinancEnc;
-          this.idActividadFinancEnc = Number(this.JsonReceptionFinancimientoEncProyecto[0].idActividadFinancEnc);
+          // this.idActividadFinancEnc = Number(this.JsonReceptionFinancimientoEncProyecto[0].idActividadFinancEnc);
+          this.idActividadFinancEnc = this._activityFinanciamientoEncModel.idActividadFinancEnc;
 
           // Carga de Relaciones
           this._activityFinanciamientoEncModel.idMoneda = this.JsonReceptionFinancimientoEncProyecto[0].idMonedaActividad.idMonedaActividad;

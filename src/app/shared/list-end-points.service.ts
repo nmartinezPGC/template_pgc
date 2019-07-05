@@ -217,9 +217,9 @@ export class ListEndPointsService {
       findByIdEspacioTrabajoUsuarios: {
         id: 2,
         nameEndpoint: 'FindByIdEspacioTrabajoUsuarios',
-        urlEndPoint: '/espacios-trabajo-usuario/findByIdUsuario/',
+        urlEndPoint: '/espacios-trabajo-usuario/findByIdEspaciotrabajousuario/',
         groupEndPoint: 'espacioTrabajoUsuarioGroup',
-        descEndPoint: 'Busca los espacios de trabajo asignados al Usuario con el IdUsuario, de parametro',
+        descEndPoint: 'Busca el Espacio de Trabajo con el ID Espacio de Trab/User, de parametro',
       },
       newEspacioTrabajoUsuarios: {
         id: 3,
@@ -228,12 +228,12 @@ export class ListEndPointsService {
         groupEndPoint: 'espacioTrabajoUsuarioGroup',
         descEndPoint: 'Ingresa un nuevo Espacio de Trabajo en la BD asignandolo a un Usuario',
       },
-      findByIdEspacioTrabajoUsuario: {
+      findByIdUsuarioEspacioTrabajo: {
         id: 4,
-        nameEndpoint: 'findByIdEspacioTrabajoUsuario',
-        urlEndPoint: '/espacios-trabajo-usuario/findByIdEspacioTrabajoUsuario',
+        nameEndpoint: 'FindByIdUsuarioEspacioTrabajo',
+        urlEndPoint: '/espacios-trabajo-usuario/findByIdUsuarioEspacioTrabajo/',
         groupEndPoint: 'espacioTrabajoUsuarioGroup',
-        descEndPoint: 'Busca los espacios de trabajo asignados al Usuario con el IdEspacioUsuario, de parametro',
+        descEndPoint: 'Busca los espacios de trabajo asignados al Usuario con el IdUsuario, de parametro',
       },
     }, // Modulo de Organizaciones
     endPointOrganizaciones: { // DRP NUEVO TIPO DE ORGANIZACION
@@ -564,7 +564,7 @@ export class ListEndPointsService {
       // NAM | 2019-02-28 | Mapping Ubicaciones de Actividades
       newActivityUbicacion: {
         id: 10,
-        nameEndpoint: 'Agregar Ubicacion a Proyecto',
+        nameEndpoint: 'newActivityUbicacion',
         urlEndPoint: '/mant-actividades/ubicaciones/new',
         params: '{ jsonUbicacionActivity }',
         groupEndPoint: 'actividadesCRUDGroup',
@@ -572,17 +572,17 @@ export class ListEndPointsService {
       },
       listAllActivityUbicaciones: {
         id: 11,
-        nameEndpoint: 'Listar todas las Ubicaciones de los Proyecto',
+        nameEndpoint: 'listAllActivityUbicaciones',
         urlEndPoint: '/mant-actividades/ubicaciones',
         params: '{}',
         groupEndPoint: 'actividadesCRUDGroup',
         descEndPoint: 'Listar todas las Ubicaciones de los proyectos',
       },
-      findByIdActivity: {
+      findByIdActividadUbicacion: {
         id: 12,
-        nameEndpoint: 'Listar todas las Ubicaciones de un Proyecto',
+        nameEndpoint: 'findByIdActividadUbicacion',
         urlEndPoint: '/mant-actividades/ubicaciones/findByIdActividadUbicacion/',
-        params: '{ idActividadUbicacion }',
+        params: '{ idActividad }',
         groupEndPoint: 'actividadesCRUDGroup',
         descEndPoint: 'Listar todas las Ubicaciones del proyecto a consultado',
       },
@@ -1066,7 +1066,7 @@ export class ListEndPointsService {
         id: 70,
         nameEndpoint: 'deleteActividadFinanciamientoDet',
         urlEndPoint: '/mant-actividades/financiamiento/detalle/delete/',
-        params: '{ codigoActividad }',
+        params: '{ codigoFinancDet }',
         groupEndPoint: 'actividadesCRUDGroup',
         descEndPoint: 'Eliminar el dato de Detalle de Financiamiento enviado y asociarlo al Proyecto',
       },

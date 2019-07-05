@@ -13,11 +13,13 @@
 
 <!-- ==================================================================================== -->
 <!-- Componente para los Mensajes en pantalla -->
-<toaster-container [toasterconfig]="config"></toaster-container>
+<!-- <toaster-container [toasterconfig]="config"></toaster-container> -->
+<toaster-container></toaster-container>
 
 <!-- ==================================================================================== -->
 <!-- Componente para el Espiner de la Pantalla -->
-<ngx-spinner bdOpacity="0.1" bdColor="#0b547b" size="large" color="#fff" type="square-jelly-box" fullScreen="false">
+<ngx-spinner bdOpacity="0.7" bdColor="rgba(51,51,51,0.37)" size="large" color="#e6e6e6" type="timer" [fullScreen]="true">
+  <br>
   <p style="font-size: 20px; color: white"> {{ msgLoader }}... </p>
 </ngx-spinner>
 
@@ -30,159 +32,159 @@
         <p-tabPanel header="Paso #1 | Datos Generales" [selected]="true" leftIcon="pi pi-home"
           tooltip="Datos Generales del Proyecto">
           <!-- <nb-card-body> -->
-            <!-- Definición de los Datos Generales -->
-            <nb-flip-card>
-              <nb-card-front>
-                <nb-card accent="warning" status="primary">
-                  <nb-card-header>Datos Generales | Definición del Programa/Proyecto</nb-card-header>
-                  <nb-card-body>
+          <!-- Definición de los Datos Generales -->
+          <nb-flip-card>
+            <nb-card-front>
+              <nb-card accent="warning" status="primary">
+                <nb-card-header>Datos Generales | Definición del Programa/Proyecto</nb-card-header>
+                <nb-card-body>
 
-                    <!-- ==================================================================================== -->
-                    <!-- Nombre del Proyecto/Actividad y Espacios de Trabajo Asignados al Usuario -->
-                    <br>
+                  <!-- ==================================================================================== -->
+                  <!-- Nombre del Proyecto/Actividad y Espacios de Trabajo Asignados al Usuario -->
+                  <br>
 
-                    <div class="row">
-                      <div class="col-12 col-sm-6 col-md-8">
+                  <div class="row">
+                    <div class="col-12 col-sm-6 col-md-8">
+                      <div class="form-group">
+                        <strong> <label for="inputFirstName">Nombres del Proyecto/Programa</label> </strong>
+                        <textarea #nombreActividad class="form-control" id="nombreActividad" name="nombreActividad"
+                          ngControl="nombreActividad" [(ngModel)]="_activityModel.nombreActividad" required autofocus
+                          placeholder="Nombre del Proyecto/Programa"></textarea>
+                      </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4">
+                      <div class="form-group">
+                        <strong> <label>Espacio de Trabajo</label> </strong>
+
+                        <angular2-multiselect [data]="dropdownListEspacioTrabajo"
+                          [(ngModel)]="selectedItemsEspacioTrabajo" [settings]="dropdownSettings"
+                          (onSelect)="OnItemDeSelectEspacioTrabajo($event)"></angular2-multiselect>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- ==================================================================================== -->
+                  <!-- Definición de los Estados de la Actividad -->
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <div class="form-group">
+                        <strong> <label>Estado de Proyecto/Programa</label> </strong>
+                        <select class="form-control" #idEstado="ngModel" name="idEstado" id="idEstado" required
+                          ngControl="idEstado" [(ngModel)]="_activityModel.idEstado">
+                          <option value="0">**** Selecciona el Estado ****</option>
+                          <option *ngFor="let item of JsonReceptionEstados" [value]="item.idEstado">
+                            {{item.descEstado}}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-sm-9">
+                      <div class="form-group">
+                        <strong> <label for="inputWebsite">Explicación de Estado</label> </strong>
+                        <textarea #explicacionEstado class="form-control" id="explicacionEstado"
+                          name="explicacionEstado" ngControl="explicacionEstado"
+                          [(ngModel)]="_activityModel.explicacionEstado" required
+                          placeholder="Nombre del Proyecto/Programa"></textarea>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- ==================================================================================== -->
+                  <!-- Definicion de los Descripcion y Objetivos de la Actividad -->
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <strong> <label>Descripción</label> </strong>
                         <div class="form-group">
-                          <strong> <label for="inputFirstName">Nombres del Proyecto/Programa</label> </strong>
-                          <textarea #nombreActividad class="form-control" id="nombreActividad" name="nombreActividad"
-                            ngControl="nombreActividad" [(ngModel)]="_activityModel.nombreActividad" required autofocus
-                            placeholder="Nombre del Proyecto/Programa"></textarea>
+                          <textarea #descripcionActividad class="form-control" id="descripcionActividad"
+                            name="descripcionActividad" ngControl="descripcionActividad"
+                            [(ngModel)]="_activityModel.descripcionActividad" required
+                            placeholder="Descripción del Proyecto/Programa" rows="5"></textarea>
                         </div>
                       </div>
-                      <div class="col-12 col-sm-6 col-md-4">
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <strong> <label>Objetivo</label> </strong>
                         <div class="form-group">
-                          <strong> <label>Espacio de Trabajo</label> </strong>
+                          <textarea #objetivoActividad class="form-control" id="objetivoActividad"
+                            name="objetivoActividad" ngControl="objetivoActividad"
+                            [(ngModel)]="_activityModel.objetivoActividad" required
+                            placeholder="Objetivo del Proyecto/Programa" rows="5"></textarea>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
 
-                          <angular2-multiselect [data]="dropdownListEspacioTrabajo"
-                            [(ngModel)]="selectedItemsEspacioTrabajo" [settings]="dropdownSettings"
-                            (onSelect)="OnItemDeSelectEspacioTrabajo($event)"></angular2-multiselect>
+                  <!-- ==================================================================================== -->
+                  <!-- Definicion de Antecentes y Condiciones Previas -->
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <strong> <label>Antecedentes</label> </strong>
+                        <div class="form-group">
+                          <textarea #antecedentesActividad class="form-control" id="antecedentesActividad"
+                            name="antecedentesActividad" ngControl="antecedentesActividad"
+                            [(ngModel)]="_activityModel.antecedentesActividad"
+                            placeholder="Antecedentes del Proyecto/Programa" rows="5"></textarea>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6" *ngIf="idTipoOrganizacionUsario != 4">
+                      <div class="form-group">
+                        <strong> <label>Condiciones Previas</label> </strong>
+                        <div class="form-group">
+                          <textarea #condicionesActividad class="form-control" id="condicionesActividad"
+                            name="condicionesActividad" ngControl="condicionesActividad"
+                            [(ngModel)]="_activityModel.condicionesActividad"
+                            placeholder="Condiciones Previas del Proyecto/Programa" rows="5"></textarea>
                         </div>
                       </div>
                     </div>
 
-                    <!-- ==================================================================================== -->
-                    <!-- Definición de los Estados de la Actividad -->
-                    <div class="row">
-                      <div class="col-sm-3">
+                    <div class="col-sm-6" *ngIf="idTipoOrganizacionUsario == 4">
+                      <div class="form-group">
+                        <strong> <label>Actividades</label> </strong>
                         <div class="form-group">
-                          <strong> <label>Estado de Proyecto/Programa</label> </strong>
-                          <select class="form-control" #idEstado="ngModel" name="idEstado" id="idEstado" required
-                            ngControl="idEstado" [(ngModel)]="_activityModel.idEstado">
-                            <option value="0">**** Selecciona el Estado ****</option>
-                            <option *ngFor="let item of JsonReceptionEstados" [value]="item.idEstado">
-                              {{item.descEstado}}
-                            </option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="col-sm-9">
-                        <div class="form-group">
-                          <strong> <label for="inputWebsite">Explicación de Estado</label> </strong>
-                          <textarea #explicacionEstado class="form-control" id="explicacionEstado"
-                            name="explicacionEstado" ngControl="explicacionEstado"
-                            [(ngModel)]="_activityModel.explicacionEstado" required
-                            placeholder="Nombre del Proyecto/Programa"></textarea>
+                          <textarea #actividadesCss class="form-control" id="actividadesCss" name="actividadesCss"
+                            ngControl="actividadesCss" [(ngModel)]="_activityModel.actividadesCss"
+                            placeholder="Actividades del Proyecto/Programa" rows="5"></textarea>
                         </div>
                       </div>
                     </div>
+                  </div>
 
-                    <!-- ==================================================================================== -->
-                    <!-- Definicion de los Descripcion y Objetivos de la Actividad -->
-                    <div class="row">
-                      <div class="col-sm-6">
+                  <!-- ==================================================================================== -->
+                  <!-- Definicion de Justificacion y Productos Esperados -->
+                  <div class="row" *ngIf="idTipoOrganizacionUsario != 4">
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <strong> <label>Justificación</label> </strong>
                         <div class="form-group">
-                          <strong> <label>Descripción</label> </strong>
-                          <div class="form-group">
-                            <textarea #descripcionActividad class="form-control" id="descripcionActividad"
-                              name="descripcionActividad" ngControl="descripcionActividad"
-                              [(ngModel)]="_activityModel.descripcionActividad" required
-                              placeholder="Descripción del Proyecto/Programa" rows="5"></textarea>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-sm-6">
-                        <div class="form-group">
-                          <strong> <label>Objetivo</label> </strong>
-                          <div class="form-group">
-                            <textarea #objetivoActividad class="form-control" id="objetivoActividad"
-                              name="objetivoActividad" ngControl="objetivoActividad"
-                              [(ngModel)]="_activityModel.objetivoActividad" required
-                              placeholder="Objetivo del Proyecto/Programa" rows="5"></textarea>
-                          </div>
+                          <textarea #justificacionActividad class="form-control" id="justificacionActividad"
+                            name="justificacionActividad" ngControl="justificacionActividad"
+                            [(ngModel)]="_activityModel.justificacionActividad" required
+                            placeholder="Justificación del Proyecto/Programa" rows="5"></textarea>
                         </div>
                       </div>
                     </div>
-
-                    <!-- ==================================================================================== -->
-                    <!-- Definicion de Antecentes y Condiciones Previas -->
-                    <div class="row">
-                      <div class="col-sm-6">
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <strong> <label>Productos Esperados</label> </strong>
                         <div class="form-group">
-                          <strong> <label>Antecedentes</label> </strong>
-                          <div class="form-group">
-                            <textarea #antecedentesActividad class="form-control" id="antecedentesActividad"
-                              name="antecedentesActividad" ngControl="antecedentesActividad"
-                              [(ngModel)]="_activityModel.antecedentesActividad"
-                              placeholder="Antecedentes del Proyecto/Programa" rows="5"></textarea>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-sm-6" *ngIf="idTipoOrganizacionUsario != 4">
-                        <div class="form-group">
-                          <strong> <label>Condiciones Previas</label> </strong>
-                          <div class="form-group">
-                            <textarea #condicionesActividad class="form-control" id="condicionesActividad"
-                              name="condicionesActividad" ngControl="condicionesActividad"
-                              [(ngModel)]="_activityModel.condicionesActividad"
-                              placeholder="Condiciones Previas del Proyecto/Programa" rows="5"></textarea>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="col-sm-6" *ngIf="idTipoOrganizacionUsario == 4">
-                        <div class="form-group">
-                          <strong> <label>Actividades</label> </strong>
-                          <div class="form-group">
-                            <textarea #actividadesCss class="form-control" id="actividadesCss" name="actividadesCss"
-                              ngControl="actividadesCss" [(ngModel)]="_activityModel.actividadesCss"
-                              placeholder="Actividades del Proyecto/Programa" rows="5"></textarea>
-                          </div>
+                          <textarea #productosEsperados class="form-control" id="productosEsperados"
+                            name="productosEsperados" ngControl="productosEsperados"
+                            [(ngModel)]="_activityModel.productosEsperados"
+                            placeholder="Productos Esperados del Proyecto/Programa" rows="5"></textarea>
                         </div>
                       </div>
                     </div>
+                  </div>
 
-                    <!-- ==================================================================================== -->
-                    <!-- Definicion de Justificacion y Productos Esperados -->
-                    <div class="row" *ngIf="idTipoOrganizacionUsario != 4">
-                      <div class="col-sm-6">
-                        <div class="form-group">
-                          <strong> <label>Justificación</label> </strong>
-                          <div class="form-group">
-                            <textarea #justificacionActividad class="form-control" id="justificacionActividad"
-                              name="justificacionActividad" ngControl="justificacionActividad"
-                              [(ngModel)]="_activityModel.justificacionActividad" required
-                              placeholder="Justificación del Proyecto/Programa" rows="5"></textarea>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-sm-6">
-                        <div class="form-group">
-                          <strong> <label>Productos Esperados</label> </strong>
-                          <div class="form-group">
-                            <textarea #productosEsperados class="form-control" id="productosEsperados"
-                              name="productosEsperados" ngControl="productosEsperados"
-                              [(ngModel)]="_activityModel.productosEsperados"
-                              placeholder="Productos Esperados del Proyecto/Programa" rows="5"></textarea>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <!-- ==================================================================================== -->
-                    <!-- Definición de los Datos de Estrategias, Presupuesto, Sector Ejecutor y BIB SIAFI del Proyecto -->
-                    <!-- Tipo de Iniciativa CSS -->
-                    <!-- <div class="row" *ngIf="idTipoOrganizacionUsario == 4">
+                  <!-- ==================================================================================== -->
+                  <!-- Definición de los Datos de Estrategias, Presupuesto, Sector Ejecutor y BIB SIAFI del Proyecto -->
+                  <!-- Tipo de Iniciativa CSS -->
+                  <!-- <div class="row" *ngIf="idTipoOrganizacionUsario == 4">
                       <div class="col-sm-6">
                         <div class="form-group">
                           <strong> <label>Tipo de Iniciativa</label> </strong>
@@ -197,406 +199,405 @@
                       </div>
                     </div> -->
 
-                    <!-- Cooperacion Tradicional -->
-                    <div class="row" *ngIf="idTipoOrganizacionUsario != 4">
-                      <div class="col-sm-6">
-                        <div class="form-group">
-                          <strong> <label>Estrategia</label> </strong>
-                          <select #idEstrategia class="form-control" id="idEstrategia" name="idEstrategia"
-                            ngControl="idEstrategia" [(ngModel)]="_activityModel.idEstrategia">
-                            <option value="0">**** Selecciona la Estrategia ****</option>
-                            <option *ngFor="let item of JsonReceptionEstrategias" [value]="item.idEstrategia">
-                              {{item.descripcionEstrategia}}
-                            </option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="col-sm-6">
-                        <div class="form-group">
-                          <strong> <label for="inputcodigoSIAFIBIP">Código BIP / SIAFI</label> </strong>
-                          <input #codigoSIAFIBIP type="text" class="form-control" id="codigoSIAFIBIP"
-                            name="codigoSIAFIBIP" ngControl="codigoSIAFIBIP" [(ngModel)]="_activityModel.codigoSIAFIBIP"
-                            placeholder="Código BIP / SIAFI">
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="row">
-                      <!-- Presupuesto -->
-                      <div class="col-sm-6" *ngIf="idTipoOrganizacionUsario != 4">
-                        <div class="form-group">
-                          <strong> <label>Presupuesto</label> </strong>
-                          <select #idPresupuesto class="form-control" id="idPresupuesto" name="idPresupuesto"
-                            ngControl="idPresupuesto" [(ngModel)]="_activityModel.idPresupuesto">
-                            <option value="0">**** Selecciona el Presupuesto ****</option>
-                            <option *ngFor="let item of JsonReceptionPresupuesto" [value]="item.idPresupuesto">
-                              {{item.descPresupuesto}}
-                            </option>
-                          </select>
-                        </div>
-                      </div>
-
-                      <!-- Tipo de Iniciativa CSS -->
-                      <div class="col-sm-6" *ngIf="idTipoOrganizacionUsario == 4">
-                        <div class="form-group">
-                          <strong> <label>Tipo de Iniciativa</label> </strong>
-                          <select #idTipoIniciativa class="form-control" id="idTipoIniciativa" name="idTipoIniciativa"
-                            ngControl="idTipoIniciativa" [(ngModel)]="_activityModel.idTipoIniciativa" disabled>
-                            <option value="0">**** Selecciona la Iniciativa ****</option>
-                            <option *ngFor="let item of JsonReceptionTipoIniciativaCss" [value]="item.idTipoIniciativa">
-                              {{item.desctipoiniciativa}}
-                            </option>
-                          </select>
-                        </div>
-                      </div>
-
-                      <!-- Sector Ejecutor -->
-                      <div class="col-sm-6">
-                        <div class="form-group">
-                          <strong> <label>Sector Ejecutor</label> </strong>
-                          <select #idSectorEjecutor class="form-control" id="idSectorEjecutor" name="idSectorEjecutor"
-                            ngControl="idSectorEjecutor" [(ngModel)]="_activityModel.idSectorEjecutor">
-                            <option value="0">**** Selecciona el Sector Ejecutor ****</option>
-                            <option *ngFor="let item of JsonReceptionSectorEjecutor" [value]="item.idSectorEjecutor">
-                              {{item.descSectorEjecutor}}
-                            </option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-
-                  </nb-card-body>
-                </nb-card>
-              </nb-card-front>
-
-              <!-- Letrero de Ayuda con el Formulario de Proyectos -->
-              <nb-card-back>
-                <nb-card>
-                  <nb-card-body>
-                    <div class="jumbotron jumbotron-fluid">
-                      <div class="container">
-                        <h1 class="display-4">Hola, nesesitas ayuda!</h1>
-                        <p class="lead">Esta es una guia de como ingresar la información en cada sección presentada.</p>
-                        <hr class="my-4">
-                        <p> <strong> Datos Generales | Definición del Programa/Proyecto.</strong>
-                          <br>Se requiere ingresar la información que define al proyecto como tal,
-                          su nombre, justificacion, objetivos, a que cooperante pertenece
-                          (Agencia
-                          de Cooperación/Espacio de Trabajo).
-                          <br><br> <strong> Datos Generales | Resultados.</strong>
-                          <br>Ademas nesesita que le definamos el estado o etapa en el que se encuentra, asi
-                          como una breve Explicación del porque se encuentra en esa etapa que definamos.
-                          <br><br> <strong> Datos Generales | Planificación</strong>
-                          <br> Los Campos: Descripción, Objetivo, Antecedentes y Condiciones Previas, son
-                          tipo texto, lo que requiere que describamos textualmente lo que el documento del
-                          proyecto/programa
-                          menciona en el mismo, vale la pena mencionar que estas decripciones son abiertas sin limites
-                          de
-                          cantidad de palabras para ingresar y que se puede copiar y pargar de untexto a otro.
-                          <br><br> <strong>Datos Generales | ID's Internas.</strong>
-                          <br> En la Seccion de resultados, se realizara una sentesis de lo que se espera alcanzar con
-                          la implementacion y desarrollo del proyecto en mención y ademas actaulizar con el transcurrir
-                          del tiempo los resultados que seran alcanzados,
-                          y desarrollo del proyecto en mención y ademas actaulizar con el transcurrir del tiempo los
-                          resultados
-                          que seran alcanzados.
-                          <br><br> <strong>Guardar como Borrador ?</strong>
-                          Es una opción que presenta la PGC, para que tu puedas Grabar tus cambios sin tener toda la
-                          Información a
-                          tu Alcance, de esta manera, podras mas adelante seguir Modificando la Información de la
-                          Actividad. <br><br>
-                        </p>
-                        <br><br>
-                        <hr class="my-4">
-                        <a class="btn btn-primary btn-lg" href="#" role="button">Intructivo de uso ...</a>
-                      </div>
-                    </div>
-                  </nb-card-body>
-                </nb-card>
-              </nb-card-back>
-            </nb-flip-card>
-
-
-            <!-- ==================================================================================== -->
-            <!-- Definición de los Resultados de la Actividad -->
-            <nb-card accent="warning" status="primary">
-              <nb-card-header>Datos Generales | Resultados</nb-card-header>
-              <nb-card-body>
-                <div class="row">
-                  <div class="col-sm-6">
-                    <div class="form-group">
-                      <strong> <label>Resultados Esperados</label> </strong>
+                  <!-- Cooperacion Tradicional -->
+                  <div class="row" *ngIf="idTipoOrganizacionUsario != 4">
+                    <div class="col-sm-6">
                       <div class="form-group">
-                        <textarea #resultadosEsperados class="form-control" id="resultadosEsperados"
-                          name="resultadosEsperados" ngControl="resultadosEsperados"
-                          [(ngModel)]="_activityModel.resultadosEsperados"
-                          placeholder="Resultados Esperados del Proyecto/Programa" rows="5"></textarea>
+                        <strong> <label>Estrategia</label> </strong>
+                        <select #idEstrategia class="form-control" id="idEstrategia" name="idEstrategia"
+                          ngControl="idEstrategia" [(ngModel)]="_activityModel.idEstrategia">
+                          <option value="0">**** Selecciona la Estrategia ****</option>
+                          <option *ngFor="let item of JsonReceptionEstrategias" [value]="item.idEstrategia">
+                            {{item.descripcionEstrategia}}
+                          </option>
+                        </select>
                       </div>
                     </div>
-                  </div>
-                  <div class="col-sm-6">
-                    <div class="form-group">
-                      <strong> <label>Resultados a la Fecha</label> </strong>
+                    <div class="col-sm-6">
                       <div class="form-group">
-                        <textarea #resultadosAlaFecha class="form-control" id="resultadosAlaFecha"
-                          name="resultadosAlaFecha" ngControl="resultadosAlaFecha"
-                          [(ngModel)]="_activityModel.resultadosAlaFecha"
-                          placeholder="Resultados a la Fecha del Proyecto/Programa" rows="5"></textarea>
+                        <strong> <label for="inputcodigoSIAFIBIP">Código BIP / SIAFI</label> </strong>
+                        <input #codigoSIAFIBIP type="text" class="form-control" id="codigoSIAFIBIP"
+                          name="codigoSIAFIBIP" ngControl="codigoSIAFIBIP" [(ngModel)]="_activityModel.codigoSIAFIBIP"
+                          placeholder="Código BIP / SIAFI">
                       </div>
                     </div>
                   </div>
+
+                  <div class="row">
+                    <!-- Presupuesto -->
+                    <div class="col-sm-6" *ngIf="idTipoOrganizacionUsario != 4">
+                      <div class="form-group">
+                        <strong> <label>Presupuesto</label> </strong>
+                        <select #idPresupuesto class="form-control" id="idPresupuesto" name="idPresupuesto"
+                          ngControl="idPresupuesto" [(ngModel)]="_activityModel.idPresupuesto">
+                          <option value="0">**** Selecciona el Presupuesto ****</option>
+                          <option *ngFor="let item of JsonReceptionPresupuesto" [value]="item.idPresupuesto">
+                            {{item.descPresupuesto}}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <!-- Tipo de Iniciativa CSS -->
+                    <div class="col-sm-6" *ngIf="idTipoOrganizacionUsario == 4">
+                      <div class="form-group">
+                        <strong> <label>Tipo de Iniciativa</label> </strong>
+                        <select #idTipoIniciativa class="form-control" id="idTipoIniciativa" name="idTipoIniciativa"
+                          ngControl="idTipoIniciativa" [(ngModel)]="_activityModel.idTipoIniciativa" disabled>
+                          <option value="0">**** Selecciona la Iniciativa ****</option>
+                          <option *ngFor="let item of JsonReceptionTipoIniciativaCss" [value]="item.idTipoIniciativa">
+                            {{item.desctipoiniciativa}}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <!-- Sector Ejecutor -->
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <strong> <label>Sector Ejecutor</label> </strong>
+                        <select #idSectorEjecutor class="form-control" id="idSectorEjecutor" name="idSectorEjecutor"
+                          ngControl="idSectorEjecutor" [(ngModel)]="_activityModel.idSectorEjecutor">
+                          <option value="0">**** Selecciona el Sector Ejecutor ****</option>
+                          <option *ngFor="let item of JsonReceptionSectorEjecutor" [value]="item.idSectorEjecutor">
+                            {{item.descSectorEjecutor}}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                </nb-card-body>
+              </nb-card>
+            </nb-card-front>
+
+            <!-- Letrero de Ayuda con el Formulario de Proyectos -->
+            <nb-card-back>
+              <nb-card>
+                <nb-card-body>
+                  <div class="jumbotron jumbotron-fluid">
+                    <div class="container">
+                      <h1 class="display-4">Hola, nesesitas ayuda!</h1>
+                      <p class="lead">Esta es una guia de como ingresar la información en cada sección presentada.</p>
+                      <hr class="my-4">
+                      <p> <strong> Datos Generales | Definición del Programa/Proyecto.</strong>
+                        <br>Se requiere ingresar la información que define al proyecto como tal,
+                        su nombre, justificacion, objetivos, a que cooperante pertenece
+                        (Agencia
+                        de Cooperación/Espacio de Trabajo).
+                        <br><br> <strong> Datos Generales | Resultados.</strong>
+                        <br>Ademas nesesita que le definamos el estado o etapa en el que se encuentra, asi
+                        como una breve Explicación del porque se encuentra en esa etapa que definamos.
+                        <br><br> <strong> Datos Generales | Planificación</strong>
+                        <br> Los Campos: Descripción, Objetivo, Antecedentes y Condiciones Previas, son
+                        tipo texto, lo que requiere que describamos textualmente lo que el documento del
+                        proyecto/programa
+                        menciona en el mismo, vale la pena mencionar que estas decripciones son abiertas sin limites
+                        de
+                        cantidad de palabras para ingresar y que se puede copiar y pargar de untexto a otro.
+                        <br><br> <strong>Datos Generales | ID's Internas.</strong>
+                        <br> En la Seccion de resultados, se realizara una sentesis de lo que se espera alcanzar con
+                        la implementacion y desarrollo del proyecto en mención y ademas actaulizar con el transcurrir
+                        del tiempo los resultados que seran alcanzados,
+                        y desarrollo del proyecto en mención y ademas actaulizar con el transcurrir del tiempo los
+                        resultados
+                        que seran alcanzados.
+                        <br><br> <strong>Guardar como Borrador ?</strong>
+                        Es una opción que presenta la PGC, para que tu puedas Grabar tus cambios sin tener toda la
+                        Información a
+                        tu Alcance, de esta manera, podras mas adelante seguir Modificando la Información de la
+                        Actividad. <br><br>
+                      </p>
+                      <br><br>
+                      <hr class="my-4">
+                      <a class="btn btn-primary btn-lg" href="#" role="button">Intructivo de uso ...</a>
+                    </div>
+                  </div>
+                </nb-card-body>
+              </nb-card>
+            </nb-card-back>
+          </nb-flip-card>
+
+
+          <!-- ==================================================================================== -->
+          <!-- Definición de los Resultados de la Actividad -->
+          <nb-card accent="warning" status="primary">
+            <nb-card-header>Datos Generales | Resultados</nb-card-header>
+            <nb-card-body>
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <strong> <label>Resultados Esperados</label> </strong>
+                    <div class="form-group">
+                      <textarea #resultadosEsperados class="form-control" id="resultadosEsperados"
+                        name="resultadosEsperados" ngControl="resultadosEsperados"
+                        [(ngModel)]="_activityModel.resultadosEsperados"
+                        placeholder="Resultados Esperados del Proyecto/Programa" rows="5"></textarea>
+                    </div>
+                  </div>
                 </div>
-              </nb-card-body>
-            </nb-card>
-
-            <!-- ==================================================================================== -->
-            <!-- Definición de los Datos de Planificacion del Proyecto -->
-            <nb-card status="primary" accent="warning">
-              <nb-card-header>Datos Generales | Planificación</nb-card-header>
-              <nb-card-body>
-                <div class="row">
-                  <div class="col-sm-4">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <strong> <label>Resultados a la Fecha</label> </strong>
                     <div class="form-group">
-                      <strong> <label>Fecha de Firma</label> </strong>
-                      <my-date-picker name="mydate" class="form-control" [options]="myDatePickerOptions"
-                        [(ngModel)]="_activityModel.fechaFirma" required (dateChanged)="onDateChanged($event, 1)">
-                      </my-date-picker>
-                    </div>
-                  </div>
-                  <div class="col-sm-4">
-                    <div class="form-group">
-                      <strong> <label for="inputfechaEfectividad">Fecha de Efectividad</label> </strong>
-                      <my-date-picker name="mydate" class="form-control" [options]="myDatePickerOptions"
-                        [(ngModel)]="_activityModel.fechaEfectividad" required (dateChanged)="onDateChanged($event, 2)">
-                      </my-date-picker>
-                    </div>
-                  </div>
-                  <div class="col-sm-4">
-                    <div class="form-group">
-                      <strong> <label for="inputfechaCierre">Fecha Cierre</label> </strong>
-                      <my-date-picker name="mydate" class="form-control" [options]="myDatePickerOptions"
-                        [(ngModel)]="_activityModel.fechaCierre" (dateChanged)="onDateChanged($event, 3)">
-                      </my-date-picker>
+                      <textarea #resultadosAlaFecha class="form-control" id="resultadosAlaFecha"
+                        name="resultadosAlaFecha" ngControl="resultadosAlaFecha"
+                        [(ngModel)]="_activityModel.resultadosAlaFecha"
+                        placeholder="Resultados a la Fecha del Proyecto/Programa" rows="5"></textarea>
                     </div>
                   </div>
                 </div>
-                <div class="row">
-                  <div class="col-sm-4">
-                    <div class="form-group">
-                      <strong> <label for="inputfechaPropuestaFinalizacion">Fecha Propuesta Finalización</label>
-                      </strong>
-                      <my-date-picker name="mydate" class="form-control" [options]="myDatePickerOptions"
-                        [(ngModel)]="_activityModel.fechaPropuestaFinalizacion"
-                        (dateChanged)="onDateChanged($event, 4)"></my-date-picker>
-                    </div>
-                  </div>
-                  <div class="col-sm-4">
-                    <div class="form-group">
-                      <strong> <label for="inputfechaFinalizacion">Fecha Finalización</label> </strong>
-                      <my-date-picker name="mydate" class="form-control" [options]="myDatePickerOptions"
-                        [(ngModel)]="_activityModel.fechaFinalizacion" (dateChanged)="onDateChanged($event, 5)">
-                      </my-date-picker>
-                    </div>
+              </div>
+            </nb-card-body>
+          </nb-card>
+
+          <!-- ==================================================================================== -->
+          <!-- Definición de los Datos de Planificacion del Proyecto -->
+          <nb-card status="primary" accent="warning">
+            <nb-card-header>Datos Generales | Planificación</nb-card-header>
+            <nb-card-body>
+              <div class="row">
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <strong> <label>Fecha de Firma</label> </strong>
+                    <my-date-picker name="mydate" class="form-control" [options]="myDatePickerOptions"
+                      [(ngModel)]="_activityModel.fechaFirma" required (dateChanged)="onDateChanged($event, 1)">
+                    </my-date-picker>
                   </div>
                 </div>
-              </nb-card-body>
-            </nb-card>
-
-            <!-- ==================================================================================== -->
-            <!-- Definición de las ID's Internas del Proyecto -->
-            <nb-card status="primary" accent="warning" *ngIf="idTipoOrganizacionUsario != 4">
-              <nb-card-header>Datos Generales | ID's Internas
-                <button type="button" class="btn btn-primary btn-group-icon btn-group-divider" [nbPopover]="card"
-                  nbPopoverMode="hint">
-                  <i class="ion-help"></i>
-                </button>
-              </nb-card-header>
-              <nb-card-body>
-                <div class="row">
-                  <div class="col-sm-3">
-                    <div class="form-group">
-                      <strong> <label>País Organización</label> </strong>
-                      <angular2-multiselect [data]="dropdownListPais" [(ngModel)]="selectedItemsPais"
-                        [settings]="dropdownSettings" (onSelect)="onItemSelectPais($event)"></angular2-multiselect>
-                    </div>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <strong> <label for="inputfechaEfectividad">Fecha de Efectividad</label> </strong>
+                    <my-date-picker name="mydate" class="form-control" [options]="myDatePickerOptions"
+                      [(ngModel)]="_activityModel.fechaEfectividad" required (dateChanged)="onDateChanged($event, 2)">
+                    </my-date-picker>
                   </div>
-
-                  <div class="col-sm-4">
-                    <div class="form-group">
-                      <strong> <label>Tipo Organización</label> </strong>
-                      <select #idTipoOrganizacion class="form-control" id="idTipoOrganizacion" name="idTipoOrganizacion"
-                        ngControl="idTipoOrganizacion" [(ngModel)]="_activityModel.idTipoOrganizacion"
-                        (change)="categoriasOrganizacionListService(_activityModel.idTipoOrganizacion)">
-                        <option value="0">**** Selecciona el tipo de Organizacion ****</option>
-                        <option *ngFor="let item of JsonReceptionTiposOrganizacion" [value]="item.idTipoOrganizacion">
-                          {{item.descTipoOrganizacion}}
-                        </option>
-                      </select>
-                    </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <strong> <label for="inputfechaCierre">Fecha Cierre</label> </strong>
+                    <my-date-picker name="mydate" class="form-control" [options]="myDatePickerOptions"
+                      [(ngModel)]="_activityModel.fechaCierre" (dateChanged)="onDateChanged($event, 3)">
+                    </my-date-picker>
                   </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <strong> <label for="inputfechaPropuestaFinalizacion">Fecha Propuesta Finalización</label>
+                    </strong>
+                    <my-date-picker name="mydate" class="form-control" [options]="myDatePickerOptions"
+                      [(ngModel)]="_activityModel.fechaPropuestaFinalizacion" (dateChanged)="onDateChanged($event, 4)">
+                    </my-date-picker>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <strong> <label for="inputfechaFinalizacion">Fecha Finalización</label> </strong>
+                    <my-date-picker name="mydate" class="form-control" [options]="myDatePickerOptions"
+                      [(ngModel)]="_activityModel.fechaFinalizacion" (dateChanged)="onDateChanged($event, 5)">
+                    </my-date-picker>
+                  </div>
+                </div>
+              </div>
+            </nb-card-body>
+          </nb-card>
 
-                  <div class="col-sm-5">
-                    <div class="form-group">
-                      <strong> <label>Categoría Organización</label> </strong>
-                      <select #idCatOrganizacion class="form-control" id="idCatOrganizacion" name="idCatOrganizacion"
-                        ngControl="idCatOrganizacion" [(ngModel)]="_activityModel.idCatOrganizacion" (change)="organizacionesIdTipoIdPaisIdCategoriaListService(_activityModel.idTipoOrganizacion,
+          <!-- ==================================================================================== -->
+          <!-- Definición de las ID's Internas del Proyecto -->
+          <nb-card status="primary" accent="warning" *ngIf="idTipoOrganizacionUsario != 4">
+            <nb-card-header>Datos Generales | ID's Internas
+              <button type="button" class="btn btn-primary btn-group-icon btn-group-divider" [nbPopover]="card"
+                nbPopoverMode="hint">
+                <i class="ion-help"></i>
+              </button>
+            </nb-card-header>
+            <nb-card-body>
+              <div class="row">
+                <div class="col-sm-3">
+                  <div class="form-group">
+                    <strong> <label>País Organización</label> </strong>
+                    <angular2-multiselect [data]="dropdownListPais" [(ngModel)]="selectedItemsPais"
+                      [settings]="dropdownSettings" (onSelect)="onItemSelectPais($event)"></angular2-multiselect>
+                  </div>
+                </div>
+
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <strong> <label>Tipo Organización</label> </strong>
+                    <select #idTipoOrganizacion class="form-control" id="idTipoOrganizacion" name="idTipoOrganizacion"
+                      ngControl="idTipoOrganizacion" [(ngModel)]="_activityModel.idTipoOrganizacion"
+                      (change)="categoriasOrganizacionListService(_activityModel.idTipoOrganizacion)">
+                      <option value="0">**** Selecciona el tipo de Organizacion ****</option>
+                      <option *ngFor="let item of JsonReceptionTiposOrganizacion" [value]="item.idTipoOrganizacion">
+                        {{item.descTipoOrganizacion}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col-sm-5">
+                  <div class="form-group">
+                    <strong> <label>Categoría Organización</label> </strong>
+                    <select #idCatOrganizacion class="form-control" id="idCatOrganizacion" name="idCatOrganizacion"
+                      ngControl="idCatOrganizacion" [(ngModel)]="_activityModel.idCatOrganizacion" (change)="organizacionesIdTipoIdPaisIdCategoriaListService(_activityModel.idTipoOrganizacion,
                         _activityModel.idPais, _activityModel.idCatOrganizacion)">
-                        <option value="0">**** Selecciona la Categoría ****</option>
-                        <option *ngFor="let item of JsonReceptionCategoriasOrganizacion"
-                          [value]="item.idCatOrganizacion">
-                          {{item.descCatOrganizacion}}
-                        </option>
-                      </select>
+                      <option value="0">**** Selecciona la Categoría ****</option>
+                      <option *ngFor="let item of JsonReceptionCategoriasOrganizacion" [value]="item.idCatOrganizacion">
+                        {{item.descCatOrganizacion}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-8">
+                  <div class="form-group">
+                    <strong> <label for="inputWebsite">Buscar Organización</label> </strong>
+                    <div class="input-group">
+                      <angular2-multiselect [data]="dropdownList" [(ngModel)]="selectedItems"
+                        [settings]="dropdownSettings" (onSelect)="onItemSelect($event)"></angular2-multiselect>
+
+                      <!-- Boton de Todas las Organizaciones -->
+                      <button type="button" class="btn btn-primary botonSpecial"
+                        nbPopover="Listar todas las Organizaciones, registradas en la PGC" nbPopoverMode="hint"
+                        (click)="organizacionesAllListService()">
+                        Todas las Organizaciones
+                      </button>
                     </div>
                   </div>
                 </div>
 
-                <div class="row">
-                  <div class="col-sm-8">
-                    <div class="form-group">
-                      <strong> <label for="inputWebsite">Buscar Organización</label> </strong>
-                      <div class="input-group">
-                        <angular2-multiselect [data]="dropdownList" [(ngModel)]="selectedItems"
-                          [settings]="dropdownSettings" (onSelect)="onItemSelect($event)"></angular2-multiselect>
+                <div class="col-sm-3">
+                  <div class="form-group">
+                    <strong> <label for="inputWebsite">Id Interna</label> </strong>
+                    <div class="input-group">
+                      <input #idInterna type="text" class="form-control" name="idInterna" id="idInterna"
+                        ngControl="idInterna" [(ngModel)]="_activityModel.idInterna" placeholder="ID Interna">
 
-                        <!-- Boton de Todas las Organizaciones -->
-                        <button type="button" class="btn btn-primary botonSpecial"
-                          nbPopover="Listar todas las Organizaciones, registradas en la PGC" nbPopoverMode="hint"
-                          (click)="organizacionesAllListService()">
-                          Todas las Organizaciones
-                        </button>
-                      </div>
+                      <!-- Botonera de Organizaciones -->
+                      <button type="button" class="btn btn-primary btn-group-icon btn-group-divider botonSpecial"
+                        nbPopover="Agrega la ID Interna a la lista" nbPopoverMode="hint" (click)="pushJsonIdInterna()">
+                        <i class="ion-plus-round"></i>
+                      </button>
                     </div>
                   </div>
 
-                  <div class="col-sm-3">
-                    <div class="form-group">
-                      <strong> <label for="inputWebsite">Id Interna</label> </strong>
-                      <div class="input-group">
-                        <input #idInterna type="text" class="form-control" name="idInterna" id="idInterna"
-                          ngControl="idInterna" [(ngModel)]="_activityModel.idInterna" placeholder="ID Interna">
-
-                        <!-- Botonera de Organizaciones -->
-                        <button type="button" class="btn btn-primary btn-group-icon btn-group-divider botonSpecial"
-                          nbPopover="Agrega la ID Interna a la lista" nbPopoverMode="hint"
-                          (click)="pushJsonIdInterna()">
-                          <i class="ion-plus-round"></i>
-                        </button>
-                      </div>
-                    </div>
-
-                    <!-- Tarjeta de ayuda de la Seccion -->
-                    <ng-template #card>
-                      <nb-card class="popover-card">
-                        <nb-card-header status="warning">
-                          Hola! Ingresa la Id Interna de tu Proyecto
-                        </nb-card-header>
-                        <nb-card-body>
-                          Esta sección de la PGC, sirve para registrar el Código que tienes en tu Sistema de
-                          Registro de Proyectos, y relacionarlo con Identificador de la PGC, logrando una equivalencia
-                          entre su Sistema y la PGC.
-                        </nb-card-body>
-                      </nb-card>
-                    </ng-template>
-                  </div>
+                  <!-- Tarjeta de ayuda de la Seccion -->
+                  <ng-template #card>
+                    <nb-card class="popover-card">
+                      <nb-card-header status="warning">
+                        Hola! Ingresa la Id Interna de tu Proyecto
+                      </nb-card-header>
+                      <nb-card-body>
+                        Esta sección de la PGC, sirve para registrar el Código que tienes en tu Sistema de
+                        Registro de Proyectos, y relacionarlo con Identificador de la PGC, logrando una equivalencia
+                        entre su Sistema y la PGC.
+                      </nb-card-body>
+                    </nb-card>
+                  </ng-template>
                 </div>
+              </div>
 
-                <div class="row">
-                  <div class="col-sm-12">
-                    <!-- Tabla de las ID's Internas -->
-                    <!-- <div class="form-group">
+              <div class="row">
+                <div class="col-sm-12">
+                  <!-- Tabla de las ID's Internas -->
+                  <!-- <div class="form-group">
                       <label>ID's Internas seleccionadas</label>
                       <ng2-smart-table [settings]="settings" [source]="data" (deleteConfirm)="onDeleteConfirm($event)"
                         (editConfirm)="onSaveConfirm($event)" (createConfirm)="onCreateConfirm($event)"></ng2-smart-table>
                     </div> -->
-                    <!-- <hr> -->
-                    <table class="table table-hover table-striped table-bordered" id="tableIdInterna">
-                      <thead>
-                        <tr class="tHeadSearch">
-                          <th scope="col" colspan="2">
-                            <input type="text" class="form-control" [(ngModel)]="queryString"
-                              placeholder="Buscar Id Interna :">
-                          </th>
-                        </tr>
-                        <tr class="tHeadTable">
-                          <th scope="col" style="width: 5%;">No</th>
-                          <th scope="col" style="width: 20%;">Tipo de Organización</th>
-                          <th scope="col" style="width: 20%;">País de Organización</th>
-                          <th scope="col" style="width: 35%;">Organización</th>
-                          <th scope="col" style="width: 15%;">ID Interna</th>
-                          <th scope="col" style="width: 5%;">Acción</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr
-                          *ngFor="let itemIdInterna of JsonIdInternaOrganizacion | filterdata: queryString : 'idInterna' | paginate: { itemsPerPage: 3, currentPage: p };let homeTableIndex = index">
-                          <td>{{ homeTableIndex + 1 }}</td>
-                          <td>{{ itemIdInterna.descTipoOrganizacion }}</td>
-                          <td>{{ itemIdInterna.descPaisOrganizacion }}</td>
-                          <td>{{ itemIdInterna.descOrganizacion }}</td>
-                          <td>
-                            <!-- <div class="input-group input-group-sm" id="tdIdInterna">
+                  <!-- <hr> -->
+                  <table class="table table-hover table-striped table-bordered" id="tableIdInterna">
+                    <thead>
+                      <tr class="tHeadSearch">
+                        <th scope="col" colspan="2">
+                          <input type="text" class="form-control" [(ngModel)]="queryString"
+                            placeholder="Buscar Id Interna :">
+                        </th>
+                      </tr>
+                      <tr class="tHeadTable">
+                        <th scope="col" style="width: 5%;">No</th>
+                        <th scope="col" style="width: 20%;">Tipo de Organización</th>
+                        <th scope="col" style="width: 20%;">País de Organización</th>
+                        <th scope="col" style="width: 35%;">Organización</th>
+                        <th scope="col" style="width: 15%;">ID Interna</th>
+                        <th scope="col" style="width: 5%;">Acción</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr
+                        *ngFor="let itemIdInterna of JsonIdInternaOrganizacion | filterdata: queryString : 'idInterna' | paginate: { itemsPerPage: 3, currentPage: p };let homeTableIndex = index">
+                        <td>{{ homeTableIndex + 1 }}</td>
+                        <td>{{ itemIdInterna.descTipoOrganizacion }}</td>
+                        <td>{{ itemIdInterna.descPaisOrganizacion }}</td>
+                        <td>{{ itemIdInterna.descOrganizacion }}</td>
+                        <td>
+                          <!-- <div class="input-group input-group-sm" id="tdIdInterna">
                               <input type="text" placeholder="ID Interna" class="form-control" value="" />
                             </div> -->
-                            <!-- {{ itemIdInterna.idInterna | uppercase }} -->
-                            {{ itemIdInterna.idInterna }}
-                          </td>
-                          <td>
-                            <img class="pointerMouse" src="../../../../assets/icons/forms/rubbish-bin_24x.png" alt=""
-                              (click)="deleteRowHomeForm(homeTableIndex, itemIdInterna.idInterna)">
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+                          <!-- {{ itemIdInterna.idInterna | uppercase }} -->
+                          {{ itemIdInterna.idInterna }}
+                        </td>
+                        <td>
+                          <img class="pointerMouse" src="../../../../assets/icons/forms/rubbish-bin_24x.png" alt=""
+                            (click)="deleteRowHomeForm(homeTableIndex, itemIdInterna.idInterna)">
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
 
-                    <!-- paginador de la tabla -->
-                    <pagination-controls autoHide="true" responsive="true" previousLabel="Anterior"
-                      nextLabel="Siguiente" (pageChange)="p = $event"></pagination-controls>
+                  <!-- paginador de la tabla -->
+                  <pagination-controls autoHide="true" responsive="true" previousLabel="Anterior" nextLabel="Siguiente"
+                    (pageChange)="p = $event"></pagination-controls>
 
-                  </div>
                 </div>
+              </div>
 
-              </nb-card-body>
-            </nb-card>
+            </nb-card-body>
+          </nb-card>
 
-            <!-- Botones  -->
-            <nb-card>
-              <!-- <nb-card-header>
+          <!-- Botones  -->
+          <nb-card>
+            <!-- <nb-card-header>
                 Tiny MCE
               </nb-card-header> -->
-              <nb-card-body>
-                <!-- <ngx-tiny-mce></ngx-tiny-mce> -->
-                <div class="row">
-                  <div class="col-lg-12">
-                    <button class="btn btn-warning with-margins"
-                      nbPopover="Guarda la Información de tu Proyecto de forma temporal; para que luego puedas seguir actualizandola."
-                      nbPopoverMode="hint" nbPopoverPlacement="left" (click)="saveActivity(1)">Guardar como
-                      borrador</button>
+            <nb-card-body>
+              <!-- <ngx-tiny-mce></ngx-tiny-mce> -->
+              <div class="row">
+                <div class="col-lg-12">
+                  <button class="btn btn-warning with-margins"
+                    nbPopover="Guarda la Información de tu Proyecto de forma temporal; para que luego puedas seguir actualizandola."
+                    nbPopoverMode="hint" nbPopoverPlacement="left" (click)="saveActivity(1)">Guardar como
+                    borrador</button>
 
-                    <button class="btn btn-primary botonSave with-margins"
-                      nbPopover="Enviar la Información del Proyecto, para luego validar por el Administrador"
-                      nbPopoverMode="hint" nbPopoverPlacement="top" (click)="saveActivity(2)">Guardar y Enviar</button>
+                  <button class="btn btn-primary botonSave with-margins"
+                    nbPopover="Enviar la Información del Proyecto, para luego validar por el Administrador"
+                    nbPopoverMode="hint" nbPopoverPlacement="top" (click)="saveActivity(2)">Guardar y Enviar</button>
 
-                    <button class="btn btn-danger with-margins"
-                      nbPopover="Limpiar la Información del formulario del Proyecto" nbPopoverMode="hint"
-                      nbPopoverPlacement="bottom" (click)="resetActivity()">Limpiar Formulario</button>
+                  <button class="btn btn-danger with-margins"
+                    nbPopover="Limpiar la Información del formulario del Proyecto" nbPopoverMode="hint"
+                    nbPopoverPlacement="bottom" (click)="resetActivity()">Limpiar Formulario</button>
 
-                    <button class="btn btn-warning with-margins" nbPopover="Hello, how are you today?"
-                      nbPopoverMode="hint" nbPopoverPlacement="right" (click)="newActividadIdInterna()">Probar</button>
-                  </div>
+                  <button class="btn btn-warning with-margins" nbPopover="Hello, how are you today?"
+                    nbPopoverMode="hint" nbPopoverPlacement="right" (click)="newActividadIdInterna()">Probar</button>
                 </div>
-              </nb-card-body>
-            </nb-card>
+              </div>
+            </nb-card-body>
+          </nb-card>
           <!-- </nb-card-body> -->
         </p-tabPanel>
         <!-- Fin de Datos Generales -->
         <!-- ==================================================================================== -->
 
         <!-- Tab #2 de Ubicacion Proyecto/Programa -->
-        <p-tabPanel header="Paso #2 | Ubicación" leftIcon="pi pi-globe" [cache]="false" tooltip="Datos de Ubicación">
+        <p-tabPanel header="Paso #2 | Ubicación" leftIcon="pi pi-globe" [cache]="false" tooltip="Datos de Ubicación"
+          [disabled]="false">
           <ng-template pTemplate="content">
-            <ngx-ubicacion [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
-              [codigoProyectoTab]="codigoProyectoTab" [JsonPassData]="JsonPassData"></ngx-ubicacion>
+            <ngx-ubicacion-proyecto [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
+              [codigoProyectoTab]="codigoProyectoTab" [JsonPassData]="JsonPassData"></ngx-ubicacion-proyecto>
           </ng-template>
         </p-tabPanel>
         <!-- Fin de Datos de Ubicacion Proyecto/Programa -->
@@ -604,7 +605,7 @@
 
         <!-- Tab #3 de Sectores y ODS -->
         <p-tabPanel header="Paso #3 | Sectores y ODS" leftIcon="pi pi-user" leftIcon="pi pi-align-left"
-          tooltip="Sectores y ODS" [cache]="false">
+          tooltip="Sectores y ODS" [cache]="false" [disabled]="false">
           <ng-template pTemplate="content">
             <ngx-sectores-programas-ods [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
               [codigoProyectoTab]="codigoProyectoTab"></ngx-sectores-programas-ods>
@@ -615,7 +616,7 @@
 
         <!-- Tab #4 de Programas -->
         <p-tabPanel header="Paso #4 | Programas de Nación" leftIcon="pi pi-align-right" [cache]="false"
-          tooltip="Programas de Nación">
+          tooltip="Programas de Nación" [disabled]="false">
           <ng-template pTemplate="content">
             <ngx-programas [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
               [codigoProyectoTab]="codigoProyectoTab"></ngx-programas>
@@ -626,7 +627,7 @@
 
         <!-- Tab #5 de Información de Organizaciones -->
         <p-tabPanel header="Paso #5 | Organizaciones" leftIcon="pi pi-users" [cache]="false"
-          tooltip="Organizaciones del Proyecto">
+          tooltip="Organizaciones del Proyecto" [disabled]="false">
           <ng-template pTemplate="content">
             <ngx-organizaciones [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
               [codigoProyectoTab]="codigoProyectoTab"></ngx-organizaciones>
@@ -636,8 +637,8 @@
         <!-- ==================================================================================== -->
 
         <!-- Tab #6 de Información Financiera -->
-        <p-tabPanel header="Paso #6 | Financiamiento" leftIcon="pi pi-calendar"
-          tooltip="Información Financiera" [cache]="false" >
+        <p-tabPanel header="Paso #6 | Financiamiento" leftIcon="pi pi-calendar" tooltip="Información Financiera"
+          [cache]="false" [disabled]="false">
           <ng-template pTemplate="content">
             <ngx-financiamiento [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
               [codigoProyectoTab]="codigoProyectoTab"></ngx-financiamiento>
@@ -647,11 +648,11 @@
         <!-- ==================================================================================== -->
 
         <!-- Tab #7 Recursos de soporte -->
-         <p-tabPanel header="Paso #7 | Recursos"  leftIcon="pi pi-copy"
-          tooltip="Recursos de Soporte">
+        <p-tabPanel header="Paso #7 | Recursos" leftIcon="pi pi-copy" tooltip="Recursos de Soporte" [cache]="false"
+          [disabled]="false">
           <ng-template pTemplate="content">
             <ngx-recursos-proyecto [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
-            [codigoProyectoTab]="codigoProyectoTab"></ngx-recursos-proyecto>
+              [codigoProyectoTab]="codigoProyectoTab"></ngx-recursos-proyecto>
           </ng-template>
         </p-tabPanel>
         <!-- Fin de Datos de Documentos de Soporte -->
