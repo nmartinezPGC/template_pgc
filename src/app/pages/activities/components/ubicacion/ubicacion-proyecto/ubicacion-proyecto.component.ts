@@ -644,7 +644,7 @@ export class UbicacionProyectoComponent implements OnInit, OnChanges {
     // Seteo de los Campo Relacionales
     this._activityUbicacionModel.idActividad = { idActividad: this.idProyectoTab };
     this._activityUbicacionModel.codigoActividad = this.codigoProyectoTab;
-    this._activityUbicacionModel.idUsuarioCreador = { idUsuario: this.idUsuarioTab };
+    this._activityUbicacionModel.idUsuario = { idUsuario: this.idUsuarioTab };
 
     // Valida que los Campos de relacion Existan
     if (this.idProyectoTab === 0 || this._activityUbicacionModel.codigoActividad === null) {
@@ -666,7 +666,7 @@ export class UbicacionProyectoComponent implements OnInit, OnChanges {
             // Ocultamos el Loader la Funcion
             setTimeout(() => {
               this._spinner.hide();
-            }, 2000);
+            }, 1000);
           } else if (result.status === 200) {
             if (result.findRecord) {
               this._notificacionesService.showToast('error', 'Error al ingresar la Información de las Ubicaciones', result.message);
@@ -678,7 +678,7 @@ export class UbicacionProyectoComponent implements OnInit, OnChanges {
             // Ocultamos el Loader la Funcion
             setTimeout(() => {
               this._spinner.hide();
-            }, 2000);
+            }, 1000);
           }
         },
         error => {
@@ -686,7 +686,7 @@ export class UbicacionProyectoComponent implements OnInit, OnChanges {
           // Ocultamos el Loader la Funcion
           setTimeout(() => {
             this._spinner.hide();
-          }, 2000);
+          }, 1000);
         },
       );
     });
@@ -716,7 +716,7 @@ export class UbicacionProyectoComponent implements OnInit, OnChanges {
           // Ocultamos el Loader la Funcion
           setTimeout(() => {
             this._spinner.hide();
-          }, 2000);
+          }, 1000);
         } else if (response.status === 200) {
           // Verificamos que la Actividad no Exista en la BD
           this._notificacionesService.showToast('default', 'La Información de la Ubicación del Proyecto, se ha eliminado con exito', response.message);
@@ -724,7 +724,7 @@ export class UbicacionProyectoComponent implements OnInit, OnChanges {
           // Ocultamos el Loader la Funcion
           setTimeout(() => {
             this._spinner.hide();
-          }, 2000);
+          }, 1000);
         }
       },
       error => {
@@ -733,7 +733,7 @@ export class UbicacionProyectoComponent implements OnInit, OnChanges {
         // Ocultamos el Loader la Funcion
         setTimeout(() => {
           this._spinner.hide();
-        }, 2000);
+        }, 1000);
       },
     );
     // Return
@@ -783,9 +783,9 @@ export class UbicacionProyectoComponent implements OnInit, OnChanges {
           // Asignamos la Ubicacion seleccionada
           this.JsonUbicacionesImplements.forEach(element => {
             this.selectedItemsUbicacion.push({
-              idUbicacionImplementacion: element.idActividadUbicacion,
-              nombreNivelImpl: element,
-              nombreNivelUbicacion: element,
+              idUbicacionImplementacion: element.idUbicacionImplementacion,
+              // nombreNivelImpl: element.nombreUbicacionImpl,
+              // nombreNivelUbicacion: element,
               nombreUbicacionImpl: element.nombreUbicacionImpl,
               idActividad: element.idActividad,
               latitudUbicacion: element.latitudUbicacion,
