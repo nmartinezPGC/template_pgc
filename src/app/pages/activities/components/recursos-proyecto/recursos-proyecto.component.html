@@ -4,7 +4,7 @@
 
 <!-- ==================================================================================== -->
 <nb-card accent="warning" status="primary">
-  <nb-card-header>Información de Programas del Proyecto
+  <nb-card-header>Información de Recursos del Proyecto
   </nb-card-header>
   <nb-card-body>
     <hr>
@@ -19,6 +19,14 @@
     <ngx-link [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
     [codigoProyectoTab]="codigoProyectoTab">
     </ngx-link>
+
+    <br>
+    <hr>
+    <!-- ================ Recursos de soporte | Agregar Contactos ==================== -->
+    <ngx-contactos [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
+    [codigoProyectoTab]="codigoProyectoTab">
+    </ngx-contactos>
+
   </nb-card-body>
 </nb-card>
 

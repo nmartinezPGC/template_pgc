@@ -2,6 +2,9 @@
 <!-- Maquetacion de Ubicacion del Proyecto -->
 <toaster-container></toaster-container>
 
+<!-- INI | Servicio de confirmacion de Accion -->
+<p-confirmDialog header="Eliminar Compromiso" icon="pi pi-exclamation-triangle" width="425"></p-confirmDialog>
+
 <nb-card accent="warning" status="primary">
   <nb-card-header>Ingreso de Ubicación del Proyecto
     <button class="close" aria-label="Close" (click)="closeModal()">
@@ -45,33 +48,38 @@
             (onSelect)="onItemSelect($event)"></angular2-multiselect>
         </div>
 
+        <hr>
         <p-scrollPanel [style]="{width: '100%', height: '200px'}" styleClass="custombar1">
-          <div style="padding:1em;line-height:1.5">
-            <table class="table table-striped table-hover">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col" nbPopover="Ubicación de Implementación" nbPopoverMode="hint">Ubicación</th>
-                  <th scope="col" nbPopover="Eliminar Ubicación de Implementación" nbPopoverMode="hint">Acc.</th>
-                </tr>
-              </thead>
-              <tbody>
-                <!-- Datos de gastos -->
-                <tr *ngFor="let itemMaps of selectedItemsUbicacion; let homeTableIndex = index">
-                  <th scope="row">{{ homeTableIndex + 1 }}</th>
-                  <td>{{ itemMaps.nombreUbicacionImpl }}</td>
-                  <td style="text-align: center;">
-                    <!-- <img class="accButton" src="../../../../../../assets/icons/forms/pencil-striped-symbol_16.png"
+          <!-- <div style="padding:1em;line-height:1.5"> -->
+          <!-- Loader de carga de datos -->
+          <img src="../../../../../../../assets/images/loaderBlack.gif" *ngIf="loadingdata == true"
+            style="width: 20%; margin-left: 40%" alt="Cargando...">
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col" nbPopover="Ubicación de Implementación" nbPopoverMode="hint">Ubicación</th>
+                <th scope="col" nbPopover="Eliminar Ubicación de Implementación" nbPopoverMode="hint">Acc.</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Datos de gastos -->
+              <tr *ngFor="let itemMaps of selectedItemsUbicacion; let homeTableIndex = index">
+                <th scope="row">{{ homeTableIndex + 1 }}</th>
+                <td>{{ itemMaps.nombreUbicacionImpl }}</td>
+                <td style="text-align: center;">
+                  <!-- <img class="accButton" src="../../../../../../assets/icons/forms/pencil-striped-symbol_16.png"
                       nbPopover="Editar Compromiso" nbPopoverMode="hint" alt="Editar" (click)="showDialog(itemCompromisos.idActividadFinancDetCompromiso, itemCompromisos.idTipoTransaccion,
                     itemCompromisos.montoCompromiso, itemCompromisos.idMoneda, itemCompromisos.fechaTransaccion,
                     itemCompromisos.codigoFinancCompromiso)"> -->
-                    <img class="accButton" src="../../../../../../assets/icons/forms/rubbish-bin_16.png"
-                      nbPopover="Eliminar Ubicación" nbPopoverMode="hint" alt="Eliminar"
-                      (click)="deleteRowHomeForm(homeTableIndex, itemUbicacion.nombreUbicacionImpl)"></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+                  <img class="accButton" src="../../../../../../assets/icons/forms/rubbish-bin_16.png"
+                    nbPopover="Eliminar Ubicación" nbPopoverMode="hint" alt="Eliminar" style="cursor: pointer"
+                    (click)="confirm(homeTableIndex, itemMaps.nombreUbicacionImpl, itemMaps.idUbicacionImplementacion, itemMaps.idActividad)">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- </div> -->
         </p-scrollPanel>
       </div>
 
@@ -83,8 +91,9 @@
 
         <hr>
         <!-- Botones de Accion -->
-        <button pButton type="button" icon="pi pi-check" iconPos="right" label="Agregar"
-          class="ui-button-raised"></button>
+        <button pButton type="button" icon="pi pi-check" iconPos="right" label="Agregar" class="ui-button-raised"
+          (click)="saveUbicaciones()"></button>
+
         <button pButton type="button" icon="pi pi-trash" iconPos="right" label="Limpiar"
           class="ui-button-raised ui-button-danger"></button>
       </div>

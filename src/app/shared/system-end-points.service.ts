@@ -301,7 +301,7 @@ export class SystemEndPointsService extends ListEndPointsService {
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.listAllActivityUbicaciones.urlEndPoint;
             break;
           case 12:
-            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdActivity.urlEndPoint;
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdActividadUbicacion.urlEndPoint;
             break;
           case 13:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActivityUbicacion.urlEndPoint;
@@ -581,6 +581,39 @@ export class SystemEndPointsService extends ListEndPointsService {
             break;
           case 93:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.uploadMuLtiplefilerecursosproyecto.urlEndPoint;
+            break;
+        case 94:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.newrecursosproyecto.urlEndPoint;
+            break;
+        case 95:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.editrecursosproyecto.urlEndPoint;
+            break;
+        case 95.1:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdActividadRecurso.urlEndPoint;
+            break;
+        case 95.2:
+              endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleterecursosproyecto.urlEndPoint;
+              break;
+        case 96:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.listAllContactos.urlEndPoint;
+            break;
+        case 97:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdContacto.urlEndPoint;
+            break;
+        case 98:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.newContacto.urlEndPoint;
+            break;
+        case 99:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.editContacto.urlEndPoint;
+            break;
+        case 100:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteContacto.urlEndPoint;
+            break;
+       case 101:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.listAllTratos.urlEndPoint;
+            break;
+       case 102:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdTratos.urlEndPoint;
             break;
         }
         break;

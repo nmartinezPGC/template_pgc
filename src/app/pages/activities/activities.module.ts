@@ -1,4 +1,7 @@
 import { NgModule } from '@angular/core';
+import {FileUploadModule} from 'primeng/fileupload';
+
+import { HttpClientModule} from '@angular/common/http';
 
 // Imports de Tabla Smart de Angular
 import { Ng2SmartTableModule } from 'ng2-smart-table';
@@ -41,7 +44,6 @@ import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import { ListboxModule } from 'primeng/listbox';
 import { RecursosProyectoComponent } from './components/recursos-proyecto/recursos-proyecto.component';
-import { FileUploadModule } from 'primeng/fileupload';
 import { DropdownModule, EditorModule, AutoCompleteModule, KeyFilterModule, CalendarModule, DialogModule, InputMaskModule, AccordionModule, TabViewModule } from 'primeng/primeng';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
@@ -82,6 +84,13 @@ import { DocumentosComponent } from './components/recursos-proyecto/documentos/d
 import { LinkComponent } from './components/recursos-proyecto/link/link.component';
 
 import { ToastModule } from 'primeng/toast';
+import { ContactosComponent } from './components/recursos-proyecto/contactos/contactos.component';
+import { ModalUpdateContactoComponent } from './components/recursos-proyecto/contactos/modal-update-contacto/modal-update-contacto.component';
+import { ModalNewContactoComponent } from './components/recursos-proyecto/contactos/modal-new-contacto/modal-new-contacto.component';
+
+// Recursos de Proyecto
+import { ModalDocumentosComponent } from './components/recursos-proyecto/documentos/modal-documentos/modal-documentos.component';
+import { ModalLinkComponent } from './components/recursos-proyecto/link/modal-link/modal-link.component';
 
 export const customCurrencyMaskConfig = {
   align: 'right',
@@ -98,6 +107,8 @@ export const customCurrencyMaskConfig = {
 @NgModule({
   imports: [
     ThemeModule,
+    FileUploadModule,
+    HttpClientModule,
     ActivitiesRoutingModule,
     Ng2SmartTableModule, // Modulo Base del pluguin de TableSmart
     ToasterModule.forRoot(), // Modulo de Toaster-Notification
@@ -164,6 +175,11 @@ export const customCurrencyMaskConfig = {
     FinancDetalleGastosFormComponent,
     DocumentosComponent,
     LinkComponent,
+    ContactosComponent,
+    ModalUpdateContactoComponent,
+    ModalNewContactoComponent,
+    ModalDocumentosComponent,
+    ModalLinkComponent,
   ],
   providers: [
     // SmartTableService, // Defincion del Servicio que provee los Datos de la Tabla: ID's Internas
@@ -173,6 +189,10 @@ export const customCurrencyMaskConfig = {
   entryComponents: [
     OdsModalMetasComponent,
     FinancDetalleCompromisosFormComponent,
+    ModalUpdateContactoComponent, // JOE 01-07-2019
+    ModalNewContactoComponent, // JOE 01-07-2019
+    ModalLinkComponent,
+    ModalDocumentosComponent,
   ],
 })
 export class ActivitiesPGCModule { }

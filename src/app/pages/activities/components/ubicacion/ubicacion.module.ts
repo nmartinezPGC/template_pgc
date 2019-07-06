@@ -23,6 +23,7 @@ import { ThemeModule } from '../../../../@theme/theme.module';
 import { ButtonModule } from 'primeng/button';
 import { ToasterModule } from 'angular2-toaster';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
+import { ConfirmDialogModule } from 'primeng/primeng';
 
 // Multiselect imports
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
@@ -37,6 +38,7 @@ import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
     LeafletModule.forRoot(),
     ToasterModule.forRoot(), // Modulo de Toaster-Notification
     AngularMultiSelectModule,
+    ConfirmDialogModule,
   ],
   declarations: [
     ...routedComponents,

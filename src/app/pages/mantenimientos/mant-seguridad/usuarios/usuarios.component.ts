@@ -29,6 +29,7 @@ import { NotificacionesService } from '../../../shared/services/notificaciones.s
 import { ModalVistaComponent } from './modal-vista/modal-vista.component';
 import { ModalModificarComponent } from './modal-modificar/modal-modificar.component';
 
+
 // Varieble Jquey
 declare var jquery: any;
 declare var $: any;
@@ -50,6 +51,7 @@ export class UsuariosComponent implements OnInit {
   public JsonReceptionTipoUsuarios: any;
   public JsonReceptionEstados: any;
   public JsonReceptionPaises: any;
+  public JsonReceptionListEspacioTrabajoUsuario: any;
   public JsonReceptionCatOrganizacion: any;
   public JsonReceptionTipoOrganizacion: any;
   public JsonReceptionOrganizacion: any;
@@ -163,6 +165,7 @@ export class UsuariosComponent implements OnInit {
    * @param _usuariosService
    */
   constructor(private modalService: NgbModal, protected _router: Router,
+    public _UsuariosService: UsuarioService,
     public _usuariosService: UsuarioService, // Inicializa el ToasterService
     private _notificacionesService: NotificacionesService,
     public _configSmartTableService: ConfigSmartTableService, public _listasComunesService: ListasComunesService) {
@@ -367,6 +370,25 @@ export class UsuariosComponent implements OnInit {
       },
     );
   } // FIN | usuariosTipoService
+   findByIdEspacioTrabajoUsuario(idEspaciosTrabajoUsuarios: number) {
+    // Ejecutamos el Recurso del EndPoint
+    this._UsuariosService.findByIdEspacioTrabajoUsuario(idEspaciosTrabajoUsuarios).subscribe(
+      response => {
+        if (response.status !== 200) {
+            this._notificacionesService.showToast('error', 'Error al Eliminar la Id Interna de la Planificacion del Proyecto', response.message);
+        } else if (response.status === 200) {
+          this.JsonReceptionListEspacioTrabajoUsuario = response.data;
+          this.data3 = this.JsonReceptionListEspacioTrabajoUsuario;
+        }
+      },
+      error => {
+        // Informacion del Error que se capturo de la Secuencia
+        this._notificacionesService.showToast('error', 'Ha ocurrido un Error al cargar un dato, por favor verifica que todo este bien!!', JSON.stringify(error.error.message));
+        // Ocultamos el Loader la Funcion
+      },
+    );
+    // Return
+  } // FIN | findByIdEspacioTrabajoUsuario
 
 
   /****************************************************************************
@@ -1074,9 +1096,11 @@ export class UsuariosComponent implements OnInit {
     activeModal.componentInstance.idUsuario = idUsuario1;
     // console.log(idUsuario1);
   }
-  showLargeModal1() {
-    const activeModal = this.modalService.open(ModalVistaComponent, { size: 'lg', container: 'nb-layout' });
-    activeModal.componentInstance.modalHeader = 'Espacio de Trabajo asignado';
+  showLargeModal1(idEspaciosTrabajoUsuarios: number) {
+    const activeModal = this.modalService.open(ModalVistaComponent, { size: 'lg', backdrop: 'static', container: 'nb-layout',
+    });
+    activeModal.componentInstance.modalHeader = 'Espacio de Trabajo Asignado ';
+    activeModal.componentInstance.modalidEspacioTrabajoUsuario = idEspaciosTrabajoUsuarios;
   }
   showLargeModal2() {
     const activeModal = this.modalService.open(ModalModificarComponent, { size: 'lg', container: 'nb-layout' });
