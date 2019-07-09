@@ -24,6 +24,7 @@ import { ButtonModule } from 'primeng/button';
 import { ToasterModule } from 'angular2-toaster';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
 import { ConfirmDialogModule } from 'primeng/primeng';
+import { KeyFilterModule } from 'primeng/keyfilter';
 
 // Multiselect imports
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
@@ -39,6 +40,7 @@ import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
     ToasterModule.forRoot(), // Modulo de Toaster-Notification
     AngularMultiSelectModule,
     ConfirmDialogModule,
+    KeyFilterModule,
   ],
   declarations: [
     ...routedComponents,

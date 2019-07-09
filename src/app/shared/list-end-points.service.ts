@@ -594,6 +594,14 @@ export class ListEndPointsService {
         groupEndPoint: 'actividadesCRUDGroup',
         descEndPoint: 'Eliminar la Ubicacion al proyecto, selecionado',
       },
+      editActivityUbicacion: {
+        id: 13.100,
+        nameEndpoint: 'Editar Ubicación de Proyecto',
+        urlEndPoint: '/mant-actividades/ubicaciones/edit/',
+        params: '{ idActividadUbicacion }',
+        groupEndPoint: 'actividadesCRUDGroup',
+        descEndPoint: 'Editar la Ubicacion al proyecto, selecionado',
+      },
       findAllSectoresOcdeCad: { // Modulo de Sectores OCDE/CAD
         id: 14,
         nameEndpoint: 'findAllSectoresOcdeCad',

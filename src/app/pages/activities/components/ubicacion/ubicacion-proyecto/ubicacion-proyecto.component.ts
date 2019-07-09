@@ -24,6 +24,7 @@ import { ToasterService } from 'angular2-toaster';
 import { ListasComunesService } from '../../../../common-list/services/listas-comunes.service';
 import { ConfirmationService } from 'primeng/api';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { delay } from 'q';
 
 @Component({
   selector: 'ngx-ubicacion-proyecto',
@@ -86,8 +87,6 @@ export class UbicacionProyectoComponent implements OnInit, OnChanges {
    * Configuracion del Dropdow List
    */
   dropdownList = [];
-  dropdownListPais = [];
-  dropdownListEspacioTrabajo = [];
   selectedItems = [];
   selectedItemsUbicacion = [];
   selectedItemsEspacioTrabajo = [];
@@ -128,7 +127,7 @@ export class UbicacionProyectoComponent implements OnInit, OnChanges {
   * @copyright SRECI-2019
   ****************************************************************************/
   // Variables Globales del Mapa
-  datos = [];
+  public datos = [];
   public marker1;
   layers = this.datos;
 
@@ -355,20 +354,19 @@ export class UbicacionProyectoComponent implements OnInit, OnChanges {
     this._activityUbicacionModel.nombreNivelImpl = this.nombreNivelImplSelected;
     this._activityUbicacionModel.nombreNivelUbicacion = this.nombreNivelUbicacionSeleted;
     this._activityUbicacionModel.nombreUbicacionImpl = this.nombreUbicacionSelected;
-    // this._activityModel.idNivelUbicacion = this.selectedDescOrganizacion;
-    // this._activityModel.idUbicacion = this.selectedDescTipoOrganizacion;
 
     const foundUbicacion = this.selectedItemsUbicacion.find(function (element) {
       return element.nombreUbicacionImpl === item.itemName;
     });
 
     if (foundUbicacion !== undefined) {
-      this._notificacionesService.showToast('error', 'Error al seleccionar La Ubicación', 'Ya existe en el listado');
+      this._notificacionesService.showToast('error', 'Error al seleccionar La Ubicación', 'Ya existe: ' + this.nombreUbicacionSelected + ' en el listado');
       // Oculta el loader
       this.loadingdata = false;
     } else {
       // Asignamos la Ubicacion seleccionada
       this.selectedItemsUbicacion.push({
+        idActividadUbicacion: 0,
         idUbicacionImplementacion: item.id,
         nombreNivelImpl: this.nombreNivelImplSelected,
         nombreNivelUbicacion: this.nombreNivelUbicacionSeleted,
@@ -376,22 +374,46 @@ export class UbicacionProyectoComponent implements OnInit, OnChanges {
         idActividad: item.idActividad,
         latitudUbicacion: item.latitudUbicacion,
         longitudUbicacion: item.longitudUbicacion,
+        porcentajeUbicacion: 0,
       });
-
-      // Array de Markers del Mapa
-      this.datos.push(
-        L.marker([item.latitudUbicacion, item.longitudUbicacion], {
-          icon: icon({
-            iconUrl: 'assets/icons/forms/map_24.png',
-            shadowUrl: 'assets/icons/forms/map_24.png',
-          }),
-          draggable: false,
-          riseOnHover: true,
-        }).bindPopup('<p><strong>Nivel de Implementación</strong>: ' + this.nombreNivelImplSelected +
-          ' <br><strong>Nivel de Ubicación: </strong>' + this.nombreNivelUbicacionSeleted +
-          ' <br><strong>Ubicación: </strong>' + this.nombreUbicacionSelected +
-          ' <br>Coordenadas: [' + item.latitudUbicacion + ',' + item.longitudUbicacion + '] </p>'),
-      )
+      +
+        // Array de Markers del Mapa
+        this.datos.push(
+          L.marker([item.latitudUbicacion, item.longitudUbicacion], {
+            icon: icon({
+              iconUrl: 'assets/icons/forms/map_24.png',
+              shadowUrl: 'assets/icons/forms/map_24.png',
+            }),
+            draggable: false,
+            riseOnHover: true,
+          }).bindPopup(
+            '<table class="table table-bordered table-striped"">' +
+            '<thead class="thead-dark">' +
+            '<tr>' +
+            '<th scope="col">Concepto</th>' +
+            '<th scope="col">Descripción</th>' +
+            '</tr>' +
+            '</thead>' +
+            '<tbody>' +
+            '<tr>' +
+            '<th scope="row">Nivel de Impl.</th>' +
+            '<td>' + item.nombreNivelImpl + '</td>' +
+            '</tr>' +
+            '<tr>' +
+            '<th scope="row">Nivel de Ubic.</th>' +
+            '<td>' + item.nombreNivelUbicacion + '</td>' +
+            '</tr>' +
+            '<tr>' +
+            '<th scope="row">Ubicación</th>' +
+            '<td>' + item.itemName + '</td>' +
+            '</tr>' +
+            '<tr>' +
+            '<th scope="row">Beneficiados</th>' +
+            '<td>' + 0 + '</td>' +
+            '</tr>' +
+            '</tbody>' +
+            '</table>'),
+        )
       // Oculta el loader
       this.loadingdata = false;
       // console.log(this.selectedItemsUbicacion);
@@ -468,6 +490,8 @@ export class UbicacionProyectoComponent implements OnInit, OnChanges {
   private getListUbicacionService(idNivelUbicacion: number) {
     // Inicializa el Filtro
     this.selectedItems = [];
+    this.JsonReceptionUbicacion = [];
+    this.dropdownList = [];
 
     this._serviceUbicacionService.getUbicacionesByIdNivelUbicacion(idNivelUbicacion).subscribe(
       result => {
@@ -490,6 +514,7 @@ export class UbicacionProyectoComponent implements OnInit, OnChanges {
               latitudUbicacion: item.latitudUbicacion,
               longitudUbicacion: item.longitudUbicacion,
               idActividad: this.idProyectoTab,
+              porcentajeUbicacion: item.porcentajeUbicacion,
             }
           })
         }
@@ -579,10 +604,7 @@ export class UbicacionProyectoComponent implements OnInit, OnChanges {
   deleteRowHomeForm(homeFormIndex: number, nombreUbicacionImpl: string, idUbicacionImplementacion: number, idActividad: number) {
     // Confirmar que se desea borrar ?
     // const deletedItem = confirm('Esta seguro de borrar el Item de Ubicación Seleccionado ? ');
-
-    // if (deletedItem === true) {
     // Borra el Elemento al Json
-    // this.JsonIdUbicacionesProyecto.forEach(function (element, index) {
     this.selectedItemsUbicacion.forEach(function (element, index) {
       if (element.nombreUbicacionImpl === nombreUbicacionImpl) {
         homeFormIndex = index;
@@ -596,9 +618,6 @@ export class UbicacionProyectoComponent implements OnInit, OnChanges {
     if (idActividad !== 0) {
       this.deletedUbicaciones(idUbicacionImplementacion, idActividad);
     }
-
-    // this.changeDetectorRef.detectChanges();
-    // }
   } // FIN | FND-011
 
 
@@ -627,6 +646,19 @@ export class UbicacionProyectoComponent implements OnInit, OnChanges {
   } // FIN | FND-012
 
 
+  validaPoblacion(event: any, codeIn: number) {
+    const otroIn = event.target.value;
+    // console.log(codeIn);
+
+    this.selectedItemsUbicacion.map(function (dato) {
+      if (dato.nombreUbicacionImpl === codeIn) {
+        dato.porcentajeUbicacion = otroIn;
+      }
+      return dato;
+    });
+
+  }
+
   /****************************************************************************
   * Funcion: saveUbicaciones
   * Object Number: FND-013
@@ -636,30 +668,32 @@ export class UbicacionProyectoComponent implements OnInit, OnChanges {
   * la API | /mant-actividades/ubicaciones/new
   * @param jsonUbicacionActivity
   ****************************************************************************/
-  saveUbicaciones() {
+  private saveUbicaciones() {
     /** spinner starts on Start Function */
     this.msgLoader = 'Guardando la Información de Ubicación del Proyecto';
     this._spinner.show();
 
     // Seteo de los Campo Relacionales
     this._activityUbicacionModel.idActividad = { idActividad: this.idProyectoTab };
-    this._activityUbicacionModel.codigoActividad = this.codigoProyectoTab;
     this._activityUbicacionModel.idUsuario = { idUsuario: this.idUsuarioTab };
 
     // Valida que los Campos de relacion Existan
-    if (this.idProyectoTab === 0 || this._activityUbicacionModel.codigoActividad === null) {
+    if (this.idProyectoTab === 0 || this.codigoProyectoTab === null) {
       this._notificacionesService.showToast('error', 'Error al ingresar la Información de las Ubicaciones', 'Debes Ingresar la Información General del Proyecto primero para continuar.');
       return -1;
     }
 
     // Ciclo de Ingresos de Ubicaciones
-    // this.JsonIdUbicacionesProyecto.forEach(element => {
-    this.selectedItemsUbicacion.forEach(element => {
+    this.selectedItemsUbicacion.forEach(async (element, index) => {
+      this._activityUbicacionModel.idActividadUbicacion = element.idActividadUbicacion;
+      this._activityUbicacionModel.codigoActividad = this.codigoProyectoTab + '-AUI-' + element.idUbicacionImplementacion;
       this._activityUbicacionModel.idUbicacionImplementacion = { idUbicacionImplementacion: element.idUbicacionImplementacion };
+
+      this._activityUbicacionModel.porcentajeUbicacion = element.porcentajeUbicacion;
 
       // End Point de Nueva Ubicacion
       this._serviceUbicacionService.newUbicacionProyecto(this._activityUbicacionModel).subscribe(
-        result => {
+        async result => {
           if (result.status !== 200) {
             this._notificacionesService.showToast('error', 'Error al ingresar la Información de las Ubicaciones', result.message);
 
@@ -669,9 +703,21 @@ export class UbicacionProyectoComponent implements OnInit, OnChanges {
             }, 1000);
           } else if (result.status === 200) {
             if (result.findRecord) {
-              this._notificacionesService.showToast('error', 'Error al ingresar la Información de las Ubicaciones', result.message);
+              this._activityUbicacionModel.idActividadUbicacion = element.idActividadUbicacion;
+              this._activityUbicacionModel.porcentajeUbicacion = element.porcentajeUbicacion;
+              this._activityUbicacionModel.codigoActividad = this.codigoProyectoTab + '-AUI-' + element.idUbicacionImplementacion;
+
+              const valor1 = Number(JSON.stringify(result.data[0]['porcentajeUbicacion']));
+              const valor2 = Number(element.porcentajeUbicacion);
+
+              // Condicion de Modificacion de información
+              if (valor1 !== valor2) {
+                // Ejecutamos la Actualización de la Ubicación
+                this.editUbicaciones(element.idActividadUbicacion, this._activityUbicacionModel);
+                await delay(1000);
+              }
             } else {
-              // this.JsonReceptionUbicacion = result.data;
+              this.getUbicacionesByIdActividadService(this.idProyectoTab);
               this._notificacionesService.showToast('default', 'La Información de las Ubicaciones, se ha ingresado con exito.', result.message);
             }
 
@@ -682,7 +728,7 @@ export class UbicacionProyectoComponent implements OnInit, OnChanges {
           }
         },
         error => {
-          this._notificacionesService.showToast('error', 'Error al ingresar la Información de las Ubicaciones', JSON.stringify(error.message));
+          this._notificacionesService.showToast('error', 'Error al ingresar la Información de las Ubicaciones', JSON.stringify(error.error.message));
           // Ocultamos el Loader la Funcion
           setTimeout(() => {
             this._spinner.hide();
@@ -699,16 +745,16 @@ export class UbicacionProyectoComponent implements OnInit, OnChanges {
   * Fecha: 01-01-2019
   * Descripcion: Method que Elimina la Ubicacion de la Actividad
   * Objetivo: Eliminar la Ubicacion del Proyecto
-  * @param { idUbicacionImpl }
+  * @param { idActividadUbicacion }
   * @param { idActividad }
   ****************************************************************************/
-  deletedUbicaciones(idUbicacionImpl: number, idActividad: number) {
+  deletedUbicaciones(idActividadUbicacion: number, idActividad: number) {
     /** spinner starts on Start Function */
     this.msgLoader = 'Eliminando la Información de Ubicación del Proyecto';
     this._spinner.show();
 
     // Ejecutamos el Recurso del EndPoint
-    this._serviceUbicacionService.deletedActivityUbicacion(idUbicacionImpl, idActividad).subscribe(
+    this._serviceUbicacionService.deletedActivityUbicacion(idActividadUbicacion, idActividad).subscribe(
       response => {
         if (response.status !== 200) {
           this._notificacionesService.showToast('error', 'Error al Eliminar la Ubicación del Proyecto', response.message);
@@ -720,6 +766,9 @@ export class UbicacionProyectoComponent implements OnInit, OnChanges {
         } else if (response.status === 200) {
           // Verificamos que la Actividad no Exista en la BD
           this._notificacionesService.showToast('default', 'La Información de la Ubicación del Proyecto, se ha eliminado con exito', response.message);
+
+          // Ejecutamos la busqueda de Actualizacion de la Matriz
+          // this.getUbicacionesByIdActividadService(this.idProyectoTab);
 
           // Ocultamos el Loader la Funcion
           setTimeout(() => {
@@ -769,27 +818,31 @@ export class UbicacionProyectoComponent implements OnInit, OnChanges {
   ****************************************************************************/
   private getUbicacionesByIdActividadService(idActividad: number) {
     // Inicializa el Filtro
-    // this.selectedItems = [];
+    this.JsonUbicacionesImplements = [];
+    // this.selectedItemsUbicacion = [];
+    this.selectedItemsUbicacion.splice(0, this.selectedItemsUbicacion.length);
+    this.datos.splice(0, this.datos.length);
 
     this._serviceUbicacionService.getUbicacionesByIdActividad(idActividad).subscribe(
       result => {
         if (result.status !== 200) {
           this._notificacionesService.showToast('error', 'Error al Obtener la Información de las Ubicaciones', result.message);
-          // this.JsonUbicacionesImplements = [];
-          // this.selectedItems = [];
+          this.JsonUbicacionesImplements = [];
         } else if (result.status === 200) {
           this.JsonUbicacionesImplements = result.data;
 
           // Asignamos la Ubicacion seleccionada
           this.JsonUbicacionesImplements.forEach(element => {
             this.selectedItemsUbicacion.push({
+              idActividadUbicacion: element.idActividadUbicacion,
               idUbicacionImplementacion: element.idUbicacionImplementacion,
-              // nombreNivelImpl: element.nombreUbicacionImpl,
-              // nombreNivelUbicacion: element,
+              nombreNivelImpl: element.nombreNivelImpl,
+              nombreNivelUbicacion: element.nombreNivelUbicacion,
               nombreUbicacionImpl: element.nombreUbicacionImpl,
               idActividad: element.idActividad,
               latitudUbicacion: element.latitudUbicacion,
               longitudUbicacion: element.longitudUbicacion,
+              porcentajeUbicacion: element.porcentajeUbicacion,
             });
 
             // Array de Markers del Mapa
@@ -801,10 +854,38 @@ export class UbicacionProyectoComponent implements OnInit, OnChanges {
                 }),
                 draggable: false,
                 riseOnHover: true,
-              }).bindPopup('<p><strong>Nivel de Implementación</strong>: ' + element.nombreUbicacionImpl +
-                ' <br><strong>Nivel de Ubicación: </strong>' + element.nombreUbicacionImpl +
+              }).bindPopup(
+                '<table class="table table-bordered table-striped"">' +
+                '<thead class="thead-dark">' +
+                '<tr>' +
+                '<th scope="col">Concepto</th>' +
+                '<th scope="col">Descripción</th>' +
+                '</tr>' +
+                '</thead>' +
+                '<tbody>' +
+                '<tr>' +
+                '<th scope="row">Nivel de Impl.</th>' +
+                '<td>' + element.nombreNivelImpl + '</td>' +
+                '</tr>' +
+                '<tr>' +
+                '<th scope="row">Nivel de Ubic.</th>' +
+                '<td>' + element.nombreNivelUbicacion + '</td>' +
+                '</tr>' +
+                '<tr>' +
+                '<th scope="row">Ubicación</th>' +
+                '<td>' + element.nombreUbicacionImpl + '</td>' +
+                '</tr>' +
+                '<tr>' +
+                '<th scope="row">Beneficiados</th>' +
+                '<td>' + element.porcentajeUbicacion + '</td>' +
+                '</tr>' +
+                '</tbody>' +
+                '</table>'),
+              /*}).bindPopup('<p><strong>Nivel de Implementación</strong>: ' + element.nombreNivelImpl +
+                ' <br><strong>Nivel de Ubicación: </strong>' + element.nombreNivelUbicacion +
                 ' <br><strong>Ubicación: </strong>' + element.nombreUbicacionImpl +
-                ' <br>Coordenadas: [' + element.latitudUbicacion + ',' + element.longitudUbicacion + '] </p>'),
+                ' <br><strong>Beneficiados: </strong>' + element.porcentajeUbicacion +
+                ' <hr><br>Coordenadas: [' + element.latitudUbicacion + ',' + element.longitudUbicacion + '] </p>'),*/
             )
           });
           // console.log(this.JsonUbicacionesImplements);
@@ -815,5 +896,56 @@ export class UbicacionProyectoComponent implements OnInit, OnChanges {
       },
     );
   } // FIN | FND-016
+
+
+  /****************************************************************************
+  * Funcion: editUbicaciones
+  * Object Number: FND-017
+  * Fecha: 07-07-2019
+  * Descripcion: Method Edit Ubicaciones, en BD por llamado a la API
+  * Objetivo: Salvar Ubicaciones de Proyectos, en BD por llamado a EndPoint de
+  * la API | /mant-actividades/ubicaciones/edit/{idUbicacionImplementacion}
+  * @param {idUbicacionImplementacion, jsonUbicacionActivity}
+  ****************************************************************************/
+  private editUbicaciones(idUbicacionImplementacion: number, jsonUbicacionActivity: any) {
+    /** spinner starts on Start Function */
+    this.msgLoader = 'Actualizando la Información de Ubicación del Proyecto';
+    this._spinner.show();
+
+    // End Point de Editar la Ubicacion
+    this._serviceUbicacionService.editUbicacionProyecto(idUbicacionImplementacion, jsonUbicacionActivity).subscribe(
+      result => {
+        if (result.status !== 200) {
+          this._notificacionesService.showToast('error', 'Error al actualizar la Información de las Ubicaciones', result.message);
+
+          // Ocultamos el Loader la Funcion
+          setTimeout(() => {
+            this._spinner.hide();
+          }, 1000);
+        } else if (result.status === 200) {
+          if (result.findRecord && result.findChange) {
+            // Ejecutamos la busqueda de Actualizacion de la Matriz
+            // this.getUbicacionesByIdActividadService(this.idProyectoTab);
+
+            this._notificacionesService.showToast('default', 'La Información de las Ubicación, se ha actualizado con exito.', result.message);
+          } else {
+            // this._notificacionesService.showToast('error', 'Error al ingresar la Información de las Ubicaciones', result.message);
+          }
+
+          // Ocultamos el Loader la Funcion
+          setTimeout(() => {
+            this._spinner.hide();
+          }, 1000);
+        }
+      },
+      error => {
+        this._notificacionesService.showToast('error', 'Error al actualizar la Información de las Ubicaciones', JSON.stringify(error.error.message));
+        // Ocultamos el Loader la Funcion
+        setTimeout(() => {
+          this._spinner.hide();
+        }, 1000);
+      },
+    );
+  } // FIN | FND-017
 
 }
