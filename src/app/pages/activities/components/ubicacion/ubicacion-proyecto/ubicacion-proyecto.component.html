@@ -3,7 +3,7 @@
 <toaster-container></toaster-container>
 
 <!-- INI | Servicio de confirmacion de Accion -->
-<p-confirmDialog header="Eliminar Compromiso" icon="pi pi-exclamation-triangle" width="425"></p-confirmDialog>
+<p-confirmDialog header="Eliminar Ubicación" icon="pi pi-exclamation-triangle" width="425"></p-confirmDialog>
 
 <nb-card accent="warning" status="primary">
   <nb-card-header>Ingreso de Ubicación del Proyecto
@@ -55,11 +55,12 @@
           <img src="../../../../../../../assets/images/loaderBlack.gif" *ngIf="loadingdata == true"
             style="width: 20%; margin-left: 40%" alt="Cargando...">
           <table class="table table-striped table-hover">
-            <thead>
+            <thead class="thead-dark">
               <tr>
                 <th scope="col">#</th>
                 <th scope="col" nbPopover="Ubicación de Implementación" nbPopoverMode="hint">Ubicación</th>
-                <th scope="col" nbPopover="Eliminar Ubicación de Implementación" nbPopoverMode="hint">Acc.</th>
+                <th scope="col" nbPopover="Población Beneficiada" nbPopoverMode="hint">Pobl.</th>
+                <th scope="col" nbPopover="Eliminar Ubicación de Implementación" nbPopoverMode="hint"></th>
               </tr>
             </thead>
             <tbody>
@@ -67,6 +68,8 @@
               <tr *ngFor="let itemMaps of selectedItemsUbicacion; let homeTableIndex = index">
                 <th scope="row">{{ homeTableIndex + 1 }}</th>
                 <td>{{ itemMaps.nombreUbicacionImpl }}</td>
+                <td><input type="text" pInputText pKeyFilter="int" maxlength="6"
+                  (keyup)="validaPoblacion($event, itemMaps.nombreUbicacionImpl)" style=" width: 90%" value="{{ itemMaps.porcentajeUbicacion }}"></td>
                 <td style="text-align: center;">
                   <!-- <img class="accButton" src="../../../../../../assets/icons/forms/pencil-striped-symbol_16.png"
                       nbPopover="Editar Compromiso" nbPopoverMode="hint" alt="Editar" (click)="showDialog(itemCompromisos.idActividadFinancDetCompromiso, itemCompromisos.idTipoTransaccion,
