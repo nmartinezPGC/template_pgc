@@ -501,7 +501,7 @@ export class SystemEndPointsService extends ListEndPointsService {
           case 70.103:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdActividadFinancEncDetAndIdSocioDesarrollo.urlEndPoint;
             break;
-          case 70.200: // NAM | 2019-06-06 | Mapeo de Compromisos, Desembolsos y gastos
+          case 70.200: // NAM | 2019-06-06 | Mapeo de Compromisos
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.newActividadFinanciamientoDetCompromiso.urlEndPoint;
             break;
           case 70.201:
@@ -512,6 +512,30 @@ export class SystemEndPointsService extends ListEndPointsService {
             break;
           case 70.203:
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.editActividadFinanciamientoDetCompromiso.urlEndPoint;
+            break;
+          case 70.204: // NAM | 2019-07-09 | Mapeo de Desembolsos
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.newActividadFinanciamientoDetDesembolso.urlEndPoint;
+            break;
+          case 70.205:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActividadFinanciamientoDetDesembolso.urlEndPoint;
+            break;
+          case 70.206:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdActividadDetDesembolsos.urlEndPoint;
+            break;
+          case 70.207:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.editActividadFinanciamientoDetDesembolso.urlEndPoint;
+            break;
+          case 70.208: // NAM | 2019-07-10 | Mapeo de Gastos
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.newActividadFinanciamientoDetGasto.urlEndPoint;
+            break;
+          case 70.209:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.deleteActividadFinanciamientoDetGasto.urlEndPoint;
+            break;
+          case 70.210:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findByIdActividadDetGastos.urlEndPoint;
+            break;
+          case 70.211:
+            endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.editActividadFinanciamientoDetGasto.urlEndPoint;
             break;
           case 71: // AMA | 2019-27-05 | Mapeo de Organización Unidad Ejecutora
             endPointResult = this.urlBaseAPI + this.getEndPoint.endPointCRUDActividades.findAllUnidadEjecutora.urlEndPoint;

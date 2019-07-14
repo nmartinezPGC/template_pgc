@@ -14,7 +14,7 @@
               <strong> <label>Monto de Proyecto</label> </strong>
               <input class="form-control" currencyMask required [options]="{ prefix: '', thousands: ',', decimal: '.' }"
                 [(ngModel)]="_activityFinanciamientoEncModel.montoActividad" #montoActividad="ngModel"
-                name="montoActividad" placeholder="0.00" />
+                name="montoActividad" placeholder="0.00" autocomplete="off"/>
             </div>
           </div>
 
@@ -34,7 +34,7 @@
           <div class="col-sm-6 col-md-3">
             <div class="form-group">
               <strong> <label>Fecha de Transacción</label> </strong>
-              <p-calendar [inline]="false" class="form-control" [inputStyle]="{'width':'100%'}" [showIcon]="true"
+              <p-calendar [inline]="false" class="form-control" [inputStyle]="{'width':'90%'}" [showIcon]="true"
                 [(ngModel)]="date6" dateFormat="dd/mm/yy" (click)="showDialog()" [locale]="es" required
                 [(ngModel)]="_activityFinanciamientoEncModel.fechaTransaccion" #fechaTransaccion="ngModel"
                 name="fechaTransaccion">

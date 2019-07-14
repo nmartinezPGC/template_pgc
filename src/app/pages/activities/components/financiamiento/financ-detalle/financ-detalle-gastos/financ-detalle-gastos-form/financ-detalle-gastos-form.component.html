@@ -1,3 +1,77 @@
-<p>
-  financ-detalle-gastos-form works!
-</p>
+<!-- Diseño de la Ventana de Gastos -->
+<!-- ==================================================================================== -->
+
+<!-- ==================================================================================== -->
+<!-- INI | Formulario de la ventana Modal -->
+<div class="ui-g ui-fluid">
+  <div class="col-sm-12 col-md-12">
+    <div class="form-group">
+      <strong> <label>Tipo de Transacción</label> </strong>
+      <select class="form-control" #idTipoTransaccionSend="ngModel" name="idTipoTransaccionSend"
+        id="idTipoTransaccionSend" required
+        [(ngModel)]="_activityFinanciamientoDetGastosModel.idTipoTransaccionSend">
+        <option value="0">**** Selecciona Tipo de Transacción ****</option>
+        <option *ngFor="let item of JsonReceptionAllTipoTransaccion" [value]="item.idTipoTransaccion">
+          {{item.descTipoTransaccion}}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <div class="col-sm-12 col-md-12">
+    <div class="form-group">
+      <strong> <label>Monto de Gasto</label> </strong>
+      <input class="form-control" currencyMask required [options]="{ prefix: '', thousands: ',', decimal: '.' }"
+        name="montoGasto" #montoGasto="ngModel" id="montoGasto" autocomplete="off"
+        [(ngModel)]="_activityFinanciamientoDetGastosModel.montoGasto" placeholder="0.00" required />
+    </div>
+  </div>
+
+  <div class="col-sm-12 col-md-12">
+    <div class="form-group">
+      <strong> <label>Moneda</label> </strong>
+      <select class="form-control" #idMonedaActividadSend="ngModel" name="idMonedaActividadSend"
+        id="idMonedaActividadSend" required
+        [(ngModel)]="_activityFinanciamientoDetGastosModel.idMonedaActividadSend">
+        <option value="0">**** Selecciona la Moneda ****</option>
+        <option *ngFor="let item of JsonReceptionAllMonedasProyecto" [value]="item.idMonedaActividad">
+          {{item.descMoneda}}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <div class="col-sm-12 col-md-12">
+    <div class="form-group">
+      <strong> <label>Fecha Transacción</label> </strong>
+      <p-calendar [inline]="false" class="form-control" [inputStyle]="{'width':'85%'}" [showIcon]="true"
+        [(ngModel)]="date6" dateFormat="dd/mm/yy" (click)="showDialog()" required
+        [(ngModel)]="_activityFinanciamientoDetGastosModel.fechaTransaccion" #fechaTransaccion="ngModel"
+        name="fechaTransaccion">
+      </p-calendar>
+    </div>
+  </div>
+</div>
+<!-- FIN | Formulario de la ventana Modal -->
+<!-- ==================================================================================== -->
+
+<!-- Botones de Acción -->
+<hr>
+<div class="ui-dialog-buttonpane ui-helper-clearfix">
+  <button type="button" pButton icon="fa fa-close" class="ui-button-warning" (click)="cleanForm()"
+    label="Limpiar"></button>
+  <button type="button" pButton icon="fa fa-check" (click)="saveFinanciamientoDetGastoservice()"
+    label="Guardar"></button>
+</div>
+
+
+<!-- ==================================================================================== -->
+<!-- INI | Ventana Modal de la fecha de Transacción -->
+<p-dialog header="Fecha de Transacción" [(visible)]="display" [modal]="false">
+  <div class="col-md-2">
+    <p-calendar [inline]="true" [showIcon]="false" [(ngModel)]="date6" [monthNavigator]="true" [yearNavigator]="true"
+      yearRange="2000:2030" (dblclick)="closeDialog()" dateFormat="dd/mm/yy"></p-calendar>
+  </div>
+</p-dialog>
+<!-- FIN | Ventana Modal de la fecha de Transacción -->
+<!-- ==================================================================================== -->
