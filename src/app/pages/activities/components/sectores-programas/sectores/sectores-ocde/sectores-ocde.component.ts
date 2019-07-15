@@ -84,6 +84,7 @@ export class SectoresOcdeComponent implements OnInit, OnChanges {
   // Json, de cargado de Sectores
   public JsonSendSectoresOcdeCad: any = [];
   public JsonSendSectoresOcdeCadOpciones: any = [];
+  public JsonReceptionSectorByIdActividad: any = [];
 
   // Json Recpetion de la Clase
   public JsonReceptionAllSectoresOcdeCad: any;
@@ -706,9 +707,8 @@ export class SectoresOcdeComponent implements OnInit, OnChanges {
         break;
       }
     }
-  }
-  this.JsonSendSectoresOcdeCadOpciones = [...this.JsonSendSectoresOcdeCadOpciones];
-} // FIN | FND-005
+    this.JsonSendSectoresOcdeCadOpciones = [...this.JsonSendSectoresOcdeCadOpciones];
+  } // FIN | FND-005
 
 
   /****************************************************************************
