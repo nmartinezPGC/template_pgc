@@ -13,8 +13,6 @@ import { GMapModule } from 'primeng/gmap'; // NAM|209-06-29|Modulo de Google Map
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
 // Modulo de confirmaciones
-// import { ConfirmationService } from 'primeng/api';
-// import { UbicacionProyectoComponent } from './ubicacion-proyecto/ubicacion-proyecto.component';
 import { UbicacionRoutingModule, routedComponents } from './ubicacion-routing.module';
 
 import { ThemeModule } from '../../../../@theme/theme.module';
@@ -24,6 +22,7 @@ import { ButtonModule } from 'primeng/button';
 import { ToasterModule } from 'angular2-toaster';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
 import { ConfirmDialogModule } from 'primeng/primeng';
+import { KeyFilterModule } from 'primeng/keyfilter';
 
 // Multiselect imports
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
@@ -35,10 +34,11 @@ import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
     ScrollPanelModule,
     UbicacionRoutingModule,
     GMapModule,
-    LeafletModule.forRoot(),
+    LeafletModule.forRoot(), // Modulo de leaflet Maps
     ToasterModule.forRoot(), // Modulo de Toaster-Notification
     AngularMultiSelectModule,
     ConfirmDialogModule,
+    KeyFilterModule,
   ],
   declarations: [
     ...routedComponents,

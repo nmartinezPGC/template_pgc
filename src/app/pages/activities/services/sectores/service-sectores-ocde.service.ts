@@ -174,6 +174,7 @@ export class ServiceSectoresOcdeService {
     });
   } // FIN | FND-00008
 
+
       /****************************************************************************
     * Funcion: FND-00004
     * Fecha: 15-05-2019
@@ -190,4 +191,24 @@ export class ServiceSectoresOcdeService {
       params: { 'tokenApi': this.tokenHeader },
     });
   } // FIN | FND-00004
+
+
+  /****************************************************************************
+   @author Nahum Martinez
+   @name getfindByIdActividadOcdeCad
+   @function FND-00009
+   @fecha 03-07-2019
+   @description Servicio que propociona los Sectores Ocde/Cad del Proyecto
+   @param { idActividad }
+   @copyright SRECI-2019
+  ****************************************************************************/
+  getfindByIdActividadOcdeCad(idActividad): Observable<any> {
+    const paramSend: number = idActividad;
+    // Retorno de la Funcion
+    return this._http.get(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 19.100) + paramSend, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  } // FIN | FND-00009
+
 }

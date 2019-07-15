@@ -95,26 +95,13 @@ export class SectoresOcdeComponent implements OnInit, OnChanges {
   public JsonReceptionSectorByNivelOcdeCad3: any;
   public JsonReceptionSectorByNivelOcdeCad4: any;
 
+  public JsonReceptionSectorByIdActividad: any;
+
   // Auditoria
   public secuenciaDeActividad: any;
 
   // Modelo de la Clase
-  public _activitySectoresOcdeModel: ActivitySectoresOcdeModel
-
-  // Consfiguracion del Notificador
-  position = 'toast-bottom-full-width';
-  animationType = 'slideDown';
-  title = 'Se ha grabado la Información! ';
-  content = 'los cambios han sido grabados temporalmente, en la PGC!';
-  timeout = 20000;
-  toastsLimit = 5;
-  type = 'default';
-
-  isNewestOnTop = true;
-  isHideOnClick = true;
-  isDuplicatesPrevented = false;
-  isCloseButton = true;
-  config: ToasterConfig;
+  public _activitySectoresOcdeModel: ActivitySectoresOcdeModel;
 
   /**
    * constructor
@@ -152,60 +139,9 @@ export class SectoresOcdeComponent implements OnInit, OnChanges {
     this._serviceSectoresService.getFiles().then(files => this.filesTree4 = files);
 
     // this.getfindByIdNivelSectorService(1);
+    // Cargar los Sectores Ocde/Cad del Proyecto
+    this.getfindByIdActividadOcdeCadService(this.idProyectoTab);
   }
-
-
-  /****************************************************************************
-  * Funcion: makeToast
-  * Object Number: 003
-  * Fecha: 16-08-2018
-  * Descripcion: Method makeToast of the Class
-  * Objetivo: makeToast in the method header API
-  ****************************************************************************/
-  makeToast() {
-    this._notificacionesService.showToast(this.type, this.title, this.content);
-  } // FIN | makeToast
-
-
-  /****************************************************************************
-  * Funcion: showToast
-  * Object Number: 004
-  * Fecha: 16-08-2018
-  * Descripcion: Method showToast of the Class
-  * Objetivo: showToast in the method header API
-  ****************************************************************************/
-  private showToast(type: string, title: string, body: string) {
-    this.config = new ToasterConfig({
-      positionClass: this.position,
-      timeout: this.timeout,
-      newestOnTop: this.isNewestOnTop,
-      tapToDismiss: this.isHideOnClick,
-      preventDuplicates: this.isDuplicatesPrevented,
-      animation: this.animationType,
-      limit: this.toastsLimit,
-    });
-    const toast: Toast = {
-      type: type,
-      title: title,
-      body: body,
-      timeout: this.timeout,
-      showCloseButton: this.isCloseButton,
-      bodyOutputType: BodyOutputType.TrustedHtml,
-    };
-  } // FIN | showToast
-
-
-  /****************************************************************************
-  * Funcion: toasterconfig
-  * Object Number: 004.1
-  * Fecha: 16-08-2018
-  * Descripcion: Method showToast of the Class
-  * Objetivo: showToast in the method header API
-  ****************************************************************************/
-  public toasterconfig: ToasterConfig =
-    new ToasterConfig({
-      showCloseButton: { 'warning': true, 'error': true },
-    }); // FIN | toasterconfig
 
   /****************************************************************************
   * Funcion: viewFile
@@ -708,4 +644,45 @@ export class SectoresOcdeComponent implements OnInit, OnChanges {
   }
   this.JsonSendSectoresOcdeCadOpciones = [...this.JsonSendSectoresOcdeCadOpciones];
 } // FIN | FND-005
+
+  
+  /****************************************************************************
+   @author Nahum Martinez
+   @name getfindByIdActividadOcdeCad
+   @function FND001
+   @fecha 03-07-2019
+   @description Buscar los Sectores OCDE de la Actividad
+   @param { idActividad }
+   @copyright SRECI-2019
+  ****************************************************************************/
+  private getfindByIdActividadOcdeCadService(idActividad: number) {
+
+    // Ejecucion del EndPoint de Consulta de Sectores por Actividad, por ID
+    this._serviceSectoresService.getfindByIdActividadOcdeCad(idActividad).subscribe(
+      result => {
+        if (result.status !== 200) {
+          this._notificacionesService.showToast('error', 'Error al Obtener la Información de Sector Nivel 1', result.message);
+          this.JsonReceptionSectorByIdActividad = [];
+          this.nodes = [];
+        } else if (result.status === 200) {
+          if (result.findRecords === true) {
+            this.JsonReceptionSectorByIdActividad = result.data;
+
+            // Mapeo del Json de Carga de Sectores
+            for (let index = 0; index < this.JsonReceptionSectorByIdActividad.length; index++) {
+              const element = this.JsonReceptionSectorByIdActividad[index];
+              this.JsonSendSectoresOcdeCadOpciones = [...this.JsonSendSectoresOcdeCadOpciones, { name: element.nombreSector, code: element.idSector }];
+            }
+          } else {
+            this._notificacionesService.showToast('error', 'Error al Obtener la Información', result.message);
+          }
+          // this.getSectorOcdeCadNivel2(this.JsonReceptionSectorByIdActividad);
+        }
+      },
+      error => {
+        this._notificacionesService.showToast('error', 'Error al Obtener la Información de Secotores de Desarrollo', JSON.stringify(error.message));
+      },
+    );
+  } // FIN | FND001
+
 }

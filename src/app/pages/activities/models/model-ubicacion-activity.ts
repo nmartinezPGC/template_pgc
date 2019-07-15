@@ -41,6 +41,6 @@ export class ActivityUbicacionModel {
         public porcentajeUbicacion: number,
 
         // Datos de Usuario
-        public idUsuarioCreador: { idUsuario: number },
+        public idUsuario: { idUsuario: number },
     ) { }
 }

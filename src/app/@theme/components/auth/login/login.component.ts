@@ -3,13 +3,14 @@
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NB_AUTH_OPTIONS, NbAuthSocialLink } from '../../../../../../node_modules/@nebular/auth/auth.options';
 import { getDeepFromObject } from '../../../../../../node_modules/@nebular/auth/helpers';
 
 import { NbAuthService } from '../../../../../../node_modules/@nebular/auth/services/auth.service';
 import { NbAuthResult } from '../../../../../../node_modules/@nebular/auth/services/auth-result';
+import { LoginService } from '../services/login.service';
 
 @Component({
   selector: 'ngx-login',
@@ -98,8 +99,9 @@ import { NbAuthResult } from '../../../../../../node_modules/@nebular/auth/servi
       </div>
     </nb-auth-block>
   `,
+  providers: [LoginService],
 })
-export class NgxLoginComponent {
+export class NgxLoginComponent implements OnInit {
 
   // Variables de la Clase
   msgErrorApi: string[];
@@ -115,10 +117,18 @@ export class NgxLoginComponent {
   submitted: boolean = false;
   socialLinks: NbAuthSocialLink[] = [];
 
+  // User Details
+  public firstName: String;
+  public lastName: String;
+  public firtSurname: String;
+  public lastSurname: String;
+  public completeName: String;
+
   constructor(protected service: NbAuthService,
-              @Inject(NB_AUTH_OPTIONS) protected options = {},
-              protected router: Router,
-              private _route: ActivatedRoute) {
+    @Inject(NB_AUTH_OPTIONS) protected options = {},
+    protected router: Router,
+    private _route: ActivatedRoute,
+    private _loginService: LoginService) {
 
     this.redirectDelay = this.getConfigValue('forms.login.redirectDelay');
     this.showMessages = this.getConfigValue('forms.login.showMessages');
@@ -126,14 +136,53 @@ export class NgxLoginComponent {
     this.socialLinks = this.getConfigValue('forms.login.socialLinks');
 
     // Variables de paso para el logout
-    this._route.params.subscribe( params => {
+    this._route.params.subscribe(params => {
       const logout = + params['id'];
-      if ( logout === 1 ) {
-        alert( 'En login ' + logout );
+      if (logout === 1) {
+        alert('En login ' + logout);
       }
     });
+  }
+
+
+  ngOnInit(): void {
+    // Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    // Add 'implements OnInit' to the class.
 
   }
+
+
+  /****************************************************************************
+  * @author Nahum Martinez
+  * @name userDetails
+  * @function FNDXXX
+  * @fecha 24-06-2019
+  * @description Detalle del usuario
+  * @param { emailUsuario }
+  * @copyright SRECI-2019
+  ****************************************************************************/
+  private userDetails(userName) {
+    // Llamado al Servicio de detalle de Usuarios
+    this._loginService.getUserDetails(userName)
+      .subscribe(
+        result => {
+          if (result.status !== 200) {
+          } else {
+            // Ejecución de la Data Obtenida
+            this.user = result.data;
+
+            // this.completeName = result.data.nombre1Usuario + ' ' + result.data.apellido1Usuario;
+
+            // Se crea la variable local
+            localStorage.setItem('rolUser', this.user[0]);
+          }
+        },
+        error => {
+          // Redirecciona al Login
+          alert('Error en la petición de la API ' + error);
+        },
+      );
+  } // FIN | userDetails
 
 
   /****************************************************************************
@@ -148,11 +197,11 @@ export class NgxLoginComponent {
     this.submitted = true;
 
     // Convertimos la Informacion para enviarla a la API
-    this.jsonUser = JSON.stringify( this.user );
+    this.jsonUser = JSON.stringify(this.user);
 
-    // console.log( jsonUser );
+    // console.log( this.jsonUser );
 
-    this.service.authenticate( this.strategy, this.jsonUser ).subscribe(( result: NbAuthResult ) => {
+    this.service.authenticate(this.strategy, this.jsonUser).subscribe((result: NbAuthResult) => {
       this.submitted = false;
 
       if (result.isSuccess()) {
@@ -163,8 +212,10 @@ export class NgxLoginComponent {
         // Generamos la nueva variable LocalStorage
         localStorage.setItem('identity', JSON.stringify(identity));
 
-      }else {
-        this.msgErrorApi = [ result.getResponse().error.message ];
+        this.userDetails(this.user.emailUsuario);
+
+      } else {
+        this.msgErrorApi = [result.getResponse().error.message];
 
         this.errors = this.msgErrorApi;
       }
@@ -172,12 +223,12 @@ export class NgxLoginComponent {
       const redirect = result.getRedirect();
 
       if (redirect) {
-          setTimeout(() => {
+        setTimeout(() => {
           return this.router.navigateByUrl(redirect);
         }, this.redirectDelay);
       }
     },
-  );
+    );
   } // FIN | FND-00001
 
 

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
-import {FileUploadModule} from 'primeng/fileupload';
+import { FileUploadModule } from 'primeng/fileupload';
 
-import { HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 // Imports de Tabla Smart de Angular
 import { Ng2SmartTableModule } from 'ng2-smart-table';
@@ -31,7 +31,6 @@ import { NbRouteTabsetModule } from '@nebular/theme/components/route-tabset/rout
 
 // Modulo de Mapas
 import { UbicacionModule } from './components/ubicacion/ubicacion.module'; // NAM|2019-06-29|Modulo de Mapas
-// import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
 import { OdsComponent } from './components/sectores-programas/sectores/ods/ods.component';
 import { ProgramasComponent } from './components/sectores-programas/programas/programas.component';
@@ -66,20 +65,6 @@ import { UnidadEjecutoraComponent } from './components/organizaciones/unidad-eje
 import { AdmonFinancieroComponent } from './components/organizaciones/admon-financiero/admon-financiero.component';
 import { AgenciaBeneficiariaComponent } from './components/organizaciones/agencia-beneficiaria/agencia-beneficiaria.component';
 
-// Financiamiento de Proyecto
-import { FinancEncabezadoComponent } from './components/financiamiento/financ-encabezado/financ-encabezado.component';
-import { FinancDetalleComponent } from './components/financiamiento/financ-detalle/financ-detalle.component';
-import { FinancDetalleCompromisosComponent } from './components/financiamiento/financ-detalle/financ-detalle-compromisos/financ-detalle-compromisos.component';
-import { FinancDetalleDesembolsosComponent } from './components/financiamiento/financ-detalle/financ-detalle-desembolsos/financ-detalle-desembolsos.component';
-import { FinancDetalleGastosComponent } from './components/financiamiento/financ-detalle/financ-detalle-gastos/financ-detalle-gastos.component';
-import { FinanciamientoComponent } from './components/financiamiento/financiamiento.component';
-
-// Monedas
-import { NgxCurrencyModule } from 'ngx-currency';
-import { FinancDetalleCompromisosFormComponent } from './components/financiamiento/financ-detalle/financ-detalle-compromisos/financ-detalle-compromisos-form/financ-detalle-compromisos-form.component';
-import { FinancDetalleDesembolsosFormComponent } from './components/financiamiento/financ-detalle/financ-detalle-desembolsos/financ-detalle-desembolsos-form/financ-detalle-desembolsos-form.component';
-import { FinancDetalleGastosFormComponent } from './components/financiamiento/financ-detalle/financ-detalle-gastos/financ-detalle-gastos-form/financ-detalle-gastos-form.component';
-
 import { DocumentosComponent } from './components/recursos-proyecto/documentos/documentos.component';
 import { LinkComponent } from './components/recursos-proyecto/link/link.component';
 
@@ -92,17 +77,8 @@ import { ModalNewContactoComponent } from './components/recursos-proyecto/contac
 import { ModalDocumentosComponent } from './components/recursos-proyecto/documentos/modal-documentos/modal-documentos.component';
 import { ModalLinkComponent } from './components/recursos-proyecto/link/modal-link/modal-link.component';
 
-export const customCurrencyMaskConfig = {
-  align: 'right',
-  allowNegative: true,
-  allowZero: true,
-  decimal: '.',
-  precision: 2,
-  prefix: '',
-  suffix: '',
-  thousands: ',',
-  nullable: true,
-};
+// Modulo de Financiamiento
+import { FinanciamientoModule } from './components/financiamiento/financiamiento.module';
 
 @NgModule({
   imports: [
@@ -121,7 +97,6 @@ export const customCurrencyMaskConfig = {
     MyDatePickerModule, // Modulo de Fechas
     NgxSpinnerModule, // Modulo de Spinner
     NbRouteTabsetModule, // Modulo de Rutas para los tabs,
-    // LeafletModule.forRoot(),
     FieldsetModule,
     TreeModule,
     DropdownModule,
@@ -136,11 +111,11 @@ export const customCurrencyMaskConfig = {
     CalendarModule,
     DialogModule,
     InputMaskModule,
-    NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
-    AccordionModule, // NAM|2019-05-28
-    TabViewModule, // NAM|2019-06-03
-    ToastModule, // NAM|2019-06-03
-    UbicacionModule, // NAM|2019-06-29
+    AccordionModule, // NAM|2019-05-28|modulo de Acordiones
+    TabViewModule, // NAM|2019-06-03|modulo de tabs de primeNG
+    ToastModule, // NAM|2019-06-03|modulo de toast
+    UbicacionModule, // NAM|2019-06-29|modulo de Ubicaciones
+    FinanciamientoModule, // NAM|2019-07-09|modulo de Financiamiento
   ],
   declarations: [
     ...routedComponents,
@@ -164,15 +139,6 @@ export const customCurrencyMaskConfig = {
     UnidadEjecutoraComponent,
     AdmonFinancieroComponent,
     AgenciaBeneficiariaComponent,
-    FinancEncabezadoComponent,
-    FinancDetalleComponent,
-    FinancDetalleCompromisosComponent,
-    FinancDetalleDesembolsosComponent,
-    FinancDetalleGastosComponent,
-    FinanciamientoComponent,
-    FinancDetalleCompromisosFormComponent,
-    FinancDetalleDesembolsosFormComponent,
-    FinancDetalleGastosFormComponent,
     DocumentosComponent,
     LinkComponent,
     ContactosComponent,
@@ -188,7 +154,6 @@ export const customCurrencyMaskConfig = {
   ],
   entryComponents: [
     OdsModalMetasComponent,
-    FinancDetalleCompromisosFormComponent,
     ModalUpdateContactoComponent, // JOE 01-07-2019
     ModalNewContactoComponent, // JOE 01-07-2019
     ModalLinkComponent,

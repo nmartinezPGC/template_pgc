@@ -1,12 +1,26 @@
+/**
+* @author Nahum Martinez
+* @returns Listado de los Menu con sus permisos
+* @name MenuItems
+* @alias _menuItems
+* @version 1.0.0
+* @fecha 25-06-2019
+*/
+
 import { NbMenuItem } from '@nebular/theme';
-
 import * as _ from 'lodash';
+import decode from 'jwt-decode';
 
-const roles = [1, 2, 3, 4, 5, 6, 7];
+// Definicion de variables de uso
 const token = localStorage.getItem('auth_app_token');
-const identity = localStorage.getItem('identity');
+const rolUser = localStorage.getItem('rolUser');
 
 // decode the token to get its payload
+let tokenPayload: any = [];
+if (token) {
+  tokenPayload = decode(token);
+}
+
 
 export const MENU_ITEMS: NbMenuItem[] = [
   {
@@ -18,27 +32,31 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'MENU PGC',
     group: true,
+    hidden: !findRole([1, 2, 3, 4, 5], Number(rolUser)),
   },
   {
     title: 'Proyectos',
     icon: 'ion-folder',
-    // link: '/pages/activities',
+    // hidden: !findRole([1, 2, 7], Number(tokenPayload.userRole)),
+    hidden: !findRole([1, 2, 3, 4, 5], Number(rolUser)),
     children: [
       {
         title: 'Ingreso de Proyecto',
         link: '/pages/activities/new-activity',
+        hidden: !findRole([1, 2, 3, 4, 5], Number(rolUser)),
       },
       {
         title: 'Editar de Proyecto',
         link: '/pages/activities/new-activity',
-        hidden: true,
+        hidden: !findRole([1, 2, 3, 4, 5], Number(rolUser)),
       },
     ],
   },
   { // Menu de Mantenimientos NAM | 2018-12-12 | Se creo el menu de raiz del Modulo de Mantenimientos
     title: 'Mantenimientos',
     icon: 'nb-gear',
-    // link: '/pages/activities',
+    // link: '/pages/mantenimientos',
+    hidden: !findRole([1], Number(rolUser)),
     children: [
       {
         title: 'Espacios de Trabajo',
@@ -59,32 +77,22 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Sectores y ODS',
         link: '/pages/forms/inputs',
+        hidden: !findRole([1, 2, 3, 4, 5], Number(rolUser)),
+      },
+      {
+        title: 'Programas de Nación',
+        link: '/pages/forms/layouts',
+        hidden: !findRole([1, 2, 3, 4, 5], Number(rolUser)),
       },
       {
         title: 'Ubicación',
         link: '/pages/forms/layouts',
-      },
-    ],
-  },
-  {
-    title: 'Mapas',
-    icon: 'nb-location',
-    children: [
-      {
-        title: 'Google Maps',
-        link: '/pages/maps/gmaps',
+        hidden: !findRole([1, 2, 3, 4, 5], Number(rolUser)),
       },
       {
-        title: 'Leaflet Maps',
-        link: '/pages/maps/leaflet',
-      },
-      {
-        title: 'Bubble Maps',
-        link: '/pages/maps/bubble',
-      },
-      {
-        title: 'Search Maps',
-        link: '/pages/maps/searchmap',
+        title: 'Resumen Financiero',
+        link: '/pages/forms/layouts',
+        hidden: !findRole([1, 2, 3, 4, 5], Number(rolUser)),
       },
     ],
   },
@@ -93,16 +101,50 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'nb-bar-chart',
     children: [
       {
-        title: 'Echarts',
+        title: 'Sectores y ODS',
         link: '/pages/charts/echarts',
+        hidden: !findRole([1, 2, 3, 4, 5], Number(rolUser)),
       },
       {
-        title: 'Charts.js',
+        title: 'Programas de Nación',
         link: '/pages/charts/chartjs',
+        hidden: !findRole([1, 2, 3, 4, 5], Number(rolUser)),
       },
       {
-        title: 'D3',
+        title: 'Ubicación',
         link: '/pages/charts/d3',
+        hidden: !findRole([1, 2, 3, 4, 5], Number(rolUser)),
+      },
+      {
+        title: 'Resumen Financiero',
+        link: '/pages/forms/layouts',
+        hidden: !findRole([1, 2, 3, 4, 5], Number(rolUser)),
+      },
+    ],
+  },
+  {
+    title: 'Mapas',
+    icon: 'nb-location',
+    children: [
+      {
+        title: 'Ubicación Geográfica',
+        link: '/pages/maps/gmaps',
+        hidden: !findRole([1, 2, 3, 4, 5], Number(rolUser)),
+      },
+      {
+        title: 'Ubicación Poblacional',
+        link: '/pages/maps/leaflet',
+        hidden: !findRole([1, 2, 3, 4, 5], Number(rolUser)),
+      },
+      {
+        title: 'Mapa 3',
+        link: '/pages/maps/bubble',
+        hidden: !findRole([1, 2, 3, 4, 5], Number(rolUser)),
+      },
+      {
+        title: 'Geolocalización',
+        link: '/pages/maps/searchmap',
+        hidden: !findRole([1, 2, 3, 4, 5], Number(rolUser)),
       },
     ],
   },
@@ -117,6 +159,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Register',
         link: '/auth/register',
+        hidden: !findRole([1], Number(rolUser)),
       },
       {
         title: 'Request Password',
@@ -132,6 +175,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     title: 'UI Features',
     icon: 'nb-keypad',
     link: '/pages/ui-features',
+    hidden: !findRole([1], Number(rolUser)),
     children: [
       {
         title: 'Buttons',
@@ -170,6 +214,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Forms',
     icon: 'nb-compose',
+    hidden: !findRole([1], Number(rolUser)),
     children: [
       {
         title: 'Form Inputs',
@@ -184,6 +229,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Components',
     icon: 'nb-gear',
+    hidden: !findRole([1], Number(rolUser)),
     children: [
       {
         title: 'Tree',
@@ -197,6 +243,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Editors',
     icon: 'nb-title',
+    hidden: !findRole([1], Number(rolUser)),
     children: [
       {
         title: 'TinyMCE',
@@ -211,6 +258,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Tables',
     icon: 'nb-tables',
+    hidden: !findRole([1], Number(rolUser)),
     children: [
       {
         title: 'Smart Table',
@@ -221,6 +269,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Miscellaneous',
     icon: 'nb-shuffle',
+    hidden: !findRole([1], Number(rolUser)),
     children: [
       {
         title: '404',
