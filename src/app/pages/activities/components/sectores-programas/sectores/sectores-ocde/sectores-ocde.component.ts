@@ -645,7 +645,7 @@ export class SectoresOcdeComponent implements OnInit, OnChanges {
   this.JsonSendSectoresOcdeCadOpciones = [...this.JsonSendSectoresOcdeCadOpciones];
 } // FIN | FND-005
 
-  
+
   /****************************************************************************
    @author Nahum Martinez
    @name getfindByIdActividadOcdeCad
