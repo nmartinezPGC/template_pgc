@@ -85,7 +85,7 @@ export class SocioDesarrolloComponent implements OnInit {
     this.getAllSocioDesarrolloService(1);
 
     // Carga de Socios al Desarrollo Registrados
-    this.getAllSociosDesarrollo();
+    this.getAllSociosDesarrolloByActividadService(this.idProyectoTab);
 
     // Inicio de las Configuraciones del DrowDown
     this.dropdownListSocioDesarrollo = [];
@@ -302,9 +302,9 @@ export class SocioDesarrolloComponent implements OnInit {
   * Objetivo: getAllSociosDesarrolloByActividadService listados todos los Socios al Desarrollo
   * Params: { idActividad }
   ****************************************************************************/
-  private getAllSociosDesarrollo() {
+  private getAllSociosDesarrolloByActividadService(idActividad: number) {
     // Ejecuta el Servicio de invocar todos los Socios al Desarrollo
-    this._socioDesarrolloService.getAllSociosDesarrollo().subscribe(
+    this._socioDesarrolloService.getAllSociosDesarrolloByActividad(idActividad).subscribe(
       result => {
         if (result.status !== 200) {
           this._notificacionesService.showToast('error', 'Error al Obtener la Información de todos Socios al Desarrollo', result.message);
@@ -313,7 +313,6 @@ export class SocioDesarrolloComponent implements OnInit {
           this.JsonReceptionAllSocioDesarrolloByActividad = result.data;
 
           // Mapear los datos de los Socios al Desarrollo Registrados
-          // console.log(this.JsonReceptionAllSocioDesarrolloByActividad);
           this.JsonSendSociosDesarrollo = this.JsonReceptionAllSocioDesarrolloByActividad.map((item) => {
             return {
               code: item.idOrganizacion.idOrganizacion,
