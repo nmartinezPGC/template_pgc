@@ -57,7 +57,7 @@ public usernameHeader = this._systemPropertiesService.getIdentity().userName;
     * Objetivo: datos de Plan de Nacion
     * Params: { }
     ****************************************************************************/
-   getAllAgenciaBeneficiaria(caseOrganizacion: number): Observable<any> {
+   getAllAgenciaBeneficiariaOrg(caseOrganizacion: number): Observable<any> {
     const paramsSend: number = caseOrganizacion;
 
     // Retorno de la Funcion
@@ -118,6 +118,20 @@ public usernameHeader = this._systemPropertiesService.getIdentity().userName;
       params: { 'tokenApi': this.tokenHeader },
     });
   } // FIN | FND-00004
+
+/****************************************************************************
+  * Funcion: FND-00005
+  * Fecha: 09-07-2019
+  * Descripcion: Metodo para obtener los datos de agencia beneficiaria del Proyecto
+  * Objetivo: agencia beneficiaria del Proyecto
+  ****************************************************************************/
+ getAllAgenciaBeneficiaria(): Observable<any> {
+  // Retorno de la Funcion
+  return this._http.get(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 81), {
+    headers: this.headers,
+    params: { 'tokenApi': this.tokenHeader },
+  });
+} // FIN | FND-00005
 
 
 

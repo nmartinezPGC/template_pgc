@@ -2,8 +2,12 @@
 <!-- Componente para los Mensajes en pantalla -->
 <toaster-container [toasterconfig]="config"></toaster-container>
 
+<p-confirmDialog header="Eliminar Socio al Desarrollo" icon="pi pi-exclamation-triangle" width="425">
+</p-confirmDialog>
+
+
 <!-- Agrupacion de la Informacion de Unidad Ejecutora -->
-<p-fieldset legend="Unidad Ejecutora" [toggleable]="true" class="fieldSet">
+<p-fieldset legend="Unidad Ejecutora" [toggleable]="true" class="fieldSet"  [collapsed]="true">
   <nb-card accent="warning" status="primary">
     <nb-card-body>
       <div class="row">
@@ -28,7 +32,7 @@
                   type="text" severity="error" pInputText pKeyFilter="int" placeholder="%" maxlength="2"
                   value="{{Unidad.value.otro}}" (keyup)="validaPercent($event, Unidad.value.code)">
                 <img style="float: right;" src="../../../../../../assets/icons/forms/rubbish-bin_16.png" alt="Delete"
-                  (click)="cleanUnidadEjecutora(Unidad.value.code)">
+                  (click)="confirm2(Unidad.value.code)">
               </div>
             </ng-template>
           </p-listbox>

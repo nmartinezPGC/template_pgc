@@ -13,6 +13,7 @@ import { SharedOrganizacionesService } from '../../../services/organizaciones/sh
 import { UnidadEjecutoraService } from '../../../services/organizaciones/unidad-ejecutora.service';
 import { ActivityOrganizacionUnidadEjecutoraModel } from '../../../models/organizaciones/model-unidad-ejecutora';
 import { NotificacionesService } from '../../../../shared/services/notificaciones.service';
+import { ConfirmationService } from 'primeng/primeng';
 @Component({
   selector: 'ngx-unidad-ejecutora',
   templateUrl: './unidad-ejecutora.component.html',
@@ -51,6 +52,7 @@ export class UnidadEjecutoraComponent implements OnInit {
 
   // Json de recpcion de Informacion
   public JsonReceptionAllUnidadEjecutora: any;
+  public JsonReceptionAllUnidadEjecutoraByActividad: any;
   // Json a enviar
   public JsonSendUnidadEjecutora: any = [];
   changeDetectorRef: any;
@@ -63,7 +65,8 @@ export class UnidadEjecutoraComponent implements OnInit {
    */
   constructor(private _notificacionesService: NotificacionesService,
     private _unidadEjecutoraService: UnidadEjecutoraService,
-    private _sharedOrganizacionesService: SharedOrganizacionesService ) {
+    private _sharedOrganizacionesService: SharedOrganizacionesService,
+    private confirmationService: ConfirmationService ) {
     // Codigo del Constructor
   }
 
@@ -80,6 +83,7 @@ export class UnidadEjecutoraComponent implements OnInit {
     );
     // Carga los Datos de Socio al Desarrollo
     this.getAllUnidadEjecutoraService(3);
+    this.getAllUnidadEjecutoraByActividadService();
 
     // Inicio de las Configuraciones del DrowDown
     this.dropdownListUnidadEjecutora = [];
@@ -361,4 +365,59 @@ calcularPercent() {
     return dato;
   });
 } // FIN | calcularPercent
+
+ /****************************************************************************
+  * Funcion: getAllSociosDesarrolloByActividadService
+  * Object Number: FND-008
+  * Fecha: 03-06-2019
+  * Descripcion: Method getAllSociosDesarrolloByActividadService of the Class
+  * Objetivo: getAllSociosDesarrolloByActividadService listados todos los Socios al Desarrollo
+  * Params: { idActividad }
+  ****************************************************************************/
+ private getAllUnidadEjecutoraByActividadService() {
+  // Ejecuta el Servicio de invocar todos los Socios al Desarrollo
+  this._unidadEjecutoraService.getAllUnidadEjecutoraByIdActividad().subscribe(
+    result => {
+      if (result.status !== 200) {
+        this._notificacionesService.showToast('error', 'Error al Obtener la Información de todos Socios al Desarrollo', result.message);
+        this.JsonReceptionAllUnidadEjecutoraByActividad = [];
+      } else if (result.status === 200) {
+        this.JsonReceptionAllUnidadEjecutoraByActividad = result.data;
+
+        // Mapear los datos de los Socios al Desarrollo Registrados
+        // console.log(this.JsonReceptionAllSocioDesarrolloByActividad);
+        this.JsonSendUnidadEjecutora = this.JsonReceptionAllUnidadEjecutoraByActividad.map((item) => {
+          return {
+            code: item.idOrganizacion.idOrganizacion,
+            name: item.idOrganizacion.descOrganizacion,
+            otro: item.porcentajePart,
+          }
+        });
+      }
+    },
+    error => {
+      this._notificacionesService.showToast('error', 'Error al Obtener la Información de Unidad Ejecutora', JSON.stringify(error.error.message));
+    },
+  );
+} // FIN | FND-008
+
+
+  /****************************************************************************
+  * Funcion: confirm
+  * Object Number: FND-009
+  * Fecha: 01-07-2019
+  * Descripcion: Method confirm of the Class
+  * Objetivo: Eliminar el Detalle de Financiamiento seleccionado
+  * Params: { event }
+  ****************************************************************************/
+ confirm2(event: any) {
+  this.confirmationService.confirm({
+    message: 'Estas seguro de Eliminar Unidad Ejecutora?',
+    accept: () => {
+      // Ejecuta la funcion de Eliminar el Socio al Desarrollo con Elementos relacionados
+      this.cleanUnidadEjecutora(event);
+    },
+  });
+} // FIN | FND-009
+
 }

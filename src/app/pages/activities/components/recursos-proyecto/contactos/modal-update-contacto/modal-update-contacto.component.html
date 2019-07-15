@@ -12,96 +12,157 @@
     </nb-card-header>
 
     <nb-card-body>
-      <div class="row">
-        <div class="col-lg-6">
-          <nb-card>
-            <nb-card-body>
-              <div class="row full-name-inputs">
-                <div class="col-sm-6 input-group">
-                    <strong> <label>Seleccione un Trato o Titulo</label> </strong>
-                    <select name="idTrato" id="idTrato" ngControl="idTratoIN"
-                    class="form-control" [(ngModel)]="_contactosModel1.idTratoIN" required>
-                    <option value="0">Seleccione una Opcion</option>
-                    <option *ngFor="let item of JsonReceptionTratos" [value]="item.idTrato">
-                      {{item.descTrato}}</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                    <input type="text" placeholder="Codigo Contacto" class="form-control" name="codigoContacto"
-                    id="codigoContacto" [(ngModel)]="_contactosModel1.codigoContacto" disabled required />
-                </div>
-                <div class="col-sm-6 input-group">
-                    <input type="text" placeholder="Nombre Contacto " class="form-control" name="nombreContacto"
-                      id="nombreContacto" [(ngModel)]="_contactosModel1.nombreContacto" required >
-                  </div>
-                  <div class="col-sm-6 input-group">
-                      <input type="text" placeholder="Apellido Contacto" class="form-control" name="apellidoContacto"
-                        id="apellidoContacto" [(ngModel)]="_contactosModel1.apellidoContacto" required>
-                    </div>
-              </div>
-              <div class="input-group">
-               <input type="text" placeholder="Funcion del Contacto" class="form-control" name="FuncionContacto"
-                  id="FuncionContacto"  [(ngModel)]="_contactosModel1.funcionContacto" required />
-              </div><br>
-              <div class="input-group">
-               <input type="text" placeholder="Organizacion Contacto" class="form-control" name="organizacionContacto"
-                  id="organizacionContacto"  [(ngModel)]="_contactosModel1.organizacionContacto" required  />
-                 </div><br>
-               <div class="input-group">
-                  <textarea rows="3" placeholder="Direcion fisica Contacto" class="form-control" [(ngModel)]="_contactosModel1.dFisicaContacto" required></textarea>
-                   </div>
-            </nb-card-body>
-          </nb-card>
-        </div>
-        <div class="col-lg-6">
+        <div class="row">
+          <div class="col-lg-4">
             <nb-card>
-                <nb-card-body>
-                <div class="row full-name-inputs">
-                    <div class="col-sm-6 input-group">
-                        <input type="text" placeholder="Email1" class="form-control" name="email1Contacto"
-                          id="email1Contacto" [(ngModel)]="_contactosModel1.email1Contacto" >
-                      </div>
-
-                      <div class="col-sm-6 input-group">
-                          <input type="text" placeholder="Email2" class="form-control" name="email2Contacto"
-                            id="email2Contacto" [(ngModel)]="_contactosModel1.email2Contacto" >
-                        </div>
-
-                        <div class="col-sm-6 input-group">
-                            <input type="text" placeholder="Telefono1" class="form-control" name="telefono1Contacto"
-                              id="telefono1Contacto" [(ngModel)]="_contactosModel1.telefono1Contacto" >
-                          </div>
-
-                          <div class="col-sm-6 input-group">
-                              <input type="text" placeholder="Telefon2" class="form-control" name="telefono2Contacto"
-                                id="telefono2Contacto" [(ngModel)]="_contactosModel1.telefono2Contacto" >
-                            </div>
-                    <div class="col-sm-6 input-group">
-                      <input type="text" placeholder="Extencion1" class="form-control" name="ext1Contacto"
-                        id="ext1Contacto" [(ngModel)]="_contactosModel1.ext1Contacto" >
+              <nb-card-body>
+                  <strong><label>Elija un Tipo De Trato</label></strong>
+                  <div class="form-group">
+                      <select name="idTratoIN" id="idTratoIN" ngControl="idTratoIN"
+                        class="form-control" [(ngModel)]="_contactosModel1.idTratoIN" required>
+                        <option *ngFor="let item of JsonReceptionTratos" [value]="item.idTrato">
+                          {{item.descTrato}}</option>
+                          </select>
+                  </div>
+                  <strong><label>Codigo del Contacto</label></strong>
+                  <div class="form-group">
+                    <input #codigoContacto="ngModel" class="form-control" type="text"
+                      placeholder="codigo del contacto" name="codigoContacto" id="codigoContacto"
+                      ngControl="codigoContacto" [(ngModel)]="_contactosModel1.codigoContacto" disabled required />
+                  </div>
+                  <strong><label>Nombre del Contacto</label></strong>
+                    <div class="form-group">
+                      <input #nombreContacto="ngModel" class="form-control" type="text"
+                        placeholder="Nombre del Contacto" name="nombreContacto" id="nombreContacto"
+                        ngControl="nombreContacto" [(ngModel)]="_contactosModel1.nombreContacto" required />
                     </div>
-                    <div class="col-sm-6 input-group">
-                        <input type="text" placeholder="Extencion2" class="form-control" name="ext2Contacto"
-                          id="ext2Contacto" [(ngModel)]="_contactosModel1.ext2Contacto" >
-                      </div>
-                      </div>
-                <strong> <label>Seleccione una Organizacion</label> </strong>
-                <select name="idOrganizacion" id="idOrganizacion" ngControl="idOrgIN"
-                class="form-control" [(ngModel)]="_contactosModel1.IdOrgIN" required>
-                <option value="0">Seleccione una Opcion</option>
-                <option *ngFor="let item of JsonReceptionOrg" [value]="item.idOrganizacion">
-                  {{item.descOrganizacion}}</option>
-              </select>
-                </nb-card-body>
-              </nb-card>
-        </div>
-      </div>
-    </nb-card-body>
-  </nb-card>
+  
+                     <strong><label>Apellido del Contacto</label></strong>
+                    <div class="form-group">
+                      <input #apellidoContacto="ngModel" class="form-control" type="text"
+                        placeholder="Apellido del Contacto" name="apellidoContacto" id="apellidoContacto"
+                        ngControl="apellidoContacto" [(ngModel)]="_contactosModel1.apellidoContacto" required />
+                    </div>
+  
+                <strong><label>Funcion del Contacto</label></strong>
+                <div class="form-group">
+                  <input #funcionContacto="ngModel" class="form-control" type="text"
+                    placeholder="Funcion del Contacto" name="funcionContacto" id="funcionContacto"
+                    ngControl="funcionContacto" [(ngModel)]="_contactosModel1.funcionContacto" required />
+                </div>
+  
+                <strong><label>Nombre de la Organizacion</label></strong>
+                <div class="form-group">
+                  <input #organizacionContacto="ngModel" class="form-control" type="text"
+                    placeholder="Nombre de la Organizacion" name="organizacionContacto" id="organizacionContacto"
+                    ngControl="organizacionContacto" [(ngModel)]="_contactosModel1.organizacionContacto" required />
+                </div>
+              </nb-card-body>
+            </nb-card>
+          </div>
 
-  <div class="modal-footer">
-    <button type="button" (click)="UpdateContactos()" class="btn btn-primary">Guardar
-      Cambios</button>
-    <button type="button" (Click)="closeModal()" class="btn btn-danger">Cerrar</button>
+          <div class="col-lg-4">
+              <nb-card>
+                  <nb-card-body>
+                  <strong><label>Direccion Fisica</label></strong>
+                   <div class="form-group">
+                      <textarea rows="3" #organizacionContacto="ngModel" placeholder="Direcion fisica Contacto" class="form-control"
+                      name="dFisicaContacto" id="dFisicaContacto"
+                          ngControl="dFisicaContacto" [(ngModel)]="_contactosModel1.dFisicaContacto" required></textarea>
+                       </div>
+  
+                <strong><label>Email1</label></strong>
+                      <div class="form-group">
+                        <input #email1Contacto="ngModel" class="form-control" type="text" placeholder="Email del contacto"
+                          name="email1Contacto" id="email1Contacto" ngControl="email1Contacto"
+                          [(ngModel)]="_contactosModel1.email1Contacto" pattern=".+@.+\..+" required/>
+                          <small class="form-text error" *ngIf="email1Contacto.invalid && email1Contacto.touched &&
+                          email1Contacto.errors?.required">
+                          Email es requerido!
+                        </small>
+                        <small class="form-text error"
+                               *ngIf="email1Contacto.invalid && email1Contacto.touched && email1Contacto.errors?.pattern">
+                          Ingresa un Email real!
+                        </small>
+                      </div>
+  
+                 <strong><label>Email2 del contacto</label></strong>
+                 <div class="form-group">
+                   <input #email2Contacto="ngModel" class="form-control" type="text"
+                     placeholder="Email del contacto" name="email2Contacto" id="email2Contacto"
+                     ngControl="email2Contacto" [(ngModel)]="_contactosModel1.email2Contacto"
+                     pattern=".+@.+\..+"/>
+                          <small class="form-text error" *ngIf="email2Contacto.invalid && email2Contacto.touched &&
+                          email2Contacto.errors?.required">
+                          Email es requerido!
+                        </small>
+                        <small class="form-text error"
+                               *ngIf="email2Contacto.invalid && email2Contacto.touched && email2Contacto.errors?.pattern">
+                          Ingresa un Email real!
+                        </small>
+                 </div>
+  
+                 <strong><label>Telefono1 del contacto</label></strong>
+                    <div class="form-group">
+                      <input #telefono1Contacto="ngModel" class="form-control" type="text"
+                        placeholder="Telefono del contacto" name="telefono1Contacto" id="telefono1Contacto"
+                        ngControl="telefono1Contacto" [(ngModel)]="_contactosModel1.telefono1Contacto"
+                        pKeyFilter="int" required maxlength="8"  />
+                    </div>
+  
+                    <strong><label>Telefono2 del Contacto</label></strong>
+                    <div class="form-group">
+                      <input #telefono2Contacto="ngModel" class="form-control" type="text"
+                        placeholder="Telefono del contacto" name="telefono2Contacto" id="telefono2Contacto"
+                        ngControl="telefono2Contacto" [(ngModel)]="_contactosModel1.telefono2Contacto"
+                         pKeyFilter="int"  maxlength="8" />
+                    </div>
+                  </nb-card-body>
+                </nb-card>
+          </div>
+
+          <div class="col-lg-4">
+              <nb-card>
+                <nb-card-body>
+                   <strong><label>Extencion1 del contacto</label></strong>
+                   <div class="form-group">
+                     <input #ext1Contacto="ngModel" class="form-control" type="text"
+                       placeholder="Extencion del contacto" name="ext1Contacto" id="ext1Contacto"
+                       ngControl="ext1Contacto" [(ngModel)]="_contactosModel1.ext1Contacto"
+                       pKeyFilter="int"  maxlength="4" required />
+                   </div>
+  
+                   <strong><label>Extencion2 del contacto</label></strong>
+                   <div class="form-group">
+                     <input #ext2Contacto="ngModel" class="form-control" type="text"
+                       placeholder="Extencion del contacto" name="ext2Contacto" id="ext2Contacto"
+                       ngControl="ext2Contacto" [(ngModel)]="_contactosModel1.ext2Contacto"
+                       pKeyFilter="int"  maxlength="4"  />
+                   </div>
+  
+                   <strong><label>Elija una Organizacion</label></strong>
+                   <div class="form-group">
+                       <select name="IdOrgIN" id="IdOrgIN" ngControl="IdOrgIN"
+                         class="form-control" [(ngModel)]="_contactosModel1.IdOrgIN" required>
+                         <option *ngFor="let item of JsonReceptionOrg" [value]="item.idOrganizacion">
+                           {{item.descOrganizacion}}</option>
+                           </select>
+                   </div>
+                   <strong> <label>País Contacto</label> </strong>
+                   <angular2-multiselect [data]="dropdownListPais" [(ngModel)]="selectedItemsPais"
+                     [settings]="dropdownSettings" (onSelect)="onItemSlectPais($event)" required></angular2-multiselect><br>
+  
+          </nb-card-body>
+              </nb-card>
+              <div class="modal-footer">
+                  <button type="button" (click)=" UpdateContactos() " class="btn btn-primary">Guardar Contacto</button>
+                  <button type="button" (Click)="closeModal()" class="btn btn-danger">Cerrar</button>
+                </div>
+            </div>
+  
+        </div>
+      </nb-card-body>
+    </nb-card>
+  
   </div>
-</div>
+    

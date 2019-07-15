@@ -7,7 +7,7 @@
 * @fecha 02-05-2019
 */
 import { Component, OnInit, Input, ChangeDetectorRef, OnChanges } from '@angular/core';
-import { TreeNode, MessageService, MenuItem } from 'primeng/primeng';
+import { TreeNode, MessageService, MenuItem, ConfirmationService } from 'primeng/primeng';
 import { ToasterConfig, ToasterService, Toast, BodyOutputType } from 'angular2-toaster';
 import { ListasComunesService } from '../../../../../common-list/services/listas-comunes.service';
 import { ServicePoliticasPublicasService } from '../../../../services/programas/service-politicas-publicas.service';
@@ -111,7 +111,8 @@ export class PoliticasPublicasComponent implements OnInit, OnChanges {
     private messageService: MessageService,
     private changeDetectorRef: ChangeDetectorRef,
     private _notificacionesService: NotificacionesService,
-    private _listasComunesService: ListasComunesService) {
+    private _listasComunesService: ListasComunesService,
+    private confirmationService: ConfirmationService) {
     // Codigo del Constructor
   }
   /**
@@ -132,6 +133,7 @@ export class PoliticasPublicasComponent implements OnInit, OnChanges {
 
     // Llenado del Treeview de la Tabla
     this._servicePoliticasPublicasService.getFiles().then(files => this.filesTree4 = files);
+    this.getAllProgramasPoliticasPublicas();
 
     // this.getfindByIdNivelProgramaService(1);
   }
@@ -279,7 +281,7 @@ export class PoliticasPublicasComponent implements OnInit, OnChanges {
   * de Ubicacion de Implementacion del Formulario de Actividad llamando a la API
   * Params: { }
   ****************************************************************************/
-  private getAllProgramasPoliticasPublicasService() {
+  private getAllProgramasPoliticasPublicas() {
     // Ejecuta el Servicio de invocar todos los Objetivos Politica Publica
     this._servicePoliticasPublicasService.getAllProgramasPoliticasPublicas().subscribe(
       result => {
@@ -290,18 +292,11 @@ export class PoliticasPublicasComponent implements OnInit, OnChanges {
           this.JsonReceptionAllProgramasPoliticasPublicas = result.data;
 
           // Setea la Lista de los todos Objetivos de Politica Publica
-          this.nodes = this.JsonReceptionAllProgramasPoliticasPublicas.map((item) => {
+          this.JsonSendProgramaPoliticasPublicasOpciones = this.JsonReceptionAllProgramasPoliticasPublicas.map((item) => {
             return {
-              label: item.nombrePrograma,
-              data: item.codigoPrograma,
-              expandedIcon: 'fa fa-folder-open',
-              collapsedIcon: 'fa fa-folder',
-              children: [{
-                label: item.idNivelPrograma.nombreNivelPrograma,
-                data: item.codigoPrograma,
-                expandedIcon: 'fa fa-folder-open',
-                collapsedIcon: 'fa fa-fold*er',
-              }],
+              code: item.idProgramaPoliticaPublica.idPrograma,
+              name: item.idProgramaPoliticaPublica.nombrePrograma,
+              otro: item.porcentajePart,
             }
           })
         }
@@ -462,6 +457,7 @@ export class PoliticasPublicasComponent implements OnInit, OnChanges {
   * Params: { JsonSendProgramaPoliticasPublicasOpciones }
   ****************************************************************************/
   saveProgramaPoliticasPublicas() {
+    this.calcularPercent();
     // Seteo de los campos iniciales
     this._activityProgramaPoliticasPublicasModel.idActividad = { idActividad: this.idProyectoTab };
 
@@ -470,6 +466,10 @@ export class PoliticasPublicasComponent implements OnInit, OnChanges {
       // Recorre los items seleccionados del Treeview
       for (let index = 0; index < this.JsonSendProgramaPoliticasPublicasOpciones.length; index++) {
         const element = this.JsonSendProgramaPoliticasPublicasOpciones[index];
+
+
+        // asignacion de porcetaje de participacion
+       this._activityProgramaPoliticasPublicasModel.porcentajePart = Number(element.otro);
 
         // Asignacion del Campo Transversal
         this._activityProgramaPoliticasPublicasModel.idProgramaPoliticaPublica = { idPrograma: element.code };
@@ -516,5 +516,101 @@ export class PoliticasPublicasComponent implements OnInit, OnChanges {
     this.changeDetectorRef.detectChanges();
     this.JsonSendProgramaPoliticasPublicasOpciones = [...this.JsonSendProgramaPoliticasPublicasOpciones];
   } // FIN | cleanProgramaPoliticasPublicas
+
+  /****************************************************************************
+  * Funcion: calcularPercent
+  * Object Number: FND-007
+  * Fecha: 13-05-2019
+  * Descripcion: Method para calcular % Items de vision de pais
+  * en la Insercion del Proyecto
+  * Objetivo: calculo de % el Json de los Items seleccionados
+  ****************************************************************************/
+ calcularPercent() {
+  const valorMax = (100 / this.JsonSendProgramaPoliticasPublicasOpciones.length);
+
+  this.JsonSendProgramaPoliticasPublicasOpciones.map(function (dato) {
+    dato.otro = valorMax.toFixed(2);
+    return dato;
+  });
+} // FIN | FND-007
+
+
+  /****************************************************************************
+  * Funcion: validaPercent
+  * Object Number: FND-006
+  * Fecha: 13-05-2019
+  * Descripcion: Method para validar % Items del Socio al Desarrollo
+  * en la Insercion del Proyecto
+  * Objetivo: % el Json de los Items seleccionados
+  ****************************************************************************/
+ validaPercent(event: any, codeIn: number) {
+  const otroIn = event.target.value;
+
+  this.JsonSendProgramaPoliticasPublicasOpciones.map(function (dato) {
+    if (dato.code === codeIn) {
+      dato.otro = otroIn;
+    }
+    return dato;
+  });
+} // FIN | FND-006
+
+
+
+  /****************************************************************************
+  * Funcion: deleteVisionPais
+  * Object Number: FND-005
+  * Fecha: 11-07-2019
+  * Descripcion: Method para Eliminar Item  de vision pais
+  * Objetivo: limpiar el Json de los Items seleccionados
+  ****************************************************************************/
+ DeletePoliticas(event: any) {
+  for (let i = 0; i < this.JsonSendProgramaPoliticasPublicasOpciones.length; i++) {
+    if (this.JsonSendProgramaPoliticasPublicasOpciones[i].code === event) {
+      // Ejecuta el Servicio de invocar el registro de Socio al Desarrollo
+      this._servicePoliticasPublicasService.deleteProgramaPoliticasPublicas(this.codigoProyectoTab + '-APP-' + this.JsonSendProgramaPoliticasPublicasOpciones[i].code).subscribe(
+        result => {
+          if (result.status !== 200) {
+            this._notificacionesService.showToast('error', 'Error al Borrar la Información de politicas publicas ', result.message);
+          } else if (result.status === 200) {
+            if (result.findRecord === true) {
+              this._notificacionesService.showToast('default', 'politicas publicas', result.message)
+            } else {
+              this._notificacionesService.showToast('error', 'Error al Borrar la Información de politicas publicas', result.message);
+            }
+          }
+        },
+        error => {
+          this._notificacionesService.showToast('error', 'Error al Borrar la Información de poiliticas publicas', JSON.stringify(error.error.message));
+        },
+      );
+      // Borramos el Item del Json
+      this.JsonSendProgramaPoliticasPublicasOpciones.splice(i, 1);
+      // para el Bucle
+      break;
+    }
+  }
+  this.JsonSendProgramaPoliticasPublicasOpciones = [...this.JsonSendProgramaPoliticasPublicasOpciones];
+} // FIN | FND-005
+
+
+
+  /****************************************************************************
+  * Funcion: confirm
+  * Object Number: FND-009
+  * Fecha: 01-07-2019
+  * Descripcion: Method confirm of the Class
+  * Objetivo: Eliminar el Detalle de Financiamiento seleccionado
+  * Params: { event }
+  ****************************************************************************/
+ confirm(event: any) {
+  this.confirmationService.confirm({
+    message: 'Estas seguro de Eliminar politicas publicas?',
+    accept: () => {
+      // Ejecuta la funcion de Eliminar politicas publcias
+      this.DeletePoliticas(event);
+    },
+  });
+} // FIN | FND-009
+
 
 }

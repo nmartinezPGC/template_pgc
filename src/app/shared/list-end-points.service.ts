@@ -742,7 +742,7 @@ export class ListEndPointsService {
       findAllProgramasPlanNacion: { // Modulo de Plan de Nacion
         id: 32,
         nameEndpoint: 'findAllProgramasPlanNacion',
-        urlEndPoint: '/programas/plan-nacion',
+        urlEndPoint: '/mant-actividades/programas/plan-nacion-proyecto',
         params: '{ }',
         groupEndPoint: 'actividadesCRUDGroup',
         descEndPoint: 'Listar todos los Planes de Nacion registrados en la BD',
@@ -790,7 +790,7 @@ export class ListEndPointsService {
       findAllProgramasVidaMejor: { // Modulo de Vida Mejor
         id: 38,
         nameEndpoint: 'findAllProgramasVidaMejor',
-        urlEndPoint: '/programas/vida-mejor',
+        urlEndPoint: '/mant-actividades/programas/vida-mejor-proyecto',
         params: '{ }',
         groupEndPoint: 'actividadesCRUDGroup',
         descEndPoint: 'Listar todos Vida Mejor registrados en la BD',
@@ -887,7 +887,7 @@ export class ListEndPointsService {
       findAllProgramaVisionPais: {
         id: 50,
         nameEndpoint: 'findAllProgramaVisionPais',
-        urlEndPoint: '/programas/vision-pais',
+        urlEndPoint: '/mant-actividades/programas/vision-pais-proyecto',
         params: '{ }',
         groupEndPoint: 'actividadesCRUDGroup',
         descEndPoint: 'Listar todos datos de Vision de Pais registrados en la BD',
@@ -936,7 +936,7 @@ export class ListEndPointsService {
       findAllProgramasPoliticasPublicas: {
         id: 56,
         nameEndpoint: 'findAllProgramasPoliticasPublicas',
-        urlEndPoint: '/programas/politica-publica',
+        urlEndPoint: '/mant-actividades/programas/politica-publica-proyecto',
         params: '{ }',
         groupEndPoint: 'actividadesCRUDGroup',
         descEndPoint: 'Listar todos datos de Politicas Publicas registrados en la BD',

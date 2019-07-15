@@ -16,6 +16,7 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import {ModalUpdateContactoComponent} from '../../recursos-proyecto/contactos/modal-update-contacto/modal-update-contacto.component';
 import {ModalNewContactoComponent} from '../../recursos-proyecto/contactos/modal-new-contacto/modal-new-contacto.component';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'ngx-contactos',
@@ -147,7 +148,7 @@ export class ContactosComponent implements OnInit, OnChanges {
 
 
  constructor(public _contactoService: ContactosService, protected _router: Router, private modalService: NgbModal,
-  private _notificacionesService: NotificacionesService) {
+  private _notificacionesService: NotificacionesService, private _spinner: NgxSpinnerService) {
   this.responsedata = { 'error': false, 'msg': 'error campos solicitado' };
 }
 
@@ -212,12 +213,17 @@ private showToast(type: string, title: string, body: string) {
     classes: 'comboSea',
     showCheckbox: false,
     lazyLoading: false,
+
   };
+  // Ocultamos el Loader la Funcion
+  setTimeout(() => {
+    this._spinner.hide();
+  }, 2000);
 
   this._contactoModel = new ContactosModel(
    true, 0, null, // datos generales
   null, null, null, null, null, null, null, null, null, null, null, null, null, // datos de tabla generales
-  null, 0, null, 0,
+  null, 0, null, 0, null, 0, null,
   );
 
   this.ListAllContactos();

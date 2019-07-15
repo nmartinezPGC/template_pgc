@@ -8,7 +8,7 @@
 */
 
 import { Component, OnInit, Input, ChangeDetectorRef, OnChanges } from '@angular/core';
-import { TreeNode, MessageService, MenuItem } from 'primeng/primeng';
+import { TreeNode, MessageService, MenuItem, ConfirmationService } from 'primeng/primeng';
 import { ToasterConfig, ToasterService, Toast, BodyOutputType } from 'angular2-toaster';
 import { ListasComunesService } from '../../../../../common-list/services/listas-comunes.service';
 import { ServicePlanNacionService } from '../../../../services/programas/service-plan-nacion.service';
@@ -112,7 +112,8 @@ export class PlanNacionComponent implements OnInit, OnChanges {
   constructor(private _servicePlanNacionService: ServicePlanNacionService,
     private messageService: MessageService,
     private changeDetectorRef: ChangeDetectorRef,
-    private _notificacionesService: NotificacionesService) {
+    private _notificacionesService: NotificacionesService,
+    private confirmationService: ConfirmationService) {
     // Codigo del Constructor
   }
 
@@ -133,6 +134,7 @@ export class PlanNacionComponent implements OnInit, OnChanges {
 
     // Llenado del Treeview de la Tabla
     this._servicePlanNacionService.getFiles().then(files => this.filesTree4 = files);
+    this.getAllProgramaPlanDeNacion();
 
     // this.getfindByIdNivelProgramaService(1);
   }
@@ -296,7 +298,7 @@ export class PlanNacionComponent implements OnInit, OnChanges {
   * de Ubicacion de Implementacion del Formulario de Actividad llamando a la API
   * Params: { }
   ****************************************************************************/
-  private getAllProgramaCampoTransversalService() {
+  private getAllProgramaPlanDeNacion() {
     // Ejecuta el Servicio de invocar todos los Programa de Desarrollo
     this._servicePlanNacionService.getAllProgramasPlanNacion().subscribe(
       result => {
@@ -307,18 +309,12 @@ export class PlanNacionComponent implements OnInit, OnChanges {
           this.JsonReceptionAllProgramasPlanNacion = result.data;
 
           // Setea la Lista de los todos Programa Ocde/Cad
-          this.nodes = this.JsonReceptionAllProgramasPlanNacion.map((item) => {
+          this.JsonSendProgramaPlanNacionOpciones = this.JsonReceptionAllProgramasPlanNacion.map((item) => {
             return {
-              label: item.nombrePrograma,
-              data: item.codigoPrograma,
-              expandedIcon: 'fa fa-folder-open',
-              collapsedIcon: 'fa fa-folder',
-              children: [{
-                label: item.idNivelPrograma.nombreNivelPrograma,
-                data: item.codigoPrograma,
-                expandedIcon: 'fa fa-folder-open',
-                collapsedIcon: 'fa fa-fold*er',
-              }],
+              code: item.idProgramaPlanNacion.idPrograma,
+              name: item.idProgramaPlanNacion.nombrePrograma,
+              otro: item.porcentajePart,
+
             }
           })
         }
@@ -479,6 +475,7 @@ export class PlanNacionComponent implements OnInit, OnChanges {
   * Params: { JsonSendProgramaPlanNacionOpciones }
   ****************************************************************************/
   saveProgramaPlanNacion() {
+    this.calcularPercent();
     // Seteo de los campos iniciales
     this._activityProgramaPlanNacion.idActividad = { idActividad: this.idProyectoTab };
 
@@ -488,10 +485,12 @@ export class PlanNacionComponent implements OnInit, OnChanges {
       for (let index = 0; index < this.JsonSendProgramaPlanNacionOpciones.length; index++) {
         const element = this.JsonSendProgramaPlanNacionOpciones[index];
 
+        // asignacion de porcetaje de participacion
+       this._activityProgramaPlanNacion.porcentajePart = Number(element.otro);
         // Asignacion del Campo Transversal
         this._activityProgramaPlanNacion.idProgramaPlanNacion = { idPrograma: element.code };
 
-        this._activityProgramaPlanNacion.codigoActividad = this.codigoProyectoTab + '-APP-' + element.code;
+        this._activityProgramaPlanNacion.codigoActividad = this.codigoProyectoTab + '-APN-' + element.code;
 
         // Ejecucion del Campo Transversal
         this._servicePlanNacionService.saveActividadProgramaPlanNacion(this._activityProgramaPlanNacion).subscribe(
@@ -533,4 +532,101 @@ export class PlanNacionComponent implements OnInit, OnChanges {
     this.changeDetectorRef.detectChanges();
     this.JsonSendProgramaPlanNacionOpciones = [...this.JsonSendProgramaPlanNacionOpciones];
   } // FIN | cleanProgramaPlanNacion
+
+
+  /****************************************************************************
+  * Funcion: calcularPercent
+  * Object Number: FND-007
+  * Fecha: 13-05-2019
+  * Descripcion: Method para calcular % Items de vision de pais
+  * en la Insercion del Proyecto
+  * Objetivo: calculo de % el Json de los Items seleccionados
+  ****************************************************************************/
+ calcularPercent() {
+  const valorMax = (100 / this.JsonSendProgramaPlanNacionOpciones.length);
+
+  this.JsonSendProgramaPlanNacionOpciones.map(function (dato) {
+    dato.otro = valorMax.toFixed(2);
+    return dato;
+  });
+} // FIN | FND-007
+
+
+  /****************************************************************************
+  * Funcion: validaPercent
+  * Object Number: FND-006
+  * Fecha: 13-05-2019
+  * Descripcion: Method para validar % Items del Socio al Desarrollo
+  * en la Insercion del Proyecto
+  * Objetivo: % el Json de los Items seleccionados
+  ****************************************************************************/
+ validaPercent(event: any, codeIn: number) {
+  const otroIn = event.target.value;
+
+  this.JsonSendProgramaPlanNacionOpciones.map(function (dato) {
+    if (dato.code === codeIn) {
+      dato.otro = otroIn;
+    }
+    return dato;
+  });
+} // FIN | FND-006
+
+
+
+  /****************************************************************************
+  * Funcion: deleteVisionPais
+  * Object Number: FND-005
+  * Fecha: 11-07-2019
+  * Descripcion: Method para Eliminar Item  de vision pais
+  * Objetivo: limpiar el Json de los Items seleccionados
+  ****************************************************************************/
+ DeletePlanDeNacion(event: any) {
+  for (let i = 0; i < this.JsonSendProgramaPlanNacionOpciones.length; i++) {
+    if (this.JsonSendProgramaPlanNacionOpciones[i].code === event) {
+      // Ejecuta el Servicio de invocar el registro de Socio al Desarrollo
+      this._servicePlanNacionService.deleteProgramaPlanDeNacion(this.codigoProyectoTab + '-APN-' + this.JsonSendProgramaPlanNacionOpciones[i].code).subscribe(
+        result => {
+          if (result.status !== 200) {
+            this._notificacionesService.showToast('error', 'Error al Borrar la Información de plan de nacion ', result.message);
+          } else if (result.status === 200) {
+            if (result.findRecord === true) {
+              this._notificacionesService.showToast('default', 'plan de nacion', result.message)
+            } else {
+              this._notificacionesService.showToast('error', 'Error al Borrar la Información de plan de nacion', result.message);
+            }
+          }
+        },
+        error => {
+          this._notificacionesService.showToast('error', 'Error al Borrar la Información de plan de nacion', JSON.stringify(error.error.message));
+        },
+      );
+      // Borramos el Item del Json
+      this.JsonSendProgramaPlanNacionOpciones.splice(i, 1);
+      // para el Bucle
+      break;
+    }
+  }
+  this.JsonSendProgramaPlanNacionOpciones = [...this.JsonSendProgramaPlanNacionOpciones];
+} // FIN | FND-005
+
+
+  /****************************************************************************
+  * Funcion: confirm
+  * Object Number: FND-009
+  * Fecha: 01-07-2019
+  * Descripcion: Method confirm of the Class
+  * Objetivo: Eliminar el Detalle de Financiamiento seleccionado
+  * Params: { event }
+  ****************************************************************************/
+ confirm2(event: any) {
+  this.confirmationService.confirm({
+    message: 'Estas seguro de Eliminar plan de nacion?',
+    accept: () => {
+      // Ejecuta la funcion de Eliminar el Socio al Desarrollo con Elementos relacionados
+      this.DeletePlanDeNacion(event);
+    },
+  });
+} // FIN | FND-009
+
+
 }

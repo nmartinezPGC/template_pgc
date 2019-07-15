@@ -36,6 +36,9 @@ export class ContactosModel {
         public idTratoIN: number,
         public idOrganizacion: { idOrganizacion: number},
         public IdOrgIN: number,
+        public idPais: { idPais: number },
+        public idPaisIN: number,
+        public descPais: string,
 
     ) { }
 }

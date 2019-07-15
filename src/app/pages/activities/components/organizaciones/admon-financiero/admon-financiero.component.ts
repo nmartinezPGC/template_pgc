@@ -13,6 +13,7 @@ import { SharedOrganizacionesService } from '../../../services/organizaciones/sh
 import { AdmonFinancieroService} from '../../../services/organizaciones/admon-financiero.service';
 import { ActivityOrganizacionAdmonFinancieroModel } from '../../../models/organizaciones/model-Admon-Financiero';
 import { NotificacionesService } from '../../../../shared/services/notificaciones.service';
+import { ConfirmationService } from 'primeng/primeng';
 
 @Component({
   selector: 'ngx-admon-financiero',
@@ -50,6 +51,7 @@ export class AdmonFinancieroComponent implements OnInit {
 
   // Json de recpcion de Informacion
   public JsonReceptionAllAdmonFinanciero: any;
+  public JsonReceptionAllAdmonFinanciera: any;
 
   // definicion del modelo de la clase
   public _activityOrganizacionAdmonFinancieroModel: ActivityOrganizacionAdmonFinancieroModel;
@@ -64,7 +66,8 @@ export class AdmonFinancieroComponent implements OnInit {
    */
   constructor( private _notificacionesService: NotificacionesService,
     private _sharedOrganizacionesService: SharedOrganizacionesService,
-    private _admonFinancieroService: AdmonFinancieroService ) {
+    private _admonFinancieroService: AdmonFinancieroService,
+    private confirmationService: ConfirmationService ) {
     // Codigo del Constructor
   }
 
@@ -83,6 +86,7 @@ export class AdmonFinancieroComponent implements OnInit {
 
     // Carga los Datos de Admon Financiero
     this.getAllAdmonFinancieroService(4);
+    this.getAllAdmonFinanciera();
 
     // Inicio de las Configuraciones del DrowDown
     this.dropdownListAdmonFinanciero = [];
@@ -339,4 +343,56 @@ cleanAllAdmonFinanciero() {
     });
   } // FIN | calcularPercent
 
+  /****************************************************************************
+  * Funcion: getAllSociosDesarrolloByActividadService
+  * Object Number: FND-008
+  * Fecha: 03-06-2019
+  * Descripcion: Method getAllSociosDesarrolloByActividadService of the Class
+  * Objetivo: getAllSociosDesarrolloByActividadService listados todos los Socios al Desarrollo
+  * Params: { idActividad }
+  ****************************************************************************/
+ private getAllAdmonFinanciera() {
+  // Ejecuta el Servicio de invocar todos los Socios al Desarrollo
+  this._admonFinancieroService.getAllAdmonFinanciera().subscribe(
+    result => {
+      if (result.status !== 200) {
+        this._notificacionesService.showToast('error', 'Error al Obtener la Información de todos Socios al Desarrollo', result.message);
+        this.JsonReceptionAllAdmonFinanciera = [];
+      } else if (result.status === 200) {
+        this.JsonReceptionAllAdmonFinanciera = result.data;
+
+        // Mapear los datos de los Socios al Desarrollo Registrados
+        // console.log(this.JsonReceptionAllSocioDesarrolloByActividad);
+        this.JsonSendAdmonFinanciero = this.JsonReceptionAllAdmonFinanciera.map((item) => {
+          return {
+            code: item.idOrganizacion.idOrganizacion,
+            name: item.idOrganizacion.descOrganizacion,
+            otro: item.porcentajePart,
+          }
+        });
+      }
+    },
+    error => {
+      this._notificacionesService.showToast('error', 'Error al Obtener la Información de Unidad Ejecutora', JSON.stringify(error.error.message));
+    },
+  );
+} // FIN | FND-008
+
+ /****************************************************************************
+  * Funcion: confirm
+  * Object Number: FND-009
+  * Fecha: 01-07-2019
+  * Descripcion: Method confirm of the Class
+  * Objetivo: Eliminar el Detalle de Financiamiento seleccionado
+  * Params: { event }
+  ****************************************************************************/
+ confirm3(event: any) {
+  this.confirmationService.confirm({
+    message: 'Estas seguro de Eliminar Admon Fianciero?',
+    accept: () => {
+      // Ejecuta la funcion de Eliminar el Socio al Desarrollo con Elementos relacionados
+      this.cleanAdmonFinanciero(event);
+    },
+  });
+} // FIN | FND-009
 }

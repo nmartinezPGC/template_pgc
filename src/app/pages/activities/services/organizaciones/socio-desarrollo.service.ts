@@ -58,7 +58,7 @@ export class SocioDesarrolloService {
     * Objetivo: datos de Plan de Nacion
     * Params: { }
     ****************************************************************************/
-  getAllSociosDesarrollo(caseOrganizacion: number): Observable<any> {
+  getAllSociosDesarrolloOrganizacion(caseOrganizacion: number): Observable<any> {
     const paramsSend: number = caseOrganizacion;
 
     // Retorno de la Funcion
@@ -111,10 +111,9 @@ export class SocioDesarrolloService {
   * Objetivo: Socios al Desarrollo del Proyecto
   * Params: { idActividad }
   ****************************************************************************/
-  getAllSociosDesarrolloByIdActividad(idActividad: number): Observable<any> {
-    const paramsSend: number = idActividad;
+  getAllSociosDesarrollo(): Observable<any> {
     // Retorno de la Funcion
-    return this._http.get(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 63) + paramsSend, {
+    return this._http.get(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 62),  {
       headers: this.headers,
       params: { 'tokenApi': this.tokenHeader },
     });

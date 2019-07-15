@@ -155,5 +155,22 @@ export class ServicePoliticasPublicasService {
     });
   } // FIN | FND-00007
 
+ /****************************************************************************
+    * Funcion: FND-00008
+    * Fecha: 11-07-2019
+    * Descripcion: Metodo para borrar datos de Plan de nacion
+    * Objetivo: Borrar el dato de plan de nacion del Proyecto
+    * Params: { codigoActividad }
+    ****************************************************************************/
+   deleteProgramaPoliticasPublicas(codigoActividad: string): Observable<any> {
+    const paramsSend: string = codigoActividad;
+
+    // Retorno de la Funcion
+    return this._http.delete(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 61) + paramsSend, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  } // FIN | FND-00008
+
 }
 

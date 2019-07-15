@@ -71,32 +71,51 @@
                         ngControl="dFisicaContacto" [(ngModel)]="_contactosModel1.dFisicaContacto" required></textarea>
                      </div>
 
-               <strong><label>Email1 del contacto</label></strong>
-               <div class="form-group">
-                 <input #email1contacto="ngModel" class="form-control" type="text"
-                   placeholder="Email del contacto" name="email1Contacto" id="email1Contacto"
-                   ngControl="email1Contacto" [(ngModel)]="_contactosModel1.email1Contacto" required />
-               </div>
+              <strong><label>Email1</label></strong>
+                    <div class="form-group">
+                      <input #email1Contacto="ngModel" class="form-control" type="text" placeholder="Email del contacto"
+                        name="email1Contacto" id="email1Contacto" ngControl="email1Contacto"
+                        [(ngModel)]="_contactosModel1.email1Contacto" pattern=".+@.+\..+" required/>
+                        <small class="form-text error" *ngIf="email1Contacto.invalid && email1Contacto.touched &&
+                        email1Contacto.errors?.required">
+                        Email es requerido!
+                      </small>
+                      <small class="form-text error"
+                             *ngIf="email1Contacto.invalid && email1Contacto.touched && email1Contacto.errors?.pattern">
+                        Ingresa un Email real!
+                      </small>
+                    </div>
 
                <strong><label>Email2 del contacto</label></strong>
                <div class="form-group">
                  <input #email2Contacto="ngModel" class="form-control" type="text"
                    placeholder="Email del contacto" name="email2Contacto" id="email2Contacto"
-                   ngControl="email2Contacto" [(ngModel)]="_contactosModel1.email2Contacto" required />
+                   ngControl="email2Contacto" [(ngModel)]="_contactosModel1.email2Contacto"
+                   pattern=".+@.+\..+"/>
+                        <small class="form-text error" *ngIf="email2Contacto.invalid && email2Contacto.touched &&
+                        email2Contacto.errors?.required">
+                        Email es requerido!
+                      </small>
+                      <small class="form-text error"
+                             *ngIf="email2Contacto.invalid && email2Contacto.touched && email2Contacto.errors?.pattern">
+                        Ingresa un Email real!
+                      </small>
                </div>
 
                <strong><label>Telefono1 del contacto</label></strong>
                   <div class="form-group">
                     <input #telefono1Contacto="ngModel" class="form-control" type="text"
                       placeholder="Telefono del contacto" name="telefono1Contacto" id="telefono1Contacto"
-                      ngControl="telefono1Contacto" [(ngModel)]="_contactosModel1.telefono1Contacto" required />
+                      ngControl="telefono1Contacto" [(ngModel)]="_contactosModel1.telefono1Contacto"
+                      pKeyFilter="int" required maxlength="8"  />
                   </div>
 
                   <strong><label>Telefono2 del Contacto</label></strong>
                   <div class="form-group">
                     <input #telefono2Contacto="ngModel" class="form-control" type="text"
                       placeholder="Telefono del contacto" name="telefono2Contacto" id="telefono2Contacto"
-                      ngControl="telefono2Contacto" [(ngModel)]="_contactosModel1.telefono2Contacto" required />
+                      ngControl="telefono2Contacto" [(ngModel)]="_contactosModel1.telefono2Contacto"
+                       pKeyFilter="int"  maxlength="8" />
                   </div>
                 </nb-card-body>
               </nb-card>
@@ -109,29 +128,34 @@
                  <div class="form-group">
                    <input #ext1Contacto="ngModel" class="form-control" type="text"
                      placeholder="Extencion del contacto" name="ext1Contacto" id="ext1Contacto"
-                     ngControl="ext1Contacto" [(ngModel)]="_contactosModel1.ext1Contacto" required />
+                     ngControl="ext1Contacto" [(ngModel)]="_contactosModel1.ext1Contacto"
+                     pKeyFilter="int"  maxlength="4" required />
                  </div>
 
                  <strong><label>Extencion2 del contacto</label></strong>
                  <div class="form-group">
                    <input #ext2Contacto="ngModel" class="form-control" type="text"
                      placeholder="Extencion del contacto" name="ext2Contacto" id="ext2Contacto"
-                     ngControl="ext2Contacto" [(ngModel)]="_contactosModel1.ext2Contacto" required />
+                     ngControl="ext2Contacto" [(ngModel)]="_contactosModel1.ext2Contacto"
+                     pKeyFilter="int"  maxlength="4"  />
                  </div>
 
                  <strong><label>Elija una Organizacion</label></strong>
                  <div class="form-group">
-                     <select name="idOrgIN" id="idOrgIN" ngControl="idOrgIN"
-                       class="form-control" [(ngModel)]="_contactosModel1.idOrgIN" required>
+                     <select name="IdOrgIN" id="IdOrgIN" ngControl="IdOrgIN"
+                       class="form-control" [(ngModel)]="_contactosModel1.IdOrgIN" required>
                        <option *ngFor="let item of JsonReceptionOrg" [value]="item.idOrganizacion">
                          {{item.descOrganizacion}}</option>
                          </select>
-                 </div><br>
+                 </div>
+                 <strong> <label>País Contacto</label> </strong>
+                 <angular2-multiselect [data]="dropdownListPais" [(ngModel)]="selectedItemsPais"
+                   [settings]="dropdownSettings" (onSelect)="onItemSlectPais($event)" required></angular2-multiselect><br>
 
         </nb-card-body>
             </nb-card>
             <div class="modal-footer">
-                <button type="button" (click)="newOrganizacion()" class="btn btn-primary">Guardar Contacto</button>
+                <button type="button" (click)="newContacto() " class="btn btn-primary">Guardar Contacto</button>
                 <button type="button" (Click)="closeModal()" class="btn btn-danger">Cerrar</button>
               </div>
           </div>

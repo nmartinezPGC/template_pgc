@@ -13,6 +13,7 @@ import { SharedOrganizacionesService } from '../../../services/organizaciones/sh
 import { AgenciaBeneficiariaService } from '../../../services/organizaciones/agencia-beneficiaria.service';
 import { ActivityOrganizacionAgenciaBeneficiariaModel } from '../../../models/organizaciones/model-agencia-beneficiaria';
 import { NotificacionesService } from '../../../../shared/services/notificaciones.service';
+import { ConfirmationService } from 'primeng/primeng';
 
 
 @Component({
@@ -54,6 +55,7 @@ export class AgenciaBeneficiariaComponent implements OnInit {
 
   // Json a enviar
   public JsonSendAgenciaBeneficiaria: any = [];
+  public JsonReceptionAllAgenciaBeneficiario: any
   changeDetectorRef: any;
 // definicio de la variable del modelo
   public _activityOrganizacionAgenciaBeneficiariaModel: ActivityOrganizacionAgenciaBeneficiariaModel;
@@ -64,7 +66,8 @@ export class AgenciaBeneficiariaComponent implements OnInit {
    */
   constructor(private _notificacionesService: NotificacionesService,
     private _agenciaBeneficiariaService: AgenciaBeneficiariaService,
-    private _sharedOrganizacionesService: SharedOrganizacionesService) {
+    private _sharedOrganizacionesService: SharedOrganizacionesService,
+    private confirmationService: ConfirmationService) {
     // Codigo del Constructor
   }
 
@@ -83,6 +86,7 @@ export class AgenciaBeneficiariaComponent implements OnInit {
     // Carga los Datos de agencia beneficiaria
 
     this.getAllAgenciaBeneficiariaService(3);
+    this.getAllAdmonFinanciera();
 
     // Inicio de las Configuraciones del DrowDown
     this.dropdownListAgenciaBeneficiaria = [];
@@ -379,5 +383,58 @@ cleanAllAgenciaBeneficiaria() {
       return dato;
     });
   } // FIN | calcularPercent
+
+  /****************************************************************************
+  * Funcion: getAllSociosDesarrolloByActividadService
+  * Object Number: FND-008
+  * Fecha: 03-06-2019
+  * Descripcion: Method getAllSociosDesarrolloByActividadService of the Class
+  * Objetivo: getAllSociosDesarrolloByActividadService listados todos los Socios al Desarrollo
+  * Params: { idActividad }
+  ****************************************************************************/
+ private getAllAdmonFinanciera() {
+  // Ejecuta el Servicio de invocar todos los Socios al Desarrollo
+  this._agenciaBeneficiariaService.getAllAgenciaBeneficiaria().subscribe(
+    result => {
+      if (result.status !== 200) {
+        this._notificacionesService.showToast('error', 'Error al Obtener la Información de todos Socios al Desarrollo', result.message);
+        this.JsonReceptionAllAgenciaBeneficiario = [];
+      } else if (result.status === 200) {
+        this.JsonReceptionAllAgenciaBeneficiario = result.data;
+
+        // Mapear los datos de los Socios al Desarrollo Registrados
+        // console.log(this.JsonReceptionAllSocioDesarrolloByActividad);
+        this.JsonSendAgenciaBeneficiaria = this.JsonReceptionAllAgenciaBeneficiario.map((item) => {
+          return {
+            code: item.idOrganizacion.idOrganizacion,
+            name: item.idOrganizacion.descOrganizacion,
+            otro: item.porcentajePart,
+          }
+        });
+      }
+    },
+    error => {
+      this._notificacionesService.showToast('error', 'Error al Obtener la Información de Unidad Ejecutora', JSON.stringify(error.error.message));
+    },
+  );
+} // FIN | FND-008
+
+  /****************************************************************************
+  * Funcion: confirm
+  * Object Number: FND-009
+  * Fecha: 01-07-2019
+  * Descripcion: Method confirm of the Class
+  * Objetivo: Eliminar el Detalle de Financiamiento seleccionado
+  * Params: { event }
+  ****************************************************************************/
+  confirm1(event: any) {
+    this.confirmationService.confirm({
+      message: 'Estas seguro de Eliminar Agencia Beneficiaria?',
+      accept: () => {
+        // Ejecuta la funcion de Eliminar el Socio al Desarrollo con Elementos relacionados
+        this.cleanAgenciaBeneficiaria(event);
+      },
+    });
+  } // FIN | FND-009
 
 }

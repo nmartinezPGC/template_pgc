@@ -1,18 +1,19 @@
-<!-- Maquetacion de link -->
+<!-- Maquetacion de Contactos-->
 <!-- Componente para los Mensajes en pantalla -->
 <toaster-container [toasterconfig]="config"></toaster-container>
 
-<!-- Agrupacion de la Informacion de link -->
-<p-fieldset legend="Agregar Contactos" [toggleable]="true">
+<!-- Agrupacion de la Informacion de Contactos -->
+<p-fieldset   [transitionOptions]="'0ms'" legend="Agregar Contactos" [toggleable]="true"  [collapsed]="true">
   <hr/>
-
+  <p-fieldset   [transitionOptions]="'0ms'" legend=" Contacto del Donante" [toggleable]="true"  [collapsed]="true">
+  <hr/>
   <table class="table table-hover table-striped table-bordered" id="tableIdInterna">
       <thead>
         <tr class="tHeadSearch">
             <th scope="col" colspan="5">
                 <input type="text" class="form-control" [(ngModel)]="queryString"
                   placeholder="Buscar Nombre del Contacto :">
-              </th>
+              </th><br>
               <div class="form-group" >
                 <div class="col-lg-9">
                 <button type="button" (click)="showLargeModal1()" class="btn btn-warning">Agregar Contacto</button>
@@ -52,4 +53,210 @@
      <!-- paginador de la tabla -->
      <pagination-controls autoHide="true" responsive="true" previousLabel="Anterior" nextLabel="Siguiente"
      (pageChange)="p = $event"></pagination-controls>
+    </p-fieldset>
+    <hr>
+
+    <p-fieldset legend=" Contacto de SRECI o SEFIN" [toggleable]="true"  [collapsed]="true">
+        <hr/>
+        <table class="table table-hover table-striped table-bordered" id="tableIdInterna">
+            <thead>
+              <tr class="tHeadSearch">
+                  <th scope="col" colspan="5">
+                      <input type="text" class="form-control" [(ngModel)]="queryString"
+                        placeholder="Buscar Nombre del Contacto :">
+                    </th><br>
+                    <div class="form-group" >
+                      <div class="col-lg-9">
+                      <button type="button" (click)="showLargeModal1()" class="btn btn-warning">Agregar Contacto</button>
+                    </div>
+                  </div>
+              </tr>
+              <tr class="tHeadTable">
+                <th scope="col" style="width: 5%;">No</th>
+                <th scope="col" style="width: 10%;">nombre</th>
+                <th scope="col" style="width: 15%;">Funcion</th>
+                <th scope="col" style="width: 15%;">Organización</th>
+                <th scope="col" style="width: 15%;">Telefono</th>
+                <th scope="col" style="width: 15%;">Extencion</th>
+                <th scope="col" style="width: 15%;">Email</th>
+                <th scope="col" style="width: 40%;">Acción</th>
+              </tr>
+            </thead>
+            <tbody>
+             <tr
+                  *ngFor="let item of JsonReceptionListContactos | filterdata: queryString : 'nombreContacto'  | paginate: { itemsPerPage: 6, currentPage: p };let homeTableIndex = index">
+                  <td>{{ homeTableIndex + 1 }}</td>
+                  <td>{{item.nombreContacto}}</td>
+                  <td>{{item.funcionContacto}}</td>
+                  <td>{{item.idOrganizacion.nombreOrganizacion}}</td>
+                  <td>{{item.telefono1Contacto}}</td>
+                  <td>{{item.ext1Contacto}}</td>
+                  <td>{{item.email1Contacto}}</td>
+                  <td>
+                    <img (click)="showLargeModal(item.idContacto)" class="pointerMouse"
+                        src="../../../../assets/icons/forms/pencil-striped-symbol_24.png" alt="">
+                        <img (click)="deleteContactos(item.idContacto)" class="pointerMouse"
+                        src="../../../../assets/icons/forms/rubbish-bin_24x.png" alt=""><img alt="">
+                    </td>
+               </tr>
+            </tbody>
+          </table>
+           <!-- paginador de la tabla -->
+           <pagination-controls autoHide="true" responsive="true" previousLabel="Anterior" nextLabel="Siguiente"
+           (pageChange)="p = $event"></pagination-controls>
+       </p-fieldset>
+       <hr>
+
+       <p-fieldset legend=" Contacto del Coordinador del Proyecto" [toggleable]="true"  [collapsed]="true">
+          <hr/>
+          <table class="table table-hover table-striped table-bordered" id="tableIdInterna">
+              <thead>
+                <tr class="tHeadSearch">
+                    <th scope="col" colspan="5">
+                        <input type="text" class="form-control" [(ngModel)]="queryString"
+                          placeholder="Buscar Nombre del Contacto :">
+                      </th><br>
+                      <div class="form-group" >
+                        <div class="col-lg-9">
+                        <button type="button" (click)="showLargeModal1()" class="btn btn-warning">Agregar Contacto</button>
+                      </div>
+                    </div>
+                </tr>
+                <tr class="tHeadTable">
+                  <th scope="col" style="width: 5%;">No</th>
+                  <th scope="col" style="width: 10%;">nombre</th>
+                  <th scope="col" style="width: 15%;">Funcion</th>
+                  <th scope="col" style="width: 15%;">Organización</th>
+                  <th scope="col" style="width: 15%;">Telefono</th>
+                  <th scope="col" style="width: 15%;">Extencion</th>
+                  <th scope="col" style="width: 15%;">Email</th>
+                  <th scope="col" style="width: 40%;">Acción</th>
+                </tr>
+              </thead>
+              <tbody>
+               <tr
+                    *ngFor="let item of JsonReceptionListContactos | filterdata: queryString : 'nombreContacto'  | paginate: { itemsPerPage: 6, currentPage: p };let homeTableIndex = index">
+                    <td>{{ homeTableIndex + 1 }}</td>
+                    <td>{{item.nombreContacto}}</td>
+                    <td>{{item.funcionContacto}}</td>
+                    <td>{{item.idOrganizacion.nombreOrganizacion}}</td>
+                    <td>{{item.telefono1Contacto}}</td>
+                    <td>{{item.ext1Contacto}}</td>
+                    <td>{{item.email1Contacto}}</td>
+                    <td>
+                      <img (click)="showLargeModal(item.idContacto)" class="pointerMouse"
+                          src="../../../../assets/icons/forms/pencil-striped-symbol_24.png" alt="">
+                          <img (click)="deleteContactos(item.idContacto)" class="pointerMouse"
+                          src="../../../../assets/icons/forms/rubbish-bin_24x.png" alt=""><img alt="">
+                      </td>
+                 </tr>
+              </tbody>
+            </table>
+             <!-- paginador de la tabla -->
+             <pagination-controls autoHide="true" responsive="true" previousLabel="Anterior" nextLabel="Siguiente"
+             (pageChange)="p = $event"></pagination-controls>
+             </p-fieldset>
+             <hr>
+
+       <p-fieldset legend=" Contacto en Ministerio Sectorial" [toggleable]="true"  [collapsed]="true">
+          <hr/>
+          <table class="table table-hover table-striped table-bordered" id="tableIdInterna">
+              <thead>
+                <tr class="tHeadSearch">
+                    <th scope="col" colspan="5">
+                        <input type="text" class="form-control" [(ngModel)]="queryString"
+                          placeholder="Buscar Nombre del Contacto :">
+                      </th><br>
+                      <div class="form-group" >
+                        <div class="col-lg-9">
+                        <button type="button" (click)="showLargeModal1()" class="btn btn-warning">Agregar Contacto</button>
+                      </div>
+                    </div>
+                </tr>
+                <tr class="tHeadTable">
+                  <th scope="col" style="width: 5%;">No</th>
+                  <th scope="col" style="width: 10%;">nombre</th>
+                  <th scope="col" style="width: 15%;">Funcion</th>
+                  <th scope="col" style="width: 15%;">Organización</th>
+                  <th scope="col" style="width: 15%;">Telefono</th>
+                  <th scope="col" style="width: 15%;">Extencion</th>
+                  <th scope="col" style="width: 15%;">Email</th>
+                  <th scope="col" style="width: 40%;">Acción</th>
+                </tr>
+              </thead>
+              <tbody>
+               <tr
+                    *ngFor="let item of JsonReceptionListContactos | filterdata: queryString : 'nombreContacto'  | paginate: { itemsPerPage: 6, currentPage: p };let homeTableIndex = index">
+                    <td>{{ homeTableIndex + 1 }}</td>
+                    <td>{{item.nombreContacto}}</td>
+                    <td>{{item.funcionContacto}}</td>
+                    <td>{{item.idOrganizacion.nombreOrganizacion}}</td>
+                    <td>{{item.telefono1Contacto}}</td>
+                    <td>{{item.ext1Contacto}}</td>
+                    <td>{{item.email1Contacto}}</td>
+                    <td>
+                      <img (click)="showLargeModal(item.idContacto)" class="pointerMouse"
+                          src="../../../../assets/icons/forms/pencil-striped-symbol_24.png" alt="">
+                          <img (click)="deleteContactos(item.idContacto)" class="pointerMouse"
+                          src="../../../../assets/icons/forms/rubbish-bin_24x.png" alt=""><img alt="">
+                      </td>
+                 </tr>
+              </tbody>
+            </table>
+             <!-- paginador de la tabla -->
+             <pagination-controls autoHide="true" responsive="true" previousLabel="Anterior" nextLabel="Siguiente"
+             (pageChange)="p = $event"></pagination-controls>
+             </p-fieldset>
+             <hr>
+
+       <p-fieldset legend=" Contacto en la Agencia Ejecutora/implementadora" [toggleable]="true"  [collapsed]="true">
+          <hr/>
+          <table class="table table-hover table-striped table-bordered" id="tableIdInterna">
+              <thead>
+                <tr class="tHeadSearch">
+                    <th scope="col" colspan="5">
+                        <input type="text" class="form-control" [(ngModel)]="queryString"
+                          placeholder="Buscar Nombre del Contacto :">
+                      </th><br>
+                      <div class="form-group" >
+                        <div class="col-lg-9">
+                        <button type="button" (click)="showLargeModal1()" class="btn btn-warning">Agregar Contacto</button>
+                      </div>
+                    </div>
+                </tr>
+                <tr class="tHeadTable">
+                  <th scope="col" style="width: 5%;">No</th>
+                  <th scope="col" style="width: 10%;">nombre</th>
+                  <th scope="col" style="width: 15%;">Funcion</th>
+                  <th scope="col" style="width: 15%;">Organización</th>
+                  <th scope="col" style="width: 15%;">Telefono</th>
+                  <th scope="col" style="width: 15%;">Extencion</th>
+                  <th scope="col" style="width: 15%;">Email</th>
+                  <th scope="col" style="width: 40%;">Acción</th>
+                </tr>
+              </thead>
+              <tbody>
+               <tr
+                    *ngFor="let item of JsonReceptionListContactos | filterdata: queryString : 'nombreContacto'  | paginate: { itemsPerPage: 6, currentPage: p };let homeTableIndex = index">
+                    <td>{{ homeTableIndex + 1 }}</td>
+                    <td>{{item.nombreContacto}}</td>
+                    <td>{{item.funcionContacto}}</td>
+                    <td>{{item.idOrganizacion.nombreOrganizacion}}</td>
+                    <td>{{item.telefono1Contacto}}</td>
+                    <td>{{item.ext1Contacto}}</td>
+                    <td>{{item.email1Contacto}}</td>
+                    <td>
+                      <img (click)="showLargeModal(item.idContacto)" class="pointerMouse"
+                          src="../../../../assets/icons/forms/pencil-striped-symbol_24.png" alt="">
+                          <img (click)="deleteContactos(item.idContacto)" class="pointerMouse"
+                          src="../../../../assets/icons/forms/rubbish-bin_24x.png" alt=""><img alt="">
+                      </td>
+                 </tr>
+              </tbody>
+            </table>
+             <!-- paginador de la tabla -->
+             <pagination-controls autoHide="true" responsive="true" previousLabel="Anterior" nextLabel="Siguiente"
+             (pageChange)="p = $event"></pagination-controls>
+             </p-fieldset>
+
 </p-fieldset>

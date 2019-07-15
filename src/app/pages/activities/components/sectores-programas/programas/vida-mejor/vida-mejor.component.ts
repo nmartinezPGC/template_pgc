@@ -8,7 +8,7 @@
 */
 
 import { Component, OnInit, Input, ChangeDetectorRef, OnChanges } from '@angular/core';
-import { TreeNode, MessageService, MenuItem } from 'primeng/primeng';
+import { TreeNode, MessageService, MenuItem, ConfirmationService } from 'primeng/primeng';
 import { ToasterConfig, ToasterService, Toast, BodyOutputType } from 'angular2-toaster';
 import { ListasComunesService } from '../../../../../common-list/services/listas-comunes.service';
 import { ServiceVidaMejorService } from '../../../../services/programas/service-vida-mejor.service';
@@ -112,7 +112,8 @@ export class VidaMejorComponent implements OnInit, OnChanges {
   constructor(private _serviceVidaMejorService: ServiceVidaMejorService,
     private messageService: MessageService,
     private changeDetectorRef: ChangeDetectorRef,
-    private _notificacionesService: NotificacionesService) {
+    private _notificacionesService: NotificacionesService,
+    private confirmationService: ConfirmationService) {
     // Codigo del Constructor
   }
 
@@ -133,6 +134,7 @@ export class VidaMejorComponent implements OnInit, OnChanges {
 
     // Llenado del Treeview de la Tabla
     this._serviceVidaMejorService.getFiles().then(files => this.filesTree4 = files);
+    this.getAllProgramaVidaMejor();
 
     // this.getfindByIdNivelProgramaService(1);
   }
@@ -296,7 +298,7 @@ export class VidaMejorComponent implements OnInit, OnChanges {
   * de Ubicacion de Implementacion del Formulario de Actividad llamando a la API
   * Params: { }
   ****************************************************************************/
-  private getAllProgramaVidaMejorService() {
+  private getAllProgramaVidaMejor() {
     // Ejecuta el Servicio de invocar todos los Programa Vida Mejor
     this._serviceVidaMejorService.getAllProgramasVidaMejor().subscribe(
       result => {
@@ -307,18 +309,11 @@ export class VidaMejorComponent implements OnInit, OnChanges {
           this.JsonReceptionAllProgramasVidaMejor = result.data;
 
           // Setea la Lista de los todos Programa Vida Mejor
-          this.nodes = this.JsonReceptionAllProgramasVidaMejor.map((item) => {
+          this.JsonSendProgramaVidaMejorOpciones = this.JsonReceptionAllProgramasVidaMejor.map((item) => {
             return {
-              label: item.nombrePrograma,
-              data: item.codigoPrograma,
-              expandedIcon: 'fa fa-folder-open',
-              collapsedIcon: 'fa fa-folder',
-              children: [{
-                label: item.idNivelPrograma.nombreNivelPrograma,
-                data: item.codigoPrograma,
-                expandedIcon: 'fa fa-folder-open',
-                collapsedIcon: 'fa fa-fold*er',
-              }],
+              code: item.idProgramaVidaMejor.idPrograma,
+              name: item.idProgramaVidaMejor.nombrePrograma,
+              otro: item.porcentajePart,
             }
           })
         }
@@ -425,6 +420,7 @@ export class VidaMejorComponent implements OnInit, OnChanges {
   * Params: { JsonSendProgramaVidaMejorOpciones }
   ****************************************************************************/
   saveProgramaVidaMejor() {
+    this.calcularPercent();
     // Seteo de los campos iniciales
     this._activityProgramaVidaMejorModel.idActividad = { idActividad: this.idProyectoTab };
 
@@ -434,10 +430,14 @@ export class VidaMejorComponent implements OnInit, OnChanges {
       for (let index = 0; index < this.JsonSendProgramaVidaMejorOpciones.length; index++) {
         const element = this.JsonSendProgramaVidaMejorOpciones[index];
 
+
+        // asignacion de porcetaje de participacion
+       this._activityProgramaVidaMejorModel.porcentajePart = Number(element.otro);
+
         // Asignacion del Vida Mejor
         this._activityProgramaVidaMejorModel.idProgramaVidaMejor = { idPrograma: element.code };
 
-        this._activityProgramaVidaMejorModel.codigoActividad = this.codigoProyectoTab + '-APP-' + element.code;
+        this._activityProgramaVidaMejorModel.codigoActividad = this.codigoProyectoTab + '-AVM-' + element.code;
 
         // Ejecucion del Vida Mejor
         this._serviceVidaMejorService.saveActividadProgramaVidaMejor(this._activityProgramaVidaMejorModel).subscribe(
@@ -479,4 +479,100 @@ export class VidaMejorComponent implements OnInit, OnChanges {
     this.changeDetectorRef.detectChanges();
     this.JsonSendProgramaVidaMejorOpciones = [...this.JsonSendProgramaVidaMejorOpciones];
   } // FIN | cleanProgramaVidaMejor
+
+  /****************************************************************************
+  * Funcion: calcularPercent
+  * Object Number: FND-007
+  * Fecha: 13-05-2019
+  * Descripcion: Method para calcular % Items de vida mejor
+  * en la Insercion del Proyecto
+  * Objetivo: calculo de % el Json de los Items seleccionados
+  ****************************************************************************/
+ calcularPercent() {
+  const valorMax = (100 / this.JsonSendProgramaVidaMejorOpciones.length);
+
+  this.JsonSendProgramaVidaMejorOpciones.map(function (dato) {
+    dato.otro = valorMax.toFixed(2);
+    return dato;
+  });
+} // FIN | FND-007
+
+
+  /****************************************************************************
+  * Funcion: validaPercent
+  * Object Number: FND-006
+  * Fecha: 13-05-2019
+  * Descripcion: Method para validar % Items de vida mejor
+  * en la Insercion del Proyecto
+  * Objetivo: % el Json de los Items seleccionados
+  ****************************************************************************/
+ validaPercent(event: any, codeIn: number) {
+  const otroIn = event.target.value;
+
+  this.JsonSendProgramaVidaMejorOpciones.map(function (dato) {
+    if (dato.code === codeIn) {
+      dato.otro = otroIn;
+    }
+    return dato;
+  });
+} // FIN | FND-006
+
+
+
+  /****************************************************************************
+  * Funcion: deleteVisionPais
+  * Object Number: FND-005
+  * Fecha: 11-07-2019
+  * Descripcion: Method para Eliminar Item  de vision pais
+  * Objetivo: limpiar el Json de los Items seleccionados
+  ****************************************************************************/
+ DeleteVidaMejor(event: any) {
+  for (let i = 0; i < this.JsonSendProgramaVidaMejorOpciones.length; i++) {
+    if (this.JsonSendProgramaVidaMejorOpciones[i].code === event) {
+      // Ejecuta el Servicio de invocar el registro de Socio al Desarrollo
+      this._serviceVidaMejorService.deleteProgramasVidaMejor(this.codigoProyectoTab + '-AVM-' + this.JsonSendProgramaVidaMejorOpciones[i].code).subscribe(
+        result => {
+          if (result.status !== 200) {
+            this._notificacionesService.showToast('error', 'Error al Borrar la Información de vida mejor ', result.message);
+          } else if (result.status === 200) {
+            if (result.findRecord === true) {
+              this._notificacionesService.showToast('error', 'vida mejor', result.message);
+              this.ngOnInit();
+            } else {
+              this._notificacionesService.showToast('default', 'Error al Borrar la Información de vida mejor', result.message);
+            }
+          }
+        },
+        error => {
+          this._notificacionesService.showToast('error', 'Error al Borrar la Información de vision de pais', JSON.stringify(error.error.message));
+        },
+      );
+      // Borramos el Item del Json
+      this.JsonSendProgramaVidaMejorOpciones.splice(i, 1);
+      // para el Bucle
+      break;
+    }
+  }
+  this.JsonSendProgramaVidaMejorOpciones = [...this.JsonSendProgramaVidaMejorOpciones];
+} // FIN | FND-005
+
+
+  /****************************************************************************
+  * Funcion: confirm
+  * Object Number: FND-009
+  * Fecha: 01-07-2019
+  * Descripcion: Method confirm of the Class
+  * Objetivo: Eliminar el Detalle de Financiamiento seleccionado
+  * Params: { event }
+  ****************************************************************************/
+ confirm(event: any) {
+  this.confirmationService.confirm({
+    message: 'Estas seguro de Eliminar vida mejor',
+    accept: () => {
+      // Ejecuta la funcion de Eliminar el Socio al Desarrollo con Elementos relacionados
+      this.DeleteVidaMejor(event);
+    },
+  });
+} // FIN | FND-009
+
 }
