@@ -99,9 +99,10 @@ export class FinancEncabezadoComponent implements OnInit, OnChanges {
   ngOnChanges() {
     // Verificacion de informacion de Compromiso
     // console.log('En change Encabezado ' + this.idProyectoTab);
-    // if (this.idProyectoTab !== undefined) {
-    //   this.getActividadFinanciamientoEncByIdActividadService(this.idProyectoTab);
-    // }
+    if (this.idActividadFinancEnc !== undefined) {
+      // this.getActividadFinanciamientoEncByIdActividadService(this.idProyectoTab);
+      this.idActividadFinancEnc = this.idActividadFinancEnc;
+    }
 
   } // FIN | ngOnChanges
 
@@ -227,7 +228,7 @@ export class FinancEncabezadoComponent implements OnInit, OnChanges {
   * Params: { idActividad }
   ****************************************************************************/
   private getActividadFinanciamientoEncByIdActividadService(idActividad: number) {
-    // Ejecuta el Servicio de invocar todos los Objetivos Vision Pais
+    // Ejecuta el Servicio de invocar todos los Objetivos Encabezado de Financiamiento
     this._financiamientoEncService.getActividadFinanciamientoEncByIdActividad(idActividad).subscribe(
       result => {
         if (result.status !== 200) {
@@ -240,7 +241,6 @@ export class FinancEncabezadoComponent implements OnInit, OnChanges {
           this._activityFinanciamientoEncModel.idActividad = this.JsonReceptionFinancimientoEncProyecto[0].idActividad;
           this._activityFinanciamientoEncModel.montoActividad = this.JsonReceptionFinancimientoEncProyecto[0].montoActividad;
           this._activityFinanciamientoEncModel.codigoFinancEnc = this.JsonReceptionFinancimientoEncProyecto[0].codigoFinancEnc;
-          // this.idActividadFinancEnc = Number(this.JsonReceptionFinancimientoEncProyecto[0].idActividadFinancEnc);
           this.idActividadFinancEnc = this._activityFinanciamientoEncModel.idActividadFinancEnc;
 
           // Carga de Relaciones

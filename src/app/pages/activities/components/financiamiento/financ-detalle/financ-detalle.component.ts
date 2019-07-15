@@ -275,7 +275,7 @@ export class FinancDetalleComponent implements OnInit, OnChanges {
     this.showLoader = true;
 
     this._financiamientoDetService.getAllSociosDesarrolloByIdActividad(idActividad).subscribe(
-      result => {
+      async result => {
         if (result.status !== 200) {
           this._notificacionesService.showToast('error', 'Error al Obtener la Información de todos Socios al Desarrollo', result.message);
           this.JsonReceptionAllSocioDesarrollo = [];
@@ -285,6 +285,7 @@ export class FinancDetalleComponent implements OnInit, OnChanges {
           this.JsonReceptionAllSocioDesarrollo = result.data;
 
           // Ejecuta la Funcion que llama al Servicio de Clasificacion de Financiamiento
+          await delay(100);
           this.getFindByIdActividadEncAndSocioDesarrolloService(this.idActividadFinancEnc);
 
           setTimeout(() => {
