@@ -14,6 +14,7 @@ import { ServiceSectoresService } from '../../../../services/service-sectores.se
 import { ServiceSectoresOcdeService } from '../../../../services/sectores/service-sectores-ocde.service';
 import { ActivitySectoresOcdeModel } from '../../../../models/sectores/model-sectores-ocde';
 import { NotificacionesService } from '../../../../../shared/services/notificaciones.service';
+import { ConfirmationService } from 'primeng/primeng';
 
 @Component({
   selector: 'ngx-sectores-ocde',
@@ -86,6 +87,8 @@ export class SectoresOcdeComponent implements OnInit, OnChanges {
 
   // Json Recpetion de la Clase
   public JsonReceptionAllSectoresOcdeCad: any;
+  public JsonReceptionAllSectoresOcdeCads: any;
+  public JsonSector: any;
   public JsonReceptionSectorOcdeCad: any;
   public JsonReceptionSectorByNivelOcdeCad: any;
   public JsonReceptionSectorByNivelOcdeCad2: any;
@@ -108,6 +111,7 @@ export class SectoresOcdeComponent implements OnInit, OnChanges {
   constructor(private _serviceSectoresService: ServiceSectoresOcdeService,
     private messageService: MessageService,
     private changeDetectorRef: ChangeDetectorRef,
+    private confirmationService: ConfirmationService,
     private _notificacionesService: NotificacionesService) {
     // Codigo del Constructor
   }
@@ -131,6 +135,7 @@ export class SectoresOcdeComponent implements OnInit, OnChanges {
     );
 
     // Llenado del Treeview de la Tabla
+    this.getAllSectoresOcdeCadService();
     this._serviceSectoresService.getFiles().then(files => this.filesTree4 = files);
 
     // this.getfindByIdNivelSectorService(1);
@@ -251,26 +256,19 @@ export class SectoresOcdeComponent implements OnInit, OnChanges {
     this._serviceSectoresService.getAllSectoresOcdeCad().subscribe(
       result => {
         if (result.status !== 200) {
-          this._notificacionesService.showToast('error', 'Error al Obtener la Información de todos los Sectores de Desarrollo', result.message);
+          this._notificacionesService.showToast('error', 'Error al Obtener la Información de todos los Sectores Ocde', result.message);
           this.JsonReceptionAllSectoresOcdeCad = [];
         } else if (result.status === 200) {
           this.JsonReceptionAllSectoresOcdeCad = result.data;
 
           // Setea la Lista de los todos Sectores Ocde/Cad
-          this.nodes = this.JsonReceptionAllSectoresOcdeCad.map((item) => {
+          this.JsonSendSectoresOcdeCadOpciones = this.JsonReceptionAllSectoresOcdeCad.map((item) => {
             return {
-              label: item.nombreSector,
-              data: item.codigoSector,
-              expandedIcon: 'fa fa-folder-open',
-              collapsedIcon: 'fa fa-folder',
-              children: [{
-                label: item.idNivelSector.nombreNivelSector,
-                data: item.codigoSector,
-                expandedIcon: 'fa fa-folder-open',
-                collapsedIcon: 'fa fa-folder',
-              }],
+              code: item.idSectorOcde.idSector,
+              name: item.idSectorOcde.nombreSector,
+              otro: item.porcentajePart,
             }
-          })
+          });
         }
       },
       error => {
@@ -494,6 +492,7 @@ export class SectoresOcdeComponent implements OnInit, OnChanges {
   * Params: { JsonSendSectoresOcdeCadOpciones }
   ****************************************************************************/
   async saveSectoresOcdeCad() {
+    this.calcularPercent();
     // Seteo de los campos iniciales
     this._activitySectoresOcdeModel.idActividad = { idActividad: this.idProyectoTab };
 
@@ -502,6 +501,7 @@ export class SectoresOcdeComponent implements OnInit, OnChanges {
       // Recorre los items seleccionados del Treeview
       for (let index = 0; index < this.JsonSendSectoresOcdeCadOpciones.length; index++) {
         const element = this.JsonSendSectoresOcdeCadOpciones[index];
+        this._activitySectoresOcdeModel.porcentajePart = Number(element.otro);
         // Creacion del Codigo de la Actividad con Sector Ocde/Cad | 3 = NEW-ASO
         // this.getSecuenciaListService('NEW-ASO');
 
@@ -555,10 +555,97 @@ export class SectoresOcdeComponent implements OnInit, OnChanges {
   } // FIN | cleanSectoresOcdeCad
 
 
-  calcularPorc() {
-    // console.log('Calcular el Porcentaje');
-  }
+ /****************************************************************************
+  * Funcion: calcularPercent
+  * Object Number: FND-007
+  * Fecha: 13-05-2019
+  * Descripcion: Method para calcular % Items del Socio al Desarrollo
+  * en la Insercion del Proyecto
+  * Objetivo: calculo de % el Json de los Items seleccionados
+  ****************************************************************************/
+ calcularPercent() {
+  const valorMax = (100 / this.JsonSendSectoresOcdeCadOpciones.length);
 
+  this.JsonSendSectoresOcdeCadOpciones.map(function (dato) {
+    dato.otro = valorMax.toFixed(2);
+    return dato;
+  });
+} // FIN | FND-007
+ /****************************************************************************
+  * Funcion: validaPercent
+  * Object Number: FND-006
+  * Fecha: 13-05-2019
+  * Descripcion: Method para validar % Items del Socio al Desarrollo
+  * en la Insercion del Proyecto
+  * Objetivo: % el Json de los Items seleccionados
+  ****************************************************************************/
+ validaPercent(event: any, codeIn: number) {
+  const otroIn = event.target.value;
+
+  this.JsonSendSectoresOcdeCadOpciones.map(function (dato) {
+    if (dato.code === codeIn) {
+      dato.otro = otroIn;
+    }
+    return dato;
+  });
+} // FIN | FND-006
+
+/****************************************************************************
+  * Funcion: confirm
+  * Object Number: FND-009
+  * Fecha: 01-07-2019
+  * Descripcion: Method confirm of the Class
+  * Objetivo: Eliminar el Detalle de Financiamiento seleccionado
+  * Params: { event }
+  ****************************************************************************/
+ private confirmocde(event: any) {
+  this.confirmationService.confirm({
+    message: 'Estas seguro de Eliminar del el Sector Ocde?',
+    accept: () => {
+      // Ejecuta la funcion de Eliminar el Socio al Desarrollo con Elementos relacionados
+      this.cleanOcde(event);
+    },
+  });
+} // FIN | FND-009
+/****************************************************************************
+  * Funcion: cleanSocioDesarrollo
+  * Object Number: FND-005
+  * Fecha: 13-05-2019
+  * Descripcion: Method para Eliminar Item del Socio al Desarrollo
+  * Objetivo: limpiar el Json de los Items seleccionados
+  ****************************************************************************/
+ private cleanOcde(event: any) {
+  for (let i = 0; i < this.JsonSendSectoresOcdeCadOpciones.length; i++) {
+    if (this.JsonSendSectoresOcdeCadOpciones[i].code === event) {
+      // Ejecuta el Servicio de invocar el registro de Socio al Desarrollo
+      this._serviceSectoresService.deleteOcde(this.codigoProyectoTab + '-ASO-' + this.JsonSendSectoresOcdeCadOpciones[i].code).subscribe(
+        result => {
+          if (result.status !== 200) {
+            this._notificacionesService.showToast('error', 'Error al Borrar la Información Sector OCDE/CAD', result.message);
+          } else if (result.status === 200) {
+            if (result.findRecord === true) {
+              this._notificacionesService.showToast('error', 'Error al Borrar la Información de Sector de OCDE/CAD', result.message);
+              this.ngOnInit();
+            } else {
+              this._notificacionesService.showToast('default', 'Sector OCDE/CAD', result.message);
+              this.ngOnInit();
+            }
+          }
+        },
+        error => {
+          this._notificacionesService.showToast('error', 'Error al Borrar la Información de Sector OCDE/CAD', JSON.stringify(error.error.message));
+        },
+      );
+      // Borramos el Item del Json
+      this.JsonSendSectoresOcdeCadOpciones.splice(i, 1);
+      // para el Bucle
+      break;
+    }
+  }
+  this.JsonSendSectoresOcdeCadOpciones = [...this.JsonSendSectoresOcdeCadOpciones];
+} // FIN | FND-005
+
+  
   /****************************************************************************
    @author Nahum Martinez
    @name getfindByIdActividadOcdeCad

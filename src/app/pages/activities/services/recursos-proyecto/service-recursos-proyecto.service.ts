@@ -178,4 +178,19 @@ FindByIdActividadRecurso(idActividadRecurso: number): Observable<any> {
             params: { 'tokenApi': this.tokenHeader },
           });
         }// FIN | FND-00006
+
+/****************************************************************************
+* Funcion: FND-00007
+* Fecha: 07-01-2019
+* Descripcion: Metodo que sirve para poder ingresar un nuevo Recurso Proyecto
+* Params: { actividadRecursoJson }
+****************************************************************************/
+   Uploadfile(uploadFile): Observable<any> {
+    // Parametros del EndPoint
+    const paramsSend = uploadFile;
+    return this._http.post(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 92), paramsSend, {
+        headers: this.headers,
+        params: { 'tokenApi': this.tokenHeader },
+    });
+}// FIN | FND-00007
 }

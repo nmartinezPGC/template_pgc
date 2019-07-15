@@ -168,58 +168,6 @@ export class ModalModificarComponent implements OnInit {
 
 
 
-    /****************************************************************************
-* Funcion: saveUbicaciones
-* Object Number: 007
-* Fecha: 21-03-2019
-* Descripcion: Method Save Ubicaciones, en BD por llamado a la API
-* Objetivo: Salvar Ubicaciones de Proyectos, en BD por llamado a EndPoint de
-* la API | /mant-actividades/ubicaciones/new
-
-****************************************************************************/
-    async  saveEspaciosTrabajoUsuario() {
-        this.getSecuenciaListService('NEW-ACT');
-
-        await delay(100);
-
-        // Actualizamos la Siguiente Secuencia
-        // this.updateSecuenciaService(this.JsonReceptionUserDetail.idUsuario, 1);
-
-        /* spinner starts on Start Function */
-
-
-        // Seteo de los Campo Relacionales
-         this._espacioTrabajoUsuarioModel.idRolEspacioTrabajo = { idRol: this.idRol };
-         this._espacioTrabajoUsuarioModel.idEspacioTrabajo =  this.idEspacioTrabajo;
-        this._espacioTrabajoUsuarioModel.idUsuarioEspacioTrabajo = { idUsuario: this.idUsuario };
-        this._espacioTrabajoUsuarioModel.codEspacioTrabajoUsuario = this.codSec;
-
-        this.JsonIdEspacioUsuario.forEach(element => {
-        this._espacioTrabajoUsuarioModel.idRol1 = element.idRol;
-        this._espacioTrabajoUsuarioModel.idRolEspacioTrabajo = { idRol: this._espacioTrabajoUsuarioModel.idRol1 };
-       this._espacioTrabajoUsuarioModel.idEspacio = element.idEspacio;
-       this.idEspacioTrabajo = element.idEspacioTrabajo;
-        this._espacioTrabajoUsuarioModel.idEspacioTrabajo = { idEspacioTrabajo: this.idEspacioTrabajo };
-             this._espacioTrabajoUsuarioModel.idEspacioTrabajo = element.idEspacioTrabajo;
-             (this._espacioTrabajoUsuarioModel);
-
-            this._usuariosService.newEspacioTrabajoUsuario(this._espacioTrabajoUsuarioModel).subscribe(
-                response => {
-                    (this._espacioTrabajoModel);
-                    if (response.status !== 200) {
-
-                        // console.log('error al ingresar el espacio de trabajo de usuario');
-                        this._notificacionesService.showToast('error', 'Error al Ingresar la Información del Usuario', response.message);
-                    } else if (response.status === 200) {
-                        // console.log('ingreso con exito el espacio de trabajo de usuario');
-                       // (this.idUsuario + ' id usuario');
-                        this._notificacionesService.showToast('default', 'La Información del Usuario, se ha ingresado con exito', response.message);
-                    }
-                },
-            );
-        });
-
-    } // FIN saveUbicaciones
 
 
     /*****************************************************
@@ -253,9 +201,9 @@ export class ModalModificarComponent implements OnInit {
     closeModal() {
         this.activeModal.close();
     }
-    fyByIdEspacioUsuario(idUsuarioEspacioTrabajo: number) {
+    fyByIdEspacioUsuario(idEspaciosTrabajoUsuarios: number) {
         // Ejecutamos el Recurso del EndPoint
-        this._usuariosService.fyByIdEspacioTrabajoUsuario(idUsuarioEspacioTrabajo).subscribe(
+        this._usuariosService.fyByIdEspacioTrabajoUsuario(idEspaciosTrabajoUsuarios).subscribe(
           response => {// console.log("id espacios"+ this.fyByIdEspaciostrabajo);
             if (response.status !== 200) {
                 this._notificacionesService.showToast('error', 'Error al Eliminar la Id Interna de la Planificacion del Proyecto', response.message);
@@ -264,8 +212,8 @@ export class ModalModificarComponent implements OnInit {
               // instancia data con los perfiles;
               this.data3 = this.JsonReceptionFyByEspacioTrabajoUsuario;
               this._espacioTrabajoUsuarioModel.idEspacioTrabajo = this.data3.idEspacioTrabajo.idEspacio;
-              this._espacioTrabajoUsuarioModel.idUsuarioEspacioTrabajo = this.data3.idUsuarioEspacioTrabajo.idUsuario;
-              this._espacioTrabajoUsuarioModel.idRolEspacioTrabajo = this.data3.idRolEspacioTrabajo.idRol1;
+              this._espacioTrabajoUsuarioModel.idUsuarioEspacioTrabajo = this.data3.idUsuario.idUsuario;
+              this._espacioTrabajoUsuarioModel.idRolEspacioTrabajo = this.data3.idRol.idRol1;
             }
           },
           error => {

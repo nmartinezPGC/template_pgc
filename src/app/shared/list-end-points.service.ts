@@ -214,10 +214,11 @@ export class ListEndPointsService {
         groupEndPoint: 'espacioTrabajoUsuarioGroup',
         descEndPoint: 'Busca todos los Espacios de Trabajo de la API que han sido asignados a los Usuarios',
       },
-      findByIdEspacioTrabajoUsuarios: {
+      findByIdEspaciotrabajousuario: {
         id: 2,
         nameEndpoint: 'FindByIdEspacioTrabajoUsuarios',
         urlEndPoint: '/espacios-trabajo-usuario/findByIdEspaciotrabajousuario/',
+        params: 'idEspaciosTrabajoUsuarios',
         groupEndPoint: 'espacioTrabajoUsuarioGroup',
         descEndPoint: 'Busca el Espacio de Trabajo con el ID Espacio de Trab/User, de parametro',
       },
@@ -605,7 +606,7 @@ export class ListEndPointsService {
       findAllSectoresOcdeCad: { // Modulo de Sectores OCDE/CAD
         id: 14,
         nameEndpoint: 'findAllSectoresOcdeCad',
-        urlEndPoint: '/sectores/ocde-cad',
+        urlEndPoint: '/mant-actividades/sectores/ocde-cad-proyecto',
         params: '{ }',
         groupEndPoint: 'actividadesCRUDGroup',
         descEndPoint: 'Listar todos los Sectores OCDE/CAD registrados en la BD',
@@ -661,7 +662,7 @@ export class ListEndPointsService {
       findAllSectoresGobierno: { // Modulo de Sectores de Gobierno
         id: 20,
         nameEndpoint: 'findAllSectoresGobierno',
-        urlEndPoint: '/sectores/gobierno',
+        urlEndPoint: '/mant-actividades/sectores/gobierno-proyecto',
         params: '{ }',
         groupEndPoint: 'actividadesCRUDGroup',
         descEndPoint: 'Listar todos los Sectores Gobierno registrados en la BD',
@@ -709,7 +710,7 @@ export class ListEndPointsService {
       findAllSectoresCamposTransversales: { // Modulo de Campos Transversales
         id: 26,
         nameEndpoint: 'findAllSectoresCamposTransversales',
-        urlEndPoint: '/sectores/campos-transversales',
+        urlEndPoint: '/mant-actividades/sectores/campos-transversales-proyecto',
         params: '{ }',
         groupEndPoint: 'actividadesCRUDGroup',
         descEndPoint: 'Listar todos los Campos Transversales registrados en la BD',

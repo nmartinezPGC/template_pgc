@@ -264,11 +264,11 @@ export class UsuarioService {
 * Params: {  }
 * Autor: Edgar Ramirez
 ****************************************************************************/
-    fyByIdEspacioTrabajo(idEspacioTrabajoIn: number): Observable<any> {
+    fyByIdEspacioTrabajo(idEspaciosTrabajoUsuarios: number): Observable<any> {
         // Retorno de la Funcion
         // console.log("hola");
-        const idEspacioTrabajo: number = idEspacioTrabajoIn;
-        return this._http.get(this._systemEndPointsService.getEndPointService('espacioTrabajoGroup', 2) + idEspacioTrabajo, {
+        const idEspacioTrabajoIn: number = idEspaciosTrabajoUsuarios;
+        return this._http.get(this._systemEndPointsService.getEndPointService('espacioTrabajoGroup', 2) + idEspacioTrabajoIn, {
             headers: this.headers,
             params: { 'tokenApi': this.tokenHeader },
         });
@@ -276,18 +276,18 @@ export class UsuarioService {
 * Funcion: FND-00013
 * Fecha: 05-03-2019
 * Descripcion: Metodo que sirve para poder optener los espacios de trabajo por
-* Params: { idUsuario }
+* Params: { idEspaciosTrabajoUsuarios }
 * Autor: Edgar Ramirez
 ****************************************************************************/
     }// FIN | FND-00013
-    fyByIdEspacioTrabajoUsuario(idUsuarioEspacioTrabajo1: number): Observable<any> {
-        const idUsuarioEspacioTrabajo: number = idUsuarioEspacioTrabajo1;
-        return this._http.get(this._systemEndPointsService.getEndPointService('espacioTrabajoUsuarioGroup', 2) + idUsuarioEspacioTrabajo, {
+    fyByIdEspacioTrabajoUsuario(idEspaciosTrabajoUsuarios: number): Observable<any> {
+        const idEspaciosTrabajoUsuario: number = idEspaciosTrabajoUsuarios;
+        return this._http.get(this._systemEndPointsService.getEndPointService('espacioTrabajoUsuarioGroup', 2) + idEspaciosTrabajoUsuario, {
             headers: this.headers,
             params: { 'tokenApi': this.tokenHeader },
         });
     }
-
+// FIN | FND-00013
 
 
     /****************************************************************************
