@@ -78,7 +78,7 @@ export class ServiceSectoresGobiernoService {
     return this._http.get(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 20), {
       headers: this.headers,
       params: { 'tokenApi': this.tokenHeader },
-    }).map(response => <TreeNode[]>response);
+    });
   } // FIN | FND-00003
 
 
@@ -174,4 +174,21 @@ export class ServiceSectoresGobiernoService {
       params: { 'tokenApi': this.tokenHeader },
     });
   } // FIN | FND-00008
+
+     /****************************************************************************
+    * Funcion: FND-00004
+    * Fecha: 15-05-2019
+    * Descripcion: Metodo para borrar datos de Socio al Desarrollo
+    * Objetivo: Borrar Socio al Desarrollo al Proyecto
+    * Params: { codigoActividad }
+    ****************************************************************************/
+   deleteActividadGobierno(codigoActividad: string): Observable<any> {
+    const paramsSend: string = codigoActividad;
+
+    // Retorno de la Funcion
+    return this._http.delete(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 25) + paramsSend, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  } // FIN | FND-00004
 }

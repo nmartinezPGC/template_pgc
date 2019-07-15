@@ -42,7 +42,9 @@ declare var $: any;
 })
 export class UsuariosComponent implements OnInit {
   @Input() idUsuario;
+  @Input() idUsuario1;
   @Input() idPerfil;
+  @Input() idEspaciosTrabajoUsuarios;
 
   // Variables Tipo JSON, para usarlas en los Servicios Invocados
   public _EspacioTrabajoModel: EspacioTrabajoModel;
@@ -1102,9 +1104,10 @@ export class UsuariosComponent implements OnInit {
     activeModal.componentInstance.modalHeader = 'Espacio de Trabajo Asignado ';
     activeModal.componentInstance.modalidEspacioTrabajoUsuario = idEspaciosTrabajoUsuarios;
   }
-  showLargeModal2() {
+  showLargeModal2(idEspaciosTrabajoUsuarios: number) {
     const activeModal = this.modalService.open(ModalModificarComponent, { size: 'lg', container: 'nb-layout' });
     activeModal.componentInstance.modalHeader = 'Modificar Espacio de Trabajo asignado';
+    activeModal.componentInstance.modalidEspacioTrabajoUsuario = idEspaciosTrabajoUsuarios;
   }
 
 

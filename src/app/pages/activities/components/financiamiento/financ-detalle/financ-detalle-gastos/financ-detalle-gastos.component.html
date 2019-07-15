@@ -1,47 +1,91 @@
 <!-- Maquetacion de la seccion de Gastos del Detalle de finanaciamiento del Proyecto -->
 <!-- NAM|2019-05-29 -->
 
-<nb-card>
+<!-- INI | Servicio de confirmacion de Accion -->
+<p-confirmDialog header="Eliminar Gasto" icon="pi pi-exclamation-triangle" width="425"></p-confirmDialog>
+
+<!-- ==================================================================================== -->
+<!-- INI | Ventana de listado de Gastos -->
+<nb-card fullWidth>
   <nb-card-body>
     <div class="details">
-      <div class="title">
+      <div class="title" style="margin-left: 5%">
         Gastos <img src="../../../../../../assets/icons/forms/payment-method_24.png" alt="">
       </div>
 
-      <div class="description">
+      <div class="description" style="cursor:pointer">
         <!-- No data Found image -->
         <div class="container6">
           <img src="../../../../../../../assets/icons/forms/no-search-result_teaser.png"
-            alt="No se encotraron datos de Compromisos" *ngIf="showNoData == true">
+            alt="No se encotraron datos de Gastos" *ngIf="showNoData == true">
         </div>
 
-        <img src="../../../../../../../assets/images/loading.gif" *ngIf="showLoader == true"
+        <img src="../../../../../../../assets/images/loaderBlack.gif" *ngIf="showLoader == true"
           style="width: 20%; margin-left: 40%" alt="Cargando...">
+
         <table class="table table-striped table-hover" *ngIf="showLoader == false && showNoData == false">
-          <thead>
+          <thead class="thead-dark">
             <tr>
               <th scope="col">No</th>
               <th scope="col" nbPopover="Tipo de Transacción" nbPopoverMode="hint">Tipo</th>
-              <th scope="col" nbPopover="Monto de la Transacción" nbPopoverMode="hint">Monto</th>
               <th scope="col" nbPopover="Moneda de la Transacción" nbPopoverMode="hint">Mon.</th>
               <th scope="col" nbPopover="Fecha de Transacción" nbPopoverMode="hint">Fecha</th>
+              <th scope="col" nbPopover="Monto de la Transacción" nbPopoverMode="hint">Monto</th>
               <th scope="col">Acción</th>
             </tr>
           </thead>
           <tbody>
             <!-- Datos de gastos -->
+            <tr *ngFor="let itemGastos of JsonMapAllFinanciamientoDetGasto; let homeTableIndex = index">
+              <th scope="row">{{ homeTableIndex + 1 }}</th>
+              <td>{{ itemGastos.descTipoTransaccion }}</td>
+              <td>{{ itemGastos.nombreMoneda }}</td>
+              <td>{{ itemGastos.fechaTransaccion | date: 'dd/MM/yyyy' }}</td>
+              <td>{{ itemGastos.montoGasto | number: '3.2-2' }}</td>
+              <td style="text-align: center;">
+                <img class="accButton" src="../../../../../../assets/icons/forms/pencil-striped-symbol_16.png"
+                  nbPopover="Editar Gasto" nbPopoverMode="hint" alt="Editar" (click)="showDialog(itemGastos.idActividadFinancDetGasto, itemGastos.idTipoTransaccion,
+                    itemGastos.montoGasto, itemGastos.idMoneda, itemGastos.fechaTransaccion,
+                    itemGastos.codigoFinancGasto)">
+                <img class="accButton" src="../../../../../../assets/icons/forms/rubbish-bin_16.png"
+                  nbPopover="Eliminar Gasto" nbPopoverMode="hint" alt="Eliminar"
+                  (click)="confirm(itemGastos.codigoFinancGasto)"></td>
+            </tr>
           </tbody>
+          <tfoot>
+            <tr>
+              <th colspan="4" scope="row">Total</th>
+              <td>{{ montoTotalGastos | number: '3.2-2' }}</td>
+            </tr>
+          </tfoot>
         </table>
       </div>
     </div>
   </nb-card-body>
 
   <nb-card-footer>
-    <a nbPopover="Selecciona la Meta del ODS" nbPopoverMode="hint">
-      <i class="ion-flag"></i>
+    <a (click)="showDialog()" nbPopover="Ingresar Gasto" nbPopoverMode="hint" style="cursor: pointer">
+      <i class="ion-plus-round"></i>
     </a>
-    <a href="" target="_blanck" nbPopover="Ver Información del ODS " nbPopoverMode="hint">
+    <a nbPopover="Registra la información del Gasto de parte del Socio al Desarrollo." nbPopoverMode="hint">
       <i class="ion-help"></i>
     </a>
   </nb-card-footer>
 </nb-card>
+<!-- FIN | Ventana de listado de Gastos -->
+<!-- ==================================================================================== -->
+
+<!-- ==================================================================================== -->
+<!-- INI | Formulario Modal de Registro de Gastos -->
+<p-dialog [(visible)]="display" [modal]="true" showEffect="fade" [draggable]="false" (onHide)="closeModal()"
+  [width]="300">
+  <p-header>
+    Registro de Gasto
+  </p-header>
+  <ngx-financ-detalle-gastos-form [idProyectoTab]="idProyectoTab" [idUsuarioTab]="idUsuarioTab"
+    [codigoProyectoTab]="codigoProyectoTab" [idActividadFinancDet]="idActividadFinancDet"
+    [JsonGastosSelect]="JsonGastosSelect">
+  </ngx-financ-detalle-gastos-form>
+</p-dialog>
+<!-- FIN | Formulario Modal de Registro de Gastos -->
+<!-- ==================================================================================== -->

@@ -16,12 +16,9 @@ import { CompleterData, CompleterService, CompleterItem } from 'ng2-completer';
 import { UserService } from '../../../@core/data/users.service'; // Servicio de Usuarios
 import { ListasComunesService } from '../../common-list/services/listas-comunes.service'; // Servicio de Lista de Comunes
 
-import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster'; // Servicio de Notificaciones
 import { LocalDataSource } from 'ng2-smart-table'; // DataLocal de Ejemplo para el JSON de envio
 import { ActivityConfigSmartTableService } from '../services/activity-config-smart-table.service';
 import { IMyDpOptions, IMyDateModel } from 'mydatepicker';
-import 'style-loader!angular2-toaster/toaster.css';
-// import { SmartTableService } from '../../../@core/data/smart-table.service'; // Servicio de la SmartTable de la API
 
 // Modelo y Servicios de la Clase Activiades
 import { ActivityPlanificacionModel } from '../models/model-planificacion-activity';
@@ -31,8 +28,9 @@ import { ActivityValidateFormService } from '../services/activity-validate-form.
 import { delay } from 'q';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ActivityIdInternaModel } from '../models/model-idinterna-activity';
-import { FilterdataPipe } from '../pipes/filterdata.pipe';
 import { MessageService } from 'primeng/api';
+
+import { NotificacionesService } from '../../shared/services/notificaciones.service'; // Servicio de Notificaciones
 
 @Component({
   selector: 'ngx-new-activity',
@@ -46,7 +44,7 @@ import { MessageService } from 'primeng/api';
   templateUrl: './new-activity.component.html',
   styleUrls: ['./new-activity.component.scss', '../../components/notifications/notifications.component.scss'],
   // changeDetection: ChangeDetectionStrategy.OnPush, // Se usa para Actualizar la Informacion con otro evento
-  providers: [ToasterService, ActivityConfigSmartTableService, ActivityService, ActivityValidateFormService, MessageService],
+  providers: [NotificacionesService, ActivityConfigSmartTableService, ActivityService, ActivityValidateFormService, MessageService],
 })
 export class NewActivityComponent implements OnInit {
   /****************************************************************************
@@ -105,22 +103,6 @@ export class NewActivityComponent implements OnInit {
   redirectDelay: number = 0;
 
   protected dataService: CompleterData;
-
-  config: ToasterConfig;
-
-  // Consfiguracion del Notificador
-  position = 'toast-bottom-full-width';
-  animationType = 'slideDown';
-  title = 'Se ha grabado la Información! ';
-  content = 'los cambios han sido grabados temporalmente, en la PGC!';
-  timeout = 20000;
-  toastsLimit = 5;
-  type = 'default';
-
-  isNewestOnTop = true;
-  isHideOnClick = true;
-  isDuplicatesPrevented = false;
-  isCloseButton = true;
 
   p: number = 1;
 
@@ -227,8 +209,8 @@ export class NewActivityComponent implements OnInit {
     private _listasComunesService: ListasComunesService,
     // private service: SmartTableService,
     private changeDetectorRef: ChangeDetectorRef,
-    // Inicializa el ToasterService
-    private _toasterService: ToasterService,
+    // Inicializa el NotificacionesService
+    private _notificacionesService: NotificacionesService,
     protected _router: Router,
     public _activityConfigSmartTableService: ActivityConfigSmartTableService,
     public _activityService: ActivityService,
@@ -371,61 +353,6 @@ export class NewActivityComponent implements OnInit {
 
 
   /****************************************************************************
-  * Funcion: makeToast
-  * Object Number: 003
-  * Fecha: 16-08-2018
-  * Descripcion: Method makeToast of the Class
-  * Objetivo: makeToast in the method header API
-  ****************************************************************************/
-  makeToast() {
-    this.showToast(this.type, this.title, this.content);
-  } // FIN | makeToast
-
-
-  /****************************************************************************
-  * Funcion: showToast
-  * Object Number: 004
-  * Fecha: 16-08-2018
-  * Descripcion: Method showToast of the Class
-  * Objetivo: showToast in the method header API
-  ****************************************************************************/
-  private showToast(type: string, title: string, body: string) {
-    this.config = new ToasterConfig({
-      positionClass: this.position,
-      timeout: this.timeout,
-      newestOnTop: this.isNewestOnTop,
-      tapToDismiss: this.isHideOnClick,
-      preventDuplicates: this.isDuplicatesPrevented,
-      animation: this.animationType,
-      limit: this.toastsLimit,
-    });
-    const toast: Toast = {
-      type: type,
-      title: title,
-      body: body,
-      timeout: this.timeout,
-      showCloseButton: this.isCloseButton,
-      bodyOutputType: BodyOutputType.TrustedHtml,
-    };
-    // this._toasterService.popAsync(toast);
-    this._toasterService.pop(toast);
-  } // FIN | showToast
-
-
-  /****************************************************************************
-  * Funcion: toasterconfig
-  * Object Number: 004.1
-  * Fecha: 16-08-2018
-  * Descripcion: Method showToast of the Class
-  * Objetivo: showToast in the method header API
-  ****************************************************************************/
-  public toasterconfig: ToasterConfig =
-    new ToasterConfig({
-      showCloseButton: { 'warning': true, 'error': true },
-    }); // FIN | toasterconfig
-
-
-  /****************************************************************************
   * Funcion: onItemSelect
   * Object Number: 005
   * Fecha: 09-01-2019
@@ -433,7 +360,7 @@ export class NewActivityComponent implements OnInit {
   * Internas
   * Objetivo: enviar al Json de ID'Intermas la información que ocupa la API
   ****************************************************************************/
-  onItemSelect(item: any) {
+  private onItemSelect(item: any) {
     // Envia la Organizacion seleccionada
     this.selectedIdOrganizacion = item ? item.id : '';
     this.selectedDescOrganizacion = item ? item.itemName : '';
@@ -457,7 +384,7 @@ export class NewActivityComponent implements OnInit {
   * Internas
   * Objetivo: enviar al Json de ID'Intermas la información que ocupa la API
   ****************************************************************************/
-  onItemSelectPais(item: any) {
+  private onItemSelectPais(item: any) {
     // Asignamos el Pais seleccionado
     this._activityModel.idPais = item.id;
     this.inicialesPais = item.iniciales;
@@ -477,7 +404,7 @@ export class NewActivityComponent implements OnInit {
   * Objetivo: enviar al Json de Proyectos el Id Espacio de Trabajo la
   * información que ocupa la API
   ****************************************************************************/
-  OnItemDeSelectEspacioTrabajo(item: any) {
+  private OnItemDeSelectEspacioTrabajo(item: any) {
     // Asignamos el Pais seleccionado
     this._activityModel.idEspacioTrabajo = item.id;
     this.tipoEspacioTrabajo = item.tipoEspacioTrabajo;
@@ -491,7 +418,7 @@ export class NewActivityComponent implements OnInit {
   * Descripcion: Method para Guardar Items de la SmartTable
   * Objetivo: enviar al Json de ID'Intermas la información que ocupa la API
   ****************************************************************************/
-  onSaveConfirm(event) {
+  private onSaveConfirm(event) {
     if (window.confirm('Estas seguro de grabar la información modificada?')) {
       // event.newData['name'] += ' + added in code';
       alert(event.newData['username']);
@@ -509,7 +436,7 @@ export class NewActivityComponent implements OnInit {
   * Descripcion: Method para Editar listas Items de la SmartTable
   * Objetivo: enviar al Json de ID'Intermas la información que ocupa la API
   ****************************************************************************/
-  onEditedCompleter(event: { title: '' }): boolean {
+  private onEditedCompleter(event: { title: '' }): boolean {
     // this.cell.newValue = event.title;
     this.JsonOrganizationSelect = event.title;
     return false;
@@ -531,7 +458,7 @@ export class NewActivityComponent implements OnInit {
       result => {
 
         if (result.status !== 200) {
-          this.showToast('error', 'Error al Obtener la Información del Usuario', result.message);
+          this._notificacionesService.showToast('error', 'Error al Obtener la Información del Usuario', result.message);
         } else {
           this.JsonReceptionUserDetail = result.data;
           this.idTipoOrganizacionUsario = this.JsonReceptionUserDetail.idTipoOrganizacionUsuario.idTipoOrganizacion;
@@ -578,14 +505,14 @@ export class NewActivityComponent implements OnInit {
     this._listasComunesService.getAllEstados(3).subscribe(
       result => {
         if (result.status !== 200) {
-          this.showToast('error', 'Error al Obtener la Información de Estados', result.message);
+          this._notificacionesService.showToast('error', 'Error al Obtener la Información de Estados', result.message);
         } else if (result.status === 200) {
           // NADA
           this.JsonReceptionEstados = result.data;
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información de Estados', JSON.stringify(error.message));
+        this._notificacionesService.showToast('error', 'Error al Obtener la Información de Estados', JSON.stringify(error.message));
         // this.userDatailsService();
       },
     );
@@ -605,13 +532,13 @@ export class NewActivityComponent implements OnInit {
     this._listasComunesService.getAllSectoresEjecutores().subscribe(
       result => {
         if (result.status !== 200) {
-          this.showToast('error', 'Error al Obtener la Información de los Sectores Ejecutores', result.message);
+          this._notificacionesService.showToast('error', 'Error al Obtener la Información de los Sectores Ejecutores', result.message);
         } else if (result.status === 200) {
           this.JsonReceptionSectorEjecutor = result.data;
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información de Sectores', JSON.stringify(error.message));
+        this._notificacionesService.showToast('error', 'Error al Obtener la Información de Sectores', JSON.stringify(error.message));
       },
     );
   } // FIN | sectorEjecutorListService
@@ -629,13 +556,13 @@ export class NewActivityComponent implements OnInit {
     this._listasComunesService.getAllEstrategias().subscribe(
       result => {
         if (result.status !== 200) {
-          this.showToast('error', 'Error al Obtener la Información de los Estrategias', result.message);
+          this._notificacionesService.showToast('error', 'Error al Obtener la Información de los Estrategias', result.message);
         } else if (result.status === 200) {
           this.JsonReceptionEstrategias = result.data;
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información de las Estrategias', JSON.stringify(error.message));
+        this._notificacionesService.showToast('error', 'Error al Obtener la Información de las Estrategias', JSON.stringify(error.message));
       },
     );
   } // FIN | estrategiasListService
@@ -653,13 +580,13 @@ export class NewActivityComponent implements OnInit {
     this._listasComunesService.getAllPresupuesto().subscribe(
       result => {
         if (result.status !== 200) {
-          this.showToast('error', 'Error al Obtener la Información de los Presupuesto', result.message);
+          this._notificacionesService.showToast('error', 'Error al Obtener la Información de los Presupuesto', result.message);
         } else if (result.status === 200) {
           this.JsonReceptionPresupuesto = result.data;
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información de los Presupuestos', JSON.stringify(error));
+        this._notificacionesService.showToast('error', 'Error al Obtener la Información de los Presupuestos', JSON.stringify(error));
       },
     );
   } // FIN | presupuestoListService
@@ -677,13 +604,13 @@ export class NewActivityComponent implements OnInit {
     this._listasComunesService.getAllEspaciosTrabajo().subscribe(
       result => {
         if (result.status !== 200) {
-          this.showToast('error', 'Error al Obtener la Información de los Espacios de Trabajo', result.message);
+          this._notificacionesService.showToast('error', 'Error al Obtener la Información de los Espacios de Trabajo', result.message);
         } else if (result.status === 200) {
           this.JsonReceptionEspaciosTrabajo = result.data;
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información de los Espacios de Trabajo', JSON.stringify(error.message));
+        this._notificacionesService.showToast('error', 'Error al Obtener la Información de los Espacios de Trabajo', JSON.stringify(error.message));
       },
     );
   } // FIN | espaciosTrabajoListService
@@ -701,7 +628,7 @@ export class NewActivityComponent implements OnInit {
     this._listasComunesService.getAllEspaciosTrabajoUsuario(9).subscribe(
       result => {
         if (result.status !== 200) {
-          this.showToast('error', 'Error al Obtener la Información de los Espacios de Trabajo', result.message);
+          this._notificacionesService.showToast('error', 'Error al Obtener la Información de los Espacios de Trabajo', result.message);
         } else if (result.status === 200) {
           this.JsonReceptionEspaciosTrabajoUsuario = result.data;
 
@@ -718,7 +645,7 @@ export class NewActivityComponent implements OnInit {
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información de los Espacios de Trabajo', JSON.stringify(error.message));
+        this._notificacionesService.showToast('error', 'Error al Obtener la Información de los Espacios de Trabajo', JSON.stringify(error.message));
       },
     );
   } // FIN | espaciosTrabajoUsuarioListService
@@ -737,13 +664,13 @@ export class NewActivityComponent implements OnInit {
       result => {
         if (result.status !== 200) {
           // Respuesta del Error
-          this.showToast('error', 'Error al Obtener la Información de los Tipos de Organizacion', result.message);
+          this._notificacionesService.showToast('error', 'Error al Obtener la Información de los Tipos de Organizacion', result.message);
         } else if (result.status === 200) {
           this.JsonReceptionTiposOrganizacion = result.data;
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información de los Tipos de Organizacion', JSON.stringify(error.message));
+        this._notificacionesService.showToast('error', 'Error al Obtener la Información de los Tipos de Organizacion', JSON.stringify(error.message));
       },
     );
   } // FIN | tiposOrganizacionListService
@@ -763,7 +690,7 @@ export class NewActivityComponent implements OnInit {
         if (result.status !== 200) {
           // Respuesta del Error
           this.JsonReceptionCategoriasOrganizacion = null;
-          this.showToast('error', 'Error al Obtener la Información de las Categorias de Organizacion', result.message);
+          this._notificacionesService.showToast('error', 'Error al Obtener la Información de las Categorias de Organizacion', result.message);
         } else if (result.status === 200) {
           this.JsonReceptionCategoriasOrganizacion = result.data;
 
@@ -776,7 +703,7 @@ export class NewActivityComponent implements OnInit {
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información de las Categorias de Organizacion', JSON.stringify(error.message));
+        this._notificacionesService.showToast('error', 'Error al Obtener la Información de las Categorias de Organizacion', JSON.stringify(error.message));
       },
     );
   } // FIN | tiposOrganizacionListService
@@ -794,7 +721,7 @@ export class NewActivityComponent implements OnInit {
     this._listasComunesService.getAllPaises().subscribe(
       result => {
         if (result.status !== 200) {
-          this.showToast('error', 'Error al Obtener la Información de los Paises', result.message);
+          this._notificacionesService.showToast('error', 'Error al Obtener la Información de los Paises', result.message);
         } else if (result.status === 200) {
           this.JsonReceptionPaises = result.data;
 
@@ -809,7 +736,7 @@ export class NewActivityComponent implements OnInit {
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información de los Paises', JSON.stringify(error.message));
+        this._notificacionesService.showToast('error', 'Error al Obtener la Información de los Paises', JSON.stringify(error.message));
       },
     );
   } // FIN | paisesAllListService
@@ -839,7 +766,7 @@ export class NewActivityComponent implements OnInit {
           this.dropdownList = [];
           this.selectedItems = [];
 
-          this.showToast('error', 'Error al Obtener la Información de las Organizaciones', result.message);
+          this._notificacionesService.showToast('error', 'Error al Obtener la Información de las Organizaciones', result.message);
         } else if (result.status === 200) {
           this.JsonReceptionAllOrganizaciones = result.data;
 
@@ -856,7 +783,7 @@ export class NewActivityComponent implements OnInit {
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información de las Organizaciones', JSON.stringify(error.message));
+        this._notificacionesService.showToast('error', 'Error al Obtener la Información de las Organizaciones', JSON.stringify(error.message));
       },
     );
   } // FIN | organizacionesAllListService
@@ -874,7 +801,7 @@ export class NewActivityComponent implements OnInit {
     this._listasComunesService.getSecuenciaActividad(codSecuencia).subscribe(
       result => {
         if (result.status !== 200) {
-          this.showToast('error', 'Error al Obtener la Información de la Secuencia', JSON.stringify(result.message));
+          this._notificacionesService.showToast('error', 'Error al Obtener la Información de la Secuencia', JSON.stringify(result.message));
         } else if (result.status === 200) {
           this.secuenciaDeActividad = result.data;
 
@@ -884,7 +811,7 @@ export class NewActivityComponent implements OnInit {
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información de la Secuencia', JSON.stringify(error.message));
+        this._notificacionesService.showToast('error', 'Error al Obtener la Información de la Secuencia', JSON.stringify(error.message));
       },
     );
   } // FIN | FND-00001
@@ -908,13 +835,13 @@ export class NewActivityComponent implements OnInit {
     this._activityService.updateSecuence(jsonSecuencia, idSecuencia).subscribe(
       result => {
         if (result.status !== 200) {
-          this.showToast('error', 'Error al Actualizar la Información de la Secuencia', JSON.stringify(result.message));
+          this._notificacionesService.showToast('error', 'Error al Actualizar la Información de la Secuencia', JSON.stringify(result.message));
         } else if (result.status === 200) {
           // Result success
         }
       },
       error => {
-        this.showToast('error', 'Error al Actualizar la Información de la Secuencia', JSON.stringify(error.message));
+        this._notificacionesService.showToast('error', 'Error al Actualizar la Información de la Secuencia', JSON.stringify(error.message));
       },
     );
   } // FIN | FND-00001.1
@@ -938,7 +865,7 @@ export class NewActivityComponent implements OnInit {
           this.dropdownList = [];
           this.selectedItems = [];
 
-          this.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', result.message);
+          this._notificacionesService.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', result.message);
         } else if (result.status === 200) {
           this.JsonReceptionTipoPaisOrganizacionesData = result.data;
           /*this.data1 = this.JsonReceptionTipoPaisOrganizacionesData;
@@ -966,7 +893,7 @@ export class NewActivityComponent implements OnInit {
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', JSON.stringify(error.message));
+        this._notificacionesService.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', JSON.stringify(error.message));
       },
     );
   } // FIN | organizacionesIdTipoIdPaisListService
@@ -991,7 +918,7 @@ export class NewActivityComponent implements OnInit {
           this.selectedItems = [];
           this.JsonReceptionTipoPaisCategoriaOrganizacionesData = null;
 
-          this.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', result.message);
+          this._notificacionesService.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', result.message);
         } else if (result.status === 200) {
           this.JsonReceptionTipoPaisCategoriaOrganizacionesData = result.data;
           // Asignacion de los Valores del Json al Select
@@ -1007,7 +934,7 @@ export class NewActivityComponent implements OnInit {
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', JSON.stringify(error));
+        this._notificacionesService.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', JSON.stringify(error));
       },
     );
   } // FIN | organizacionesIdTipoIdPaisIdCategoriaListService
@@ -1031,7 +958,7 @@ export class NewActivityComponent implements OnInit {
           this.dropdownList = [];
           this.selectedItems = [];
 
-          this.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', result.message);
+          this._notificacionesService.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', result.message);
         } else if (result.status === 200) {
           this.JsonReceptionPaisOrganizacionesData = result.data;
 
@@ -1048,7 +975,7 @@ export class NewActivityComponent implements OnInit {
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', JSON.stringify(error));
+        this._notificacionesService.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', JSON.stringify(error));
       },
     );
   } // FIN | organizacionesIdPaisListService
@@ -1076,7 +1003,7 @@ export class NewActivityComponent implements OnInit {
           this.dropdownList = [];
           this.selectedItems = [];
 
-          this.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', result.message);
+          this._notificacionesService.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', result.message);
         } else if (result.status === 200) {
           this.JsonReceptionPaisOrganizacionesData = result.data;
 
@@ -1093,7 +1020,7 @@ export class NewActivityComponent implements OnInit {
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', JSON.stringify(error));
+        this._notificacionesService.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', JSON.stringify(error));
       },
     );
   } // FIN | organizacionesIdTipoListService
@@ -1110,7 +1037,7 @@ export class NewActivityComponent implements OnInit {
   private pushJsonIdInterna() {
     // Validacion de la Informacion a Ingresar
     if (this._activityModel.idInterna === '' || this._activityModel.idInterna === null) {
-      this.showToast('error', 'Error al Ingresar la Información de las Organizaciones', 'Debes de Ingresar el Código del ID Interna, para continuar');
+      this._notificacionesService.showToast('error', 'Error al Ingresar la Información de las Organizaciones', 'Debes de Ingresar el Código del ID Interna, para continuar');
       this.mySelectIdInterna.nativeElement.focus();
       return -1;
     } else {
@@ -1120,16 +1047,16 @@ export class NewActivityComponent implements OnInit {
 
     // Validamos que se ha Seleccionado los Filtros Previos a la ID Interna
     if (this._activityModel.idPais === 0 && this._activityModel.idOrganizacion === 0) {
-      this.showToast('error', 'Error al Ingresar la Información de las ID Internas', 'Debes Seleccionar el País, para continuar');
+      this._notificacionesService.showToast('error', 'Error al Ingresar la Información de las ID Internas', 'Debes Seleccionar el País, para continuar');
       return -1;
     } else if (this._activityModel.idTipoOrganizacion === 0 && this._activityModel.idOrganizacion === 0) {
-      this.showToast('error', 'Error al Ingresar la Información de las ID Internas', 'Debes Seleccionar el Tipo de Organización, para continuar');
+      this._notificacionesService.showToast('error', 'Error al Ingresar la Información de las ID Internas', 'Debes Seleccionar el Tipo de Organización, para continuar');
       return -1;
     } else if (this._activityModel.idCatOrganizacion === 0 && this._activityModel.idOrganizacion === 0) {
-      this.showToast('error', 'Error al Ingresar la Información de las ID Internas', 'Debes Seleccionar la Categoría de Organización, para continuar');
+      this._notificacionesService.showToast('error', 'Error al Ingresar la Información de las ID Internas', 'Debes Seleccionar la Categoría de Organización, para continuar');
       return -1;
     } else if (this._activityModel.idOrganizacion === 0) {
-      this.showToast('error', 'Error al Ingresar la Información de las ID Internas', 'Debes Seleccionar la Organización, para continuar');
+      this._notificacionesService.showToast('error', 'Error al Ingresar la Información de las ID Internas', 'Debes Seleccionar la Organización, para continuar');
       return -1;
     }
   } // FIN | pushJsonIdInterna
@@ -1175,12 +1102,12 @@ export class NewActivityComponent implements OnInit {
       result => {
         if (result.status !== 200) {
           // Resultadps del Error
-          this.showToast('error', 'Error al Obtener la Información de la Organizacion, con los parametros enviados', result.message);
+          this._notificacionesService.showToast('error', 'Error al Obtener la Información de la Organizacion, con los parametros enviados', result.message);
         } else if (result.status === 200) {
           this.countIdInternaFind = result.data;
 
           if (this.countIdInternaFind !== 0) {
-            this.showToast('error', 'Error al Ingresar la Información de Id Interna en las Organizaciones', 'Ya existe un Código de Id Interna registrado en la BD');
+            this._notificacionesService.showToast('error', 'Error al Ingresar la Información de Id Interna en las Organizaciones', 'Ya existe un Código de Id Interna registrado en la BD');
             return -1;
           } else {
             // Ingresa el primer Item del json
@@ -1193,12 +1120,12 @@ export class NewActivityComponent implements OnInit {
             });
             this._activityModel.idInterna = '';
             // this.data = this.JsonIdInternaOrganizacion;
-            this.showToast('success', 'ID Interna Ingresada', 'Se ha Ingresado la ID Interna, a la Organización seleccionada');
+            this._notificacionesService.showToast('success', 'ID Interna Ingresada', 'Se ha Ingresado la ID Interna, a la Organización seleccionada');
           }
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', <any>error);
+        this._notificacionesService.showToast('error', 'Error al Obtener la Información de las Organizaciones, con los parametros enviados', <any>error);
       },
     );
   } // FIN | findOrganizacionByCode
@@ -1213,7 +1140,7 @@ export class NewActivityComponent implements OnInit {
   * Objetivo: Ingresar un Nuevo proyecto a la PGC
   * @param { _activityModel }
   ****************************************************************************/
-  async saveActivity(caseSave: number) {
+  private async saveActivity(caseSave: number) {
     // Seteo de las variables del Model al json de Java
     this._activityModel.idEstadoActivity = { idEstado: this._activityModel.idEstado };
     this._activityModel.idEspacioTrabajoActivity = { idEspacioTrabajo: this._activityModel.idEspacioTrabajo };
@@ -1231,7 +1158,7 @@ export class NewActivityComponent implements OnInit {
     const responseData: any = this._activityValidateFormService.responseData;
 
     if (responseData.error === true) {
-      this.showToast('error', 'Error al Ingresar la Información del Proyecto', responseData.msg);
+      this._notificacionesService.showToast('error', 'Error al Ingresar la Información del Proyecto', responseData.msg);
       return -1;
     }
 
@@ -1270,7 +1197,7 @@ export class NewActivityComponent implements OnInit {
   * Objetivo: Ingresar un Nuevo proyecto a la PGC
   * @param { _activityModel }
   ****************************************************************************/
-  async newActivity() {
+  private async newActivity() {
     // Setea el Usuario que esta Creando el proytecto
     this._activityModel.idUsuarioCreador = { idUsuario: this.JsonReceptionUserDetail.idUsuario };
 
@@ -1283,7 +1210,7 @@ export class NewActivityComponent implements OnInit {
     this._activityService.newActivityGeneral(this._activityModel).subscribe(
       response => {
         if (response.status !== 200) {
-          this.showToast('error', 'Error en el Servidor al Ingresar la Información del Proyecto', response.message);
+          this._notificacionesService.showToast('error', 'Error en el Servidor al Ingresar la Información del Proyecto', response.message);
           // Ocultamos el Loader la Funcion
           setTimeout(() => {
             this._spinner.hide();
@@ -1291,7 +1218,7 @@ export class NewActivityComponent implements OnInit {
         } else if (response.status === 200) {
           // Verificamos que la Actividad no Exista en la BD
           if (response.find === true) {
-            this.showToast('error', 'Error al Ingresar la Información del Proyecto', response.message);
+            this._notificacionesService.showToast('error', 'Error al Ingresar la Información del Proyecto', response.message);
             // Ocultamos el Loader la Funcion
             setTimeout(() => {
               this._spinner.hide();
@@ -1321,7 +1248,7 @@ export class NewActivityComponent implements OnInit {
               this._spinner.hide();
             }, 2000);
 
-            this.showToast('default', 'La Información del Proyecto, se ha ingresado con exito', response.message);
+            this._notificacionesService.showToast('default', 'La Información del Proyecto, se ha ingresado con exito', response.message);
             // Carga la tabla Nuevamente
             // this.resetActivity();
           }
@@ -1329,7 +1256,7 @@ export class NewActivityComponent implements OnInit {
       },
       error => {
         // Error en la petición de la API
-        this.showToast('error', 'Ha ocurrido un Error al Registrar la información del Proyecto, por favor verifica que todo este bien!!', JSON.stringify(error.message));
+        this._notificacionesService.showToast('error', 'Ha ocurrido un Error al Registrar la información del Proyecto, por favor verifica que todo este bien!!', JSON.stringify(error.message));
         // Ocultamos el Loader la Funcion
         setTimeout(() => {
           this._spinner.hide();
@@ -1348,7 +1275,7 @@ export class NewActivityComponent implements OnInit {
   * Objetivo: Actualizar un Nuevo proyecto a la PGC
   * @param { _activityModel }
   ****************************************************************************/
-  async editActivity(idActividadIn: number) {
+  private async editActivity(idActividadIn: number) {
     // Setamos el Usuario que Modifica el Form
     this._activityModel.idUsuarioMod = { idUsuario: this.JsonReceptionUserDetail.idUsuario };
 
@@ -1356,7 +1283,7 @@ export class NewActivityComponent implements OnInit {
     this._activityService.editActivityGeneral(this._activityModel, idActividadIn).subscribe(
       response => {
         if (response.status !== 200) {
-          this.showToast('error', 'Error en el Servidor al Actualizar la Información del Proyecto', response.message);
+          this._notificacionesService.showToast('error', 'Error en el Servidor al Actualizar la Información del Proyecto', response.message);
           // Ocultamos el Loader la Funcion
           setTimeout(() => {
             this._spinner.hide();
@@ -1369,12 +1296,12 @@ export class NewActivityComponent implements OnInit {
           setTimeout(() => {
             this._spinner.hide();
           }, 2000);
-          this.showToast('default', 'La Información del Proyecto, se ha Actualizado con exito', response.message);
+          this._notificacionesService.showToast('default', 'La Información del Proyecto, se ha Actualizado con exito', response.message);
         }
       },
       error => {
         // Error en la petición de la API
-        this.showToast('error', 'Ha ocurrido un Error al Actualizar la información del Proyecto, por favor verifica que todo este bien!!', JSON.stringify(error.message));
+        this._notificacionesService.showToast('error', 'Ha ocurrido un Error al Actualizar la información del Proyecto, por favor verifica que todo este bien!!', JSON.stringify(error.message));
         // Ocultamos el Loader la Funcion
         setTimeout(() => {
           this._spinner.hide();
@@ -1391,7 +1318,7 @@ export class NewActivityComponent implements OnInit {
   * Descripcion: Method que Limpia el Formulario de Activiades
   * Objetivo: Limpiar Formulario
   ****************************************************************************/
-  resetActivity() {
+  private resetActivity() {
     // Limpiar Formulario de la Actividad
     this.ngOnInit();
 
@@ -1413,22 +1340,22 @@ export class NewActivityComponent implements OnInit {
   * Objetivo: Generar Planificacion del Proyecto
   * @param { _activityPlanificacionModel }
   ****************************************************************************/
-  newActividadPlanificacion() {
+  private newActividadPlanificacion() {
     // Seteamos los valores del Modelo de Planificacion a Enviar
 
     // Ejecutamos el Recurso del EndPoint
     this._activityService.newActivityPlanificacion(this._activityPlanificacionModel).subscribe(
       response => {
         if (response.status !== 200) {
-          this.showToast('error', 'Error al Ingresar la Información de la Planificacion del Proyecto', response.message);
+          this._notificacionesService.showToast('error', 'Error al Ingresar la Información de la Planificacion del Proyecto', response.message);
         } else if (response.status === 200) {
           // Verificamos que la Actividad no Exista en la BD
-          this.showToast('default', 'La Información de la Planificacion del Proyecto, se ha ingresado con exito', response.message);
+          this._notificacionesService.showToast('default', 'La Información de la Planificacion del Proyecto, se ha ingresado con exito', response.message);
         }
       },
       error => {
         // Informacion del Error que se capturo de la Secuencia
-        this.showToast('error', 'Ha ocurrido un Error al Registrar la información de Planificación del Proyecto, por favor verifica que todo este bien!!', JSON.stringify(error.message));
+        this._notificacionesService.showToast('error', 'Ha ocurrido un Error al Registrar la información de Planificación del Proyecto, por favor verifica que todo este bien!!', JSON.stringify(error.message));
       },
     );
     // Return
@@ -1443,20 +1370,20 @@ export class NewActivityComponent implements OnInit {
   * Objetivo: Actulizar la Planificacion del Proyecto
   * @param { _activityPlanificacionModel, idActividadPlan }
   ****************************************************************************/
-  editActividadPlanificacion(idActividadIn: number) {
+  private editActividadPlanificacion(idActividadIn: number) {
     // Ejecutamos el Recurso del EndPoint
     this._activityService.editActivityPlanificacion(this._activityPlanificacionModel, idActividadIn).subscribe(
       response => {
         if (response.status !== 200) {
-          this.showToast('error', 'Error al Actualizar la Información de la Planificacion del Proyecto', response.message);
+          this._notificacionesService.showToast('error', 'Error al Actualizar la Información de la Planificacion del Proyecto', response.message);
         } else if (response.status === 200) {
           // Verificamos que la Actividad no Exista en la BD
-          this.showToast('default', 'La Información de la Planificacion del Proyecto, se ha Actualizar con exito', response.message);
+          this._notificacionesService.showToast('default', 'La Información de la Planificacion del Proyecto, se ha Actualizar con exito', response.message);
         }
       },
       error => {
         // Informacion del Error que se capturo de la Secuencia
-        this.showToast('error', 'Ha ocurrido un Error al Actualizar la información de Planificación del Proyecto, por favor verifica que todo este bien!!', JSON.stringify(error.message));
+        this._notificacionesService.showToast('error', 'Ha ocurrido un Error al Actualizar la información de Planificación del Proyecto, por favor verifica que todo este bien!!', JSON.stringify(error.message));
         // Ocultamos el Loader la Funcion
         setTimeout(() => {
           this._spinner.hide();
@@ -1476,7 +1403,7 @@ export class NewActivityComponent implements OnInit {
   * Objetivo: Generar las Fechas de Planificacion al Modelo
   * @param event
   ****************************************************************************/
-  onDateChanged(event: IMyDateModel, paraEvalDate: number) {
+  private onDateChanged(event: IMyDateModel, paraEvalDate: number) {
     // event properties are: event.date, event.jsdate, event.formatted and event.epoc
     switch (paraEvalDate) {
       case 1:
@@ -1510,13 +1437,13 @@ export class NewActivityComponent implements OnInit {
     this._listasComunesService.getAllTipoIniciativasCSS().subscribe(
       result => {
         if (result.status !== 200) {
-          this.showToast('error', 'Error al Obtener la Información de los Tipos de Iniciativa CSS', result.message);
+          this._notificacionesService.showToast('error', 'Error al Obtener la Información de los Tipos de Iniciativa CSS', result.message);
         } else if (result.status === 200) {
           this.JsonReceptionTipoIniciativaCss = result.data;
         }
       },
       error => {
-        this.showToast('error', 'Error al Obtener la Información de los Tipos de Iniciativa CSS', JSON.stringify(error.message));
+        this._notificacionesService.showToast('error', 'Error al Obtener la Información de los Tipos de Iniciativa CSS', JSON.stringify(error.message));
       },
     );
   } // FIN | getTipoIniciativasCssService
@@ -1530,7 +1457,7 @@ export class NewActivityComponent implements OnInit {
   * Objetivo: Generar Id internas del Proyecto
   * @param { _activityPlanificacionModel }
   ****************************************************************************/
-  newActividadIdInterna() {
+  private newActividadIdInterna() {
     // Seteamos los valores del Modelo de Planificacion a Enviar
     this.JsonIdInternaOrganizacion.forEach(element => {
       this._activityIdInternaModel.idOrganizacionIdInterna = { idOrganizacion: this._activityModel.idOrganizacion };
@@ -1541,15 +1468,15 @@ export class NewActivityComponent implements OnInit {
       this._activityService.newActivityIdInterna(this._activityIdInternaModel).subscribe(
         response => {
           if (response.status !== 200) {
-            this.showToast('error', 'Error al Ingresar la Información de la Id Interna del Proyecto', response.message);
+            this._notificacionesService.showToast('error', 'Error al Ingresar la Información de la Id Interna del Proyecto', response.message);
           } else if (response.status === 200) {
             // Verificamos que la Actividad no Exista en la BD
-            this.showToast('default', 'La Información de la Id Interna del Proyecto, se ha ingresado con exito', response.message);
+            this._notificacionesService.showToast('default', 'La Información de la Id Interna del Proyecto, se ha ingresado con exito', response.message);
           }
         },
         error => {
           // Informacion del Error que se capturo de la Secuencia
-          this.showToast('error', 'Ha ocurrido un Error al Registrar la información de la Id Interna del Proyecto, por favor verifica que todo este bien!!', JSON.stringify(error.message));
+          this._notificacionesService.showToast('error', 'Ha ocurrido un Error al Registrar la información de la Id Interna del Proyecto, por favor verifica que todo este bien!!', JSON.stringify(error.message));
         },
       );
     });
@@ -1565,20 +1492,20 @@ export class NewActivityComponent implements OnInit {
   * Objetivo: Eliminar la Id Interna del Proyecto
   * @param { codIdInterna }
   ****************************************************************************/
-  deletedActividadIdInterna(codIdInterna: string) {
+  private deletedActividadIdInterna(codIdInterna: string) {
     // Ejecutamos el Recurso del EndPoint
     this._activityService.deletedActivityIdInterna(codIdInterna).subscribe(
       response => {
         if (response.status !== 200) {
-          this.showToast('error', 'Error al Eliminar la Id Interna de la Planificacion del Proyecto', response.message);
+          this._notificacionesService.showToast('error', 'Error al Eliminar la Id Interna de la Planificacion del Proyecto', response.message);
         } else if (response.status === 200) {
           // Verificamos que la Actividad no Exista en la BD
-          this.showToast('default', 'La Información de la Id Interna del Proyecto, se ha eliminado con exito', response.message);
+          this._notificacionesService.showToast('default', 'La Información de la Id Interna del Proyecto, se ha eliminado con exito', response.message);
         }
       },
       error => {
         // Informacion del Error que se capturo de la Secuencia
-        this.showToast('error', 'Ha ocurrido un Error al Actualizar la información de Id Interna del Proyecto, por favor verifica que todo este bien!!', JSON.stringify(error.error.message));
+        this._notificacionesService.showToast('error', 'Ha ocurrido un Error al Actualizar la información de Id Interna del Proyecto, por favor verifica que todo este bien!!', JSON.stringify(error.error.message));
         // Ocultamos el Loader la Funcion
         setTimeout(() => {
           this._spinner.hide();

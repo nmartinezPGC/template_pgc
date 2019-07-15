@@ -254,7 +254,7 @@ $color-loader: #9aa0a5;
     font-weight: bold;
   }
 
-  // tarjetas de Comprmisos
+  // tarjetas de Gastos
   nb-card-body {
     display: flex;
     flex-direction: column;
@@ -287,7 +287,7 @@ $color-loader: #9aa0a5;
   }
 
   .details {
-    padding: 1.25rem 1rem 0;
+    padding: 1.25rem 0.25rem 0;
 
     .title {
       font-family: nb-theme(font-secondary);

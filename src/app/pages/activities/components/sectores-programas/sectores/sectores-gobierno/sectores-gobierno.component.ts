@@ -14,6 +14,7 @@ import { ListasComunesService } from '../../../../../common-list/services/listas
 import { ActivitySectoresGobiernoModel } from '../../../../models/sectores/model-sectores-gobierno';
 import { ServiceSectoresGobiernoService } from '../../../../services/sectores/service-sectores-gobierno.service';
 import { NotificacionesService } from '../../../../../shared/services/notificaciones.service';
+import { ConfirmationService } from 'primeng/primeng';
 
 @Component({
   selector: 'ngx-sectores-gobierno',
@@ -59,6 +60,8 @@ export class SectoresGobiernoComponent implements OnInit, OnChanges {
    * Configuracion Lazy Load de TreeView
    */
   loading: boolean;
+  // Loaders
+  loader: boolean = true;
 
   /**
    * Configuracion del Dropdow List NMA
@@ -122,6 +125,7 @@ export class SectoresGobiernoComponent implements OnInit, OnChanges {
     private messageService: MessageService,
     private changeDetectorRef: ChangeDetectorRef,
     private _notificacionesService: NotificacionesService,
+    private confirmationService: ConfirmationService,
     private _listasComunesService: ListasComunesService) {
     // Codigo del Constructor
   }
@@ -144,7 +148,7 @@ export class SectoresGobiernoComponent implements OnInit, OnChanges {
     // Llenado del Treeview de la Tabla
     this._serviceSectoresGobiernoService.getFiles().then(files => this.filesTree4 = files);
 
-    // this.getAllSectoresGobiernoService();
+     this.getAllSectoresGobiernoService();
    // this.getfindByIdNivelSectorService(1);
   }
 
@@ -303,18 +307,11 @@ export class SectoresGobiernoComponent implements OnInit, OnChanges {
           this.JsonReceptionAllSectoresGobierno = result.data;
 
           // Setea la Lista de los todos Sectores Ocde/Cad
-          this.nodes = this.JsonReceptionAllSectoresGobierno.map((item) => {
+          this.JsonSendSectoresGobiernoOpciones = this.JsonReceptionAllSectoresGobierno.map((item) => {
             return {
-              label: item.nombreSector,
-              data: item.codigoSector,
-              expandedIcon: 'fa fa-folder-open',
-              collapsedIcon: 'fa fa-folder',
-              children: [{
-                label: item.idNivelSector.nombreNivelSector,
-                data: item.codigoSector,
-                expandedIcon: 'fa fa-folder-open',
-                collapsedIcon: 'fa fa-fold*er',
-              }],
+              code: item.idSectorGobierno.idSector,
+              name: item.idSectorGobierno.nombreSector,
+              otro: item.porcentajePart,
             }
           })
         }
@@ -466,6 +463,7 @@ export class SectoresGobiernoComponent implements OnInit, OnChanges {
   * Params: { JsonSendSectoresGobiernoOpciones }
   ****************************************************************************/
   saveSectoresGobierno() {
+    this.calcularPercent();
     // Seteo de los campos iniciales
     this._activitySectoresGobiernoModel.idActividad = { idActividad: this.idProyectoTab };
 
@@ -474,6 +472,7 @@ export class SectoresGobiernoComponent implements OnInit, OnChanges {
       // Recorre los items seleccionados del Treeview
       for (let index = 0; index < this.JsonSendSectoresGobiernoOpciones.length; index++) {
         const element = this.JsonSendSectoresGobiernoOpciones[index];
+        this._activitySectoresGobiernoModel.porcentajePart = Number(element.otro);
 
         // Asignacion del Sector de Gobierno
         this._activitySectoresGobiernoModel.idSectorGobierno = { idSector: element.code };
@@ -522,5 +521,85 @@ export class SectoresGobiernoComponent implements OnInit, OnChanges {
     this.JsonSendSectoresGobiernoOpciones = [...this.JsonSendSectoresGobiernoOpciones];
        // console.log(this.JsonSendSectoresGobiernoOpciones);
       } // FIN | cleanSectoresGobierno
+
+      /****************************************************************************
+  * Funcion: calcularPercent
+  * Object Number: FND-007
+  * Fecha: 13-05-2019
+  * Descripcion: Method para calcular % Items del Socio al Desarrollo
+  * en la Insercion del Proyecto
+  * Objetivo: calculo de % el Json de los Items seleccionados
+  ****************************************************************************/
+ calcularPercent() {
+  const valorMax = (100 / this.JsonSendSectoresGobiernoOpciones.length);
+
+  this.JsonSendSectoresGobiernoOpciones.map(function (dato) {
+    dato.otro = valorMax.toFixed(2);
+    return dato;
+  });
+} // FIN | FND-007
+ /****************************************************************************
+  * Funcion: validaPercent
+  * Object Number: FND-006
+  * Fecha: 13-05-2019
+  * Descripcion: Method para validar % Items del Socio al Desarrollo
+  * en la Insercion del Proyecto
+  * Objetivo: % el Json de los Items seleccionados
+  ****************************************************************************/
+ validaPercent(event: any, codeIn: number) {
+  const otroIn = event.target.value;
+
+  this.JsonSendSectoresGobiernoOpciones.map(function (dato) {
+    if (dato.code === codeIn) {
+      dato.otro = otroIn;
+    }
+    return dato;
+  });
+} // FIN | FND-006
+
+/****************************************************************************
+  * Funcion: confirm
+  * Object Number: FND-009
+  * Fecha: 01-07-2019
+  * Descripcion: Method confirm of the Class
+  * Objetivo: Eliminar el Detalle de Financiamiento seleccionado
+  * Params: { event }
+  ****************************************************************************/
+ confirm(event: any) {
+  this.confirmationService.confirm({
+    message: 'Estas seguro de Eliminar del el Sector de Gobierno',
+    accept: () => {
+      this.loader = true;
+      for (let i = 0; i < this.JsonSendSectoresGobiernoOpciones.length; i++) {
+        if (this.JsonSendSectoresGobiernoOpciones[i].code === event) {
+          // Ejecuta el Servicio de invocar el registro de Socio al Desarrollo
+          this._serviceSectoresGobiernoService.deleteActividadGobierno(this.codigoProyectoTab + '-ASG-' + this.JsonSendSectoresGobiernoOpciones[i].code).subscribe(
+            result => {
+              if (result.status !== 200) {
+                this._notificacionesService.showToast('error', 'Error al Borrar la Información Sector de Gobierno', result.message);
+              } else if (result.status === 200) {
+                if (result.findRecord === true) {
+                  this._notificacionesService.showToast('error', 'Error al Borrar la Información de Sector de Gobierno', result.message);
+                  this.ngOnInit();
+                } else {
+                  this._notificacionesService.showToast('default', 'Sector de Gobierno', result.message);
+                }
+              }
+            },
+            error => {
+              this._notificacionesService.showToast('error', 'Error al Borrar la Información de Sector de Gobierno', JSON.stringify(error.error.message));
+            },
+          );
+          // Borramos el Item del Json
+          this.JsonSendSectoresGobiernoOpciones.splice(i, 1);
+          // para el Bucle
+          break;
+        }
+      }
+      this.JsonSendSectoresGobiernoOpciones = [...this.JsonSendSectoresGobiernoOpciones];
+    },
+  });
+} // FIN | FND-009
+
 
 }

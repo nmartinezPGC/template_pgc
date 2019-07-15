@@ -4,37 +4,52 @@
 * @name FinanciamientoModule
 * @alias _financiamientoModule
 * @version 1.0.0
-* @fecha 24-06-2019
+* @fecha 09-07-2019
 */
 
 import { NgModule } from '@angular/core';
 
-// Financiamiento Encabezado
-import { FinanciamientoComponent } from './financiamiento.component';
-import { FinancEncabezadoComponent } from './financ-encabezado/financ-encabezado.component';
+// Rutas del Modulo de Financiamiento
+import { FinanciamientoRoutingModule, routedComponents } from './financiamiento-routing.module';
 
-// Financiamiento Detalle
-import { FinancDetalleComponent } from './financ-detalle/financ-detalle.component';
-import { FinancDetalleCompromisosComponent } from './financ-detalle/financ-detalle-compromisos/financ-detalle-compromisos.component';
-import { FinancDetalleCompromisosFormComponent } from './financ-detalle/financ-detalle-compromisos/financ-detalle-compromisos-form/financ-detalle-compromisos-form.component';
-import { FinancDetalleDesembolsosComponent } from './financ-detalle/financ-detalle-desembolsos/financ-detalle-desembolsos.component';
-import { FinancDetalleDesembolsosFormComponent } from './financ-detalle/financ-detalle-desembolsos/financ-detalle-desembolsos-form/financ-detalle-desembolsos-form.component';
-import { FinancDetalleGastosComponent } from './financ-detalle/financ-detalle-gastos/financ-detalle-gastos.component';
-import { FinancDetalleGastosFormComponent } from './financ-detalle/financ-detalle-gastos/financ-detalle-gastos-form/financ-detalle-gastos-form.component';
+// Modulo de thema Akevo
+import { ThemeModule } from '../../../../@theme/theme.module';
+import { NgxCurrencyModule } from 'ngx-currency';
+import { CalendarModule, DialogModule, AccordionModule } from 'primeng/primeng';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
 
+// Configuracion de mascara de Dinero
+export const customCurrencyMaskConfig = {
+  align: 'right',
+  allowNegative: true,
+  allowZero: true,
+  decimal: '.',
+  precision: 2,
+  prefix: '',
+  suffix: '',
+  thousands: ',',
+  nullable: true,
+};
 
 @NgModule({
-  declarations: [],
-  imports: [
-    FinanciamientoComponent,
-    FinancEncabezadoComponent,
-    FinancDetalleComponent,
-    FinancDetalleCompromisosComponent,
-    FinancDetalleCompromisosFormComponent,
-    FinancDetalleDesembolsosComponent,
-    FinancDetalleDesembolsosFormComponent,
-    FinancDetalleGastosComponent,
-    FinancDetalleGastosFormComponent,
+  imports: [ // NAM|2019-07-09
+    ThemeModule,
+    NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
+    CalendarModule,
+    DialogModule,
+    ConfirmDialogModule,
+    AccordionModule,
+    FinanciamientoRoutingModule,
+  ],
+  declarations: [
+    ...routedComponents,
+  ],
+  providers: [
+    ConfirmationService,
+  ],
+  exports: [
+    ...routedComponents,
   ],
 })
 export class FinanciamientoModule { }

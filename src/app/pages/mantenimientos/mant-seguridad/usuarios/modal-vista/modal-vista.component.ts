@@ -6,7 +6,6 @@ import { VistaModalModel } from '../../../models/vista.modal.model';
 import { NotificacionesService } from '../../../../shared/services/notificaciones.service';
 import {  ToasterConfig  } from 'angular2-toaster'; // Servicio de Notificaciones
 
-
 @Component({
     selector: 'ngx-usuarios',
     templateUrl: './modal-vista.component.html',
@@ -24,7 +23,6 @@ export class ModalVistaComponent implements OnInit {
     verSeleccion: string = '';
     datos;
 
-
     data: any;
     data1: any;
     data2: any;
@@ -37,7 +35,6 @@ export class ModalVistaComponent implements OnInit {
         this.datos = this.data2
     }
 
-
     ngOnInit() {
         // Inicializacion del Modelo de la Clase
         this._espacioTrabajoUsuarioModel = new VistaModalModel(
@@ -46,9 +43,7 @@ export class ModalVistaComponent implements OnInit {
             this._espacioTrabajoUsuarioModel.idUsuario;
             this._espacioTrabajoUsuarioModel.idRolIN;
 
-
         this.ListAllEspaciosTrabajoUsuario();
-        this.findByIdEspacioTrabajoUsuario(this.modalidEspacioTrabajoUsuario);
 
     }
     config: ToasterConfig;
@@ -108,35 +103,9 @@ export class ModalVistaComponent implements OnInit {
         );
     } // FIN | ListAllEspaciosTrabajo
 
-     findByIdEspacioTrabajoUsuario(idEspaciosTrabajoUsuarios: number) {
-        // Ejecutamos el Recurso del EndPoint
-        this._usuariosService.findByIdEspacioTrabajoUsuario(idEspaciosTrabajoUsuarios).subscribe(
-          response => {
-            if (response.status !== 200) {
-                this._notificacionesService.showToast('error', 'Error al Eliminar la Id Interna de la Planificacion del Proyecto', response.message);
-            } else if (response.status === 200) {
-              this.JsonReceptionfindByIdEspacioTrabajoUsuario = response.data;
-              this.data3 = this.JsonReceptionfindByIdEspacioTrabajoUsuario;
-              this._espacioTrabajoUsuarioModel.idEspacioTrabajo = this.data3.idEspacioTrabajo.idEspacio;
-              this._espacioTrabajoUsuarioModel.idRolEspacioTrabajo = this.data3.idRolEspacioTrabajo.idRol1;
-            }
-          },
-          error => {
-            // Informacion del Error que se capturo de la Secuencia
-            this._notificacionesService.showToast('error', 'Ha ocurrido un Error al cargar un dato, por favor verifica que todo este bien!!', JSON.stringify(error.error.message));
-            // Ocultamos el Loader la Funcion
-          },
-        );
-        // Return
-      } // FIN | findByIdEspacioTrabajoUsuario
-
-
-
-
-
     closeModal() {
         this.activeModal.close();
     }
 
-
 }
+

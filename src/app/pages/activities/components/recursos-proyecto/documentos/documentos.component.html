@@ -2,7 +2,7 @@
 <!-- Componente para los Mensajes en pantalla -->
 <toaster-container [toasterconfig]="config"></toaster-container>
 <!-- Agrupacion de la Informacion de Documentos-->
-<p-fieldset legend="Agregar Documento" [toggleable]="true">
+<p-fieldset legend="Agregar Documento" [toggleable]="true" [transitionOptions]="'0ms'" [collapsed] = "true">
   <div class="row">
     <div class="col-md-6">
       <fieldset class="fieldCheck">
@@ -51,7 +51,7 @@
           [(ngModel)]="_recursosproyectoModel.urlActividadRecursoDocumento" required />
         </div>
         <strong><label>Subir Recurso</label></strong>
-        <p-fileUpload (change)="upload($event)" name="myfile[]" url="./upload.php"
+        <p-fileUpload (change)="Upload($event)" name="myfile[]"
           maxFileSize="1000000"></p-fileUpload>
       </fieldset>
     </div>

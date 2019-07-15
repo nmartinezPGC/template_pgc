@@ -325,9 +325,151 @@ export class FinanciamientoDetService {
   /**
    * Seccion de Desembolsos ******************************************************
    */
+  /****************************************************************************
+  * Funcion: FND-00013
+  * Fecha: 06-06-2019
+  * Descripcion: Metodo para Ingresar Desembolsos de Socio al Desarrollo
+  * Objetivo: Ingresar Desembolsos de Socio al Desarrollo
+  * Params: { jsonSendActividadFinanciamientoDetDesembolso }
+  ****************************************************************************/
+  newActividadFinanciamientoDetDesembolso(jsonSendActividadFinanciamientoDetDesembolso: any): Observable<any> {
+    const paramsSend: any = jsonSendActividadFinanciamientoDetDesembolso;
+
+    // Retorno de la Funcion
+    return this._http.post(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 70.204), paramsSend, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  } // FIN | FND-00013
+
+
+  /****************************************************************************
+    * Funcion: FND-00014
+    * Fecha: 06-06-2019
+    * Descripcion: Metodo para eliminar datos de Financiamiento Detalle
+    * Objetivo: Eliminar Financiamiento Detalle al Proyecto
+    * Params: { codigoFinancDesembolso }
+    ****************************************************************************/
+  deleteActividadFinanciamientoDetDesembolso(codigoFinancDesembolso: string): Observable<any> {
+    const paramsSend: string = codigoFinancDesembolso;
+
+    // Retorno de la Funcion
+    return this._http.delete(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 70.205) + paramsSend, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  } // FIN | FND-00014
+
+
+  /****************************************************************************
+  * Funcion: FND-00015
+  * Fecha: 08-06-2019
+  * Descripcion: Metodo para obtener los todos los Desembolsos
+  * Objetivo: Listar todos los Desembolsos
+  * Params: { idActividadFinancEnc }
+  ****************************************************************************/
+  getAllActividadFinanciamientoDetDesembolso(idActividadFinancEnc: number): Observable<any> {
+    const paramsSend: number = idActividadFinancEnc;
+
+    // Retorno de la Funcion
+    return this._http.get(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 70.206) + paramsSend, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  } // FIN | FND-00015
+
+
+  /****************************************************************************
+  * Funcion: FND-00016
+  * Fecha: 13-06-2019
+  * Descripcion: Metodo para Actualizar Desembolsos de Socio al Desarrollo
+  * Objetivo: Actualizar Desembolsos de Socio al Desarrollo
+  * Params: { idActividadFinancDetDesembolso, jsonSendActividadFinanciamientoDetDesembolso }
+  ****************************************************************************/
+  editActividadFinanciamientoDetDesembolso(idActividadFinancDetDesembolso: number, jsonSendActividadFinanciamientoDetDesembolso: any): Observable<any> {
+    const paramsSend1: number = idActividadFinancDetDesembolso;
+    const paramsSend2: any = jsonSendActividadFinanciamientoDetDesembolso;
+
+    // Retorno de la Funcion
+    return this._http.put(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 70.207) + paramsSend1, paramsSend2, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  } // FIN | FND-00016
 
 
   /**
    * Seccion de Gastos **********************************************************
    */
+  /****************************************************************************
+  * Funcion: FND-00017
+  * Fecha: 06-06-2019
+  * Descripcion: Metodo para Ingresar Gastos de Socio al Desarrollo
+  * Objetivo: Ingresar Gastos de Socio al Desarrollo
+  * Params: { jsonSendActividadFinanciamientoDetGastos }
+  ****************************************************************************/
+  newActividadFinanciamientoDetGasto(jsonSendActividadFinanciamientoDetGasto: any): Observable<any> {
+    const paramsSend: any = jsonSendActividadFinanciamientoDetGasto;
+
+    // Retorno de la Funcion
+    return this._http.post(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 70.208), paramsSend, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  } // FIN | FND-00017
+
+
+  /****************************************************************************
+    * Funcion: FND-00018
+    * Fecha: 06-06-2019
+    * Descripcion: Metodo para eliminar datos de Financiamiento Detalle
+    * Objetivo: Eliminar Financiamiento Detalle al Proyecto
+    * Params: { codigoFinancGasto }
+    ****************************************************************************/
+  deleteActividadFinanciamientoDetGasto(codigoFinancGasto: string): Observable<any> {
+    const paramsSend: string = codigoFinancGasto;
+
+    // Retorno de la Funcion
+    return this._http.delete(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 70.209) + paramsSend, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  } // FIN | FND-00018
+
+
+  /****************************************************************************
+  * Funcion: FND-00019
+  * Fecha: 08-06-2019
+  * Descripcion: Metodo para obtener los todos los Gastos
+  * Objetivo: Listar todos los Gastos
+  * Params: { idActividadFinancEnc }
+  ****************************************************************************/
+  getAllActividadFinanciamientoDetGasto(idActividadFinancEnc: number): Observable<any> {
+    const paramsSend: number = idActividadFinancEnc;
+
+    // Retorno de la Funcion
+    return this._http.get(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 70.210) + paramsSend, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  } // FIN | FND-00019
+
+
+  /****************************************************************************
+  * Funcion: FND-00020
+  * Fecha: 13-06-2019
+  * Descripcion: Metodo para Actualizar Gastos de Socio al Desarrollo
+  * Objetivo: Actualizar Gastos de Socio al Desarrollo
+  * Params: { idActividadFinancDetGasto, jsonSendActividadFinanciamientoDetGasto }
+  ****************************************************************************/
+  editActividadFinanciamientoDetGasto(idActividadFinancDetGasto: number, jsonSendActividadFinanciamientoDetGasto: any): Observable<any> {
+    const paramsSend1: number = idActividadFinancDetGasto;
+    const paramsSend2: any = jsonSendActividadFinanciamientoDetGasto;
+
+    // Retorno de la Funcion
+    return this._http.put(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 70.211) + paramsSend1, paramsSend2, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  } // FIN | FND-00020
 }

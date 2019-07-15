@@ -35,19 +35,19 @@ export class SocioDesarrolloComponent implements OnInit {
   dropdownSettings = {};
 
   // Consfiguracion del Notificador
-  position = 'toast-bottom-full-width';
-  animationType = 'slideDown';
-  title = 'Se ha grabado la Información! ';
-  content = 'los cambios han sido grabados temporalmente, en la PGC!';
-  timeout = 20000;
-  toastsLimit = 5;
-  type = 'default';
+  // position = 'toast-bottom-full-width';
+  // animationType = 'slideDown';
+  // title = 'Se ha grabado la Información! ';
+  // content = 'los cambios han sido grabados temporalmente, en la PGC!';
+  // timeout = 20000;
+  // toastsLimit = 5;
+  // type = 'default';
 
-  isNewestOnTop = true;
-  isHideOnClick = true;
-  isDuplicatesPrevented = false;
-  isCloseButton = true;
-  config: ToasterConfig;
+  // isNewestOnTop = true;
+  // isHideOnClick = true;
+  // isDuplicatesPrevented = false;
+  // isCloseButton = true;
+  // config: ToasterConfig;
 
   // Json de recpcion de Informacion
   public JsonReceptionAllSocioDesarrollo: any;

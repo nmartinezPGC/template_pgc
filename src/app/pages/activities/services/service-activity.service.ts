@@ -55,12 +55,12 @@ export class ActivityService {
 
 
   /****************************************************************************
-    * Funcion: FND-00002
-    * Fecha: 09-01-2019
-    * Descripcion: Metodo para obtener los Datos de todos los perfiles
-    * Objetivo: datos generales de los perfiles
-    * Params: { }
-    ****************************************************************************/
+  * Funcion: FND-00002
+  * Fecha: 09-01-2019
+  * Descripcion: Metodo para obtener los Datos de todos los perfiles
+  * Objetivo: datos generales de los perfiles
+  * Params: { }
+  ****************************************************************************/
   getAllPerfiles(): Observable<any> {
     // Retorno de la Funcion
     return this._http.get(this._systemEndPointsService.getEndPointService('mantGenericosGroup', 4), {
@@ -71,12 +71,12 @@ export class ActivityService {
 
 
   /****************************************************************************
-    * Funcion: FND-00003
-    * Fecha: 14-01-2019
-    * Descripcion: Metodo para Ingresar los Datos Generales de la Actividad
-    * Objetivo: Ingresar los Datos generales de la Activiad
-    * Params: { jsonActivity }
-    ****************************************************************************/
+  * Funcion: FND-00003
+  * Fecha: 14-01-2019
+  * Descripcion: Metodo para Ingresar los Datos Generales de la Actividad
+  * Objetivo: Ingresar los Datos generales de la Activiad
+  * Params: { jsonActivity }
+  ****************************************************************************/
   newActivityGeneral(jsonActivity: any): Observable<any> {
     // Parametros del EndPoint
     const paramsSend = jsonActivity;
@@ -90,12 +90,12 @@ export class ActivityService {
 
 
   /****************************************************************************
-    * Funcion: FND-00003.1
-    * Fecha: 08-02-2019
-    * Descripcion: Metodo para Actualizar los Datos Generales de la Actividad
-    * Objetivo: Actualizar los Datos generales de la Activiad
-    * Params: { jsonActivity }
-    ****************************************************************************/
+  * Funcion: FND-00003.1
+  * Fecha: 08-02-2019
+  * Descripcion: Metodo para Actualizar los Datos Generales de la Actividad
+  * Objetivo: Actualizar los Datos generales de la Activiad
+  * Params: { jsonActivity }
+  ****************************************************************************/
   editActivityGeneral(jsonActivity: any, idProyectoIn: number): Observable<any> {
     // Parametros del EndPoint
     const idProyectoSend: number = idProyectoIn;
@@ -110,12 +110,31 @@ export class ActivityService {
 
 
   /****************************************************************************
-    * Funcion: FND-00004
-    * Fecha: 21-01-2019
-    * Descripcion: Metodo para Actualizar el Valor de la Secuencia
-    * Objetivo: Actualizar el valor de la Secuencia
-    * Params: { jsonSecuencia, idSecuencia }
-    ****************************************************************************/
+  * Funcion: FND-00003.2
+  * Fecha: 14-07-2019
+  * Descripcion: Metodo para Borrar los Datos Generales de la Actividad
+  * Objetivo: Borrar los Datos generales de la Activiad
+  * Params: { idProyectoIn }
+  ****************************************************************************/
+  deleteActivityGeneral(idProyectoIn: number): Observable<any> {
+    // Parametros del EndPoint
+    const idProyectoSend: number = idProyectoIn;
+
+    // Retorno de la Funcion
+    return this._http.delete(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 2) + idProyectoSend, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  } // FIN | FND-00003.2
+
+
+  /****************************************************************************
+  * Funcion: FND-00004
+  * Fecha: 21-01-2019
+  * Descripcion: Metodo para Actualizar el Valor de la Secuencia
+  * Objetivo: Actualizar el valor de la Secuencia
+  * Params: { jsonSecuencia, idSecuencia }
+  ****************************************************************************/
   updateSecuence(jsonSecuencia, idSecuencia: number): Observable<any> {
     // Valores Constantes
     const idSecuenciaSend: number = idSecuencia;
@@ -128,13 +147,13 @@ export class ActivityService {
 
 
   /****************************************************************************
-    * Funcion: FND-00005
-    * Fecha: 28-01-2019
-    * Descripcion: Metodo para obtener Ingresar los Datos de Planificacion de
-    * la Actividad, segun el codigo de la Actividad recien Ingresado
-    * Objetivo: Ingresar los Datos de Planificacion de la Activiad
-    * Params: { jsonActivityPlanificacion }
-    ****************************************************************************/
+  * Funcion: FND-00005
+  * Fecha: 28-01-2019
+  * Descripcion: Metodo para obtener Ingresar los Datos de Planificacion de
+  * la Actividad, segun el codigo de la Actividad recien Ingresado
+  * Objetivo: Ingresar los Datos de Planificacion de la Activiad
+  * Params: { jsonActivityPlanificacion }
+  ****************************************************************************/
   newActivityPlanificacion(jsonActivityPlanificacion: any): Observable<any> {
     // Parametros del EndPoint
     const paramsSend = jsonActivityPlanificacion;
@@ -148,13 +167,13 @@ export class ActivityService {
 
 
   /****************************************************************************
-    * Funcion: FND-00005.1
-    * Fecha: 08-02-2019
-    * Descripcion: Metodo para Actualizar los Datos de Planificacion de
-    * la Actividad, segun el codigo del Proyecto
-    * Objetivo: Actualizar los Datos de Planificacion del Proyecto
-    * * Params: { jsonActivityPlanificacion, idActividadPlan }
-    ****************************************************************************/
+  * Funcion: FND-00005.1
+  * Fecha: 08-02-2019
+  * Descripcion: Metodo para Actualizar los Datos de Planificacion de
+  * la Actividad, segun el codigo del Proyecto
+  * Objetivo: Actualizar los Datos de Planificacion del Proyecto
+  * Params: { jsonActivityPlanificacion, idActividadPlan }
+  ****************************************************************************/
   editActivityPlanificacion(jsonActivityPlanificacion: any, idActividadPlanIn: number): Observable<any> {
     // Parametros del EndPoint
     const idActividadPlanSend: number = idActividadPlanIn;
@@ -169,13 +188,13 @@ export class ActivityService {
 
 
   /****************************************************************************
-    * Funcion: FND-00006
-    * Fecha: 11-02-2019
-    * Descripcion: Metodo para Ingresar los Datos de Id Interna de
-    * la Actividad, segun el Id de la Actividad recien Ingresado
-    * Objetivo: Ingresar los Datos de Planificacion de la Activiad
-    * Params: { jsonActivityIdInterna }
-    ****************************************************************************/
+  * Funcion: FND-00006
+  * Fecha: 11-02-2019
+  * Descripcion: Metodo para Ingresar los Datos de Id Interna de
+  * la Actividad, segun el Id de la Actividad recien Ingresado
+  * Objetivo: Ingresar los Datos de Planificacion de la Activiad
+  * Params: { jsonActivityIdInterna }
+  ****************************************************************************/
   newActivityIdInterna(jsonActivityIdInterna: any): Observable<any> {
     // Parametros del EndPoint
     const paramsSend = jsonActivityIdInterna;
@@ -189,13 +208,13 @@ export class ActivityService {
 
 
   /****************************************************************************
-    * Funcion: FND-00006.1
-    * Fecha: 11-02-2019
-    * Descripcion: Metodo para Actualizar los Datos de Id Interna de
-    * la Actividad, segun el Id de la Actividad recien Ingresado
-    * Objetivo: Editar los Datos de Id Interna de la Activiad
-    * Params: { jsonActivityIdInterna, idInterna }
-    ****************************************************************************/
+  * Funcion: FND-00006.1
+  * Fecha: 11-02-2019
+  * Descripcion: Metodo para Actualizar los Datos de Id Interna de
+  * la Actividad, segun el Id de la Actividad recien Ingresado
+  * Objetivo: Editar los Datos de Id Interna de la Activiad
+  * Params: { jsonActivityIdInterna, idInterna }
+  ****************************************************************************/
   editActivityIdInterna(jsonActivityIdInterna: any, idInternaIn: number): Observable<any> {
     // Parametros del EndPoint
     const idInternaSend: number = idInternaIn;
@@ -210,13 +229,13 @@ export class ActivityService {
 
 
   /****************************************************************************
-    * Funcion: FND-00006.2
-    * Fecha: 11-02-2019
-    * Descripcion: Metodo para Eliminar los Datos de Id Interna de
-    * la Actividad, segun el Id de la Actividad recien Ingresado
-    * Objetivo: Eliminar los Datos de Id Interna de la Activiad
-    * Params: { codIdInterna }
-    ****************************************************************************/
+  * Funcion: FND-00006.2
+  * Fecha: 11-02-2019
+  * Descripcion: Metodo para Eliminar los Datos de Id Interna de
+  * la Actividad, segun el Id de la Actividad recien Ingresado
+  * Objetivo: Eliminar los Datos de Id Interna de la Activiad
+  * Params: { codIdInterna }
+  ****************************************************************************/
   deletedActivityIdInterna(codIdInterna: string): Observable<any> {
     // Parametros del EndPoint
     const codIdInternaSend: string = codIdInterna;

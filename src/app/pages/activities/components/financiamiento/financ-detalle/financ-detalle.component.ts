@@ -57,7 +57,7 @@ export class FinancDetalleComponent implements OnInit, OnChanges {
   public contadorSociosDessarrollo: number = 0;
 
   // Variables de Auditoria
-
+  public showLoader: boolean = false;
 
 
   public secuenciaFinancDetalle: any;
@@ -271,22 +271,32 @@ export class FinancDetalleComponent implements OnInit, OnChanges {
     // Ejecuta el Servicio de invocar todos los Socios al Desarrollo
     this.JsonReceptionAllSocioDesarrollo = [];
 
+    // Visualiza el loader
+    this.showLoader = true;
+
     this._financiamientoDetService.getAllSociosDesarrolloByIdActividad(idActividad).subscribe(
       result => {
         if (result.status !== 200) {
           this._notificacionesService.showToast('error', 'Error al Obtener la Información de todos Socios al Desarrollo', result.message);
           this.JsonReceptionAllSocioDesarrollo = [];
+          // Oculta el loader
+          this.showLoader = false;
         } else if (result.status === 200) {
           this.JsonReceptionAllSocioDesarrollo = result.data;
 
           // Ejecuta la Funcion que llama al Servicio de Clasificacion de Financiamiento
-          // console.log(this.idActividadFinancEnc);
-
           this.getFindByIdActividadEncAndSocioDesarrolloService(this.idActividadFinancEnc);
+
+          setTimeout(() => {
+            // Oculta el loader
+            this.showLoader = false;
+          }, 100);
         }
       },
       error => {
         this._notificacionesService.showToast('error', 'Error al Obtener la Información de todos Socios al Desarrollo', JSON.stringify(error.error.message));
+        // Oculta el loader
+        this.showLoader = false;
       },
     );
   } // FIN | FND-005

@@ -146,7 +146,7 @@ export class ModalLinkComponent implements OnInit, OnChanges {
           this._linkmodal1.urlActividadRecursoDocumento = this.data4.urlActividadRecursoDocumento;
           this._linkmodal1.urlActividadRecursoLink = this.data4.urlActividadRecursoLink;
           // carga de los datos relacionales
-          this._linkmodal1.Actividad = this.data4.idActividadRecurso.idActividadRecurso;
+          this._linkmodal1.Actividad = this.data4.idActividad.idActividad;
           this._linkmodal1.TipoRecursos = this.data4.idTipoRecursos.idTipoRecursos;
           this._linkmodal1.Usuario = this.data4.idUsuario.idUsuario;
           this._linkmodal1.Tipo = this.data4.idTipo.idTipo;
