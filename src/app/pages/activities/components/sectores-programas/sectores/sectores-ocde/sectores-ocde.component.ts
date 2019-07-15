@@ -329,8 +329,7 @@ export class SectoresOcdeComponent implements OnInit, OnChanges {
           // Setea la Lista de los todos Sectores Ocde/Cad
           this.JsonSendSectoresOcdeCadOpciones = this.JsonReceptionAllSectoresOcdeCad.map((item) => {
             return {
-              code: item.idSectorOcde.idSector,
-              name: item.idSectorOcde.nombreSector,
+              name: item.nombreSector,
               otro: item.porcentajePart,
             }
           });
