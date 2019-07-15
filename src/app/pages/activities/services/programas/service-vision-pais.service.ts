@@ -159,4 +159,24 @@ export class ServiceVisionPaisService {
     });
   } // FIN | FND-00007
 
+
+
+  /****************************************************************************
+    * Funcion: FND-00008
+    * Fecha: 11-07-2019
+    * Descripcion: Metodo para borrar datos de vision pais
+    * Objetivo: Borrar el dato de vision pais del Proyecto
+    * Params: { codigoActividad }
+    ****************************************************************************/
+   deletePromagaVisionPais(codigoActividad: string): Observable<any> {
+    const paramsSend: string = codigoActividad;
+
+    // Retorno de la Funcion
+    return this._http.delete(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 55) + paramsSend, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  } // FIN | FND-00008
+
+
 }

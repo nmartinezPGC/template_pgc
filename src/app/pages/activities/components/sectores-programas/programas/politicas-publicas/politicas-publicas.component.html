@@ -1,9 +1,11 @@
 <!-- Maquetacion de los Programas de Politicas Publicas -->
 <!-- Componente para los Mensajes en pantalla -->
-<!-- <toaster-container [toasterconfig]="config"></toaster-container> -->
+<toaster-container [toasterconfig]="config"></toaster-container>
+<p-confirmDialog header="Eliminar poolitcas publicas" icon="pi pi-exclamation-triangle" width="425">
+</p-confirmDialog>
 
 <!-- Agrupacion de la Informacion de Politicas Publicas -->
-<p-fieldset legend="Políticas Publicas y Estrategias Nacionales" [toggleable]="true" class="fieldSet">
+<p-fieldset legend="Políticas Publicas y Estrategias Nacionales" [toggleable]="true" class="fieldSet"  [collapsed]="true">
   <nb-card accent="warning" status="primary">
     <nb-card-body>
       <div class="row">
@@ -16,8 +18,6 @@
           <br>
 
         </div>
-        <div><span *ngFor="let file of JsonSendProgramaPoliticasPublicasOpciones">{{file.parent.data}} </span> </div>
-
         <div class="col-sm-6">
           <h4>Políticas Publicas y Estrategias Nacionales seleccionados</h4>
           <p-listbox [options]="JsonSendProgramaPoliticasPublicasOpciones" [style]="{'width': '100%'}"
@@ -26,9 +26,19 @@
               <i class="fa fa-file"></i>
               Confirma cuales Políticas Publicas y Estrategias Nacionales deben registrarse...
             </p-header>
+            <ng-template let-Politicas pTemplate="item">
+              <div class="ui-helper-clearfix">
+                  <span style="float:left">{{Politicas.label}}</span>
+                <input style="float: right; width: 15%; height: 10px; text-align: center" class="form-control"
+                  type="text" severity="error" pInputText pKeyFilter="int" placeholder="%" maxlength="2"
+                  value="{{Politicas.value.otro}}" (keyup)="validaPercent($event, Politicas.value.code)">
+                <img style="float: right;" src="../../../../../../assets/icons/forms/rubbish-bin_24x.png" alt="Delete"
+                  (click)="confirm(Politicas.value.code)">
+              </div>
+            </ng-template>
+
           </p-listbox>
-          <p> <span *ngFor="let c of selectedCities" style="margin-right: 10px">{{c.name}}</span>
-          </p>
+
           <hr>
           <div class="icon-button-examples">
             <!-- Boton de limpiar listado Politicas Publicas -->
@@ -39,7 +49,7 @@
             </button>
 
             <!-- Boton para Calcular los Porcentajes de Políticas Publicas y Estrategias Nacionales -->
-            <button type="button" class="btn btn-outline-success btn-icon"
+            <button type="button" class="btn btn-outline-success btn-icon" (click)="calcularPercent()"
               nbPopover="Calcula el % de participacion de Políticas Publicas y Estrategias Nacionales"
               nbPopoverMode="hint" nbPopoverPlacement="top">
               <i class="ion-calculator"></i>

@@ -2,8 +2,11 @@
 <!-- Componente para los Mensajes en pantalla -->
 <toaster-container [toasterconfig]="config"></toaster-container>
 
+<p-confirmDialog header="Eliminar vida mejor" icon="pi pi-exclamation-triangle" width="425">
+</p-confirmDialog>
+
 <!-- Agrupacion de la Informacion de Programas de Vida Mejor -->
-<p-fieldset legend="Vida Mejor" [toggleable]="true" class="fieldSet">
+<p-fieldset legend="Vida Mejor" [toggleable]="true" class="fieldSet"  [collapsed]="true">
   <nb-card accent="warning" status="primary">
     <nb-card-body>
       <div class="row">
@@ -27,9 +30,17 @@
               <i class="fa fa-file"></i>
               Confirma cuales Programas deben de registrarse...
             </p-header>
+            <ng-template let-Vida pTemplate="item">
+              <div class="ui-helper-clearfix">
+                  <span style="float:left">{{Vida.label}}</span>
+                <input style="float: right; width: 15%; height: 10px; text-align: center" class="form-control"
+                  type="text" severity="error" pInputText pKeyFilter="int" placeholder="%" maxlength="2"
+                  value="{{Vida.value.otro}}" (keyup)="validaPercent($event, Vida.value.code)">
+                <img style="float: right;" src="../../../../../../assets/icons/forms/rubbish-bin_24x.png" alt="Delete"
+                  (click)="confirm(Vida.value.code)">
+              </div>
+            </ng-template>
           </p-listbox>
-          <p> <span *ngFor="let c of selectedCities" style="margin-right: 10px">{{c.name}}</span>
-          </p>
           <hr>
           <div class="icon-button-examples">
             <!-- Boton de limpiar listado Vida Mejor -->
@@ -39,7 +50,7 @@
             </button>
 
             <!-- Boton para Calcular los Porcentajes Vida Mejor -->
-            <button type="button" class="btn btn-outline-success btn-icon"
+            <button type="button" class="btn btn-outline-success btn-icon" (click)="calcularPercent()"
               nbPopover="Calcula el % de participacion de Vida Mejor" nbPopoverMode="hint" nbPopoverPlacement="top">
               <i class="ion-calculator"></i>
             </button>

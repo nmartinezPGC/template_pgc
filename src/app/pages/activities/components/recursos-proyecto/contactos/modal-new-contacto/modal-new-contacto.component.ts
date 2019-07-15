@@ -6,6 +6,7 @@ import {ContactosModel } from '../../../../models/recursos-proyecto/contactos.mo
 import { ContactosService } from '../../../../services/contactos.service';
 import { delay } from 'q';
 import { UserService } from '../../../../../../@core/data/users.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 @Component({
@@ -59,7 +60,7 @@ export class ModalNewContactoComponent implements OnInit {
 
 
   constructor(private activeModal: NgbActiveModal, public _contactosService1: ContactosService,
-    protected _router: Router, private _toasterService: ToasterService, public _userService: UserService) {
+    protected _router: Router, private _toasterService: ToasterService, public _userService: UserService, private _spinner: NgxSpinnerService) {
     this.responsedata = { 'error': false, 'msg': 'error campos solicitado' }
 
   }
@@ -134,12 +135,17 @@ private showToast(type: string, title: string, body: string) {
       classes: 'comboSea',
       showCheckbox: false,
       lazyLoading: false,
+
     };
+      // Ocultamos el Loader la Funcion
+      setTimeout(() => {
+        this._spinner.hide();
+      }, 2000);
 
     this._contactosModel1 = new ContactosModel(
       true, 0, null, // datos generales
       null, null, null, null, null, null, null, null, null, null, null, null, null, // datos de tabla generales
-      null, 0, null, 0,
+      null, 0, null, 0, null, 0, null,
       );
 
 
@@ -151,6 +157,7 @@ private showToast(type: string, title: string, body: string) {
     this.ListAllTrato();
     this.ListAllOrg()
     this.userDatailsService();
+    this.paisesAllListService();
 
   }
 
@@ -163,14 +170,14 @@ private showToast(type: string, title: string, body: string) {
   * Objetivo: crear nuevos usuarios.
   * Autor: Edgar Ramirez
   ****************************************************************************/
- async  newOrganizacion() {
+ async  newContacto() {
 
 
   this.getSecuenciaListService('NEW-CT');
 
 
   await delay(100);
-  this.validateContactos(this._contactosModel1);
+
 
   const responsedataExt: any = this.responsedata;
 
@@ -181,7 +188,7 @@ private showToast(type: string, title: string, body: string) {
 
   this._contactosModel1.idOrganizacion = { idOrganizacion: this._contactosModel1.IdOrgIN };
   this._contactosModel1.idTrato = { idTrato: this._contactosModel1.idTratoIN };
- // this._OrganizacionModal1.idTipoOrganizacion = { idTipoOrganizacion: this._OrganizacionModal1.idTipoOrganizacion1 };
+  this._contactosModel1.idPais = { idPais: this._contactosModel1.idPaisIN };
 
 
   if (responsedataExt.error === true) {
@@ -191,18 +198,14 @@ private showToast(type: string, title: string, body: string) {
   // Ejecutamos el Recurso del EndPoint
   this._contactosService1.newContactos(this._contactosModel1).subscribe(
     response => {
-
+      this.validateContactos(this._contactosModel1);
       if (response.status !== 200) {
-        // console.log('antes de---NEW')
         this.showToast('error', 'Error al Ingresar la Información del Usuario', response.message);
       } else if (response.status === 200) {
         this.showToast('default', 'La Información de la Organizacion, se ha ingresado con exito', response.message);
-        //  this.ListAllCategoria();
-
+        this.updateSecuenciaService(this.idUsuarioSed, 8);
+        this.ngOnInit();
       }
-      // this.ListAllOranizacion();
-      this.updateSecuenciaService(this.idUsuarioSed, 2);
-      this.ngOnInit();
     },
   );
 } // FIN | newUsuarioService
@@ -235,7 +238,7 @@ private showToast(type: string, title: string, body: string) {
 
     },
   );
-} // FIN | perfilesTipoService
+} // FIN | TratosService
 
 
 /****************************************************************************
@@ -265,7 +268,45 @@ private showToast(type: string, title: string, body: string) {
 
     },
   );
-} // FIN | perfilesTipoService
+} // FIN | OrgService
+
+
+ /****************************************************************************
+  * Funcion: paisesAllListService
+  * Object Number: 0003
+  * Fecha: 04-07-2019
+  * Descripcion: Method paisesAllListService of the Class
+  * Objetivo: paisesAllListService listados de los Paises
+  * del Formulario de Actividad llamando a la API
+  * Autor: Jorge EScamilla
+  ****************************************************************************/
+ private paisesAllListService() {
+  this._contactosService1.getAllPaises().subscribe(
+    result => {
+      if (result.status !== 200) {
+        this.showToast('error', 'Error al Obtener la Información de los Paises', result.message);
+      } else if (result.status === 200) {
+        this.JsonReceptionPaises = result.data;
+
+        // Setea la Lista del Dropdown List
+        this.dropdownListPais = this.JsonReceptionPaises.map((item) => {
+          return {
+            id: item.idPais,
+            itemName: item.descPais,
+            iniciales: item.inicialesPais,
+          }
+        })
+      }
+    },
+    error => {
+      this.showToast('error', 'Error al Obtener la Información de los Paises', error);
+    },
+  );
+} // FIN | paisesAllListService
+
+onItemSlectPais(item: any) {
+  this._contactosModel1.idPaisIN = item.id;
+}
 
 
 /****************************************************************************
@@ -273,7 +314,7 @@ private showToast(type: string, title: string, body: string) {
    * Object Number: 0005
    * Fecha: 22-01-2019
    * Descripcion: Method para validar que los campos esten llenos
-   * Objetivo: validatePerfiles  procurar que llegue a la base de datos toda la informacion de tipo de organizacion.
+   * Objetivo: validatePerfiles  procurar que llegue a la base de datos toda la informacion del contacto.
    ****************************************************************************/
   private validateContactos(_contactosModel1: any) {
     // seteo el modelo para que los campos sean verificados
@@ -311,8 +352,14 @@ private showToast(type: string, title: string, body: string) {
     } if (_contactosModel1.ext1Contacto === '' || _contactosModel1.ext1Contacto === null) {
       this.responsedata.msg = 'Por favor ingrese la extencion1 del contacto';
       this.responsedata.error = true;
-    } if (_contactosModel1.ext2Contacto === '' || _contactosModel1.ext2Contacto === null) {
-      this.responsedata.msg = 'Por favor ingrese un extencion2 del contacto';
+    }if (_contactosModel1.ext2Contacto === '' || _contactosModel1.ext2Contacto === null) {
+      this.responsedata.msg = 'Por favor ingrese la extencion2 del contacto';
+      this.responsedata.error = true;
+    } if (_contactosModel1.idTratoIN === '' || _contactosModel1.idTratoIN === null) {
+      this.responsedata.msg = 'Por favor selecione el trato del contacto';
+      this.responsedata.error = true;
+    }if (_contactosModel1.IdOrgIN === '' || _contactosModel1.IdOrgIN === null) {
+      this.responsedata.msg = 'Por favor seleciones una organizacion del contacto';
       this.responsedata.error = true;
     }
     return this.responsedata;

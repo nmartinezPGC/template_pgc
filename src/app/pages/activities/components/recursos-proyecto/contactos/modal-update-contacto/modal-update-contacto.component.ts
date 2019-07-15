@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster';
 import {ContactosModel } from '../../../../models/recursos-proyecto/contactos.model';
 import { ContactosService } from '../../../../services/contactos.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 @Component({
@@ -58,7 +59,7 @@ export class ModalUpdateContactoComponent implements OnInit {
 
 
   constructor(private activeModal: NgbActiveModal, public _contactosService1: ContactosService,
-    protected _router: Router, private _toasterService: ToasterService) {
+    protected _router: Router, private _toasterService: ToasterService, private _spinner: NgxSpinnerService) {
     this.responsedata = { 'error': false, 'msg': 'error campos solicitado' }
 
   }
@@ -134,11 +135,16 @@ private showToast(type: string, title: string, body: string) {
       showCheckbox: false,
       lazyLoading: false,
     };
+      // Ocultamos el Loader la Funcion
+  setTimeout(() => {
+    this._spinner.hide();
+  }, 2000);
+
 
     this._contactosModel1 = new ContactosModel(
       true, 0, null, // datos generales
       null, null, null, null, null, null, null, null, null, null, null, null, null, // datos de tabla generales
-      null, 0, null, 0,
+      null, 0, null, 0, null, 0, null,
       );
     this._contactosModel1.activo;
     this._contactosModel1.idContacto;
@@ -156,6 +162,7 @@ private showToast(type: string, title: string, body: string) {
     this._contactosModel1.ext2Contacto;
     this._contactosModel1.idTratoIN;
     this._contactosModel1.IdOrgIN;
+    this._contactosModel1.idPaisIN;
 
 
     this.selectedItemsPais = [
@@ -166,6 +173,7 @@ private showToast(type: string, title: string, body: string) {
     this.fyByIdContactos(this.idContactoHeader);
     this.ListAllTrato();
     this.ListAllOrg()
+    this.paisesAllListService();
 
   }
 
@@ -195,7 +203,12 @@ private showToast(type: string, title: string, body: string) {
           // carga de los datos relacionales
           this._contactosModel1.idTratoIN = this.data4.idTrato.idTrato;
           this._contactosModel1.IdOrgIN = this.data4.idOrganizacion.idOrganizacion;
+          this._contactosModel1.descPais = this.data4.idPais.descPais;
+          this._contactosModel1.idPais = this.data4.idPais.idPais;
 
+          this.selectedItemsPais = [
+            { 'id': this._contactosModel1.idPais, 'itemName': this._contactosModel1.descPais },
+          ];
           // Verificamos que la Actividad no Exista en la BD
         }
       },
@@ -237,7 +250,7 @@ private showToast(type: string, title: string, body: string) {
 
     },
   );
-} // FIN | perfilesTipoService
+} // FIN | TratosService
 
 
 /****************************************************************************
@@ -267,7 +280,45 @@ private showToast(type: string, title: string, body: string) {
 
     },
   );
-} // FIN | perfilesTipoService
+} // FIN | OrgService
+
+
+ /****************************************************************************
+ * Funcion: paisesAllListService
+ * Object Number: 0004
+ * Fecha:04-07-2019
+ * Descripcion: Method paisesAllListService of the Class
+ * Objetivo: paisesAllListService listados de los Paises
+ * del Formulario de Actividad llamando a la API
+ * Autor: Jorge Escamilla
+ ****************************************************************************/
+private paisesAllListService() {
+  this._contactosService1.getAllPaises().subscribe(
+    result => {
+      if (result.status !== 200) {
+        this.showToast('error', 'Error al Obtener la Información de los Paises', result.message);
+      } else if (result.status === 200) {
+        this.JsonReceptionPaises = result.data;
+        // Setea la Lista del Dropdown List
+        this.dropdownListPais = this.JsonReceptionPaises.map((item) => {
+          return {
+            id: item.idPais,
+            itemName: item.descPais,
+            iniciales: item.inicialesPais,
+          }
+        })
+      }
+    },
+    error => {
+      // console.log(<any>error);
+      this.showToast('error', 'Error al Obtener la Información de los Paises', error);
+    },
+  );
+} // FIN | paisesAllListService
+
+onItemSlectPais(item: any) {
+  this._contactosModel1.idPaisIN = item.id;
+}
 
 
  /****************************************************************************
@@ -282,7 +333,7 @@ private UpdateContactos() {
 
   this._contactosModel1.idOrganizacion = { idOrganizacion: this._contactosModel1.IdOrgIN };
   this._contactosModel1.idTrato = { idTrato: this._contactosModel1.idTratoIN };
- // this._OrganizacionModal1.idTipoOrganizacion = { idTipoOrganizacion: this._OrganizacionModal1.idTipoOrganizacion1 };
+  this._contactosModel1.idPais = { idPais: this._contactosModel1.idPaisIN };
 
   // this.validateUsuarios(this._usuarioModel);
   const responsedataExt: any = this.responsedata;

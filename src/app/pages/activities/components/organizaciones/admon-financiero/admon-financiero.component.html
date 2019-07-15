@@ -2,8 +2,12 @@
 <!-- Componente para los Mensajes en pantalla -->
 <!-- <toaster-container [toasterconfig]="config"></toaster-container> -->
 
+<p-confirmDialog header="Eliminar Socio al Desarrollo" icon="pi pi-exclamation-triangle" width="425">
+</p-confirmDialog>
+
+
 <!-- Agrupacion de la Informacion de Administrador Financiero -->
-<p-fieldset legend="Administrador Financiero" [toggleable]="true" [styleClass]="fieldSet">
+<p-fieldset legend="Administrador Financiero" [toggleable]="true" [styleClass]="fieldSet" [collapsed]="true">
   <nb-card accent="warning" status="primary">
     <nb-card-body>
       <div class="row">
@@ -27,7 +31,7 @@
                 <input style="float: right; width: 15%; height: 10px; text-align: center" class="form-control" type="text" severity="error"
                   pInputText pKeyFilter="int" placeholder="%" maxlength="2" value="{{Admon.value.otro}}" (keyup)="validaPercent($event, Admon.value.code)">
                   <img style="float: right;" src="../../../../../../assets/icons/forms/rubbish-bin_24x.png" alt="Delete"
-                  (click)="cleanAdmonFinanciero(Admon.value.code)">
+                  (click)="confirm3(Admon.value.code)">
               </div>
             </ng-template>
           </p-listbox>

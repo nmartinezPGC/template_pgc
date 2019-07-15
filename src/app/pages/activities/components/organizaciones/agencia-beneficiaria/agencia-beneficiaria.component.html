@@ -2,8 +2,11 @@
 <!-- Componente para los Mensajes en pantalla -->
 <!-- <toaster-container [toasterconfig]="config"></toaster-container> -->
 
+<p-confirmDialog header="Eliminar Agencia Beneficiaria" icon="pi pi-exclamation-triangle" width="425">
+</p-confirmDialog>
+
 <!-- Agrupacion de la Informacion de Agencia Beneficiaria -->
-<p-fieldset legend="Agencia Beneficiaria" [toggleable]="true" class="fieldSet">
+<p-fieldset legend="Agencia Beneficiaria" [toggleable]="true" class="fieldSet"  [collapsed]="true">
   <nb-card accent="warning" status="primary">
     <nb-card-body>
       <div class="row">
@@ -28,7 +31,7 @@
                   type="text" severity="error" pInputText pKeyFilter="int" placeholder="%" maxlength="2"
                   value="{{Agencia.value.otro}}" (keyup)="validaPercent($event, Agencia.value.code)">
                   <img style="float: right;" src="../../../../../../assets/icons/forms/rubbish-bin_16.png" alt="Delete"
-                  (click)="cleanAgenciaBeneficiaria(Agencia.value.code)">
+                  (click)= "confirm1(Agencia.value.code)">
               </div>
             </ng-template>
           </p-listbox>

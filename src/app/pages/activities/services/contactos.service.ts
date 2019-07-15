@@ -174,9 +174,24 @@ listAllOrg(): Observable<any> {
   });
 }// FIN | FND-00007
 
+/*****************************************************************************
+* Funcion: FND-00008
+* Fecha: 13-10-2018
+* Descripcion: Metodo para obtener los Datos de los Paises
+* Objetivo: datos de los Tipos de Paises
+* Params: { }
+****************************************************************************/
+  getAllPaises(): Observable<any> {
+    // Retorno de la Funcion
+    return this._http.get(this._systemEndPointsService.getEndPointService('mantGenericosGroup', 1), {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  }// FIN | FND-00008
+
 
 /****************************************************************************
-    * Funcion: FND-00008
+    * Funcion: FND-00009
     * Fecha: 18-01-2019
     * Descripcion: Metodo para obtener los Datos de la Secuencia
     * Objetivo: Obtener la Secuencia de la Actividad
@@ -190,11 +205,11 @@ listAllOrg(): Observable<any> {
       headers: this.headers,
       params: { 'tokenApi': this.tokenHeader },
     });
-  }// FIN | FND-00008
+  }// FIN | FND-00009
 
 
   /****************************************************************************
-    * Funcion: FND-00009
+    * Funcion: FND-00010
     * Fecha: 21-01-2019
     * Descripcion: Metodo para Actualizar el Valor de la Secuencia
     * Objetivo: Actualizar el valor de la Secuencia
@@ -208,6 +223,6 @@ listAllOrg(): Observable<any> {
       headers: this.headers,
       params: { 'tokenApi': this.tokenHeader },
     });
-  } // FIN | FND-00009
+  } // FIN | FND-00010
 
 }

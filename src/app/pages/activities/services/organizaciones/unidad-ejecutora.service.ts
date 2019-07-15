@@ -52,6 +52,8 @@ export class UnidadEjecutoraService {
       'Authorization': this.tokenHeader, 'Access-Control-Allow-Origin': '*',
     });
   }// FIN | Constructor
+
+
     /****************************************************************************
     * Funcion: FND-00002
     * Fecha: 17-04-2019
@@ -68,6 +70,8 @@ export class UnidadEjecutoraService {
       params: { 'tokenApi': this.tokenHeader },
     });
   } // FIN | FND-00002
+
+
   /****************************************************************************
     * Funcion: FND-00003
     * Fecha: 15-05-2019
@@ -103,6 +107,8 @@ export class UnidadEjecutoraService {
       params: { 'tokenApi': this.tokenHeader },
     });
   } // FIN | FND-00004
+
+
  /****************************************************************************
     * Funcion: FND-00005
     * Fecha: 30-05-2019
@@ -119,5 +125,23 @@ export class UnidadEjecutoraService {
       headers: this.headers,
       params: { 'tokenApi': this.tokenHeader },
     }); // FIN | FND-00005
-  }
+  } // FIN | FND-00005
+
+
+  /****************************************************************************
+  * Funcion: FND-00006
+  * Fecha: 09-07-2019
+  * Descripcion: Metodo para obtener los datos de Unidad Ejecutora del Proyecto
+  * Objetivo: Unidad Ejecutora del Proyecto
+  * Params: { idActividad }
+  ****************************************************************************/
+ getAllUnidadEjecutoraByIdActividad(): Observable<any> {
+  // Retorno de la Funcion
+  return this._http.get(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 71), {
+    headers: this.headers,
+    params: { 'tokenApi': this.tokenHeader },
+  });
+} // FIN | FND-00006
+
+
 }

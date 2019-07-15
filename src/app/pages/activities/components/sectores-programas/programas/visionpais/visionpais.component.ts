@@ -7,7 +7,7 @@
 * @fecha 02-05-2019
 */
 import { Component, OnInit, Input, ChangeDetectorRef, OnChanges} from '@angular/core';
-import { TreeNode, MessageService, MenuItem } from 'primeng/primeng';
+import { TreeNode, MessageService, MenuItem, ConfirmationService } from 'primeng/primeng';
 import { ToasterConfig, ToasterService, Toast, BodyOutputType } from 'angular2-toaster';
 import { ListasComunesService } from '../../../../../common-list/services/listas-comunes.service';
 import { ServiceVisionPaisService } from '../../../../services/programas/service-vision-pais.service';
@@ -112,7 +112,8 @@ export class VisionPaisComponent implements OnInit, OnChanges {
     private messageService: MessageService,
     private changeDetectorRef: ChangeDetectorRef,
     private _notificacionesService: NotificacionesService,
-    private _listasComunesService: ListasComunesService) {
+    private _listasComunesService: ListasComunesService,
+    private confirmationService: ConfirmationService) {
       // Codigo del Constructor
      }
       /**
@@ -133,6 +134,7 @@ export class VisionPaisComponent implements OnInit, OnChanges {
 
       // Llenado del Treeview de la Tabla
       this._serviceVisionPaisService.getFiles().then(files => this.filesTree4 = files);
+      this.getAllProgramasVisionPaisService();
 
       // this.getfindByIdNivelProgramaService(1);
   }
@@ -306,18 +308,11 @@ private getAllProgramasVisionPaisService() {
         this.JsonReceptionAllProgramasVisionPais = result.data;
 
         // Setea la Lista de los todos Objetivos de Vision Pais
-        this.nodes = this.JsonReceptionAllProgramasVisionPais.map((item) => {
+        this.JsonSendProgramaVisionPaisOpciones = this.JsonReceptionAllProgramasVisionPais.map((item) => {
           return {
-            label: item.nombrePrograma,
-            data: item.codigoPrograma,
-            expandedIcon: 'fa fa-folder-open',
-            collapsedIcon: 'fa fa-folder',
-            children: [{
-              label: item.idNivelPrograma.nombreNivelPrograma,
-              data: item.codigoPrograma,
-              expandedIcon: 'fa fa-folder-open',
-              collapsedIcon: 'fa fa-fold*er',
-            }],
+            code: item.idProgramaVisionPais.idPrograma,
+            name: item.idProgramaVisionPais.nombrePrograma,
+            otro: item.porcentajePart,
           }
         })
       }
@@ -478,19 +473,24 @@ getProgramaVisionPaisNivel2(array: any) {
 * Params: { JsonSendProgramaVisionPaisOpciones }
 ****************************************************************************/
 saveProgramaVisionPais() {
+   this.calcularPercent();
   // Seteo de los campos iniciales
   this._activityProgramaVisionPaisModel.idActividad = { idActividad: this.idProyectoTab };
 
   // Validacion de Items seleccionados
   if (this.JsonSendProgramaVisionPaisOpciones.length > 0) {
+
     // Recorre los items seleccionados del Treeview
     for (let index = 0; index < this.JsonSendProgramaVisionPaisOpciones.length; index++) {
       const element = this.JsonSendProgramaVisionPaisOpciones[index];
 
+       // seteo del campo de porcentaje de participacion
+       this._activityProgramaVisionPaisModel.porcentajePart = Number(element.otro);
       // Asignacion del Campo Transversal
       this._activityProgramaVisionPaisModel.idProgramaVisionPais = { idPrograma: element.code };
 
-      this._activityProgramaVisionPaisModel.codigoActividad = this.codigoProyectoTab + '-APP-' + element.code;
+      this._activityProgramaVisionPaisModel.codigoActividad = this.codigoProyectoTab + '-AVP-' + element.code;
+
 
       // Ejecucion del Campo Transversal
       this._serviceVisionPaisService.saveActividadProgramaVisionPais(this._activityProgramaVisionPaisModel).subscribe(
@@ -532,5 +532,99 @@ cleanProgramaVisionPais() {
   this.changeDetectorRef.detectChanges();
   this.JsonSendProgramaVisionPaisOpciones = [...this.JsonSendProgramaVisionPaisOpciones];
 } // FIN | cleanProgramaVisionPais
+
+
+  /****************************************************************************
+  * Funcion: calcularPercent
+  * Object Number: FND-007
+  * Fecha: 13-05-2019
+  * Descripcion: Method para calcular % Items de vision de pais
+  * en la Insercion del Proyecto
+  * Objetivo: calculo de % el Json de los Items seleccionados
+  ****************************************************************************/
+ calcularPercent() {
+  const valorMax = (100 / this.JsonSendProgramaVisionPaisOpciones.length);
+
+  this.JsonSendProgramaVisionPaisOpciones.map(function (dato) {
+    dato.otro = valorMax.toFixed(2);
+    return dato;
+  });
+} // FIN | FND-007
+
+
+  /****************************************************************************
+  * Funcion: validaPercent
+  * Object Number: FND-006
+  * Fecha: 13-05-2019
+  * Descripcion: Method para validar % Items del Socio al Desarrollo
+  * en la Insercion del Proyecto
+  * Objetivo: % el Json de los Items seleccionados
+  ****************************************************************************/
+ validaPercent(event: any, codeIn: number) {
+  const otroIn = event.target.value;
+
+  this.JsonSendProgramaVisionPaisOpciones.map(function (dato) {
+    if (dato.code === codeIn) {
+      dato.otro = otroIn;
+    }
+    return dato;
+  });
+} // FIN | FND-006
+
+
+
+  /****************************************************************************
+  * Funcion: deleteVisionPais
+  * Object Number: FND-005
+  * Fecha: 11-07-2019
+  * Descripcion: Method para Eliminar Item  de vision pais
+  * Objetivo: limpiar el Json de los Items seleccionados
+  ****************************************************************************/
+ DeleteVision(event: any) {
+  for (let i = 0; i < this.JsonSendProgramaVisionPaisOpciones.length; i++) {
+    if (this.JsonSendProgramaVisionPaisOpciones[i].code === event) {
+      // Ejecuta el Servicio de invocar el registro de Socio al Desarrollo
+      this._serviceVisionPaisService.deletePromagaVisionPais(this.codigoProyectoTab + '-AVP-' + this.JsonSendProgramaVisionPaisOpciones[i].code).subscribe(
+        result => {
+          if (result.status !== 200) {
+            this._notificacionesService.showToast('error', 'Error al Borrar la Información de vision pais ', result.message);
+          } else if (result.status === 200) {
+            if (result.findRecord === true) {
+              this._notificacionesService.showToast('error', 'vision pais', result.message)
+            } else {
+              this._notificacionesService.showToast('default', 'Error al Borrar la Información de vision pais', result.message);
+            }
+          }
+        },
+        error => {
+          this._notificacionesService.showToast('error', 'Error al Borrar la Información de vision pais', JSON.stringify(error.error.message));
+        },
+      );
+      // Borramos el Item del Json
+      this.JsonSendProgramaVisionPaisOpciones.splice(i, 1);
+      // para el Bucle
+      break;
+    }
+  }
+  this.JsonSendProgramaVisionPaisOpciones = [...this.JsonSendProgramaVisionPaisOpciones];
+} // FIN | FND-005
+
+/****************************************************************************
+  * Funcion: confirm
+  * Object Number: FND-009
+  * Fecha: 11-07-2019
+  * Descripcion: Method confirm of the Class
+  * Objetivo: Eliminar el Detalle de Financiamiento seleccionado
+  * Params: { event }
+  ****************************************************************************/
+ confirm1(event: any) {
+  this.confirmationService.confirm({
+    message: 'Estas seguro de Eliminar Vision de pais?',
+    accept: () => {
+      // Ejecuta la funcion de Eliminar el Socio al Desarrollo con Elementos relacionados
+      this.DeleteVision(event);
+    },
+  });
+} // FIN | FND-009
 
 }
