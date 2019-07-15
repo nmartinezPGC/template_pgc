@@ -15,6 +15,7 @@ import { NotificacionesService } from '../../../../shared/services/notificacione
 import { ModalDocumentosComponent } from '../../recursos-proyecto/documentos/modal-documentos/modal-documentos.component';
 import { RecursosProyectoModel  } from '../../../models/recursos-proyecto/recursos-proyecto.model';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { HttpClient} from '@angular/common/http';
 @Component({
   selector: 'ngx-documentos',
   templateUrl: './documentos.component.html',
@@ -76,7 +77,7 @@ export class DocumentosComponent implements OnInit, OnChanges {
 
 }
 constructor(public _servicerecursosproyectoService: ServicerecursosproyectoService, protected _router: Router, private modalService: NgbModal,
-  private _notificacionesService: NotificacionesService) { }
+  private _notificacionesService: NotificacionesService, private http: HttpClient) { }
 
   ngOnInit() {
     this._recursosproyectoModel = new RecursosProyectoModel(
@@ -228,4 +229,40 @@ private tiposService() {
     },
   );
 } // FIN | tiposService
+
+/****************************************************************************
+* Funcion: Upload
+* Object Number: 00005
+* Fecha: 09-07-2019
+* Descripcion: Method Upload of the Class
+* Objetivo: Upload detalle de los tipos llamando a la API
+* Autor: Allan Madrid
+****************************************************************************/
+/****************************************************************************
+ * Funcion: newDocService
+ * Object Number: 00003
+ * Fecha: 26-06-2019
+ * Descripcion: Method newDocService
+ * Objetivo: crear nuevo Recurso de Proyecto de link.
+ ****************************************************************************/
+private Upload(event) {
+  // Seteo de las variables del Model al json de Java
+  // Ejecutamos el Recurso del EndPoint
+  this._servicerecursosproyectoService.Uploadfile(this._recursosproyectoModel).subscribe(
+    response => {
+      if (response.status !== 200) {
+        // console.log(response.status);
+        // console.log(response.message);
+        this._notificacionesService.showToast('error', 'Error al Ingresar la Información del Recurso de Proyecto', response.message);
+      } else if (response.status === 200) {
+        // console.log(result.status);
+        this._notificacionesService.showToast('default', 'El Recurso de Proyecto, se ha ingresado con exito', response.message);
+      }
+    },
+    error => {
+      // Redirecciona al Login
+      this._notificacionesService.showToast('error' , 'Error en la petición de la API' , <any>error.message.message);
+    },
+  );
+} // FIN | Upload
 }

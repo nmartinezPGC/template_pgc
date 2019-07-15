@@ -14,12 +14,13 @@ import { ListasComunesService } from '../../../../../common-list/services/listas
 import { ActivitySectoresCampoTransversalModel } from '../../../../models/sectores/model-sectores-campo-transversal';
 import { ServiceSectoresCampoTransversalService } from '../../../../services/sectores/service-sectores-campo-transversal.service';
 import { NotificacionesService } from '../../../../../shared/services/notificaciones.service';
+import { ConfirmationService } from 'primeng/primeng';
 
 @Component({
   selector: 'ngx-sectores-campos-transversales',
   templateUrl: './sectores-campos-transversales.component.html',
   styleUrls: ['./sectores-campos-transversales.component.scss'],
-  providers: [ServiceSectoresCampoTransversalService, MessageService, NotificacionesService, ListasComunesService],
+  providers: [ServiceSectoresCampoTransversalService, MessageService, NotificacionesService, ListasComunesService, ConfirmationService],
 })
 export class SectoresCamposTransversalesComponent implements OnInit, OnChanges {
   // Variables entre Tabs | Components
@@ -122,6 +123,7 @@ export class SectoresCamposTransversalesComponent implements OnInit, OnChanges {
     private messageService: MessageService,
     private changeDetectorRef: ChangeDetectorRef,
     private _notificacionesService: NotificacionesService,
+    private confirmationService: ConfirmationService,
     private _listasComunesService: ListasComunesService) {
     // Codigo del Constructor
   }
@@ -132,6 +134,7 @@ export class SectoresCamposTransversalesComponent implements OnInit, OnChanges {
   ngOnInit() {
     // Cargando los Items del TreeView
     this.loading = true;
+    this.getAllSectoresCampoTransversalService();
 
     // Inicializacion del Modelo
     this._activitySectoresCampoTransversal = new ActivitySectoresCampoTransversalModel(
@@ -312,24 +315,17 @@ export class SectoresCamposTransversalesComponent implements OnInit, OnChanges {
     this._serviceSectoresCampoTransversalService.getAllSectoresCamposTransversales().subscribe(
       result => {
         if (result.status !== 200) {
-          this._notificacionesService.showToast('error', 'Error al Obtener la Información de todos los Sectores de Desarrollo', result.message);
+          this._notificacionesService.showToast('error', 'Error al Obtener la Información de todos los Sectores de Campos Transversales', result.message);
           this.JsonReceptionAllSectoresCampoTransversal = [];
         } else if (result.status === 200) {
           this.JsonReceptionAllSectoresCampoTransversal = result.data;
 
           // Setea la Lista de los todos Sectores Campos Transversales
-          this.nodes = this.JsonReceptionAllSectoresCampoTransversal.map((item) => {
+          this.JsonSendSectoresCampoTransversalOpciones = this.JsonReceptionAllSectoresCampoTransversal.map((item) => {
             return {
-              label: item.nombreSector,
-              data: item.codigoSector,
-              expandedIcon: 'fa fa-folder-open',
-              collapsedIcon: 'fa fa-folder',
-              children: [{
-                label: item.idNivelSector.nombreNivelSector,
-                data: item.codigoSector,
-                expandedIcon: 'fa fa-folder-open',
-                collapsedIcon: 'fa fa-fold*er',
-              }],
+              code: item.idSectorCampo.idSector,
+              name: item.idSectorCampo.nombreSector,
+              otro: item.porcentajePart,
             }
           })
         }
@@ -441,6 +437,7 @@ export class SectoresCamposTransversalesComponent implements OnInit, OnChanges {
   * Params: { JsonSendSectoresCampoTransversalOpciones }
   ****************************************************************************/
   saveSectoresCampoTransversal() {
+    this.calcularPercent();
     // Seteo de los campos iniciales
     this._activitySectoresCampoTransversal.idActividad = { idActividad: this.idProyectoTab };
 
@@ -449,6 +446,7 @@ export class SectoresCamposTransversalesComponent implements OnInit, OnChanges {
       // Recorre los items seleccionados del Treeview
       for (let index = 0; index < this.JsonSendSectoresCampoTransversalOpciones.length; index++) {
         const element = this.JsonSendSectoresCampoTransversalOpciones[index];
+        this._activitySectoresCampoTransversal.porcentajePart = Number(element.otro);
 
         // Asignacion del Campo Transversal
         this._activitySectoresCampoTransversal.idSectorCampo = { idSector: element.code };
@@ -496,5 +494,94 @@ export class SectoresCamposTransversalesComponent implements OnInit, OnChanges {
     this.JsonSendSectoresCampoTransversalOpciones = [...this.JsonSendSectoresCampoTransversalOpciones];
     // console.log(this.JsonSendSectoresCampoTransversalOpciones);
   } // FIN | cleanSectoresCamposTransversales
+
+       /****************************************************************************
+  * Funcion: calcularPercent
+  * Object Number: FND-007
+  * Fecha: 13-05-2019
+  * Descripcion: Method para calcular % Items del Socio al Desarrollo
+  * en la Insercion del Proyecto
+  * Objetivo: calculo de % el Json de los Items seleccionados
+  ****************************************************************************/
+ calcularPercent() {
+  const valorMax = (100 / this.JsonSendSectoresCampoTransversalOpciones.length);
+
+  this.JsonSendSectoresCampoTransversalOpciones.map(function (dato) {
+    dato.otro = valorMax.toFixed(2);
+    return dato;
+  });
+} // FIN | FND-007
+ /****************************************************************************
+  * Funcion: validaPercent
+  * Object Number: FND-006
+  * Fecha: 13-05-2019
+  * Descripcion: Method para validar % Items del Socio al Desarrollo
+  * en la Insercion del Proyecto
+  * Objetivo: % el Json de los Items seleccionados
+  ****************************************************************************/
+ validaPercent(event: any, codeIn: number) {
+  const otroIn = event.target.value;
+
+  this.JsonSendSectoresCampoTransversalOpciones.map(function (dato) {
+    if (dato.code === codeIn) {
+      dato.otro = otroIn;
+    }
+    return dato;
+  });
+} // FIN | FND-006
+
+ /****************************************************************************
+  * Funcion: confirm
+  * Object Number: FND-009
+  * Fecha: 01-07-2019
+  * Descripcion: Method confirm of the Class
+  * Objetivo: Eliminar el Detalle de Financiamiento seleccionado
+  * Params: { event }
+  ****************************************************************************/
+ confirm(event: any) {
+  this.confirmationService.confirm({
+    message: 'Estas seguro de Eliminar el Campo Transversal?',
+    accept: () => {
+      // Ejecuta la funcion de Eliminar el Socio al Desarrollo con Elementos relacionados
+      this.cleanTransversal(event);
+    },
+  });
+} // FIN | FND-009
+/****************************************************************************
+  * Funcion: cleanSocioDesarrollo
+  * Object Number: FND-005
+  * Fecha: 13-05-2019
+  * Descripcion: Method para Eliminar Item del Socio al Desarrollo
+  * Objetivo: limpiar el Json de los Items seleccionados
+  ****************************************************************************/
+ cleanTransversal(event: any) {
+  for (let i = 0; i < this.JsonSendSectoresCampoTransversalOpciones.length; i++) {
+    if (this.JsonSendSectoresCampoTransversalOpciones[i].code === event) {
+      // Ejecuta el Servicio de invocar el registro de Socio al Desarrollo
+      this._serviceSectoresCampoTransversalService.deleteActividadTransversal(this.codigoProyectoTab + '-ASC-' + this.JsonSendSectoresCampoTransversalOpciones[i].code).subscribe(
+        result => {
+          if (result.status !== 200) {
+            this._notificacionesService.showToast('error', 'Error al Borrar la Información de Campos Transversales', result.message);
+          } else if (result.status === 200) {
+            if (result.findRecord === true) {
+              this._notificacionesService.showToast('error', 'Error al Borrar la Información del Campo Transversal', result.message);
+              this.ngOnInit();
+            } else {
+              this._notificacionesService.showToast('default', 'Campo Transversal', result.message);
+            }
+          }
+        },
+        error => {
+          this._notificacionesService.showToast('error', 'Error al Borrar la Información de Campos Transversales', JSON.stringify(error.error.message));
+        },
+      );
+      // Borramos el Item del Json
+      this.JsonSendSectoresCampoTransversalOpciones.splice(i, 1);
+      // para el Bucle
+      break;
+    }
+  }
+  this.JsonSendSectoresCampoTransversalOpciones = [...this.JsonSendSectoresCampoTransversalOpciones];
+} // FIN | FND-005
 
 }
