@@ -113,9 +113,24 @@ export class SocioDesarrolloService {
   ****************************************************************************/
   getAllSociosDesarrollo(): Observable<any> {
     // Retorno de la Funcion
-    return this._http.get(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 62),  {
+    return this._http.get(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 62), {
       headers: this.headers,
       params: { 'tokenApi': this.tokenHeader },
     });
   } // FIN | FND-00005
+
+  /****************************************************************************
+  * Funcion: FND-00006
+  * Fecha: 15-07-2019
+  * Descripcion: Metodo para obtener los Socios al Desarrollo del Proyecto
+  * Objetivo: Socios al Desarrollo del Proyecto
+  * Params: { idActividad }
+  ****************************************************************************/
+  getAllSociosDesarrolloByActividad(idActividad: number): Observable<any> {
+    // Retorno de la Funcion
+    return this._http.get(this._systemEndPointsService.getEndPointService('actividadesCRUDGroup', 63) + idActividad, {
+      headers: this.headers,
+      params: { 'tokenApi': this.tokenHeader },
+    });
+  } // FIN | FND-00006
 }

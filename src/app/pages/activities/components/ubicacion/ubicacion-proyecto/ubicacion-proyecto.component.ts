@@ -888,7 +888,6 @@ export class UbicacionProyectoComponent implements OnInit, OnChanges {
                 ' <hr><br>Coordenadas: [' + element.latitudUbicacion + ',' + element.longitudUbicacion + '] </p>'),*/
             )
           });
-          // console.log(this.JsonUbicacionesImplements);
         }
       },
       error => {

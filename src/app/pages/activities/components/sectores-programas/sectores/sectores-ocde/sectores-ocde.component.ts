@@ -84,6 +84,7 @@ export class SectoresOcdeComponent implements OnInit, OnChanges {
   // Json, de cargado de Sectores
   public JsonSendSectoresOcdeCad: any = [];
   public JsonSendSectoresOcdeCadOpciones: any = [];
+  public JsonReceptionSectorByIdActividad: any = [];
 
   // Json Recpetion de la Clase
   public JsonReceptionAllSectoresOcdeCad: any;
@@ -95,13 +96,26 @@ export class SectoresOcdeComponent implements OnInit, OnChanges {
   public JsonReceptionSectorByNivelOcdeCad3: any;
   public JsonReceptionSectorByNivelOcdeCad4: any;
 
-  public JsonReceptionSectorByIdActividad: any;
-
   // Auditoria
   public secuenciaDeActividad: any;
 
   // Modelo de la Clase
-  public _activitySectoresOcdeModel: ActivitySectoresOcdeModel;
+  public _activitySectoresOcdeModel: ActivitySectoresOcdeModel
+
+  // Consfiguracion del Notificador
+  position = 'toast-bottom-full-width';
+  animationType = 'slideDown';
+  title = 'Se ha grabado la Información! ';
+  content = 'los cambios han sido grabados temporalmente, en la PGC!';
+  timeout = 20000;
+  toastsLimit = 5;
+  type = 'default';
+
+  isNewestOnTop = true;
+  isHideOnClick = true;
+  isDuplicatesPrevented = false;
+  isCloseButton = true;
+  config: ToasterConfig;
 
   /**
    * constructor
@@ -139,9 +153,60 @@ export class SectoresOcdeComponent implements OnInit, OnChanges {
     this._serviceSectoresService.getFiles().then(files => this.filesTree4 = files);
 
     // this.getfindByIdNivelSectorService(1);
-    // Cargar los Sectores Ocde/Cad del Proyecto
-    this.getfindByIdActividadOcdeCadService(this.idProyectoTab);
   }
+
+
+  /****************************************************************************
+  * Funcion: makeToast
+  * Object Number: 003
+  * Fecha: 16-08-2018
+  * Descripcion: Method makeToast of the Class
+  * Objetivo: makeToast in the method header API
+  ****************************************************************************/
+  makeToast() {
+    this._notificacionesService.showToast(this.type, this.title, this.content);
+  } // FIN | makeToast
+
+
+  /****************************************************************************
+  * Funcion: showToast
+  * Object Number: 004
+  * Fecha: 16-08-2018
+  * Descripcion: Method showToast of the Class
+  * Objetivo: showToast in the method header API
+  ****************************************************************************/
+  private showToast(type: string, title: string, body: string) {
+    this.config = new ToasterConfig({
+      positionClass: this.position,
+      timeout: this.timeout,
+      newestOnTop: this.isNewestOnTop,
+      tapToDismiss: this.isHideOnClick,
+      preventDuplicates: this.isDuplicatesPrevented,
+      animation: this.animationType,
+      limit: this.toastsLimit,
+    });
+    const toast: Toast = {
+      type: type,
+      title: title,
+      body: body,
+      timeout: this.timeout,
+      showCloseButton: this.isCloseButton,
+      bodyOutputType: BodyOutputType.TrustedHtml,
+    };
+  } // FIN | showToast
+
+
+  /****************************************************************************
+  * Funcion: toasterconfig
+  * Object Number: 004.1
+  * Fecha: 16-08-2018
+  * Descripcion: Method showToast of the Class
+  * Objetivo: showToast in the method header API
+  ****************************************************************************/
+  public toasterconfig: ToasterConfig =
+    new ToasterConfig({
+      showCloseButton: { 'warning': true, 'error': true },
+    }); // FIN | toasterconfig
 
   /****************************************************************************
   * Funcion: viewFile
@@ -555,95 +620,95 @@ export class SectoresOcdeComponent implements OnInit, OnChanges {
   } // FIN | cleanSectoresOcdeCad
 
 
- /****************************************************************************
-  * Funcion: calcularPercent
-  * Object Number: FND-007
-  * Fecha: 13-05-2019
-  * Descripcion: Method para calcular % Items del Socio al Desarrollo
-  * en la Insercion del Proyecto
-  * Objetivo: calculo de % el Json de los Items seleccionados
-  ****************************************************************************/
- calcularPercent() {
-  const valorMax = (100 / this.JsonSendSectoresOcdeCadOpciones.length);
+  /****************************************************************************
+   * Funcion: calcularPercent
+   * Object Number: FND-007
+   * Fecha: 13-05-2019
+   * Descripcion: Method para calcular % Items del Socio al Desarrollo
+   * en la Insercion del Proyecto
+   * Objetivo: calculo de % el Json de los Items seleccionados
+   ****************************************************************************/
+  calcularPercent() {
+    const valorMax = (100 / this.JsonSendSectoresOcdeCadOpciones.length);
 
-  this.JsonSendSectoresOcdeCadOpciones.map(function (dato) {
-    dato.otro = valorMax.toFixed(2);
-    return dato;
-  });
-} // FIN | FND-007
- /****************************************************************************
-  * Funcion: validaPercent
-  * Object Number: FND-006
-  * Fecha: 13-05-2019
-  * Descripcion: Method para validar % Items del Socio al Desarrollo
-  * en la Insercion del Proyecto
-  * Objetivo: % el Json de los Items seleccionados
-  ****************************************************************************/
- validaPercent(event: any, codeIn: number) {
-  const otroIn = event.target.value;
+    this.JsonSendSectoresOcdeCadOpciones.map(function (dato) {
+      dato.otro = valorMax.toFixed(2);
+      return dato;
+    });
+  } // FIN | FND-007
+  /****************************************************************************
+   * Funcion: validaPercent
+   * Object Number: FND-006
+   * Fecha: 13-05-2019
+   * Descripcion: Method para validar % Items del Socio al Desarrollo
+   * en la Insercion del Proyecto
+   * Objetivo: % el Json de los Items seleccionados
+   ****************************************************************************/
+  validaPercent(event: any, codeIn: number) {
+    const otroIn = event.target.value;
 
-  this.JsonSendSectoresOcdeCadOpciones.map(function (dato) {
-    if (dato.code === codeIn) {
-      dato.otro = otroIn;
-    }
-    return dato;
-  });
-} // FIN | FND-006
+    this.JsonSendSectoresOcdeCadOpciones.map(function (dato) {
+      if (dato.code === codeIn) {
+        dato.otro = otroIn;
+      }
+      return dato;
+    });
+  } // FIN | FND-006
 
-/****************************************************************************
-  * Funcion: confirm
-  * Object Number: FND-009
-  * Fecha: 01-07-2019
-  * Descripcion: Method confirm of the Class
-  * Objetivo: Eliminar el Detalle de Financiamiento seleccionado
-  * Params: { event }
-  ****************************************************************************/
- private confirmocde(event: any) {
-  this.confirmationService.confirm({
-    message: 'Estas seguro de Eliminar del el Sector Ocde?',
-    accept: () => {
-      // Ejecuta la funcion de Eliminar el Socio al Desarrollo con Elementos relacionados
-      this.cleanOcde(event);
-    },
-  });
-} // FIN | FND-009
-/****************************************************************************
-  * Funcion: cleanSocioDesarrollo
-  * Object Number: FND-005
-  * Fecha: 13-05-2019
-  * Descripcion: Method para Eliminar Item del Socio al Desarrollo
-  * Objetivo: limpiar el Json de los Items seleccionados
-  ****************************************************************************/
- private cleanOcde(event: any) {
-  for (let i = 0; i < this.JsonSendSectoresOcdeCadOpciones.length; i++) {
-    if (this.JsonSendSectoresOcdeCadOpciones[i].code === event) {
-      // Ejecuta el Servicio de invocar el registro de Socio al Desarrollo
-      this._serviceSectoresService.deleteOcde(this.codigoProyectoTab + '-ASO-' + this.JsonSendSectoresOcdeCadOpciones[i].code).subscribe(
-        result => {
-          if (result.status !== 200) {
-            this._notificacionesService.showToast('error', 'Error al Borrar la Información Sector OCDE/CAD', result.message);
-          } else if (result.status === 200) {
-            if (result.findRecord === true) {
-              this._notificacionesService.showToast('error', 'Error al Borrar la Información de Sector de OCDE/CAD', result.message);
-              this.ngOnInit();
-            } else {
-              this._notificacionesService.showToast('default', 'Sector OCDE/CAD', result.message);
-              this.ngOnInit();
+  /****************************************************************************
+    * Funcion: confirm
+    * Object Number: FND-009
+    * Fecha: 01-07-2019
+    * Descripcion: Method confirm of the Class
+    * Objetivo: Eliminar el Detalle de Financiamiento seleccionado
+    * Params: { event }
+    ****************************************************************************/
+  private confirmocde(event: any) {
+    this.confirmationService.confirm({
+      message: 'Estas seguro de Eliminar del el Sector Ocde?',
+      accept: () => {
+        // Ejecuta la funcion de Eliminar el Socio al Desarrollo con Elementos relacionados
+        this.cleanOcde(event);
+      },
+    });
+  } // FIN | FND-009
+  /****************************************************************************
+    * Funcion: cleanSocioDesarrollo
+    * Object Number: FND-005
+    * Fecha: 13-05-2019
+    * Descripcion: Method para Eliminar Item del Socio al Desarrollo
+    * Objetivo: limpiar el Json de los Items seleccionados
+    ****************************************************************************/
+  private cleanOcde(event: any) {
+    for (let i = 0; i < this.JsonSendSectoresOcdeCadOpciones.length; i++) {
+      if (this.JsonSendSectoresOcdeCadOpciones[i].code === event) {
+        // Ejecuta el Servicio de invocar el registro de Socio al Desarrollo
+        this._serviceSectoresService.deleteOcde(this.codigoProyectoTab + '-ASO-' + this.JsonSendSectoresOcdeCadOpciones[i].code).subscribe(
+          result => {
+            if (result.status !== 200) {
+              this._notificacionesService.showToast('error', 'Error al Borrar la Información Sector OCDE/CAD', result.message);
+            } else if (result.status === 200) {
+              if (result.findRecord === true) {
+                this._notificacionesService.showToast('error', 'Error al Borrar la Información de Sector de OCDE/CAD', result.message);
+                this.ngOnInit();
+              } else {
+                this._notificacionesService.showToast('default', 'Sector OCDE/CAD', result.message);
+                this.ngOnInit();
+              }
             }
-          }
-        },
-        error => {
-          this._notificacionesService.showToast('error', 'Error al Borrar la Información de Sector OCDE/CAD', JSON.stringify(error.error.message));
-        },
-      );
-      // Borramos el Item del Json
-      this.JsonSendSectoresOcdeCadOpciones.splice(i, 1);
-      // para el Bucle
-      break;
+          },
+          error => {
+            this._notificacionesService.showToast('error', 'Error al Borrar la Información de Sector OCDE/CAD', JSON.stringify(error.error.message));
+          },
+        );
+        // Borramos el Item del Json
+        this.JsonSendSectoresOcdeCadOpciones.splice(i, 1);
+        // para el Bucle
+        break;
+      }
     }
-  }
-  this.JsonSendSectoresOcdeCadOpciones = [...this.JsonSendSectoresOcdeCadOpciones];
-} // FIN | FND-005
+    this.JsonSendSectoresOcdeCadOpciones = [...this.JsonSendSectoresOcdeCadOpciones];
+  } // FIN | FND-005
 
 
   /****************************************************************************
@@ -684,5 +749,4 @@ export class SectoresOcdeComponent implements OnInit, OnChanges {
       },
     );
   } // FIN | FND001
-
 }
